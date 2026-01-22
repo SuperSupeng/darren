@@ -1,226 +1,327 @@
 {
   "meta": {
-    "title": "Darren Su | Geek Builder",
-    "description": "Geek Builder, shipping AI × Hardware products"
+    "title": "Darren Su | ギークビルダー",
+    "description": "ギークビルダー、AI × ハードウェア製品を出荷中"
   },
   "nav": {
-    "home": "Home",
-    "build": "Build",
-    "blog": "Blog",
-    "community": "Community",
-    "impact": "Impact",
-    "global": "Global",
+    "home": "ホーム",
+    "build": "作品",
+    "blog": "ブログ",
+    "community": "コミュニティ",
+    "impact": "インパクト",
+    "global": "グローバル",
     "about": "About",
     "coBuild": "Co-build"
   },
   "hero": {
-    "title": "Geek Builder, shipping AI × Hardware.",
-    "subtitle": "I'm Darren. I build: AI × Hardware products / Creator tools / Communities. Also building my digital avatar.",
+    "title": "ギークビルダー、AI × ハードウェアを出荷中。",
+    "subtitle": "Darrenです。AI × ハードウェア製品 / クリエイターツール / コミュニティを作っています。デジタルアバターも構築中。",
     "cta": {
-      "coBuild": "Co-build with me",
-      "viewBuild": "See what I'm building",
-      "contact": "Contact me"
+      "coBuild": "一緒にCo-build",
+      "viewBuild": "作っているものを見る",
+      "contact": "連絡する"
     },
-    "tagline": "Based in Shanghai｜Global co-creation｜Community-driven｜Zen practitioner"
+    "tagline": "上海拠点｜グローバル共創｜コミュニティ駆動｜禅の実践者"
+  },
+  "community": {
+    "meta": {
+      "title": "コミュニティ | Darren Su",
+      "description": "コミュニティ、イベント、ビルダーとの共創"
+    },
+    "hero": {
+      "title": "コミュニティ",
+      "subtitle1": "コミュニティはイノベーションのインフラだと信じています。",
+      "subtitle2": "ミートアップ / ワークショップ / ビルダソン / コホートで人を集め、作品を生み出すのが好きです。"
+    },
+    "communities": {
+      "title": "参加しているコミュニティ",
+      "whatIDo": "活動内容",
+      "suitableFor": "こんな人に",
+      "items": [
+        {
+          "name": "AGI Villa",
+          "tagline": "AIビルダー＆ファウンダー向けコミュニティ駆動ベンチャースタジオ",
+          "role": "共同創設者",
+          "whatIDo": ["共創プロジェクトの推進（デモから製品へ）", "グローバルノードとパートナーの接続"],
+          "suitableFor": ["AI製品 / AI × ハードウェア作品を作りたいビルダー", "Co-buildしたい、納品を加速したい人"],
+          "color": "gold"
+        },
+        {
+          "name": "Datawhale",
+          "tagline": "中国最大級のAIオープンソース学習コミュニティ",
+          "role": "都市エコシステムリード",
+          "whatIDo": ["学習→実践→創造→起業のパス構築", "ワークショップやビルダソンの企画", "大学、産業、開発者、プロジェクトの接続"],
+          "suitableFor": ["AIを体系的に学びオープンソースに参加したい人", "開発者エコシステムに入りプロジェクトを作りたい人"],
+          "color": "cyan"
+        },
+        {
+          "name": "CryptoTime",
+          "tagline": "AI × Web3 ビルダーファーストコミュニティ",
+          "role": "共同ビルダー",
+          "whatIDo": ["共創と共有の企画", "ビルダーと実際のプロジェクトの接続", "デモ→製品の納品を推進"],
+          "suitableFor": ["AI / Web3 / DeAIに興味があり作りたい人"],
+          "color": "purple"
+        }
+      ]
+    },
+    "howWeRun": {
+      "title": "運営方法",
+      "items": [
+        {"icon": "📺", "title": "作品を見せる", "description": "進行中の作品を共有、完璧でなくてOK"},
+        {"icon": "📦", "title": "毎週出荷", "description": "毎週小さなバージョンを納品"},
+        {"icon": "🔧", "title": "作りながら学ぶ", "description": "講義より実践"},
+        {"icon": "🎤", "title": "実世界のフィードバック", "description": "ステージでデモできるならする"}
+      ]
+    },
+    "events": {
+      "title": "イベント形態",
+      "items": [
+        {"name": "Workshop", "icon": "🛠️", "tagline": "2-3時間、テーマに沿って動くデモを作る", "details": ["新人ビルダー向け", "すぐに実践", "動くものを持ち帰る"]},
+        {"name": "Buildathon", "icon": "🚀", "tagline": "タイムボックス内で作品を納品（デモファースト）", "details": ["実際の作品を出荷", "ステージと展示", "つながりと機会"]},
+        {"name": "Cohort", "icon": "👥", "tagline": "グループでリズムを合わせて一緒にビルド", "details": ["固定ペース", "公開納品", "互いにプッシュ"]}
+      ]
+    },
+    "coHost": {
+      "title": "共催 / パートナー",
+      "subtitle": "一緒に何か作りましょう",
+      "youHaveTitle": "あなたが持っているもの",
+      "youHave": ["会場 / メーカースペース / 学校 / キャンパス", "スポンサーリソース", "開発者成長やビルダーエコシステムの目標"],
+      "weCanTitle": "一緒にできること",
+      "weCan": ["Workshop / Buildathon / Cohort", "グローバル都市ノード共創", "デモナイトと展示"],
+      "cta": {"coHost": "イベントを共催", "email": "パートナーになる"}
+    },
+    "pastEvents": {
+      "title": "過去のイベント",
+      "subtitle": "一緒に作ってきたもの",
+      "note": "さらに多くのイベントを整理中、お楽しみに →",
+      "items": [
+        {"name": "AI × ハードウェア Workshop", "date": "2025.12", "location": "上海", "participants": 28, "image": "/events/workshop-hardware.svg", "community": "AGI Villa"},
+        {"name": "RAG ハンズオン Workshop", "date": "2025.11", "location": "上海", "participants": 35, "image": "/events/workshop-rag.svg", "community": "Datawhale"},
+        {"name": "AI Builder Meetup", "date": "2025.10", "location": "深圳", "participants": 42, "image": "/events/meetup-shenzhen.svg", "community": "AGI Villa"},
+        {"name": "Demo Day: Ship Your AI", "date": "2025.09", "location": "上海", "participants": 56, "image": "/events/demo-day.svg", "community": "AGI Villa"},
+        {"name": "Web3 × AI Buildathon", "date": "2025.08", "location": "バンコク", "participants": 38, "image": "/events/buildathon-bangkok.svg", "community": "CryptoTime"},
+        {"name": "オープンソースサマー Workshop", "date": "2025.07", "location": "オンライン", "participants": 120, "image": "/events/ospp-workshop.svg", "community": "Datawhale"}
+      ]
+    }
+  },
+  "impact": {
+    "meta": {
+      "title": "インパクト | Darren Su",
+      "description": "テックフォーグッド - 教育、アクセシビリティ、公益"
+    },
+    "hero": {
+      "title": "インパクト",
+      "subtitle1": "テクノロジーは効率化ツールだけでなく、人々の生活をより良くすべきだと信じています。",
+      "subtitle2": "だからコミュニティ、教育、共創を通じて、エネルギーの一部を公益に投入し続けています。"
+    },
+    "whatIDid": {
+      "title": "やってきたこと",
+      "whatIDid": "活動内容",
+      "result": "結果 / インパクト",
+      "items": [
+        {"name": "Datawhale公益グループ", "tagline": "コミュニティの力をAI教育と公益に", "whatIDid": "協力の組織、活動の立ち上げ、ボランティアの接続", "result": "継続中（随時更新）"},
+        {"name": "地方 / 弱者向けAI教育", "tagline": "より多くの人がAIに触れ、理解し、創造できるように", "whatIDid": "コース / 共有 / ハンズオンワークショップ", "result": "複数回実施（随時更新）"},
+        {"name": "シルバーハッカソン（高齢者テック）", "tagline": "創造を通じて高齢者がAIとテクノロジーにつながる支援", "whatIDid": "0から1の構築支援", "result": "プロジェクト進行中"}
+      ]
+    },
+    "mechanism": {
+      "title": "仕組み",
+      "intro": "公益は「お金を稼いでから」始めたくありません。",
+      "items": ["AGI Villaは収益の1%を公益とインパクトプロジェクトに", "イベントリソース、会場、プロモーションも公益パートナーの支援に活用"]
+    },
+    "openTo": {
+      "title": "オープンな協力",
+      "subtitle": "こんな公益協力を歓迎します",
+      "items": ["AI教育 / 普及（特に弱者、地方向け）", "アクセシビリティ関連プロジェクト", "公益団体とのハンズオンワークショップ", "テックフォーグッドをテーマにしたビルダソン / クリエイティブイベント"],
+      "cta": "インパクトプロジェクトに取り組んでいる方、公益をより持続可能にしたい方、ぜひつながりましょう。",
+      "button": "メールする"
+    }
+  },
+  "global": {
+    "meta": {
+      "title": "グローバル | Darren Su",
+      "description": "グローバル都市ノードと都市間共創コネクション"
+    },
+    "hero": {
+      "title": "グローバル",
+      "subtitle1": "異なる都市のビルダーと共創するのが好きです。",
+      "subtitle2": "あなたもビルドしているなら — 世界のどこかで一緒に出荷しましょう。",
+      "note": "このページは随時更新：都市ノード / パートナー / 最近の旅程"
+    },
+    "cities": {
+      "title": "都市ノード",
+      "whatIDo": "ここでの活動",
+      "suitableFor": "つながりに適した人",
+      "items": [
+        {"city": "上海", "cityEn": "Shanghai", "flag": "🇨🇳", "whatIDo": "ビルド / ワークショップ企画 / コミュニティ共創", "suitableFor": "AIビルダー / メーカー / オーガナイザー / 会場パートナー"},
+        {"city": "清迈", "cityEn": "Chiang Mai", "flag": "🇹🇭", "whatIDo": "コリビング共創 / メーカーカルチャー / ビルダソン", "suitableFor": "リモートビルダー / インディー開発者 / メーカースペース"},
+        {"city": "曼谷", "cityEn": "Bangkok", "flag": "🇹🇭", "whatIDo": "イベント協力 / グローバルビルダー接続", "suitableFor": "海外起業家 / AIビルダー / イベントパートナー"},
+        {"city": "深圳", "cityEn": "Shenzhen", "flag": "🇨🇳", "whatIDo": "ハードウェアエコシステム / メーカー接続", "suitableFor": "ハードウェアエンジニア / メーカースペース / サプライチェーン"},
+        {"city": "北京", "cityEn": "Beijing", "flag": "🇨🇳", "whatIDo": "開発者エコシステム / パートナー接続", "suitableFor": "コミュニティ運営者 / スポンサー / エコシステムパートナー"}
+      ]
+    },
+    "howWeRun": {
+      "title": "グローバル運営方法",
+      "items": ["都市ノード共創：co-work / co-build / co-host", "小規模ワークショップ / ビルダソンの共催（作品志向）", "メーカースペース / 大学 / ビルダーの接続", "作品をステージへ：公開展示"]
+    },
+    "becomeNode": {
+      "title": "ノードになる",
+      "subtitle": "ある都市で長期的にビルドしていて、ローカルビルダーを集め、イベントを共催し、作品に実際の露出を得たいなら — 一緒にその都市をノードにできます。",
+      "requirementsTitle": "期待すること",
+      "requirements": ["安定したコミュニティリーチ（小規模でもOK）", "イベントスペースやリソース", "作品納品を中心にする意欲"],
+      "youProvideTitle": "あなたが提供（いずれか）",
+      "youProvide": ["会場", "プロモーションチャネル / コミュニティ", "スポンサーリソース", "メンター / 審査員"],
+      "iProvideTitle": "私が提供",
+      "iProvide": ["イベント設計（作品志向）", "プロセスと納品リズム", "プロモーションコピーと募集", "グローバルビルダーネットワーク接続"],
+      "footerTitle": "世界のどこかで、一緒に出荷。",
+      "footerSubtitle": "あなたもビルドしているなら — 都市と作りたいものを教えてください。",
+      "cta": "メールする"
+    }
   },
   "nowBuilding": {
-    "title": "Now building",
-    "items": [
-      "AI × Hardware products (Interactive / Sensors / NFC)",
-      "Builder Workshops & Buildathons (Output-oriented)",
-      "Builder community infrastructure (Global node connection)"
-    ]
+    "title": "現在ビルド中",
+    "items": ["AI × ハードウェア製品（インタラクティブ / センサー / NFC）", "ビルダーワークショップ＆ビルダソン（アウトプット志向）", "ビルダーコミュニティインフラ（グローバルノード接続）"]
   },
   "buildDirection": {
-    "title": "What I love to build",
-    "items": [
-      "AI × Hardware (Interactive / Toys / Installations)",
-      "Creator tools / Automation workflows",
-      "Rapid prototyping: idea → prototype → demo",
-      "Community co-creation (Events / Learning / Cohorts)",
-      "Web3 × AI builder-first demos"
-    ]
+    "title": "ビルドが好きな方向",
+    "items": ["AI × ハードウェア（インタラクティブ / トイ / インスタレーション）", "クリエイターツール / 自動化ワークフロー", "高速プロトタイピング：アイデア→プロトタイプ→デモ", "コミュニティ共創（イベント / 学習 / コホート）", "Web3 × AI ビルダーファーストデモ"]
   },
   "signals": {
-    "title": "Signals",
+    "title": "シグナル",
     "items": [
-      {
-        "role": "AGI Villa (AI Builder Accelerator)",
-        "position": "Co-founder"
-      },
-      {
-        "role": "Datawhale",
-        "position": "City Ecosystem Lead"
-      },
-      {
-        "role": "CryptoTime (AI × Web3 Builder Community)",
-        "position": "Co-builder"
-      }
+      {"role": "AGI Villa（AIビルダーアクセラレーター）", "position": "共同創設者"},
+      {"role": "Datawhale", "position": "都市エコシステムリード"},
+      {"role": "CryptoTime（AI × Web3ビルダーコミュニティ）", "position": "共同ビルダー"}
     ]
   },
   "portals": {
-    "title": "Explore",
-    "build": {
-      "title": "Build",
-      "description": "Demos, prototypes, and runnable experiments.",
-      "cta": "View works"
-    },
-    "community": {
-      "title": "Community",
-      "description": "Workshops, Buildathons, Builder circles.",
-      "cta": "Explore community"
-    },
-    "impact": {
-      "title": "Impact",
-      "description": "Tech for good, education, and accessibility.",
-      "cta": "View impact"
-    },
-    "global": {
-      "title": "Global",
-      "description": "Global city nodes and co-creation connections.",
-      "cta": "Global links"
-    }
+    "title": "探索",
+    "build": {"title": "Build", "description": "デモ、プロトタイプ、実行可能な実験", "cta": "作品を見る"},
+    "community": {"title": "Community", "description": "ワークショップ、ビルダソン、ビルダーサークル", "cta": "コミュニティを探索"},
+    "impact": {"title": "Impact", "description": "テックフォーグッド、教育、アクセシビリティ", "cta": "インパクトを見る"},
+    "global": {"title": "Global", "description": "グローバル都市ノードと共創コネクション", "cta": "グローバルリンク"}
   },
   "footerCta": {
-    "title": "Let's ship something real.",
-    "description": "If you're also building AI tools, hardware, buildathons, or global nodes — I'd love to co-build with you.",
-    "cta": {
-      "coBuild": "Co-build with me",
-      "contact": "Contact me"
-    }
+    "title": "一緒に何か本物を出荷しましょう。",
+    "description": "AIツール、ハードウェア、ビルダソン、グローバルノードを作っているなら — 一緒にCo-buildしたいです。",
+    "cta": {"coBuild": "一緒にCo-build", "contact": "連絡する"}
   },
   "footer": {
     "name": "Darren Su",
-    "location": "Shanghai / Global",
+    "location": "上海 / グローバル",
+    "bio": "AGI Villa創設者 | AI + ハードウェアインタラクティブ製品の出荷を支援 | グローバルコミュニティ主導の実行＆成長 | 禅の実践者＆仏教学習者",
     "copyright": "© {year} Darren Su. All rights reserved."
   },
   "subscribe": {
-    "title": "Subscribe",
-    "placeholder": "Enter your email",
-    "button": "Subscribe",
-    "success": "Subscribed!",
-    "description": "Get the latest build updates and event info"
+    "title": "購読",
+    "placeholder": "メールアドレスを入力",
+    "button": "購読",
+    "success": "購読完了！",
+    "description": "最新のビルド更新とイベント情報を取得"
   },
-  "language": {
-    "zh": "中文",
-    "en": "English"
-  },
+  "language": {"zh": "中文", "en": "English"},
   "coBuild": {
-    "meta": {
-      "title": "Co-build | Darren Su",
-      "description": "Build the AI-Native world together"
-    },
-    "hero": {
-      "title": "Let's build together",
-      "subtitle": "Build the AI-Native world together"
-    },
+    "meta": {"title": "Co-build | Darren Su", "description": "AI-Nativeの世界を一緒に構築"},
+    "hero": {"title": "一緒にビルドしましょう", "subtitle": "AI-Nativeの世界を一緒に構築"},
     "whatWeBuild": {
-      "title": "What we can build together",
+      "title": "一緒にビルドできるもの",
       "items": [
-        {
-          "title": "AI × Hardware",
-          "description": "Interactive experiences / Toys / Installations / Sensors / NFC"
-        },
-        {
-          "title": "AI Tools",
-          "description": "Small tools for specific vertical scenarios"
-        },
-        {
-          "title": "Creator Tools",
-          "description": "Content production, workflow automation, growth tools"
-        },
-        {
-          "title": "Buildathon / Workshop",
-          "description": "Ship works through events, gather builders together"
-        },
-        {
-          "title": "Web3 × AI demo",
-          "description": "Builder-first, real runnable projects"
-        }
+        {"title": "AI × ハードウェア", "description": "インタラクティブ体験 / トイ / インスタレーション / センサー / NFC"},
+        {"title": "AIツール", "description": "特定のバーティカルシナリオ向け小型ツール"},
+        {"title": "クリエイターツール", "description": "コンテンツ制作、ワークフロー自動化、成長ツール"},
+        {"title": "Buildathon / Workshop", "description": "イベントを通じて作品を出荷、ビルダーを集める"},
+        {"title": "Web3 × AI デモ", "description": "ビルダーファースト、実際に動くプロジェクト"}
       ]
     },
     "howWeCoBuild": {
-      "title": "How we collaborate",
-      "suitable": "Suitable for",
-      "goal": "Goal",
-      "outputs": "Outputs",
+      "title": "協力方法",
+      "suitable": "適している人",
+      "goal": "目標",
+      "outputs": "成果物",
       "modes": [
-        {
-          "id": "Mode A",
-          "title": "Sprint",
-          "suitable": "You have an idea / half-finished project / repo",
-          "goal": "Ship a presentable, explainable, shareable version",
-          "outputs": ["Interactive MVP product", "Storytelling"]
-        },
-        {
-          "id": "Mode B",
-          "title": "Productize",
-          "suitable": "You have a demo, want to make it more like a product",
-          "goal": "From 'it works' to 'people want to use it'",
-          "outputs": ["Core user journey", "Feature priorities / iteration rhythm", "Minimal growth actions"]
-        },
-        {
-          "id": "Mode C",
-          "title": "Co-host Events",
-          "suitable": "You have venue/resources/community, want to do workshops / buildathons",
-          "goal": "Turn events into sustainable community building",
-          "outputs": ["Event mechanism design", "Mentor/partner collaboration", "Promotion & growth"]
-        }
+        {"id": "Mode A", "title": "スプリント", "suitable": "アイデア / 半完成プロジェクト / リポジトリがある", "goal": "見せられる、説明できる、共有できるバージョンを出荷", "outputs": ["インタラクティブMVP製品", "ストーリーテリング"]},
+        {"id": "Mode B", "title": "製品化", "suitable": "デモがあり、より製品らしくしたい", "goal": "動くから使いたいへ", "outputs": ["コアユーザージャーニー", "機能優先度 / イテレーションリズム", "最小成長アクション"]},
+        {"id": "Mode C", "title": "イベント共催", "suitable": "会場/リソース/コミュニティがあり、ワークショップ / ビルダソンをしたい", "goal": "イベントを持続可能なコミュニティ構築に", "outputs": ["イベント設計", "メンター/パートナー協力", "プロモーション＆成長"]}
       ]
     },
     "whatIDo": {
-      "title": "What I bring",
-      "items": [
-        "Rapid prototyping & delivery rhythm (idea → prototype → demo)",
-        "Work presentation (storytelling, demo paths, packaging as 'works')",
-        "Community & event mechanisms (workshops / buildathons / cohorts)",
-        "Global builder connections (city nodes, partners, venues)"
-      ]
+      "title": "私が持ち込むもの",
+      "items": ["高速プロトタイピング＆納品リズム（アイデア→プロトタイプ→デモ）", "作品プレゼンテーション（ストーリーテリング、デモパス、作品としてのパッケージング）", "コミュニティ＆イベントの仕組み（ワークショップ / ビルダソン / コホート）", "グローバルビルダー接続（都市ノード、パートナー、会場）"]
     },
     "howToStart": {
-      "title": "How to start",
-      "description": "Just send me an email (copy the template below)",
-      "templateTitle": "Co-build Template",
-      "template": [
-        "Who I am (background/skills):",
-        "What I'm building (one sentence):",
-        "What I hope to achieve in 30 days:",
-        "repo/demo/docs link (if any):"
-      ],
-      "cta": "Email me"
+      "title": "始め方",
+      "description": "メールを送ってください（下のテンプレートをコピー）",
+      "templateTitle": "Co-buildテンプレート",
+      "template": ["私は誰か（バックグラウンド/スキル）：", "何をビルドしているか（一文）：", "30日後に達成したいこと：", "repo/demo/docsリンク（あれば）："],
+      "cta": "メールする"
     },
     "principles": {
-      "title": "Collaboration Principles",
-      "items": [
-        "Direct, clear, low friction",
-        "Prefer async (text/docs), meet only when necessary",
-        "All collaboration centers on 'delivery'",
-        "No long abstract discussions (unless explicitly exploratory)"
-      ],
-      "notSuitableTitle": "Might not be a fit",
-      "notSuitable": [
-        "Just want to discuss concepts, not build things",
-        "Want me to 'do it for you/outsource/consult' without participating",
-        "Only want resources and exposure, not willing to co-create long-term",
-        "Treat collaboration as client-vendor, not co-delivery"
-      ]
+      "title": "協力原則",
+      "items": ["直接的、明確、低摩擦", "非同期優先（テキスト/ドキュメント）、必要な時だけミーティング", "すべての協力は納品を中心に", "長い抽象的な議論はなし（明示的な探索を除く）"],
+      "notSuitableTitle": "合わないかも",
+      "notSuitable": ["コンセプトを話したいだけで、作りたくない", "参加せずにやってほしい/外注/コンサル", "リソースと露出だけ欲しく、長期共創したくない", "協力をクライアント-ベンダーとして扱い、共同納品ではない"]
     },
-    "contact": {
-      "title": "Contact",
-      "tagline": "Ship happens."
-    }
+    "contact": {"title": "連絡先", "tagline": "Ship happens."}
   },
   "blog": {
-    "title": "Blog",
-    "description": "Thoughts, build logs, and learning notes.",
-    "empty": "No posts yet, stay tuned...",
-    "readMore": "Read more",
-    "backToList": "Back to list",
-    "minRead": "min",
-    "share": "Share",
-    "meta": {
-      "title": "Blog | Darren Su",
-      "description": "Darren's blog - thoughts and build logs"
+    "title": "ブログ",
+    "description": "思考、ビルドログ、学習ノート",
+    "empty": "まだ投稿がありません、お楽しみに...",
+    "readMore": "続きを読む",
+    "backToList": "リストに戻る",
+    "minRead": "分",
+    "share": "共有",
+    "meta": {"title": "ブログ | Darren Su", "description": "Darrenのブログ - 思考とビルドログ"}
+  },
+  "build": {
+    "meta": {"title": "Build | Darren Su", "description": "Darren Suのプロジェクト、プロトタイプ、実験"},
+    "hero": {"title": "Build", "subtitle": "ここでAI × ハードウェアプロジェクト、ツール、コミュニティ活動を継続的に更新します。"},
+    "selected": {
+      "title": "精選",
+      "projects": [],
+      "empty": {"title": "公開プロジェクトはまだありません（整理中...）", "description": "デモ、プロトタイプ、MVP、イベント成果を徐々に公開します。", "cta": "あなたもビルドしているなら、一緒にCo-buildしましょう。"}
+    },
+    "log": {
+      "title": "ビルドログ",
+      "description": "進行中のプロジェクトと実験の進捗",
+      "entries": [
+        {"date": "2026-01", "content": "個人サイト + i18n構築中、ビルドプロセスを公開準備"},
+        {"date": "2026-01", "content": "AI × ハードウェアワークショップの製品化フロー整理中（デモ＆出荷フォーカス）"},
+        {"date": "2026-01", "content": "グローバルビルダーノード接続を推進中（イベント/共創）"},
+        {"date": "2026-01", "content": "公開可能なデモ/プロトタイプを整理中、徐々にリリース"},
+        {"date": "2026-01", "content": "AI × ハードウェアインタラクティブ作品コレクション準備中（継続更新）"}
+      ]
+    }
+  },
+  "about": {
+    "meta": {"title": "About | Darren Su", "description": "Darren Suについて - ギークビルダー、AI × ハードウェア製品を出荷中"},
+    "hero": {"oneliner": "AGI Villa創設者 | ビルダーのAI + ハードウェア製品出荷を支援（Demo→MVP）| グローバルコミュニティ駆動実行 | 禅の実践者＆仏教学習者"},
+    "now": {
+      "title": "Now / 今やっていること",
+      "items": ["ビルド中：AI × ハードウェア製品（インタラクティブ / センサー / NFC）", "ビルド中：クリエイターツール（ワークフロー / 自動化）", "ビルド中：コミュニティインフラ（ワークショップ / ビルダソン / コホート）", "接続中：グローバル都市ノード、都市間共創を促進"]
+    },
+    "background": {
+      "title": "Background / どこから来たか",
+      "items": [
+        {"year": "2021", "title": "PingCAP - データベースユニコーン", "description": "コアツールTiCDCチームでR&Dに参加。その後コミュニティ運営に転身、中国のオープンソースエコシステムの復興に参加。開発者関係とオープンソースコミュニティの力を理解し始める。", "tags": ["オープンソース", "開発者関係", "コミュニティ"]},
+        {"year": "2021", "title": "Actionsky - AI Infra", "description": "会社のAI Infraベクターデータベース事業を主導。ベクターデータベースが市場に認知される前に、チームはAI + データインフラを探索し、2023年初頭に中国で最初のAI-Native SaaS製品チームの一つに。", "tags": ["ベクターDB", "RAG", "AI Infra"], "links": [{"text": "ベクター検索 & RAG実践", "url": "https://github.com/datawhalechina/what-is-vs"}, {"text": "QCon 2024トーク", "url": "https://b.geekbang.org/mall/events/qcon/2024/beijing/presentation/5940"}]},
+        {"year": "2023", "title": "テックからビジネスへ", "description": "香港企業で商業化を主導、その後上海交通大学研究所でAIミドルプラットフォームを担当。技術者から起業家への能力飛躍を完了：テック→ビジネス→組織＆製品納品。", "tags": ["商業化", "AIプラットフォーム", "起業"]},
+        {"year": "Now", "title": "AGI Villa - AIビルダーアクセラレーター", "description": "AGI Villaを共同創設、ビルダーのAI + ハードウェア製品の0から1への出荷を支援。グローバルコミュニティ駆動の実行と成長の仕組みを構築中。", "tags": ["ビルダーコミュニティ", "AI × ハードウェア", "グローバル"]}
+      ]
+    },
+    "values": {
+      "title": "Values / 信じていること",
+      "items": [
+        {"icon": "🚀", "title": "Ship > Talk", "description": "動く製品を納品することは終わりのない議論より重要。アウトプットに集中、インプットではなく。"},
+        {"icon": "🌊", "title": "フロー状態", "description": "ビルドは修行。リズムを見つけ、フローに入り、創造が自然に起こるように。"},
+        {"icon": "🤝", "title": "共創 > ソロ", "description": "最高のものは一緒に作られる。コミュニティは個人の努力を増幅する。"},
+        {"icon": "☯️", "title": "テックの中の禅", "description": "テクノロジーとマインドフルネスは共存できる。意図を持ってビルドし、平和を持って出荷。"}
+      ]
+    },
+    "connect": {
+      "title": "つながりましょう",
+      "description": "AI、ハードウェア、コミュニティで面白いものを作っているなら - ぜひお聞かせください。",
+      "cta": {"coBuild": "一緒にCo-build", "email": "メールを送る"}
     }
   }
 }

@@ -22,6 +22,13 @@ const notoSerifSC = Noto_Serif_SC({
 export const metadata: Metadata = {
   title: 'Darren Su | Builder',
   description: 'Geek Builder, shipping AI × Hardware products',
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/logo/logo-enso-brush.svg', type: 'image/svg+xml' },
+    ],
+    apple: '/logo/logo-enso-brush.svg',
+  },
 };
 
 export default function RootLayout({

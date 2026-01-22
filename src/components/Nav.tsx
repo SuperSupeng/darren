@@ -4,16 +4,24 @@ import { useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/i18n/navigation';
 import { useState, useEffect } from 'react';
 import LanguageSwitcher from './LanguageSwitcher';
+import Logo from './Logo';
 
 export default function Nav() {
   const t = useTranslations('nav');
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      const scrollY = window.scrollY;
+      setScrolled(scrollY > 20);
+      
+      // 计算页面滚动进度
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
+      setScrollProgress(progress);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -36,20 +44,40 @@ export default function Nav() {
   };
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrolled 
-        ? 'bg-ink-950/90 backdrop-blur-xl border-b border-ink-800/50 shadow-lg shadow-black/10' 
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      scrolled || mobileMenuOpen
+        ? 'bg-ink-950/95 backdrop-blur-2xl shadow-2xl shadow-black/20' 
         : 'bg-transparent'
     }`}>
+      {/* 滚动进度条 */}
+      <div 
+        className="absolute bottom-0 left-0 h-[2px] bg-gradient-to-r from-zen-gold via-geek-cyan to-geek-purple transition-all duration-150"
+        style={{ width: `${scrollProgress}%`, opacity: scrolled ? 1 : 0 }}
+      />
+      
+      {/* 底部边框发光效果 */}
+      <div className={`absolute bottom-0 left-0 right-0 h-px transition-opacity duration-500 ${
+        scrolled ? 'opacity-100' : 'opacity-0'
+      }`}>
+        <div className="h-full bg-gradient-to-r from-transparent via-zen-gold/30 to-transparent" />
+      </div>
+
       <div className="container">
-        <div className="flex items-center justify-between h-16 md:h-20">
+        <div className={`flex items-center justify-between transition-all duration-500 ${
+          scrolled ? 'h-14 md:h-16' : 'h-16 md:h-20'
+        }`}>
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group">
             <span className="relative">
-              <span className="text-zen-gold font-mono text-xl transition-transform duration-300 group-hover:scale-110 inline-block">◯</span>
+              <Logo 
+                size={scrolled ? 24 : 28} 
+                className="transition-all duration-500 group-hover:scale-110" 
+              />
               <span className="absolute inset-0 bg-zen-gold/20 blur-lg rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
             </span>
-            <span className="font-medium tracking-tight text-lg">
+            <span className={`font-medium tracking-tight transition-all duration-500 ${
+              scrolled ? 'text-base' : 'text-lg'
+            }`}>
               Darren<span className="text-zen-gold">.</span>Su
             </span>
           </Link>

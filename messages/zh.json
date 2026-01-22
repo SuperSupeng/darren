@@ -23,6 +23,341 @@
     },
     "tagline": "常驻上海｜全球流动共创｜社区驱动｜禅修实践者"
   },
+  "community": {
+    "meta": {
+      "title": "社区 | Darren Su",
+      "description": "社区、活动与 Builder 共创"
+    },
+    "hero": {
+      "title": "社区",
+      "subtitle1": "我相信社区是创新的基础设施。",
+      "subtitle2": "我喜欢用 meetups / workshops / buildathons / cohorts 把人聚起来，把作品做出来。"
+    },
+    "communities": {
+      "title": "我在参与的社区",
+      "whatIDo": "我在做什么",
+      "suitableFor": "适合谁",
+      "items": [
+        {
+          "name": "AGI Villa",
+          "tagline": "面向 AI Builder & Founder 的社区驱动 Venture Studio",
+          "role": "联合发起人",
+          "whatIDo": [
+            "推进共创项目（从 demo 到作品/产品）",
+            "连接全球节点与合作伙伴"
+          ],
+          "suitableFor": [
+            "想做 AI 产品 / AI × 硬件作品的 builder",
+            "想 co-build、想加速交付的人"
+          ],
+          "color": "gold"
+        },
+        {
+          "name": "Datawhale",
+          "tagline": "中国最大的 AI 开源学习社区之一",
+          "role": "城市生态建设负责人",
+          "whatIDo": [
+            "学习 → 实践 → 创造 → 创业 的路径建设",
+            "发起/组织 workshops、buildathons",
+            "连接高校、产业、企业、开发者与项目"
+          ],
+          "suitableFor": [
+            "想系统学习 AI 并参与开源的人",
+            "想进入开发者生态、做项目的人"
+          ],
+          "color": "cyan"
+        },
+        {
+          "name": "CryptoTime",
+          "tagline": "AI × Web3 builder-first 社区",
+          "role": "共建者",
+          "whatIDo": [
+            "组织共创与分享",
+            "连接 builder 与真实项目",
+            "推动 demo → product 的落地"
+          ],
+          "suitableFor": [
+            "对 AI / Web3 / DeAI 感兴趣并愿意动手的人"
+          ],
+          "color": "purple"
+        }
+      ]
+    },
+    "howWeRun": {
+      "title": "我们怎么玩",
+      "items": [
+        {
+          "icon": "📺",
+          "title": "Show your work",
+          "description": "展示进行中的作品，不用完美"
+        },
+        {
+          "icon": "📦",
+          "title": "Ship weekly",
+          "description": "每周交付一个小版本"
+        },
+        {
+          "icon": "🔧",
+          "title": "Learn by making",
+          "description": "少上课，多做 demo"
+        },
+        {
+          "icon": "🎤",
+          "title": "Real-world feedback",
+          "description": "能上台 demo 就上台 demo"
+        }
+      ]
+    },
+    "events": {
+      "title": "活动形态",
+      "items": [
+        {
+          "name": "Workshop",
+          "icon": "🛠️",
+          "tagline": "2-3 小时，围绕一个主题做出可运行 demo",
+          "details": ["适合新人 builder", "快速上手", "带着成果离开"]
+        },
+        {
+          "name": "Buildathon",
+          "icon": "🚀",
+          "tagline": "在时间盒里交付作品（demo first）",
+          "details": ["产出真实作品", "舞台与展示", "连接与机会"]
+        },
+        {
+          "name": "Cohort",
+          "icon": "👥",
+          "tagline": "一群人按节奏一起 build",
+          "details": ["固定节奏", "公开交付", "互相 push"]
+        }
+      ]
+    },
+    "coHost": {
+      "title": "合作 / Co-host",
+      "subtitle": "一起创造点什么",
+      "youHaveTitle": "如果你有",
+      "youHave": [
+        "场地 / maker space / 学校 / 园区",
+        "sponsor 资源",
+        "developer growth 或 builder ecosystem 目标"
+      ],
+      "weCanTitle": "我们可以一起",
+      "weCan": [
+        "Workshop / Buildathon / Cohort",
+        "全球城市节点共创",
+        "Demo nights 与作品展示"
+      ],
+      "cta": {
+        "coHost": "共办活动",
+        "email": "合作洽谈"
+      }
+    },
+    "pastEvents": {
+      "title": "往期精彩",
+      "subtitle": "我们一起做过的事",
+      "note": "更多活动正在整理中，持续更新 →",
+      "items": [
+        {
+          "name": "AI × 硬件 Workshop",
+          "date": "2025.12",
+          "location": "上海",
+          "participants": 28,
+          "image": "/events/workshop-hardware.svg",
+          "community": "AGI Villa"
+        },
+        {
+          "name": "RAG 实战工作坊",
+          "date": "2025.11",
+          "location": "上海",
+          "participants": 35,
+          "image": "/events/workshop-rag.svg",
+          "community": "Datawhale"
+        },
+        {
+          "name": "AI Builder Meetup",
+          "date": "2025.10",
+          "location": "深圳",
+          "participants": 42,
+          "image": "/events/meetup-shenzhen.jpg",
+          "community": "AGI Villa"
+        },
+        {
+          "name": "Demo Day: Ship Your AI",
+          "date": "2025.09",
+          "location": "上海",
+          "participants": 56,
+          "image": "/events/demo-day.svg",
+          "community": "AGI Villa"
+        },
+        {
+          "name": "Web3 × AI Buildathon",
+          "date": "2025.08",
+          "location": "曼谷",
+          "participants": 38,
+          "image": "/events/buildathon-bangkok.jpg",
+          "community": "CryptoTime"
+        },
+        {
+          "name": "开源之夏 Workshop",
+          "date": "2025.07",
+          "location": "线上",
+          "participants": 120,
+          "image": "/events/ospp-workshop.svg",
+          "community": "Datawhale"
+        }
+      ]
+    }
+  },
+  "impact": {
+    "meta": {
+      "title": "公益 | Darren Su",
+      "description": "科技向善 - 教育、无障碍与公益项目"
+    },
+    "hero": {
+      "title": "公益",
+      "subtitle1": "我相信技术不止是效率工具，也应该让人的生活变得更好。",
+      "subtitle2": "所以我会用社区、教育与共创，把一部分能量持续投入到公益里。"
+    },
+    "whatIDid": {
+      "title": "做过什么",
+      "whatIDid": "我做了什么",
+      "result": "结果/影响",
+      "items": [
+        {
+          "name": "Datawhale 公益组",
+          "tagline": "把社区力量投入到 AI 教育与公益议题中",
+          "whatIDid": "组织协作、发起活动、连接志愿者",
+          "result": "持续运作中（持续更新）"
+        },
+        {
+          "name": "乡村 / 弱势群体 AI 教育实践",
+          "tagline": "让更多人接触 AI、理解 AI、学会用 AI 创造",
+          "whatIDid": "课程/分享/实践型工作坊",
+          "result": "多次落地（持续更新）"
+        },
+        {
+          "name": "银客松（银发群体）支持",
+          "tagline": "用创造的方式让更多银发群体接触 AI 与科技",
+          "whatIDid": "支持从 0 到 1 建设与协作",
+          "result": "项目持续推进中"
+        }
+      ]
+    },
+    "mechanism": {
+      "title": "机制",
+      "intro": "我不希望公益只在「赚到钱以后」才开始。",
+      "items": [
+        "AGI Villa 承诺将收益的 1% 用于公益与 impact 项目",
+        "我也会把部分活动资源、场地与传播能力用于支持公益伙伴"
+      ]
+    },
+    "partners": {
+      "title": "合作伙伴与同行者",
+      "description": "共同关注「科技向善」的组织与社区",
+      "note": "* 这些是我欣赏或在 impact 项目上合作的组织"
+    },
+    "openTo": {
+      "title": "欢迎一起做",
+      "subtitle": "我欢迎这样的公益合作",
+      "items": [
+        "AI 教育 / 科普（尤其是弱势群体、乡村）",
+        "无障碍 / 可及性相关项目",
+        "公益组织的工作坊共创（更偏 hands-on）",
+        "「科技向善」主题 buildathon / 创作活动"
+      ],
+      "cta": "如果你在做 impact 项目，或者希望一起把公益做得更「可持续」，欢迎联系我。",
+      "button": "发邮件给我"
+    }
+  },
+  "global": {
+    "meta": {
+      "title": "全球 | Darren Su",
+      "description": "全球城市节点与跨城市共创连接"
+    },
+    "hero": {
+      "title": "全球链接",
+      "subtitle1": "我喜欢和不同城市的 builder 一起共创。",
+      "subtitle2": "如果你也在 build —— 我们可以在世界的某个角落一起 ship。",
+      "note": "这页会持续更新：城市节点 / 合作伙伴 / 近期行程。"
+    },
+    "cities": {
+      "title": "城市节点",
+      "whatIDo": "我在这里做什么",
+      "suitableFor": "适合连接的人",
+      "items": [
+        {
+          "city": "上海",
+          "cityEn": "Shanghai",
+          "flag": "🇨🇳",
+          "whatIDo": "build / 组织 workshop / 社区共创",
+          "suitableFor": "AI builder / maker / organizer / 场地伙伴"
+        },
+        {
+          "city": "清迈",
+          "cityEn": "Chiang Mai",
+          "flag": "🇹🇭",
+          "whatIDo": "共居共创 / maker culture / buildathon",
+          "suitableFor": "远程工作 builder / 独立开发者 / maker space"
+        },
+        {
+          "city": "曼谷",
+          "cityEn": "Bangkok",
+          "flag": "🇹🇭",
+          "whatIDo": "活动合作 / 全球 builder 连接",
+          "suitableFor": "出海创业者 / AI builder / 活动伙伴"
+        },
+        {
+          "city": "深圳",
+          "cityEn": "Shenzhen",
+          "flag": "🇨🇳",
+          "whatIDo": "硬件生态 / maker 连接",
+          "suitableFor": "硬件工程师 / maker space / 供应链伙伴"
+        },
+        {
+          "city": "北京",
+          "cityEn": "Beijing",
+          "flag": "🇨🇳",
+          "whatIDo": "开发者生态 / 合作伙伴连接",
+          "suitableFor": "社区运营者 / sponsor / 生态伙伴"
+        }
+      ]
+    },
+    "howWeRun": {
+      "title": "全球怎么玩",
+      "items": [
+        "城市节点共创：co-work / co-build / co-host",
+        "一起办小型 workshop / buildathon（作品导向）",
+        "连结 maker spaces / universities / builders",
+        "让作品「上台」：showcase in public"
+      ]
+    },
+    "becomeNode": {
+      "title": "成为节点",
+      "subtitle": "如果你也在一个城市长期 build，并且愿意聚集本地 builder、共办活动、帮作品获得真实展示机会 —— 我们可以一起把这个城市变成节点。",
+      "requirementsTitle": "我希望你具备",
+      "requirements": [
+        "有稳定的社区/圈层触达能力（哪怕很小也行）",
+        "有一个活动空间或资源",
+        "愿意以「交付作品」为核心"
+      ],
+      "youProvideTitle": "你提供（任一即可）",
+      "youProvide": [
+        "场地",
+        "传播渠道/社群",
+        "sponsor 资源",
+        "导师/评审"
+      ],
+      "iProvideTitle": "我提供",
+      "iProvide": [
+        "活动机制设计（作品导向）",
+        "流程与交付节奏",
+        "传播文案与招募节奏",
+        "连接全球 builder 网络"
+      ],
+      "footerTitle": "在世界某个角落，一起 ship。",
+      "footerSubtitle": "如果你也在 build —— 不管在哪个城市，都欢迎来连接。",
+      "cta": "发邮件给我"
+    }
+  },
   "nowBuilding": {
     "title": "Now building / 在建",
     "items": [
@@ -92,6 +427,7 @@
   "footer": {
     "name": "Darren Su / 苏鹏",
     "location": "Shanghai / Global",
+    "bio": "AGI Villa 联合创始人｜帮助 Builder 交付 AI + 硬件互动产品（Demo→MVP）｜全球化社区驱动执行与增长｜禅修实践者 & 佛学学习者",
     "copyright": "© {year} Darren Su. All rights reserved."
   },
   "subscribe": {
@@ -218,9 +554,130 @@
     "backToList": "返回列表",
     "minRead": "分钟",
     "share": "分享",
+    "newsletter": {
+      "title": "保持关注",
+      "description": "订阅后会在新文章发布时收到通知，包括 build 日志、学习笔记和共创机会。",
+      "placeholder": "your@email.com",
+      "button": "订阅",
+      "note": "不发垃圾邮件，随时可退订。"
+    },
     "meta": {
       "title": "Blog | Darren Su",
       "description": "Darren 的博客 - 记录思考与 build 过程"
+    }
+  },
+  "build": {
+    "meta": {
+      "title": "作品 | Darren Su",
+      "description": "Darren Su 的项目、原型和实验作品"
+    },
+    "hero": {
+      "title": "作品",
+      "subtitle": "这里会持续更新我做过/正在做的 AI × 硬件作品、工具、社区活动。"
+    },
+    "selected": {
+      "title": "精选",
+      "projects": [],
+      "empty": {
+        "title": "暂无公开作品（整理中）",
+        "description": "我会逐步把 demo / prototype / MVP 以及活动产出放到这里。",
+        "cta": "如果你也在 build，欢迎直接找我一起 co-build。"
+      }
+    },
+    "log": {
+      "title": "在建",
+      "description": "记录一些进行中的项目、实验、以及阶段性进展。",
+      "entries": [
+        { "date": "2026-01", "content": "搭建个人网站 + i18n，准备公开 build 过程" },
+        { "date": "2026-01", "content": "整理 AI × 硬件 workshop 的作品化流程（更偏 demo & ship）" },
+        { "date": "2026-01", "content": "推进全球 builder 节点连接（活动/共创）" },
+        { "date": "2026-01", "content": "整理可公开的 demo / prototype，陆续发布到这里" },
+        { "date": "2026-01", "content": "准备一个 AI × 硬件互动作品合集（持续更新）" }
+      ]
+    }
+  },
+  "about": {
+    "meta": {
+      "title": "关于我 | Darren Su",
+      "description": "了解 Darren Su - 极客 Builder，正在 ship AI × 硬件作品"
+    },
+    "hero": {
+      "oneliner": "AGI Villa 联合创始人｜帮助 Builder 从 0 到 1 交付 AI + 硬件互动产品（Demo→MVP）｜全球化社区驱动执行与增长｜禅修实践者 & 佛学学习者"
+    },
+    "now": {
+      "title": "Now / 现在在做",
+      "items": [
+        "在 build：AI × 硬件作品（互动体验 / 传感器 / NFC）",
+        "在 build：创作者工具（workflow / automation）",
+        "在 build：社区基础设施（workshops / buildathons / cohorts）",
+        "在连接：全球城市节点，推动跨城市共创与展示"
+      ]
+    },
+    "background": {
+      "title": "Background / 从哪里来",
+      "items": [
+        {
+          "year": "2021",
+          "title": "PingCAP - 数据库独角兽",
+          "description": "加入核心工具 TiCDC 做研发。后来主动转向社区运营，有幸参与了中国开源生态的复兴，也从那时开始真正理解开发者关系、开源社区与生态的力量。",
+          "tags": ["开源", "开发者关系", "社区"]
+        },
+        {
+          "year": "2021",
+          "title": "爱可生 - AI Infra",
+          "description": "负责公司 AI Infra 向量数据库业务。在向量数据库概念还没被市场认知之前，我们团队就开始探索「AI + 数据基础设施」的结合，并在 2023 年初成为国内最早一批做 AI-Native SaaS 产品的团队。",
+          "tags": ["向量数据库", "RAG", "AI Infra"],
+          "links": [
+            { "text": "向量检索与 RAG 实践", "url": "https://github.com/datawhalechina/what-is-vs" },
+            { "text": "QCon 2024 演讲", "url": "https://b.geekbang.org/mall/events/qcon/2024/beijing/presentation/5940" }
+          ]
+        },
+        {
+          "year": "2023",
+          "title": "从技术到商业",
+          "description": "先后在港资公司负责商业化，以及在交大工研院负责 AI 中台，从技术 → 商业 → 组织与产品落地，完成从技术人员到创业者的能力跃迁。",
+          "tags": ["商业化", "AI 平台", "创业"]
+        },
+        {
+          "year": "现在",
+          "title": "AGI Villa - AI Builder Accelerator",
+          "description": "联合创立 AGI Villa，帮助 Builder 从 0 到 1 交付 AI + 硬件产品。构建全球化社区驱动的执行与增长机制。",
+          "tags": ["Builder 社区", "AI × 硬件", "全球化"]
+        }
+      ]
+    },
+    "values": {
+      "title": "Values / 我相信什么",
+      "items": [
+        {
+          "icon": "🚀",
+          "title": "Ship > Talk",
+          "description": "交付可运行的产品比无尽的讨论更重要。专注产出，而非投入。"
+        },
+        {
+          "icon": "🌊",
+          "title": "心流状态",
+          "description": "Build 是一种修行。找到你的节奏，进入心流，让创造自然发生。"
+        },
+        {
+          "icon": "🤝",
+          "title": "共创 > 单干",
+          "description": "最好的东西是一起 build 出来的。社区放大个人的力量。"
+        },
+        {
+          "icon": "☯️",
+          "title": "禅与科技",
+          "description": "技术与正念可以共存。带着意图去 build，带着平和去 ship。"
+        }
+      ]
+    },
+    "connect": {
+      "title": "联系我",
+      "description": "如果你正在 AI、硬件或社区方向做一些有趣的事情，我很想听听你的想法。",
+      "cta": {
+        "coBuild": "一起 Co-build",
+        "email": "发邮件给我"
+      }
     }
   }
 }
