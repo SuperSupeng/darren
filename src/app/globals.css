@@ -1,0 +1,485 @@
+@import "tailwindcss";
+
+/* ===== ZEN + GEEK Design System v2 - More Modern ===== */
+
+:root {
+  /* 墨色系 - Ink Colors */
+  --ink-950: #050505;
+  --ink-900: #0a0a0a;
+  --ink-800: #141414;
+  --ink-700: #1f1f1f;
+  --ink-600: #2a2a2a;
+  --ink-500: #3d3d3d;
+  
+  /* 纸色系 - Paper Colors */
+  --paper-100: #faf9f7;
+  --paper-200: #f5f3ef;
+  --paper-300: #e8e4dd;
+  --paper-400: #d4cfc5;
+  
+  /* 禅意点缀 - Zen Accents */
+  --zen-gold: #d4a856;
+  --zen-gold-light: #f0d590;
+  --zen-gold-dim: #a08040;
+  --zen-bamboo: #7a9e7e;
+  --zen-stone: #8b8680;
+  
+  /* 极客色 - Geek Colors */
+  --geek-cyan: #22d3ee;
+  --geek-cyan-dim: #0891b2;
+  --geek-purple: #a78bfa;
+  --geek-green: #4ade80;
+  --geek-blue: #3b82f6;
+  
+  /* Glow Colors */
+  --glow-gold: rgba(212, 168, 86, 0.4);
+  --glow-cyan: rgba(34, 211, 238, 0.4);
+  --glow-purple: rgba(167, 139, 250, 0.3);
+  
+  /* Semantic */
+  --background: var(--ink-950);
+  --foreground: var(--paper-100);
+  --muted: var(--ink-600);
+  --muted-foreground: var(--paper-400);
+  --accent: var(--zen-gold);
+  --accent-foreground: var(--ink-900);
+  
+  /* Spacing */
+  --section-padding: clamp(2rem, 4vw, 3.5rem);
+  --container-max: 1200px;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-ink-950: var(--ink-950);
+  --color-ink-900: var(--ink-900);
+  --color-ink-800: var(--ink-800);
+  --color-ink-700: var(--ink-700);
+  --color-ink-600: var(--ink-600);
+  --color-paper-100: var(--paper-100);
+  --color-paper-200: var(--paper-200);
+  --color-paper-300: var(--paper-300);
+  --color-zen-gold: var(--zen-gold);
+  --color-zen-gold-light: var(--zen-gold-light);
+  --color-zen-gold-dim: var(--zen-gold-dim);
+  --color-zen-bamboo: var(--zen-bamboo);
+  --color-geek-cyan: var(--geek-cyan);
+  --color-geek-purple: var(--geek-purple);
+  --color-geek-green: var(--geek-green);
+  --color-geek-blue: var(--geek-blue);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-noto-serif);
+}
+
+/* ===== Base Styles ===== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  overflow-x: hidden;
+}
+
+/* Selection */
+::selection {
+  background: var(--zen-gold);
+  color: var(--ink-900);
+}
+
+/* ===== Typography ===== */
+.font-serif {
+  font-family: var(--font-noto-serif), 'Noto Serif SC', 'Source Han Serif SC', Georgia, serif;
+}
+
+.font-mono {
+  font-family: var(--font-geist-mono), 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+h1, h2, h3 {
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+/* ===== Modern Buttons ===== */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+/* Primary Button - Golden Glow */
+.btn-primary {
+  background: linear-gradient(135deg, var(--zen-gold) 0%, var(--zen-gold-dim) 100%);
+  color: var(--ink-900);
+  border: 1px solid var(--zen-gold);
+  box-shadow: 
+    0 0 20px var(--glow-gold),
+    0 4px 15px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 
+    0 0 30px var(--glow-gold),
+    0 0 60px rgba(212, 168, 86, 0.2),
+    0 8px 25px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Outline Button - Cyan Glow */
+.btn-outline {
+  background: transparent;
+  color: var(--paper-100);
+  border: 1px solid var(--ink-500);
+  box-shadow: 0 0 0 transparent;
+}
+
+.btn-outline::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--geek-cyan), var(--geek-purple));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-outline:hover {
+  border-color: transparent;
+  color: var(--geek-cyan);
+  box-shadow: 
+    0 0 20px var(--glow-cyan),
+    0 4px 15px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.btn-outline:hover::before {
+  opacity: 1;
+}
+
+/* Ghost Button */
+.btn-ghost {
+  background: transparent;
+  color: var(--paper-400);
+  border: 1px solid transparent;
+}
+
+.btn-ghost:hover {
+  color: var(--paper-100);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-1px);
+}
+
+/* ===== Modern Cards ===== */
+.card {
+  position: relative;
+  background: linear-gradient(135deg, var(--ink-800) 0%, var(--ink-900) 100%);
+  border: 1px solid var(--ink-700);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--ink-600), transparent, var(--ink-600));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 40px rgba(212, 168, 86, 0.05);
+}
+
+.card:hover::before {
+  opacity: 1;
+  background: linear-gradient(135deg, var(--zen-gold), transparent, var(--geek-cyan));
+}
+
+/* ===== Modern Input ===== */
+.input {
+  background: var(--ink-800);
+  border: 1px solid var(--ink-600);
+  border-radius: 6px;
+  padding: 0.875rem 1rem;
+  color: var(--paper-100);
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--zen-gold);
+  box-shadow: 
+    0 0 0 3px rgba(212, 168, 86, 0.1),
+    0 0 20px rgba(212, 168, 86, 0.1);
+}
+
+.input::placeholder {
+  color: var(--ink-500);
+}
+
+/* ===== Geek Elements ===== */
+.code-tag {
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 0.75em;
+  padding: 0.35em 0.7em;
+  background: linear-gradient(135deg, var(--ink-800) 0%, var(--ink-700) 100%);
+  border: 1px solid var(--ink-600);
+  border-radius: 6px;
+  color: var(--geek-cyan);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Terminal cursor blink */
+.cursor-blink::after {
+  content: '▊';
+  animation: blink 1s step-end infinite;
+  color: var(--geek-cyan);
+  margin-left: 2px;
+  text-shadow: 0 0 10px var(--geek-cyan);
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ===== Layout ===== */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section {
+  padding: var(--section-padding) 0;
+  position: relative;
+}
+
+/* ===== Animations ===== */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+.animate-rotate-slow {
+  animation: rotate-slow 20s linear infinite;
+}
+
+.animation-delay-100 { animation-delay: 0.1s; }
+.animation-delay-200 { animation-delay: 0.2s; }
+.animation-delay-300 { animation-delay: 0.3s; }
+.animation-delay-400 { animation-delay: 0.4s; }
+.animation-delay-500 { animation-delay: 0.5s; }
+.animation-delay-600 { animation-delay: 0.6s; }
+
+/* ===== Background Effects ===== */
+
+/* Grid Pattern */
+.bg-grid {
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Radial Gradient Glow */
+.bg-glow {
+  position: relative;
+}
+
+.bg-glow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(212, 168, 86, 0.08) 0%,
+    rgba(34, 211, 238, 0.03) 30%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* Noise Texture */
+.bg-noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.02;
+  pointer-events: none;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ink-900);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--ink-600), var(--ink-700));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--ink-500), var(--ink-600));
+}
+
+/* ===== Utility Classes ===== */
+.text-gradient-gold {
+  background: linear-gradient(135deg, var(--zen-gold-light) 0%, var(--zen-gold) 50%, var(--zen-gold-dim) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-cyan {
+  background: linear-gradient(135deg, var(--geek-cyan) 0%, var(--geek-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.border-gradient {
+  border: 1px solid transparent;
+  background: 
+    linear-gradient(var(--ink-900), var(--ink-900)) padding-box,
+    linear-gradient(135deg, var(--zen-gold), var(--geek-cyan)) border-box;
+}
+
+.glow-gold {
+  box-shadow: 0 0 30px var(--glow-gold);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 30px var(--glow-cyan);
+}
+
+/* ===== Interactive Hover Effects ===== */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.hover-glow {
+  transition: box-shadow 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 30px var(--glow-gold);
+}

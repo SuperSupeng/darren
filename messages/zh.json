@@ -1,0 +1,226 @@
+{
+  "meta": {
+    "title": "Darren Su | 极客 Builder",
+    "description": "极客 Builder，正在 ship AI × 硬件作品"
+  },
+  "nav": {
+    "home": "首页",
+    "build": "作品",
+    "blog": "博客",
+    "community": "社区",
+    "impact": "公益",
+    "global": "全球",
+    "about": "关于",
+    "coBuild": "一起 Co-build"
+  },
+  "hero": {
+    "title": "极客 Builder，正在 ship AI × 硬件作品。",
+    "subtitle": "我叫 Darren，喜欢 build：AI × 硬件产品 / 创作者工具 / 社区。也在构建自己的数字分身。",
+    "cta": {
+      "coBuild": "一起 Co-build",
+      "viewBuild": "看我在 build 什么",
+      "contact": "联系我"
+    },
+    "tagline": "常驻上海｜全球流动共创｜社区驱动｜禅修实践者"
+  },
+  "nowBuilding": {
+    "title": "Now building / 在建",
+    "items": [
+      "AI × 硬件产品（互动体验 / 传感器 / NFC）",
+      "Builder 工作坊 & Buildathon（作品导向）",
+      "Builder 社区基础设施（全球节点连接与共创机制）"
+    ]
+  },
+  "buildDirection": {
+    "title": "我喜欢 build 的方向",
+    "items": [
+      "AI × 硬件产品（互动体验 / 玩具 / 装置）",
+      "创作者工具 / 自动化工作流",
+      "快速原型：从 idea → prototype → demo",
+      "社区共创实验（活动 / 共学 / Cohort）",
+      "Web3 × AI 的 builder-first demo"
+    ]
+  },
+  "signals": {
+    "title": "Signals / 信号",
+    "items": [
+      {
+        "role": "AGI Villa（AI Builder Accelerator）",
+        "position": "联合发起人"
+      },
+      {
+        "role": "Datawhale",
+        "position": "城市生态建设负责人"
+      },
+      {
+        "role": "CryptoTime（AI × Web3 Builder 社区）",
+        "position": "共建者"
+      }
+    ]
+  },
+  "portals": {
+    "title": "探索 / Explore",
+    "build": {
+      "title": "Build",
+      "description": "Demo、原型、可运行的实验作品。",
+      "cta": "查看作品"
+    },
+    "community": {
+      "title": "Community",
+      "description": "工作坊、Buildathon、Builder 圈子。",
+      "cta": "了解社区"
+    },
+    "impact": {
+      "title": "Impact",
+      "description": "科技向善、公益教育与无障碍。",
+      "cta": "查看公益"
+    },
+    "global": {
+      "title": "Global",
+      "description": "全球城市节点与共创连接。",
+      "cta": "全球链接"
+    }
+  },
+  "footerCta": {
+    "title": "一起 ship 点真实的东西。",
+    "description": "如果你也在构建 AI 工具、硬件作品、buildathon 与全球节点 —— 我很愿意一起 co-build。",
+    "cta": {
+      "coBuild": "一起 Co-build",
+      "contact": "联系我"
+    }
+  },
+  "footer": {
+    "name": "Darren Su / 苏鹏",
+    "location": "Shanghai / Global",
+    "copyright": "© {year} Darren Su. All rights reserved."
+  },
+  "subscribe": {
+    "title": "订阅动态",
+    "placeholder": "输入你的邮箱",
+    "button": "订阅",
+    "success": "订阅成功！",
+    "description": "获取最新的 build 动态与活动信息"
+  },
+  "language": {
+    "zh": "中文",
+    "en": "English"
+  },
+  "coBuild": {
+    "meta": {
+      "title": "一起 Co-build | Darren Su",
+      "description": "一起构建 AI-Native 的新世界"
+    },
+    "hero": {
+      "title": "一起 build",
+      "subtitle": "一起构建 AI-Native 的新世界"
+    },
+    "whatWeBuild": {
+      "title": "可以一起 build 的方向",
+      "items": [
+        {
+          "title": "AI × 硬件作品",
+          "description": "互动体验 / 玩具 / 装置 / 传感器 / NFC"
+        },
+        {
+          "title": "AI 工具产品",
+          "description": "面向某个垂直场景的小工具"
+        },
+        {
+          "title": "Creator Tools",
+          "description": "内容生产、工作流自动化、增长工具"
+        },
+        {
+          "title": "Buildathon / Workshop",
+          "description": "用活动把作品做出来、把 builder 聚起来"
+        },
+        {
+          "title": "Web3 × AI demo",
+          "description": "builder-first、真实可跑的作品"
+        }
+      ]
+    },
+    "howWeCoBuild": {
+      "title": "协作方式",
+      "suitable": "适合",
+      "goal": "目标",
+      "outputs": "产出",
+      "modes": [
+        {
+          "id": "Mode A",
+          "title": "共创冲刺",
+          "suitable": "你已经有 idea / 半成品 / repo",
+          "goal": "ship 一个可展示、可讲清楚、可传播的版本",
+          "outputs": ["可上线交互的 MVP 产品", "storytelling"]
+        },
+        {
+          "id": "Mode B",
+          "title": "产品化",
+          "suitable": "你已经有 demo，但想把它变成更像产品",
+          "goal": "从「能跑」到「有人愿意用」",
+          "outputs": ["核心 user journey", "功能优先级 / 迭代节奏", "最小增长动作"]
+        },
+        {
+          "id": "Mode C",
+          "title": "共办活动",
+          "suitable": "你有场地/资源/社区，想做 workshop / buildathon",
+          "goal": "把活动变成持续聚人的方向",
+          "outputs": ["活动机制设计", "导师/伙伴协作", "传播与增长"]
+        }
+      ]
+    },
+    "whatIDo": {
+      "title": "我可以做什么",
+      "items": [
+        "快速原型与交付节奏（idea → prototype → demo）",
+        "作品呈现能力（storytelling、演示路径、包装成「作品」）",
+        "社区与活动机制（workshops / buildathons / cohorts）",
+        "全球 builder 连接（城市节点、伙伴、场地）"
+      ]
+    },
+    "howToStart": {
+      "title": "怎么开始",
+      "description": "发我一封邮件即可（复制下面模板）",
+      "templateTitle": "Co-build 模板",
+      "template": [
+        "我是谁（背景/技能栈）：",
+        "我在 build 什么（一句话）：",
+        "希望 30 天后达成什么：",
+        "repo/demo/docs 链接（如有）："
+      ],
+      "cta": "发邮件给我"
+    },
+    "principles": {
+      "title": "协作原则",
+      "items": [
+        "直接、清晰、少内耗",
+        "偏好 async（文字/文档），必要时再开会",
+        "任何合作都以「交付」为核心",
+        "不做长期务虚讨论（除非明确是探索）"
+      ],
+      "notSuitableTitle": "可能不适合",
+      "notSuitable": [
+        "只想聊概念，不想做东西",
+        "希望我「代做/外包/咨询交付」，但自己不参与",
+        "只要资源与曝光，不愿意长期共创",
+        "把合作当成甲乙方，而不是共同交付"
+      ]
+    },
+    "contact": {
+      "title": "联系我",
+      "tagline": "Ship happens."
+    }
+  },
+  "blog": {
+    "title": "Blog / 博客",
+    "description": "记录我的思考、build 过程与学习笔记。",
+    "empty": "暂无文章，敬请期待...",
+    "readMore": "阅读全文",
+    "backToList": "返回列表",
+    "minRead": "分钟",
+    "share": "分享",
+    "meta": {
+      "title": "Blog | Darren Su",
+      "description": "Darren 的博客 - 记录思考与 build 过程"
+    }
+  }
+}

@@ -1,0 +1,226 @@
+{
+  "meta": {
+    "title": "Darren Su | Geek Builder",
+    "description": "Geek Builder, shipping AI × Hardware products"
+  },
+  "nav": {
+    "home": "Home",
+    "build": "Build",
+    "blog": "Blog",
+    "community": "Community",
+    "impact": "Impact",
+    "global": "Global",
+    "about": "About",
+    "coBuild": "Co-build"
+  },
+  "hero": {
+    "title": "Geek Builder, shipping AI × Hardware.",
+    "subtitle": "I'm Darren. I build: AI × Hardware products / Creator tools / Communities. Also building my digital avatar.",
+    "cta": {
+      "coBuild": "Co-build with me",
+      "viewBuild": "See what I'm building",
+      "contact": "Contact me"
+    },
+    "tagline": "Based in Shanghai｜Global co-creation｜Community-driven｜Zen practitioner"
+  },
+  "nowBuilding": {
+    "title": "Now building",
+    "items": [
+      "AI × Hardware products (Interactive / Sensors / NFC)",
+      "Builder Workshops & Buildathons (Output-oriented)",
+      "Builder community infrastructure (Global node connection)"
+    ]
+  },
+  "buildDirection": {
+    "title": "What I love to build",
+    "items": [
+      "AI × Hardware (Interactive / Toys / Installations)",
+      "Creator tools / Automation workflows",
+      "Rapid prototyping: idea → prototype → demo",
+      "Community co-creation (Events / Learning / Cohorts)",
+      "Web3 × AI builder-first demos"
+    ]
+  },
+  "signals": {
+    "title": "Signals",
+    "items": [
+      {
+        "role": "AGI Villa (AI Builder Accelerator)",
+        "position": "Co-founder"
+      },
+      {
+        "role": "Datawhale",
+        "position": "City Ecosystem Lead"
+      },
+      {
+        "role": "CryptoTime (AI × Web3 Builder Community)",
+        "position": "Co-builder"
+      }
+    ]
+  },
+  "portals": {
+    "title": "Explore",
+    "build": {
+      "title": "Build",
+      "description": "Demos, prototypes, and runnable experiments.",
+      "cta": "View works"
+    },
+    "community": {
+      "title": "Community",
+      "description": "Workshops, Buildathons, Builder circles.",
+      "cta": "Explore community"
+    },
+    "impact": {
+      "title": "Impact",
+      "description": "Tech for good, education, and accessibility.",
+      "cta": "View impact"
+    },
+    "global": {
+      "title": "Global",
+      "description": "Global city nodes and co-creation connections.",
+      "cta": "Global links"
+    }
+  },
+  "footerCta": {
+    "title": "Let's ship something real.",
+    "description": "If you're also building AI tools, hardware, buildathons, or global nodes — I'd love to co-build with you.",
+    "cta": {
+      "coBuild": "Co-build with me",
+      "contact": "Contact me"
+    }
+  },
+  "footer": {
+    "name": "Darren Su",
+    "location": "Shanghai / Global",
+    "copyright": "© {year} Darren Su. All rights reserved."
+  },
+  "subscribe": {
+    "title": "Subscribe",
+    "placeholder": "Enter your email",
+    "button": "Subscribe",
+    "success": "Subscribed!",
+    "description": "Get the latest build updates and event info"
+  },
+  "language": {
+    "zh": "中文",
+    "en": "English"
+  },
+  "coBuild": {
+    "meta": {
+      "title": "Co-build | Darren Su",
+      "description": "Build the AI-Native world together"
+    },
+    "hero": {
+      "title": "Let's build together",
+      "subtitle": "Build the AI-Native world together"
+    },
+    "whatWeBuild": {
+      "title": "What we can build together",
+      "items": [
+        {
+          "title": "AI × Hardware",
+          "description": "Interactive experiences / Toys / Installations / Sensors / NFC"
+        },
+        {
+          "title": "AI Tools",
+          "description": "Small tools for specific vertical scenarios"
+        },
+        {
+          "title": "Creator Tools",
+          "description": "Content production, workflow automation, growth tools"
+        },
+        {
+          "title": "Buildathon / Workshop",
+          "description": "Ship works through events, gather builders together"
+        },
+        {
+          "title": "Web3 × AI demo",
+          "description": "Builder-first, real runnable projects"
+        }
+      ]
+    },
+    "howWeCoBuild": {
+      "title": "How we collaborate",
+      "suitable": "Suitable for",
+      "goal": "Goal",
+      "outputs": "Outputs",
+      "modes": [
+        {
+          "id": "Mode A",
+          "title": "Sprint",
+          "suitable": "You have an idea / half-finished project / repo",
+          "goal": "Ship a presentable, explainable, shareable version",
+          "outputs": ["Interactive MVP product", "Storytelling"]
+        },
+        {
+          "id": "Mode B",
+          "title": "Productize",
+          "suitable": "You have a demo, want to make it more like a product",
+          "goal": "From 'it works' to 'people want to use it'",
+          "outputs": ["Core user journey", "Feature priorities / iteration rhythm", "Minimal growth actions"]
+        },
+        {
+          "id": "Mode C",
+          "title": "Co-host Events",
+          "suitable": "You have venue/resources/community, want to do workshops / buildathons",
+          "goal": "Turn events into sustainable community building",
+          "outputs": ["Event mechanism design", "Mentor/partner collaboration", "Promotion & growth"]
+        }
+      ]
+    },
+    "whatIDo": {
+      "title": "What I bring",
+      "items": [
+        "Rapid prototyping & delivery rhythm (idea → prototype → demo)",
+        "Work presentation (storytelling, demo paths, packaging as 'works')",
+        "Community & event mechanisms (workshops / buildathons / cohorts)",
+        "Global builder connections (city nodes, partners, venues)"
+      ]
+    },
+    "howToStart": {
+      "title": "How to start",
+      "description": "Just send me an email (copy the template below)",
+      "templateTitle": "Co-build Template",
+      "template": [
+        "Who I am (background/skills):",
+        "What I'm building (one sentence):",
+        "What I hope to achieve in 30 days:",
+        "repo/demo/docs link (if any):"
+      ],
+      "cta": "Email me"
+    },
+    "principles": {
+      "title": "Collaboration Principles",
+      "items": [
+        "Direct, clear, low friction",
+        "Prefer async (text/docs), meet only when necessary",
+        "All collaboration centers on 'delivery'",
+        "No long abstract discussions (unless explicitly exploratory)"
+      ],
+      "notSuitableTitle": "Might not be a fit",
+      "notSuitable": [
+        "Just want to discuss concepts, not build things",
+        "Want me to 'do it for you/outsource/consult' without participating",
+        "Only want resources and exposure, not willing to co-create long-term",
+        "Treat collaboration as client-vendor, not co-delivery"
+      ]
+    },
+    "contact": {
+      "title": "Contact",
+      "tagline": "Ship happens."
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Thoughts, build logs, and learning notes.",
+    "empty": "No posts yet, stay tuned...",
+    "readMore": "Read more",
+    "backToList": "Back to list",
+    "minRead": "min",
+    "share": "Share",
+    "meta": {
+      "title": "Blog | Darren Su",
+      "description": "Darren's blog - thoughts and build logs"
+    }
+  }
+}
