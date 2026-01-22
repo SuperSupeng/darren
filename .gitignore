@@ -52,10 +52,6 @@ next-env.d.ts
 *.swp
 *.swo
 
-# Cursor & Shared
-.cursor/
-.shared/
-
 # OS
 .DS_Store
 .AppleDouble
