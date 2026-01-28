@@ -29,12 +29,10 @@ export default function Nav() {
 
   const navLinks = [
     { href: '/', label: t('home') },
+    { href: '/services', label: t('services') },
     { href: '/build', label: t('build') },
-    { href: '/blog', label: t('blog') },
-    { href: '/community', label: t('community') },
-    { href: '/impact', label: t('impact') },
-    { href: '/global', label: t('global') },
     { href: '/about', label: t('about') },
+    { href: '/blog', label: t('blog') },
   ];
 
   // 检查当前路径是否激活
@@ -107,7 +105,7 @@ export default function Nav() {
 
             {/* CTA Button */}
             <Link href="/co-build" className="btn btn-primary text-sm py-2.5 px-5">
-              {t('coBuild')}
+              {t('contact')}
             </Link>
           </div>
 
@@ -156,7 +154,7 @@ export default function Nav() {
                   onClick={() => setMobileMenuOpen(false)}
                   className="btn btn-primary w-full justify-center"
                 >
-                  {t('coBuild')}
+                  {t('contact')}
                 </Link>
               </div>
             </div>

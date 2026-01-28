@@ -12,6 +12,52 @@ interface Project {
   tags: string[];
   links?: { type: string; url: string }[];
   description: string;
+  image?: string;
+  icon?: string;
+  url?: string;
+  brandColor?: string; // e.g., "cyan", "purple", "amber", "green"
+}
+
+// 品牌色映射
+const brandColors: Record<string, { gradient: string; accent: string }> = {
+  cyan: { gradient: 'from-cyan-500/20 via-cyan-600/10 to-ink-800', accent: 'bg-cyan-400' },
+  purple: { gradient: 'from-purple-500/20 via-purple-600/10 to-ink-800', accent: 'bg-purple-400' },
+  amber: { gradient: 'from-amber-500/20 via-amber-600/10 to-ink-800', accent: 'bg-amber-400' },
+  green: { gradient: 'from-green-500/20 via-green-600/10 to-ink-800', accent: 'bg-green-400' },
+  blue: { gradient: 'from-blue-500/20 via-blue-600/10 to-ink-800', accent: 'bg-blue-400' },
+  pink: { gradient: 'from-pink-500/20 via-pink-600/10 to-ink-800', accent: 'bg-pink-400' },
+  orange: { gradient: 'from-orange-500/20 via-orange-600/10 to-ink-800', accent: 'bg-orange-400' },
+};
+
+// 浏览器窗口预览组件
+function BrowserPreview({ url, name, icon, brandColor = 'cyan' }: { url: string; name: string; icon?: string; brandColor?: string }) {
+  const colors = brandColors[brandColor] || brandColors.cyan;
+  const domain = url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+  
+  return (
+    <div className="w-full h-full flex flex-col">
+      {/* Browser Chrome */}
+      <div className="flex items-center gap-1.5 px-3 py-2 bg-ink-800/80 border-b border-ink-700/50">
+        <div className="flex gap-1">
+          <span className="w-2.5 h-2.5 rounded-full bg-red-500/70" />
+          <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/70" />
+          <span className="w-2.5 h-2.5 rounded-full bg-green-500/70" />
+        </div>
+        {/* URL Bar */}
+        <div className="flex-1 ml-2 px-3 py-1 rounded-md bg-ink-900/80 border border-ink-700/30 flex items-center gap-2">
+          <svg className="w-3 h-3 text-green-400/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+          <span className="text-[10px] text-paper-400 font-mono truncate">{domain}</span>
+        </div>
+      </div>
+      {/* Page Content Preview */}
+      <div className={`flex-1 bg-gradient-to-br ${colors.gradient} flex flex-col items-center justify-center p-4`}>
+        <div className="text-4xl mb-2 drop-shadow-lg">{icon || '🌐'}</div>
+        <div className="text-sm font-medium text-paper-200 text-center">{name}</div>
+      </div>
+    </div>
+  );
 }
 
 // 打字机效果 Hook
@@ -112,11 +158,28 @@ export default function SelectedBuilds() {
                       </span>
                     </div>
 
-                    {/* Project Image Placeholder / Icon */}
-                    <div className="mb-4 aspect-video rounded-xl bg-ink-800/50 border border-ink-700/30 flex items-center justify-center overflow-hidden group-hover:border-geek-cyan/20 transition-colors">
-                      <div className="text-6xl opacity-50 group-hover:opacity-80 group-hover:scale-110 transition-all duration-500">
-                        🔧
-                      </div>
+                    {/* Project Preview */}
+                    <div className="mb-4 aspect-video rounded-xl bg-ink-800/50 border border-ink-700/30 overflow-hidden group-hover:border-geek-cyan/20 transition-colors">
+                      {project.image ? (
+                        <img 
+                          src={project.image} 
+                          alt={project.name}
+                          className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                        />
+                      ) : project.url ? (
+                        <BrowserPreview 
+                          url={project.url} 
+                          name={project.name} 
+                          icon={project.icon}
+                          brandColor={project.brandColor}
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <div className="text-6xl opacity-50 group-hover:opacity-80 group-hover:scale-110 transition-all duration-500">
+                            {project.icon || '🔧'}
+                          </div>
+                        </div>
+                      )}
                     </div>
 
                     {/* Content */}

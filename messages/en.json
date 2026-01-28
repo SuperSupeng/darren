@@ -5,23 +5,21 @@
   },
   "nav": {
     "home": "Home",
-    "build": "Build",
-    "blog": "Blog",
-    "community": "Community",
-    "impact": "Impact",
-    "global": "Global",
+    "services": "Services",
+    "build": "Work",
     "about": "About",
-    "coBuild": "Co-build"
+    "blog": "Blog",
+    "contact": "Contact"
   },
   "hero": {
     "title": "Geek Builder, shipping AI × Hardware.",
-    "subtitle": "I'm Darren. I build: AI × Hardware products / Creator tools / Communities. Also building my digital avatar.",
+    "subtitle": "Darren. I build: AI × Hardware products / Creator tools / Communities. Also building my digital avatar.",
     "cta": {
       "coBuild": "Co-build with me",
       "viewBuild": "See what I'm building",
       "contact": "Contact me"
     },
-    "tagline": "Based in Shanghai｜Global co-creation｜Community-driven｜Zen practitioner"
+    "tagline": "Builder｜Global co-creation｜Community-driven｜Zen practitioner"
   },
   "community": {
     "meta": {
@@ -54,7 +52,7 @@
         },
         {
           "name": "Datawhale",
-          "tagline": "One of China's largest AI open-source learning communities",
+          "tagline": "China's largest AI open-source learning community",
           "role": "City Ecosystem Lead",
           "whatIDo": [
             "Build learning → practice → creation → startup paths",
@@ -358,13 +356,68 @@
       "cta": "Email me"
     }
   },
-  "nowBuilding": {
-    "title": "Now building",
+  "servicesPage": {
+    "meta": {
+      "title": "Services | Darren Su",
+      "description": "Services I can offer"
+    },
+    "hero": {
+      "title": "What I Can Help You With",
+      "subtitle": "Think of me as a company: here are the services I offer. Each one has clear deliverables and is a paid collaboration."
+    },
+    "cta": {
+      "title": "Have an idea? Let's talk",
+      "description": "If you have a project you'd like to collaborate on, or are interested in any of these services, send me an email. I'll get back to you soon.",
+      "button": "Email me",
+      "viewWork": "View past work →"
+    }
+  },
+  "services": {
+    "title": "What I Can Help You With",
+    "subtitle": "Think of me as a company: here are the services I offer",
     "items": [
-      "AI × Hardware products (Interactive / Sensors / NFC)",
-      "Builder Workshops & Buildathons (Output-oriented)",
-      "Builder community infrastructure (Global node connection)"
-    ]
+      {
+        "id": "activity",
+        "title": "Co-creation Events",
+        "description": "Plan output-driven events for companies/schools/communities, ensuring participants deliver real, presentable results"
+      },
+      {
+        "id": "kickstart",
+        "title": "Project Kickstart",
+        "description": "Transform vague ideas into executable project structures and first deliverables"
+      },
+      {
+        "id": "aiSoftware",
+        "title": "AI Software Prototyping",
+        "description": "Rapidly validate AI software product ideas, from concept to demo-ready prototype"
+      },
+      {
+        "id": "aiHardware",
+        "title": "AI Hardware Prototyping",
+        "description": "Rapidly validate AI × hardware product ideas, from concept to interactive physical prototype"
+      },
+      {
+        "id": "global",
+        "title": "Cross-border Co-creation",
+        "description": "Low-risk pilot programs for teams exploring international collaboration through real projects"
+      },
+      {
+        "id": "overseas",
+        "title": "Overseas Event Execution",
+        "description": "Help organize and execute Workshops / Meetups / Buildathons overseas"
+      },
+      {
+        "id": "community",
+        "title": "Community Building",
+        "description": "Help build builder communities with architecture design, operations strategy, and cold-start plans"
+      },
+      {
+        "id": "connect",
+        "title": "Resource Connection",
+        "description": "Connect you with builder networks, event venues, and partners"
+      }
+    ],
+    "viewAll": "View all services"
   },
   "buildDirection": {
     "title": "What I love to build",
@@ -384,12 +437,12 @@
         "position": "Co-founder"
       },
       {
-        "role": "Datawhale",
+        "role": "Datawhale (China's largest open-source learning community)",
         "position": "City Ecosystem Lead"
       },
       {
         "role": "CryptoTime (AI × Web3 Builder Community)",
-        "position": "Co-builder"
+        "position": "Co-founder"
       }
     ]
   },
@@ -415,6 +468,27 @@
       "description": "Global city nodes and co-creation connections.",
       "cta": "Global links"
     }
+  },
+  "featuredProjects": {
+    "title": "Featured Work",
+    "subtitle": "Selected projects",
+    "viewAll": "View all work",
+    "items": [
+      {
+        "id": "globaltechevents",
+        "name": "GlobalTechEvents",
+        "tagline": "Discover world's tech events",
+        "url": "https://www.globaltechevents.xyz",
+        "image": "/projects/globaltechevents.png"
+      },
+      {
+        "id": "internplanet",
+        "name": "Intern Planet",
+        "tagline": "Find your internship faster",
+        "url": "https://internplanet.tech",
+        "image": "/projects/internplanet.png"
+      }
+    ]
   },
   "footerCta": {
     "title": "Let's ship something real.",
@@ -577,7 +651,30 @@
     },
     "selected": {
       "title": "Selected",
-      "projects": [],
+      "projects": [
+        {
+          "id": "globaltechevents",
+          "name": "GlobalTechEvents",
+          "tagline": "Discover world's tech events",
+          "status": "shipped",
+          "tags": ["Events", "Tech", "Global"],
+          "links": [{ "type": "Website", "url": "https://www.globaltechevents.xyz" }],
+          "description": "Discover global tech events and conferences, helping developers and entrepreneurs find the best offline event opportunities.",
+          "url": "https://www.globaltechevents.xyz",
+          "image": "/projects/globaltechevents.png"
+        },
+        {
+          "id": "internplanet",
+          "name": "Intern Planet",
+          "tagline": "Find your internship faster",
+          "status": "shipped",
+          "tags": ["Jobs", "Internship", "Students"],
+          "links": [{ "type": "Website", "url": "https://internplanet.tech" }],
+          "description": "A job platform for university students, helping them quickly find quality internship opportunities and kickstart their careers.",
+          "url": "https://internplanet.tech",
+          "image": "/projects/internplanet.png"
+        }
+      ],
       "empty": {
         "title": "No public projects yet (organizing...)",
         "description": "I'll gradually publish demos, prototypes, MVPs, and event outputs here.",
@@ -669,6 +766,25 @@
           "title": "Zen in Tech",
           "description": "Technology and mindfulness can coexist. Build with intention, ship with peace."
         }
+      ]
+    },
+    "communities": {
+      "title": "Communities",
+      "items": [
+        { "name": "AGI Villa", "tagline": "Community-driven Venture Studio for AI Builders & Founders", "role": "Co-founder", "color": "gold" },
+        { "name": "Datawhale", "tagline": "China's largest AI open-source learning community", "role": "City Ecosystem Lead", "color": "cyan" },
+        { "name": "CryptoTime", "tagline": "AI × Web3 builder-first community", "role": "Co-builder", "color": "purple" }
+      ]
+    },
+    "global": {
+      "title": "Global Reach",
+      "subtitle": "I have community connections in these cities and can help you connect with local builder networks, venues, and partners.",
+      "cities": [
+        { "city": "Shanghai", "flag": "🇨🇳" },
+        { "city": "Shenzhen", "flag": "🇨🇳" },
+        { "city": "Beijing", "flag": "🇨🇳" },
+        { "city": "Chiang Mai", "flag": "🇹🇭" },
+        { "city": "Bangkok", "flag": "🇹🇭" }
       ]
     },
     "connect": {

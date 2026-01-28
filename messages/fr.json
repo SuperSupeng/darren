@@ -5,13 +5,11 @@
   },
   "nav": {
     "home": "Accueil",
+    "services": "Services",
     "build": "Projets",
-    "blog": "Blog",
-    "community": "Communauté",
-    "impact": "Impact",
-    "global": "Global",
     "about": "À propos",
-    "coBuild": "Co-build"
+    "blog": "Blog",
+    "contact": "Contact"
   },
   "hero": {
     "title": "Builder Geek, livrant AI × Hardware.",
@@ -148,9 +146,24 @@
       "cta": "M'envoyer un email"
     }
   },
-  "nowBuilding": {
-    "title": "En construction",
-    "items": ["Produits AI × Hardware (Interactifs / Capteurs / NFC)", "Workshops & Buildathons pour Builders (Orientés output)", "Infrastructure communauté builder (Connexion nœuds globaux)"]
+  "servicesPage": {
+    "meta": { "title": "Services | Darren Su", "description": "Services que je peux offrir" },
+    "hero": { "title": "Comment je peux t'aider", "subtitle": "Considère-moi comme une entreprise : voici les services que j'offre. Chacun a des livrables clairs et est une collaboration payante." },
+    "cta": { "title": "Tu as une idée ? Parlons-en", "description": "Si tu as un projet sur lequel tu aimerais collaborer, ou si tu es intéressé par un service, envoie-moi un email. Je te réponds rapidement.", "button": "M'envoyer un email" }
+  },
+  "services": {
+    "title": "Comment je peux t'aider",
+    "subtitle": "Considère-moi comme une entreprise : voici les services que j'offre",
+    "items": [
+      { "id": "activity", "title": "Événements Co-création", "description": "Planifier des événements orientés résultats pour entreprises/écoles/communautés, garantissant des livrables réels" },
+      { "id": "kickstart", "title": "Kickstart Projet", "description": "Transformer des idées vagues en structures de projet exécutables et premiers livrables" },
+      { "id": "aiSoftware", "title": "Prototypage AI Software", "description": "Valider rapidement les idées de produits AI software, du concept au prototype démontrable" },
+      { "id": "aiHardware", "title": "Prototypage AI Hardware", "description": "Valider rapidement les idées AI × hardware, du concept au prototype physique interactif" },
+      { "id": "global", "title": "Co-création Transfrontalière", "description": "Programmes pilotes à faible risque pour équipes explorant la collaboration internationale" },
+      { "id": "overseas", "title": "Exécution Événements Overseas", "description": "Aide à l'organisation et exécution de Workshops / Meetups / Buildathons à l'étranger" },
+      { "id": "community", "title": "Construction Communauté", "description": "Aide à construire des communautés builder avec architecture, stratégie et plans de démarrage" },
+      { "id": "connect", "title": "Connexion Ressources", "description": "Connexion aux réseaux builder, lieux d'événements et partenaires" }
+    ]
   },
   "buildDirection": {
     "title": "Ce que j'aime construire",
@@ -160,8 +173,8 @@
     "title": "Signaux",
     "items": [
       {"role": "AGI Villa (AI Builder Accelerator)", "position": "Co-fondateur"},
-      {"role": "Datawhale", "position": "Lead Écosystème Ville"},
-      {"role": "CryptoTime (Communauté Builder AI × Web3)", "position": "Co-builder"}
+      {"role": "Datawhale (Plus grande communauté open-source de Chine)", "position": "Lead Écosystème Ville"},
+      {"role": "CryptoTime (Communauté Builder AI × Web3)", "position": "Co-fondateur"}
     ]
   },
   "portals": {
@@ -170,6 +183,15 @@
     "community": {"title": "Community", "description": "Workshops, Buildathons, cercles de builders.", "cta": "Explorer communauté"},
     "impact": {"title": "Impact", "description": "Tech for good, éducation et accessibilité.", "cta": "Voir impact"},
     "global": {"title": "Global", "description": "Nœuds villes globaux et connexions co-création.", "cta": "Liens globaux"}
+  },
+  "featuredProjects": {
+    "title": "Projets Sélectionnés",
+    "subtitle": "Projets passés",
+    "viewAll": "Voir tous les projets",
+    "items": [
+      { "id": "globaltechevents", "name": "GlobalTechEvents", "tagline": "Découvrez les événements tech mondiaux", "url": "https://www.globaltechevents.xyz", "image": "/projects/globaltechevents.png" },
+      { "id": "internplanet", "name": "Intern Planet", "tagline": "Trouvez votre stage plus rapidement", "url": "https://internplanet.tech", "image": "/projects/internplanet.png" }
+    ]
   },
   "footerCta": {
     "title": "Livrons quelque chose de réel ensemble.",
@@ -248,7 +270,30 @@
     "hero": {"title": "Build", "subtitle": "Ici je mets à jour continuellement mes projets AI × Hardware, outils et activités communautaires."},
     "selected": {
       "title": "Sélection",
-      "projects": [],
+      "projects": [
+        {
+          "id": "globaltechevents",
+          "name": "GlobalTechEvents",
+          "tagline": "Découvrez les événements tech mondiaux",
+          "status": "shipped",
+          "tags": ["Événements", "Tech", "Global"],
+          "links": [{ "type": "Site web", "url": "https://www.globaltechevents.xyz" }],
+          "description": "Découvrez les événements et conférences tech à travers le monde, aidant les développeurs et entrepreneurs à trouver les meilleures opportunités d'événements en présentiel.",
+          "url": "https://www.globaltechevents.xyz",
+          "image": "/projects/globaltechevents.png"
+        },
+        {
+          "id": "internplanet",
+          "name": "Intern Planet",
+          "tagline": "Trouvez votre stage plus rapidement",
+          "status": "shipped",
+          "tags": ["Emploi", "Stage", "Étudiants"],
+          "links": [{ "type": "Site web", "url": "https://internplanet.tech" }],
+          "description": "Une plateforme d'emploi pour les étudiants universitaires, les aidant à trouver rapidement des opportunités de stage de qualité et à lancer leur carrière.",
+          "url": "https://internplanet.tech",
+          "image": "/projects/internplanet.png"
+        }
+      ],
       "empty": {"title": "Pas encore de projets publics (en organisation...)", "description": "Je publierai graduellement démos, prototypes, MVPs et outputs d'événements ici.", "cta": "Si tu construis aussi, n'hésite pas à co-build avec moi."}
     },
     "log": {
@@ -286,6 +331,25 @@
         {"icon": "🌊", "title": "État de Flow", "description": "Construire est une pratique. Trouve ton rythme, entre dans le flow, et laisse la création se faire naturellement."},
         {"icon": "🤝", "title": "Co-création > Solo", "description": "Les meilleures choses se construisent ensemble. La communauté multiplie l'effort individuel."},
         {"icon": "☯️", "title": "Zen dans la Tech", "description": "Technologie et pleine conscience peuvent coexister. Construis avec intention, livre avec paix."}
+      ]
+    },
+    "communities": {
+      "title": "Communautés",
+      "items": [
+        { "name": "AGI Villa", "tagline": "Venture Studio communautaire pour AI Builders & Founders", "role": "Co-fondateur", "color": "gold" },
+        { "name": "Datawhale", "tagline": "Plus grande communauté AI open-source de Chine", "role": "Lead Écosystème Ville", "color": "cyan" },
+        { "name": "CryptoTime", "tagline": "Communauté AI × Web3 builder-first", "role": "Co-builder", "color": "purple" }
+      ]
+    },
+    "global": {
+      "title": "Portée Globale",
+      "subtitle": "J'ai des connexions communautaires dans ces villes et peux t'aider à te connecter aux réseaux builder locaux, lieux et partenaires.",
+      "cities": [
+        { "city": "Shanghai", "flag": "🇨🇳" },
+        { "city": "Shenzhen", "flag": "🇨🇳" },
+        { "city": "Beijing", "flag": "🇨🇳" },
+        { "city": "Chiang Mai", "flag": "🇹🇭" },
+        { "city": "Bangkok", "flag": "🇹🇭" }
       ]
     },
     "connect": {

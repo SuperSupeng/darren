@@ -5,23 +5,21 @@
   },
   "nav": {
     "home": "首页",
+    "services": "服务",
     "build": "作品",
-    "blog": "博客",
-    "community": "社区",
-    "impact": "公益",
-    "global": "全球",
     "about": "关于",
-    "coBuild": "一起 Co-build"
+    "blog": "博客",
+    "contact": "联系我"
   },
   "hero": {
     "title": "极客 Builder，正在 ship AI × 硬件作品。",
-    "subtitle": "我叫 Darren，喜欢 build：AI × 硬件产品 / 创作者工具 / 社区。也在构建自己的数字分身。",
+    "subtitle": "Darren，喜欢 build：AI × 硬件产品 / 创作者工具 / 社区。构建自己的数字分身ing",
     "cta": {
       "coBuild": "一起 Co-build",
       "viewBuild": "看我在 build 什么",
       "contact": "联系我"
     },
-    "tagline": "常驻上海｜全球流动共创｜社区驱动｜禅修实践者"
+    "tagline": "Builder｜全球流动共创｜社区驱动｜禅修实践者"
   },
   "community": {
     "meta": {
@@ -54,7 +52,7 @@
         },
         {
           "name": "Datawhale",
-          "tagline": "中国最大的 AI 开源学习社区之一",
+          "tagline": "中国最大的 AI 开源学习社区",
           "role": "城市生态建设负责人",
           "whatIDo": [
             "学习 → 实践 → 创造 → 创业 的路径建设",
@@ -244,7 +242,7 @@
     },
     "mechanism": {
       "title": "机制",
-      "intro": "我不希望公益只在「赚到钱以后」才开始。",
+      "intro": "公益应该是一种公共意识",
       "items": [
         "AGI Villa 承诺将收益的 1% 用于公益与 impact 项目",
         "我也会把部分活动资源、场地与传播能力用于支持公益伙伴"
@@ -358,13 +356,68 @@
       "cta": "发邮件给我"
     }
   },
-  "nowBuilding": {
-    "title": "Now building / 在建",
+  "servicesPage": {
+    "meta": {
+      "title": "服务 | Darren Su",
+      "description": "我能提供的服务能力"
+    },
+    "hero": {
+      "title": "我能帮你做什么",
+      "subtitle": "把我当成一家公司：以下是我能提供的服务。每一项都是可以收费的、有明确交付物的合作方式。"
+    },
+    "cta": {
+      "title": "有想法？聊聊",
+      "description": "如果你有项目想合作，或者对某项服务感兴趣，直接发邮件给我。我会尽快回复。",
+      "button": "发邮件给我",
+      "viewWork": "查看过往作品 →"
+    }
+  },
+  "services": {
+    "title": "我能帮你做什么",
+    "subtitle": "把我当成一家公司：以下是我能提供的服务",
     "items": [
-      "AI × 硬件产品（互动体验 / 传感器 / NFC）",
-      "Builder 工作坊 & Buildathon（作品导向）",
-      "Builder 社区基础设施（全球节点连接与共创机制）"
-    ]
+      {
+        "id": "activity",
+        "title": "共创型活动产品",
+        "description": "为企业/学校/社区策划「以产出为目标」的活动，确保参与者完成可展示的真实成果"
+      },
+      {
+        "id": "kickstart",
+        "title": "共创项目启动包",
+        "description": "将模糊想法转化为可执行的第一轮项目结构与交付物"
+      },
+      {
+        "id": "aiSoftware",
+        "title": "AI 软件产品原型",
+        "description": "快速验证 AI 软件产品想法，从概念到可演示的原型"
+      },
+      {
+        "id": "aiHardware",
+        "title": "AI 硬件产品原型",
+        "description": "快速验证 AI × 硬件产品想法，从概念到可交互的实体原型"
+      },
+      {
+        "id": "global",
+        "title": "跨地域共创试点",
+        "description": "为希望开展国际合作的团队提供低风险试点方案，用真实项目验证合作可能性"
+      },
+      {
+        "id": "overseas",
+        "title": "海外活动执行",
+        "description": "帮助在海外组织和落地 Workshop / Meetup / Buildathon 等活动"
+      },
+      {
+        "id": "community",
+        "title": "社区建设咨询",
+        "description": "帮助搭建 builder 社区，提供架构设计、运营策略与冷启动方案"
+      },
+      {
+        "id": "connect",
+        "title": "资源连接",
+        "description": "对接 Builder 网络、活动场地、合作伙伴等资源"
+      }
+    ],
+    "viewAll": "查看全部服务"
   },
   "buildDirection": {
     "title": "我喜欢 build 的方向",
@@ -384,12 +437,12 @@
         "position": "联合发起人"
       },
       {
-        "role": "Datawhale",
+        "role": "Datawhale（中国最大的开源学习社区）",
         "position": "城市生态建设负责人"
       },
       {
         "role": "CryptoTime（AI × Web3 Builder 社区）",
-        "position": "共建者"
+        "position": "联合发起人"
       }
     ]
   },
@@ -415,6 +468,27 @@
       "description": "全球城市节点与共创连接。",
       "cta": "全球链接"
     }
+  },
+  "featuredProjects": {
+    "title": "精选案例",
+    "subtitle": "过往项目展示",
+    "viewAll": "查看全部作品",
+    "items": [
+      {
+        "id": "globaltechevents",
+        "name": "GlobalTechEvents",
+        "tagline": "汇聚全球科技活动",
+        "url": "https://www.globaltechevents.xyz",
+        "image": "/projects/globaltechevents.png"
+      },
+      {
+        "id": "internplanet",
+        "name": "实习星球",
+        "tagline": "帮助大家快速找到实习",
+        "url": "https://internplanet.tech",
+        "image": "/projects/internplanet.png"
+      }
+    ]
   },
   "footerCta": {
     "title": "一起 ship 点真实的东西。",
@@ -577,7 +651,30 @@
     },
     "selected": {
       "title": "精选",
-      "projects": [],
+      "projects": [
+        {
+          "id": "globaltechevents",
+          "name": "GlobalTechEvents",
+          "tagline": "汇聚全球科技活动",
+          "status": "shipped",
+          "tags": ["活动", "科技", "全球"],
+          "links": [{ "type": "网站", "url": "https://www.globaltechevents.xyz" }],
+          "description": "发现全球科技活动与会议，帮助开发者和创业者找到最适合的线下活动机会。",
+          "url": "https://www.globaltechevents.xyz",
+          "image": "/projects/globaltechevents.png"
+        },
+        {
+          "id": "internplanet",
+          "name": "实习星球",
+          "tagline": "帮助大家快速找到实习",
+          "status": "shipped",
+          "tags": ["求职", "实习", "大学生"],
+          "links": [{ "type": "网站", "url": "https://internplanet.tech" }],
+          "description": "大学生求职平台，帮助学生快速找到优质实习机会，开启职业生涯第一步。",
+          "url": "https://internplanet.tech",
+          "image": "/projects/internplanet.png"
+        }
+      ],
       "empty": {
         "title": "暂无公开作品（整理中）",
         "description": "我会逐步把 demo / prototype / MVP 以及活动产出放到这里。",
@@ -614,7 +711,7 @@
       ]
     },
     "background": {
-      "title": "Background / 从哪里来",
+      "title": "个人经历",
       "items": [
         {
           "year": "2021",
@@ -623,7 +720,7 @@
           "tags": ["开源", "开发者关系", "社区"]
         },
         {
-          "year": "2021",
+          "year": "2022",
           "title": "爱可生 - AI Infra",
           "description": "负责公司 AI Infra 向量数据库业务。在向量数据库概念还没被市场认知之前，我们团队就开始探索「AI + 数据基础设施」的结合，并在 2023 年初成为国内最早一批做 AI-Native SaaS 产品的团队。",
           "tags": ["向量数据库", "RAG", "AI Infra"],
@@ -633,7 +730,7 @@
           ]
         },
         {
-          "year": "2023",
+          "year": "2025",
           "title": "从技术到商业",
           "description": "先后在港资公司负责商业化，以及在交大工研院负责 AI 中台，从技术 → 商业 → 组织与产品落地，完成从技术人员到创业者的能力跃迁。",
           "tags": ["商业化", "AI 平台", "创业"]
@@ -647,7 +744,7 @@
       ]
     },
     "values": {
-      "title": "Values / 我相信什么",
+      "title": "我相信什么",
       "items": [
         {
           "icon": "🚀",
@@ -669,6 +766,25 @@
           "title": "禅与科技",
           "description": "技术与正念可以共存。带着意图去 build，带着平和去 ship。"
         }
+      ]
+    },
+    "communities": {
+      "title": "参与的社区",
+      "items": [
+        { "name": "AGI Villa", "tagline": "AI Builder & Founder 的社区驱动 Venture Studio", "role": "联合发起人", "color": "gold" },
+        { "name": "Datawhale", "tagline": "中国最大的 AI 开源学习社区", "role": "城市生态建设负责人", "color": "cyan" },
+        { "name": "CryptoTime", "tagline": "AI × Web3 builder-first 社区", "role": "共建者", "color": "purple" }
+      ]
+    },
+    "global": {
+      "title": "全球连接",
+      "subtitle": "我在这些城市有社区连接，可以帮你对接当地的 builder 网络、活动场地与合作伙伴。",
+      "cities": [
+        { "city": "上海", "flag": "🇨🇳" },
+        { "city": "深圳", "flag": "🇨🇳" },
+        { "city": "北京", "flag": "🇨🇳" },
+        { "city": "清迈", "flag": "🇹🇭" },
+        { "city": "曼谷", "flag": "🇹🇭" }
       ]
     },
     "connect": {

@@ -1,162 +1,100 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
-// 模拟进度的 Hook
-function useProgress(targetProgress: number, duration: number = 2000) {
-  const [progress, setProgress] = useState(0);
-  
-  useEffect(() => {
-    const startTime = Date.now();
-    const animate = () => {
-      const elapsed = Date.now() - startTime;
-      const newProgress = Math.min((elapsed / duration) * targetProgress, targetProgress);
-      setProgress(newProgress);
-      if (elapsed < duration) {
-        requestAnimationFrame(animate);
-      }
-    };
-    const timer = setTimeout(() => requestAnimationFrame(animate), 500);
-    return () => clearTimeout(timer);
-  }, [targetProgress, duration]);
-  
-  return progress;
-}
-
-// 进度条组件
-function ProcessBar({ label, progress, color, delay = 0 }: { 
-  label: string; 
-  progress: number; 
-  color: string;
-  delay?: number;
-}) {
-  const [show, setShow] = useState(false);
-  const animatedProgress = useProgress(show ? progress : 0);
-  
-  useEffect(() => {
-    const timer = setTimeout(() => setShow(true), delay);
-    return () => clearTimeout(timer);
-  }, [delay]);
-
-  return (
-    <div className="group">
-      <div className="flex items-center justify-between mb-2">
-        <span className="text-sm text-paper-300 font-mono group-hover:text-paper-100 transition-colors">
-          {label}
-        </span>
-        <span className={`text-xs font-mono ${color}`}>
-          {Math.round(animatedProgress)}%
-        </span>
-      </div>
-      <div className="h-2 bg-ink-800 rounded-full overflow-hidden">
-        <div 
-          className={`h-full rounded-full transition-all duration-1000 ease-out`}
-          style={{ 
-            width: `${animatedProgress}%`,
-            background: `linear-gradient(90deg, ${color.includes('cyan') ? '#22d3ee' : color.includes('purple') ? '#a78bfa' : '#d4a856'}, ${color.includes('cyan') ? '#0891b2' : color.includes('purple') ? '#7c3aed' : '#a08040'})`,
-            boxShadow: `0 0 10px ${color.includes('cyan') ? 'rgba(34, 211, 238, 0.5)' : color.includes('purple') ? 'rgba(167, 139, 250, 0.5)' : 'rgba(212, 168, 86, 0.5)'}`,
-          }}
-        />
-      </div>
-    </div>
-  );
-}
+// 服务配置
+const serviceConfig: Record<string, { icon: string; accent: string }> = {
+  activity: { icon: '🎯', accent: 'from-amber-500/20 to-orange-500/20' },
+  kickstart: { icon: '🚀', accent: 'from-purple-500/20 to-pink-500/20' },
+  aiSoftware: { icon: '🤖', accent: 'from-cyan-500/20 to-blue-500/20' },
+  aiHardware: { icon: '⚡', accent: 'from-yellow-500/20 to-green-500/20' },
+  global: { icon: '🌏', accent: 'from-blue-500/20 to-indigo-500/20' },
+  overseas: { icon: '✈️', accent: 'from-indigo-500/20 to-purple-500/20' },
+  community: { icon: '👥', accent: 'from-pink-500/20 to-rose-500/20' },
+  connect: { icon: '🔗', accent: 'from-orange-500/20 to-red-500/20' },
+};
 
 export default function NowBuilding() {
-  const t = useTranslations('nowBuilding');
-  const items = t.raw('items') as string[];
-  
-  const processData = [
-    { progress: 75, color: 'text-geek-cyan' },
-    { progress: 60, color: 'text-geek-purple' },
-    { progress: 45, color: 'text-zen-gold' },
-  ];
+  const t = useTranslations('services');
+  const items = t.raw('items') as Array<{
+    id: string;
+    title: string;
+    description: string;
+  }>;
 
   return (
-    <section className="section relative overflow-hidden">
+    <section className="py-24 md:py-32 relative overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-ink-950 via-ink-900 to-ink-950" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(212,175,55,0.08)_0%,transparent_50%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(147,51,234,0.05)_0%,transparent_50%)]" />
+      
+      {/* Decorative grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px]" />
       
       <div className="container relative z-10">
-        <div className="max-w-5xl mx-auto">
-          {/* Terminal Window */}
-          <div className="rounded-2xl overflow-hidden border border-ink-700/50 bg-ink-900/80 backdrop-blur-sm">
-            {/* Terminal Header */}
-            <div className="flex items-center gap-3 px-4 py-3 bg-ink-800/50 border-b border-ink-700/50">
-              <div className="flex items-center gap-2">
-                <span className="w-3 h-3 rounded-full bg-red-500/80" />
-                <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                <span className="w-3 h-3 rounded-full bg-green-500/80" />
+        {/* Section Header */}
+        <div className="text-center mb-16 md:mb-20">
+          <span className="inline-block text-zen-gold text-sm font-medium tracking-widest uppercase mb-4">
+            Services
+          </span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-gradient-white">
+            {t('title')}
+          </h2>
+          <p className="text-paper-400 text-lg md:text-xl max-w-2xl mx-auto">
+            {t('subtitle')}
+          </p>
+        </div>
+        
+        {/* Services Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-16">
+          {items.map((item, index) => {
+            const config = serviceConfig[item.id] || { icon: '•', accent: 'from-gray-500/20 to-gray-600/20' };
+            return (
+              <div 
+                key={item.id}
+                className="group relative"
+              >
+                {/* Card - 添加实色背景层确保兼容性 */}
+                <div className={`relative h-full p-6 md:p-8 rounded-2xl border border-white/5 
+                  bg-ink-900/80 bg-gradient-to-br ${config.accent}
+                  hover:border-white/10 hover:scale-[1.02] transition-all duration-300`}
+                >
+                  {/* Number badge */}
+                  <span className="absolute top-4 right-4 text-xs font-mono text-paper-600">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  
+                  {/* Icon */}
+                  <div className="text-4xl mb-4">{config.icon}</div>
+                  
+                  {/* Content */}
+                  <h3 className="text-lg md:text-xl font-semibold text-white mb-2 group-hover:text-zen-gold transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-paper-400 text-sm leading-relaxed line-clamp-2">
+                    {item.description}
+                  </p>
+                </div>
               </div>
-              <div className="flex-1 text-center">
-                <span className="text-xs font-mono text-paper-400">darren@builder ~ / now-building</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-geek-green opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-geek-green"></span>
-                </span>
-                <span className="text-xs font-mono text-geek-green">LIVE</span>
-              </div>
-            </div>
-            
-            {/* Terminal Content */}
-            <div className="p-6">
-              {/* Command */}
-              <div className="flex items-center gap-2 mb-6 font-mono text-sm">
-                <span className="text-geek-green">➜</span>
-                <span className="text-geek-cyan">~</span>
-                <span className="text-paper-300">htop --filter=building</span>
-                <span className="w-2 h-4 bg-paper-100 animate-pulse ml-1" />
-              </div>
+            );
+          })}
+        </div>
 
-              {/* Section Title */}
-              <div className="flex items-center gap-3 mb-6">
-                <span className="text-xl font-medium">{t('title')}</span>
-                <span className="text-xs font-mono text-paper-400 px-2 py-0.5 rounded bg-ink-800">3 processes</span>
-              </div>
-              
-              {/* Process List */}
-              <div className="space-y-5">
-                {items.map((item, index) => (
-                  <div key={index} className="group">
-                    {/* Process Header */}
-                    <div className="flex items-center gap-3 mb-2">
-                      <span className={`w-6 h-6 flex items-center justify-center rounded text-xs font-mono ${
-                        index === 0 ? 'bg-geek-cyan/20 text-geek-cyan' :
-                        index === 1 ? 'bg-geek-purple/20 text-geek-purple' :
-                        'bg-zen-gold/20 text-zen-gold'
-                      }`}>
-                        {String(index + 1).padStart(2, '0')}
-                      </span>
-                      <span className="flex-1 text-paper-200 group-hover:text-paper-100 transition-colors">
-                        {item}
-                      </span>
-                      <span className="text-xs font-mono text-paper-500">PID {1000 + index}</span>
-                    </div>
-                    
-                    {/* Progress Bar */}
-                    <div className="ml-9">
-                      <ProcessBar 
-                        label="progress" 
-                        progress={processData[index].progress} 
-                        color={processData[index].color}
-                        delay={index * 200}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-              
-              {/* Footer Stats */}
-              <div className="mt-6 pt-4 border-t border-ink-700/50 flex items-center justify-between text-xs font-mono text-paper-500">
-                <span>Tasks: 3 running</span>
-                <span>Load: 0.42 0.38 0.35</span>
-                <span>Uptime: 365 days</span>
-              </div>
-            </div>
-          </div>
+        {/* CTA */}
+        <div className="text-center">
+          <Link 
+            href="/services"
+            className="group inline-flex items-center gap-3 px-8 py-4 rounded-full
+              bg-gradient-to-r from-zen-gold to-amber-500 text-ink-950 font-semibold text-lg
+              hover:shadow-[0_0_40px_rgba(212,175,55,0.3)] transition-all duration-300"
+          >
+            {t('viewAll') || 'View all services'}
+            <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </Link>
         </div>
       </div>
     </section>

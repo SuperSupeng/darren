@@ -5,13 +5,11 @@
   },
   "nav": {
     "home": "ホーム",
+    "services": "サービス",
     "build": "作品",
-    "blog": "ブログ",
-    "community": "コミュニティ",
-    "impact": "インパクト",
-    "global": "グローバル",
     "about": "About",
-    "coBuild": "Co-build"
+    "blog": "ブログ",
+    "contact": "お問い合わせ"
   },
   "hero": {
     "title": "ギークビルダー、AI × ハードウェアを出荷中。",
@@ -178,9 +176,24 @@
       "cta": "メールする"
     }
   },
-  "nowBuilding": {
-    "title": "現在ビルド中",
-    "items": ["AI × ハードウェア製品（インタラクティブ / センサー / NFC）", "ビルダーワークショップ＆ビルダソン（アウトプット志向）", "ビルダーコミュニティインフラ（グローバルノード接続）"]
+  "servicesPage": {
+    "meta": { "title": "サービス | Darren Su", "description": "提供できるサービス" },
+    "hero": { "title": "お手伝いできること", "subtitle": "私を会社として考えてください：提供できるサービスです。各サービスには明確な成果物があり、有料のコラボレーションです。" },
+    "cta": { "title": "アイデアがありますか？話しましょう", "description": "コラボレーションしたいプロジェクトがある、またはサービスに興味がある場合は、メールしてください。すぐに返信します。", "button": "メールを送る" }
+  },
+  "services": {
+    "title": "お手伝いできること",
+    "subtitle": "私を会社として考えてください：提供できるサービスです",
+    "items": [
+      { "id": "activity", "title": "共創型イベント", "description": "企業/学校/コミュニティ向けの成果志向イベントを企画し、参加者が実際の成果物を完成させる" },
+      { "id": "kickstart", "title": "プロジェクトキックスタート", "description": "曖昧なアイデアを実行可能なプロジェクト構造と最初の成果物に変換" },
+      { "id": "aiSoftware", "title": "AIソフトウェアプロトタイピング", "description": "AIソフトウェア製品アイデアを迅速に検証、コンセプトからデモ可能なプロトタイプへ" },
+      { "id": "aiHardware", "title": "AIハードウェアプロトタイピング", "description": "AI×ハードウェア製品アイデアを迅速に検証、コンセプトからインタラクティブな実機プロトタイプへ" },
+      { "id": "global", "title": "越境共創パイロット", "description": "国際協力を検討するチーム向けの低リスクパイロットプログラム" },
+      { "id": "overseas", "title": "海外イベント実行", "description": "海外でのWorkshop/Meetup/Buildathonの企画・実行をサポート" },
+      { "id": "community", "title": "コミュニティ構築", "description": "ビルダーコミュニティの構築、設計、運営戦略、コールドスタートプランを提供" },
+      { "id": "connect", "title": "リソースコネクション", "description": "ビルダーネットワーク、イベント会場、パートナーとの接続" }
+    ]
   },
   "buildDirection": {
     "title": "ビルドが好きな方向",
@@ -190,8 +203,8 @@
     "title": "シグナル",
     "items": [
       {"role": "AGI Villa（AIビルダーアクセラレーター）", "position": "共同創設者"},
-      {"role": "Datawhale", "position": "都市エコシステムリード"},
-      {"role": "CryptoTime（AI × Web3ビルダーコミュニティ）", "position": "共同ビルダー"}
+      {"role": "Datawhale（中国最大のオープンソース学習コミュニティ）", "position": "都市エコシステムリード"},
+      {"role": "CryptoTime（AI × Web3ビルダーコミュニティ）", "position": "共同創設者"}
     ]
   },
   "portals": {
@@ -200,6 +213,15 @@
     "community": {"title": "Community", "description": "ワークショップ、ビルダソン、ビルダーサークル", "cta": "コミュニティを探索"},
     "impact": {"title": "Impact", "description": "テックフォーグッド、教育、アクセシビリティ", "cta": "インパクトを見る"},
     "global": {"title": "Global", "description": "グローバル都市ノードと共創コネクション", "cta": "グローバルリンク"}
+  },
+  "featuredProjects": {
+    "title": "精選プロジェクト",
+    "subtitle": "過去のプロジェクト",
+    "viewAll": "すべての作品を見る",
+    "items": [
+      { "id": "globaltechevents", "name": "GlobalTechEvents", "tagline": "世界のテックイベントを発見", "url": "https://www.globaltechevents.xyz", "image": "/projects/globaltechevents.png" },
+      { "id": "internplanet", "name": "Intern Planet", "tagline": "インターンシップを素早く見つける", "url": "https://internplanet.tech", "image": "/projects/internplanet.png" }
+    ]
   },
   "footerCta": {
     "title": "一緒に何か本物を出荷しましょう。",
@@ -278,7 +300,30 @@
     "hero": {"title": "Build", "subtitle": "ここでAI × ハードウェアプロジェクト、ツール、コミュニティ活動を継続的に更新します。"},
     "selected": {
       "title": "精選",
-      "projects": [],
+      "projects": [
+        {
+          "id": "globaltechevents",
+          "name": "GlobalTechEvents",
+          "tagline": "世界のテックイベントを発見",
+          "status": "shipped",
+          "tags": ["イベント", "テック", "グローバル"],
+          "links": [{ "type": "ウェブサイト", "url": "https://www.globaltechevents.xyz" }],
+          "description": "世界中のテックイベントやカンファレンスを発見し、開発者や起業家が最適なオフラインイベントの機会を見つけるのを支援します。",
+          "url": "https://www.globaltechevents.xyz",
+          "image": "/projects/globaltechevents.png"
+        },
+        {
+          "id": "internplanet",
+          "name": "Intern Planet",
+          "tagline": "インターンシップを素早く見つける",
+          "status": "shipped",
+          "tags": ["就職", "インターンシップ", "学生"],
+          "links": [{ "type": "ウェブサイト", "url": "https://internplanet.tech" }],
+          "description": "大学生向けの求人プラットフォーム。質の高いインターンシップの機会を素早く見つけ、キャリアをスタートさせるお手伝いをします。",
+          "url": "https://internplanet.tech",
+          "image": "/projects/internplanet.png"
+        }
+      ],
       "empty": {"title": "公開プロジェクトはまだありません（整理中...）", "description": "デモ、プロトタイプ、MVP、イベント成果を徐々に公開します。", "cta": "あなたもビルドしているなら、一緒にCo-buildしましょう。"}
     },
     "log": {
@@ -316,6 +361,25 @@
         {"icon": "🌊", "title": "フロー状態", "description": "ビルドは修行。リズムを見つけ、フローに入り、創造が自然に起こるように。"},
         {"icon": "🤝", "title": "共創 > ソロ", "description": "最高のものは一緒に作られる。コミュニティは個人の努力を増幅する。"},
         {"icon": "☯️", "title": "テックの中の禅", "description": "テクノロジーとマインドフルネスは共存できる。意図を持ってビルドし、平和を持って出荷。"}
+      ]
+    },
+    "communities": {
+      "title": "参加コミュニティ",
+      "items": [
+        { "name": "AGI Villa", "tagline": "AIビルダー＆ファウンダー向けコミュニティ駆動ベンチャースタジオ", "role": "共同創設者", "color": "gold" },
+        { "name": "Datawhale", "tagline": "中国最大級のAIオープンソース学習コミュニティ", "role": "都市エコシステムリード", "color": "cyan" },
+        { "name": "CryptoTime", "tagline": "AI × Web3 ビルダーファーストコミュニティ", "role": "共同ビルダー", "color": "purple" }
+      ]
+    },
+    "global": {
+      "title": "グローバルリーチ",
+      "subtitle": "これらの都市にコミュニティコネクションがあり、現地のビルダーネットワーク、会場、パートナーとの接続をお手伝いできます。",
+      "cities": [
+        { "city": "上海", "flag": "🇨🇳" },
+        { "city": "深セン", "flag": "🇨🇳" },
+        { "city": "北京", "flag": "🇨🇳" },
+        { "city": "チェンマイ", "flag": "🇹🇭" },
+        { "city": "バンコク", "flag": "🇹🇭" }
       ]
     },
     "connect": {

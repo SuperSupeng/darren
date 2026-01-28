@@ -1,9 +1,8 @@
 import {
   Hero,
   NowBuilding,
-  BuildDirection,
+  FeaturedProjects,
   Signals,
-  Portals,
   FooterCta,
 } from '@/components/home';
 
@@ -12,9 +11,8 @@ export default function HomePage() {
     <>
       <Hero />
       <NowBuilding />
-      <BuildDirection />
+      <FeaturedProjects />
       <Signals />
-      <Portals />
       <FooterCta />
     </>
   );
