@@ -104,9 +104,9 @@ export default function Nav() {
             <LanguageSwitcher />
 
             {/* CTA Button */}
-            <Link href="/co-build" className="btn btn-primary text-sm py-2.5 px-5">
+            <a href="mailto:supeng842499467@gmail.com" className="btn btn-primary text-sm py-2.5 px-5">
               {t('contact')}
-            </Link>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -149,13 +149,13 @@ export default function Nav() {
               
               {/* CTA Mobile */}
               <div className="px-4 pt-2">
-                <Link
-                  href="/co-build"
+                <a
+                  href="mailto:supeng842499467@gmail.com"
                   onClick={() => setMobileMenuOpen(false)}
                   className="btn btn-primary w-full justify-center"
                 >
                   {t('contact')}
-                </Link>
+                </a>
               </div>
             </div>
           </div>

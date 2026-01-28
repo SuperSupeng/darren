@@ -6,13 +6,10 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://darren.su';
 export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     '',
+    '/services',
     '/build',
-    '/blog',
-    '/community',
-    '/impact',
-    '/global',
     '/about',
-    '/co-build',
+    '/blog',
   ];
 
   const sitemap: MetadataRoute.Sitemap = [];

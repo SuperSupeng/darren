@@ -1,10 +1,9 @@
 import { getTranslations } from 'next-intl/server';
 import {
   AboutHero,
+  WhatICanHelp,
   Background,
-  Communities,
-  GlobalReach,
-  Impact,
+  Proof,
   Connect,
 } from '@/components/about';
 
@@ -21,10 +20,9 @@ export default function AboutPage() {
   return (
     <>
       <AboutHero />
+      <WhatICanHelp />
       <Background />
-      <Communities />
-      <GlobalReach />
-      <Impact />
+      <Proof />
       <Connect />
     </>
   );

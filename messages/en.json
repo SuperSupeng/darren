@@ -15,9 +15,9 @@
     "title": "Geek Builder, shipping AI × Hardware.",
     "subtitle": "Darren. I build: AI × Hardware products / Creator tools / Communities. Also building my digital avatar.",
     "cta": {
-      "coBuild": "Co-build with me",
-      "viewBuild": "See what I'm building",
-      "contact": "Contact me"
+      "contact": "Contact me",
+      "services": "View services",
+      "viewBuild": "See what I'm building"
     },
     "tagline": "Builder｜Global co-creation｜Community-driven｜Zen practitioner"
   },
@@ -494,8 +494,8 @@
     "title": "Let's ship something real.",
     "description": "If you're also building AI tools, hardware, buildathons, or global nodes — I'd love to co-build with you.",
     "cta": {
-      "coBuild": "Co-build with me",
-      "contact": "Contact me"
+      "contact": "Contact me",
+      "services": "View services"
     }
   },
   "footer": {
@@ -642,12 +642,13 @@
   },
   "build": {
     "meta": {
-      "title": "Build | Darren Su",
+      "title": "Work | Darren Su",
       "description": "Projects, prototypes, and experiments by Darren Su"
     },
     "hero": {
-      "title": "Build",
-      "subtitle": "Here I continuously update my AI × Hardware projects, tools, and community activities."
+      "title": "Work",
+      "subtitle": "Here I continuously update my AI × Hardware projects, tools, and community activities.",
+      "cta": "Interested in my work? Or have ideas to collaborate?"
     },
     "selected": {
       "title": "Selected",
@@ -681,6 +682,7 @@
         "cta": "If you're also building, feel free to co-build with me."
       }
     },
+    "cta": "Contact me",
     "log": {
       "title": "Build Log",
       "description": "Progress on ongoing projects and experiments.",
@@ -699,7 +701,45 @@
       "description": "Learn more about Darren Su - Geek Builder, shipping AI × Hardware products"
     },
     "hero": {
-      "oneliner": "Founder @ AGI Villa | Helping Builders ship AI + Hardware products (Demo→MVP) | Global community-driven execution | Zen practitioner & Buddhist learner"
+      "oneliner": "Geek Builder, shipping AI × Hardware products | Building interactive experiences & creator tools | Zen practitioner & community builder"
+    },
+    "whatICanHelp": {
+      "title": "How I Can Help You",
+      "subtitle": "No matter what stage you're at, I can provide concrete support",
+      "scenarios": [
+        {
+          "icon": "🚀",
+          "title": "AI Software & Hardware Prototyping",
+          "description": "Rapidly validate AI software/hardware product ideas, from concept to demo-ready prototype. Focused on making it work.",
+          "action": "View services",
+          "color": "product"
+        },
+        {
+          "icon": "🎯",
+          "title": "Co-creation Events",
+          "description": "Plan output-driven events for companies/schools/communities, ensuring participants deliver real, presentable results. From mechanism to execution.",
+          "action": "View services",
+          "color": "event"
+        },
+        {
+          "icon": "🌍",
+          "title": "Cross-border Co-creation",
+          "description": "Connect you with global builder networks, venues, and partners. Low-risk pilot programs for international collaboration through real projects.",
+          "action": "View global nodes",
+          "color": "connect"
+        },
+        {
+          "icon": "🔗",
+          "title": "Resource Connection",
+          "description": "Connect you with builder networks, event venues, and partners. Help build builder communities with architecture design and operations strategy.",
+          "action": "View services",
+          "color": "learn"
+        }
+      ],
+      "cta": {
+        "description": "Want to know more about my services and how we can collaborate?",
+        "button": "View All Services"
+      }
     },
     "now": {
       "title": "Now / What I'm doing",
@@ -711,37 +751,29 @@
       ]
     },
     "background": {
-      "title": "Background / Where I come from",
-      "items": [
+      "title": "Why I Can Do This",
+      "subtitle": "Complete experience from tech to community, from product to business",
+      "capabilities": [
         {
-          "year": "2021",
-          "title": "PingCAP - Database Unicorn",
-          "description": "Joined the core tool TiCDC team for R&D. Later transitioned to community operations, participating in the renaissance of China's open source ecosystem. Began understanding the power of developer relations and open source communities.",
-          "tags": ["Open Source", "Developer Relations", "Community"]
+          "icon": "👨‍💻",
+          "title": "Technical Background",
+          "description": "From database R&D to AI Infra, deep involvement in open source communities. Understanding of technical architecture and product implementation."
         },
         {
-          "year": "2021",
-          "title": "Actionsky - AI Infra",
-          "description": "Led the company's AI Infra vector database business. Before vector databases were recognized by the market, our team explored 'AI + data infrastructure', becoming one of the first teams in China to build AI-Native SaaS products in early 2023.",
-          "tags": ["Vector DB", "RAG", "AI Infra"],
-          "links": [
-            { "text": "Vector Search & RAG Practice", "url": "https://github.com/datawhalechina/what-is-vs" },
-            { "text": "QCon 2024 Talk", "url": "https://b.geekbang.org/mall/events/qcon/2024/beijing/presentation/5940" }
-          ]
+          "icon": "🤝",
+          "title": "Community Experience",
+          "description": "Community operations experience at PingCAP, Datawhale, etc. Know how to gather people, organize events, and deliver outcomes."
         },
         {
-          "year": "2023",
-          "title": "From Tech to Business",
-          "description": "Led commercialization at a HK company, then headed the AI middle platform at SJTU Research Institute. Completed the capability leap from technologist to entrepreneur: Tech → Business → Organization & Product delivery.",
-          "tags": ["Commercialization", "AI Platform", "Entrepreneurship"]
-        },
-        {
-          "year": "Now",
-          "title": "AGI Villa - AI Builder Accelerator",
-          "description": "Co-founding AGI Villa, helping Builders ship AI + Hardware products from 0 to 1. Building global community-driven execution and growth mechanisms.",
-          "tags": ["Builder Community", "AI × Hardware", "Global"]
+          "icon": "💼",
+          "title": "Business Capability",
+          "description": "Complete path from tech to business. Understanding how to turn products into businesses, from demo to MVP to market."
         }
-      ]
+      ],
+      "journey": {
+        "title": "My Journey",
+        "description": "2021 Database R&D → 2022 AI Infra & Open Source Community → 2023 Commercialization & Product Delivery → Now founding AGI Villa, helping Builders go from 0 to 1. These experiences allow me to understand tech, community, and business."
+      }
     },
     "values": {
       "title": "Values / What I believe",
@@ -773,7 +805,7 @@
       "items": [
         { "name": "AGI Villa", "tagline": "Community-driven Venture Studio for AI Builders & Founders", "role": "Co-founder", "color": "gold" },
         { "name": "Datawhale", "tagline": "China's largest AI open-source learning community", "role": "City Ecosystem Lead", "color": "cyan" },
-        { "name": "CryptoTime", "tagline": "AI × Web3 builder-first community", "role": "Co-builder", "color": "purple" }
+        { "name": "CryptoTime", "tagline": "AI × Web3 builder-first community", "role": "Co-founder", "color": "purple" }
       ]
     },
     "global": {
@@ -787,11 +819,52 @@
         { "city": "Bangkok", "flag": "🇹🇭" }
       ]
     },
+    "proof": {
+      "title": "What I've Done",
+      "subtitle": "Let the numbers and cases speak",
+      "stats": [
+        { "icon": "🎯", "value": "20+", "label": "Events" },
+        { "icon": "👥", "value": "500+", "label": "Participants" },
+        { "icon": "🌐", "value": "5", "label": "Cities" },
+        { "icon": "🚀", "value": "3", "label": "Communities" }
+      ],
+      "tabs": {
+        "communities": "Communities",
+        "events": "Events",
+        "impact": "Impact"
+      },
+      "communities": {
+        "items": [
+          { "name": "AGI Villa", "role": "Co-founder" },
+          { "name": "Datawhale", "role": "City Ecosystem Lead" },
+          { "name": "CryptoTime", "role": "Co-founder" }
+        ]
+      },
+      "events": {
+        "title": "Events I've Organized",
+        "description": "From Workshops to Buildathons, helping builders turn ideas into works",
+        "list": [
+          "AI × Hardware Workshop (Shanghai)",
+          "RAG Hands-on Workshop (Shanghai)",
+          "Demo Day (Shanghai)",
+          "Web3 × AI Buildathon (Bangkok)",
+          "Open Source Summer Workshop (Online)"
+        ]
+      },
+      "impact": {
+        "title": "Impact Projects",
+        "description": "Using technology to help more people",
+        "list": [
+          "Datawhale Public Welfare Group",
+          "Rural AI Education",
+          "Tech Support for Elderly"
+        ]
+      }
+    },
     "connect": {
       "title": "Let's Connect",
-      "description": "If you're building something interesting in AI, hardware, or community - I'd love to hear from you.",
+      "description": "If you're interested in my services, or want to chat about AI, hardware, or community topics, feel free to email me directly.",
       "cta": {
-        "coBuild": "Co-build with me",
         "email": "Send me an email"
       }
     }

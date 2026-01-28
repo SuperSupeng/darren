@@ -15,9 +15,9 @@
     "title": "极客 Builder，正在 ship AI × 硬件作品。",
     "subtitle": "Darren，喜欢 build：AI × 硬件产品 / 创作者工具 / 社区。构建自己的数字分身ing",
     "cta": {
-      "coBuild": "一起 Co-build",
-      "viewBuild": "看我在 build 什么",
-      "contact": "联系我"
+      "contact": "联系我",
+      "services": "查看服务",
+      "viewBuild": "看我在 build 什么"
     },
     "tagline": "Builder｜全球流动共创｜社区驱动｜禅修实践者"
   },
@@ -494,8 +494,8 @@
     "title": "一起 ship 点真实的东西。",
     "description": "如果你也在构建 AI 工具、硬件作品、buildathon 与全球节点 —— 我很愿意一起 co-build。",
     "cta": {
-      "coBuild": "一起 Co-build",
-      "contact": "联系我"
+      "contact": "联系我",
+      "services": "查看服务"
     }
   },
   "footer": {
@@ -647,7 +647,8 @@
     },
     "hero": {
       "title": "作品",
-      "subtitle": "这里会持续更新我做过/正在做的 AI × 硬件作品、工具、社区活动。"
+      "subtitle": "这里会持续更新我做过/正在做的 AI × 硬件作品、工具、社区活动。",
+      "cta": "对我的作品感兴趣？或者有合作想法？"
     },
     "selected": {
       "title": "精选",
@@ -681,6 +682,7 @@
         "cta": "如果你也在 build，欢迎直接找我一起 co-build。"
       }
     },
+    "cta": "联系我",
     "log": {
       "title": "在建",
       "description": "记录一些进行中的项目、实验、以及阶段性进展。",
@@ -699,7 +701,45 @@
       "description": "了解 Darren Su - 极客 Builder，正在 ship AI × 硬件作品"
     },
     "hero": {
-      "oneliner": "AGI Villa 联合创始人｜帮助 Builder 从 0 到 1 交付 AI + 硬件互动产品（Demo→MVP）｜全球化社区驱动执行与增长｜禅修实践者 & 佛学学习者"
+      "oneliner": "极客 Builder，正在 ship AI × 硬件作品 | 构建互动体验与创作者工具 | 禅修实践者与社区建设者"
+    },
+    "whatICanHelp": {
+      "title": "我能帮你做什么",
+      "subtitle": "不管你在哪个阶段，我都能提供具体的帮助",
+      "scenarios": [
+        {
+          "icon": "🚀",
+          "title": "AI 软件与硬件原型",
+          "description": "快速验证 AI 软件/硬件产品想法，从概念到可演示的原型。专注于让产品「能跑起来」。",
+          "action": "查看服务",
+          "color": "product"
+        },
+        {
+          "icon": "🎯",
+          "title": "共创型活动产品",
+          "description": "为企业/学校/社区策划「以产出为目标」的活动，确保参与者完成可展示的真实成果。从机制到落地，全程支持。",
+          "action": "查看服务",
+          "color": "event"
+        },
+        {
+          "icon": "🌍",
+          "title": "跨地域共创合作",
+          "description": "帮你连接全球 builder 网络、场地资源、合作伙伴。为国际合作提供低风险试点方案。",
+          "action": "看全球节点",
+          "color": "connect"
+        },
+        {
+          "icon": "🔗",
+          "title": "资源连接",
+          "description": "帮你连接 builder 网络、活动场地、合作伙伴。帮助搭建 builder 社区，提供架构设计和运营策略。",
+          "action": "查看服务",
+          "color": "learn"
+        }
+      ],
+      "cta": {
+        "description": "想了解更详细的服务内容和合作方式？",
+        "button": "查看所有服务"
+      }
     },
     "now": {
       "title": "Now / 现在在做",
@@ -711,37 +751,29 @@
       ]
     },
     "background": {
-      "title": "个人经历",
-      "items": [
+      "title": "为什么我能做这些",
+      "subtitle": "从技术到社区，从产品到商业的完整经验",
+      "capabilities": [
         {
-          "year": "2021",
-          "title": "PingCAP - 数据库独角兽",
-          "description": "加入核心工具 TiCDC 做研发。后来主动转向社区运营，有幸参与了中国开源生态的复兴，也从那时开始真正理解开发者关系、开源社区与生态的力量。",
-          "tags": ["开源", "开发者关系", "社区"]
+          "icon": "👨‍💻",
+          "title": "技术背景",
+          "description": "从数据库研发到 AI Infra，深度参与开源社区，理解技术架构和产品实现。"
         },
         {
-          "year": "2022",
-          "title": "爱可生 - AI Infra",
-          "description": "负责公司 AI Infra 向量数据库业务。在向量数据库概念还没被市场认知之前，我们团队就开始探索「AI + 数据基础设施」的结合，并在 2023 年初成为国内最早一批做 AI-Native SaaS 产品的团队。",
-          "tags": ["向量数据库", "RAG", "AI Infra"],
-          "links": [
-            { "text": "向量检索与 RAG 实践", "url": "https://github.com/datawhalechina/what-is-vs" },
-            { "text": "QCon 2024 演讲", "url": "https://b.geekbang.org/mall/events/qcon/2024/beijing/presentation/5940" }
-          ]
+          "icon": "🤝",
+          "title": "社区经验",
+          "description": "在 PingCAP、Datawhale 等社区运营经验，知道如何聚集人、组织活动、产出成果。"
         },
         {
-          "year": "2025",
-          "title": "从技术到商业",
-          "description": "先后在港资公司负责商业化，以及在交大工研院负责 AI 中台，从技术 → 商业 → 组织与产品落地，完成从技术人员到创业者的能力跃迁。",
-          "tags": ["商业化", "AI 平台", "创业"]
-        },
-        {
-          "year": "现在",
-          "title": "AGI Villa - AI Builder Accelerator",
-          "description": "联合创立 AGI Villa，帮助 Builder 从 0 到 1 交付 AI + 硬件产品。构建全球化社区驱动的执行与增长机制。",
-          "tags": ["Builder 社区", "AI × 硬件", "全球化"]
+          "icon": "💼",
+          "title": "商业化能力",
+          "description": "从技术到商业的完整路径，理解如何把产品变成业务，从 demo 到 MVP 到市场。"
         }
-      ]
+      ],
+      "journey": {
+        "title": "我的路径",
+        "description": "2021 数据库研发 → 2022 AI Infra 与开源社区 → 2023 商业化与产品落地 → 现在创立 AGI Villa，帮助 Builder 从 0 到 1。这些经历让我能同时理解技术、社区和商业。"
+      }
     },
     "values": {
       "title": "我相信什么",
@@ -773,7 +805,7 @@
       "items": [
         { "name": "AGI Villa", "tagline": "AI Builder & Founder 的社区驱动 Venture Studio", "role": "联合发起人", "color": "gold" },
         { "name": "Datawhale", "tagline": "中国最大的 AI 开源学习社区", "role": "城市生态建设负责人", "color": "cyan" },
-        { "name": "CryptoTime", "tagline": "AI × Web3 builder-first 社区", "role": "共建者", "color": "purple" }
+        { "name": "CryptoTime", "tagline": "AI × Web3 builder-first 社区", "role": "联合发起人", "color": "purple" }
       ]
     },
     "global": {
@@ -787,11 +819,52 @@
         { "city": "曼谷", "flag": "🇹🇭" }
       ]
     },
+    "proof": {
+      "title": "我做过什么",
+      "subtitle": "用案例和数据说话",
+      "stats": [
+        { "icon": "🎯", "value": "20+", "label": "场活动" },
+        { "icon": "👥", "value": "500+", "label": "参与者" },
+        { "icon": "🌐", "value": "5", "label": "个城市" },
+        { "icon": "🚀", "value": "3", "label": "个社区" }
+      ],
+      "tabs": {
+        "communities": "社区",
+        "events": "活动",
+        "impact": "公益"
+      },
+      "communities": {
+        "items": [
+          { "name": "AGI Villa", "role": "联合发起人" },
+          { "name": "Datawhale", "role": "城市生态负责人" },
+          { "name": "CryptoTime", "role": "联合发起人" }
+        ]
+      },
+      "events": {
+        "title": "办过的活动",
+        "description": "从 Workshop 到 Buildathon，帮助 builder 把想法变成作品",
+        "list": [
+          "AI × 硬件 Workshop（上海）",
+          "RAG 实战工作坊（上海）",
+          "Demo Day（上海）",
+          "Web3 × AI Buildathon（曼谷）",
+          "开源之夏 Workshop（线上）"
+        ]
+      },
+      "impact": {
+        "title": "公益项目",
+        "description": "用技术让更多人受益",
+        "list": [
+          "Datawhale 公益组",
+          "乡村 AI 教育",
+          "银发群体科技支持"
+        ]
+      }
+    },
     "connect": {
       "title": "联系我",
-      "description": "如果你正在 AI、硬件或社区方向做一些有趣的事情，我很想听听你的想法。",
+      "description": "如果你对我的服务感兴趣，或者想聊聊 AI、硬件、社区相关的话题，欢迎直接发邮件给我。",
       "cta": {
-        "coBuild": "一起 Co-build",
         "email": "发邮件给我"
       }
     }

@@ -260,20 +260,31 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10 opacity-0 animate-fade-in-up animation-delay-300">
-            <Link href="/co-build" className="btn btn-primary group relative overflow-hidden">
-              <span className="relative z-10">{t('cta.coBuild')}</span>
+            <a href="mailto:supeng842499467@gmail.com" className="btn btn-primary group relative overflow-hidden">
+              <span className="relative z-10">{t('cta.contact')}</span>
               <svg 
-                className="w-4 h-4 relative z-10 transition-transform duration-300 group-hover:translate-x-1" 
+                className="w-4 h-4 relative z-10 transition-transform duration-300 group-hover:rotate-12" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              {/* Animated border */}
+              <span className="absolute inset-0 border border-zen-gold/50 rounded-md animate-pulse" />
+            </a>
+            <Link href="/services" className="btn btn-outline group">
+              <span>{t('cta.services')}</span>
+              <svg 
+                className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" 
                 fill="none" 
                 stroke="currentColor" 
                 viewBox="0 0 24 24"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
-              {/* Animated border */}
-              <span className="absolute inset-0 border border-zen-gold/50 rounded-md animate-pulse" />
             </Link>
-            <Link href="/build" className="btn btn-outline group">
+            <Link href="/build" className="btn btn-ghost group">
               <span>{t('cta.viewBuild')}</span>
               <svg 
                 className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" 
@@ -283,17 +294,6 @@ export default function Hero() {
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-              </svg>
-            </Link>
-            <Link href="/about" className="btn btn-ghost group">
-              <span>{t('cta.contact')}</span>
-              <svg 
-                className="w-4 h-4 transition-transform duration-300 group-hover:rotate-12" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
             </Link>
           </div>
