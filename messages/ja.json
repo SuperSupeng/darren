@@ -11,6 +11,19 @@
     "blog": "ブログ",
     "contact": "お問い合わせ"
   },
+  "chat": {
+    "title": "Darren AI とチャット",
+    "subtitle": "デジタルアバター · オンライン",
+    "openLabel": "Darren AI チャットを開く",
+    "closeLabel": "閉じる",
+    "drawerLabel": "Darren AI とチャット",
+    "online": "オンライン",
+    "placeholder": "挨拶して、Darren・AGI Villa・AI×ハードウェアについて聞いてみてください。",
+    "inputPlaceholder": "メッセージを入力...",
+    "sendLabel": "送信",
+    "thinking": "考え中...",
+    "errorGeneric": "エラーが発生しました。しばらくしてからお試しください。"
+  },
   "hero": {
     "title": "ギークビルダー、AI × ハードウェアを出荷中。",
     "subtitle": "Darrenです。AI × ハードウェア製品 / クリエイターツール / コミュニティを作っています。デジタルアバターも構築中。",

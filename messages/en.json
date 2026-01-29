@@ -11,6 +11,19 @@
     "blog": "Blog",
     "contact": "Contact"
   },
+  "chat": {
+    "title": "Chat with Darren's AI",
+    "subtitle": "Digital avatar · Online",
+    "openLabel": "Open chat with Darren's AI",
+    "closeLabel": "Close chat",
+    "drawerLabel": "Chat with Darren's AI",
+    "online": "Online",
+    "placeholder": "Say hi and ask anything about Darren, AGI Villa, or AI × Hardware.",
+    "inputPlaceholder": "Type a message...",
+    "sendLabel": "Send",
+    "thinking": "Thinking...",
+    "errorGeneric": "Something went wrong. Please try again."
+  },
   "hero": {
     "title": "Geek Builder, shipping AI × Hardware.",
     "subtitle": "Darren. I build: AI × Hardware products / Creator tools / Communities. Also building my digital avatar.",

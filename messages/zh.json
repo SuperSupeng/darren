@@ -11,6 +11,19 @@
     "blog": "博客",
     "contact": "联系我"
   },
+  "chat": {
+    "title": "和 Darren 的 AI 分身对话",
+    "subtitle": "数字分身 · 在线",
+    "openLabel": "打开与 Darren AI 的对话",
+    "closeLabel": "关闭对话",
+    "drawerLabel": "与 Darren AI 分身对话",
+    "online": "在线",
+    "placeholder": "打个招呼，问问关于 Darren、AGI Villa 或 AI × 硬件的事～",
+    "inputPlaceholder": "输入消息...",
+    "sendLabel": "发送",
+    "thinking": "思考中...",
+    "errorGeneric": "出错了，请稍后再试。"
+  },
   "hero": {
     "title": "极客 Builder，正在 ship AI × 硬件作品。",
     "subtitle": "Darren，喜欢 build：AI × 硬件产品 / 创作者工具 / 社区。构建自己的数字分身ing",

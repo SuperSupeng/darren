@@ -11,6 +11,19 @@
     "blog": "블로그",
     "contact": "연락하기"
   },
+  "chat": {
+    "title": "Darren AI와 대화",
+    "subtitle": "디지털 아바타 · 온라인",
+    "openLabel": "Darren AI 채팅 열기",
+    "closeLabel": "닫기",
+    "drawerLabel": "Darren AI와 대화",
+    "online": "온라인",
+    "placeholder": "인사하고 Darren, AGI Villa, AI×하드웨어에 대해 물어보세요.",
+    "inputPlaceholder": "메시지 입력...",
+    "sendLabel": "보내기",
+    "thinking": "생각 중...",
+    "errorGeneric": "오류가 발생했습니다. 나중에 다시 시도해 주세요."
+  },
   "hero": {
     "title": "긱 빌더, AI × 하드웨어 출시 중.",
     "subtitle": "저는 Darren입니다. AI × 하드웨어 제품 / 크리에이터 도구 / 커뮤니티를 만듭니다. 디지털 아바타도 구축 중입니다.",

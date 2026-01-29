@@ -11,6 +11,19 @@
     "blog": "Blog",
     "contact": "Contacto"
   },
+  "chat": {
+    "title": "Chatea con el AI de Darren",
+    "subtitle": "Avatar digital · En línea",
+    "openLabel": "Abrir chat con el AI de Darren",
+    "closeLabel": "Cerrar",
+    "drawerLabel": "Chat con el AI de Darren",
+    "online": "En línea",
+    "placeholder": "Saluda y pregunta sobre Darren, AGI Villa o AI × Hardware.",
+    "inputPlaceholder": "Escribe un mensaje...",
+    "sendLabel": "Enviar",
+    "thinking": "Pensando...",
+    "errorGeneric": "Algo salió mal. Inténtalo de nuevo más tarde."
+  },
   "hero": {
     "title": "Constructor Geek, lanzando AI × Hardware.",
     "subtitle": "Soy Darren. Construyo: productos AI × Hardware / Herramientas para creadores / Comunidades. También construyendo mi avatar digital.",

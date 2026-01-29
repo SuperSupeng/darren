@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
+import { AiAvatarChat } from '@/components/ai-chat';
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://darren.su';
 
@@ -96,6 +97,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       <Nav />
       <main className="pt-16">{children}</main>
       <Footer />
+      <AiAvatarChat />
     </NextIntlClientProvider>
   );
 }
