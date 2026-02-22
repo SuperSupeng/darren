@@ -2,55 +2,61 @@
 
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { useState, useCallback } from 'react';
-
-// 服务配置
-const serviceConfig: Record<string, string> = {
-  activity: '🎯',
-  kickstart: '🚀',
-  aiSoftware: '🤖',
-  aiHardware: '⚡',
-  global: '🌏',
-  overseas: '✈️',
-  community: '👥',
-  connect: '🔗',
-};
+import { useState } from 'react';
 
 export default function ServicesClient() {
   const t = useTranslations('services');
   const tPage = useTranslations('servicesPage');
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
   
-  const items = t.raw('items') as Array<{
-    id: string;
-    title: string;
-    description: string;
-  }>;
+  // 核心服务 - 全球化战略与咨询服务 和 硬件供应链战略咨询服务
+  const coreServices = [
+    {
+      id: 'globalStrategy',
+      title: t('items.globalStrategy.title'),
+      description: t('items.globalStrategy.description'),
+      icon: '🌍',
+      color: 'from-zen-gold/20 to-amber-500/10',
+      accent: 'text-zen-gold',
+      borderColor: 'border-zen-gold/30'
+    },
+    {
+      id: 'hardwareSupplyChain',
+      title: t('items.hardwareSupplyChain.title'),
+      description: t('items.hardwareSupplyChain.description'),
+      icon: '🏭',
+      color: 'from-geek-cyan/20 to-blue-500/10',
+      accent: 'text-geek-cyan',
+      borderColor: 'border-geek-cyan/30'
+    }
+  ];
 
-  const goToNext = useCallback(() => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setCurrentIndex((prev) => (prev + 1) % items.length);
-    setTimeout(() => setIsAnimating(false), 500);
-  }, [isAnimating, items.length]);
-
-  const goToPrev = useCallback(() => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setCurrentIndex((prev) => (prev - 1 + items.length) % items.length);
-    setTimeout(() => setIsAnimating(false), 500);
-  }, [isAnimating, items.length]);
-
-  const goToIndex = useCallback((index: number) => {
-    if (isAnimating || index === currentIndex) return;
-    setIsAnimating(true);
-    setCurrentIndex(index);
-    setTimeout(() => setIsAnimating(false), 500);
-  }, [isAnimating, currentIndex]);
-
-  const currentItem = items[currentIndex];
-  const icon = serviceConfig[currentItem?.id] || '•';
+  // 产品驱动的服务
+  const productServices = [
+    {
+      id: 'kickstart',
+      title: t('items.kickstart.title'),
+      description: t('items.kickstart.description'),
+      icon: '🚀'
+    },
+    {
+      id: 'aiSoftware',
+      title: t('items.aiSoftware.title'),
+      description: t('items.aiSoftware.description'),
+      icon: '🤖'
+    },
+    {
+      id: 'community',
+      title: t('items.community.title'),
+      description: t('items.community.description'),
+      icon: '👥'
+    },
+    {
+      id: 'connect',
+      title: t('items.connect.title'),
+      description: t('items.connect.description'),
+      icon: '🔗'
+    }
+  ];
 
   return (
     <main className="min-h-screen bg-ink-950">
@@ -77,25 +83,6 @@ export default function ServicesClient() {
           />
         </div>
 
-        {/* Zen Circles */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-          <div 
-            className="absolute -inset-[200px] rounded-full border border-zen-gold/10 animate-rotate-slow"
-            style={{ animationDuration: '50s' }}
-          />
-          <div 
-            className="absolute -inset-[120px] rounded-full border border-ink-700/30 animate-rotate-slow"
-            style={{ animationDirection: 'reverse', animationDuration: '35s' }}
-          />
-        </div>
-
-        {/* Floating code elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none font-mono">
-          <span className="absolute top-[15%] left-[10%] text-zen-gold/15 text-xl animate-float" style={{ animationDelay: '0s' }}>{'{ services }'}</span>
-          <span className="absolute top-[25%] right-[15%] text-geek-cyan/15 text-lg animate-float" style={{ animationDelay: '1s' }}>{'<offer />'}</span>
-          <span className="absolute bottom-[30%] left-[8%] text-geek-purple/15 text-lg animate-float" style={{ animationDelay: '2s' }}>{'( deliver )'}</span>
-        </div>
-
         {/* Content */}
         <div className="container relative z-10">
           <div className="max-w-3xl mx-auto text-center">
@@ -119,115 +106,93 @@ export default function ServicesClient() {
         <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-ink-950 to-transparent pointer-events-none" />
       </section>
       
-      {/* Spotlight Services */}
+      {/* Core Consulting Services */}
       <section className="py-12 md:py-20 relative overflow-hidden">
-        {/* Background glow */}
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.06)_0%,transparent_60%)]" />
         
         <div className="container relative z-10">
-          <div className="max-w-4xl mx-auto">
-            {/* Main Spotlight Area */}
-            <div className="relative min-h-[400px] md:min-h-[450px] flex items-center justify-center">
-              {/* Content */}
-              <div 
-                key={currentIndex}
-                className="text-center px-4 animate-fade-in-up"
-              >
-                {/* Number */}
-                <div className="mb-6">
-                  <span className="inline-block font-mono text-sm text-zen-gold tracking-widest">
-                    {String(currentIndex + 1).padStart(2, '0')} / {String(items.length).padStart(2, '0')}
-                  </span>
-                </div>
-                
-                {/* Icon */}
-                <div className="text-7xl md:text-8xl mb-8">{icon}</div>
-                
-                {/* Title */}
-                <h2 className="text-3xl md:text-5xl font-medium mb-6 text-white">
-                  {currentItem?.title}
-                </h2>
-                
-                {/* Description */}
-                <p className="text-paper-400 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-12">
-                  {currentItem?.description}
-                </p>
-                
-                {/* Navigation Buttons */}
-                <div className="flex items-center justify-center gap-4">
-                  <button
-                    onClick={goToPrev}
-                    disabled={isAnimating}
-                    className="group flex items-center gap-2 px-6 py-3 rounded-full
-                      border border-ink-700 text-paper-400
-                      hover:border-paper-400 hover:text-white
-                      disabled:opacity-50 transition-all duration-300"
-                  >
-                    <svg className="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
-                    </svg>
-                    Prev
-                  </button>
-                  
-                  <button
-                    onClick={goToNext}
-                    disabled={isAnimating}
-                    className="group flex items-center gap-2 px-6 py-3 rounded-full
-                      bg-zen-gold text-ink-950 font-medium
-                      hover:bg-zen-gold/90
-                      disabled:opacity-50 transition-all duration-300"
-                  >
-                    Next
-                    <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-medium mb-4 text-white">
+                Core Consulting Services
+              </h2>
+              <p className="text-paper-400 max-w-2xl mx-auto">
+                Strategic consulting in high-value, information-differentiated industries
+              </p>
             </div>
             
-            {/* Dots Navigation */}
-            <div className="flex items-center justify-center gap-2 mt-8">
-              {items.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => goToIndex(index)}
-                  className={`
-                    w-2 h-2 rounded-full transition-all duration-300
-                    ${index === currentIndex 
-                      ? 'w-8 bg-zen-gold' 
-                      : 'bg-ink-700 hover:bg-ink-600'}
-                  `}
-                  aria-label={`Go to service ${index + 1}`}
-                />
+            <div className="grid md:grid-cols-2 gap-8">
+              {coreServices.map((service, index) => (
+                <div 
+                  key={service.id}
+                  className={`group relative p-8 rounded-2xl bg-ink-900/60 border border-ink-700/50 ${service.borderColor} hover:border-geek-cyan/40 transition-all duration-300 hover:-translate-y-2`}
+                >
+                  <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+                  
+                  <div className="relative z-10">
+                    <div className="text-5xl mb-6">
+                      {service.icon}
+                    </div>
+                    
+                    <h3 className="text-xl md:text-2xl font-medium text-paper-100 mb-4 leading-snug">
+                      {service.title}
+                    </h3>
+                    
+                    <p className={`text-paper-400 leading-relaxed mb-6`}>
+                      {service.description}
+                    </p>
+                    
+                    <div className="flex items-center gap-2">
+                      <span className={`inline-flex items-center justify-center w-8 h-8 rounded-full bg-ink-800 ${service.accent}`}>
+                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </span>
+                      <span className={`${service.accent} text-sm font-medium`}>Strategic Consultation</span>
+                    </div>
+                  </div>
+                  
+                  {/* Bottom Decoration */}
+                  <div className={`absolute bottom-0 left-8 right-8 h-px bg-gradient-to-r from-transparent ${service.accent.replace('text-', 'via-')}/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity`} />
+                </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+      
+      {/* Product-Driven Services */}
+      <section className="py-12 md:py-20 relative overflow-hidden">
+        <div className="container relative z-10">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-medium mb-4 text-white">
+                Product-Driven Solutions
+              </h2>
+              <p className="text-paper-400 max-w-2xl mx-auto">
+                Additional services delivered through our proprietary products and platforms
+              </p>
+            </div>
             
-            {/* Quick List - Collapsed view */}
-            <div className="mt-16 pt-12 border-t border-ink-800">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {items.map((item, index) => {
-                  const itemIcon = serviceConfig[item.id] || '•';
-                  const isActive = index === currentIndex;
-                  return (
-                    <button
-                      key={item.id}
-                      onClick={() => goToIndex(index)}
-                      className={`
-                        p-4 rounded-xl text-left transition-all duration-300
-                        ${isActive 
-                          ? 'bg-ink-800 border border-zen-gold/30' 
-                          : 'bg-ink-900/50 border border-transparent hover:bg-ink-800/50'}
-                      `}
-                    >
-                      <span className="text-xl mb-2 block">{itemIcon}</span>
-                      <span className={`text-sm font-medium block truncate ${isActive ? 'text-white' : 'text-paper-400'}`}>
-                        {item.title}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {productServices.map((service) => (
+                <div 
+                  key={service.id}
+                  className="group p-6 rounded-xl bg-ink-900/50 border border-ink-700/50 hover:border-ink-600/50 transition-all duration-300"
+                >
+                  <div className="text-3xl mb-4">
+                    {service.icon}
+                  </div>
+                  
+                  <h3 className="text-lg font-medium text-paper-100 mb-2">
+                    {service.title}
+                  </h3>
+                  
+                  <p className="text-paper-400 text-sm leading-relaxed">
+                    {service.description}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -237,7 +202,7 @@ export default function ServicesClient() {
       <section className="py-20 md:py-28">
         <div className="container">
           <div className="max-w-2xl mx-auto text-center">
-            <p className="text-paper-500 text-lg mb-4">Ready to collaborate?</p>
+            <p className="text-paper-500 text-lg mb-4">Ready to leverage strategic insights?</p>
             <h2 className="text-3xl md:text-4xl font-medium mb-8">
               {tPage('cta.title')}
             </h2>
@@ -245,8 +210,8 @@ export default function ServicesClient() {
               <a 
                 href="mailto:supeng842499467@gmail.com" 
                 className="group inline-flex items-center gap-3 px-8 py-4 rounded-full
-                  bg-white text-ink-950 font-medium text-lg
-                  hover:bg-paper-200 transition-all duration-300"
+                  bg-zen-gold text-ink-950 font-medium text-lg
+                  hover:bg-zen-gold/90 transition-all duration-300"
               >
                 {tPage('cta.button')}
                 <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
