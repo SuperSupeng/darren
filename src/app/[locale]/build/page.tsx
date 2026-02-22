@@ -66,7 +66,7 @@ export default function BuildPage() {
             {/* Tag */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-ink-800/50 border border-ink-700/50 mb-6">
               <span className="w-2 h-2 bg-zen-gold rounded-full animate-pulse" />
-              <span className="text-sm font-mono text-zen-gold">portfolio</span>
+              <span className="text-sm font-mono text-zen-gold">products</span>
             </div>
             
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium mb-6">

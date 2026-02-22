@@ -1,12 +1,12 @@
 {
   "meta": {
-    "title": "Darren Su | Geek Builder",
-    "description": "Geek Builder, shipping AI × Hardware products"
+    "title": "Darren Su | Global Strategy & Hardware",
+    "description": "Helping businesses grow across borders and build products that matter."
   },
   "nav": {
     "home": "Home",
     "services": "Services",
-    "build": "Work",
+    "build": "Products",
     "about": "About",
     "blog": "Blog",
     "contact": "Contact"
@@ -25,14 +25,14 @@
     "errorGeneric": "Something went wrong. Please try again."
   },
   "hero": {
-    "title": "Geek Builder, shipping AI × Hardware.",
-    "subtitle": "Darren. I build: AI × Hardware products / Creator tools / Communities. Also building my digital avatar.",
+    "title": "Helping businesses grow across borders and build products that matter.",
+    "subtitle": "Global strategy, hardware supply chain, and AI product development — delivered through real collaboration, not just advice.",
     "cta": {
       "contact": "Contact me",
       "services": "View services",
       "viewBuild": "See what I'm building"
     },
-    "tagline": "Builder｜Global co-creation｜Community-driven｜Zen practitioner"
+    "tagline": "Global strategy · Hardware supply chain · AI products · Zen practitioner"
   },
   "community": {
     "meta": {
@@ -372,13 +372,23 @@
   "servicesPage": {
     "meta": {
       "title": "Services | Darren Su",
-      "description": "Services I can offer"
+      "description": "Helping businesses grow across borders and build products that matter."
     },
     "hero": {
       "title": "What I Can Help You With",
-      "subtitle": "Think of me as a company: here are the services I offer. Each one has clear deliverables and is a paid collaboration."
+      "subtitle": "Real problems, real solutions. Whether you're a Chinese company going global or an overseas company entering Asian markets — I help you navigate, build, and grow."
+    },
+    "coreSection": {
+      "title": "Core Consulting Services",
+      "subtitle": "Strategic consulting in high-value, information-differentiated industries",
+      "badge": "Strategic Consultation"
+    },
+    "productSection": {
+      "title": "Product-Driven Solutions",
+      "subtitle": "Additional services delivered through our proprietary products and platforms"
     },
     "cta": {
+      "eyebrow": "Ready to leverage strategic insights?",
       "title": "Have an idea? Let's talk",
       "description": "If you have a project you'd like to collaborate on, or are interested in any of these services, send me an email. I'll get back to you soon.",
       "button": "Email me",
@@ -388,48 +398,32 @@
   "services": {
     "title": "What I Can Help You With",
     "subtitle": "Think of me as a company: here are the services I offer",
-    "items": [
-      {
-        "id": "activity",
-        "title": "Co-creation Events",
-        "description": "Plan output-driven events for companies/schools/communities, ensuring participants deliver real, presentable results"
+    "items": {
+      "globalStrategy": {
+        "title": "Global Strategy & Consulting",
+        "description": "Strategic advisory for companies going global — Chinese companies expanding internationally, or overseas companies entering Asian markets. Real market insight, not generic advice."
       },
-      {
-        "id": "kickstart",
+      "hardwareSupplyChain": {
+        "title": "Hardware Supply Chain Strategy",
+        "description": "End-to-end supply chain consulting for hardware products, from sourcing to manufacturing to distribution."
+      },
+      "kickstart": {
         "title": "Project Kickstart",
         "description": "Transform vague ideas into executable project structures and first deliverables"
       },
-      {
-        "id": "aiSoftware",
+      "aiSoftware": {
         "title": "AI Software Prototyping",
         "description": "Rapidly validate AI software product ideas, from concept to demo-ready prototype"
       },
-      {
-        "id": "aiHardware",
-        "title": "AI Hardware Prototyping",
-        "description": "Rapidly validate AI × hardware product ideas, from concept to interactive physical prototype"
-      },
-      {
-        "id": "global",
-        "title": "Cross-border Co-creation",
-        "description": "Low-risk pilot programs for teams exploring international collaboration through real projects"
-      },
-      {
-        "id": "overseas",
-        "title": "Overseas Event Execution",
-        "description": "Help organize and execute Workshops / Meetups / Buildathons overseas"
-      },
-      {
-        "id": "community",
+      "community": {
         "title": "Community Building",
         "description": "Help build builder communities with architecture design, operations strategy, and cold-start plans"
       },
-      {
-        "id": "connect",
+      "connect": {
         "title": "Resource Connection",
         "description": "Connect you with builder networks, event venues, and partners"
       }
-    ],
+    },
     "viewAll": "View all services"
   },
   "buildDirection": {
@@ -443,19 +437,19 @@
     ]
   },
   "signals": {
-    "title": "Signals",
+    "title": "Why Me",
     "items": [
       {
         "role": "AGI Villa (AI Builder Accelerator)",
-        "position": "Co-founder"
+        "position": "Co-founder — global builder network across 5+ cities"
       },
       {
         "role": "Datawhale (China's largest open-source learning community)",
-        "position": "City Ecosystem Lead"
+        "position": "City Ecosystem Lead — deep roots in China's tech ecosystem"
       },
       {
         "role": "CryptoTime (AI × Web3 Builder Community)",
-        "position": "Co-founder"
+        "position": "Co-founder — cross-border builder connections in Asia"
       }
     ]
   },
@@ -483,29 +477,29 @@
     }
   },
   "featuredProjects": {
-    "title": "Featured Work",
-    "subtitle": "Selected projects",
+    "title": "Products as Services",
+    "subtitle": "Built to deliver real capabilities",
     "viewAll": "View all work",
     "items": [
       {
         "id": "globaltechevents",
         "name": "GlobalTechEvents",
-        "tagline": "Discover world's tech events",
+        "tagline": "Global network intelligence — connecting companies with the right markets, events, and partners worldwide",
         "url": "https://www.globaltechevents.xyz",
         "image": "/projects/globaltechevents.png"
       },
       {
         "id": "internplanet",
         "name": "Intern Planet",
-        "tagline": "Find your internship faster",
+        "tagline": "Cross-border talent pipeline — bridging companies with international talent across Asia and beyond",
         "url": "https://internplanet.tech",
         "image": "/projects/internplanet.png"
       }
     ]
   },
   "footerCta": {
-    "title": "Let's ship something real.",
-    "description": "If you're also building AI tools, hardware, buildathons, or global nodes — I'd love to co-build with you.",
+    "title": "Have a problem worth solving?",
+    "description": "Whether you're expanding globally, navigating hardware supply chains, or need an AI product built — let's talk.",
     "cta": {
       "contact": "Contact me",
       "services": "View services"
@@ -514,7 +508,7 @@
   "footer": {
     "name": "Darren Su",
     "location": "Shanghai / Global",
-    "bio": "Founder @ AGI Villa | Helping builders ship AI + hardware interactive products | Global community-led execution & growth | Zen practitioner & Buddhist learner",
+    "bio": "Global strategy & hardware supply chain consultant. Helping companies grow across borders and build products that matter. Zen practitioner.",
     "copyright": "© {year} Darren Su. All rights reserved."
   },
   "subscribe": {
@@ -655,96 +649,96 @@
   },
   "build": {
     "meta": {
-      "title": "Work | Darren Su",
-      "description": "Projects, prototypes, and experiments by Darren Su"
+      "title": "Products | Darren Su",
+      "description": "Products built to deliver real service capabilities."
     },
     "hero": {
-      "title": "Work",
-      "subtitle": "Here I continuously update my AI × Hardware projects, tools, and community activities.",
-      "cta": "Interested in my work? Or have ideas to collaborate?"
+      "title": "Products",
+      "subtitle": "Each product here is a service capability in action — not just a demo, but a real solution to a real problem.",
+      "cta": "Interested in what these products can do for you?"
     },
     "selected": {
-      "title": "Selected",
+      "title": "Products",
       "projects": [
         {
           "id": "globaltechevents",
           "name": "GlobalTechEvents",
-          "tagline": "Discover world's tech events",
+          "tagline": "Global network intelligence as a service",
           "status": "shipped",
-          "tags": ["Events", "Tech", "Global"],
+          "tags": ["Global", "Events", "Network"],
           "links": [{ "type": "Website", "url": "https://www.globaltechevents.xyz" }],
-          "description": "Discover global tech events and conferences, helping developers and entrepreneurs find the best offline event opportunities.",
+          "description": "Aggregates global tech events to help companies identify market opportunities, find partners, and expand internationally — global strategy made actionable.",
           "url": "https://www.globaltechevents.xyz",
           "image": "/projects/globaltechevents.png"
         },
         {
           "id": "internplanet",
           "name": "Intern Planet",
-          "tagline": "Find your internship faster",
+          "tagline": "Cross-border talent pipeline as a service",
           "status": "shipped",
-          "tags": ["Jobs", "Internship", "Students"],
+          "tags": ["Talent", "Cross-border", "Asia"],
           "links": [{ "type": "Website", "url": "https://internplanet.tech" }],
-          "description": "A job platform for university students, helping them quickly find quality internship opportunities and kickstart their careers.",
+          "description": "Connects companies with international talent across Asia — bridging the gap between global companies and local markets through people.",
           "url": "https://internplanet.tech",
           "image": "/projects/internplanet.png"
         }
       ],
       "empty": {
-        "title": "No public projects yet (organizing...)",
-        "description": "I'll gradually publish demos, prototypes, MVPs, and event outputs here.",
-        "cta": "If you're also building, feel free to co-build with me."
+        "title": "More products coming (organizing...)",
+        "description": "I'll gradually publish products and tools here, each built around a real service capability.",
+        "cta": "If you have a problem worth solving, let's talk."
       }
     },
     "cta": "Contact me",
     "log": {
       "title": "Build Log",
-      "description": "Progress on ongoing projects and experiments.",
+      "description": "What's being built and shipped.",
       "entries": [
         { "date": "2026-01", "content": "Building personal website + i18n, preparing to share build process publicly" },
         { "date": "2026-01", "content": "Organizing AI × Hardware workshop productization flow (demo & ship focus)" },
         { "date": "2026-01", "content": "Advancing global builder node connections (events/co-creation)" },
-        { "date": "2026-01", "content": "Organizing publishable demos/prototypes, releasing here gradually" },
-        { "date": "2026-01", "content": "Preparing an AI × Hardware interactive works collection (continuous updates)" }
+        { "date": "2026-01", "content": "Organizing publishable products, releasing here gradually" },
+        { "date": "2026-01", "content": "Preparing an AI × Hardware interactive product collection (continuous updates)" }
       ]
     }
   },
   "about": {
     "meta": {
       "title": "About | Darren Su",
-      "description": "Learn more about Darren Su - Geek Builder, shipping AI × Hardware products"
+      "description": "Global Strategy & Hardware Supply Chain Consultant. Helping companies grow across borders and build products that matter."
     },
     "hero": {
-      "oneliner": "Geek Builder, shipping AI × Hardware products | Building interactive experiences & creator tools | Zen practitioner & community builder"
+      "oneliner": "Global Strategy & Hardware Supply Chain Consultant | Helping companies grow across borders and build products that matter | Zen practitioner"
     },
     "whatICanHelp": {
       "title": "How I Can Help You",
-      "subtitle": "No matter what stage you're at, I can provide concrete support",
+      "subtitle": "Real problems, real solutions — with clear deliverables, not just advice",
       "scenarios": [
         {
-          "icon": "🚀",
-          "title": "AI Software & Hardware Prototyping",
-          "description": "Rapidly validate AI software/hardware product ideas, from concept to demo-ready prototype. Focused on making it work.",
+          "icon": "🌍",
+          "title": "Global Strategy & Consulting",
+          "description": "Strategic advisory for companies going global — Chinese companies expanding internationally, or overseas companies entering Asian markets. Real market insight, not generic advice.",
           "action": "View services",
-          "color": "product"
+          "color": "connect"
         },
         {
-          "icon": "🎯",
-          "title": "Co-creation Events",
-          "description": "Plan output-driven events for companies/schools/communities, ensuring participants deliver real, presentable results. From mechanism to execution.",
+          "icon": "🏭",
+          "title": "Hardware Supply Chain Strategy",
+          "description": "End-to-end supply chain consulting for hardware products — from sourcing and manufacturing to distribution. Built on deep experience in China's hardware ecosystem.",
           "action": "View services",
           "color": "event"
         },
         {
-          "icon": "🌍",
-          "title": "Cross-border Co-creation",
-          "description": "Connect you with global builder networks, venues, and partners. Low-risk pilot programs for international collaboration through real projects.",
-          "action": "View global nodes",
-          "color": "connect"
+          "icon": "🤖",
+          "title": "AI Product Prototyping",
+          "description": "Rapidly validate AI product ideas through community-driven development, from concept to demo-ready prototype. Focused on validating real assumptions fast.",
+          "action": "View services",
+          "color": "product"
         },
         {
           "icon": "🔗",
-          "title": "Resource Connection",
-          "description": "Connect you with builder networks, event venues, and partners. Help build builder communities with architecture design and operations strategy.",
+          "title": "Community & Resource Connection",
+          "description": "Connect with global builder networks, event resources, and partners. Backed by AGI Villa, Datawhale, and CryptoTime — real networks, not cold outreach.",
           "action": "View services",
           "color": "learn"
         }
@@ -757,35 +751,35 @@
     "now": {
       "title": "Now / What I'm doing",
       "items": [
-        "Building: AI × Hardware products (Interactive / Sensors / NFC)",
-        "Building: Creator tools (workflow / automation)",
-        "Building: Community infrastructure (workshops / buildathons / cohorts)",
-        "Connecting: Global city nodes, promoting cross-city co-creation"
+        "Consulting: Global strategy for companies expanding across borders",
+        "Consulting: Hardware supply chain optimization and sourcing strategy",
+        "Building: AI products that deliver real service capabilities",
+        "Connecting: Global builder networks across Shanghai, Chiang Mai, Bangkok, and beyond"
       ]
     },
     "background": {
       "title": "Why I Can Do This",
-      "subtitle": "Complete experience from tech to community, from product to business",
+      "subtitle": "Tech, community, and business — the full path",
       "capabilities": [
         {
           "icon": "👨‍💻",
           "title": "Technical Background",
-          "description": "From database R&D to AI Infra, deep involvement in open source communities. Understanding of technical architecture and product implementation."
+          "description": "From database R&D to AI Infra, deep involvement in open source communities. I understand technical architecture and can translate it into product decisions."
         },
         {
           "icon": "🤝",
-          "title": "Community Experience",
-          "description": "Community operations experience at PingCAP, Datawhale, etc. Know how to gather people, organize events, and deliver outcomes."
+          "title": "Community & Network",
+          "description": "Co-founder of AGI Villa (global builder network), City Ecosystem Lead at Datawhale (China's largest open-source community), Co-founder of CryptoTime (global digital nomad network)."
         },
         {
           "icon": "💼",
-          "title": "Business Capability",
-          "description": "Complete path from tech to business. Understanding how to turn products into businesses, from demo to MVP to market."
+          "title": "Business & Commercialization",
+          "description": "Complete path from tech to business — PingCAP, open source community, product delivery, and now running AGI Villa. I know how to turn products into businesses."
         }
       ],
       "journey": {
         "title": "My Journey",
-        "description": "2021 Database R&D → 2022 AI Infra & Open Source Community → 2023 Commercialization & Product Delivery → Now founding AGI Villa, helping Builders go from 0 to 1. These experiences allow me to understand tech, community, and business."
+        "description": "2021 Database R&D → 2022 AI Infra & Open Source Community → 2023 Commercialization & Product Delivery → Now: Global strategy consulting + hardware supply chain + AI products. These experiences let me operate across tech, community, and business."
       }
     },
     "values": {

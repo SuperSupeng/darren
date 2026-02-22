@@ -2,7 +2,6 @@
 
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { useState } from 'react';
 
 export default function ServicesClient() {
   const t = useTranslations('services');
@@ -114,10 +113,10 @@ export default function ServicesClient() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-medium mb-4 text-white">
-                Core Consulting Services
+                {tPage('coreSection.title')}
               </h2>
               <p className="text-paper-400 max-w-2xl mx-auto">
-                Strategic consulting in high-value, information-differentiated industries
+                {tPage('coreSection.subtitle')}
               </p>
             </div>
             
@@ -148,7 +147,7 @@ export default function ServicesClient() {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
                       </span>
-                      <span className={`${service.accent} text-sm font-medium`}>Strategic Consultation</span>
+                      <span className={`${service.accent} text-sm font-medium`}>{tPage('coreSection.badge')}</span>
                     </div>
                   </div>
                   
@@ -167,10 +166,10 @@ export default function ServicesClient() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-medium mb-4 text-white">
-                Product-Driven Solutions
+                {tPage('productSection.title')}
               </h2>
               <p className="text-paper-400 max-w-2xl mx-auto">
-                Additional services delivered through our proprietary products and platforms
+                {tPage('productSection.subtitle')}
               </p>
             </div>
             
@@ -202,7 +201,7 @@ export default function ServicesClient() {
       <section className="py-20 md:py-28">
         <div className="container">
           <div className="max-w-2xl mx-auto text-center">
-            <p className="text-paper-500 text-lg mb-4">Ready to leverage strategic insights?</p>
+            <p className="text-paper-500 text-lg mb-4">{tPage('cta.eyebrow')}</p>
             <h2 className="text-3xl md:text-4xl font-medium mb-8">
               {tPage('cta.title')}
             </h2>

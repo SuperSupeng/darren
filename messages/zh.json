@@ -1,12 +1,12 @@
 {
   "meta": {
-    "title": "Darren Su | 极客 Builder",
-    "description": "极客 Builder，正在 ship AI × 硬件作品"
+    "title": "Darren Su | 全球化战略与硬件",
+    "description": "帮助企业跨境增长，打造真正有价值的产品。"
   },
   "nav": {
     "home": "首页",
     "services": "服务",
-    "build": "作品",
+    "build": "产品",
     "about": "关于",
     "blog": "博客",
     "contact": "联系我"
@@ -25,14 +25,14 @@
     "errorGeneric": "出错了，请稍后再试。"
   },
   "hero": {
-    "title": "极客 Builder，正在 ship AI × 硬件作品。",
-    "subtitle": "Darren，喜欢 build：AI × 硬件产品 / 创作者工具 / 社区。构建自己的数字分身ing",
+    "title": "帮助企业跨境增长，打造真正有价值的产品。",
+    "subtitle": "全球化战略、硬件供应链、AI 产品开发——真实协作交付，不只是建议。",
     "cta": {
       "contact": "联系我",
       "services": "查看服务",
       "viewBuild": "看我在 build 什么"
     },
-    "tagline": "Builder｜全球流动共创｜社区驱动｜禅修实践者"
+    "tagline": "全球化战略 · 硬件供应链 · AI 产品 · 禅修实践者"
   },
   "community": {
     "meta": {
@@ -126,19 +126,31 @@
           "name": "Workshop",
           "icon": "🛠️",
           "tagline": "2-3 小时，围绕一个主题做出可运行 demo",
-          "details": ["适合新人 builder", "快速上手", "带着成果离开"]
+          "details": [
+            "适合新人 builder",
+            "快速上手",
+            "带着成果离开"
+          ]
         },
         {
           "name": "Buildathon",
           "icon": "🚀",
           "tagline": "在时间盒里交付作品（demo first）",
-          "details": ["产出真实作品", "舞台与展示", "连接与机会"]
+          "details": [
+            "产出真实作品",
+            "舞台与展示",
+            "连接与机会"
+          ]
         },
         {
           "name": "Cohort",
           "icon": "👥",
           "tagline": "一群人按节奏一起 build",
-          "details": ["固定节奏", "公开交付", "互相 push"]
+          "details": [
+            "固定节奏",
+            "公开交付",
+            "互相 push"
+          ]
         }
       ]
     },
@@ -372,13 +384,23 @@
   "servicesPage": {
     "meta": {
       "title": "服务 | Darren Su",
-      "description": "我能提供的服务能力"
+      "description": "帮助企业跨境增长，打造真正有价值的产品。"
     },
     "hero": {
       "title": "我能帮你做什么",
-      "subtitle": "把我当成一家公司：以下是我能提供的服务。每一项都是可以收费的、有明确交付物的合作方式。"
+      "subtitle": "真实问题，真实解决方案。无论你是中国企业走向全球，还是海外企业进入亚洲市场——我帮你找路径、做产品、实现增长。"
+    },
+    "coreSection": {
+      "title": "核心咨询服务",
+      "subtitle": "在高价值、信息差显著的领域提供战略咨询",
+      "badge": "战略咨询"
+    },
+    "productSection": {
+      "title": "产品驱动型服务",
+      "subtitle": "通过我们的自有产品和平台交付的附加服务"
     },
     "cta": {
+      "eyebrow": "准备好利用战略洞察了吗？",
       "title": "有想法？聊聊",
       "description": "如果你有项目想合作，或者对某项服务感兴趣，直接发邮件给我。我会尽快回复。",
       "button": "发邮件给我",
@@ -388,48 +410,32 @@
   "services": {
     "title": "我能帮你做什么",
     "subtitle": "把我当成一家公司：以下是我能提供的服务",
-    "items": [
-      {
-        "id": "activity",
-        "title": "共创型活动产品",
-        "description": "为企业/学校/社区策划「以产出为目标」的活动，确保参与者完成可展示的真实成果"
+    "items": {
+      "globalStrategy": {
+        "title": "全球化战略与咨询",
+        "description": "为企业国际化提供战略支持——中国企业走向全球，或海外企业进入亚洲市场。真实的市场洞察，不是泛泛的建议。"
       },
-      {
-        "id": "kickstart",
+      "hardwareSupplyChain": {
+        "title": "硬件供应链战略",
+        "description": "为硬件产品提供端到端供应链咨询，涵盖采购、制造到分销的全流程。"
+      },
+      "kickstart": {
         "title": "共创项目启动包",
         "description": "将模糊想法转化为可执行的第一轮项目结构与交付物"
       },
-      {
-        "id": "aiSoftware",
+      "aiSoftware": {
         "title": "AI 软件产品原型",
         "description": "快速验证 AI 软件产品想法，从概念到可演示的原型"
       },
-      {
-        "id": "aiHardware",
-        "title": "AI 硬件产品原型",
-        "description": "快速验证 AI × 硬件产品想法，从概念到可交互的实体原型"
-      },
-      {
-        "id": "global",
-        "title": "跨地域共创试点",
-        "description": "为希望开展国际合作的团队提供低风险试点方案，用真实项目验证合作可能性"
-      },
-      {
-        "id": "overseas",
-        "title": "海外活动执行",
-        "description": "帮助在海外组织和落地 Workshop / Meetup / Buildathon 等活动"
-      },
-      {
-        "id": "community",
+      "community": {
         "title": "社区建设咨询",
         "description": "帮助搭建 builder 社区，提供架构设计、运营策略与冷启动方案"
       },
-      {
-        "id": "connect",
+      "connect": {
         "title": "资源连接",
         "description": "对接 Builder 网络、活动场地、合作伙伴等资源"
       }
-    ],
+    },
     "viewAll": "查看全部服务"
   },
   "buildDirection": {
@@ -443,19 +449,19 @@
     ]
   },
   "signals": {
-    "title": "Signals / 信号",
+    "title": "为什么是我",
     "items": [
       {
-        "role": "AGI Villa（AI Builder Accelerator）",
-        "position": "联合发起人"
+        "role": "AGI Villa（AI Builder 加速器）",
+        "position": "联合发起人 — 覆盖 5+ 城市的全球 builder 网络"
       },
       {
         "role": "Datawhale（中国最大的开源学习社区）",
-        "position": "城市生态建设负责人"
+        "position": "城市生态建设负责人 — 深度扎根中国科技生态"
       },
       {
         "role": "CryptoTime（AI × Web3 Builder 社区）",
-        "position": "联合发起人"
+        "position": "联合发起人 — 亚洲跨境 builder 资源连接"
       }
     ]
   },
@@ -483,29 +489,29 @@
     }
   },
   "featuredProjects": {
-    "title": "精选案例",
-    "subtitle": "过往项目展示",
+    "title": "产品即服务",
+    "subtitle": "通过产品交付真实的服务能力",
     "viewAll": "查看全部作品",
     "items": [
       {
         "id": "globaltechevents",
         "name": "GlobalTechEvents",
-        "tagline": "汇聚全球科技活动",
+        "tagline": "全球网络情报 — 帮助企业连接全球市场、活动和合作伙伴",
         "url": "https://www.globaltechevents.xyz",
         "image": "/projects/globaltechevents.png"
       },
       {
         "id": "internplanet",
-        "name": "实习星球",
-        "tagline": "帮助大家快速找到实习",
+        "name": "Intern Planet",
+        "tagline": "跨境人才通道 — 连接企业与亚洲及全球国际人才",
         "url": "https://internplanet.tech",
         "image": "/projects/internplanet.png"
       }
     ]
   },
   "footerCta": {
-    "title": "一起 ship 点真实的东西。",
-    "description": "如果你也在构建 AI 工具、硬件作品、buildathon 与全球节点 —— 我很愿意一起 co-build。",
+    "title": "有值得解决的问题？",
+    "description": "无论是全球化扩张、硬件供应链，还是需要打造一款 AI 产品——来聊聊。",
     "cta": {
       "contact": "联系我",
       "services": "查看服务"
@@ -514,7 +520,7 @@
   "footer": {
     "name": "Darren Su / 苏鹏",
     "location": "Shanghai / Global",
-    "bio": "AGI Villa 联合创始人｜帮助 Builder 交付 AI + 硬件互动产品（Demo→MVP）｜全球化社区驱动执行与增长｜禅修实践者 & 佛学学习者",
+    "bio": "全球化战略与硬件供应链顾问。帮助企业跨境增长，打造真正有价值的产品。禅修实践者。",
     "copyright": "© {year} Darren Su. All rights reserved."
   },
   "subscribe": {
@@ -573,21 +579,32 @@
           "title": "共创冲刺",
           "suitable": "你已经有 idea / 半成品 / repo",
           "goal": "ship 一个可展示、可讲清楚、可传播的版本",
-          "outputs": ["可上线交互的 MVP 产品", "storytelling"]
+          "outputs": [
+            "可上线交互的 MVP 产品",
+            "storytelling"
+          ]
         },
         {
           "id": "Mode B",
           "title": "产品化",
           "suitable": "你已经有 demo，但想把它变成更像产品",
           "goal": "从「能跑」到「有人愿意用」",
-          "outputs": ["核心 user journey", "功能优先级 / 迭代节奏", "最小增长动作"]
+          "outputs": [
+            "核心 user journey",
+            "功能优先级 / 迭代节奏",
+            "最小增长动作"
+          ]
         },
         {
           "id": "Mode C",
           "title": "共办活动",
           "suitable": "你有场地/资源/社区，想做 workshop / buildathon",
           "goal": "把活动变成持续聚人的方向",
-          "outputs": ["活动机制设计", "导师/伙伴协作", "传播与增长"]
+          "outputs": [
+            "活动机制设计",
+            "导师/伙伴协作",
+            "传播与增长"
+          ]
         }
       ]
     },
@@ -655,96 +672,129 @@
   },
   "build": {
     "meta": {
-      "title": "作品 | Darren Su",
-      "description": "Darren Su 的项目、原型和实验作品"
+      "title": "产品 | Darren Su",
+      "description": "通过产品交付真实的服务能力。"
     },
     "hero": {
-      "title": "作品",
-      "subtitle": "这里会持续更新我做过/正在做的 AI × 硬件作品、工具、社区活动。",
-      "cta": "对我的作品感兴趣？或者有合作想法？"
+      "title": "产品",
+      "subtitle": "这里的每一个产品都是服务能力的体现——不只是 demo，而是真实问题的真实解决方案。",
+      "cta": "想了解这些产品能为你做什么？"
     },
     "selected": {
-      "title": "精选",
+      "title": "产品",
       "projects": [
         {
           "id": "globaltechevents",
           "name": "GlobalTechEvents",
-          "tagline": "汇聚全球科技活动",
+          "tagline": "全球网络情报即服务",
           "status": "shipped",
-          "tags": ["活动", "科技", "全球"],
-          "links": [{ "type": "网站", "url": "https://www.globaltechevents.xyz" }],
-          "description": "发现全球科技活动与会议，帮助开发者和创业者找到最适合的线下活动机会。",
+          "tags": [
+            "全球化",
+            "活动",
+            "网络"
+          ],
+          "links": [
+            {
+              "type": "Website",
+              "url": "https://www.globaltechevents.xyz"
+            }
+          ],
+          "description": "聚合全球科技活动，帮助企业识别市场机会、寻找合作伙伴、实现国际化扩张——让全球化战略落地可执行。",
           "url": "https://www.globaltechevents.xyz",
           "image": "/projects/globaltechevents.png"
         },
         {
           "id": "internplanet",
-          "name": "实习星球",
-          "tagline": "帮助大家快速找到实习",
+          "name": "Intern Planet",
+          "tagline": "跨境人才通道即服务",
           "status": "shipped",
-          "tags": ["求职", "实习", "大学生"],
-          "links": [{ "type": "网站", "url": "https://internplanet.tech" }],
-          "description": "大学生求职平台，帮助学生快速找到优质实习机会，开启职业生涯第一步。",
+          "tags": [
+            "人才",
+            "跨境",
+            "亚洲"
+          ],
+          "links": [
+            {
+              "type": "Website",
+              "url": "https://internplanet.tech"
+            }
+          ],
+          "description": "连接企业与亚洲国际人才——通过人才桥接全球企业与本地市场之间的鸿沟。",
           "url": "https://internplanet.tech",
           "image": "/projects/internplanet.png"
         }
       ],
       "empty": {
-        "title": "暂无公开作品（整理中）",
-        "description": "我会逐步把 demo / prototype / MVP 以及活动产出放到这里。",
-        "cta": "如果你也在 build，欢迎直接找我一起 co-build。"
+        "title": "更多产品即将上线（整理中...）",
+        "description": "我会逐步在这里发布产品和工具，每一个都围绕真实的服务能力构建。",
+        "cta": "如果你有值得解决的问题，来聊聊。"
       }
     },
     "cta": "联系我",
     "log": {
       "title": "在建",
-      "description": "记录一些进行中的项目、实验、以及阶段性进展。",
+      "description": "正在构建和交付的内容。",
       "entries": [
-        { "date": "2026-01", "content": "搭建个人网站 + i18n，准备公开 build 过程" },
-        { "date": "2026-01", "content": "整理 AI × 硬件 workshop 的作品化流程（更偏 demo & ship）" },
-        { "date": "2026-01", "content": "推进全球 builder 节点连接（活动/共创）" },
-        { "date": "2026-01", "content": "整理可公开的 demo / prototype，陆续发布到这里" },
-        { "date": "2026-01", "content": "准备一个 AI × 硬件互动作品合集（持续更新）" }
+        {
+          "date": "2026-01",
+          "content": "搭建个人网站 + i18n，准备公开 build 过程"
+        },
+        {
+          "date": "2026-01",
+          "content": "整理 AI × 硬件 workshop 的作品化流程（更偏 demo & ship）"
+        },
+        {
+          "date": "2026-01",
+          "content": "推进全球 builder 节点连接（活动/共创）"
+        },
+        {
+          "date": "2026-01",
+          "content": "整理可公开的 demo / prototype，陆续发布到这里"
+        },
+        {
+          "date": "2026-01",
+          "content": "准备一个 AI × 硬件互动作品合集（持续更新）"
+        }
       ]
     }
   },
   "about": {
     "meta": {
       "title": "关于我 | Darren Su",
-      "description": "了解 Darren Su - 极客 Builder，正在 ship AI × 硬件作品"
+      "description": "全球化战略与硬件供应链顾问。帮助企业跨境增长，打造真正有价值的产品。"
     },
     "hero": {
-      "oneliner": "极客 Builder，正在 ship AI × 硬件作品 | 构建互动体验与创作者工具 | 禅修实践者与社区建设者"
+      "oneliner": "全球化战略与硬件供应链顾问 | 帮助企业跨境增长，打造真正有价值的产品 | 禅修实践者"
     },
     "whatICanHelp": {
       "title": "我能帮你做什么",
-      "subtitle": "不管你在哪个阶段，我都能提供具体的帮助",
+      "subtitle": "真实问题，真实解决方案——有明确交付物，不只是建议",
       "scenarios": [
         {
-          "icon": "🚀",
-          "title": "AI 软件与硬件原型",
-          "description": "快速验证 AI 软件/硬件产品想法，从概念到可演示的原型。专注于让产品「能跑起来」。",
+          "icon": "🌍",
+          "title": "全球化战略与咨询",
+          "description": "为企业国际化提供战略支持。中国企业走向全球，或海外企业进入亚洲市场。真实的市场洞察，不是泛泛的建议。",
           "action": "查看服务",
-          "color": "product"
+          "color": "connect"
         },
         {
-          "icon": "🎯",
-          "title": "共创型活动产品",
-          "description": "为企业/学校/社区策划「以产出为目标」的活动，确保参与者完成可展示的真实成果。从机制到落地，全程支持。",
+          "icon": "🏭",
+          "title": "硬件供应链战略",
+          "description": "为硬件产品提供端到端供应链咨询——从采购、制造到分销。深度扎根中国硬件生态。",
           "action": "查看服务",
           "color": "event"
         },
         {
-          "icon": "🌍",
-          "title": "跨地域共创合作",
-          "description": "帮你连接全球 builder 网络、场地资源、合作伙伴。为国际合作提供低风险试点方案。",
-          "action": "看全球节点",
-          "color": "connect"
+          "icon": "🤖",
+          "title": "AI 产品原型",
+          "description": "通过社区驱动的方式快速验证 AI 产品想法，从概念到可演示的原型。专注于快速验证核心假设。",
+          "action": "查看服务",
+          "color": "product"
         },
         {
           "icon": "🔗",
-          "title": "资源连接",
-          "description": "帮你连接 builder 网络、活动场地、合作伙伴。帮助搭建 builder 社区，提供架构设计和运营策略。",
+          "title": "社区与资源连接",
+          "description": "连接全球 builder 网络、活动资源、合作伙伴。背靠 AGI Villa、Datawhale、CryptoTime——真实网络，不是冷启动。",
           "action": "查看服务",
           "color": "learn"
         }
@@ -757,35 +807,35 @@
     "now": {
       "title": "Now / 现在在做",
       "items": [
-        "在 build：AI × 硬件作品（互动体验 / 传感器 / NFC）",
-        "在 build：创作者工具（workflow / automation）",
-        "在 build：社区基础设施（workshops / buildathons / cohorts）",
-        "在连接：全球城市节点，推动跨城市共创与展示"
+        "咨询：帮助企业跨境增长的全球化战略",
+        "咨询：硬件供应链优化与采购策略",
+        "构建：交付真实服务能力的 AI 产品",
+        "连接：上海、清迈、曼谷等地的全球 builder 网络"
       ]
     },
     "background": {
       "title": "为什么我能做这些",
-      "subtitle": "从技术到社区，从产品到商业的完整经验",
+      "subtitle": "技术、社区、商业——完整路径",
       "capabilities": [
         {
           "icon": "👨‍💻",
           "title": "技术背景",
-          "description": "从数据库研发到 AI Infra，深度参与开源社区，理解技术架构和产品实现。"
+          "description": "从数据库研发到 AI Infra，深度参与开源社区。理解技术架构，能将其转化为产品决策。"
         },
         {
           "icon": "🤝",
-          "title": "社区经验",
-          "description": "在 PingCAP、Datawhale 等社区运营经验，知道如何聚集人、组织活动、产出成果。"
+          "title": "社区与网络",
+          "description": "AGI Villa 联合发起人（全球 builder 网络）、Datawhale 城市生态建设负责人（中国最大开源社区）、CryptoTime 联合发起人（全球数字游民网络）。"
         },
         {
           "icon": "💼",
           "title": "商业化能力",
-          "description": "从技术到商业的完整路径，理解如何把产品变成业务，从 demo 到 MVP 到市场。"
+          "description": "完整的从技术到商业的路径——PingCAP、开源社区、产品交付，现在运营 AGI Villa。懂得如何把产品变成生意。"
         }
       ],
       "journey": {
         "title": "我的路径",
-        "description": "2021 数据库研发 → 2022 AI Infra 与开源社区 → 2023 商业化与产品落地 → 现在创立 AGI Villa，帮助 Builder 从 0 到 1。这些经历让我能同时理解技术、社区和商业。"
+        "description": "2021 数据库研发 → 2022 AI Infra & 开源社区 → 2023 商业化与产品交付 → 现在：全球化战略咨询 + 硬件供应链 + AI 产品。这些经历让我能同时在技术、社区和商业三个维度上运作。"
       }
     },
     "values": {
@@ -816,30 +866,76 @@
     "communities": {
       "title": "参与的社区",
       "items": [
-        { "name": "AGI Villa", "tagline": "AI Builder & Founder 的社区驱动 Venture Studio", "role": "联合发起人", "color": "gold" },
-        { "name": "Datawhale", "tagline": "中国最大的 AI 开源学习社区", "role": "城市生态建设负责人", "color": "cyan" },
-        { "name": "CryptoTime", "tagline": "AI × Web3 builder-first 社区", "role": "联合发起人", "color": "purple" }
+        {
+          "name": "AGI Villa",
+          "tagline": "AI Builder & Founder 的社区驱动 Venture Studio",
+          "role": "联合发起人",
+          "color": "gold"
+        },
+        {
+          "name": "Datawhale",
+          "tagline": "中国最大的 AI 开源学习社区",
+          "role": "城市生态建设负责人",
+          "color": "cyan"
+        },
+        {
+          "name": "CryptoTime",
+          "tagline": "AI × Web3 builder-first 社区",
+          "role": "联合发起人",
+          "color": "purple"
+        }
       ]
     },
     "global": {
       "title": "全球连接",
       "subtitle": "我在这些城市有社区连接，可以帮你对接当地的 builder 网络、活动场地与合作伙伴。",
       "cities": [
-        { "city": "上海", "flag": "🇨🇳" },
-        { "city": "深圳", "flag": "🇨🇳" },
-        { "city": "北京", "flag": "🇨🇳" },
-        { "city": "清迈", "flag": "🇹🇭" },
-        { "city": "曼谷", "flag": "🇹🇭" }
+        {
+          "city": "上海",
+          "flag": "🇨🇳"
+        },
+        {
+          "city": "深圳",
+          "flag": "🇨🇳"
+        },
+        {
+          "city": "北京",
+          "flag": "🇨🇳"
+        },
+        {
+          "city": "清迈",
+          "flag": "🇹🇭"
+        },
+        {
+          "city": "曼谷",
+          "flag": "🇹🇭"
+        }
       ]
     },
     "proof": {
       "title": "我做过什么",
       "subtitle": "用案例和数据说话",
       "stats": [
-        { "icon": "🎯", "value": "20+", "label": "场活动" },
-        { "icon": "👥", "value": "500+", "label": "参与者" },
-        { "icon": "🌐", "value": "5", "label": "个城市" },
-        { "icon": "🚀", "value": "3", "label": "个社区" }
+        {
+          "icon": "🎯",
+          "value": "20+",
+          "label": "场活动"
+        },
+        {
+          "icon": "👥",
+          "value": "500+",
+          "label": "参与者"
+        },
+        {
+          "icon": "🌐",
+          "value": "5",
+          "label": "个城市"
+        },
+        {
+          "icon": "🚀",
+          "value": "3",
+          "label": "个社区"
+        }
       ],
       "tabs": {
         "communities": "社区",
@@ -848,9 +944,18 @@
       },
       "communities": {
         "items": [
-          { "name": "AGI Villa", "role": "联合发起人" },
-          { "name": "Datawhale", "role": "城市生态负责人" },
-          { "name": "CryptoTime", "role": "联合发起人" }
+          {
+            "name": "AGI Villa",
+            "role": "联合发起人"
+          },
+          {
+            "name": "Datawhale",
+            "role": "城市生态负责人"
+          },
+          {
+            "name": "CryptoTime",
+            "role": "联合发起人"
+          }
         ]
       },
       "events": {
