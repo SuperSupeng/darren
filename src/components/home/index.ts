@@ -1,4 +1,5 @@
 export { default as Hero } from './Hero';
+export { default as ClientQuestions } from './ClientQuestions';
 export { default as NowBuilding } from './NowBuilding';
 export { default as FeaturedProjects } from './FeaturedProjects';
 export { default as Signals } from './Signals';

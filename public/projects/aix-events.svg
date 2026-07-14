@@ -1,0 +1,30 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#F7F8F1"/>
+  <path d="M0 0H1200V630H0V0Z" fill="url(#grid)"/>
+  <rect x="76" y="72" width="1048" height="486" fill="white" stroke="#050505" stroke-width="6"/>
+  <rect x="88" y="84" width="1048" height="486" fill="none" stroke="#050505" stroke-width="6" opacity="0.9"/>
+  <rect x="118" y="118" width="240" height="44" fill="white" stroke="#050505" stroke-width="4"/>
+  <rect x="140" y="136" width="16" height="16" fill="#A7F000"/>
+  <text x="170" y="148" fill="#050505" font-family="Inter, Arial, sans-serif" font-size="20" font-weight="900">DATAWHALE AI+X</text>
+  <text x="118" y="286" fill="#050505" font-family="Inter, Arial, sans-serif" font-size="112" font-weight="900" letter-spacing="0">AI+X</text>
+  <text x="118" y="398" fill="#050505" font-family="Inter, Arial, sans-serif" font-size="98" font-weight="900" letter-spacing="0">活动日历</text>
+  <rect x="118" y="426" width="446" height="54" fill="#A7F000"/>
+  <text x="134" y="464" fill="#050505" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="900">发现、提交和订阅生态活动</text>
+  <text x="120" y="522" fill="#1764FF" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="900">AI 实践 / 开发者 / 高校 / 产业 / 创业 / OPC</text>
+  <g transform="translate(780 218)">
+    <path d="M192 78C199 54 218 35 244 29C247 80 220 118 178 128C146 193 69 233 -24 214C-79 202 -117 176 -137 136C-99 143 -70 135 -51 113C-25 25 50 -27 138 -12C175 -5 197 29 192 78Z" fill="#2F71B9"/>
+    <path d="M-88 76C-97 32 -114 7 -138 -5C-143 44 -128 87 -73 118L-88 76Z" fill="#2F71B9"/>
+    <path d="M-3 209C45 213 118 199 174 132C117 170 51 189 -28 187C-20 197 -12 204 -3 209Z" fill="white"/>
+    <circle cx="128" cy="76" r="18" fill="white"/>
+    <path d="M47 -51C49 -82 67 -103 99 -115C103 -86 85 -59 47 -51Z" fill="#2F71B9"/>
+    <path d="M17 -45C1 -65 2 -85 21 -101C35 -82 33 -63 17 -45Z" fill="#2F71B9"/>
+  </g>
+  <rect x="1050" y="120" width="26" height="26" fill="#A7F000"/>
+  <rect x="908" y="456" width="22" height="22" fill="#1764FF"/>
+  <path d="M1010 190L1048 228M1048 190L1010 228" stroke="#FF1515" stroke-width="12"/>
+  <defs>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" stroke="#050505" stroke-opacity="0.06"/>
+    </pattern>
+  </defs>
+</svg>

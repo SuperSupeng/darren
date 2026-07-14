@@ -2,7 +2,6 @@
 
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
-import NewsletterForm from './NewsletterForm';
 import Logo from './Logo';
 
 export default function Footer() {
@@ -12,10 +11,41 @@ export default function Footer() {
   const socialLinks = [
     {
       name: 'X',
-      href: 'https://x.com/supeng842499467',
+      href: 'https://x.com/zenshipai',
       icon: (
         <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
           <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+        </svg>
+      ),
+    },
+    {
+      name: 'Instagram',
+      label: 'Ins',
+      href: 'https://www.instagram.com/0xdarren_su',
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <rect width="16" height="16" x="4" y="4" rx="4" strokeWidth={1.7} />
+          <circle cx="12" cy="12" r="3.2" strokeWidth={1.7} />
+          <path strokeLinecap="round" strokeWidth={1.7} d="M17.2 6.8h.01" />
+        </svg>
+      ),
+    },
+    {
+      name: 'LinkedIn',
+      href: 'https://www.linkedin.com/in/darrenzenshipai',
+      icon: (
+        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.447-2.136 2.942v5.664H9.351V9h3.414v1.561h.047c.476-.9 1.637-1.85 3.37-1.85 3.602 0 4.267 2.371 4.267 5.455v6.286zM5.337 7.433a2.063 2.063 0 1 1 0-4.126 2.063 2.063 0 0 1 0 4.126zM7.114 20.452H3.558V9h3.556v11.452z" />
+        </svg>
+      ),
+    },
+    {
+      name: 'WhatsApp',
+      href: 'https://wa.me/8618846436143',
+      icon: (
+        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M17.472 14.382c-.297-.149-1.758-.868-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.224-.644.075-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.372-.01-.571-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479s1.065 2.876 1.213 3.074c.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347z" />
+          <path d="M12.051 2C6.477 2 1.949 6.528 1.949 12.102c0 1.781.465 3.522 1.348 5.056L2 22l4.967-1.303a10.064 10.064 0 0 0 5.084 1.374h.004c5.573 0 10.102-4.528 10.102-10.101C22.157 6.397 17.628 2 12.051 2zm.004 18.369h-.004a8.372 8.372 0 0 1-4.267-1.168l-.306-.181-2.947.773.787-2.873-.199-.295a8.367 8.367 0 0 1-1.462-4.523c0-4.638 3.774-8.412 8.414-8.412 2.247 0 4.359.875 5.948 2.464a8.358 8.358 0 0 1 2.464 5.95c-.002 4.638-3.776 8.265-8.428 8.265z" />
         </svg>
       ),
     },
@@ -44,53 +74,42 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative bg-ink-950 border-t border-ink-800/50 overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-grid opacity-10" />
-
-      <div className="container relative z-10 py-12">
-        {/* Main Content */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-          {/* Logo & Info */}
-          <div className="flex flex-col items-center md:items-start gap-3 md:col-span-1">
+    <footer className="relative overflow-hidden bg-paper-100 px-4 py-12 text-ink-950 md:px-6 md:py-14">
+      <div className="absolute inset-x-0 top-0 h-px bg-ink-950/10" />
+      <div className="container relative z-10">
+        <div className="grid gap-10 md:grid-cols-[0.82fr_1.18fr] md:items-start">
+          <div className="flex flex-col items-center gap-4 md:items-start">
             <Link href="/" className="flex items-center gap-2.5 group">
               <Logo size={24} className="group-hover:scale-110 transition-transform" />
               <span className="font-medium text-lg">Darren<span className="text-zen-gold">.</span>Su</span>
             </Link>
-            <p className="text-xs text-paper-500 leading-relaxed max-w-[280px] text-center md:text-left">
+            <p className="max-w-[280px] text-center text-xs leading-relaxed text-ink-600/70 md:text-left">
               {t('bio')}
             </p>
           </div>
 
-          {/* Social Links - Center */}
-          <div className="flex items-center justify-center gap-3">
-            {socialLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                target={link.name === 'Email' ? undefined : '_blank'}
-                rel={link.name === 'Email' ? undefined : 'noopener noreferrer'}
-                className="group relative w-11 h-11 flex items-center justify-center rounded-xl bg-ink-800/50 border border-ink-700/50 text-paper-400 hover:text-zen-gold hover:border-zen-gold/30 transition-all duration-300 hover:-translate-y-1"
-                aria-label={link.name}
-              >
-                {link.icon}
-                {/* Tooltip */}
-                <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 px-2 py-1 bg-ink-800 text-xs text-paper-300 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
-                  {link.name}
-                </span>
-              </a>
-            ))}
-          </div>
-
-          {/* Newsletter Subscription */}
-          <div className="flex justify-center md:justify-end">
-            <NewsletterForm />
+          <div className="flex flex-col items-center gap-4 md:items-end">
+            <p className="academy-kicker text-ink-600/58">{t('contactTitle')}</p>
+            <div className="flex flex-wrap items-center justify-center gap-2 md:justify-end lg:flex-nowrap">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  target={link.name === 'Email' ? undefined : '_blank'}
+                  rel={link.name === 'Email' ? undefined : 'noopener noreferrer'}
+                  className="group relative flex h-11 min-w-11 items-center gap-2 rounded-[6px] border border-ink-700/10 bg-paper-200/42 px-2.5 text-sm text-ink-600 transition-colors duration-200 hover:border-zen-gold/30 hover:bg-paper-200/64 hover:text-zen-gold-dim"
+                  aria-label={link.name}
+                >
+                  {link.icon}
+                  <span>{link.label ?? link.name}</span>
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="mt-10 pt-6 border-t border-ink-800/30 text-center">
-          <p className="text-xs text-paper-500/60 font-mono">
+        <div className="mt-12 border-t border-ink-700/10 pt-6 text-center md:mt-14">
+          <p className="font-mono text-xs text-ink-600/55">
             {t('copyright', { year: currentYear })}
           </p>
         </div>

@@ -9,6 +9,8 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
+!src/lib/
+!src/lib/siteContent.ts
 
 # testing
 /coverage
@@ -31,6 +33,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+screenlog.*
 
 # env files
 .env
@@ -51,6 +54,9 @@ next-env.d.ts
 .vscode/
 *.swp
 *.swo
+
+# local planning / visual exploration artifacts
+.superpowers/
 
 # OS
 .DS_Store

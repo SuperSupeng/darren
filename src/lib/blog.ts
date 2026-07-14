@@ -1,19 +1,47 @@
 import fs from 'fs';
 import path from 'path';
+import { defaultLocale, isLocale, locales, type Locale } from '@/i18n/config';
 
 export interface BlogPost {
   slug: string;
   title: string;
-  titleEn?: string;
   date: string;
   description: string;
-  descriptionEn?: string;
   tags: string[];
   content: string;
   readingTime: number;
+  image: {
+    url: string;
+    width: number;
+    height: number;
+  };
 }
 
 const BLOG_DIR = path.join(process.cwd(), 'content/blog');
+
+const postImages: Record<string, BlogPost['image']> = {
+  'superai-china-ecosystem-visit': {
+    url: '/blog/superai-china/team.jpg',
+    width: 1922,
+    height: 1280,
+  },
+  'managing-31-ai-employees': {
+    url: '/blog/ai-employees/agent-town.png',
+    width: 1922,
+    height: 1080,
+  },
+  'zongtong-temple-retreat': {
+    url: '/blog/zongtong-retreat/temple.jpg',
+    width: 1707,
+    height: 1280,
+  },
+};
+
+const defaultPostImage: BlogPost['image'] = {
+  url: '/og-image.png',
+  width: 1200,
+  height: 630,
+};
 
 // 简单的 frontmatter 解析
 function parseFrontmatter(content: string): { data: Record<string, unknown>; content: string } {
@@ -60,16 +88,29 @@ function calculateReadingTime(content: string): number {
   return Math.max(1, minutes);
 }
 
-export function getAllPosts(): BlogPost[] {
-  if (!fs.existsSync(BLOG_DIR)) {
+function resolveBlogDir(locale: string): string {
+  const safeLocale = isLocale(locale) ? locale : defaultLocale;
+  const localeDir = path.join(BLOG_DIR, safeLocale);
+
+  if (fs.existsSync(localeDir)) {
+    return localeDir;
+  }
+
+  return path.join(BLOG_DIR, defaultLocale);
+}
+
+export function getAllPosts(locale: string = defaultLocale): BlogPost[] {
+  const blogDir = resolveBlogDir(locale);
+
+  if (!fs.existsSync(blogDir)) {
     return [];
   }
 
-  const files = fs.readdirSync(BLOG_DIR).filter(f => f.endsWith('.md') || f.endsWith('.mdx'));
+  const files = fs.readdirSync(blogDir).filter(f => f.endsWith('.md') || f.endsWith('.mdx'));
   
   const posts = files.map(filename => {
     const slug = filename.replace(/\.(md|mdx)$/, '');
-    const filePath = path.join(BLOG_DIR, filename);
+    const filePath = path.join(blogDir, filename);
     const fileContent = fs.readFileSync(filePath, 'utf-8');
     
     const { data, content } = parseFrontmatter(fileContent);
@@ -77,13 +118,12 @@ export function getAllPosts(): BlogPost[] {
     return {
       slug,
       title: (data.title as string) || slug,
-      titleEn: data.titleEn as string | undefined,
       date: (data.date as string) || new Date().toISOString().split('T')[0],
       description: (data.description as string) || '',
-      descriptionEn: data.descriptionEn as string | undefined,
       tags: (data.tags as string[]) || [],
       content,
       readingTime: calculateReadingTime(content),
+      image: postImages[slug] ?? defaultPostImage,
     };
   });
 
@@ -91,7 +131,25 @@ export function getAllPosts(): BlogPost[] {
   return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
-export function getPostBySlug(slug: string): BlogPost | null {
-  const posts = getAllPosts();
+export function getPostBySlug(slug: string, locale: string = defaultLocale): BlogPost | null {
+  const posts = getAllPosts(locale);
   return posts.find(p => p.slug === slug) || null;
+}
+
+export function getAllPostSlugs(): string[] {
+  const slugs = new Set<string>();
+
+  for (const locale of locales) {
+    for (const post of getAllPosts(locale)) {
+      slugs.add(post.slug);
+    }
+  }
+
+  return Array.from(slugs);
+}
+
+export function getLocalizedBlogRoutes(): Array<{ locale: Locale; slug: string }> {
+  return locales.flatMap((locale) =>
+    getAllPosts(locale).map((post) => ({ locale, slug: post.slug }))
+  );
 }

@@ -1,27 +1,15 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
-import { Noto_Serif_SC } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
+import { getLocale } from 'next-intl/server';
 import './globals.css';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
-
-const notoSerifSC = Noto_Serif_SC({
-  variable: '--font-noto-serif',
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-});
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.darren-su.com';
 
 export const metadata: Metadata = {
-  title: 'Darren Su | Builder',
-  description: 'Geek Builder, shipping AI × Hardware products',
+  metadataBase: new URL(siteUrl),
+  title: 'Darren Su | China AI, Robotics & Supply Chain Feedback',
+  description:
+    'Helping global AI, robotics, hardware, and tech teams understand China, meet the right people, and get real feedback.',
   icons: {
     icon: [
       { url: '/favicon.svg', type: 'image/svg+xml' },
@@ -31,18 +19,21 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const locale = await getLocale();
+
   return (
-    <html suppressHydrationWarning>
+    <html lang={locale === 'zh' ? 'zh-CN' : 'en'} suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${notoSerifSC.variable} antialiased bg-ink-900 text-paper-100`}
+        className="bg-paper-200 text-ink-950 antialiased"
         suppressHydrationWarning
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );

@@ -1,256 +1,216 @@
-'use client';
-
-import { useTranslations } from 'next-intl';
 import Image from 'next/image';
+import { getTranslations } from 'next-intl/server';
+import JsonLd from '@/components/JsonLd';
+import { getSiteContent } from '@/lib/siteContent';
+import { createPageMetadata, productLabStructuredData } from '@/lib/seo';
 
-interface ProjectType {
-  id: string;
-  name: string;
-  tagline: string;
-  status: string;
-  tags: string[];
-  links: Array<{ type: string; url: string }>;
-  description: string;
-  url: string;
-  image: string;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'build' });
+
+  return createPageMetadata({
+    locale,
+    path: '/build',
+    title: t('meta.title'),
+    description: t('meta.description'),
+    keywords: ['Product Lab', 'AI product experiments', 'GlobalTechEvents', 'cross-border talent'],
+  });
 }
 
-interface LogEntryType {
-  date: string;
-  content: string;
-}
-
-// 状态标签配色
-const statusColors: Record<string, { bg: string; text: string; border: string }> = {
-  shipped: { bg: 'bg-geek-green/10', text: 'text-geek-green', border: 'border-geek-green/30' },
-  building: { bg: 'bg-geek-cyan/10', text: 'text-geek-cyan', border: 'border-geek-cyan/30' },
-  planning: { bg: 'bg-zen-gold/10', text: 'text-zen-gold', border: 'border-zen-gold/30' },
-};
-
-export default function BuildPage() {
-  const t = useTranslations('build');
-  const projects = t.raw('selected.projects') as ProjectType[];
-  const logEntries = t.raw('log.entries') as LogEntryType[];
+export default async function BuildPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const site = getSiteContent(locale);
+  const titleParts = [site.products.hero.title];
+  const mediaLabels =
+    locale === 'zh'
+      ? { status: '当前状态', tags: '相关方向', action: '入口', inactive: '实验已结束' }
+      : { status: 'Current state', tags: 'Signals', action: 'Open', inactive: 'Experiment ended' };
 
   return (
-    <main className="min-h-screen bg-ink-950">
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
-        {/* Background */}
-        <div className="absolute inset-0 bg-grid opacity-30" />
-        
-        {/* Gradient Orbs */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div 
-            className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full animate-pulse-glow"
-            style={{
-              background: 'radial-gradient(circle, rgba(212, 168, 86, 0.1) 0%, transparent 60%)',
-              filter: 'blur(60px)',
-            }}
-          />
-          <div 
-            className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full animate-float"
-            style={{
-              background: 'radial-gradient(circle, rgba(34, 211, 238, 0.06) 0%, transparent 60%)',
-              filter: 'blur(40px)',
-            }}
-          />
-        </div>
+    <>
+      <JsonLd data={productLabStructuredData(locale)} />
+      <main className="min-h-screen bg-paper-200 text-ink-950">
+      <section className="relative flex min-h-[calc(100svh-4rem)] items-center overflow-hidden px-4 py-20 md:px-6 md:py-24">
+        <div
+          aria-hidden="true"
+          className="absolute inset-y-0 right-0 w-full bg-cover bg-center opacity-[0.58] mix-blend-multiply [mask-image:linear-gradient(180deg,transparent_0%,black_30%,black_100%)] md:w-[70%] md:[mask-image:linear-gradient(90deg,transparent_0%,black_22%,black_100%)]"
+          style={{ backgroundImage: "url('/images/hero-product-bench.webp')" }}
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(241,234,220,0.98)_0%,rgba(241,234,220,0.83)_45%,rgba(251,248,241,0.28)_100%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-px bg-ink-950/10" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_20%,rgba(111,121,103,0.12),rgba(111,121,103,0)_34%)]" />
+        <div className="container relative">
+          <div className="mb-14 flex items-center gap-5">
+            <span className="h-px flex-1 bg-ink-950/10" />
+            <span className="academy-kicker">{site.labels.productLab.roomEyebrow}</span>
+            <span className="h-px flex-1 bg-ink-950/10" />
+          </div>
 
-        {/* Corner Decorations */}
-        <div className="absolute top-8 left-8 w-16 h-16 border-l-2 border-t-2 border-zen-gold/20" />
-        <div className="absolute top-8 right-8 w-16 h-16 border-r-2 border-t-2 border-geek-cyan/20" />
+          <div className="grid gap-14 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
+            <aside>
+              <p className="academy-kicker">{site.labels.productLab.sideEyebrow}</p>
+              <p className="mt-7 max-w-sm border-l border-zen-gold/45 pl-5 font-serif text-2xl leading-relaxed text-ink-800">
+                {site.labels.productLab.sideQuote}
+              </p>
+            </aside>
 
-        <div className="container relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
-            {/* Tag */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-ink-800/50 border border-ink-700/50 mb-6">
-              <span className="w-2 h-2 bg-zen-gold rounded-full animate-pulse" />
-              <span className="text-sm font-mono text-zen-gold">products</span>
+            <div>
+              <p className="academy-kicker">{site.products.hero.eyebrow}</p>
+              <h1 className="heading-chunks mt-5 max-w-5xl font-serif text-[clamp(2.65rem,5.2vw,5.6rem)] leading-[1.08] text-ink-950">
+                {titleParts.map((part) => (
+                  <span key={part}>{part}</span>
+                ))}
+              </h1>
+              <p className="mt-8 max-w-3xl text-lg leading-9 text-ink-600">
+                {site.products.hero.subtitle}
+              </p>
             </div>
-            
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-medium mb-6">
-              {t('hero.title')}
-            </h1>
-            
-            <p className="text-xl text-paper-300/90 leading-relaxed">
-              {t('hero.subtitle')}
-            </p>
           </div>
         </div>
-
-        {/* Bottom Gradient */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-ink-950 to-transparent pointer-events-none" />
       </section>
 
-      {/* Selected Projects */}
-      <section className="py-16 relative">
-        <div className="absolute inset-0 bg-gradient-to-b from-ink-950 via-ink-900 to-ink-950" />
-        
-        <div className="container relative z-10">
-          <div className="max-w-5xl mx-auto">
-            {/* Section Header */}
-            <div className="flex items-center gap-3 mb-10">
-              <span className="text-zen-gold text-xl">◈</span>
-              <h2 className="text-2xl md:text-3xl font-medium">{t('selected.title')}</h2>
+      <section className="relative bg-paper-100 px-4 py-20 md:px-6 md:py-28">
+        <div className="container">
+          <div className="mb-12 grid gap-8 border-b border-ink-950/10 pb-10 lg:grid-cols-[0.34fr_1fr]">
+            <div>
+              <p className="academy-kicker">{site.labels.productLab.selectedEyebrow}</p>
             </div>
+            <p className="max-w-3xl font-serif text-3xl leading-relaxed text-ink-900 md:text-4xl">
+              {site.labels.productLab.selectedStatement}
+            </p>
+          </div>
 
-            {projects && projects.length > 0 ? (
-              <div className="grid md:grid-cols-2 gap-6">
-                {projects.map((project) => {
-                  const status = statusColors[project.status] || statusColors.building;
-                  return (
-                    <a
-                      key={project.id}
-                      href={project.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group relative rounded-2xl overflow-hidden border border-ink-700/50 bg-ink-900/50 hover:border-ink-600/50 hover:-translate-y-1 transition-all duration-300"
-                    >
-                      {/* Project Image */}
-                      <div className="relative aspect-[16/9] overflow-hidden bg-ink-800">
-                        <Image
-                          src={project.image}
-                          alt={project.name}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-ink-950/80 to-transparent" />
-                        
-                        {/* Status Badge */}
-                        <div className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-mono border ${status.bg} ${status.text} ${status.border}`}>
+          <div className="space-y-12">
+          {site.products.items.map((project, index) => {
+            const isInactive = project.status === 'stopped' || project.status === '已停止';
+            const card = (
+              <article className="natural-slip grid overflow-hidden lg:grid-cols-[1fr_1fr] lg:items-start">
+                <div className="bg-paper-300/46 p-3 md:p-4">
+                  <div>
+                    <div className="relative aspect-[16/10] overflow-hidden bg-paper-100/70">
+                      <Image
+                        src={project.image}
+                        alt={project.name}
+                        fill
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                        priority={index === 0}
+                        className="project-image-muted object-contain transition duration-700"
+                      />
+                    </div>
+                    <div className="grid border-x border-b border-ink-950/8 bg-paper-100/42 md:grid-cols-3">
+                      <div className="border-b border-ink-950/8 p-5 md:border-b-0 md:border-r">
+                        <p className="academy-kicker text-ink-700/48">{mediaLabels.status}</p>
+                        <p className="mt-3 text-sm font-medium leading-7 text-ink-900">
                           {project.status}
-                        </div>
-                      </div>
-                      
-                      {/* Project Info */}
-                      <div className="p-6">
-                        <h3 className="text-xl font-medium text-paper-100 group-hover:text-zen-gold transition-colors mb-2">
-                          {project.name}
-                        </h3>
-                        <p className="text-paper-400 text-sm mb-4 line-clamp-2">
-                          {project.description}
                         </p>
-                        
-                        {/* Tags */}
-                        <div className="flex flex-wrap gap-2">
-                          {project.tags.map((tag, i) => (
-                            <span key={i} className="px-2.5 py-1 bg-ink-800/50 border border-ink-700/50 rounded-lg text-xs text-paper-500">
+                      </div>
+                      <div className="border-b border-ink-950/8 p-5 md:border-b-0 md:border-r">
+                        <p className="academy-kicker text-ink-700/48">{mediaLabels.tags}</p>
+                        <div className="mt-3 flex flex-wrap gap-x-3 gap-y-2">
+                          {project.tags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="text-xs uppercase tracking-[0.12em] text-ink-600/58"
+                            >
                               {tag}
                             </span>
                           ))}
                         </div>
                       </div>
-                      
-                      {/* Hover Arrow */}
-                      <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-ink-800/80 border border-ink-700/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <svg className="w-4 h-4 text-paper-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
+                      <div className="p-5">
+                        <p className="academy-kicker text-ink-700/48">{mediaLabels.action}</p>
+                        <div className={isInactive ? 'mt-3 text-sm text-ink-600/62' : 'quiet-link mt-3'}>
+                          {isInactive ? mediaLabels.inactive : site.labels.productLab.visitProject}
+                        </div>
                       </div>
-                    </a>
-                  );
-                })}
-              </div>
-            ) : (
-              <div className="text-center py-20 rounded-2xl bg-ink-900/30 border border-ink-700/50">
-                <div className="text-4xl mb-4">🔧</div>
-                <h3 className="text-xl font-medium mb-2 text-paper-300">{t('selected.empty.title')}</h3>
-                <p className="text-paper-500 mb-4 max-w-md mx-auto">{t('selected.empty.description')}</p>
-                <p className="text-sm text-geek-cyan">{t('selected.empty.cta')}</p>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* Build Log - Terminal Style */}
-      <section className="py-16 relative">
-        <div className="absolute inset-0 bg-ink-900/30" />
-        <div className="absolute inset-0 bg-grid opacity-10" />
-        
-        <div className="container relative z-10">
-          <div className="max-w-3xl mx-auto">
-            {/* Section Header */}
-            <div className="flex items-center gap-3 mb-4">
-              <span className="text-geek-cyan font-mono text-lg">{'$'}</span>
-              <h2 className="text-2xl md:text-3xl font-medium">{t('log.title')}</h2>
-            </div>
-            <p className="text-paper-400 mb-8">{t('log.description')}</p>
-
-            {/* Terminal Window */}
-            <div className="rounded-2xl bg-ink-950 border border-ink-700/50 overflow-hidden shadow-2xl">
-              {/* Terminal Header */}
-              <div className="flex items-center gap-2 px-4 py-3 bg-ink-900/80 border-b border-ink-700/50">
-                <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-red-500/80" />
-                  <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                  <span className="w-3 h-3 rounded-full bg-green-500/80" />
-                </div>
-                <span className="ml-3 text-xs font-mono text-paper-500">~/darren/build-log</span>
-              </div>
-              
-              {/* Terminal Content */}
-              <div className="p-5 font-mono text-sm space-y-4 max-h-[400px] overflow-y-auto">
-                {logEntries.map((entry, index) => (
-                  <div key={index} className="group">
-                    {/* Command Line */}
-                    <div className="flex items-start gap-2">
-                      <span className="text-geek-green select-none">➜</span>
-                      <span className="text-geek-cyan select-none">~</span>
-                      <span className="text-paper-500 select-none">git log --date=</span>
-                      <span className="text-zen-gold">{entry.date}</span>
-                    </div>
-                    {/* Output */}
-                    <div className="mt-1 pl-6 text-paper-300 group-hover:text-paper-100 transition-colors">
-                      <span className="text-paper-500 select-none">│ </span>
-                      {entry.content}
                     </div>
                   </div>
-                ))}
-                
-                {/* Cursor Line */}
-                <div className="flex items-center gap-2">
-                  <span className="text-geek-green">➜</span>
-                  <span className="text-geek-cyan">~</span>
-                  <span className="w-2 h-4 bg-paper-300 animate-pulse" />
                 </div>
+
+                <div className="p-7 md:p-9 lg:p-10">
+                  <p className="academy-kicker text-ink-700/50">
+                    {site.labels.productLab.projectLabel} {String(index + 1).padStart(2, '0')}
+                  </p>
+                  <h2 className="mt-5 font-serif text-4xl leading-tight md:text-5xl">
+                    {project.name}
+                  </h2>
+                  <p className="mt-3 text-base text-zen-gold-dim/78">{project.tagline}</p>
+                  <p className="mt-7 max-w-2xl text-base leading-8 text-ink-600">
+                    {project.description}
+                  </p>
+                  <div className="mt-8 grid gap-5 border-t border-dashed border-ink-950/12 pt-7">
+                    <div>
+                      <p className="academy-kicker text-ink-700/48">{site.labels.productLab.problem}</p>
+                      <p className="mt-3 text-sm leading-8 text-ink-600">{project.problem}</p>
+                    </div>
+                    <div>
+                      <p className="academy-kicker text-ink-700/48">{site.labels.productLab.signal}</p>
+                      <p className="mt-3 text-sm leading-8 text-ink-600">{project.signal}</p>
+                    </div>
+                    <div>
+                      <p className="academy-kicker text-ink-700/48">{site.labels.productLab.nextStep}</p>
+                      <p className="mt-3 text-sm leading-8 text-ink-600">{project.nextStep}</p>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            );
+
+            return isInactive ? (
+              <div key={project.id} className="block cursor-default opacity-[0.78]">
+                {card}
               </div>
-            </div>
+            ) : (
+              <a
+                key={project.id}
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block"
+              >
+                {card}
+              </a>
+            );
+          })}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 relative">
-        <div className="absolute inset-0 bg-gradient-to-t from-ink-900/50 to-transparent" />
-        
-        {/* Glow */}
-        <div 
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full"
-          style={{
-            background: 'radial-gradient(circle, rgba(212, 168, 86, 0.06) 0%, transparent 60%)',
-            filter: 'blur(60px)',
-          }}
-        />
-        
-        <div className="container relative z-10">
-          <div className="max-w-2xl mx-auto text-center">
-            <p className="text-paper-400 mb-6 text-lg">
-              {t('hero.cta')}
-            </p>
-            <a 
-              href="mailto:supeng842499467@gmail.com"
-              className="btn btn-primary inline-flex"
-            >
-              <span>{t('cta') || '联系我'}</span>
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-            </a>
+      <section className="relative overflow-hidden bg-ink-950 px-4 py-20 text-paper-100 md:px-6 md:py-24">
+        <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(111,121,103,0.18),rgba(31,33,26,0)_58%)]" />
+        <div className="container relative">
+          <div className="grid gap-12 lg:grid-cols-[0.34fr_1fr] lg:gap-16">
+            <aside>
+              <p className="academy-kicker text-paper-300/62">{site.labels.productLab.explainerEyebrow}</p>
+              <h2 className="mt-5 font-serif text-4xl leading-tight text-paper-100 md:text-5xl">
+                {site.labels.productLab.explainerTitle}
+              </h2>
+            </aside>
+
+            <div className="grid gap-0 overflow-hidden border-y border-paper-100/10 sm:grid-cols-3">
+            {site.labels.productLab.explainerItems.map((item, index) => (
+              <article
+                key={item.title}
+                className="min-h-[220px] border-b border-paper-100/10 p-7 last:border-b-0 sm:border-b-0 sm:border-r sm:last:border-r-0"
+              >
+                <p className="academy-kicker text-paper-300/52">
+                  {String(index + 1).padStart(2, '0')}
+                </p>
+                <h3 className="mt-5 text-2xl font-medium text-paper-100">{item.title}</h3>
+                <p className="mt-4 text-sm leading-8 text-paper-300/72">
+                  {item.description}
+                </p>
+              </article>
+            ))}
+            </div>
           </div>
         </div>
       </section>
-    </main>
+      </main>
+    </>
   );
 }
