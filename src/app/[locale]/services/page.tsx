@@ -25,7 +25,7 @@ export default async function ServicesPage({
   return (
     <>
       <JsonLd data={servicesStructuredData(locale)} />
-      <ServicesClient />
+      <ServicesClient locale={locale} />
     </>
   );
 }

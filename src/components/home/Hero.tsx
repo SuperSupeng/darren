@@ -1,48 +1,145 @@
+'use client';
+
 import Image from 'next/image';
-import { Link } from '@/i18n/navigation';
-import { getSiteContent } from '@/lib/siteContent';
+import { useRef, type PointerEvent } from 'react';
 
 export default function Hero({ locale }: { locale: string }) {
-  const content = getSiteContent(locale).home.hero;
-  const titleParts = [content.title];
+  const sectionRef = useRef<HTMLElement>(null);
+  const copy =
+    locale === 'zh'
+      ? {
+          eyebrow: '杭州 / HANGZHOU · 2026',
+          title: '过去一年，我做得最多的，是开\u2060发\u2060者活动、产\u2060品 Workshop 和分享。',
+          intro:
+            '这些项目里，我通常是发起人或负责人。从内容策划、嘉宾邀请，到参与者招募和现场执行，我都会直接参与。',
+          role: '活动之外，我也在做 MatchPoint，并在日常工作里实际使用 31\u00a0个\u00a0Agent。',
+          primary: '看看我最近做过的事',
+          contact: '联系我',
+          portrait: '苏鹏在科技活动现场分享',
+          scene: 'AI 与 Agent 分享 · 2026',
+          facts: [
+            ['40 城', 'AI+X 创造节全国联动'],
+            ['近 1,000 人', '四城开发者系列活动'],
+            ['2 位创始人', '来中国做产品 Workshop'],
+            ['31 个 Agent', '一篇文章带来多次分享'],
+          ],
+        }
+      : {
+          eyebrow: 'HANGZHOU, CHINA / 2026',
+          title: 'Over the past year, I spent most of my time organizing developer events, running product workshops, and speaking about AI and agents.',
+          intro:
+            'I usually initiated or led these projects and stayed involved from program design and speaker invitations through participant outreach and on-site delivery.',
+          role: 'Alongside this work, I am building MatchPoint and using 31 agents in my day-to-day work.',
+          primary: 'See my recent work',
+          contact: 'Contact me',
+          portrait: 'Darren speaking at a technology event',
+          scene: 'AI and agent talk · 2026',
+          facts: [
+            ['40 cities', 'The nationwide AI+X Creation Festival'],
+            ['Nearly 1,000', 'A four-city developer series'],
+            ['2 Israeli founders', 'A product workshop with early users in China'],
+            ['31 agents', 'One essay led to several talks'],
+          ],
+        };
+
+  const moveScene = (event: PointerEvent<HTMLElement>) => {
+    if (
+      event.pointerType === 'touch' ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) return;
+
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 2;
+    const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 2;
+    sectionRef.current?.style.setProperty('--hero-look-x', x.toFixed(3));
+    sectionRef.current?.style.setProperty('--hero-look-y', y.toFixed(3));
+  };
+
+  const resetScene = () => {
+    sectionRef.current?.style.setProperty('--hero-look-x', '0');
+    sectionRef.current?.style.setProperty('--hero-look-y', '0');
+  };
 
   return (
-    <section className="relative min-h-[calc(100svh-4rem)] overflow-hidden bg-paper-200">
+    <section
+      id="top"
+      ref={sectionRef}
+      className="directed-hero"
+      onPointerMove={moveScene}
+      onPointerLeave={resetScene}
+    >
       <Image
-        src="/images/hero-longjing-mist.jpg"
-        alt={content.imageAlt}
+        src="/images/hero-longjing-mist.webp"
+        alt=""
         fill
-        priority
+        preload
         sizes="100vw"
-        className="object-cover object-[center_76%]"
+        className="directed-hero-mountain"
       />
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(251,248,241,0.95)_0%,rgba(251,248,241,0.82)_34%,rgba(251,248,241,0.3)_66%,rgba(251,248,241,0.04)_100%)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(251,248,241,0.78)_0%,rgba(251,248,241,0.1)_48%,rgba(31,33,26,0.34)_100%)]" />
+      <div className="directed-hero-veil" />
+      <div className="directed-hero-mist" aria-hidden="true" />
+      <svg className="directed-hero-water" viewBox="0 0 1600 900" aria-hidden="true">
+        <path d="M-120 628C164 432 354 704 620 545S1039 353 1287 490s316 82 458-43" />
+        <path d="M-86 700c302-151 471 92 730-55s389-153 612-16 341 92 494-24" />
+        <path d="M20 768c247-108 418 71 626-28s366-113 566-19 310 81 466 4" />
+      </svg>
 
-      <div className="container relative z-10 flex min-h-[calc(100svh-4rem)] flex-col justify-center py-10 md:py-14 lg:py-16">
-        <div className="max-w-5xl">
-          <p className="academy-kicker text-ink-700/70">{content.eyebrow}</p>
-          <h1 className="heading-chunks mt-6 max-w-5xl font-serif text-[clamp(2.45rem,7.4vw,5.35rem)] font-medium leading-[1.08] text-ink-950 md:leading-[1.06]">
-            {titleParts.map((part) => (
-              <span key={part}>{part}</span>
-            ))}
+      <div className="container directed-hero-grid">
+        <div className="directed-hero-copy">
+          <p className="directed-kicker">{copy.eyebrow}</p>
+          <h1 className="directed-hero-title">
+            <span>Darren Su</span>
+            <em>苏鹏</em>
           </h1>
-          <p className="mt-6 max-w-2xl text-base leading-8 text-ink-700 md:mt-8 md:text-lg md:leading-9">
-            {content.subtitle}
-          </p>
-          <div className="mt-6 flex flex-col items-start gap-4 sm:flex-row sm:items-center md:mt-7">
-            <a href="mailto:supeng842499467@gmail.com" className="btn btn-primary px-6">
-              {content.primaryCta}
+          <p className="directed-hero-thesis">{copy.title}</p>
+          <p className="directed-hero-intro">{copy.intro}</p>
+          <p className="directed-hero-role">{copy.role}</p>
+          <div className="directed-hero-actions">
+            <a href="#work" className="directed-primary-link">
+              <span>{copy.primary}</span>
+              <i aria-hidden="true">↓</i>
             </a>
-            <Link href="/services" className="quiet-link">
-              {content.secondaryCta}
-            </Link>
+            <a href="mailto:supeng842499467@gmail.com" className="directed-text-link">
+              {copy.contact} ↗
+            </a>
           </div>
-          <p className="mt-5 max-w-2xl text-sm font-medium leading-7 text-ink-800 md:text-base md:leading-8">
-            {content.quietLine}
-          </p>
         </div>
+
+        <figure className="directed-hero-portrait">
+          <div className="directed-hero-portrait-window">
+            <Image
+              src="/photo.jpg"
+              alt={copy.portrait}
+              fill
+              sizes="(min-width: 1024px) 39vw, 88vw"
+              className="directed-hero-photo object-cover object-[52%_center]"
+            />
+            <div className="directed-hero-portrait-tone" />
+            <Image
+              src="/images/peng-seal-v1.png"
+              alt=""
+              width={220}
+              height={220}
+              className="directed-hero-seal"
+              aria-hidden="true"
+            />
+          </div>
+          <figcaption>
+            <span>FIELD / 01</span>
+            <strong>{copy.scene}</strong>
+          </figcaption>
+        </figure>
       </div>
+
+      <ul className="container directed-proof-rail" aria-label={locale === 'zh' ? '近一年事实' : 'Facts from the past year'}>
+        {copy.facts.map(([value, label], index) => (
+          <li key={value}>
+            <span>{String(index + 1).padStart(2, '0')}</span>
+            <strong>{value}</strong>
+            <p>{label}</p>
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }

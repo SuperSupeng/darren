@@ -1,12 +1,13 @@
 import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages, getTranslations } from 'next-intl/server';
+import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { isLocale } from '@/i18n/config';
 import Nav from '@/components/Nav';
 import Footer from '@/components/Footer';
-import { createPageMetadata, getPageKeywords } from '@/lib/seo';
+import ScrollCulture from '@/components/home/ScrollCulture';
+import { getLocalizedBlogRoutes } from '@/lib/blog';
 
 type Props = {
   children: React.ReactNode;
@@ -15,20 +16,10 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'meta' });
-
-  const metadata = createPageMetadata({
-    locale,
-    path: '/',
-    title: t('title'),
-    description: t('description'),
-    keywords: getPageKeywords(locale, 'home'),
-  });
 
   return {
-    ...metadata,
     title: {
-      default: t('title'),
+      default: locale === 'zh' ? 'Darren Su / 苏鹏' : 'Darren Su',
       template: `%s | Darren Su`,
     },
   };
@@ -52,11 +43,22 @@ export default async function LocaleLayout({ children, params }: Props) {
     footer: allMessages.footer,
     language: allMessages.language,
   };
+  const blogLocalesBySlug = getLocalizedBlogRoutes().reduce<Record<string, string[]>>(
+    (result, route) => {
+      result[route.slug] = [...(result[route.slug] ?? []), route.locale];
+      return result;
+    },
+    {},
+  );
 
   return (
     <NextIntlClientProvider messages={messages}>
-      <Nav />
-      <main className="pt-16">{children}</main>
+      <a href="#main-content" className="skip-link">
+        {locale === 'zh' ? '跳到主要内容' : 'Skip to main content'}
+      </a>
+      <Nav blogLocalesBySlug={blogLocalesBySlug} />
+      <ScrollCulture />
+      <div className="pt-16">{children}</div>
       <Footer />
     </NextIntlClientProvider>
   );

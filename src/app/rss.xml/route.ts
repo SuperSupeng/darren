@@ -44,7 +44,6 @@ export function GET() {
     '<title>Darren Su — Field Notes / 手记</title>',
     `<link>${siteUrl}</link>`,
     '<description>Field notes on China AI ecosystems, products, communities, global technology connections, and long-term practice.</description>',
-    '<language>en</language>',
     items,
     '</channel>',
     '</rss>',

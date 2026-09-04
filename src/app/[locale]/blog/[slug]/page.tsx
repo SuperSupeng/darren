@@ -15,25 +15,24 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const post = getPostBySlug(slug, locale);
 
   if (!post) {
-    return { title: 'Not Found' };
+    return {
+      title: locale === 'zh' ? '页面未找到' : 'Page not found',
+      description: locale === 'zh' ? '这个页面不存在，或者暂时没有对应语言的版本。' : 'This page does not exist, or is not yet available in this language.',
+      alternates: { canonical: `/${locale}/blog/${slug}` },
+      robots: { index: false, follow: false },
+    };
   }
 
   const availableLocales = locales.filter((item) => getPostBySlug(slug, item));
-  const metadataTitle =
-    locale === 'en' && slug === 'superai-china-ecosystem-visit'
-      ? "Connecting SuperAI With China's AI Ecosystem"
-      : post.title;
   const metadataDescription =
-    locale === 'en' && slug === 'superai-china-ecosystem-visit'
-      ? 'A field note from accompanying SuperAI across Hangzhou and Shanghai, and what global technology teams should know about building lasting ties with China.'
-      : post.description.length > 160
-        ? `${post.description.slice(0, 157).trimEnd()}…`
-        : post.description;
+    post.description.length > 160
+      ? `${post.description.slice(0, 157).trimEnd()}…`
+      : post.description;
 
   return createPageMetadata({
     locale,
     path: `/blog/${slug}`,
-    title: metadataTitle,
+    title: post.title,
     description: metadataDescription,
     keywords: [...post.tags, 'Darren Su', 'field notes'],
     image: post.image.url,
@@ -72,6 +71,9 @@ function renderInlineMarkdown(value: string): string {
     )
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, label: string, href: string) =>
       store(`<a href="${escapeAttribute(href)}" class="text-zen-gold-dim underline underline-offset-4 hover:text-ink-950" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`)
+    )
+    .replace(/(^|[\s(])((?:https?:\/\/)[^\s<)]+)/g, (_, prefix: string, href: string) =>
+      `${prefix}${store(`<a href="${escapeAttribute(href)}" class="break-words text-zen-gold-dim underline underline-offset-4 hover:text-ink-950" target="_blank" rel="noopener noreferrer">${escapeHtml(href)}</a>`)}`
     );
 
   html = escapeHtml(html)
@@ -81,6 +83,24 @@ function renderInlineMarkdown(value: string): string {
 
   return html.replace(/@@MDTOKEN(\d+)@@/g, (_, index: string) => tokens[Number(index)] ?? '');
 }
+
+const inlineImageDimensions: Record<string, { width: number; height: number }> = {
+  '/blog/ai-employees/agent-roles.png': { width: 1480, height: 2866 },
+  '/blog/ai-employees/agent-town.png': { width: 1922, height: 1080 },
+  '/blog/ai-employees/digital-organization.png': { width: 878, height: 834 },
+  '/blog/ai-employees/global-tech-events.jpg': { width: 2880, height: 1558 },
+  '/blog/ai-employees/management-history.png': { width: 866, height: 738 },
+  '/blog/ai-employees/openclaw.png': { width: 1016, height: 1062 },
+  '/blog/superai-china/route.png': { width: 225, height: 225 },
+  '/blog/superai-china/team.jpg': { width: 1922, height: 1280 },
+  '/blog/zongtong-retreat/ani-teacher.jpg': { width: 1280, height: 1920 },
+  '/blog/zongtong-retreat/dog-garden.jpg': { width: 1080, height: 1439 },
+  '/blog/zongtong-retreat/farewell.jpg': { width: 960, height: 1508 },
+  '/blog/zongtong-retreat/meditation.jpg': { width: 1024, height: 1536 },
+  '/blog/zongtong-retreat/pigeon.jpg': { width: 960, height: 2079 },
+  '/blog/zongtong-retreat/relic.jpg': { width: 960, height: 1696 },
+  '/blog/zongtong-retreat/temple.jpg': { width: 1707, height: 1280 },
+};
 
 // Lightweight block renderer for the local field-notes markdown files.
 function renderMarkdown(content: string, title: string, locale: string): string {
@@ -93,7 +113,8 @@ function renderMarkdown(content: string, title: string, locale: string): string 
 
   const flushParagraph = () => {
     if (paragraph.length === 0) return;
-    output.push(`<p class="mb-6 leading-9">${paragraph.map(renderInlineMarkdown).join('<br />')}</p>`);
+    const separator = locale === 'zh' ? '' : ' ';
+    output.push(`<p class="mb-6 leading-9">${paragraph.map(renderInlineMarkdown).join(separator)}</p>`);
     paragraph = [];
   };
 
@@ -128,11 +149,19 @@ function renderMarkdown(content: string, title: string, locale: string): string 
         codeLines.push(lines[index]);
         index += 1;
       }
-      output.push(`<pre class="my-8 overflow-x-auto rounded-[8px] border border-ink-950/10 bg-paper-100 p-5 font-mono text-sm leading-7 text-ink-800"><code>${escapeHtml(codeLines.join('\n'))}</code></pre>`);
+      output.push(`<pre tabindex="0" class="my-8 overflow-x-auto rounded-[8px] border border-ink-950/10 bg-paper-100 p-5 font-mono text-sm leading-7 text-ink-800"><code>${escapeHtml(codeLines.join('\n'))}</code></pre>`);
       continue;
     }
 
-    const heading = trimmed.match(/^(#{1,3})\s+(.+)$/);
+    const horizontalRule = trimmed.match(/^([-*_])(?:\s*\1){2,}$/);
+    if (horizontalRule) {
+      flushParagraph();
+      flushList();
+      output.push('<hr class="my-10 border-0 border-t border-ink-950/12" />');
+      continue;
+    }
+
+    const heading = trimmed.match(/^(#{1,6})\s+(.+)$/);
     if (heading) {
       flushParagraph();
       flushList();
@@ -142,8 +171,10 @@ function renderMarkdown(content: string, title: string, locale: string): string 
         output.push(`<h1 class="mt-14 mb-6 font-serif text-4xl leading-tight text-ink-950">${text}</h1>`);
       } else if (level === 2) {
         output.push(`<h2 class="mt-12 mb-5 font-serif text-3xl leading-tight text-ink-950">${text}</h2>`);
-      } else {
+      } else if (level === 3) {
         output.push(`<h3 class="mt-10 mb-4 text-xl font-medium text-ink-950">${text}</h3>`);
+      } else {
+        output.push(`<h${level} class="mt-8 mb-3 text-lg font-medium leading-relaxed text-ink-950">${text}</h${level}>`);
       }
       continue;
     }
@@ -157,15 +188,33 @@ function renderMarkdown(content: string, title: string, locale: string): string 
         ? `${title}，配图 ${imageIndex}`
         : `${title}, image ${imageIndex}`;
       const imageAlt = image[1].trim() || fallbackAlt;
-      output.push(`<img src="${escapeAttribute(image[2])}" alt="${escapeAttribute(imageAlt)}" loading="lazy" decoding="async" class="my-8 h-auto max-w-full rounded-[8px]" />`);
+      const dimensions = inlineImageDimensions[image[2]];
+      const sizeAttributes = dimensions
+        ? ` width="${dimensions.width}" height="${dimensions.height}"`
+        : '';
+      output.push(`<img src="${escapeAttribute(image[2])}" alt="${escapeAttribute(imageAlt)}"${sizeAttributes} loading="lazy" decoding="async" class="my-8 h-auto max-w-full rounded-[8px]" />`);
       continue;
     }
 
-    const quote = trimmed.match(/^>\s+(.+)$/);
+    const quote = trimmed.match(/^>\s?(.*)$/);
     if (quote) {
       flushParagraph();
       flushList();
-      output.push(`<blockquote class="my-6 border-l border-zen-gold/45 pl-5 font-serif text-xl leading-relaxed text-ink-700">${renderInlineMarkdown(quote[1])}</blockquote>`);
+      const quoteLines: string[] = [];
+      while (index < lines.length) {
+        const quoteMatch = lines[index].trim().match(/^>\s?(.*)$/);
+        if (!quoteMatch) break;
+        quoteLines.push(quoteMatch[1]);
+        index += 1;
+      }
+      index -= 1;
+      const quoteParagraphs = quoteLines
+        .join('\n')
+        .split(/\n\s*\n/)
+        .filter(Boolean)
+        .map((value) => `<p>${renderInlineMarkdown(value.replace(/\n/g, locale === 'zh' ? '' : ' '))}</p>`)
+        .join('');
+      output.push(`<blockquote class="my-6 space-y-4 border-l border-zen-gold/45 pl-5 font-serif text-xl leading-relaxed text-ink-700">${quoteParagraphs}</blockquote>`);
       continue;
     }
 
@@ -208,24 +257,24 @@ export default async function BlogPostPage({ params }: { params: Promise<{ local
   return (
     <>
       <JsonLd data={articleStructuredData(post, locale)} />
-      <main className="min-h-screen bg-paper-200 px-4 py-20 text-ink-950 md:px-6 md:py-28">
+      <main id="main-content" tabIndex={-1} className="article-page min-h-screen bg-paper-200 px-4 py-20 text-ink-950 md:px-6 md:py-28">
         <article className="container">
         <div className="mx-auto max-w-4xl">
           <Link
             href="/blog"
-            className="quiet-link mb-10"
+            className="article-back-link quiet-link mb-10"
           >
             <span>{t('backToList')}</span>
           </Link>
 
-          <div className="paper-open px-6 py-8 md:px-10 md:py-12">
+          <div className="article-sheet paper-open px-6 py-8 md:px-10 md:py-12">
             <header className="border-b border-ink-950/12 pb-12">
               {post.tags.length > 0 && (
                 <div className="mb-5 flex flex-wrap gap-x-4 gap-y-2">
                   {post.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="text-xs uppercase tracking-[0.12em] text-ink-600/58"
+                      className="text-xs uppercase tracking-[0.12em] text-ink-700/90"
                     >
                       {tag}
                     </span>
@@ -233,11 +282,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ local
                 </div>
               )}
 
-              <h1 className="font-serif text-5xl font-medium leading-tight md:text-6xl">
+              <h1 className="font-serif text-[clamp(2.3rem,10.5vw,3rem)] font-medium leading-tight md:text-6xl">
                 {post.title}
               </h1>
 
-              <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-zen-gold-dim/75">
+              <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-zen-gold-dim/90">
                 <time dateTime={post.date}>{post.date}</time>
                 <span>·</span>
                 <span>{post.readingTime} {t('minRead')}</span>
@@ -252,7 +301,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ local
             </header>
 
             <div
-              className="mt-12 text-lg leading-9 text-ink-800"
+              className="mt-12 text-base leading-8 text-ink-800 md:text-lg md:leading-9"
               dangerouslySetInnerHTML={{ __html: renderedContent }}
             />
 
@@ -266,7 +315,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ local
                 </Link>
 
                 <div className="flex items-center gap-3">
-                  <span className="text-sm text-zen-gold-dim/75">{t('share')}</span>
+                  <span className="text-sm text-zen-gold-dim/90">{t('share')}</span>
                   <a
                     href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(shareUrl)}`}
                     target="_blank"

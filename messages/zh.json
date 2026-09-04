@@ -1,27 +1,30 @@
 {
   "meta": {
-    "title": "Darren Su | 中国团队出海验证与海外反馈试点",
-    "description": "帮助中国 AI、科技、机器人和开发者工具团队判断优先区域、找到种子用户，通过低成本海外反馈试点看清下一步。"
+    "title": "Darren Su / 苏鹏 | AI 产品、开发者社区与科技活动",
+    "description": "Darren Su 发起和负责 AI 开发者活动，帮助早期产品接触用户，也分享 AI 使用与 Agent 构建经验。"
   },
   "nav": {
     "home": "首页",
-    "services": "服务",
+    "services": "合作",
     "work": "案例",
-    "build": "产品实验室",
+    "build": "产品",
     "about": "关于",
-    "blog": "手记",
-    "contact": "联系我"
+    "blog": "文章",
+    "contact": "联系我",
+    "openMenu": "打开菜单",
+    "closeMenu": "关闭菜单",
+    "primary": "主要导航"
   },
   "servicesPage": {
     "meta": {
-      "title": "中国团队出海第一步判断、海外用户与渠道梳理、低成本海外反馈试点",
-      "description": "面向想把产品、开源项目、机器人硬件能力或活动拿到海外测试，并形成下一步出海判断的中国团队。"
+      "title": "合作 | AI 开发者活动、产品 Workshop 与 Agent 分享",
+      "description": "围绕 AI 产品与开发者生态，发起并负责开发者活动、产品 Workshop、生态项目与 AI Agent 分享。"
     }
   },
   "footer": {
     "name": "Darren Su / 苏鹏",
     "location": "杭州 / 全球",
-    "bio": "帮助中国科技团队判断优先区域、找到种子用户，并用低成本海外反馈试点看清下一步。",
+    "bio": "组织开发者活动，帮助早期 AI 产品接触用户，也在做自己的产品。",
     "contactTitle": "找到我",
     "copyright": "© {year} Darren Su. 保留所有权利。"
   },
@@ -31,12 +34,13 @@
     "select": "选择语言",
     "search": "搜索语言...",
     "empty": "没有找到语言",
-    "hint": "目前开放中文和英文版本"
+    "hint": "目前开放中文和英文版本",
+    "onlyAvailable": "这篇文章目前只有中文版本"
   },
   "blog": {
     "meta": {
-      "title": "手记",
-      "description": "Darren Su 的手记：记录中国团队出海、海外科技生态、产品实验、现场访问和海外反馈试点。"
+      "title": "文章",
+      "description": "Darren Su 写下的项目复盘，以及关于 AI、Agent、开发者社区、产品和日常实践的记录。"
     },
     "backToList": "返回列表",
     "minRead": "分钟",
@@ -44,14 +48,14 @@
   },
   "build": {
     "meta": {
-      "title": "产品实验室",
-      "description": "Darren Su 的产品实验室：用软件、活动和社区型产品实验，校准对渠道、分发和市场反馈的判断。"
+      "title": "产品",
+      "description": "Darren Su / 苏鹏正在创造的产品与实验：MatchPoint、GlobalTechEvents、Datawhale AI+X Events 与多 Agent 数字组织。"
     }
   },
   "about": {
     "meta": {
       "title": "关于我",
-      "description": "Darren Su / 苏鹏：工程师背景，长期做 AI 社区、产品实验和跨境科技连接，帮助中国团队找到海外种子用户并拿到真实反馈。"
+      "description": "Darren Su / 苏鹏：从工程工作进入 Datawhale，后来开始负责开发者项目、做产品，也长期使用多 Agent 工作系统。"
     }
   }
 }

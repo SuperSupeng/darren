@@ -5,16 +5,16 @@ export const chineseContent: LocalizedContent = {
   ...englishContent,
   home: {
     hero: {
-      eyebrow: "让中国产品被真正看见。",
-      title: "帮中国团队找到第一批愿意理解、试用并反馈的海外用户。",
+      eyebrow: "HANGZHOU · CHINA / 2019—NOW",
+      title: "这一年，我见了很多开发者，也花了很多时间帮助 AI 产品接触用户。",
       subtitle:
-        "不需要先做完整全球化计划。先用一个足够小的场景，看清哪些海外用户真的在意，再决定下一步。",
-      primaryCta: "聊聊出海第一步",
-      secondaryCta: "看合作方式",
+        "这一年里，我发起和负责了几场开发者活动，也曾邀请两位以色列创始人带着产品来中国，和早期用户面对面交流。那篇关于 31 个 Agent 的文章发出以后，又有不少人邀请我去分享 AI 使用和 Agent 构建。",
+      primaryCta: "查看代表项目",
+      secondaryCta: "了解合作方式",
       quietLine:
-        "带着一个产品、一次尝试，先拿到真实反馈，再形成下一步判断。",
-      imageAlt: "雾中的中国茶山",
-      note: "适合已经有真实产品或想法想出海、但还不确定第一步怎么开始的团队。",
+        "Datawhale 城市生态负责人 · AGI Villa、MatchPoint 联合创始人 · GlobalTechEvents 创造者",
+      imageAlt: "Darren Su 在科技活动现场交流",
+      note: "常驻杭州，在中国与全球科技现场持续工作。",
     },
     problems: {
       eyebrow: "你可能正在问",
@@ -55,7 +55,7 @@ export const chineseContent: LocalizedContent = {
     },
     method: {
       eyebrow: "工作方式",
-      title: "先把问题变具体，再设计闭环的反馈链路。",
+      title: "先把问题说清楚，再决定怎么验证它。",
       description:
         "我会先判断现在最需要验证的假设，而不是直接建议铺渠道、办活动或做本地化。",
       steps: [
@@ -85,13 +85,13 @@ export const chineseContent: LocalizedContent = {
       eyebrow: "为什么是我",
       title: "信任来自长期在产品、社区和活动现场做判断。",
       subtitle:
-        "我是 Datawhale 城市负责人，长期接触 AI 学习者、开发者，经常组织在地活动；也是 AGI Villa 联合创始人，持续和全球 AI 创造者、早期产品团队、创业者讨论产品和组织活动。",
+        "我是 Datawhale 城市生态负责人，长期接触 AI 学习者、开发者，经常组织在地活动；也是 AGI Villa 联合创始人，持续和全球 AI 创造者、早期产品团队、创业者讨论产品和组织活动。",
       closingLine:
         "通过这些经历，我可以快速判断谁适合先接触、什么邀请会被认真对待、哪些路径现在不该做。",
     },
     fieldNotes: {
       eyebrow: "手记",
-      title: "记录真实世界的真实感受。",
+      title: "把做过的事情和当时的想法写下来。",
       subtitle:
         "我会写项目经验与复盘、全球化观察、产品实践经验，以及中国团队出海时真正遇到的问题。",
       sectionEyebrow: "观察与记录",
@@ -99,25 +99,25 @@ export const chineseContent: LocalizedContent = {
         "欢迎联系我，找到真正有价值的问题。",
     },
     productLab: {
-      eyebrow: "产品实验室",
-      title: "我自己也在做产品，会真实倾听用户反馈，而不是只停留在策略。",
+      eyebrow: "产品",
+      title: "持续创造产品，也是我理解现实的一种方式。",
       subtitle:
-        "产品会暴露用户、分发和市场时机的问题。自己做过，才更知道出海在执行里会卡在哪里。",
+        "产品与数字组织让我始终贴近真实用户、分发和日常运行，而不是只停留在活动与观点里。",
     },
     about: {
       eyebrow: "关于 Darren",
-      title: "Darren Su / 苏鹏：链接产品、社区和全球化。",
+      title: "Darren Su / 苏鹏：在产品、社区与全球科技生态之间工作。",
       description:
-        "我是 Datawhale 城市负责人、AGI Villa 联合创始人，也持续自己做产品。这个网站是一个合作入口：如果你想把产品拿到海外认真测试，我帮你把第一步设计清楚。",
-      closingLine: "不用完整方案，带着问题来聊。",
-      cta: "了解我为什么能帮你验证问题",
+        "我是 Datawhale 城市生态负责人、AGI Villa 与 MatchPoint 联合创始人，也是 GlobalTechEvents 创造者和多 Agent 数字组织实践者。",
+      closingLine: "理解当时的问题，找到合适的人，把事情认真做完。",
+      cta: "更完整地了解我",
     },
   },
   labels: {
     ...englishContent.labels,
     explore: "了解",
-    viewCollaborationPaths: "查看服务路径",
-    viewProductLab: "查看产品实验室",
+    viewCollaborationPaths: "查看合作方式",
+    viewProductLab: "查看产品",
     viewWork: "查看案例",
     draftCase: "案例结构",
     services: {
@@ -145,49 +145,49 @@ export const chineseContent: LocalizedContent = {
     },
     productLab: {
       ...englishContent.labels.productLab,
-      roomEyebrow: "工作台",
-      sideEyebrow: "判断要被验证",
-      sideQuote: "我自己做产品，是为了验证真实的渠道、分发和市场反馈。",
-      selectedEyebrow: "正在试的产品",
+      roomEyebrow: "产品与系统",
+      sideEyebrow: "为什么做产品",
+      sideQuote: "只在讨论里，一个想法常常显得很合理。做成产品交给用户以后，问题才会具体起来。",
+      selectedEyebrow: "目前的产品",
       selectedStatement:
-        "把自己的产品当作方法，去验证真实的渠道、分发和市场反馈。",
+        "这三个产品的起点都很具体：有的是几位创始人反复提到的招聘问题，有的是我自己查找科技活动、组织城市项目时遇到的麻烦。",
       projectLabel: "项目",
       visitProject: "访问项目",
-      explainerEyebrow: "产品实验室在做什么",
-      explainerTitle: "自己在做产品，才知道如何把目标落到动作里。",
+      explainerEyebrow: "为什么还在做",
+      explainerTitle: "产品上线以后，判断才刚刚开始。",
       problem: "问题",
       signal: "反馈",
       nextStep: "下一步",
       explainerItems: [
         {
-          title: "把想法做成可被看见的版本",
+          title: "先让用户看到它",
           description:
-            "很多判断停留在概念里都成立。做成页面、工具或活动，才知道用户能不能理解、愿不愿意行动。",
+            "当一个想法变成页面、工具或具体流程，用户能不能理解、愿不愿意使用，很快就会变得具体。",
         },
         {
-          title: "用分发和反馈校准方向",
+          title: "再看实际怎么用",
           description:
-            "产品不只看功能，还要看用户从哪里来、为什么留下、什么反馈会改变下一步。",
+            "上线以后，我会继续看用户从哪里来、在哪一步离开，哪些反馈说明原来的设想需要调整。",
         },
         {
-          title: "把继续或暂停都变成判断",
+          title: "也允许它停下来",
           description:
-            "一个实验如果说明了需求不够强、场景太宽或时机不对，也能减少后续错误投入。",
+            "有些实验不会变成长期产品。它们仍然会留下答案：需求是否真的存在，问题是不是太宽，或者现在还不是合适的时间。",
         },
       ],
     },
     fieldNotes: {
       ...englishContent.labels.fieldNotes,
-      roomEyebrow: "书房",
-      sidebarEyebrow: "书架",
-      sidebarQuote: "记录真实世界的真实反馈。",
+      roomEyebrow: "文章",
+      sidebarEyebrow: "写在前面",
+      sidebarQuote: "这些文章大多从一次活动、一个产品问题，或者一段亲身经历开始。",
       themesEyebrow: "主线",
       themesTitle: "我主要记录四类内容。",
       themesDescription:
-        "出海、海外科技生态、产品实验和禅修实录。每一类都希望让思考与判断更具体、更可执行。",
+        "AI 与 Agent、开发者生态、产品创造和长期实践。每一类都尽量来自真实做过的事情。",
       latestEyebrow: "最新",
-      recentTitle: "最近手记",
-      recentDescription: "记录真实的观察与复盘。",
+      recentTitle: "最近写下的内容",
+      recentDescription: "目前整理的内容从多 Agent 工作系统，到跨境科技访问和禅修经历。",
       empty: "手记正在整理中。",
       minRead: "分钟阅读",
     },
@@ -195,18 +195,18 @@ export const chineseContent: LocalizedContent = {
       ...englishContent.labels.about,
       roomEyebrow: "关于我",
       eyebrow: "关于",
-      kernelEyebrow: "判断力来源",
-      kernelTitle: "我的判断力从哪里来。",
-      kernelDescription: "关于技术、社区、产品、长期实践和全球化。",
+      kernelEyebrow: "几段经历",
+      kernelTitle: "回头看，这几段经历对我影响比较大。",
+      kernelDescription: "它们并不完全在计划之中，但每一段都改变了我后来关注的问题。",
       pullQuote:
-        "有价值的连接，不是一份名单，而是知道谁应该见面、为什么现在见、什么反馈会改变下一步。",
-      workEyebrow: "这能支持什么",
-      workTitle: "把经历转变为全球化路径。",
+        "这些年做社区，我越来越觉得，生态并不是一份联系人名单。它更接近一群人慢慢形成的理解、信任，以及愿意一起做事的关系。",
+      workEyebrow: "现在在做什么",
+      workTitle: "现在，我的时间主要花在这些事情上。",
       workItems: [
-        "把一个 AI 产品、机器人、硬件的出海问题，收敛成一次有用的海外测试。",
-        "找到真正相关的海外开发者、创造者、社区、伙伴或早期用户。",
-        "把线下交流、工作坊、伙伴交流设计成能产生判断的场景。",
-        "把现场反馈整理成下一步：深入、本地化、合作或扩大。",
+        "发起并负责 AI 开发者项目、多城市联动与大会生态合作。",
+        "帮助海外 AI 产品在中国接触开发者，组织体验并收集早期反馈。",
+        "分享自己使用 AI、构建 Agent 和运行多 Agent 工作系统的经验。",
+        "继续做 MatchPoint、GlobalTechEvents 和 AI+X Events。",
       ],
     },
     work: {
@@ -214,7 +214,7 @@ export const chineseContent: LocalizedContent = {
       typeEyebrow: "案例类型",
       typeTitle: "这里应该证明什么。",
       typeDescription:
-        "我过往如何把问题、用户、场景和反馈组织成可继续执行的策略。",
+        "这里会说明当时的问题、参与者、我做的工作，以及最后留下了什么。",
       detailsEyebrow: "案例",
       context: "背景",
       goal: "目标",
@@ -489,9 +489,9 @@ export const chineseContent: LocalizedContent = {
   fieldNotes: {
     hero: {
       eyebrow: "手记",
-      title: "关于出海、产品、社区和思考的记录。",
+      title: "我会在一件事做完以后，把当时发生的事和自己的理解写下来。",
       subtitle:
-        "我写全球科技生态、我看到的世界、禅修与实证记录，也写这些事情背后更长期的思考与判断。",
+        "这里有项目结束后的复盘，也有我做产品、使用 Agent、参加科技活动和禅修时留下的记录。它们不一定完整，有些理解也还会继续变化。",
     },
     categories: [
       {
@@ -522,50 +522,79 @@ export const chineseContent: LocalizedContent = {
   },
   products: {
     hero: {
-      eyebrow: "产品实验室",
-      title: "我用自己的产品实验，校准对渠道、分发和市场反馈的判断。",
+      eyebrow: "产品",
+      title: "MatchPoint、GlobalTechEvents 和 AI+X Events，都来自我在工作里反复遇到的问题。",
       subtitle:
-        "软件、活动、人才和社区型产品，都会暴露真实用户、分发和时机问题。这些反馈会反过来让我的出海策略判断更贴地。",
+        "MatchPoint 处理人才匹配，GlobalTechEvents 整理全球科技活动，AI+X Events 服务 Datawhale 的城市活动。我也长期运行一套多 Agent 工作系统。",
+    },
+    digitalOrganization: {
+      eyebrow: "AI 原生工作系统",
+      title: "我也把 31 个 Agent 放进了自己的日常工作。",
+      description:
+        "这套系统目前有 31 个专业 Agent 和 44 个自动任务，处理研究、产品、内容、运营和个人知识管理。我每天都在使用它，也会根据真实工作中出现的问题继续调整。",
+      primaryMetric: "31 个专业 Agent",
+      secondaryMetric: "44 个自动任务",
+      image: "/blog/ai-employees/digital-organization.png",
+      imageAlt: "Darren 的多 Agent 数字组织结构图",
+      href: "/blog/managing-31-ai-employees",
+      linkLabel: "阅读完整实践",
     },
     items: [
       {
-        ...englishContent.products.items[0],
-        tagline: "全球科技活动情报",
+        id: "matchpoint",
+        name: "MatchPoint",
+        tagline: "职业探索与岗位匹配",
         description:
-          "整理全球科技活动、社区和机会，帮助判断哪些区域和场景值得靠近。",
+          "求职者可以先和 AI 讨论自己的方向，再进一步了解具体岗位。平台也会记录候选人在实际任务中的思考和行动，补充简历很难呈现的部分。",
+        image: "/projects/matchpoint.png",
+        url: "https://matchpoint.careers",
         status: "运行中",
         problem:
-          "全球科技活动散落在不同平台、城市和社区里，让海外区域、渠道和用户判断变得低效。",
+          "简历很难说明一个人遇到陌生问题时会怎么想、怎么做；候选人也很难只凭职位描述理解这份工作的日常。",
         signal:
-          "它可以作为市场情报层，帮助我理解会议、社区、创作者和机会聚集在哪里。",
+          "公开网站、候选人和企业两端的流程、运营工作台及远程 MCP 都已经上线。产品也已经用于实际招聘，目前还在根据双方的使用情况继续调整。",
         nextStep:
-          "继续提升活动覆盖，并把它作为海外区域、渠道和现场研究的基础设施。",
-        tags: ["全球生态", "活动", "市场情报"],
+          "继续用于实际招聘，根据候选人和团队的反馈调整职业探索、岗位理解和申请流程。",
+        tags: ["AI Native", "职业", "Agent"],
       },
       {
         ...englishContent.products.items[1],
-        tagline: "AI+X 社区活动日历",
+        tagline: "全球科技活动索引",
         description:
-          "发现、提交和订阅 Meetup、Workshop、Hackathon，以及高校、城市和产业共创活动。",
+          "把分散在不同城市和平台上的科技活动整理到一起，方便我和其他用户了解接下来有哪些会议与社区活动。",
         status: "运行中",
         problem:
-          "真实、有价值的 AI 活动分散在不同社区和平台，学习者与开发者很难持续找到可以参与、实践和共建的机会。",
+          "这些信息散落在不同网站、城市和社区里。每次做海外研究或安排出行，都要重新寻找和核对。",
         signal:
-          "一个由社区共同维护的活动日历，可以让本地 AI 实践更容易被发现，也帮助组织者连接相关参与者和生态伙伴。",
+          "我会在做海外研究和行程规划时实际使用它，也能从中看到不同地区最近在讨论什么。",
         nextStep:
-          "继续扩大活动覆盖，让发现活动、参与实践、贡献内容和发起本地活动形成更清晰的路径。",
-        tags: ["Datawhale", "AI+X", "社区活动"],
+          "继续补充活动信息，也继续用它支持自己的海外研究和行程规划。",
+        tags: ["全球生态", "活动", "市场情报"],
       },
       {
         ...englishContent.products.items[2],
-        tagline: "跨境人才通道",
+        tagline: "AI+X 社区活动日历",
         description:
-          "连接企业和亚洲及更广区域的国际学生与年轻创造者，测试跨境人才合作的早期路径。",
+          "集中收录 Meetup、Workshop、Hackathon，以及高校、城市和产业相关的 AI 活动，用户也可以自己提交和订阅。",
+        status: "运行中",
+        problem:
+          "AI 活动信息散落在不同社区和平台，学习者很难持续找到本地可以参加的活动，组织者也缺少一个稳定的发布入口。",
+        signal:
+          "活动日历由社区一起维护。对参与者来说更容易找到本地活动，对组织者来说也多了一个稳定的发布入口。",
+        nextStep:
+          "继续扩大活动覆盖，也让提交、订阅和发起本地活动的流程更简单。",
+        tags: ["Datawhale", "AI+X", "社区活动"],
+      },
+      {
+        ...englishContent.products.items[3],
+        tagline: "一次已经结束的跨境人才实验",
+        description:
+          "这个项目曾尝试把企业与国际学生、年轻创作者连接起来，为双方找到第一份具体的项目或实习合作。",
         status: "已停止",
         problem:
-          "企业和年轻国际人才往往愿意合作，但第一份可信项目或实习路径不清楚。",
+          "双方都有合作意愿，但缺少一个足够具体、也能建立信任的开始。",
         signal:
-          "最强场景可能在具体项目、实习和亚洲市场之间的早期人才管道。",
+          "这次实验让我感觉，具体项目和实习可能比一个宽泛的人才社区更容易成为合作的起点。",
         nextStep:
           "实验已经结束；关于具体项目、信任建立和早期人才匹配的经验，会保留到后续实践中。",
         tags: ["人才", "亚洲", "社区"],
@@ -576,76 +605,75 @@ export const chineseContent: LocalizedContent = {
     hero: {
       title: "Darren Su / 苏鹏",
       subtitle:
-        "我常驻杭州。最早从工程师开始，在开源和 AI 学习社区里做了多年，现在的工作横跨 AGI Villa、Datawhale、产品创造、活动、公益项目和全球科技连接。共同主线很简单：理解全球生态，找到早期用户，让产品和想法见到真实反馈。",
-      tags: ["链接全球科技生态", "工程师到社区建设者", "AGI Villa 联合创始人", "Datawhale 城市负责人"],
+        "我常驻杭州。最早做工程，2019 年因为学习 AI 进入 Datawhale，后来开始组织开发者活动和城市项目。现在我也在做自己的产品，并用一套多 Agent 系统处理日常工作。",
+      tags: ["AI 生态项目负责人", "AGI Villa 与 MatchPoint 联合创始人", "Datawhale 城市生态负责人", "GlobalTechEvents 创造者"],
     },
     kernel: [
       {
-        title: "最早是从技术工程师开始",
+        title: "我最早做的是工程",
         description:
-          "2021 年在 PingCAP 做 TiCDC 研发，后来做过 AI Infra、向量数据库、AI-Native SaaS、商业化和 AI 中台。技术经历让我习惯先问：这个产品怎么被创造出来。",
+          "2021 年，我在 PingCAP 做 TiCDC 研发，后来做过 AI Infra、向量数据库、AI-Native SaaS、商业化和 AI 中台。这段经历让我习惯先看一项技术解决了什么问题，又会在哪个环节被实际使用。",
       },
       {
-        title: "社区改变了我对增长的理解",
+        title: "后来，我在 Datawhale 待了很长时间",
         description:
-          "2019 年因为学习 AI 接触 Datawhale，从学习者、助教、活动组织者，到参与城市生态和社区治理。它让我相信社区不是流量池，而是早期用户、信任、反馈和机会发生的地方。",
+          "2019 年因为学习 AI 接触 Datawhale，后来做过助教、活动组织者，也参与城市生态和社区治理。我见过一些原本互不认识的人，因为共同学习和一起做事，慢慢成为项目伙伴。",
       },
       {
-        title: "AGI Villa 是我对 AI 与创业的长期实验",
+        title: "后来，我和朋友一起发起了 AGI Villa",
         description:
-          "我和 Monica 发起 AGI Villa，是因为相信 AI 和社区结合之后，会出现新的产品、新的组织方式和新的创业路径。它让我持续接触全球 AI 创业者、早期产品和需要真实用户反馈的想法。",
+          "我和 Monica 发起 AGI Villa，是想把对 AI 感兴趣的创业者、产品人和开发者带到同一个社区里，看看会不会有合作和新项目从中发生。这个过程让我认识了许多全球 AI 创业者，也接触到不少还在寻找早期用户的团队。",
       },
       {
-        title: "产品实验室是我的产品试验地",
+        title: "再后来，我开始自己做产品",
         description:
-          "我持续自己做产品，可以更好地理解用户、分发和早期反馈。真实的创造让我先测试判断，再把它变成洞见。",
+          "我联合创办 MatchPoint，也做了 GlobalTechEvents，并持续运行一套由 31 个 Agent 组成的工作系统。产品上线以后，用户从哪里来、为什么留下，以及要不要继续做，都需要在日常运营里回答。",
       },
       {
-        title: "长期实践让我保持稳定",
+        title: "我也一直保留禅修和公益实践",
         description:
-          "禅修、冥想、佛学学习和公益实践帮助我在 AI、创业和全球化中，尽量保持简单、直接、清楚。"
+          "这些事情不会替我做决定，但会提醒我多看一眼自己的动机，也认真对待变化最终落在谁身上。"
       },
     ],
     whyThisWork: {
       eyebrow: "为什么做这件事",
-      title: "我相信 AI 和社区会让新的创造者被看见。",
+      title: "我为什么会同时做社区和产品。",
       quote:
-        "AI 很快，但真正有用的创新，仍然来自一群愿意认真对待问题的人，把想法放到真实反馈中的人。",
+        "在社区里，我能看到人为什么愿意参与；做产品时，我会更快知道一个想法有没有人需要。",
       body:
-        "AGI Villa 的起点，是我和伙伴对 AI 与社区的共同信念：让创新更快发生，让有创造力的人更早被看见。全球化不是让一个市场听起来很热闹，而是设计第一个有用的路径，让团队能做出更清楚的下一步判断。",
+        "组织活动时，我会直接看到一群人为什么愿意来、他们在哪个环节开始投入，以及哪些关系会在活动结束后继续。做产品则更直接：页面上线、用户进入流程以后，原来的设想很快就会遇到具体反馈。这两种工作一直在互相提醒我，连接人和创造产品离得并不远，都需要理解对方为什么需要，又愿不愿意继续参与。",
       points: [
-        "AI 让新产品出现得更快，旧的增长路径很难直接套用。",
-        "社区把分散的兴趣变成人、信任、反馈和持续行动。",
-        "聚焦反馈能让出海回到真实用户、伙伴和真实环境里。",
+        "AI 让做出一个新产品变得更快，但怎么找到用户并没有因此变得简单。",
+        "社区不会自动带来增长。只有人愿意长期参与，信任和反馈才会慢慢积累起来。",
+        "自己负责项目和产品，会迫使我不断面对用户、合作伙伴和日常运营里的具体限制。",
       ],
     },
   },
   cta: {
-    title: "如果你有一个产品出海问题，先低成本拿到反馈。",
+    title: "如果你也在处理类似的问题，欢迎给我写信。",
     description:
-      "告诉我你在做什么产品、为什么想看海外、现在卡在哪里、这次反馈要帮助你做什么决定。如果合适，我们可以从一个很小的切入口开始验证。",
-    primary: "聊聊出海第一步",
-    secondary: "先看我的判断",
+      "可以先说说你正在做什么、现在遇到了什么，以及你希望这次合作帮助团队弄清楚什么。",
+    primary: "开始聊聊",
+    secondary: "先看文章",
   },
   seo: {
-    ogImageAlt: "Darren Su - 中国团队出海验证与海外反馈试点",
+    ogImageAlt: "Darren Su - AI 生态项目、产品与全球科技连接",
     home: {
-      jobTitle: "中国团队出海验证与海外反馈试点",
+      jobTitle: "AI 生态项目负责人和产品创造者",
       knowsAbout: [
-        "中国团队出海",
-        "海外种子用户",
-        "海外渠道验证",
+        "AI 开发者生态",
+        "开发者社区",
+        "AI 产品 Workshop",
+        "多 Agent 数字组织",
         "全球科技活动",
-        "开源社区出海",
-        "机器人与硬件出海",
+        "社区驱动增长",
       ],
-      professionalServiceName: "Darren Su - 中国团队出海验证与海外反馈试点",
+      professionalServiceName: "Darren Su - AI 生态项目与产品 Workshop",
       serviceTypes: [
-        "出海第一步判断",
-        "海外用户与渠道梳理",
-        "低成本海外反馈试点",
-        "海外现场访问设计",
-        "出海产品反馈试点",
+        "AI 开发者生态项目",
+        "AI 产品 Workshop",
+        "AI 与 Agent 分享",
+        "大会与社区生态合作",
       ],
     },
     services: {

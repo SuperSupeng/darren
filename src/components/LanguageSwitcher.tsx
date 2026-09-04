@@ -1,26 +1,35 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useId, type KeyboardEvent } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter, usePathname } from '@/i18n/navigation';
 import { locales, localeNames, type Locale } from '@/i18n/config';
 
-export default function LanguageSwitcher() {
+export default function LanguageSwitcher({
+  inverse = false,
+  availableLocales = [...locales],
+  embedded = false,
+  onSelect,
+}: {
+  inverse?: boolean;
+  availableLocales?: Locale[];
+  embedded?: boolean;
+  onSelect?: () => void;
+}) {
   const locale = useLocale() as Locale;
   const t = useTranslations('language');
   const router = useRouter();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const [search, setSearch] = useState('');
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const optionsId = useId();
 
   // 点击外部关闭
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false);
-        setSearch('');
       }
     };
 
@@ -28,43 +37,58 @@ export default function LanguageSwitcher() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  // 打开时聚焦搜索框
-  useEffect(() => {
-    if (isOpen && inputRef.current) {
-      inputRef.current.focus();
-    }
-  }, [isOpen]);
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key !== 'Escape' || !isOpen) return;
+    event.preventDefault();
+    event.stopPropagation();
+    setIsOpen(false);
+    triggerRef.current?.focus();
+  };
 
   const switchLocale = (newLocale: Locale) => {
     router.replace(pathname, { locale: newLocale });
     setIsOpen(false);
-    setSearch('');
+    onSelect?.();
   };
 
-  // 过滤语言
-  const filteredLocales = locales.filter((loc) => {
-    const meta = localeNames[loc];
-    const searchLower = search.toLowerCase();
-    return (
-      meta.name.toLowerCase().includes(searchLower) ||
-      meta.nativeName.toLowerCase().includes(searchLower) ||
-      loc.toLowerCase().includes(searchLower)
-    );
-  });
+  const visibleLocales = locales.filter((loc) => availableLocales.includes(loc));
 
   const currentLocale = localeNames[locale];
 
+  if (availableLocales.length <= 1) {
+    return (
+      <span
+        className={`inline-flex min-h-10 items-center rounded-full border px-3 py-2 text-sm ${
+          inverse
+            ? 'border-paper-100/18 bg-paper-100/6 text-paper-100/72'
+            : 'border-ink-700/10 bg-paper-100/42 text-ink-700/90'
+        }`}
+        aria-label={`${currentLocale.nativeName}. ${t('onlyAvailable')}`}
+        title={t('onlyAvailable')}
+      >
+        {currentLocale.nativeName}
+      </span>
+    );
+  }
+
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className={embedded ? 'relative w-full' : 'relative'} ref={dropdownRef} onKeyDown={handleKeyDown}>
       {/* Trigger Button */}
       <button
+        type="button"
+        ref={triggerRef}
         onClick={() => setIsOpen(!isOpen)}
-        className="flex min-h-10 items-center gap-2 rounded-full border border-ink-700/10 bg-paper-100/52 px-3 py-2 text-sm text-ink-700 transition-colors duration-300 hover:border-ink-700/18 hover:bg-paper-100/78"
-        aria-label={t('select')}
+        className={`flex min-h-10 items-center gap-2 rounded-full border px-3 py-2 text-sm transition-colors duration-300 ${embedded ? 'w-full justify-between' : ''} ${
+          inverse
+            ? 'border-paper-100/24 bg-paper-100/8 text-paper-100 hover:border-paper-100/42 hover:bg-paper-100/16'
+            : 'border-ink-700/10 bg-paper-100/52 text-ink-700 hover:border-ink-700/18 hover:bg-paper-100/78'
+        }`}
+        aria-label={`${t('select')}: ${currentLocale.nativeName}`}
         aria-expanded={isOpen}
+        aria-controls={optionsId}
       >
         <svg
-          className="w-4 h-4 text-ink-600/70"
+          className={`h-4 w-4 ${inverse ? 'text-paper-200/70' : 'text-ink-600/70'}`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -78,7 +102,9 @@ export default function LanguageSwitcher() {
         </svg>
         <span>{currentLocale.nativeName}</span>
         <svg
-          className={`h-3 w-3 text-ink-600/50 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+          className={`h-3 w-3 transition-transform duration-200 ${
+            inverse ? 'text-paper-200/55' : 'text-ink-600/50'
+          } ${isOpen ? 'rotate-180' : ''}`}
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -89,43 +115,17 @@ export default function LanguageSwitcher() {
 
       {/* Dropdown */}
       {isOpen && (
-        <div className="absolute right-0 z-50 mt-2 w-56 overflow-hidden rounded-[10px] border border-ink-700/12 bg-paper-100 shadow-lg shadow-ink-950/8">
-          {/* Search */}
-          <div className="p-2 border-b border-ink-700/10">
-            <div className="relative">
-              <svg
-                className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-600/45"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-              <input
-                ref={inputRef}
-                type="text"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder={t('search')}
-                className="w-full rounded-full border border-ink-700/10 bg-paper-200/65 py-2 pl-9 pr-3 text-sm text-ink-800 placeholder:text-ink-600/45 focus:border-zen-gold/38 focus:outline-none focus-visible:outline-none"
-              />
-            </div>
-          </div>
-
-          {/* Language List */}
-          <div className="max-h-64 overflow-y-auto py-1">
-            {filteredLocales.length === 0 ? (
-              <div className="px-4 py-3 text-center text-sm text-ink-600/55">
-                {t('empty')}
-              </div>
-            ) : (
-              filteredLocales.map((loc) => {
+        <div id={optionsId} className={`${embedded ? 'relative mt-2 w-full' : 'absolute right-0 mt-2 w-56'} z-50 overflow-hidden rounded-[10px] border border-ink-700/12 bg-paper-100 shadow-lg shadow-ink-950/8`}>
+          <div className="py-1" role="group" aria-label={t('select')}>
+              {visibleLocales.map((loc) => {
                 const meta = localeNames[loc];
                 const isActive = loc === locale;
                 return (
                   <button
+                    type="button"
                     key={loc}
                     onClick={() => switchLocale(loc)}
+                    aria-current={isActive ? 'true' : undefined}
                     className={`w-full flex items-center gap-3 px-4 py-2.5 text-sm transition-colors ${
                       isActive
                         ? 'bg-zen-gold/10 text-zen-gold-dim'
@@ -135,7 +135,7 @@ export default function LanguageSwitcher() {
                     <span className="text-lg">{meta.flag}</span>
                     <div className="flex-1 text-left">
                       <div className="font-medium">{meta.nativeName}</div>
-                      <div className={`text-xs ${isActive ? 'text-zen-gold-dim/70' : 'text-ink-600/50'}`}>
+                      <div className={`text-xs ${isActive ? 'text-zen-gold-dim' : 'text-ink-700/90'}`}>
                         {meta.name}
                       </div>
                     </div>
@@ -146,12 +146,11 @@ export default function LanguageSwitcher() {
                     )}
                   </button>
                 );
-              })
-            )}
+              })}
           </div>
 
           {/* Footer hint */}
-          <div className="border-t border-ink-700/10 px-4 py-2 text-center text-xs text-ink-600/50">
+          <div className="border-t border-ink-700/10 px-4 py-2 text-center text-xs text-ink-700/90">
             {t('hint')}
           </div>
         </div>

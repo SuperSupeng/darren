@@ -1,27 +1,30 @@
 {
   "meta": {
-    "title": "Darren Su | China AI, Robotics & Supply Chain Feedback",
-    "description": "Helping global AI, robotics, hardware, and tech teams understand China, meet the right people, and get real feedback."
+    "title": "Darren Su | AI Products, Developer Communities & Technology Events",
+    "description": "Darren Su leads AI developer programs, helps early products meet users, and shares practical experience in AI use and agent building."
   },
   "nav": {
     "home": "Home",
-    "services": "Services",
+    "services": "Collaborate",
     "work": "Work",
-    "build": "Product Lab",
+    "build": "Products",
     "about": "About",
-    "blog": "Field Notes",
-    "contact": "Contact"
+    "blog": "Writing",
+    "contact": "Contact",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "primary": "Primary navigation"
   },
   "servicesPage": {
     "meta": {
-      "title": "China AI, Robotics & Supply Chain Services",
-      "description": "Briefings, partner mapping, field visits, and focused pilots for global teams testing China."
+      "title": "Collaborate | Developer Programs, Product Workshops & Agent Talks",
+      "description": "Work with Darren on AI developer ecosystem programs, product workshops, and talks grounded in real multi-agent practice."
     }
   },
   "footer": {
     "name": "Darren Su",
     "location": "Hangzhou / Global",
-    "bio": "Helping global tech teams understand China, meet the right people, and get real feedback.",
+    "bio": "Organizing developer programs, helping early AI products meet users, and continuing to build products of my own.",
     "contactTitle": "Contact",
     "copyright": "© {year} Darren Su. All rights reserved."
   },
@@ -31,12 +34,13 @@
     "select": "Select language",
     "search": "Search language...",
     "empty": "No languages found",
-    "hint": "Chinese and English are currently available"
+    "hint": "Chinese and English are currently available",
+    "onlyAvailable": "This article is currently available in one language"
   },
   "blog": {
     "meta": {
-      "title": "Field Notes",
-      "description": "Field notes on AI communities, product experiments, China tech, and long-term practice."
+      "title": "Writing",
+      "description": "Project reviews and notes on AI, agents, developer communities, products, and day-to-day practice."
     },
     "backToList": "Back to list",
     "minRead": "min",
@@ -44,14 +48,14 @@
   },
   "build": {
     "meta": {
-      "title": "Product Lab",
-      "description": "Product Lab: software, community, and market experiments tied to users and distribution."
+      "title": "Products",
+      "description": "Products and experiments built by Darren Su, including MatchPoint, GlobalTechEvents, Datawhale AI+X Events, and a multi-agent digital organization."
     }
   },
   "about": {
     "meta": {
       "title": "About Darren Su",
-      "description": "Builder and community operator across engineering, Datawhale, AGI Villa, Product Lab, and cross-border tech."
+      "description": "Darren Su's path from engineering and Datawhale to developer programs, product building, and a multi-agent work system."
     }
   }
 }

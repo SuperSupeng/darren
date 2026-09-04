@@ -1,33 +1,27 @@
 ---
-title: What I Learned Connecting SuperAI With China's AI Ecosystem
+title: Five Observations from Accompanying the SuperAI Team in Hangzhou and Shanghai
 date: 2026-05-18
-description: A field note from accompanying the SuperAI ecosystem team across Hangzhou and Shanghai—and what global technology organizations should understand about building lasting relationships with China.
+description: A field note from visits to universities, open-source communities, and AI companies in Hangzhou and Shanghai, and what those conversations revealed about cross-border technology exchange.
 tags: [China AI, SuperAI, Ecosystem Building, Field Visit]
 ---
 
-This is less an event recap than a field note about how global technology ecosystems connect.
+Last week, I accompanied SuperAI co-founder Peter and the ecosystem team through Hangzhou and Shanghai. Over several days, we visited Zhejiang University, ModelScope, Qwen, Qoder, Datawhale, ZhenFund, MiniMax, Volcano Engine, Trae, and SenseTime.
 
-When SuperAI co-founder Peter and the ecosystem team visited China through WAVE, initiated by Guo Hao, I accompanied them across Hangzhou and Shanghai. Over several days, we visited universities, open-source communities, model companies, AI tool platforms, investors, and embodied-intelligence environments. The route included Zhejiang University, ModelScope, Qwen, Qoder, Datawhale, ZhenFund, MiniMax, Volcano Engine, Trae, and SenseTime.
+The team came with two practical goals: to understand China's AI ecosystem more systematically and to invite relevant Chinese teams to SuperAI in Singapore that June. As we moved from one conversation to the next, I realized that the more useful thing to record was not the itinerary, but where each side's understanding of the other still broke down.
 
-SuperAI is one of Asia's important AI conferences and a core part of Singapore AI Week. Its role is broader than that of a conventional technical conference. It brings together industry, capital, startups, developers, and global technology debates. Singapore's position—connected to China, the rest of Asia, Europe, and the United States—also gives the conference the potential to serve as a neutral relay point for global AI conversations.
+The five observations below are not conclusions. They are simply the questions that kept returning during the visit.
 
 ![The SuperAI team's field route through China](/blog/superai-china/route.png)
 
-The team came with two practical goals: to understand China's technology ecosystem more systematically, and to invite relevant Chinese companies to participate in the June conference in Singapore.
-
-But the visit surfaced a larger question:
-
-> How can the innovation already happening inside China's AI ecosystem become more legible to the rest of the world—and how can global partners engage with it beyond a single conference or delegation?
-
 ## A conference is becoming a year-round ecosystem
 
-One of the clearest signals from the visit was that a once-a-year summit is no longer enough.
+One thing became clear during the visit: meeting once a year is not enough.
 
 If a conference only appears for a few days each year, relationships weaken in the months between editions. Speakers, founders, investors, community operators, and partners return to their daily work. Without ongoing visits, content, smaller gatherings, and shared questions, trust has to be rebuilt every year.
 
 That is why SuperAI has developed a dedicated ecosystem team. The conference remains a high point, but the work increasingly happens throughout the year: meeting partners, understanding local contexts, creating smaller conversations, and identifying knowledge worth bringing to the larger stage.
 
-This shift matters for anyone operating a global technology event. A summit is no longer the whole product. It is one moment in a longer relationship system.
+A summit is one moment in a relationship that has to continue before and after it.
 
 During the visit, I told Peter that Singapore occupies a distinctive position in global technology exchange. It can connect China with Western ecosystems without reducing every interaction to a geopolitical frame. There is still no major stage where leading Chinese model companies regularly sit alongside organizations such as OpenAI and Anthropic for a serious technical and industry conversation.
 
@@ -51,13 +45,11 @@ Technical strength matters, of course. DeepSeek became globally recognizable bec
 
 This is not the same as translating Chinese marketing material into English. It requires translating context: why a technical path was chosen, what local users are doing, how a supply chain changes product decisions, and which parts of the Chinese market experience might matter elsewhere.
 
-## Global stages need knowledge, not another corporate introduction
+## What global audiences want to hear from Chinese companies
 
 SuperAI was not simply looking for Chinese companies willing to promote themselves.
 
 The team wanted **knowledge**: technical judgment, industry insight, real application patterns, and an honest view of how products are being built and commercialized in China.
-
-That distinction is important.
 
 Companies often approach an international conference as a branding opportunity: a booth, a keynote, a product announcement, or a round of business development. Those things can be useful, but they rarely create lasting influence by themselves.
 
@@ -75,13 +67,13 @@ To be globally understood, it is not enough to appear in someone else's report, 
 
 ## Neutral spaces make technical conversations easier
 
-Another pattern became visible during the visit. Many technology companies want to enter international conversations without being immediately reduced to a national label.
+Many of the companies we spoke with wanted to join international conversations without first being defined by a national label.
 
 When every exchange is interpreted through a larger political narrative, potential partners can become cautious before they have understood the product, technology, or practical value. A more neutral environment allows the conversation to begin elsewhere: with engineering choices, user needs, industry experience, and possible collaboration.
 
 This is part of Singapore's value. It can create a space where people from different countries and systems meet around technology and industry first. Neutrality does not remove context, but it can make room for a more precise conversation.
 
-## Field visits should create relationships, not just impressions
+## What should remain after a field visit
 
 The SuperAI visit reinforced something I have learned through Datawhale, AGI Villa, and other community work: global ecosystem connection is moving from occasional contact toward continuous relationships.
 
@@ -106,4 +98,6 @@ The work ahead has two directions:
 - support more overseas Datawhale city nodes and long-term relationships with local developers, founders, universities, and communities;
 - continue bringing global ecosystem partners into China so they can experience companies, developer communities, industry environments, and city-level innovation directly.
 
-China's technology ecosystem deserves to be understood more clearly. That understanding will not come from occasional exposure alone. It requires sustained presence, careful translation, real field contact, and relationships that continue after everyone goes home.
+These relationships take time. They grow through repeated visits, careful translation, and conversations that continue after everyone goes home.
+
+If you organize an AI community or developer event outside China, or want to understand China's AI ecosystem more closely, feel free to write. I will keep recording what happens in these visits and collaborations.

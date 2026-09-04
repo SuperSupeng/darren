@@ -3,17 +3,17 @@ import type { WorkCase } from './types';
 export const englishContent = {
   home: {
     hero: {
-      eyebrow: "China AI · Robotics · Supply Chain",
+      eyebrow: "HANGZHOU · CHINA / 2019—NOW",
       title:
-        "Understand China. Meet the right people. Get real feedback.",
+        "This year, I met many developers and spent much of my time helping AI products meet users.",
       subtitle:
-        "For global AI, robotics, hardware, and tech teams exploring China through builders, partners, suppliers, labs, communities, and field visits.",
-      primaryCta: "Tell me what you want to test",
-      secondaryCta: "Explore services",
+        "I initiated and led developer programs, and invited two Israeli founders to bring their product to China and meet early users face to face. After my essay about working with 31 agents was published, more people began inviting me to speak about AI use and agent building.",
+      primaryCta: "See selected work",
+      secondaryCta: "Explore collaboration",
       quietLine:
-        "Start small before making bigger China decisions.",
-      imageAlt: "Misty tea fields in China",
-      note: "A practical bridge to China's AI builders, robotics teams, hardware and supply-chain partners, open-source communities, universities, startups, and innovation teams.",
+        "Datawhale City Ecosystem Lead · Co-founder of AGI Villa and MatchPoint · Creator of GlobalTechEvents",
+      imageAlt: "Darren Su speaking at a technology event",
+      note: "Based in Hangzhou, working across China and the global technology ecosystem.",
     },
     problems: {
       eyebrow: "Common Questions",
@@ -84,7 +84,7 @@ export const englishContent = {
       eyebrow: "Why Me",
       title: "I work inside the networks this depends on.",
       subtitle:
-        "As Datawhale City Lead and AGI Villa Co-founder, I stay close to AI learners, global builders, early products, and real users through community and field work.",
+        "As Datawhale City Ecosystem Lead and AGI Villa Co-founder, I stay close to AI learners, global builders, early products, and real users through community and field work.",
       closingLine:
         "Not a contact list. The value is knowing who may care, how to invite them, and when to hold back.",
     },
@@ -98,25 +98,25 @@ export const englishContent = {
         "A useful project should leave a case, a note, a reusable pattern, and a better question.",
     },
     productLab: {
-      eyebrow: "Product Lab",
-      title: "I build products too.",
+      eyebrow: "Products",
+      title: "Building is part of how I understand the field.",
       subtitle:
-        "Product Lab keeps my ecosystem advice close to real users, distribution, and early market feedback.",
+        "Products and digital organizations keep my ecosystem work close to real users, distribution, and operating reality.",
     },
     about: {
       eyebrow: "About Darren",
-      title: "Engineering, communities, products, and practice.",
+      title: "Engineering, ecosystem programs, products, and practice.",
       description:
-        "Engineering, open source, AI communities, products, founder networks. The thread: early ideas meet real feedback.",
+        "From engineering and open source to AI ecosystem programs, global founder networks, products, and multi-agent organizations.",
       closingLine: "Understand the field. Gather the right people. Let real feedback shape the next step.",
       cta: "Read about Darren",
     },
   },
   labels: {
     explore: "Explore",
-    viewCollaborationPaths: "View service path",
-    viewProductLab: "View Product Lab",
-    viewWork: "View case studies",
+    viewCollaborationPaths: "View collaboration paths",
+    viewProductLab: "View products",
+    viewWork: "View selected work",
     draftCase: "Draft case",
     services: {
       eyebrow: "Services",
@@ -141,70 +141,70 @@ export const englishContent = {
       bestFor: "Best for",
     },
     productLab: {
-      roomEyebrow: "Workbench",
-      sideEyebrow: "Projects As Proof",
+      roomEyebrow: "Products & Systems",
+      sideEyebrow: "Why I Build",
       sideQuote:
-        "A product experiment puts an assumption in front of reality.",
-      selectedEyebrow: "Selected Projects",
+        "An idea can sound perfectly reasonable in conversation. Once people use the product, the real questions become concrete.",
+      selectedEyebrow: "Current Products",
       selectedStatement:
-        "These are product experiments, not client case studies. They show how I test judgment by building.",
+        "Each product began with a specific problem: hiring questions several founders kept raising, or the friction I encountered while finding technology events and organizing city programs.",
       projectLabel: "Project",
       visitProject: "Visit project",
-      explainerEyebrow: "What Product Lab Means",
-      explainerTitle: "Products create feedback.",
+      explainerEyebrow: "Why I still build",
+      explainerTitle: "Once people start using a product, the questions become concrete.",
       problem: "Problem",
       signal: "Feedback",
       nextStep: "Next step",
       explainerItems: [
         {
-          title: "Not a portfolio wall",
+          title: "Let people see it",
           description:
-            "The lab is for testing assumptions, not only showing past work.",
+            "Once an idea becomes a page, tool, or working process, it becomes much easier to see whether people understand it and want to use it.",
         },
         {
-          title: "Advice tested by building",
+          title: "Then watch what they do",
           description:
-            "I prefer to test ideas with users before turning them into advice.",
+            "After launch, I watch where users come from, where they drop off, and what feedback suggests that the original idea needs to change.",
         },
         {
-          title: "Archived is still useful",
+          title: "Know when to stop",
           description:
-            "Paused projects stay visible when they teach something about users, timing, or distribution.",
+            "Some experiments do not become long-term products. They still leave useful answers: whether the need exists, whether the problem is too broad, or whether the timing is simply wrong.",
         },
       ],
     },
     fieldNotes: {
-      roomEyebrow: "Study Room",
-      sidebarEyebrow: "Bookshelf",
+      roomEyebrow: "Writing",
+      sidebarEyebrow: "A note before reading",
       sidebarQuote:
-        "Notes from real work, not hot takes.",
+        "I usually begin with an event, a product question, or something I experienced firsthand.",
       themesEyebrow: "Lines",
       themesTitle: "Three public lines, one deeper ground.",
       themesDescription:
         "Simple for first-time visitors, with a quieter line for long-term practice.",
       latestEyebrow: "Latest",
-      recentTitle: "Recent notes",
+      recentTitle: "Recently written",
       recentDescription:
-        "Notes from projects, events, and decisions.",
+        "The English collection currently begins with a field note from the SuperAI team’s visit to Hangzhou and Shanghai.",
       empty: "Notes are being organized.",
       minRead: "min read",
     },
     about: {
       roomEyebrow: "About",
       eyebrow: "About",
-      kernelEyebrow: "Judgment Sources",
-      kernelTitle: "Where the judgment comes from.",
+      kernelEyebrow: "A few chapters",
+      kernelTitle: "Looking back, these experiences mattered most.",
       kernelDescription:
-        "Engineering, community, product practice, and long-term field work behind the cross-border feedback work.",
+        "They were not all planned, but each changed the questions I paid attention to afterward.",
       pullQuote:
-        "A useful bridge is not a contact list. It is knowing which serious people should meet, why now, and what feedback should change next.",
-      workEyebrow: "What This Supports",
-      workTitle: "From background to practical cross-border work.",
+        "Years of community work have taught me that an ecosystem is not a contact list. It is the understanding and trust people build slowly, until they are willing to work on something together.",
+      workEyebrow: "What I Do Now",
+      workTitle: "What I spend most of my time doing now.",
       workItems: [
-        "Translate an AI, robotics, hardware, open-source, or product question into the first useful China test.",
-        "Find the builders, communities, labs, suppliers, universities, or early teams that actually fit the question.",
-        "Shape field visits, feedback rooms, workshops, demo sessions, or partner conversations around real decisions.",
-        "Turn what happens in the room into a next-step map: deepen, pause, publish, partner, or expand.",
+        "Initiate and lead AI developer programs, multi-city activations, and conference partnerships.",
+        "Help AI products from abroad meet developers in China, organize hands-on sessions, and collect early feedback.",
+        "Share what I have learned from using AI, building agents, and running a multi-agent work system.",
+        "Continue building MatchPoint, GlobalTechEvents, and AI+X Events.",
       ],
     },
     work: {
@@ -517,9 +517,9 @@ export const englishContent = {
   fieldNotes: {
     hero: {
       eyebrow: "Field Notes",
-      title: "Notes on building, organizing, and connecting.",
+      title: "After something is finished, I write down what happened and what I made of it.",
       subtitle:
-        "Short notes from products, community work, field visits, and focused pilots.",
+        "The English collection is still small. For now, it begins with a field note from the SuperAI team’s visit to Hangzhou and Shanghai.",
     },
     categories: [
       {
@@ -550,27 +550,56 @@ export const englishContent = {
   },
   products: {
     hero: {
-      eyebrow: "Product Lab",
-      title: "Product experiments that keep the work honest.",
+      eyebrow: "Products",
+      title: "MatchPoint, GlobalTechEvents, and AI+X Events all began with problems I kept encountering at work.",
       subtitle:
-        "I use products to test assumptions about AI workflows, events, talent, market intelligence, and community-led growth.",
+        "MatchPoint works on talent matching, GlobalTechEvents collects technology events worldwide, and AI+X Events supports Datawhale city activities. I also run a multi-agent work system over the long term.",
+    },
+    digitalOrganization: {
+      eyebrow: "AI-native work system",
+      title: "I also use 31 agents in my day-to-day work.",
+      description:
+        "The system currently includes 31 specialized agents and 44 recurring automations across research, products, content, operations, and personal knowledge. I use it every day and keep adjusting it as new problems appear in real work.",
+      primaryMetric: "31 specialized agents",
+      secondaryMetric: "44 recurring automations",
+      image: "/blog/ai-employees/digital-organization.png",
+      imageAlt: "Structure of Darren's multi-agent digital organization",
+      href: "",
+      linkLabel: "",
     },
     items: [
       {
+        id: "matchpoint",
+        name: "MatchPoint",
+        tagline: "Career exploration and role matching",
+        description:
+          "People can first talk through their direction with AI, then explore specific roles in more depth. The platform also records how candidates think and act in practical tasks, adding context a résumé rarely captures.",
+        image: "/projects/matchpoint.png",
+        url: "https://matchpoint.careers",
+        status: "live",
+        problem:
+          "A résumé says little about how someone thinks and acts in an unfamiliar situation. A job description also tells candidates very little about the role's actual day-to-day work.",
+        signal:
+          "The public site, candidate and employer flows, operations workspace, and remote MCP are live. The product is being used in real hiring, and we are still adjusting it around how both sides use it.",
+        nextStep:
+          "Keep using it in real hiring and adjust career exploration, role understanding, and application flows around feedback from candidates and teams.",
+        tags: ["AI native", "Careers", "Agent"],
+      },
+      {
         id: "globaltechevents",
         name: "GlobalTechEvents",
-        tagline: "Global technology event intelligence",
+        tagline: "A global technology event index",
         description:
-          "A map of global technology events, communities, and opportunities.",
+          "An index that brings together technology conferences and community events scattered across cities and platforms.",
         image: "/projects/globaltechevents.webp",
         url: "https://www.globaltechevents.xyz",
         status: "live",
         problem:
-          "Global tech events are scattered across platforms, cities, and communities.",
+          "The information is scattered across websites, cities, and communities. Each research trip or travel plan used to mean finding and checking it again.",
         signal:
-          "Useful as market intelligence for where builders, conferences, and opportunities gather.",
+          "I use it for international research and travel planning, and to see what different regions are discussing right now.",
         nextStep:
-          "Improve coverage and use it as infrastructure for field research and partner discovery.",
+          "Keep adding events and continue using the index for my own international research and travel planning.",
         tags: ["Global ecosystem", "Events", "Market intelligence"],
       },
       {
@@ -578,31 +607,31 @@ export const englishContent = {
         name: "Datawhale AI+X Events",
         tagline: "A community calendar for practical AI",
         description:
-          "A shared calendar for discovering, submitting, and following AI meetups, workshops, hackathons, and co-creation programs across communities, universities, cities, and industry.",
+          "A shared calendar for AI meetups, workshops, hackathons, and university, city, and industry events. People can discover events, submit their own, and subscribe to updates in one place.",
         image: "/projects/aix-events.svg",
         url: "https://aixevents.datawhale.cn/",
         status: "live",
         problem:
-          "Useful AI activities are scattered across communities and platforms, making it hard for learners and builders to find real opportunities to participate.",
+          "AI events are scattered across communities and platforms. Learners struggle to find local events consistently, while organizers lack a stable place to publish them.",
         signal:
-          "A community-maintained calendar can make local AI practice more visible and help organizers reach relevant participants and ecosystem partners.",
+          "The calendar is maintained with the community. Participants get a simpler way to find local events, while organizers get a stable place to publish them.",
         nextStep:
-          "Expand activity coverage and strengthen the path from discovering an event to participating, contributing, and organizing locally.",
+          "Keep expanding coverage and make submitting, following, and organizing local events simpler.",
         tags: ["Datawhale", "AI+X", "Community events"],
       },
       {
         id: "internplanet",
         name: "Intern Planet",
-        tagline: "Cross-border talent pipeline",
+        tagline: "A concluded cross-border talent experiment",
         description:
-          "A talent bridge for companies, international students, and young builders.",
+          "The project tried to connect companies with international students and young builders through a first concrete project or internship.",
         image: "/projects/internplanet.png",
         url: "https://internplanet.tech",
         status: "stopped",
         problem:
-          "Companies and young builders need a clearer first project or internship path.",
+          "Both sides were open to working together, but lacked a concrete starting point that could also build trust.",
         signal:
-          "The strongest feedback is around concrete projects, internships, and early talent pipelines.",
+          "The experiment suggested that a concrete project or internship may be a better starting point than a broad talent community.",
         nextStep:
           "The experiment has ended. Its lessons about concrete projects, trust, and early talent matching remain useful for future work.",
         tags: ["Talent", "Asia", "Community"],
@@ -613,85 +642,82 @@ export const englishContent = {
     hero: {
       title: "Darren Su / 苏鹏",
       subtitle:
-        "Based in Hangzhou. I started from engineering, grew through open-source and AI learning communities, and now work across AGI Villa, Datawhale, Product Lab, field events, and cross-border technology. The thread is simple: understand the field, gather the right people, and let real feedback shape the next step.",
+        "I am based in Hangzhou. I began in engineering and joined Datawhale in 2019 while learning AI. Later I started organizing developer events and city programs. Today I also build products and use a multi-agent system in my daily work.",
       tags: [
-        "Cross-border Tech Connector",
-        "Engineer Turned Community Builder",
-        "AGI Villa Co-founder",
-        "Datawhale City Lead",
+        "AI Ecosystem Program Lead",
+        "AGI Villa & MatchPoint Co-founder",
+        "Datawhale City Ecosystem Lead",
+        "GlobalTechEvents Creator",
       ],
     },
     kernel: [
       {
-        title: "I started from engineering work",
+        title: "I began in engineering",
         description:
-          "TiCDC at PingCAP, then AI infrastructure, vector databases, AI-native SaaS, commercialization, and platform work. Engineering taught me to ask how a product is actually used, not only how it is described.",
+          "In 2021, I worked on TiCDC at PingCAP. After that, I worked on AI infrastructure, vector databases, AI-native SaaS, commercialization, and AI platform development. The experience taught me to ask what a technology actually solves and where people will use it.",
       },
       {
-        title: "Community changed how I understand growth",
+        title: "Datawhale became a long-term part of my work",
         description:
-          "I joined Datawhale as an AI learner in 2019, then became a contributor, teaching assistant, organizer, and city lead. That work made community feel less like traffic and more like trust, feedback, and opportunity becoming visible.",
+          "I joined Datawhale as an AI learner in 2019, then became a teaching assistant, organizer, and city lead. I watched people who had never met become project partners through learning and working together.",
       },
       {
-        title: "AGI Villa is my long-term experiment with AI founders",
+        title: "Monica and I later started AGI Villa",
         description:
-          "I co-founded AGI Villa to explore how AI and community create new products, teams, and founder support systems. It keeps me close to global AI builders, early products, and the moments when ideas need real users.",
+          "Monica and I started AGI Villa to bring founders, product people, and developers interested in AI into the same community, and to see what collaborations or new projects might grow from it. Along the way, I met AI founders from around the world and many teams still looking for their first users.",
       },
       {
-        title: "Product Lab keeps my advice close to reality",
+        title: "Then I began building products myself",
         description:
-          "I keep building because strategy gets weak when it is separated from users, distribution, and awkward early feedback.",
+          "I co-founded MatchPoint, built GlobalTechEvents, and operate a work system of 31 agents. Once a product is live, questions about where users come from, why they stay, and whether to continue have to be answered through daily operations.",
       },
       {
-        title: "Long-term practice keeps the work grounded",
+        title: "I have also kept meditation and public-interest work in my life",
         description:
-          "Meditation, Zen study, and public-interest work help me stay simple, direct, and clear when AI, startups, and cross-border work move fast.",
+          "They do not make decisions for me, but they remind me to examine my motives and consider who will ultimately be affected.",
       },
     ],
     whyThisWork: {
       eyebrow: "Why This Work",
-      title: "Why I keep building at this intersection.",
+      title: "Why I work on both communities and products.",
       quote:
-        "AI moves fast, but useful innovation still depends on people who trust each other enough to test something real.",
+        "Community shows me why people choose to participate. A product quickly shows whether anyone needs the idea.",
       body:
-        "AGI Villa began from a belief in AI and community: creative people should be seen earlier, and early ideas should meet real feedback sooner. That same belief now shapes the cross-border work on this site. The goal is not to make a market feel abstractly exciting, but to create the first useful room, visit, demo, or conversation where a better decision can happen.",
+        "When I organize an event, I can see why people come, when they begin to participate, and which relationships continue afterward. Products are more direct: once people start using one, the original idea quickly meets real feedback. Both kinds of work remind me that bringing people together and building products depend on understanding what someone needs and whether they want to stay involved.",
       points: [
-        "AI creates new products faster than old go-to-market playbooks can explain.",
-        "Community turns scattered interest into people, trust, and follow-through.",
-        "Focused feedback keeps ambition tied to users, partners, and real constraints.",
+        "AI makes it faster to build a new product, but finding the right users has not become simple.",
+        "Community does not automatically create growth. Trust and feedback accumulate only when people keep participating.",
+        "Running products and programs forces me to face the practical constraints around users, partners, and day-to-day operations.",
       ],
     },
   },
   cta: {
-    title: "Have something to test in China?",
+    title: "If you are working through a similar question, feel free to write.",
     description:
-      "Tell me what you are building, why China matters, and what decision this should support. If it fits, we start small.",
-    primary: "Tell me what you want to test",
-    secondary: "Explore Field Notes",
+      "Tell me what you are working on, what you are running into, and what you hope this collaboration will help your team understand.",
+    primary: "Start a conversation",
+    secondary: "Explore writing",
   },
   seo: {
-    ogImageAlt: "Darren Su - China AI, robotics, supply-chain, and focused pilot partner",
+    ogImageAlt: "Darren Su - AI ecosystem programs, products, and global technology connections",
     home: {
-      jobTitle: "China AI, robotics, supply-chain, and focused pilot partner",
+      jobTitle: "AI Ecosystem Program Lead and Product Builder",
       knowsAbout: [
         "China AI ecosystem",
-        "China robotics ecosystem",
-        "China supply chain",
-        "hardware manufacturing networks",
-        "AI builder communities",
-        "open-source communities",
-        "product feedback",
-        "tech events",
-        "community activation",
+        "developer communities",
+        "AI ecosystem programs",
+        "AI product workshops",
+        "multi-agent organizations",
+        "global technology events",
+        "community-led growth",
       ],
       professionalServiceName:
-        "Darren Su - China AI, Robotics, Supply Chain, and Focused Pilot Partner",
+        "Darren Su - AI Ecosystem Programs and Product Workshops",
       serviceTypes: [
-        "China AI, robotics, and supply-chain ecosystem briefing",
-        "partner mapping and discovery",
-        "focused China pilot",
-        "AI builder, robotics, and supply-chain field visit",
-        "product feedback session in China",
+        "AI developer ecosystem programs",
+        "AI product workshops in China",
+        "AI and agent talks",
+        "conference and community partnerships",
       ],
     },
     services: {

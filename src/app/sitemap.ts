@@ -7,6 +7,7 @@ const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.darren-su.com';
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseRoutes = [
     '',
+    '/work',
     '/services',
     '/build',
     '/about',

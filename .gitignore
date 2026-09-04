@@ -57,6 +57,7 @@ next-env.d.ts
 
 # local planning / visual exploration artifacts
 .superpowers/
+/local-assets/
 
 # OS
 .DS_Store

@@ -4,84 +4,85 @@ import { getSiteContent } from '@/lib/siteContent';
 
 export default function FeaturedProjects({ locale }: { locale: string }) {
   const site = getSiteContent(locale);
-  const products = site.products.items.slice(0, 2);
-  const projectOffsets = ['', 'lg:mt-14'];
+  const featuredProject = site.products.items[0];
+  const otherProjects = site.products.items.slice(1, 3);
+  const copy =
+    locale === 'zh'
+      ? {
+          eyebrow: '正在做的产品 / BUILDING',
+          title: '过去一年，有几位创\u2060始\u2060人来找我，聊起同一个难题：招人。',
+          description:
+            '他们关心技能是否匹配，也想知道一个人遇到陌生问题时会怎么想、怎么做。简历很难说明这些，候选人也很难只凭一段职位描述理解真实的工作。MatchPoint 就是在一次次这样的谈话之后开始的。',
+          why: '产品已经上线，目前正在实际招聘中继续验证。',
+          open: '打开 MatchPoint',
+          more: '另外，我还在维护两个工具',
+          all: '查看其他产品和实验',
+        }
+      : {
+          eyebrow: 'BUILDING / PRODUCTS',
+          title: 'Over the past year, several founders came to me with the same problem: hiring.',
+          description:
+            'Founders want to know whether a candidate has the right skills, but also how that person thinks and acts when facing an unfamiliar problem. A résumé rarely shows this, and a short job description gives candidates little sense of the day-to-day work. MatchPoint grew out of a series of conversations like these.',
+          why: 'The product is live and is now being used in real hiring.',
+          open: 'Open MatchPoint',
+          more: 'I also maintain two other tools',
+          all: 'View other products and experiments',
+        };
 
   return (
-    <section className="landscape-band px-4 py-24 text-ink-950 md:px-6 md:py-32">
-      <div className="container relative z-10">
-        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
-          <div>
-            <p className="academy-kicker">{site.home.productLab.eyebrow}</p>
-            <h2 className="mt-5 max-w-3xl font-serif text-4xl leading-tight md:text-6xl">
-              {site.home.productLab.title}
-            </h2>
-          </div>
-          <p className="max-w-2xl text-base leading-9 text-ink-600 lg:justify-self-end">
-            {site.home.productLab.subtitle}
-          </p>
+    <section id="build" className="product-lab-scene">
+      <p className="product-lab-display" aria-hidden="true">
+        {locale === 'zh' ? '正在做' : 'BUILDING'}
+      </p>
+
+      <div className="container product-lab-heading">
+        <p className="directed-kicker">{copy.eyebrow}</p>
+        <h2>{copy.title}</h2>
+        <div>
+          <p>{copy.description}</p>
+          <strong>{copy.why}</strong>
         </div>
+      </div>
 
-        <div className="mt-14 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
-          {products.map((project, index) => (
-            <a
-              key={project.id}
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`group natural-slip overflow-hidden ${projectOffsets[index] ?? ''}`}
-            >
-              <div className="relative bg-paper-300/52 p-3 md:p-4">
-                <div className="relative aspect-[16/9] overflow-hidden bg-paper-100/70">
-                  <Image
-                    src={project.image}
-                    alt={project.name}
-                    fill
-                    sizes="(min-width: 1024px) 50vw, 100vw"
-                    className="project-image-muted object-contain transition duration-700"
-                  />
-                </div>
-                <div className="absolute left-5 top-5 border-b border-zen-gold/30 bg-paper-100/72 px-2 py-1 text-xs uppercase tracking-[0.12em] text-ink-700">
-                  {project.status}
-                </div>
-              </div>
+      <a
+        href={featuredProject.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="container product-lab-feature"
+      >
+        <div className="product-lab-screen">
+          <Image
+            src={featuredProject.image}
+            alt={featuredProject.name}
+            fill
+            sizes="(min-width: 1024px) 72vw, 100vw"
+            className="object-cover object-top"
+          />
+          <div className="product-lab-screen-shine" />
+        </div>
+        <div className="product-lab-caption">
+          <div>
+            <span>01 / {featuredProject.status}</span>
+            <h3>{featuredProject.name}</h3>
+            <p>{featuredProject.tagline}</p>
+          </div>
+          <strong>{copy.open} ↗</strong>
+        </div>
+      </a>
 
-              <div className="p-6 md:p-8">
-                <p className="academy-kicker text-ink-700/48">
-                  {site.labels.productLab.projectLabel} {String(index + 1).padStart(2, '0')}
-                </p>
-                <h3 className="mt-4 text-2xl font-medium text-ink-950 md:text-3xl">
-                  {project.name}
-                </h3>
-                <p className="mt-2 text-sm text-zen-gold-dim/80">{project.tagline}</p>
-                <p className="mt-5 text-sm leading-8 text-ink-600">{project.description}</p>
-                <div className="mt-7 grid gap-4 border-t border-dashed border-ink-950/12 pt-6">
-                  <div>
-                    <p className="academy-kicker text-ink-700/48">{site.labels.productLab.problem}</p>
-                    <p className="mt-2 text-sm leading-7 text-ink-600">{project.problem}</p>
-                  </div>
-                  <div>
-                    <p className="academy-kicker text-ink-700/48">{site.labels.productLab.signal}</p>
-                    <p className="mt-2 text-sm leading-7 text-ink-600">{project.signal}</p>
-                  </div>
-                </div>
-                <div className="mt-7 flex flex-wrap gap-x-4 gap-y-2">
-                  {project.tags.map((tag) => (
-                    <span key={tag} className="text-xs uppercase tracking-[0.12em] text-ink-600/58">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
+      <div className="container product-lab-index">
+        <p>{copy.more}</p>
+        <div>
+          {otherProjects.map((project, index) => (
+            <a key={project.id} href={project.url} target="_blank" rel="noopener noreferrer">
+              <span>{String(index + 2).padStart(2, '0')}</span>
+              <strong>{project.name}</strong>
+              <small>{project.tagline}</small>
+              <i>{project.status} ↗</i>
             </a>
           ))}
         </div>
-
-        <div className="mt-12">
-          <Link href="/build" className="quiet-link">
-            {site.labels.viewProductLab}
-          </Link>
-        </div>
+        <Link href="/build">{copy.all} →</Link>
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 export { default as Hero } from './Hero';
-export { default as ClientQuestions } from './ClientQuestions';
-export { default as NowBuilding } from './NowBuilding';
+export { default as ScrollCulture } from './ScrollCulture';
+export { default as SelectedWork } from './SelectedWork';
+export { default as FieldReel } from './FieldReel';
+export { default as CollaborationPaths } from './CollaborationPaths';
 export { default as FeaturedProjects } from './FeaturedProjects';
-export { default as Signals } from './Signals';
-export { default as FooterCta } from './FooterCta';
+export { default as NotesContact } from './NotesContact';

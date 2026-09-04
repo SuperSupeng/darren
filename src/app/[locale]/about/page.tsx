@@ -27,42 +27,42 @@ export default async function AboutPage({
     locale === 'zh'
       ? {
           eyebrow: '内在基础',
-          title: '慢下来，是为了在快节奏里看清问题。',
+          title: '事情多起来以后，我开始更在意自己为什么做它。',
           description:
-            'AI、创业和全球化都很快。稳定的观察让我更少跟着热闹走，也更清楚地分辨哪些机会值得靠近，哪些动作应该先放下。',
-          closing: '看清问题，认真对待人，再小步推进。',
+            'AI、创业和全球化都变化得很快，眼前也总有新的机会。禅修和长期的自我观察，让我在决定做一件事以前多停一下：它是不是真的重要，我是否愿意投入，以及这件事会怎样影响一起参与的人。',
+          closing: '有些事情值得快一点，有些事情需要先想清楚。',
         }
       : {
           eyebrow: 'Inner Ground',
-          title: 'Slowing down is not leaving the field.',
+          title: 'As the work grew, I began to pay more attention to why I was doing it.',
           description:
-            'I have been drawn to the quiet process of incense burning. It is less a symbol to explain and more a reminder of rhythm: the faster the work moves, the more important it is to keep a stable point of attention.',
-          closing: 'See the problem clearly, treat people seriously, then move in small steps.',
+            'AI, entrepreneurship, and cross-border work keep presenting new opportunities. Meditation and long-term reflection help me pause before saying yes: whether the work matters, whether I am willing to commit, and how it may affect the people involved.',
+          closing: 'Some things deserve speed. Others need to be understood first.',
         };
 
   return (
     <>
       <JsonLd data={aboutStructuredData(locale)} />
-      <main className="min-h-screen bg-paper-100 text-ink-950">
-      <section className="relative flex min-h-[calc(100svh-4rem)] items-center overflow-hidden bg-[linear-gradient(180deg,#fbf8f1_0%,#f1eadc_100%)] px-4 py-20 md:px-6 md:py-24">
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(251,248,241,0.98)_0%,rgba(251,248,241,0.88)_50%,rgba(241,234,220,0.62)_100%),linear-gradient(90deg,rgba(111,121,103,0.035)_0_1px,transparent_1px_100%)]" />
+      <main id="main-content" tabIndex={-1} className="min-h-screen bg-paper-100 text-ink-950">
+      <section className="site-page-hero site-page-hero-about relative flex min-h-[calc(100svh-4rem)] items-center overflow-hidden px-4 py-20 md:px-6 md:py-24">
+        <div className="site-page-hero-veil" />
         <div className="absolute inset-x-0 bottom-0 h-px bg-ink-950/10" />
         <div className="container relative">
-          <div className="mb-14 flex items-center gap-5">
-            <span className="h-px flex-1 bg-ink-950/10" />
-            <span className="academy-kicker">{site.labels.about.roomEyebrow}</span>
-            <span className="h-px flex-1 bg-ink-950/10" />
+          <div className="site-page-roomline mb-14 flex items-center gap-5">
+            <span className="h-px flex-1" />
+            <span className="academy-kicker site-page-kicker">{site.labels.about.roomEyebrow}</span>
+            <span className="h-px flex-1" />
           </div>
 
-          <div className="grid gap-14 lg:grid-cols-[0.78fr_1.22fr] lg:gap-20">
+          <div className="grid gap-10 min-[841px]:grid-cols-[0.72fr_1.28fr] min-[841px]:items-center min-[841px]:gap-10 lg:gap-16">
             <div>
-              <div className="natural-slip max-w-md overflow-hidden p-3">
+              <div className="site-page-portrait natural-slip mx-auto max-w-[17rem] overflow-hidden p-3 min-[841px]:mx-0 min-[841px]:max-w-md">
                 <div className="relative aspect-[4/5] overflow-hidden">
                   <Image
                     src="/photo.jpg"
                     alt="Darren Su"
                     fill
-                    sizes="(min-width: 1024px) 420px, 100vw"
+                    sizes="(min-width: 1024px) 420px, (min-width: 841px) 30vw, 272px"
                     className="object-cover"
                     priority
                   />
@@ -71,21 +71,21 @@ export default async function AboutPage({
             </div>
 
             <div className="flex flex-col justify-center">
-              <p className="academy-kicker">{site.labels.about.eyebrow}</p>
-              <h1 className="heading-balance mt-5 font-serif text-[clamp(2.7rem,5.2vw,5.6rem)] leading-[1.08] text-ink-950">
+              <p className="academy-kicker site-page-kicker">{site.labels.about.eyebrow}</p>
+              <h1 className="site-page-title heading-balance mt-5 font-serif text-[clamp(2.7rem,5.2vw,5.6rem)] leading-[1.08]">
                 {site.about.hero.title}
               </h1>
-              <p className="mt-8 max-w-3xl text-lg leading-9 text-ink-600">
+              <p className="site-page-lead mt-8 max-w-3xl text-lg leading-9">
                 {site.about.hero.subtitle}
               </p>
-              <p className="mt-9 max-w-2xl border-l border-zen-gold/45 pl-5 font-serif text-2xl leading-relaxed text-ink-800">
+              <p className="site-page-quote mt-9 max-w-2xl border-l pl-5 font-serif text-2xl leading-relaxed">
                 {site.labels.about.pullQuote}
               </p>
               <div className="mt-9 flex flex-wrap gap-3">
                 {site.about.hero.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="border-b border-ink-950/14 pb-1 text-xs uppercase tracking-[0.12em] text-ink-600/70"
+                    className="site-page-tag border-b pb-1 text-xs uppercase tracking-[0.12em]"
                   >
                     {tag}
                   </span>
@@ -96,10 +96,10 @@ export default async function AboutPage({
         </div>
       </section>
 
-      <section className="relative px-4 py-20 md:px-6 md:py-28">
+      <section className="site-page-section home-reveal relative px-4 py-20 md:px-6 md:py-28">
         <div className="container">
           <div className="grid gap-12 lg:grid-cols-[0.34fr_1fr] lg:gap-16">
-            <aside className="lg:sticky lg:top-28 lg:self-start">
+            <div className="lg:sticky lg:top-28 lg:self-start">
               <p className="academy-kicker">{site.labels.about.kernelEyebrow}</p>
               <h2 className="mt-5 font-serif text-3xl leading-tight md:text-4xl">
                 {site.labels.about.kernelTitle}
@@ -107,7 +107,7 @@ export default async function AboutPage({
               <p className="mt-7 max-w-xs text-sm leading-8 text-ink-600">
                 {site.labels.about.kernelDescription}
               </p>
-            </aside>
+            </div>
 
             <div className="relative border-l border-ink-950/10 pl-6 md:pl-9">
               {site.about.kernel.map((item, index) => (
@@ -118,7 +118,7 @@ export default async function AboutPage({
                   <span className="absolute -left-[2.05rem] top-9 flex h-7 w-7 items-center justify-center rounded-full border border-zen-gold/24 bg-paper-100 text-[0.68rem] font-medium text-zen-gold-dim transition duration-500 group-hover:border-zen-gold/45 group-hover:bg-paper-200 md:-left-[3.1rem]">
                     {String(index + 1).padStart(2, '0')}
                   </span>
-                  <p className="academy-kicker text-zen-gold-dim/65">
+                  <p className="academy-kicker text-zen-gold-dim">
                     {locale === 'zh' ? '阶段' : 'Chapter'} {String(index + 1).padStart(2, '0')}
                   </p>
                   <div>
@@ -136,7 +136,7 @@ export default async function AboutPage({
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-y border-ink-950/8 bg-paper-200/42 px-4 py-20 md:px-6 md:py-28">
+      <section className="site-index-section home-reveal relative overflow-hidden border-y border-ink-950/8 bg-paper-200/42 px-4 py-20 md:px-6 md:py-28">
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(111,121,103,0.045)_0_1px,transparent_1px_100%)]" />
         <div className="container relative">
           <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-18">
@@ -160,7 +160,7 @@ export default async function AboutPage({
                     key={point}
                     className="grid gap-4 border-b border-ink-950/10 py-6 md:grid-cols-[4.5rem_1fr] md:gap-8"
                   >
-                    <p className="academy-kicker text-zen-gold-dim/70">
+                    <p className="academy-kicker text-zen-gold-dim/90">
                       {String(index + 1).padStart(2, '0')}
                     </p>
                     <p className="max-w-2xl text-base leading-8 text-ink-700">
@@ -174,30 +174,19 @@ export default async function AboutPage({
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-y border-ink-950/8 bg-paper-200/38 px-4 py-20 md:px-6 md:py-28">
+      <section className="site-page-section home-reveal relative overflow-hidden border-y border-ink-950/8 bg-paper-200/38 px-4 py-20 md:px-6 md:py-28">
         <div className="container">
           <div className="grid gap-12 lg:grid-cols-[0.88fr_1.12fr] lg:items-center lg:gap-18">
-            <div className="incense-scene min-h-[380px]" aria-hidden="true">
-              <div className="incense-water" />
-              <div className="incense-floor" />
-              <div className="incense-boat-shadow" />
-              <div className="incense-boat" />
-              <div className="incense-elder">
-                <span className="incense-elder-hat" />
-                <span className="incense-elder-head" />
-                <span className="incense-elder-body" />
-                <span className="incense-elder-arm" />
+            <div className="natural-slip overflow-hidden p-3 md:p-4">
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <Image
+                  src="/blog/zongtong-retreat/temple.jpg"
+                  alt={locale === 'zh' ? '宗通寺禅修期间的寺院现场' : 'Temple grounds during Darren’s meditation retreat'}
+                  fill
+                  sizes="(min-width: 1024px) 44vw, 100vw"
+                  className="object-cover"
+                />
               </div>
-              <div className="incense-rod">
-                <div className="incense-stick" />
-                <div className="incense-burnt-tip" />
-                <div className="incense-ember" />
-                <div className="incense-ash" />
-              </div>
-              <div className="incense-fishing-line" />
-              <span className="incense-smoke incense-smoke-one" />
-              <span className="incense-smoke incense-smoke-two" />
-              <span className="incense-smoke incense-smoke-three" />
             </div>
 
             <div>
@@ -216,12 +205,12 @@ export default async function AboutPage({
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-ink-950 px-4 py-20 text-paper-100 md:px-6 md:py-24">
+      <section className="site-page-cta home-reveal relative overflow-hidden bg-ink-950 px-4 py-20 text-paper-100 md:px-6 md:py-24">
         <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(111,121,103,0.18),rgba(31,33,26,0)_58%)]" />
         <div className="container relative">
           <div className="grid gap-12 lg:grid-cols-[0.36fr_0.64fr] lg:gap-16">
             <div>
-              <p className="academy-kicker text-paper-300/62">{site.labels.about.workEyebrow}</p>
+              <p className="academy-kicker text-paper-300/82">{site.labels.about.workEyebrow}</p>
               <h2 className="mt-5 font-serif text-4xl leading-tight md:text-5xl">
                 {site.labels.about.workTitle}
               </h2>
@@ -233,7 +222,7 @@ export default async function AboutPage({
                   className="group relative overflow-hidden border-t border-paper-100/10 px-1 py-6 transition-colors duration-500 hover:bg-paper-100/[0.035] md:grid md:grid-cols-[5rem_1fr] md:gap-6 md:px-5"
                 >
                   <span className="absolute left-0 top-0 h-px w-0 bg-zen-gold-light/42 transition-all duration-700 group-hover:w-full" />
-                  <p className="academy-kicker text-paper-300/52 transition-colors duration-500 group-hover:text-zen-gold-light">
+                  <p className="academy-kicker text-paper-300/76 transition-colors duration-500 group-hover:text-zen-gold-light">
                     {String(index + 1).padStart(2, '0')}
                   </p>
                   <p className="mt-4 max-w-3xl text-base leading-8 text-paper-300/78 transition-transform duration-500 group-hover:translate-x-1 md:mt-0">

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { defaultLocale, isLocale, locales, type Locale } from '@/i18n/config';
 import type { BlogPost } from '@/lib/blog';
+import { getPortfolio } from '@/lib/portfolio';
 import { getSiteContent } from '@/lib/siteContent';
 
 export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.darren-su.com';
@@ -11,100 +12,95 @@ const pageKeywords: Record<Locale, Record<KeywordGroup, string[]>> = {
   en: {
     home: [
       'China AI ecosystem',
-      'China robotics ecosystem',
-      'China supply chain',
-      'AI builder community China',
       'China developer community',
-      'AI ecosystem briefing',
-      'China partner discovery',
-      'focused China pilot',
+      'AI developer ecosystem programs',
+      'AI product workshop China',
+      'AI agent speaker',
+      'multi-agent organization',
       'AGI Villa',
       'Datawhale',
-      'Product Lab',
+      'MatchPoint',
+      'GlobalTechEvents',
     ],
     services: [
-      'China AI ecosystem briefing',
-      'China robotics field visit',
-      'China supply chain network',
-      'China local partner discovery',
-      'AI builder community China',
-      'focused China pilot',
-      'China technology delegation',
+      'AI developer events China',
+      'developer ecosystem program',
+      'AI product workshop China',
+      'China early user feedback',
+      'AI agent keynote speaker',
+      'multi-agent workshop',
     ],
     work: [
-      'China AI case studies',
-      'AI builder community activation',
-      'China robotics field visit',
-      'China ecosystem briefing',
+      'AI developer ecosystem case studies',
+      'China developer community programs',
       'developer community workshop',
-      'supply chain field visit',
+      'global AI ecosystem partnership',
+      'WAIC side event',
+      'Datawhale city ecosystem',
     ],
     blog: [
-      'AI field notes',
-      'China tech ecosystem',
-      'China robotics ecosystem',
-      'community building',
+      'AI agent writing',
+      'developer ecosystems',
+      'multi-agent organization',
+      'product building',
       'global tech ecosystem',
     ],
     about: [
       'Darren Su',
       'AGI Villa',
       'Datawhale',
-      'AI builder community',
-      'community operator',
+      'MatchPoint',
+      'GlobalTechEvents',
+      'AI ecosystem program lead',
+      'multi-agent organization',
       'Zen practitioner',
     ],
   },
   zh: {
     home: [
-      '中国团队出海',
-      '出海策略',
-      '海外种子用户',
-      'AI 产品出海',
-      '机器人出海',
-      '硬件出海',
-      '开发者工具出海',
-      '海外渠道验证',
-      '海外反馈验证',
-      '低成本出海验证',
+      'AI 开发者生态',
+      'AI 开发者活动',
+      'AI 产品 Workshop',
+      'Agent 分享',
+      '多 Agent 数字组织',
       'AGI Villa',
       'Datawhale',
-      'Product Lab',
+      'MatchPoint',
+      'GlobalTechEvents',
     ],
     services: [
-      '出海咨询',
-      '出海第一步判断',
-      '海外用户与渠道梳理',
-      '低成本海外反馈试点',
-      'AI 产品出海',
-      '机器人硬件出海',
-      '海外种子用户',
-      '开发者社区出海',
+      'AI 开发者活动',
+      '开发者生态项目',
+      'AI 产品 Workshop',
+      '早期用户反馈',
+      'AI Agent 分享',
+      '多 Agent 工作坊',
     ],
     work: [
-      '出海案例',
-      '出海策略验证',
-      '海外用户反馈',
-      'AI 产品出海',
-      '机器人硬件出海',
-      '开发者工具出海',
-      '海外活动反馈试点',
+      'AI 生态项目案例',
+      '开发者社区活动',
+      '多城市联动活动',
+      '全球科技生态合作',
+      'WAIC 官方夜场',
+      'Datawhale 城市生态',
     ],
     blog: [
-      '出海手记',
-      '产品实验',
-      '海外科技生态',
-      '开发者社区',
+      'AI Agent 文章',
+      '多 Agent 数字组织',
+      '产品创造',
+      '开发者生态',
       '长期做事',
-      '跨境科技连接',
+      '全球科技生态',
     ],
     about: [
       'Darren Su',
       '苏鹏',
       'AGI Villa',
       'Datawhale',
-      'AI 创作者社区',
-      '社区建设者',
+      'MatchPoint',
+      'GlobalTechEvents',
+      'AI 生态项目负责人',
+      '多 Agent 数字组织',
       '禅修',
     ],
   },
@@ -164,7 +160,7 @@ export function createPageMetadata({
   title,
   description,
   keywords = [],
-  image = '/og-image.png',
+  image = '/og-image-v2.png',
   imageWidth = 1200,
   imageHeight = 630,
   imageAlt,
@@ -262,6 +258,7 @@ function personNode(locale: string) {
     affiliation: [
       { '@type': 'Organization', name: 'AGI Villa' },
       { '@type': 'Organization', name: 'Datawhale' },
+      { '@type': 'Organization', name: 'MatchPoint' },
     ],
     hasOccupation: [
       {
@@ -270,10 +267,15 @@ function personNode(locale: string) {
       },
       {
         '@type': 'Occupation',
-        name: locale === 'zh' ? 'Datawhale 城市负责人' : 'Datawhale City Lead',
+        name: locale === 'zh' ? 'Datawhale 城市生态负责人' : 'Datawhale City Ecosystem Lead',
+      },
+      {
+        '@type': 'Occupation',
+        name: locale === 'zh' ? 'MatchPoint 联合创始人' : 'MatchPoint Co-founder',
       },
     ],
     sameAs: [
+      'https://xhslink.cn/m/1JL3lV0NGmO',
       'https://x.com/zenshipai',
       'https://www.instagram.com/0xdarren_su',
       'https://www.linkedin.com/in/darrenzenshipai',
@@ -327,7 +329,7 @@ export function homeStructuredData(locale: string) {
         '@id': `${siteUrl}/#service`,
         name: site.seo.home.professionalServiceName,
         url,
-        image: `${siteUrl}/images/hero-longjing-mist.jpg`,
+        image: `${siteUrl}/photo.jpg`,
         email: 'supeng842499467@gmail.com',
         areaServed: getAreaServed(locale),
         availableLanguage: ['English', 'Chinese'],
@@ -359,6 +361,7 @@ export function aboutStructuredData(locale: string) {
 
 export function servicesStructuredData(locale: string) {
   const site = getSiteContent(locale);
+  const { collaborations } = getPortfolio(locale);
   const pageName = site.seo.services.listName;
 
   return {
@@ -368,13 +371,13 @@ export function servicesStructuredData(locale: string) {
         '@type': 'ItemList',
         name: pageName,
         url: absoluteLocalizedUrl(locale, '/services'),
-        itemListElement: site.serviceItems.map((item, index) => ({
+        itemListElement: collaborations.map((item, index) => ({
           '@type': 'ListItem',
           position: index + 1,
           item: {
             '@type': 'Service',
             name: item.title,
-            description: item.short,
+            description: item.description,
             provider: { '@id': `${siteUrl}/#person` },
             areaServed: getAreaServed(locale),
             availableLanguage: ['English', 'Chinese'],
@@ -387,9 +390,38 @@ export function servicesStructuredData(locale: string) {
   };
 }
 
+export function workStructuredData(locale: string) {
+  const { work } = getPortfolio(locale);
+  const name = locale === 'zh' ? 'Darren Su 的工作与案例' : 'Darren Su Work and Case Studies';
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'ItemList',
+        name,
+        url: absoluteLocalizedUrl(locale, '/work'),
+        itemListElement: work.map((item, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          item: {
+            '@type': 'CreativeWork',
+            name: item.title,
+            description: item.summary,
+            creator: { '@id': `${siteUrl}/#person` },
+            url: item.href ? absoluteLocalizedUrl(locale, item.href) : undefined,
+          },
+        })),
+      },
+      personNode(locale),
+      breadcrumbNode(locale, '/work', name),
+    ],
+  };
+}
+
 export function articleStructuredData(post: BlogPost, locale: string) {
   const url = absoluteLocalizedUrl(locale, `/blog/${post.slug}`);
-  const blogName = locale === 'zh' ? '手记' : 'Field Notes';
+  const blogName = locale === 'zh' ? '文章' : 'Writing';
 
   return {
     '@context': 'https://schema.org',
@@ -439,7 +471,7 @@ export function articleStructuredData(post: BlogPost, locale: string) {
 
 export function blogStructuredData(posts: BlogPost[], locale: string) {
   const url = absoluteLocalizedUrl(locale, '/blog');
-  const name = locale === 'zh' ? 'Darren Su 的手记' : 'Darren Su Field Notes';
+  const name = locale === 'zh' ? 'Darren Su 的文章' : 'Darren Su Writing';
 
   return {
     '@context': 'https://schema.org',
@@ -469,7 +501,8 @@ export function blogStructuredData(posts: BlogPost[], locale: string) {
 
 export function productLabStructuredData(locale: string) {
   const site = getSiteContent(locale);
-  const name = locale === 'zh' ? '产品实验室' : 'Product Lab';
+  const name = locale === 'zh' ? '产品' : 'Products';
+  const digitalOrganization = site.products.digitalOrganization;
 
   return {
     '@context': 'https://schema.org',
@@ -478,7 +511,8 @@ export function productLabStructuredData(locale: string) {
         '@type': 'ItemList',
         name,
         url: absoluteLocalizedUrl(locale, '/build'),
-        itemListElement: site.products.items.map((project, index) => ({
+        itemListElement: [
+          ...site.products.items.map((project, index) => ({
           '@type': 'ListItem',
           position: index + 1,
           item: {
@@ -492,7 +526,22 @@ export function productLabStructuredData(locale: string) {
             creator: { '@id': `${siteUrl}/#person` },
             keywords: project.tags.join(', '),
           },
-        })),
+          })),
+          {
+            '@type': 'ListItem',
+            position: site.products.items.length + 1,
+            item: {
+              '@type': 'CreativeWork',
+              name: digitalOrganization.title,
+              description: digitalOrganization.description,
+              url: digitalOrganization.href
+                ? absoluteLocalizedUrl(locale, digitalOrganization.href)
+                : absoluteLocalizedUrl(locale, '/build'),
+              creator: { '@id': `${siteUrl}/#person` },
+              keywords: locale === 'zh' ? '多 Agent 数字组织, AI 原生管理' : 'multi-agent organization, AI-native management',
+            },
+          },
+        ],
       },
       personNode(locale),
       breadcrumbNode(locale, '/build', name),
