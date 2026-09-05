@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import { defaultLocale, locales } from '@/i18n/config';
 import { getAllPosts, getPostBySlug } from '@/lib/blog';
+import { getPortfolio } from '@/lib/portfolio';
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.darren-su.com';
 
@@ -52,6 +53,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
         lastModified: post.date,
         changeFrequency: 'monthly',
         priority: 0.7,
+        alternates: { languages },
+      });
+    }
+  }
+
+  const workIds = getPortfolio(defaultLocale).work.map((item) => item.id);
+  for (const id of workIds) {
+    const route = `/work/${id}`;
+    const languages = Object.fromEntries(
+      locales.map((locale) => [locale, `${baseUrl}/${locale}${route}`])
+    );
+    languages['x-default'] = `${baseUrl}/${defaultLocale}${route}`;
+
+    for (const locale of locales) {
+      sitemap.push({
+        url: `${baseUrl}/${locale}${route}`,
+        changeFrequency: 'monthly',
+        priority: 0.72,
         alternates: { languages },
       });
     }

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { getAllPosts } from '@/lib/blog';
+import ContactActions from '@/components/ContactActions';
 
 export default function NotesContact({ locale }: { locale: string }) {
   const posts = getAllPosts(locale);
@@ -27,15 +28,14 @@ export default function NotesContact({ locale }: { locale: string }) {
           contactTitle: '如果你觉得我们可以一起做\u2060件\u2060事，欢迎来信。',
           contactDescription:
             '不用准备完整方案。简单说说你正在做什么、这次想解决什么，以及为什么想到找我，就够我们开始聊了。',
-          email: 'supeng842499467@gmail.com',
           services: '先看看常见的合作方式',
         }
       : {
           eyebrow: 'NOTES / WRITING',
           title: 'I usually wait until something is finished, then write down what happened and what I learned.',
-          featured: 'Five observations from a week inside China’s AI ecosystem',
-          read: 'Read the field note',
-          more: 'Two other essays',
+          featured: isAgentEssay ? 'What working with 31 agents taught me about management' : 'Five observations from a week inside China’s AI ecosystem',
+          read: isAgentEssay ? 'Read the essay' : 'Read the field note',
+          more: 'More writing',
           all: 'View all writing',
           path: 'I joined Datawhale in 2019 as an AI learner. Later, I began contributing to open-source projects and organizing communities and events. MatchPoint grew out of a hiring problem I encountered repeatedly in that work.',
           about: 'See how these experiences connect',
@@ -43,7 +43,6 @@ export default function NotesContact({ locale }: { locale: string }) {
           contactTitle: 'If you think we could work on something together, write to me.',
           contactDescription:
             'You do not need a complete proposal. A few lines about what you are working on, what you hope to solve, and why you thought of me are enough to begin.',
-          email: 'supeng842499467@gmail.com',
           services: 'See the usual ways we can work together',
         };
 
@@ -112,7 +111,7 @@ export default function NotesContact({ locale }: { locale: string }) {
         <h2>{copy.contactTitle}</h2>
         <div>
           <p>{copy.contactDescription}</p>
-          <a href={`mailto:${copy.email}`} className="quiet-contact-email">{copy.email} ↗</a>
+          <ContactActions locale={locale} context="home-contact" variant="quiet" />
           <Link href="/services">{copy.services} →</Link>
         </div>
         <Image

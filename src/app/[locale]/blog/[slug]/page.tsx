@@ -1,13 +1,13 @@
 import { notFound } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
-import { getAllPostSlugs, getPostBySlug } from '@/lib/blog';
+import { getAllPosts, getPostBySlug } from '@/lib/blog';
 import { locales } from '@/i18n/config';
 import JsonLd from '@/components/JsonLd';
 import { absoluteLocalizedUrl, articleStructuredData, createPageMetadata } from '@/lib/seo';
 
-export async function generateStaticParams() {
-  return getAllPostSlugs().map((slug) => ({ slug }));
+export function generateStaticParams({ params }: { params: { locale: string } }) {
+  return getAllPosts(params.locale).map(({ slug }) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }) {
@@ -58,6 +58,33 @@ function escapeAttribute(value: string): string {
   return escapeHtml(value).replace(/`/g, '&#96;');
 }
 
+function renderLink(label: string, rawHref: string): string {
+  const href = rawHref.trim();
+  const isExternal = /^https?:\/\//i.test(href);
+  const isRootRelative = href.startsWith('/') && !href.startsWith('//') && !href.includes('\\');
+  const isSafe = isExternal || isRootRelative || href.startsWith('#') || /^mailto:/i.test(href);
+
+  if (!isSafe) return escapeHtml(label);
+
+  const externalAttributes = isExternal ? ' target="_blank" rel="noopener noreferrer"' : '';
+  return `<a href="${escapeAttribute(href)}" class="text-zen-gold-dim underline underline-offset-4 hover:text-ink-950"${externalAttributes}>${escapeHtml(label)}</a>`;
+}
+
+function headingId(value: string, seen: Map<string, number>): string {
+  const plainText = value
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/[`*_~]/g, '')
+    .normalize('NFKC')
+    .toLocaleLowerCase()
+    .replace(/[\u2018\u2019']/g, '')
+    .replace(/[^\p{Letter}\p{Number}]+/gu, '-')
+    .replace(/^-+|-+$/g, '');
+  const base = plainText || 'section';
+  const count = seen.get(base) ?? 0;
+  seen.set(base, count + 1);
+  return count === 0 ? base : `${base}-${count + 1}`;
+}
+
 function renderInlineMarkdown(value: string): string {
   const tokens: string[] = [];
   const store = (html: string) => {
@@ -70,7 +97,7 @@ function renderInlineMarkdown(value: string): string {
       store(`<code class="rounded bg-ink-700/8 px-1.5 py-0.5 font-mono text-sm text-zen-gold-dim">${escapeHtml(code)}</code>`)
     )
     .replace(/\[([^\]]+)\]\(([^)]+)\)/g, (_, label: string, href: string) =>
-      store(`<a href="${escapeAttribute(href)}" class="text-zen-gold-dim underline underline-offset-4 hover:text-ink-950" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`)
+      store(renderLink(label, href))
     )
     .replace(/(^|[\s(])((?:https?:\/\/)[^\s<)]+)/g, (_, prefix: string, href: string) =>
       `${prefix}${store(`<a href="${escapeAttribute(href)}" class="break-words text-zen-gold-dim underline underline-offset-4 hover:text-ink-950" target="_blank" rel="noopener noreferrer">${escapeHtml(href)}</a>`)}`
@@ -110,6 +137,7 @@ function renderMarkdown(content: string, title: string, locale: string): string 
   let listType: 'ul' | 'ol' | null = null;
   let listItems: string[] = [];
   let imageIndex = 0;
+  const headingIds = new Map<string, number>();
 
   const flushParagraph = () => {
     if (paragraph.length === 0) return;
@@ -167,14 +195,15 @@ function renderMarkdown(content: string, title: string, locale: string): string 
       flushList();
       const level = heading[1].length;
       const text = renderInlineMarkdown(heading[2]);
+      const id = headingId(heading[2], headingIds);
       if (level === 1) {
-        output.push(`<h1 class="mt-14 mb-6 font-serif text-4xl leading-tight text-ink-950">${text}</h1>`);
+        output.push(`<h1 id="${escapeAttribute(id)}" class="scroll-mt-24 mt-14 mb-6 font-serif text-4xl leading-tight text-ink-950">${text}</h1>`);
       } else if (level === 2) {
-        output.push(`<h2 class="mt-12 mb-5 font-serif text-3xl leading-tight text-ink-950">${text}</h2>`);
+        output.push(`<h2 id="${escapeAttribute(id)}" class="scroll-mt-24 mt-12 mb-5 font-serif text-3xl leading-tight text-ink-950">${text}</h2>`);
       } else if (level === 3) {
-        output.push(`<h3 class="mt-10 mb-4 text-xl font-medium text-ink-950">${text}</h3>`);
+        output.push(`<h3 id="${escapeAttribute(id)}" class="scroll-mt-24 mt-10 mb-4 text-xl font-medium text-ink-950">${text}</h3>`);
       } else {
-        output.push(`<h${level} class="mt-8 mb-3 text-lg font-medium leading-relaxed text-ink-950">${text}</h${level}>`);
+        output.push(`<h${level} id="${escapeAttribute(id)}" class="scroll-mt-24 mt-8 mb-3 text-lg font-medium leading-relaxed text-ink-950">${text}</h${level}>`);
       }
       continue;
     }

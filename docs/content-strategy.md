@@ -1,97 +1,73 @@
 # Content Strategy
 
-This site is not a translation-first website. Each language has its own primary audience and should make a different promise.
+The site is Darren Su's bilingual public record of work: developer ecosystem programs, conference collaborations, early-user product workshops, AI and agent talks, products, and writing.
 
-## Audience Direction
+Chinese and English should communicate the same verified facts. They do not need to be literal translations: English copy should add context that an international reader may not have, while Chinese copy can assume more familiarity with China's technology and community landscape.
 
-English audience:
+## Audience and Promise
 
-- Overseas AI, robotics, hardware, open-source, and technology teams.
-- They want to understand China, find relevant builders or partners, and test a focused path through field visits, briefings, feedback rooms, or focused pilots.
-- Core direction: Overseas -> China.
+The primary audience is a team, event organizer, community, university, or conference considering a concrete collaboration with Darren.
 
-Chinese audience:
+Every public page should help that reader answer four questions:
 
-- China-based AI, technology, developer tool, robotics, hardware, open-source, and innovation teams.
-- They want to understand overseas builder ecosystems, developer communities, conferences, partners, and early go-to-market paths.
-- Core direction: China -> Global.
+1. What kind of work does Darren do?
+2. What did he personally handle?
+3. What was actually completed?
+4. What is the simplest way to begin a relevant conversation?
 
-## Implementation Rule
+The site should not imply capabilities, geographic reach, client work, or results that are not supported by a published project or product.
 
-The current site follows this source structure:
+## Source of Truth
 
-- `src/lib/site-content/zh.ts`: Chinese audience narrative. Treat this as independent copy for China teams going global.
-- `src/lib/site-content/en.ts`: English audience narrative. Treat this as the source of truth for overseas audiences trying to understand China.
-- Future `es`, `pt`, `fr`, and other non-Chinese locales should be localized from the English audience narrative, not from Chinese.
-- `messages/*.json` should mainly hold UI copy, route metadata, forms, navigation, and small interface labels. Strategic page content should live in the site-content files.
+- `src/lib/portfolio.ts` is the source of truth for public work, case studies, metrics, and collaboration paths in both languages.
+- `src/lib/site-content/{en,zh}.ts` holds the About, Products, Writing, and SEO narratives still used by those routes.
+- `content/blog/{en,zh}/` holds finished public essays and field notes. A translated version may share a slug, but each language must be reviewed on its own.
+- `messages/*.json` should contain navigation and small interface labels rather than strategic page copy.
+- Page-local copy is acceptable for a page-specific editorial introduction, but facts and repeated service claims should come from the shared sources above.
 
-Do not treat Chinese and English as translations of each other. They share the same underlying capabilities, but they answer different buyer questions.
+When a fact changes, update its source rather than patching several rendered pages independently.
 
-## Shared Capability
+## Public Themes
 
-The underlying capability is the same in both languages:
+- Developer events and multi-city ecosystem programs.
+- Conference and technology-brand collaborations.
+- Cross-border ecosystem visits and product feedback workshops.
+- Practical AI and multi-agent work systems.
+- Products built from recurring problems in community, events, and hiring work.
+- Long-term community practice and the personal disciplines behind it.
 
-- Ecosystem briefing.
-- Community, partner, event, supplier, lab, and people mapping.
-- Field visits and delegation design.
-- Feedback rooms, workshops, side events, and focused pilots.
-- Case studies, field notes, playbooks, and private relationship records.
+Robotics, hardware, supply chain, market-entry work, or other adjacent topics should only become primary themes after there is real, publishable work to support them.
 
-The surface narrative changes by audience. Do not copy one language into the other.
+## Case Study Standard
 
-## Important English Themes
+Every project in the public work index should have a case page containing:
 
-English content should make China legible to global teams:
+- Context: why the work existed.
+- Role: what Darren personally handled.
+- Process: the small number of actions that moved it forward.
+- Outcome: a concrete, supportable result.
+- Reflection: one useful lesson without turning the case into advertising copy.
 
-- China AI builder ecosystem.
-- Robotics and embodied AI.
-- Supply chain and hardware manufacturing networks.
-- Open-source and developer communities.
-- Universities, startups, and selected enterprise innovation teams.
-- Field visits, delegations, feedback rooms, demo sessions, and focused pilots.
+Use approximate numbers when the underlying record is approximate. Do not turn participation, reach, or invitations into stronger business outcomes unless they are verified.
 
-## Important Chinese Themes
+## Writing Standard
 
-Chinese content should help China teams work globally:
+Publish after there is something real to record. Field notes should preserve what happened and what changed in Darren's understanding; essays should make a clear argument grounded in direct practice.
 
-- Overseas developer, creator, and founder communities.
-- Global conference, community, and field event strategy.
-- AI product globalization.
-- Open-source and developer relations outside China.
-- Partner discovery and early market feedback testing.
-- How to explain Chinese product, robotics, hardware, and supply chain capabilities to overseas teams.
+Before publishing, confirm:
 
-## Content Decision Fields
-
-Before publishing anything, classify it with:
-
-- Audience: Overseas -> China, China -> Global, Both / Personal.
-- Theme: AI, Robotics, Supply Chain, Builder Community, Product, Open Source, Inner Ground.
-- Type: Case Study, Field Note, Playbook, Product Lab, Personal Note.
-- Visibility: Public, Draft, Private.
-
-## Reusing One Project
-
-One project can become two different pieces.
-
-Example: an overseas robotics team visits China.
-
-English angle:
-
-- What overseas robotics teams should understand before visiting China's supply chain ecosystem.
-- Focus on preparation, misconceptions, field visit design, and follow-up paths.
-
-Chinese angle:
-
-- How China robotics or AI hardware teams can explain their capabilities to overseas customers.
-- Focus on trust, product clarity, delivery boundaries, quality, and long-term collaboration.
+- Frontmatter is complete and the date is accurate.
+- Every local image exists and has meaningful alternative text.
+- Every external reference still resolves and is described honestly.
+- Long pieces have a linked table of contents.
+- A second-language version is either complete or intentionally unavailable; never show an empty link.
 
 ## Maintenance Rhythm
 
-- Each public project should leave one case study.
-- Each meaningful project should leave one field note.
-- Each repeated method should become a playbook or checklist.
-- Private relationship knowledge should stay in a CRM, not on the public site.
-- Product Lab updates only when project status, signal, or direction changes.
+- Add or update a case page when a public project reaches a meaningful milestone.
+- Add a field note when the experience contains evidence or judgment that the case page cannot show.
+- Update Product pages only when status, signal, or direction changes.
+- Keep private relationship knowledge in the appropriate private system, not on the public site.
+- Run the repository's full quality check before publishing.
 
-The goal is a compounding asset system: cases prove execution, notes sharpen judgment, playbooks capture reusable methods, and services become clearer through real work.
+The goal is a compact, credible body of work: cases prove execution, writing shows judgment, products demonstrate building ability, and the collaboration page sets clear expectations.

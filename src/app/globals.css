@@ -4208,6 +4208,17 @@ h1, h2, h3 {
   transform: rotate(3deg);
 }
 
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem 1.2rem;
+}
+
+.contact-actions button {
+  min-height: 2.75rem;
+}
+
 .article-page {
   position: relative;
   margin-top: -4rem;

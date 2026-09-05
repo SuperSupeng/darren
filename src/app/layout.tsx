@@ -22,9 +22,9 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.darren-su.com';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: 'Darren Su | China AI, Robotics & Supply Chain Feedback',
+  title: 'Darren Su | AI Products, Developer Communities & Technology Events',
   description:
-    'Helping global AI, robotics, hardware, and tech teams understand China, meet the right people, and get real feedback.',
+    'Darren Su leads AI developer programs, helps early products meet users, builds software, and shares practical experience with AI and agents.',
   icons: {
     icon: [
       { url: '/favicon.svg', type: 'image/svg+xml' },

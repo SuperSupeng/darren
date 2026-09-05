@@ -1,5 +1,6 @@
 import { locales } from '@/i18n/config';
 import { getAllPosts } from '@/lib/blog';
+import { getPortfolio } from '@/lib/portfolio';
 import { siteUrl } from '@/lib/seo';
 
 export const dynamic = 'force-static';
@@ -9,6 +10,12 @@ export function GET() {
     getAllPosts(locale).map(
       (post) =>
         `- [${post.title}](${siteUrl}/${locale}/blog/${post.slug}): ${post.description}`
+    )
+  );
+  const cases = locales.flatMap((locale) =>
+    getPortfolio(locale).work.map(
+      (work) =>
+        `- [${work.title}](${siteUrl}/${locale}/work/${work.id}): ${work.summary}`
     )
   );
 
@@ -32,6 +39,10 @@ export function GET() {
     `- [产品](${siteUrl}/zh/build)`,
     `- [About Darren](${siteUrl}/en/about)`,
     `- [关于 Darren](${siteUrl}/zh/about)`,
+    '',
+    '## Case studies',
+    '',
+    ...cases,
     '',
     '## Published writing',
     '',

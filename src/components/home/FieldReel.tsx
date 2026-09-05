@@ -2,77 +2,10 @@
 
 import Image from 'next/image';
 import { useEffect, useRef, useState, type PointerEvent } from 'react';
-
-const fieldImages = [
-  {
-    src: '/images/work/03.jpg',
-    zh: '微信开发者创新工坊',
-    en: 'WeChat Developer Innovation Workshop',
-    place: 'Chengdu',
-    zhRole: '项目负责人',
-    enRole: 'Program lead',
-    zhResult: '成都场近百位开发者参与',
-    enResult: 'Nearly 100 developers joined the Chengdu workshop',
-    shape: 'wide',
-  },
-  {
-    src: '/images/work/14.jpg',
-    zh: 'Agent Builders Gathering',
-    en: 'Agent Builders Gathering',
-    place: 'China',
-    zhRole: '系列活动发起人、负责人',
-    enRole: 'Series initiator and lead',
-    zhResult: '北京、上海、杭州、深圳四城近 1,000 位开发者',
-    enResult: 'Nearly 1,000 developers across four cities',
-    shape: 'portrait',
-  },
-  {
-    src: '/images/work/12.jpg',
-    zh: 'OpenClaw 城市开发者现场',
-    en: 'OpenClaw Developer Gathering',
-    place: 'Beijing',
-    zhRole: '城市生态负责人',
-    enRole: 'City ecosystem lead',
-    zhResult: '和本地组织者一起完成城市开发者活动',
-    enResult: 'Delivered a local developer event with city organizers',
-    shape: 'wide',
-  },
-  {
-    src: '/images/work/19.jpg',
-    zh: '全球 AI 创造者分享',
-    en: 'Global AI Builders Talk',
-    place: 'Singapore',
-    zhRole: '分享嘉宾',
-    enRole: 'Invited speaker',
-    zhResult: '在新加坡介绍中国开发者社区与 Agent 实践',
-    enResult: 'Spoke in Singapore about China’s developer communities and my work with agents',
-    shape: 'portrait',
-  },
-  {
-    src: '/images/work/21.jpg',
-    zh: '全球开发者生态连接',
-    en: 'Global Developer Ecosystem',
-    place: 'Singapore',
-    zhRole: '生态伙伴',
-    enRole: 'Ecosystem partner',
-    zhResult: '在现场认识不同地区的创业者与社区伙伴',
-    enResult: 'Met founders and community partners from different regions',
-    shape: 'wide',
-  },
-  {
-    src: '/images/work/08.jpg',
-    zh: 'AI 创业圆桌',
-    en: 'AI Founder Roundtable',
-    place: 'Shanghai',
-    zhRole: '圆桌嘉宾、组织者',
-    enRole: 'Panelist and organizer',
-    zhResult: '围绕 AI 产品和创业实践展开讨论',
-    enResult: 'Discussed AI products and early-stage company building',
-    shape: 'wide',
-  },
-] as const;
+import { getFieldStories } from '@/lib/portfolio';
 
 export default function FieldReel({ locale }: { locale: string }) {
+  const fieldImages = getFieldStories(locale);
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const dragRef = useRef({ active: false, x: 0, scroll: 0 });
@@ -217,7 +150,6 @@ export default function FieldReel({ locale }: { locale: string }) {
         <div className="field-gallery-window">
           <div ref={trackRef} className="field-gallery-track">
             {fieldImages.map((item, index) => {
-              const title = locale === 'zh' ? item.zh : item.en;
               return (
                 <figure
                   key={item.src}
@@ -226,7 +158,7 @@ export default function FieldReel({ locale }: { locale: string }) {
                 >
                   <Image
                     src={item.src}
-                    alt={locale === 'zh' ? title : `${title} in the field`}
+                    alt={item.imageAlt}
                     fill
                     sizes={item.shape === 'portrait' ? '(min-width: 768px) 32vw, 72vw' : '(min-width: 768px) 58vw, 88vw'}
                     className="object-cover"
@@ -234,8 +166,12 @@ export default function FieldReel({ locale }: { locale: string }) {
                   <div className="field-gallery-card-wash" />
                   <figcaption>
                     <span>{String(index + 1).padStart(2, '0')}</span>
-                    <strong>{title}</strong>
+                    <strong>{item.title}</strong>
                     <small>{item.place}</small>
+                    <div className="field-gallery-card-context">
+                      <span>{item.role}</span>
+                      <p>{item.result}</p>
+                    </div>
                   </figcaption>
                 </figure>
               );
@@ -246,9 +182,9 @@ export default function FieldReel({ locale }: { locale: string }) {
         <div className="container field-gallery-focus">
           <div>
             <span>{String(activeIndex + 1).padStart(2, '0')} / {String(fieldImages.length).padStart(2, '0')}</span>
-            <strong>{locale === 'zh' ? activeItem.zhRole : activeItem.enRole}</strong>
+            <strong>{activeItem.role}</strong>
           </div>
-          <p>{locale === 'zh' ? activeItem.zhResult : activeItem.enResult}</p>
+          <p>{activeItem.result}</p>
           <span>{copy.drag}</span>
         </div>
       </div>

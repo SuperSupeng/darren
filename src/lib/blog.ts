@@ -136,18 +136,6 @@ export function getPostBySlug(slug: string, locale: string = defaultLocale): Blo
   return posts.find(p => p.slug === slug) || null;
 }
 
-export function getAllPostSlugs(): string[] {
-  const slugs = new Set<string>();
-
-  for (const locale of locales) {
-    for (const post of getAllPosts(locale)) {
-      slugs.add(post.slug);
-    }
-  }
-
-  return Array.from(slugs);
-}
-
 export function getLocalizedBlogRoutes(): Array<{ locale: Locale; slug: string }> {
   return locales.flatMap((locale) =>
     getAllPosts(locale).map((post) => ({ locale, slug: post.slug }))

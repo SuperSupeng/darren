@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { defaultLocale, isLocale, locales, type Locale } from '@/i18n/config';
 import type { BlogPost } from '@/lib/blog';
-import { getPortfolio } from '@/lib/portfolio';
+import { getPortfolio, type PortfolioWork } from '@/lib/portfolio';
 import { getSiteContent } from '@/lib/siteContent';
 
 export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.darren-su.com';
@@ -150,9 +150,7 @@ export function getPageKeywords(locale: string, group: KeywordGroup) {
   return pageKeywords[safeLocale][group];
 }
 
-function getAreaServed(locale: string) {
-  return locale === 'zh' ? ['China', 'North America', 'Europe', 'Asia', 'Global'] : ['China', 'Asia'];
-}
+const areaServed = ['China'];
 
 export function createPageMetadata({
   locale,
@@ -331,7 +329,7 @@ export function homeStructuredData(locale: string) {
         url,
         image: `${siteUrl}/photo.jpg`,
         email: 'supeng842499467@gmail.com',
-        areaServed: getAreaServed(locale),
+        areaServed,
         availableLanguage: ['English', 'Chinese'],
         serviceType: site.seo.home.serviceTypes,
         founder: { '@id': `${siteUrl}/#person` },
@@ -379,7 +377,7 @@ export function servicesStructuredData(locale: string) {
             name: item.title,
             description: item.description,
             provider: { '@id': `${siteUrl}/#person` },
-            areaServed: getAreaServed(locale),
+            areaServed,
             availableLanguage: ['English', 'Chinese'],
           },
         })),
@@ -409,12 +407,58 @@ export function workStructuredData(locale: string) {
             name: item.title,
             description: item.summary,
             creator: { '@id': `${siteUrl}/#person` },
-            url: item.href ? absoluteLocalizedUrl(locale, item.href) : undefined,
+            url: absoluteLocalizedUrl(locale, `/work/${item.id}`),
           },
         })),
       },
       personNode(locale),
       breadcrumbNode(locale, '/work', name),
+    ],
+  };
+}
+
+export function workCaseStructuredData(work: PortfolioWork, locale: string) {
+  const url = absoluteLocalizedUrl(locale, `/work/${work.id}`);
+  const workIndexName = locale === 'zh' ? '工作与案例' : 'Work and case studies';
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'CreativeWork',
+        '@id': `${url}#case-study`,
+        url,
+        name: work.title,
+        description: work.summary,
+        image: work.image ? `${siteUrl}${work.image}` : undefined,
+        creator: { '@id': `${siteUrl}/#person` },
+        contentLocation: { '@type': 'Place', name: work.location },
+        inLanguage: locale === 'zh' ? 'zh-CN' : 'en',
+      },
+      personNode(locale),
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          {
+            '@type': 'ListItem',
+            position: 1,
+            name: locale === 'zh' ? '首页' : 'Home',
+            item: absoluteLocalizedUrl(locale),
+          },
+          {
+            '@type': 'ListItem',
+            position: 2,
+            name: workIndexName,
+            item: absoluteLocalizedUrl(locale, '/work'),
+          },
+          {
+            '@type': 'ListItem',
+            position: 3,
+            name: work.title,
+            item: url,
+          },
+        ],
+      },
     ],
   };
 }

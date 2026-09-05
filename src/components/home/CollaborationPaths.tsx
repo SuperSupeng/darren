@@ -17,23 +17,21 @@ export default function CollaborationPaths({ locale }: { locale: string }) {
     locale === 'zh'
       ? {
           eyebrow: '合作 / COLLABORATE',
-          title: '我组织开发者活动，也帮助 AI 产\u2060品接触第一批用户。',
+          title: '你正在推进哪一件事？',
           description:
-            '过去一年，我参与的合作大多从这些具体问题开始。也有人邀请我做 AI 或 Agent 分享，或者请我帮忙联系合适的嘉宾和生态伙伴。在活动和产品 Workshop 里，我通常担任发起人或负责人，从前期策划一直负责到现场和后续整理。',
+            '先弄清这次为什么做、希望谁来，以及结束以后要据此做什么决定。形式和规模，可以在这些问题清楚以后再定。',
           example: '我做过的相关项目',
           bestFor: '适合谁',
           leaves: '合作通常包括',
-          link: '查看合作方式与项目范围',
         }
       : {
           eyebrow: 'COLLABORATE / THREE PATHS',
-          title: 'I organize developer events and help AI products reach their first users.',
+          title: 'What are you working toward?',
           description:
-            'Most of my collaborations over the past year began with needs like these. Some people also invited me to speak about AI and agents, or asked me to recommend speakers and ecosystem partners. For events and product workshops, I usually serve as the initiator or program lead and stay involved from planning through delivery and follow-up.',
+            'First, we clarify why the work matters, who should take part, and what decision it should inform. Format and scale follow from those answers.',
           example: 'Related work I have done',
           bestFor: 'A good fit for',
           leaves: 'A collaboration usually includes',
-          link: 'View the scope of each collaboration',
         };
 
   const moveTabFocus = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
@@ -121,7 +119,7 @@ export default function CollaborationPaths({ locale }: { locale: string }) {
               ))}
             </ul>
           </div>
-          <Link href="/services">{copy.link} →</Link>
+          <Link href={`/services#${activePath.id}`}>{activePath.linkLabel} →</Link>
         </div>
       </div>
     </section>

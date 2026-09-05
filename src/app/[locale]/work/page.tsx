@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { getFeaturedWork, getPortfolio, type PortfolioWork } from '@/lib/portfolio';
 import JsonLd from '@/components/JsonLd';
+import ContactActions from '@/components/ContactActions';
 import { createPageMetadata, getPageKeywords, workStructuredData } from '@/lib/seo';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -55,12 +56,11 @@ export default async function WorkPage({ params }: { params: Promise<{ locale: s
           archiveTitle: '其余项目按照合作类型整理。',
           role: '我的角色',
           result: '规模与结果',
-          read: '阅读相关记录',
+          read: '查看完整案例',
           ctaEyebrow: '一起工作',
           ctaTitle: '如果你正在做类似的事情，可以给我写信。',
           ctaDescription: '不用准备完整方案。简单说说你正在做什么、这次想解决什么，以及为什么想到找我，就够我们开始聊了。',
           collaborate: '查看合作方式',
-          contact: '直接联系我',
         }
       : {
           eyebrow: 'Work archive',
@@ -72,12 +72,11 @@ export default async function WorkPage({ params }: { params: Promise<{ locale: s
           archiveTitle: 'Other projects, organized by type.',
           role: 'My role',
           result: 'Scale and outcome',
-          read: 'Read the field note',
+          read: 'View the full case study',
           ctaEyebrow: 'Work together',
           ctaTitle: 'If you are working on something similar, feel free to write.',
           ctaDescription: 'You do not need a finished proposal. A few lines about what you are building, what you want to solve, and why you thought of me are enough to begin.',
           collaborate: 'Explore collaboration',
-          contact: 'Contact me',
         };
 
   return (
@@ -187,7 +186,11 @@ export default async function WorkPage({ params }: { params: Promise<{ locale: s
                         {items.map((item) => (
                           <article key={item.id} className="border-b border-ink-950/10 py-5 first:pt-0 last:border-b-0 last:pb-0">
                             <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-                              <h4 className="text-lg font-medium text-ink-950">{item.title}</h4>
+                              <h4 className="text-lg font-medium text-ink-950">
+                                <Link href={item.href ?? '/work'} className="transition-colors hover:text-zen-gold-dim">
+                                  {item.title} <span aria-hidden="true">↗</span>
+                                </Link>
+                              </h4>
                               <p className="font-mono text-xs text-ink-700/90">{item.year} · {item.location}</p>
                             </div>
                             <div className="mt-3 grid gap-2 text-sm leading-7 text-ink-600 md:grid-cols-[0.42fr_0.58fr] md:gap-6">
@@ -217,7 +220,7 @@ export default async function WorkPage({ params }: { params: Promise<{ locale: s
             <p className="max-w-xl text-base leading-8 text-paper-300/74">{copy.ctaDescription}</p>
             <div className="mt-7 flex flex-wrap items-center gap-5">
               <Link href="/services" className="btn bg-paper-100 text-ink-950 shadow-none hover:bg-paper-200">{copy.collaborate}</Link>
-              <a href="mailto:supeng842499467@gmail.com" className="quiet-link-inverse">{copy.contact}</a>
+              <ContactActions locale={locale} context="work-cta" variant="dark" />
             </div>
           </div>
         </div>

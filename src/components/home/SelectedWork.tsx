@@ -3,23 +3,23 @@
 import Image from 'next/image';
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { Link } from '@/i18n/navigation';
-import { getFeaturedWork } from '@/lib/portfolio';
+import { getFeaturedWork, getWorkCollaboration } from '@/lib/portfolio';
 
 export default function SelectedWork({ locale }: { locale: string }) {
   const work = getFeaturedWork(locale);
   const sectionRef = useRef<HTMLElement>(null);
   const tabListRef = useRef<HTMLDivElement>(null);
   const manualSelectionRef = useRef(false);
-  const manualSelectionTimerRef = useRef<number | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const activeWork = work[activeIndex] ?? work[0];
+  const collaboration = getWorkCollaboration(locale, activeWork.id);
   const copy =
     locale === 'zh'
       ? {
           eyebrow: '最近的工作 / SELECTED WORK',
-          title: '这四件事，大致能说明我过去一年在做什么。',
+          title: '从开发者活动，到产品的第一轮反馈。',
           description:
-            '有的是全国 40 城联动，有的是几十人的产品 Workshop。我在其中大多担任发起人或项目负责人，从内容策划、嘉宾邀请、参与者招募，到现场执行，通常都会直接参与。',
+            '这四份记录里，有各自的起点、我负责的工作和实际完成的结果。你可以从最接近自己需求的一件事看起。',
           role: '我负责的部分',
           result: '这次完成了什么',
           view: '查看完整记录',
@@ -28,9 +28,9 @@ export default function SelectedWork({ locale }: { locale: string }) {
         }
       : {
           eyebrow: 'RECENT WORK / 2026',
-          title: 'These four projects show what I spent most of the past year doing.',
+          title: 'From developer events to a product’s first feedback.',
           description:
-            'One was a nationwide program across 40 cities; another was a product workshop with around 50 participants. I initiated or led most of these projects and stayed involved from content design and speaker invitations through participant outreach and on-site delivery.',
+            'Each record explains the starting point, my role, and what was completed. Start with the project closest to what you have in mind.',
           role: 'What I handled',
           result: 'What was completed',
           view: 'View the full record',
@@ -47,10 +47,14 @@ export default function SelectedWork({ locale }: { locale: string }) {
       frame = 0;
       if (
         window.innerWidth <= 840 ||
+        window.matchMedia('(max-width: 1100px) and (max-height: 720px), (max-height: 560px)').matches ||
         window.matchMedia('(prefers-reduced-motion: reduce)').matches
       ) return;
 
       const bounds = section.getBoundingClientRect();
+      if (bounds.bottom <= 0 || bounds.top >= window.innerHeight) {
+        manualSelectionRef.current = false;
+      }
       const distance = Math.max(1, section.offsetHeight - window.innerHeight);
       const travelled = Math.min(distance, Math.max(0, -bounds.top));
       const progress = travelled / distance;
@@ -70,9 +74,6 @@ export default function SelectedWork({ locale }: { locale: string }) {
       window.removeEventListener('scroll', requestUpdate);
       window.removeEventListener('resize', requestUpdate);
       if (frame) window.cancelAnimationFrame(frame);
-      if (manualSelectionTimerRef.current !== null) {
-        window.clearTimeout(manualSelectionTimerRef.current);
-      }
     };
   }, [work.length]);
 
@@ -91,12 +92,6 @@ export default function SelectedWork({ locale }: { locale: string }) {
           ? (index + 1) % work.length
           : (index - 1 + work.length) % work.length;
     manualSelectionRef.current = true;
-    if (manualSelectionTimerRef.current !== null) {
-      window.clearTimeout(manualSelectionTimerRef.current);
-    }
-    manualSelectionTimerRef.current = window.setTimeout(() => {
-      manualSelectionRef.current = false;
-    }, 1200);
     setActiveIndex(nextIndex);
     tabListRef.current?.querySelectorAll<HTMLButtonElement>('[role="tab"]')[nextIndex]?.focus();
   };
@@ -127,8 +122,14 @@ export default function SelectedWork({ locale }: { locale: string }) {
                 aria-controls="work-story-panel"
                 tabIndex={activeIndex === index ? 0 : -1}
                 className={activeIndex === index ? 'is-active' : undefined}
-                onMouseEnter={() => setActiveIndex(index)}
-                onClick={() => setActiveIndex(index)}
+                onMouseEnter={() => {
+                  manualSelectionRef.current = true;
+                  setActiveIndex(index);
+                }}
+                onClick={() => {
+                  manualSelectionRef.current = true;
+                  setActiveIndex(index);
+                }}
                 onKeyDown={(event) => moveTabFocus(event, index)}
               >
                 <span>{String(index + 1).padStart(2, '0')}</span>
@@ -144,6 +145,7 @@ export default function SelectedWork({ locale }: { locale: string }) {
             className="work-story-visual"
             role="tabpanel"
             aria-labelledby={`work-tab-${activeWork.id}`}
+            onFocusCapture={() => { manualSelectionRef.current = true; }}
           >
             <div className="work-story-images">
               {work.map((item, index) => (
@@ -179,9 +181,19 @@ export default function SelectedWork({ locale }: { locale: string }) {
                 <span>{copy.result}</span>
                 <strong>{activeWork.result}</strong>
               </div>
-              <Link href={activeWork.href ?? '/work'}>
-                {activeWork.href ? copy.view : copy.viewInIndex} →
-              </Link>
+            </div>
+            <div className="work-story-next">
+              {collaboration ? <p>{collaboration.invitation}</p> : null}
+              <div className="work-story-links">
+                <Link href={activeWork.href ?? '/work'}>
+                  {activeWork.href ? copy.view : copy.viewInIndex} →
+                </Link>
+                {collaboration ? (
+                  <Link href={`/services#${collaboration.id}`}>
+                    {collaboration.linkLabel} ↗
+                  </Link>
+                ) : null}
+              </div>
             </div>
           </div>
         </div>

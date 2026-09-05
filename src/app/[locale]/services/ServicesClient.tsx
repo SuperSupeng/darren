@@ -1,4 +1,5 @@
 import { getPortfolio } from '@/lib/portfolio';
+import ContactActions from '@/components/ContactActions';
 
 export default function ServicesClient({ locale }: { locale: string }) {
   const { collaborations } = getPortfolio(locale);
@@ -6,11 +7,13 @@ export default function ServicesClient({ locale }: { locale: string }) {
     locale === 'zh'
       ? {
           eyebrow: '合作',
-          title: '有人想办一场开发者活动，也有人想让产品见到第一批用户。',
-          subtitle: '过去一年，我参与的合作大多从这些具体问题开始。也有人邀请我做 AI 或 Agent 分享，或者请我帮忙联系合适的嘉宾和生态伙伴。',
-          quote: '我通常先问几件简单的事：这次为什么做，希望谁来，活动结束以后，团队准备根据现场的反馈做什么。规模和形式，会在这些问题清楚之后再决定。',
+          title: '开发者活动、产品 Workshop，以及 AI 实践分享。',
+          subtitle: '下面是三种常见的合作方式。找到与你的需求相近的一项，简单说说产品或项目、想解决的问题和预计时间，就可以开始聊。',
           bestFor: '适合',
           whatHappens: '一次合作可能包括',
+          inquiryTitle: '来信时，带上这三点就好',
+          emailSubject: '合作咨询',
+          fieldSeparator: '：',
           methodEyebrow: '工作方式',
           methodTitle: '事情开始前，我通常会先确认几个问题。',
           steps: [
@@ -22,17 +25,18 @@ export default function ServicesClient({ locale }: { locale: string }) {
           boundaryEyebrow: '合作边界',
           boundaryTitle: '也有一些合作方式，我目前不会做。',
           boundaries: ['不出售联系人名单或社区流量', '如果只需要现场执行、却没有清楚的项目目标，我目前不会承接。', '只有双方确实合适时，我才会做引荐。', 'Datawhale、AGI Villa 与个人合作会保持清楚边界'],
-          cta: '如果你觉得我们可以一起做点什么，欢迎来信。',
-          ctaBody: '简单说说你正在做什么、这次想解决什么，以及大致的时间和地点。这些信息已经够我们开始聊了。',
-          email: '给我写邮件',
+          cta: '还没有确定合作形式，也可以先聊聊。',
+          ctaBody: '告诉我你正在做什么，以及眼下最想解决的问题。我们可以从这里一起判断，哪种合作方式更合适。',
         }
       : {
           eyebrow: 'Collaborate',
-          title: 'Some teams come to me to organize a developer event. Others want to put a product in front of its first users.',
-          subtitle: 'Over the past year, most collaborations began with one of these needs. Others began with an invitation to speak about AI or agents, or a request to recommend a speaker or ecosystem partner.',
-          quote: 'I usually begin with a few simple questions: why are we doing this, who should be in the room, and what will the team do with the feedback afterward? Scale and format come later.',
+          title: 'Developer events, product workshops, and talks on AI in practice.',
+          subtitle: 'These are three common ways to work together. Start with the one closest to your needs, and tell me about your product or project, the question you want to explore, and your timing.',
           bestFor: 'Best for',
           whatHappens: 'A collaboration may include',
+          inquiryTitle: 'Three things to include in your email',
+          emailSubject: 'Collaboration inquiry',
+          fieldSeparator: ':',
           methodEyebrow: 'How I work',
           methodTitle: 'Before we begin, I usually clarify a few things.',
           steps: [
@@ -44,9 +48,8 @@ export default function ServicesClient({ locale }: { locale: string }) {
           boundaryEyebrow: 'Working boundaries',
           boundaryTitle: 'There are also a few kinds of work I do not currently take on.',
           boundaries: ['I do not sell contact lists or paid access to community audiences.', 'I do not take on events where the only ask is on-site execution and there is no clear project goal.', 'I make introductions only when there is a genuine fit on both sides.', 'I keep clear boundaries between Datawhale, AGI Villa, and my personal work.'],
-          cta: 'If you think we could work on something together, feel free to write.',
-          ctaBody: 'Tell me briefly what you are building, what you hope to solve, and the rough timing and location. That is enough for us to begin.',
-          email: 'Email me',
+          cta: 'You can write before you have a format in mind.',
+          ctaBody: 'Tell me what you are working on and the question you most want to resolve. From there, we can work out which kind of collaboration fits.',
         };
 
   return (
@@ -62,17 +65,16 @@ export default function ServicesClient({ locale }: { locale: string }) {
           <p className="academy-kicker site-page-kicker">{copy.eyebrow}</p>
           <h1 className="site-page-title mt-6 max-w-5xl font-serif text-[clamp(2.5rem,7vw,6.8rem)] leading-[0.98] tracking-[-0.035em]">{copy.title}</h1>
           <p className="site-page-lead mt-8 max-w-3xl text-lg leading-9">{copy.subtitle}</p>
-          <p className="site-page-quote mt-10 max-w-3xl border-l pl-5 font-serif text-xl leading-relaxed md:mt-12 md:text-3xl">{copy.quote}</p>
         </div>
       </section>
 
       <section className="site-page-section home-reveal px-4 py-20 md:px-6 md:py-28">
         <div className="container space-y-0">
           {collaborations.map((path) => (
-            <article key={path.number} className="site-path-row grid gap-8 border-t border-ink-950/12 py-12 first:border-t-0 first:pt-0 lg:grid-cols-[0.12fr_0.38fr_0.5fr] lg:gap-12">
+            <article id={path.id} key={path.id} aria-labelledby={`${path.id}-title`} className="site-path-row grid scroll-mt-24 gap-8 border-t border-ink-950/12 py-12 first:border-t-0 first:pt-0 lg:grid-cols-[0.12fr_0.38fr_0.5fr] lg:gap-12">
               <p className="font-mono text-xs text-zen-gold-dim/90">{path.number}</p>
               <div>
-                <h2 className="font-serif text-4xl leading-tight md:text-5xl">{path.title}</h2>
+                <h2 id={`${path.id}-title`} className="font-serif text-4xl leading-tight md:text-5xl">{path.title}</h2>
                 <p className="mt-6 text-sm uppercase tracking-[0.1em] text-zen-gold-dim/90">{copy.bestFor}</p>
                 <p className="mt-3 text-sm font-medium leading-7 text-ink-800">{path.bestFor}</p>
               </div>
@@ -87,6 +89,24 @@ export default function ServicesClient({ locale }: { locale: string }) {
                     </li>
                   ))}
                 </ul>
+              </div>
+              <div className="border-t border-ink-950/12 pt-6 lg:col-span-2 lg:col-start-2">
+                <h3 className="text-sm font-medium text-ink-800">{copy.inquiryTitle}</h3>
+                <ol className="mt-4 grid gap-3 md:grid-cols-3">
+                  {path.inquiry.map((item, index) => (
+                    <li key={item} className="flex gap-3 text-sm leading-7 text-ink-600">
+                      <span className="font-mono text-xs leading-7 text-zen-gold-dim/90">{index + 1}.</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ol>
+                <ContactActions
+                  locale={locale}
+                  context={`services-${path.id}`}
+                  emailSubject={`${copy.emailSubject}${copy.fieldSeparator} ${path.title}`}
+                  emailBody={path.inquiry.map((item) => `${item}${copy.fieldSeparator} `).join('\r\n\r\n')}
+                  className="mt-5"
+                />
               </div>
             </article>
           ))}
@@ -134,7 +154,7 @@ export default function ServicesClient({ locale }: { locale: string }) {
           <h2 className="max-w-4xl font-serif text-4xl leading-tight md:text-6xl">{copy.cta}</h2>
           <div>
             <p className="max-w-xl text-base leading-8 text-paper-300/74">{copy.ctaBody}</p>
-            <a href="mailto:supeng842499467@gmail.com" className="btn mt-7 bg-paper-100 text-ink-950 shadow-none hover:bg-paper-200">{copy.email}</a>
+            <ContactActions locale={locale} context="services-cta" variant="dark" className="mt-7" />
           </div>
         </div>
       </section>

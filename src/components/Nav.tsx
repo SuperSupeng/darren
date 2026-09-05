@@ -1,20 +1,24 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/i18n/navigation';
 import { useState, useEffect, useRef } from 'react';
 import LanguageSwitcher from './LanguageSwitcher';
 import Logo from './Logo';
 import type { Locale } from '@/i18n/config';
+import { track } from '@vercel/analytics';
 
 export default function Nav({ blogLocalesBySlug = {} }: { blogLocalesBySlug?: Record<string, string[]> }) {
   const t = useTranslations('nav');
+  const locale = useLocale();
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const darkHeroRoutes = ['/', '/work', '/services', '/build', '/blog', '/about'];
-  const hasDarkOpening = darkHeroRoutes.includes(pathname) || pathname.startsWith('/blog/');
+  const hasDarkOpening = darkHeroRoutes.includes(pathname)
+    || pathname.startsWith('/blog/')
+    || pathname.startsWith('/work/');
   const overDarkHero = hasDarkOpening && !scrolled && !mobileMenuOpen;
   const articleSlug = pathname.match(/^\/blog\/([^/]+)$/)?.[1];
   const availableLocales = articleSlug
@@ -118,6 +122,7 @@ export default function Nav({ blogLocalesBySlug = {} }: { blogLocalesBySlug?: Re
             <LanguageSwitcher inverse={overDarkHero} availableLocales={availableLocales} />
             <a
               href="mailto:supeng842499467@gmail.com"
+              onClick={() => track('Contact Email Opened', { location: 'navigation', locale })}
               className={`inline-flex h-10 items-center justify-center rounded-full border px-5 text-sm font-medium transition-all duration-300 ${
                 overDarkHero
                   ? 'border-paper-100/30 bg-paper-100/8 text-paper-100 backdrop-blur-md hover:border-paper-100/55 hover:bg-paper-100/16'
@@ -183,7 +188,10 @@ export default function Nav({ blogLocalesBySlug = {} }: { blogLocalesBySlug?: Re
               <div className="px-4 pt-2">
                 <a
                   href="mailto:supeng842499467@gmail.com"
-                  onClick={() => setMobileMenuOpen(false)}
+                  onClick={() => {
+                    track('Contact Email Opened', { location: 'mobile-navigation', locale });
+                    setMobileMenuOpen(false);
+                  }}
                   className="inline-flex h-12 w-full items-center justify-center rounded-full border border-ink-700/16 bg-paper-100/44 px-5 text-sm font-medium text-ink-800 transition-colors duration-300 hover:border-ink-700/28 hover:bg-paper-100/72 hover:text-ink-950"
                 >
                   {t('contact')}

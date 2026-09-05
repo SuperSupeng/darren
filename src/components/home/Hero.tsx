@@ -2,44 +2,33 @@
 
 import Image from 'next/image';
 import { useRef, type PointerEvent } from 'react';
+import { Link } from '@/i18n/navigation';
+import { getPortfolio } from '@/lib/portfolio';
 
 export default function Hero({ locale }: { locale: string }) {
   const sectionRef = useRef<HTMLElement>(null);
+  const { metrics } = getPortfolio(locale);
   const copy =
     locale === 'zh'
       ? {
           eyebrow: '杭州 / HANGZHOU · 2026',
-          title: '过去一年，我做得最多的，是开\u2060发\u2060者活动、产\u2060品 Workshop 和分享。',
+          title: '我组织开\u2060发\u2060者活动，也帮助 AI 产\u2060品接触第一批用户。',
           intro:
-            '这些项目里，我通常是发起人或负责人。从内容策划、嘉宾邀请，到参与者招募和现场执行，我都会直接参与。',
-          role: '活动之外，我也在做 MatchPoint，并在日常工作里实际使用 31\u00a0个\u00a0Agent。',
-          primary: '看看我最近做过的事',
-          contact: '联系我',
+            '从活动策划、嘉宾与开发者招募，到现场执行和反馈整理，我会直接参与，把一次合作从想法推进到完成。',
+          primary: '看相关案例',
+          contact: '聊聊你的项目',
           portrait: '苏鹏在科技活动现场分享',
           scene: 'AI 与 Agent 分享 · 2026',
-          facts: [
-            ['40 城', 'AI+X 创造节全国联动'],
-            ['近 1,000 人', '四城开发者系列活动'],
-            ['2 位创始人', '来中国做产品 Workshop'],
-            ['31 个 Agent', '一篇文章带来多次分享'],
-          ],
         }
       : {
           eyebrow: 'HANGZHOU, CHINA / 2026',
-          title: 'Over the past year, I spent most of my time organizing developer events, running product workshops, and speaking about AI and agents.',
+          title: 'I organize developer events and help AI products meet their first users.',
           intro:
-            'I usually initiated or led these projects and stayed involved from program design and speaker invitations through participant outreach and on-site delivery.',
-          role: 'Alongside this work, I am building MatchPoint and using 31 agents in my day-to-day work.',
-          primary: 'See my recent work',
-          contact: 'Contact me',
+            'I stay involved from planning and inviting speakers and developers through running the event and collecting feedback.',
+          primary: 'Explore the work',
+          contact: 'Discuss your project',
           portrait: 'Darren speaking at a technology event',
           scene: 'AI and agent talk · 2026',
-          facts: [
-            ['40 cities', 'The nationwide AI+X Creation Festival'],
-            ['Nearly 1,000', 'A four-city developer series'],
-            ['2 Israeli founders', 'A product workshop with early users in China'],
-            ['31 agents', 'One essay led to several talks'],
-          ],
         };
 
   const moveScene = (event: PointerEvent<HTMLElement>) => {
@@ -93,15 +82,17 @@ export default function Hero({ locale }: { locale: string }) {
           </h1>
           <p className="directed-hero-thesis">{copy.title}</p>
           <p className="directed-hero-intro">{copy.intro}</p>
-          <p className="directed-hero-role">{copy.role}</p>
           <div className="directed-hero-actions">
             <a href="#work" className="directed-primary-link">
               <span>{copy.primary}</span>
               <i aria-hidden="true">↓</i>
             </a>
-            <a href="mailto:supeng842499467@gmail.com" className="directed-text-link">
+            <Link
+              href="/services"
+              className="directed-text-link"
+            >
               {copy.contact} ↗
-            </a>
+            </Link>
           </div>
         </div>
 
@@ -111,6 +102,7 @@ export default function Hero({ locale }: { locale: string }) {
               src="/photo.jpg"
               alt={copy.portrait}
               fill
+              loading="eager"
               sizes="(min-width: 1024px) 39vw, 88vw"
               className="directed-hero-photo object-cover object-[52%_center]"
             />
@@ -131,12 +123,12 @@ export default function Hero({ locale }: { locale: string }) {
         </figure>
       </div>
 
-      <ul className="container directed-proof-rail" aria-label={locale === 'zh' ? '近一年事实' : 'Facts from the past year'}>
-        {copy.facts.map(([value, label], index) => (
-          <li key={value}>
+      <ul className="container directed-proof-rail" aria-label={locale === 'zh' ? '关键事实' : 'Selected facts'}>
+        {metrics.map((metric, index) => (
+          <li key={metric.note}>
             <span>{String(index + 1).padStart(2, '0')}</span>
-            <strong>{value}</strong>
-            <p>{label}</p>
+            <strong>{metric.value}</strong>
+            <p>{metric.label} · {metric.note}</p>
           </li>
         ))}
       </ul>
