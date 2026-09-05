@@ -12,6 +12,7 @@ export type PortfolioWork = {
   location: string;
   role: string;
   summary: string;
+  heroSummary?: string;
   result: string;
   image?: string;
   imageAlt?: string;
@@ -164,6 +165,7 @@ const chinesePortfolio: PortfolioContent = {
       id: 'aix-creation-festival',
       category: 'ecosystem',
       title: 'AI+X 创造节',
+      heroSummary: '我发起创造节，与各地组织者一起在全国 40 座城市落地。',
       year: '2026',
       location: '全国 40 城',
       role: '发起人、项目负责人',
@@ -202,6 +204,7 @@ const chinesePortfolio: PortfolioContent = {
       id: 'rumata-workshop',
       category: 'global',
       title: 'Rumata 产品共创 Workshop',
+      heroSummary: '我组织产品体验和交流，让创始人听到开发者的第一轮反馈。',
       year: '2026',
       location: '中国',
       role: '发起人、项目负责人',
@@ -381,6 +384,7 @@ const englishPortfolio: PortfolioContent = {
       id: 'aix-creation-festival',
       category: 'ecosystem',
       title: 'AI+X Creation Festival',
+      heroSummary: 'I initiated the festival and worked with local organizers across 40 cities in China.',
       year: '2026',
       location: '40 cities across China',
       role: 'Initiator and program lead',
@@ -419,6 +423,7 @@ const englishPortfolio: PortfolioContent = {
       id: 'rumata-workshop',
       category: 'global',
       title: 'Rumata Product Co-creation Workshop',
+      heroSummary: 'I brought founders and potential users together to try the product and share early feedback.',
       year: '2026',
       location: 'China',
       role: 'Initiator and program lead',

@@ -7,7 +7,7 @@ import { getPortfolio } from '@/lib/portfolio';
 
 export default function Hero({ locale }: { locale: string }) {
   const sectionRef = useRef<HTMLElement>(null);
-  const { metrics } = getPortfolio(locale);
+  const heroWork = getPortfolio(locale).work.filter((item) => item.heroSummary);
   const copy =
     locale === 'zh'
       ? {
@@ -123,12 +123,14 @@ export default function Hero({ locale }: { locale: string }) {
         </figure>
       </div>
 
-      <ul className="container directed-proof-rail" aria-label={locale === 'zh' ? '关键事实' : 'Selected facts'}>
-        {metrics.map((metric, index) => (
-          <li key={metric.note}>
-            <span>{String(index + 1).padStart(2, '0')}</span>
-            <strong>{metric.value}</strong>
-            <p>{metric.label} · {metric.note}</p>
+      <ul className="container directed-proof-rail" aria-label={locale === 'zh' ? '相关工作经历' : 'Related work'}>
+        {heroWork.map((item) => (
+          <li key={item.id}>
+            <Link href={`/work/${item.id}`}>
+              <strong>{item.title}</strong>
+              <span aria-hidden="true">↗</span>
+              <p>{item.heroSummary}</p>
+            </Link>
           </li>
         ))}
       </ul>
