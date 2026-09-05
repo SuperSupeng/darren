@@ -41,7 +41,7 @@ export const englishContent = {
       latestEyebrow: "Latest",
       recentTitle: "Recently written",
       recentDescription:
-        "The collection currently covers a China ecosystem visit and lessons from running a 31-agent work system.",
+        "The collection covers a China ecosystem visit, lessons from running a 31-agent work system, and a meditation retreat in northern Thailand.",
       empty: "Notes are being organized.",
       minRead: "min read",
     },
@@ -57,7 +57,7 @@ export const englishContent = {
       workEyebrow: "What I Do Now",
       workTitle: "What I spend most of my time doing now.",
       workItems: [
-        "Initiate and lead AI developer programs, multi-city activations, and conference partnerships.",
+        "Initiate and lead AI developer programs, coordinated events across cities, and conference partnerships.",
         "Help AI products from abroad meet developers in China, organize hands-on sessions, and collect early feedback.",
         "Share what I have learned from using AI, building agents, and running a multi-agent work system.",
         "Continue building MatchPoint, GlobalTechEvents, and AI+X Events.",
@@ -69,7 +69,7 @@ export const englishContent = {
       eyebrow: "Field Notes",
       title: "After something is finished, I write down what happened and what I made of it.",
       subtitle:
-        "The English collection currently begins with two field-tested subjects: connecting global and Chinese AI ecosystems, and what changes when a 31-agent system enters daily work.",
+        "Notes on connecting global and Chinese AI ecosystems, what changes when a 31-agent system enters daily work, and the inner practice behind it all.",
     },
   },
   products: {
@@ -104,7 +104,7 @@ export const englishContent = {
         problem:
           "A résumé says little about how someone thinks and acts in an unfamiliar situation. A job description also tells candidates very little about the role's actual day-to-day work.",
         signal:
-          "The public site, candidate and employer flows, operations workspace, and remote MCP are live. The product is being used in real hiring, and we are still adjusting it around how both sides use it.",
+          "The site is live, with working tools for candidates, hiring teams, and day-to-day operations. The product is being used in real hiring, and we continue to improve it based on how both sides use it.",
         nextStep:
           "Keep using it in real hiring and adjust career exploration, role understanding, and application flows around feedback from candidates and teams.",
         tags: ["AI native", "Careers", "Agent"],
@@ -183,7 +183,7 @@ export const englishContent = {
       {
         title: "Datawhale became a long-term part of my work",
         description:
-          "I joined Datawhale as an AI learner in 2019, then became a teaching assistant, organizer, and city lead. I watched people who had never met become project partners through learning and working together.",
+          "I joined Datawhale as an AI learner in 2019, then worked as a teaching assistant and event organizer and became involved in city programs and community governance. I watched people who had never met become project partners through learning and working together.",
       },
       {
         title: "Monica and I later started AGI Villa",

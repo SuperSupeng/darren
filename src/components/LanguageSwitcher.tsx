@@ -4,6 +4,8 @@ import { useState, useRef, useEffect, useId, type KeyboardEvent } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter, usePathname } from '@/i18n/navigation';
 import { locales, localeNames, type Locale } from '@/i18n/config';
+import { languageSwitchHash } from '@/lib/article-anchors';
+import { clearLanguageScroll, consumeLanguageScroll, rememberLanguageScroll } from '@/lib/language-scroll';
 
 export default function LanguageSwitcher({
   inverse = false,
@@ -24,6 +26,31 @@ export default function LanguageSwitcher({
   const dropdownRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const optionsId = useId();
+  const pendingScroll = useRef<{ pathname: string; locale: Locale; scrollY: number } | null>(null);
+
+  useEffect(() => {
+    const { hash } = window.location;
+    let restore = pendingScroll.current;
+    if (hash || !restore || restore.pathname !== pathname || restore.locale !== locale) {
+      pendingScroll.current = null;
+      try {
+        const scrollY = consumeLanguageScroll(window.sessionStorage, { pathname, locale, hash });
+        restore = scrollY === null ? null : { pathname, locale, scrollY };
+      } catch {
+        restore = null;
+      }
+    }
+    if (!restore) return;
+
+    // Retain this until the frame runs so a repeated StrictMode effect can still restore it.
+    pendingScroll.current = restore;
+    const scrollY = restore.scrollY;
+    const frame = window.requestAnimationFrame(() => {
+      if (!window.location.hash) window.scrollTo({ top: scrollY, left: 0, behavior: 'instant' });
+      pendingScroll.current = null;
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [pathname, locale]);
 
   // 点击外部关闭
   useEffect(() => {
@@ -46,7 +73,18 @@ export default function LanguageSwitcher({
   };
 
   const switchLocale = (newLocale: Locale) => {
-    router.replace(pathname, { locale: newLocale });
+    const { search, hash } = window.location;
+    const destinationHash = newLocale === locale ? hash : languageSwitchHash(hash, document);
+    try {
+      if (destinationHash || newLocale === locale) {
+        clearLanguageScroll(window.sessionStorage);
+      } else {
+        rememberLanguageScroll(window.sessionStorage, { pathname, locale: newLocale, scrollY: window.scrollY });
+      }
+    } catch {
+      // Accessing sessionStorage itself can throw in a restricted browser.
+    }
+    router.replace(`${pathname}${search}${destinationHash}`, { locale: newLocale, scroll: Boolean(destinationHash) });
     setIsOpen(false);
     onSelect?.();
   };

@@ -15,11 +15,8 @@ export default function Nav({ blogLocalesBySlug = {} }: { blogLocalesBySlug?: Re
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
-  const darkHeroRoutes = ['/', '/work', '/services', '/build', '/blog', '/about'];
-  const hasDarkOpening = darkHeroRoutes.includes(pathname)
-    || pathname.startsWith('/blog/')
-    || pathname.startsWith('/work/');
-  const overDarkHero = hasDarkOpening && !scrolled && !mobileMenuOpen;
+  // Every page sharing this navigation, including the 404, opens on a dark background.
+  const overDarkHero = !scrolled && !mobileMenuOpen;
   const articleSlug = pathname.match(/^\/blog\/([^/]+)$/)?.[1];
   const availableLocales = articleSlug
     ? (blogLocalesBySlug[articleSlug] as Locale[] | undefined)

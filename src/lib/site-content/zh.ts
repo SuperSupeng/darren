@@ -108,7 +108,7 @@ export const chineseContent: LocalizedContent = {
         problem:
           "简历很难说明一个人遇到陌生问题时会怎么想、怎么做；候选人也很难只凭职位描述理解这份工作的日常。",
         signal:
-          "公开网站、候选人和企业两端的流程、运营工作台及远程 MCP 都已经上线。产品也已经用于实际招聘，目前还在根据双方的使用情况继续调整。",
+          "网站已经上线，候选人、招聘团队和日常运营所需的工具都已可用。产品也已经用于实际招聘，目前还在根据双方的使用情况继续调整。",
         nextStep:
           "继续用于实际招聘，根据候选人和团队的反馈调整职业探索、岗位理解和申请流程。",
         tags: ["AI Native", "职业", "Agent"],
@@ -210,8 +210,9 @@ export const chineseContent: LocalizedContent = {
     home: {
       jobTitle: "AI 生态项目负责人和产品创造者",
       knowsAbout: [
-        "AI 开发者生态",
+        "中国 AI 生态",
         "开发者社区",
+        "AI 生态项目",
         "AI 产品 Workshop",
         "多 Agent 数字组织",
         "全球科技活动",
@@ -220,7 +221,7 @@ export const chineseContent: LocalizedContent = {
       professionalServiceName: "Darren Su - AI 生态项目与产品 Workshop",
       serviceTypes: [
         "AI 开发者生态项目",
-        "AI 产品 Workshop",
+        "在中国开展的 AI 产品 Workshop",
         "AI 与 Agent 分享",
         "大会与社区生态合作",
       ],

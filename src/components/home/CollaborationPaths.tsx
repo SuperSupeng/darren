@@ -79,7 +79,6 @@ export default function CollaborationPaths({ locale }: { locale: string }) {
               aria-controls="collaboration-panel"
               tabIndex={activeIndex === index ? 0 : -1}
               className={activeIndex === index ? 'is-active' : undefined}
-              onMouseEnter={() => setActiveIndex(index)}
               onClick={() => setActiveIndex(index)}
               onKeyDown={(event) => moveTabFocus(event, index)}
             >

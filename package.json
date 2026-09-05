@@ -11,8 +11,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit",
-    "test": "node --test tests/*.test.mjs",
+    "typecheck": "next typegen && tsc --noEmit",
+    "test": "node --import tsx --test tests/*.test.mjs",
     "check": "npm run lint && npm run typecheck && npm test && npm run build"
   },
   "dependencies": {
@@ -29,7 +29,9 @@
     "@types/react-dom": "^19.2.7",
     "eslint": "^9.39.4",
     "eslint-config-next": "^16.3.4",
+    "jsdom": "^30.0.1",
     "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.13",
     "typescript": "^5"
   },
   "overrides": {

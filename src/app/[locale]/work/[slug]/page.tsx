@@ -67,6 +67,8 @@ export default async function WorkCasePage({
         responsibilities: '我负责的部分',
         outcome: '最后完成了什么',
         reflection: '这件事留下的经验',
+        materials: '可查看的公开记录',
+        readMaterial: '阅读全文',
         note: '阅读相关现场记录',
         next: '下一个项目',
         contactEyebrow: '如果你正在做类似的事',
@@ -84,6 +86,8 @@ export default async function WorkCasePage({
         responsibilities: 'What I handled',
         outcome: 'What was completed',
         reflection: 'What the work taught me',
+        materials: 'Published records',
+        readMaterial: 'Read the full article',
         note: 'Read the related field note',
         next: 'Next project',
         contactEyebrow: 'Working on something similar?',
@@ -171,7 +175,25 @@ export default async function WorkCasePage({
                 </div>
               </section>
 
-              {work.noteHref ? (
+              {work.caseStudy.materials?.length ? (
+                <section aria-labelledby="work-materials-title" className="mt-12 border-t border-ink-950/12 pt-8">
+                  <h2 id="work-materials-title" className="academy-kicker">{copy.materials}</h2>
+                  <ul className="mt-5 space-y-4">
+                    {work.caseStudy.materials.map((material) => (
+                      <li key={material.href}>
+                        <Link href={material.href} className="group block bg-paper-200/65 p-6 transition-colors hover:bg-paper-200 md:p-8">
+                          <p className="text-xs tracking-wide text-ink-600">{material.type}</p>
+                          <h3 className="mt-3 font-serif text-2xl leading-snug text-ink-900 transition-colors group-hover:text-zen-gold-dim">{material.title}</h3>
+                          <p className="mt-4 text-sm leading-7 text-ink-600">{material.description}</p>
+                          <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-ink-900">
+                            {copy.readMaterial} <span aria-hidden="true">→</span>
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ) : work.noteHref ? (
                 <Link href={work.noteHref} className="quiet-link mt-12 inline-flex">
                   <span>{copy.note} →</span>
                 </Link>

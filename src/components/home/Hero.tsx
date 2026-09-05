@@ -87,12 +87,12 @@ export default function Hero({ locale }: { locale: string }) {
               <span>{copy.primary}</span>
               <i aria-hidden="true">↓</i>
             </a>
-            <Link
-              href="/services"
+            <a
+              href="#contact"
               className="directed-text-link"
             >
-              {copy.contact} ↗
-            </Link>
+              {copy.contact} ↓
+            </a>
           </div>
         </div>
 

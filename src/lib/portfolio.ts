@@ -27,6 +27,12 @@ export type PortfolioWork = {
     outcome: string;
     outcomeNote?: string;
     reflection: string;
+    materials?: {
+      type: string;
+      title: string;
+      description: string;
+      href: string;
+    }[];
   };
 };
 
@@ -118,8 +124,16 @@ const chinesePortfolio: PortfolioContent = {
       caseStudy: {
         context: 'SuperAI 团队希望了解中国 AI 生态，但跨境交流不只是安排见面，更需要理解彼此的背景和关心的问题。',
         responsibilities: ['协助规划杭州与上海的走访节奏', '连接高校、开源社区与 AI 公司', '陪同现场交流，后续代表 Datawhale 前往新加坡参会'],
-        outcome: '完成杭州、上海和新加坡三地的走访与交流。',
+        outcome: '杭州与上海的走访覆盖浙大、魔搭社区、Qwen、MiniMax 等高校、社区与 AI 团队。我将交流中的五个现场观察整理成公开手记，后来代表 Datawhale 参加了新加坡的 SuperAI 大会。',
         reflection: '跨境生态合作的价值不在于一次参观，而在于建立能继续对话的入口。',
+        materials: [
+          {
+            type: '现场手记 · 2026.05.18',
+            title: '陪 SuperAI 团队走访杭州和上海后，我记下了五个现场观察',
+            description: '我把陪同走访中的交流整理成五个观察，附上走访路线与现场合影，记录双方关心的问题，以及跨境生态交流需要补足的背景。',
+            href: '/blog/superai-china-ecosystem-visit',
+          },
+        ],
       },
     },
     {
@@ -138,8 +152,16 @@ const chinesePortfolio: PortfolioContent = {
       caseStudy: {
         context: '一篇关于 31 个 Agent 工作系统的文章发布后，不同的企业、大会与社区开始邀请我把这套实践讲清楚。',
         responsibilities: ['拆解 Agent 的分工、信息流与失败点', '根据不同听众调整分享结构', '用真实任务解释 AI 承担执行后的管理变化'],
-        outcome: '文章带来多次分享与合作邀请，也让这套工作系统在交流中继续迭代。',
+        outcome: '我把日常使用的 31 个 Agent、44 个自动任务及协作规则整理成公开长文。文章带来多次分享与合作邀请，也让这套工作系统在交流中继续迭代。',
         reflection: '对 Agent 的分享最有价值的部分，往往不是工具清单，而是任务怎样被理解、授权和检查。',
+        materials: [
+          {
+            type: '实践长文 · 2026.04.15',
+            title: '管了 31 个 AI 员工之后，我重新理解了管理学',
+            description: '文中保留了当时的组织结构、Agent 分工和产品界面，具体记录信息同步、授权与检查规则，也写下任务失败和停用的经历。',
+            href: '/blog/managing-31-ai-employees',
+          },
+        ],
       },
     },
     {
@@ -337,8 +359,16 @@ const englishPortfolio: PortfolioContent = {
       caseStudy: {
         context: 'The SuperAI team wanted a closer view of China\'s AI ecosystem. A useful cross-border visit needed more than meetings: both sides needed enough context to understand the questions behind them.',
         responsibilities: ['Helped shape the visit across Hangzhou and Shanghai', 'Connected the team with universities, open-source communities, and AI companies', 'Joined the conversations, then represented Datawhale at SuperAI in Singapore'],
-        outcome: 'The exchange continued across Hangzhou, Shanghai, and Singapore.',
+        outcome: 'The Hangzhou and Shanghai visits included Zhejiang University, ModelScope, Qwen, and MiniMax. I published a field note with five observations from the exchange, then represented Datawhale at SuperAI in Singapore.',
         reflection: 'The lasting value of an ecosystem visit is not the itinerary itself, but a credible entry point for conversations that can continue afterward.',
+        materials: [
+          {
+            type: 'Field note · 2026.05.18',
+            title: 'Five Observations from Accompanying the SuperAI Team in Hangzhou and Shanghai',
+            description: 'I documented five observations from the conversations, with the visit route and a group photo. The note records what each side wanted to understand and the context needed for useful cross-border exchanges.',
+            href: '/blog/superai-china-ecosystem-visit',
+          },
+        ],
       },
     },
     {
@@ -357,8 +387,16 @@ const englishPortfolio: PortfolioContent = {
       caseStudy: {
         context: 'After an essay about my 31-agent work system was published, companies, conferences, and communities began inviting me to explain the practice in person.',
         responsibilities: ['Mapped the agents\' roles, information flow, and common failure points', 'Adapted the talk for different audiences and settings', 'Used real tasks to explain how management changes when AI handles more execution'],
-        outcome: 'The essay led to several talks and collaboration invitations, while the questions from those rooms helped the system keep evolving.',
+        outcome: 'I published an essay documenting the 31 agents, 44 automated tasks, and collaboration rules I use in daily work. It led to several talks and collaboration invitations, while the questions from those rooms helped the system keep evolving.',
         reflection: 'The most useful part of an agent talk is rarely a tool list. It is the design of how work is understood, delegated, checked, and improved.',
+        materials: [
+          {
+            type: 'Practice essay · 2026.04.15',
+            title: 'Managing 31 AI Employees Changed How I Understand Management',
+            description: 'The essay includes the organization chart, agent roles, and product screenshots from that stage of the system. It explains information sharing, delegation, and review rules, alongside failed tasks and automations I disabled.',
+            href: '/blog/managing-31-ai-employees',
+          },
+        ],
       },
     },
     {
@@ -428,7 +466,7 @@ const englishPortfolio: PortfolioContent = {
       location: 'China',
       role: 'Initiator and program lead',
       summary: 'I invited Israeli AI founders Nitzan and Yoel to China for a small product workshop. They sat down directly with developers and potential users and heard what people thought after trying the product.',
-      result: 'Around 50 people attended and provided the first round of product feedback.',
+      result: 'Around 50 participants; first round of product feedback collected',
       image: '/images/work/05.jpg',
       imageAlt: 'Participants at the Rumata Startup Co-creation product workshop',
       imageClassName: 'object-cover object-center',
