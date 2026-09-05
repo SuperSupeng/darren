@@ -2156,29 +2156,35 @@
   }
 
   .directed-proof-rail > li { min-height: 6.5rem; padding: 1rem; }
+  .directed-proof-rail span { position: static; display: block; margin-bottom: 0.6rem; }
   .directed-proof-rail strong { font-size: 1.35rem; }
   .directed-proof-rail p { font-size: 0.72rem; }
 
   .work-story-sticky { padding-right: 1rem; padding-left: 1rem; }
   .work-story-images { min-height: 19rem; }
   .work-story-detail { grid-template-columns: 1fr; gap: 0.85rem; }
-  .work-story-index button { grid-template-columns: 2.25rem minmax(0, 1fr) 1rem; }
+  .work-story-index { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; }
+  .work-story-index button { grid-template-columns: 2.25rem minmax(0, 1fr) 1rem; border-right: 0; }
+  .work-story-index button strong { align-self: center; grid-row: 1 / -1; overflow-wrap: anywhere; }
   .work-story-index button small { display: none; }
 
   .field-gallery { height: 300vh; }
-  .field-gallery-sticky { min-height: 39rem; padding-top: 6.4rem; }
+  .field-gallery-sticky { min-height: 0; padding-top: 6.4rem; }
   .field-gallery-heading { padding-right: 1rem; padding-left: 1rem; }
   .field-gallery-heading > p { display: none; }
   .field-gallery-heading h2 { font-size: clamp(2.2rem, 10vw, 3.1rem); }
   .field-gallery-window { margin-top: 1rem; perspective: 850px; }
-  .field-gallery-track { gap: 0.75rem; padding-right: 7vw; padding-left: 7vw; }
-  .field-gallery-card { height: clamp(16rem, 40vh, 23rem); }
+  .field-gallery-track { height: 100%; gap: 0.75rem; padding: 0.5rem 7vw; }
+  .field-gallery-card { height: 100%; max-height: 23rem; }
   .field-gallery-card-wide { width: 86vw; }
   .field-gallery-card-portrait { width: 68vw; }
-  .field-gallery-card figcaption { grid-template-columns: auto 1fr; }
+  .field-gallery-card figcaption { grid-template-columns: auto minmax(0, 1fr); }
+  .field-gallery-card figcaption strong { white-space: normal; overflow-wrap: anywhere; }
   .field-gallery-card figcaption small { display: none; }
-  .field-gallery-focus { grid-template-columns: 1fr auto; gap: 0.7rem; padding-right: 1rem; padding-left: 1rem; }
+  .field-gallery-focus { grid-template-columns: minmax(0, 1fr); gap: 0.7rem; padding-right: 1rem; padding-left: 1rem; }
   .field-gallery-focus > p { grid-column: 1 / -1; grid-row: 2; }
+  .field-gallery-focus > span { display: none; }
+  .field-gallery-focus > div span { flex: none; white-space: nowrap; }
 
   .collab-selector,
   .product-lab-scene,
@@ -2197,14 +2203,17 @@
   .product-lab-scene { padding-top: 7rem; padding-bottom: 6rem; }
   .product-lab-display { font-size: 42vw; }
   .product-lab-screen { min-height: 20rem; }
+  .product-lab-feature { grid-template-columns: minmax(0, 1fr); }
   .product-lab-caption { min-height: 17rem; padding: 1.5rem; }
-  .product-lab-caption h3 { margin-top: 2.5rem; font-size: 2.8rem; }
-  .product-lab-index > div a { grid-template-columns: 2rem minmax(0, 1fr) auto; }
+  .product-lab-caption h3 { margin-top: 2.5rem; font-size: clamp(2rem, 10vw, 2.8rem); overflow-wrap: anywhere; }
+  .product-lab-index > div a { grid-template-columns: 2rem minmax(0, 1fr); gap: 0.4rem 0.8rem; padding-block: 0.85rem; }
+  .product-lab-index > div strong { overflow-wrap: anywhere; }
+  .product-lab-index > div i { grid-column: 2; }
   .product-lab-index > div small { display: none; }
 
   .writing-contact-scene { padding-top: 7rem; }
   .writing-feature { margin-top: 3.5rem; }
-  .writing-feature-number { top: -0.38em; font-size: 44vw; }
+  .writing-feature-number { top: 0.05em; left: 0.05em; font-size: 44vw; }
   .writing-feature-image { min-height: 18rem; }
   .writing-feature-copy { min-height: 24rem; padding: 1.5rem; }
   .writing-feature-copy h3 { font-size: 1.8rem; }
