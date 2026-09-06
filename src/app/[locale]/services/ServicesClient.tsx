@@ -1,7 +1,15 @@
-import { getPortfolio } from '@/lib/portfolio';
+import { Link } from '@/i18n/navigation';
+import { getPortfolio, getWorkById, type CollaborationPath } from '@/lib/portfolio';
 import ContactActions from '@/components/ContactActions';
 import RoomPortal from '@/components/spatial/RoomPortal';
 import '@/components/spatial/interiors.css';
+import '@/components/spatial/service-evidence.css';
+
+const representativeWork: Record<CollaborationPath['id'], string> = {
+  'developer-events': 'wechat-innovation-workshop',
+  'product-workshops': 'rumata-workshop',
+  'ai-talks': 'agent-speaking',
+};
 
 export default function ServicesClient({ locale }: { locale: string }) {
   const { collaborations } = getPortfolio(locale);
@@ -13,6 +21,11 @@ export default function ServicesClient({ locale }: { locale: string }) {
           subtitle: '这里列了三种合作方式。可以先看看哪一项符合需要，再告诉我你的团队或产品、想做的事和预计时间。',
           bestFor: '适合',
           whatHappens: '可以一起做什么',
+          relatedCase: '相关案例',
+          caseRole: '我的角色',
+          caseResult: '规模与结果',
+          viewCase: '查看案例',
+          readArticle: '阅读 Agent 实践文章',
           inquiryTitle: '来信时，可以说说这三点',
           emailSubject: '合作咨询',
           fieldSeparator: '：',
@@ -36,6 +49,11 @@ export default function ServicesClient({ locale }: { locale: string }) {
           subtitle: 'Here are three ways to work together. See which one fits your needs, then tell me about your team or product, what you want to do, and the timing.',
           bestFor: 'Best for',
           whatHappens: 'What I can help with',
+          relatedCase: 'Related case study',
+          caseRole: 'My role',
+          caseResult: 'Scale and outcome',
+          viewCase: 'View case study',
+          readArticle: 'Read the article on my agent system',
           inquiryTitle: 'What to include in your email',
           emailSubject: 'Collaboration inquiry',
           fieldSeparator: ':',
@@ -68,16 +86,46 @@ export default function ServicesClient({ locale }: { locale: string }) {
           {collaborations.map(path => <a href={`#${path.id}`} key={path.id}><span>{path.number}</span><span>{path.title}</span><span aria-hidden="true">↓</span></a>)}
         </nav>
         <div className="interior-service-files">
-          {collaborations.map(path => <article id={path.id} key={path.id} aria-labelledby={`${path.id}-title`} className="interior-service-file">
-            <header className="interior-service-heading"><p className="interior-kicker">{copy.eyebrow} / {path.number}</p><h2 id={`${path.id}-title`}>{path.title}</h2><p className="interior-kicker">{copy.bestFor}</p><p>{path.bestFor}</p></header>
-            <div className="interior-service-details"><p className="interior-body">{path.description}</p><h3 className="interior-kicker">{copy.whatHappens}</h3>
-              <ul className="interior-plain-list">{path.outcomes.map(outcome => <li key={outcome}>{outcome}</li>)}</ul>
-            </div>
-            <section className="interior-inquiry" aria-labelledby={`${path.id}-inquiry`}><h3 id={`${path.id}-inquiry`}>{copy.inquiryTitle}</h3>
-              <ol>{path.inquiry.map((item, index) => <li key={item}><span>{String(index + 1).padStart(2, '0')}</span><p>{item}</p></li>)}</ol>
-              <ContactActions locale={locale} context={`services-${path.id}`} emailSubject={`${copy.emailSubject}${copy.fieldSeparator} ${path.title}`} emailBody={path.inquiry.map(item => `${item}${copy.fieldSeparator} `).join('\r\n\r\n')} className="interior-contact" />
-            </section>
-          </article>)}
+          {collaborations.map(path => {
+            const work = getWorkById(locale, representativeWork[path.id]);
+
+            if (!work) {
+              throw new Error(`Missing representative work for collaboration: ${path.id}`);
+            }
+
+            return (
+              <article id={path.id} key={path.id} aria-labelledby={`${path.id}-title`} className="interior-service-file">
+                <header className="interior-service-heading"><p className="interior-kicker">{copy.eyebrow} / {path.number}</p><h2 id={`${path.id}-title`}>{path.title}</h2><p className="interior-kicker">{copy.bestFor}</p><p>{path.bestFor}</p></header>
+                <div className="interior-service-details"><p className="interior-body">{path.description}</p><h3 className="interior-kicker">{copy.whatHappens}</h3>
+                  <ul className="interior-plain-list">{path.outcomes.map(outcome => <li key={outcome}>{outcome}</li>)}</ul>
+                </div>
+                <section className="service-evidence" aria-labelledby={`${path.id}-evidence-title`}>
+                  <header className="service-evidence-heading">
+                    <p>{copy.relatedCase}</p>
+                    <h3 id={`${path.id}-evidence-title`}>{work.title}</h3>
+                  </header>
+                  <div className="service-evidence-detail">
+                    <dl className="service-evidence-facts">
+                      <div><dt>{copy.caseRole}</dt><dd>{work.role}</dd></div>
+                      <div><dt>{copy.caseResult}</dt><dd>{work.result}</dd></div>
+                    </dl>
+                    <div className="service-evidence-links">
+                      <Link href={`/work/${work.id}`} aria-label={`${copy.viewCase}: ${work.title}`}>
+                        {copy.viewCase}<span aria-hidden="true">↗</span>
+                      </Link>
+                      {path.id === 'ai-talks' && work.noteHref ? <Link href={work.noteHref}>
+                        {copy.readArticle}<span aria-hidden="true">↗</span>
+                      </Link> : null}
+                    </div>
+                  </div>
+                </section>
+                <section className="interior-inquiry" aria-labelledby={`${path.id}-inquiry`}><h3 id={`${path.id}-inquiry`}>{copy.inquiryTitle}</h3>
+                  <ol>{path.inquiry.map((item, index) => <li key={item}><span>{String(index + 1).padStart(2, '0')}</span><p>{item}</p></li>)}</ol>
+                  <ContactActions locale={locale} context={`services-${path.id}`} emailSubject={`${copy.emailSubject}${copy.fieldSeparator} ${path.title}`} emailBody={path.inquiry.map(item => `${item}${copy.fieldSeparator} `).join('\r\n\r\n')} className="interior-contact" />
+                </section>
+              </article>
+            );
+          })}
         </div>
         <section className="interior-section interior-two-columns">
           <header className="interior-section-heading"><p className="interior-kicker">{copy.methodEyebrow}</p><h2>{copy.methodTitle}</h2></header>

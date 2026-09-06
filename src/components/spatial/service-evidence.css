@@ -1,0 +1,107 @@
+.interior-services .service-evidence {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  gap: 24px 40px;
+  min-width: 0;
+  padding: 24px 28px;
+  border-left: 2px solid var(--space-accent);
+  background: var(--space-inset);
+  color: var(--space-ink);
+}
+
+.interior-services .service-evidence-heading > p {
+  color: var(--space-muted);
+  font: 10px/1.8 var(--font-geist-mono);
+  letter-spacing: .06em;
+}
+
+.interior-services .service-evidence-heading > h3 {
+  margin-top: 10px;
+  font: 400 clamp(20px, 2vw, 24px)/1.55 var(--font-noto-serif);
+  letter-spacing: -.02em;
+  overflow-wrap: anywhere;
+}
+
+.interior-services .service-evidence-detail {
+  min-width: 0;
+}
+
+.interior-services .service-evidence-facts {
+  display: grid;
+  gap: 12px;
+}
+
+.interior-services .service-evidence-facts > div {
+  display: grid;
+  grid-template-columns: minmax(72px, auto) minmax(0, 1fr);
+  gap: 8px 18px;
+  align-items: baseline;
+}
+
+.interior-services .service-evidence-facts dt {
+  color: var(--space-muted);
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.interior-services .service-evidence-facts dd {
+  color: var(--space-ink);
+  font-size: 13px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.interior-services .service-evidence-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 24px;
+  margin-top: 14px;
+}
+
+.interior-services .service-evidence-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  max-width: 100%;
+  color: var(--space-ink);
+  font-size: 12px;
+  line-height: 1.8;
+  text-decoration: underline;
+  text-decoration-color: var(--space-accent);
+  text-underline-offset: 5px;
+}
+
+.interior-services .service-evidence-links a:hover {
+  color: var(--space-accent);
+}
+
+.interior-services .service-evidence-links a > span {
+  flex-shrink: 0;
+  color: var(--space-accent);
+}
+
+@media (max-width: 760px) {
+  .interior-services .service-evidence {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    padding: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .interior-services .service-evidence {
+    padding: 20px 17px;
+  }
+
+  .interior-services .service-evidence-facts > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 3px;
+  }
+
+  .interior-services .service-evidence-links {
+    gap: 2px 20px;
+    margin-top: 10px;
+  }
+}

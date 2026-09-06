@@ -5,6 +5,7 @@ import { useLocale } from 'next-intl';
 import { Link, usePathname } from '@/i18n/navigation';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import Logo from '@/components/Logo';
+import HeaderContact from './HeaderContact';
 import type { Locale } from '@/i18n/config';
 import { useStudioSettings } from './StudioSettings';
 
@@ -58,6 +59,7 @@ export default function SpatialHeader({ blogLocalesBySlug }: { blogLocalesBySlug
         {roomLinks.map(link => <Link key={link.href} href={hrefFor(link.href)} aria-current={current(link.href) ? 'page' : undefined}>{zh ? link.zh : link.en}</Link>)}
       </nav>
       <div className="spatial-header-actions">
+        <HeaderContact locale={locale} menuOpen={open} onOpen={() => setOpen(false)} />
         <div className="spatial-light-switch" role="group" aria-label={zh ? '工作室光线' : 'Studio lighting'}>
           {(['day', 'evening'] as const).map(value => <button key={value} type="button" aria-pressed={lighting === value} onClick={() => setLighting(value)}>
             <LightIcon evening={value === 'evening'} /><span>{value === 'day' ? zh ? '日光' : 'Day' : zh ? '暮色' : 'Dusk'}</span>
@@ -75,7 +77,7 @@ export default function SpatialHeader({ blogLocalesBySlug }: { blogLocalesBySlug
       <p>{zh ? '我的项目、产品和文章都在这里。' : 'Find my projects, products, and writing here.'}</p>
     </nav>
     <noscript>
-      <style>{'.spatial-header-actions,.spatial-desktop-nav,.spatial-footer button{display:none!important}'}</style>
+      <style>{'.spatial-header-actions > :not(.spatial-header-contact),.spatial-desktop-nav,.spatial-footer button,.spatial-contact-options > button{display:none!important}'}</style>
       <nav className="spatial-noscript-nav" aria-label={zh ? '页面与语言' : 'Pages and languages'}>
         {roomLinks.map(link => <a key={link.href} href={`/${locale}${link.href}`}>{zh ? link.zh : link.en}</a>)}
         {(availableLocales ?? ['zh', 'en']).filter(value => value !== locale).map(value => <a key={value} href={`/${value}${pathname}`} hrefLang={value}>{value === 'zh' ? '中文' : 'English'}</a>)}
