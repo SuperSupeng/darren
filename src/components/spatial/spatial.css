@@ -63,7 +63,8 @@ html:has(.spatial-site) { scroll-padding-top: 100px; }
 .spatial-header { position: sticky; top: 0; z-index: 60; background: color-mix(in srgb, var(--space-paper) 93%, transparent); border-bottom: 1px solid var(--space-line); backdrop-filter: blur(18px); }
 .spatial-header-row { height: var(--spatial-header-height); max-width: 1600px; margin: 0 auto; padding: 0 4%; display: flex; align-items: center; justify-content: space-between; gap: 26px; }
 .spatial-brand { display: flex; align-items: center; gap: 11px; font-size: 22px; letter-spacing: -.055em; line-height: 1.15; font-weight: 550; flex-shrink: 0; }
-.spatial-brand-mark { width: 36px; height: 36px; display: grid; place-items: center; border: 1px solid var(--space-muted); border-radius: 50%; font-family: var(--font-noto-serif); font-size: 21px; font-weight: 400; }
+.spatial-brand-mark { width: 36px; height: 36px; display: grid; place-items: center; flex-shrink: 0; }
+.spatial-brand-mark svg { display: block; width: 100%; height: 100%; }
 .spatial-brand-dot { color: var(--space-accent); }
 .spatial-brand small { display: block; font: 7px var(--font-geist-mono); letter-spacing: .19em; margin-top: 6px; color: var(--space-muted); }
 .spatial-desktop-nav { display: flex; gap: clamp(15px, 1.7vw, 30px); align-items: center; }
@@ -140,8 +141,8 @@ html:has(.spatial-site) { scroll-padding-top: 100px; }
   .spatial-footer-intro > p:last-child { max-width: none; }
 }
 @media (max-width: 600px) {
-  .spatial-brand { font-size: 20px; }
-  .spatial-brand-mark { display: none; }
+  .spatial-brand { font-size: 18px; gap: 7px; }
+  .spatial-brand-mark { width: 28px; height: 28px; }
   .spatial-brand small { font-size: 6px; letter-spacing: .16em; }
   .spatial-header-row { padding: 0 6%; gap: 14px; }
   .spatial-header-actions { gap: 12px; }

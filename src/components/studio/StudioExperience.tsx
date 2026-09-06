@@ -219,8 +219,10 @@ export default function StudioExperience({ locale, content }: { locale: string; 
           <p className="studio-intro-description">{t.intro}</p>
           <p className="studio-invitation">{t.invitation}</p>
           <button type="button" className="studio-enter" hidden={!hydrated} onClick={() => selectZone('work')}>{t.explore}<span aria-hidden="true">↗</span></button>
-          <span className="studio-intro-rule" aria-hidden="true" />
-          <p className="studio-intro-signature">Darren Su <span>/ 苏鹏</span></p>
+          <Link className="studio-host" href={`/about${lighting === 'evening' ? '?light=evening' : ''}`} aria-label={locale === 'zh' ? '认识 Darren Su / 苏鹏' : 'Meet Darren Su'}>
+            <span className="studio-host-photo"><Image src="/photo.jpg" alt="Darren Su" fill sizes="104px" loading="eager" /></span>
+            <span className="studio-host-copy"><span className="studio-host-name">Darren Su <span>/ 苏鹏</span></span><span className="studio-host-link">{locale === 'zh' ? '认识一下' : 'A little about me'} <span aria-hidden="true">↗</span></span></span>
+          </Link>
         </div>
 
         {activeZone ? <section ref={collectionRef} className="studio-collection" aria-labelledby="studio-collection-title" key={activeZone}>

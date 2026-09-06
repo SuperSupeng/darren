@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useLocale } from 'next-intl';
 import { Link, usePathname } from '@/i18n/navigation';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import Logo from '@/components/Logo';
 import type { Locale } from '@/i18n/config';
 import { useStudioSettings } from './StudioSettings';
 
@@ -50,8 +51,8 @@ export default function SpatialHeader({ blogLocalesBySlug }: { blogLocalesBySlug
   return <header className="spatial-header">
     <div className="spatial-header-row">
       <Link className="spatial-brand" href={hrefFor('/')} aria-label={zh ? 'Darren Su 工作室首页' : 'Darren Su studio home'} onClick={() => setOpen(false)}>
-        <span className="spatial-brand-mark" aria-hidden="true">苏</span>
-        <span>Darren Su<span className="spatial-brand-dot">.</span><small>PERSONAL STUDIO</small></span>
+        <span className="spatial-brand-mark" aria-hidden="true"><Logo size={36} /></span>
+        <span>Darren<span className="spatial-brand-dot">.</span>Su<small>PERSONAL STUDIO</small></span>
       </Link>
       <nav className="spatial-desktop-nav" aria-label={zh ? '主要导航' : 'Main navigation'}>
         {roomLinks.map(link => <Link key={link.href} href={hrefFor(link.href)} aria-current={current(link.href) ? 'page' : undefined}>{zh ? link.zh : link.en}</Link>)}
