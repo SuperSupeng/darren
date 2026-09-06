@@ -80,7 +80,7 @@ const chinesePortfolio: PortfolioContent = {
     {
       value: '31 + 44',
       label: 'Agent 和自动任务',
-      note: '日常使用的工作系统',
+      note: '2026.04 实践记录',
     },
     {
       value: '2019—',
@@ -315,7 +315,7 @@ const englishPortfolio: PortfolioContent = {
     {
       value: '31 + 44',
       label: 'agents and automations',
-      note: 'A work system used every day',
+      note: 'Documented in April 2026',
     },
     {
       value: 'Since 2019',

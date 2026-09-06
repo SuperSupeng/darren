@@ -81,9 +81,9 @@ export const englishContent = {
     },
     digitalOrganization: {
       eyebrow: "AI-native work system",
-      title: "I also use 31 agents in my day-to-day work.",
+      title: "I also use a multi-agent system in my day-to-day work.",
       description:
-        "The system currently includes 31 specialized agents and 44 recurring automations across research, products, content, operations, and personal knowledge. I use it every day and adjust it as problems come up.",
+        "In the essay I published on April 15, 2026, I documented 31 specialized agents and 44 recurring automations across research, products, content, operations, and personal knowledge. I continue to use and refine the system in my daily work.",
       primaryMetric: "31 specialized agents",
       secondaryMetric: "44 recurring automations",
       image: "/blog/ai-employees/digital-organization.png",
@@ -193,7 +193,7 @@ export const englishContent = {
       {
         title: "Building my own products",
         description:
-          "I co-founded MatchPoint, built GlobalTechEvents, and operate a work system of 31 agents. Once a product is live, questions about where users come from, why they stay, and whether to continue have to be answered through daily operations.",
+          "I co-founded MatchPoint, built GlobalTechEvents, and operate a multi-agent work system. Once a product is live, questions about where users come from, why they stay, and whether to continue have to be answered through daily operations.",
       },
       {
         title: "Meditation and public-interest work",
@@ -238,7 +238,7 @@ export const englishContent = {
       ],
     },
     services: {
-      listName: "Darren Su Services",
+      listName: "Darren Su Collaboration",
     },
   },
 };

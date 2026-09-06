@@ -85,9 +85,9 @@ export const chineseContent: LocalizedContent = {
     },
     digitalOrganization: {
       eyebrow: "AI 原生工作系统",
-      title: "我也在日常工作中使用 31 个 Agent。",
+      title: "我也在日常工作中使用多 Agent 系统。",
       description:
-        "这套系统目前有 31 个专业 Agent 和 44 个自动任务，处理研究、产品、内容、运营和个人知识管理。我每天使用它，并根据遇到的问题继续调整。",
+        "我在 2026 年 4 月 15 日发布的实践文章里，记录了当时的 31 个专业 Agent 和 44 个自动任务，分别处理研究、产品、内容、运营和个人知识管理。我仍在日常工作中使用这套系统，并根据遇到的问题继续调整。",
       primaryMetric: "31 个专业 Agent",
       secondaryMetric: "44 个自动任务",
       image: "/blog/ai-employees/digital-organization.png",
@@ -183,7 +183,7 @@ export const chineseContent: LocalizedContent = {
       {
         title: "开始做自己的产品",
         description:
-          "我联合创办 MatchPoint，也做了 GlobalTechEvents，并持续运行一套由 31 个 Agent 组成的工作系统。产品上线以后，用户从哪里来、为什么留下，以及要不要继续做，都需要在日常运营里回答。",
+          "我联合创办 MatchPoint，也做了 GlobalTechEvents，并持续运行一套多 Agent 工作系统。产品上线以后，用户从哪里来、为什么留下，以及要不要继续做，都需要在日常运营里回答。",
       },
       {
         title: "禅修和公益也是生活的一部分",
@@ -227,7 +227,7 @@ export const chineseContent: LocalizedContent = {
       ],
     },
     services: {
-      listName: "Darren Su 服务",
+      listName: "Darren Su 合作方式",
     },
   },
 };

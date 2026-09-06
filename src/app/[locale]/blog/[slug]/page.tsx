@@ -27,16 +27,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   }
 
   const availableLocales = locales.filter((item) => getPostBySlug(slug, item));
-  const metadataDescription =
-    post.description.length > 160
-      ? `${post.description.slice(0, 157).trimEnd()}…`
-      : post.description;
-
   return createPageMetadata({
     locale,
     path: `/blog/${slug}`,
     title: post.title,
-    description: metadataDescription,
+    description: post.description,
     keywords: [...post.tags, 'Darren Su', 'field notes'],
     image: post.image.url,
     imageWidth: post.image.width,

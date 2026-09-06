@@ -4,5 +4,7 @@ import { locales, defaultLocale } from './config';
 export const routing = defineRouting({
   locales,
   defaultLocale,
-  localePrefix: 'always'  // 所有语言都显示在 URL 中
+  localePrefix: 'always', // 所有语言都显示在 URL 中
+  // Metadata and the sitemap only advertise translations that actually exist.
+  alternateLinks: false,
 });
