@@ -5,6 +5,8 @@ import { StudioSettings } from '@/components/spatial/StudioSettings';
 import SpatialHeader from '@/components/spatial/SpatialHeader';
 import SpatialFooter from '@/components/spatial/SpatialFooter';
 import '@/components/spatial/spatial.css';
+import '@/components/spatial/objects.css';
+import '@/components/spatial/immersive.css';
 
 type Props = {
   children: ReactNode;

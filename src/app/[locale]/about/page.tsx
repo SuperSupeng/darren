@@ -55,13 +55,15 @@ export default async function AboutPage({
               <p className="interior-lead">{site.about.hero.subtitle}</p>
               <div className="interior-tags">{site.about.hero.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
             </div>
+            <div className="interior-profile-stage">
+            <RoomPortal zone="notes" locale={locale} />
             <figure className="interior-photo interior-portrait">
               <div><Image src="/photo.jpg" alt="Darren Su" fill sizes="(min-width: 900px) 360px, 75vw" className="object-cover" priority /></div>
               <figcaption><span>Darren Su / 苏鹏</span><span>{locale === 'zh' ? '杭州' : 'HANGZHOU'}</span></figcaption>
             </figure>
+            </div>
           </header>
           <div className="interior-profile-room">
-            <RoomPortal zone="work" locale={locale} />
             <blockquote>{site.labels.about.pullQuote}</blockquote>
           </div>
 

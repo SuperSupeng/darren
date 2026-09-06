@@ -1,0 +1,89 @@
+/* A room is part of the page, with a floor and a foreground, rather than a framed image. */
+.room-portal.room-portal-spatial { border: 0; background: transparent; box-shadow: none; isolation: isolate; }
+.room-portal.room-portal-spatial::before { content: ''; position: absolute; inset: 3% 0 10%; z-index: -1; pointer-events: none; background: radial-gradient(ellipse at 54% 47%, color-mix(in srgb, var(--space-surface) 72%, transparent), transparent 68%); }
+.room-portal.room-portal-spatial .room-portal-view { height: clamp(430px, 60vw, 590px); overflow: visible; }
+.room-portal .room-portal-render > div:not(.room-portal-tools) { height: 100%; }
+.room-portal.room-portal-spatial .room-portal-render > div:not(.room-portal-tools) { mask-image: linear-gradient(90deg, transparent, #000 7%, #000 96%, transparent), linear-gradient(180deg, transparent, #000 5%, #000 88%, transparent); mask-composite: intersect; }
+.room-portal .room-portal-render > .room-portal-tools { height: auto; }
+.room-portal canvas { touch-action: pan-y; }
+.room-portal.room-portal-spatial figcaption { margin: 0 5%; padding: 15px 0; border-top: 1px solid var(--space-line); font-family: var(--font-site-sans), sans-serif; font-size: 10px; }
+.room-portal-tools { position: absolute; inset: auto 5% 12px; z-index: 4; display: flex; align-items: center; justify-content: space-between; gap: 16px; height: auto; pointer-events: none; }
+.room-portal-tools > p { color: var(--space-muted); font: 10px/1.5 var(--font-site-sans), sans-serif; letter-spacing: .02em; }
+.room-portal-tools > p > span { margin-left: 12px; font-size: 16px; }
+.room-portal-tools > div { display: flex; gap: 3px; padding: 4px; border: 1px solid var(--space-line); border-radius: 24px; background: color-mix(in srgb, var(--space-paper) 88%, transparent); backdrop-filter: blur(10px); pointer-events: auto; }
+.room-portal-tools button { display: flex; align-items: center; justify-content: center; gap: 5px; min-width: 40px; min-height: 36px; padding: 7px 10px; border-radius: 20px; font: 10px/1.5 var(--font-site-sans), sans-serif; color: var(--space-muted); }
+.room-portal-tools button[aria-pressed='true'] { background: var(--space-ink); color: var(--space-paper); }
+.room-portal-tools button:hover { box-shadow: inset 0 0 0 1px var(--space-line); }
+.room-portal-explore { position: absolute; z-index: 5; bottom: 14px; left: 50%; transform: translateX(-50%); padding: 9px 15px; min-height: 38px; background: var(--space-surface); color: var(--space-ink); border: 1px solid var(--space-line); box-shadow: 0 4px 12px var(--space-shadow); border-radius: 24px; font-size: 11px; white-space: nowrap; }
+.room-portal-explore span { margin-left: 8px; }
+.room-portal-fallback { position: absolute; bottom: 15px; left: 5%; right: 5%; text-align: center; font-size: 11px; color: var(--space-muted); }
+.room-portal.room-portal-compact .room-portal-view { height: 210px; }
+.room-portal-compact .room-portal-tools { justify-content: center; inset-inline: 8px; bottom: 5px; }
+.room-portal-compact .room-portal-tools button { min-height: 32px; padding: 5px 9px; }
+
+.collection-page .collection-hero { grid-template-columns: minmax(0,.72fr) minmax(0,1.28fr); min-height: min(760px, calc(100svh - 80px)); gap: 10px; padding-block: 26px 35px; position: relative; }
+.collection-page .collection-hero-copy { position: relative; z-index: 2; padding-block: 25px; }
+.collection-page .collection-hero h1 { font-size: clamp(48px, 5.2vw, 76px); max-width: 7.2em; margin-top: 22px; }
+.collection-page .collection-hero-lead { font-size: clamp(17px,1.5vw,21px); margin-top: 25px; max-width: 24em; }
+.collection-page .collection-hero .collection-description { max-width: 29em; font-size: 13px; line-height: 1.9; }
+.collection-page .collection-room { position: relative; z-index: 0; margin-left: -30px; margin-right: -3vw; }
+.collection-page .collection-room .room-portal-view { height: clamp(470px, 65svh, 650px); }
+.collection-page .collection-room .room-portal-spatial figcaption { margin-inline: 8%; }
+.collection-page .collection-note-strip { background: linear-gradient(110deg, color-mix(in srgb, var(--space-surface) 40%, transparent), transparent 65%); }
+
+.interior-page .interior-services-hero { grid-template-columns: minmax(0,.78fr) minmax(0,1.22fr); gap: 20px; padding: 25px 0 40px; }
+.interior-page .interior-services-hero > div { position: relative; z-index: 2; }
+.interior-page .interior-services-hero > .room-portal { margin-right: -4vw; margin-left: -25px; }
+.interior-page .interior-services-hero h1 { font-size: clamp(35px,3.6vw,53px); }
+.interior-page .interior-services-hero .room-portal-view { height: 570px; }
+.interior-page .interior-profile { grid-template-columns: minmax(0,.75fr) minmax(0,1.25fr); gap: 20px; padding: 28px 0 18px; }
+.interior-profile-stage { position: relative; min-width: 0; margin-right: -4vw; margin-left: -30px; }
+.interior-profile-stage .room-portal-view { height: 570px !important; }
+.interior-page .interior-profile-stage .interior-portrait { position: absolute; z-index: 3; bottom: 110px; left: 9%; width: 160px; padding: 7px; transform: perspective(800px) rotateY(12deg) rotate(-5deg); }
+.interior-profile-stage .interior-portrait figcaption { font-size: 7px; padding-top: 6px; }
+.interior-page .interior-profile-room { display: block; margin: 12px 0 35px; padding: 30px 0; border-block: 1px solid var(--space-line); }
+.interior-page .interior-profile-room blockquote { font-size: clamp(23px,2.2vw,32px); max-width: 950px; padding-left: 25px; }
+.interior-page .reading-sidebar .room-portal { border-bottom: 5px solid var(--space-inset); box-shadow: 0 12px 25px var(--space-shadow); }
+
+@media (max-width: 1100px) {
+  .collection-page .collection-hero { grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); }
+  .collection-page .collection-room { margin-left: -16px; margin-right: -2vw; }
+  .collection-page .collection-room .room-portal-view { height: 520px; }
+  .room-portal-tools { flex-wrap: wrap; justify-content: center; gap: 9px; }
+  .room-portal-tools > p { font-size: 9px; }
+  .interior-page .interior-services-hero .room-portal-view, .interior-profile-stage .room-portal-view { height: 500px !important; }
+  .interior-page .interior-profile-stage .interior-portrait { width: 130px; left: 3%; }
+}
+@media (max-width: 800px) {
+  .collection-page .collection-hero { grid-template-columns: 1fr; min-height: 0; gap: 0; padding: 28px 0 24px; }
+  .collection-page .collection-hero-copy { padding: 0; max-width: 620px; }
+  .collection-page .collection-hero h1 { font-size: clamp(42px,7vw,60px); max-width: none; margin-top: 15px; }
+  .collection-page .collection-hero-lead { font-size: 17px; margin-top: 20px; max-width: 38em; }
+  .collection-page .collection-hero .collection-description { font-size: 12px; max-width: 45em; }
+  .collection-page .collection-hero .collection-text-link { margin-top: 12px; }
+  .collection-page .collection-room { width: auto; max-width: none; margin: 0 -20px; }
+  .collection-page .collection-room .room-portal-view { height: 390px; }
+  .room-portal.room-portal-spatial .room-portal-view { overflow: hidden; }
+  .room-portal-tools { flex-wrap: nowrap; justify-content: space-between; inset-inline: 6%; bottom: 8px; gap: 6px; }
+  .room-portal-tools button { padding: 7px 9px; }
+  .room-portal-tools button > span:first-child { display: none; }
+  .room-portal-compact .room-portal-tools button > span:first-child { display: inline; }
+  .room-portal-tools > p > span { display: none; }
+  .interior-page .interior-services-hero, .interior-page .interior-profile { grid-template-columns: 1fr; padding-block: 30px 10px; }
+  .interior-page .interior-services-hero > .room-portal, .interior-profile-stage { margin: 0 -5vw; }
+  .interior-page .interior-services-hero .room-portal-view, .interior-profile-stage .room-portal-view { height: 410px !important; }
+  .interior-page .interior-profile-stage .interior-portrait { width: 110px; left: 9%; bottom: 105px; }
+  .interior-page .interior-profile-room { margin-bottom: 10px; }
+}
+@media (max-width: 450px) {
+  .collection-page .collection-room .room-portal-view { height: 340px; }
+  .room-portal-tools > p { max-width: 105px; line-height: 1.7; }
+  .room-portal-tools button { min-width: 36px; min-height: 34px; padding: 7px; }
+  .room-portal.room-portal-spatial figcaption { font-size: 9px; margin-inline: 7%; }
+  .interior-page .interior-services-hero .room-portal-view, .interior-profile-stage .room-portal-view { height: 350px !important; }
+  .interior-page .interior-profile-stage .interior-portrait { width: 86px; bottom: 100px; padding: 4px; }
+  .interior-profile-stage .interior-portrait figcaption { font-size: 6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .room-portal-tools, .room-portal-explore { transition: none; }
+}

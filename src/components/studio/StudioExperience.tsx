@@ -21,7 +21,7 @@ const copy = {
     directory: '直接前往', routes: { work: '工作案例', build: '产品', blog: '手记', services: '合作方式', about: '关于我' },
     title: ['山边，有间', '工作室。'], intro: '我在这里连接人、做产品，也把沿途的经历写下来。',
     invitation: '进来坐坐，看看最近发生的事。', explore: '从长桌开始',
-    hint: '点击房间里的物件，或选择下方区域',
+    hint: '左右拖动看看房间，点击物件进入',
     overview: '回到全景', controls: '场景浏览方式',
     still: '静态浏览', live: '开启 3D', loading: '正在打开工作室', ready: '工作室已打开',
     failed: '已切换为静态场景，内容仍可正常浏览。', paused: '静态场景 · 选择区域继续浏览',
@@ -43,7 +43,7 @@ const copy = {
     directory: 'Go directly to', routes: { work: 'Selected work', build: 'Products', blog: 'Field notes', services: 'Work together', about: 'About me' },
     title: ['A studio', 'by the hills.'], intro: 'A place to bring people together, build things, and write along the way.',
     invitation: 'Come in. See what I’ve been working on.', explore: 'Start at the table',
-    hint: 'Select an object in the room, or explore a space below',
+    hint: 'Drag sideways to look around. Select an object to explore.',
     overview: 'Room overview', controls: 'Scene viewing options',
     still: 'Still view', live: 'Enable 3D', loading: 'Opening the studio', ready: 'The studio is ready',
     failed: 'Showing a still scene. All content is available below.', paused: 'Still scene · Choose a space to explore',
@@ -113,6 +113,7 @@ export default function StudioExperience({ locale, content }: { locale: string; 
   const { lighting, still, setStill } = useStudioSettings();
   const [previousStill, setPreviousStill] = useState(still);
   const [highlightedZone, setHighlightedZone] = useState<StudioFocusZone | null>(null);
+  const [viewAngle, setViewAngle] = useState(0);
   const reducedMotion = useSyncExternalStore(subscribeMotion, getMotion, () => true);
   const roomRef = useRef<HTMLDivElement>(null);
   const collectionRef = useRef<HTMLElement>(null);
@@ -202,7 +203,7 @@ export default function StudioExperience({ locale, content }: { locale: string; 
             <Image src={lighting === 'evening' ? '/images/studio-dusk-preview.png' : '/images/studio-daylight-preview.png'} alt="" fill sizes="(max-width: 760px) 100vw, 76vw" preload className="studio-poster-image" />
           </div>
           {hydrated && !useStill ? <SceneBoundary onFailure={onFailure}>
-            <StudioScene zone={zone} onSelect={selectZone} reducedMotion={reducedMotion} onReady={onReady} onFailure={onFailure} lighting={lighting} highlightedZone={highlightedZone} onHover={setHighlightedZone} hotspotRoot={roomRef} />
+            <StudioScene zone={zone} onSelect={selectZone} reducedMotion={reducedMotion} onReady={onReady} onFailure={onFailure} lighting={lighting} highlightedZone={highlightedZone} onHover={setHighlightedZone} hotspotRoot={roomRef} viewAngle={viewAngle} onViewAngleChange={setViewAngle} />
           </SceneBoundary> : null}
           <div className="studio-hotspots" hidden={!ready || useStill || Boolean(activeZone)}>
             {zones.map((item, index) => <button key={item} type="button" data-studio-hotspot={item} className={`studio-hotspot ${highlightedZone === item ? 'is-highlighted' : ''}`} style={{ transform: `translate3d(var(--hotspot-${item}-x, -999px), var(--hotspot-${item}-y, -999px), 0) translate(-50%, -100%)` }} onPointerEnter={() => setHighlightedZone(item)} onPointerLeave={() => setHighlightedZone(null)} onFocus={() => setHighlightedZone(item)} onBlur={() => setHighlightedZone(null)} onClick={() => selectZone(item)} aria-label={`${t.labels[item]} · ${t.hotspotCopy[item]}`}>
@@ -250,6 +251,7 @@ export default function StudioExperience({ locale, content }: { locale: string; 
           {(['work', 'build', 'blog', 'services', 'about'] as const).map(path => <Link key={path} href={`/${path}`}>{t.routes[path]}</Link>)}
         </nav>
         <div className="studio-view-actions" role="group" aria-label={t.controls} hidden={!hydrated}>
+          {Math.abs(viewAngle) > 0.01 && !useStill ? <button type="button" onClick={() => setViewAngle(0)}>{locale === 'zh' ? '◇ 转回正面' : '◇ Reset angle'}</button> : null}
           {activeZone ? <button type="button" onClick={() => { selectZone('overview'); navRefs.current[activeZone]?.focus({ preventScroll: true }); }}>↶ {t.overview}</button> : null}
           <button type="button" aria-pressed={useStill} onClick={() => { if (useStill) { setStill(false); setFailed(false); setReady(false); } else { setStill(true); setReady(false); } }}><span aria-hidden="true">{useStill ? '◇' : '◈'}</span> {useStill ? t.live : t.still}</button>
         </div>

@@ -25,7 +25,7 @@ export function CollectionHero({ locale, zone, number, eyebrow, title, lead, des
         {children}
       </div>
       <div className="collection-room">
-        <RoomPortal zone={zone} locale={locale} />
+        <RoomPortal zone={zone} locale={locale} contentHref={zone === 'work' ? '#work-archive' : zone === 'build' ? '#product-workbench' : '#notes-index'} />
       </div>
     </header>
   );

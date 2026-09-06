@@ -4,7 +4,6 @@ import {
   Component,
   createContext,
   memo,
-  useCallback,
   useContext,
   useEffect,
   useLayoutEffect,
@@ -12,6 +11,7 @@ import {
   useRef,
   useState,
   type ReactNode,
+  type RefObject,
 } from 'react';
 import { Canvas, useFrame, useThree, type ThreeEvent } from '@react-three/fiber';
 import {
@@ -21,6 +21,7 @@ import {
   MeshBasicMaterial,
   MeshStandardMaterial,
   OrthographicCamera,
+  PerspectiveCamera,
   PCFShadowMap,
   PlaneGeometry,
   Shape,
@@ -33,9 +34,20 @@ import {
   Vector3,
 } from 'three';
 import type { StudioFocusZone, StudioLighting, StudioSceneProps, StudioZone } from './types';
+import { clampViewAngle, getPointerIntent, portalCameraDistance, PORTAL_FIELD_OF_VIEW, shouldSuppressSceneClick, viewAngleAfterDrag, type PointerIntent } from './scene-camera';
 
 type Point = [number, number, number];
 type Surface = keyof typeof COLORS;
+type OrbitGesture = {
+  pointerId: number | null;
+  pointerType: string;
+  mode: 'idle' | PointerIntent;
+  startX: number;
+  startY: number;
+  startAngle: number;
+  suppressClick: boolean;
+};
+const OrbitContext = createContext<RefObject<OrbitGesture> | null>(null);
 
 const COLORS = {
   plaster: '#ede6d6',
@@ -314,20 +326,23 @@ function ZoneObject({ children, zone, selected, highlightedZone, onSelect, onSur
   onSurfaceHover: SurfaceHover;
 }) {
   const gl = useThree((state) => state.gl);
+  const gesture = useContext(OrbitContext);
   const active = selected === zone || highlightedZone === zone;
   return <group
     onClick={(event) => {
       event.stopPropagation();
+      if (gesture?.current.suppressClick || gesture?.current.mode === 'orbit' || gesture?.current.mode === 'scroll') return;
       onSelect(zone);
     }}
     onPointerOver={(event) => {
       event.stopPropagation();
+      if (gesture?.current.mode === 'orbit') return;
       onSurfaceHover(zone, event);
       gl.domElement.style.setProperty('cursor', 'pointer');
     }}
     onPointerOut={(event) => {
       onSurfaceHover(null, event);
-      gl.domElement.style.removeProperty('cursor');
+      if (gesture?.current.mode !== 'orbit') gl.domElement.style.removeProperty('cursor');
     }}
   >
     {children}
@@ -354,6 +369,7 @@ function ZoneEmphasis({ zone }: { zone: StudioFocusZone }) {
 }
 
 function InteractiveRoom({ zone, onSelect, highlightedZone, onHover }: Pick<StudioSceneProps, 'zone' | 'onSelect' | 'highlightedZone' | 'onHover'>) {
+  const gesture = useContext(OrbitContext);
   const lastReported = useRef<StudioFocusZone | null>(null);
   const candidate = useRef<StudioFocusZone | null>(null);
   const hoverFrame = useRef<number | null>(null);
@@ -363,7 +379,8 @@ function InteractiveRoom({ zone, onSelect, highlightedZone, onHover }: Pick<Stud
     if (hoverFrame.current !== null) cancelAnimationFrame(hoverFrame.current);
   }, []);
 
-  const onSurfaceHover = useCallback<SurfaceHover>((next, event) => {
+  const onSurfaceHover: SurfaceHover = (next, event) => {
+    if (gesture?.current.mode === 'orbit') return;
     const related = event.nativeEvent.relatedTarget;
     const hotspot = related instanceof Element ? related.closest<HTMLElement>('[data-studio-hotspot]')?.dataset.studioHotspot : null;
     candidate.current = next ?? (hotspot === 'work' || hotspot === 'build' || hotspot === 'notes' ? hotspot : null);
@@ -371,11 +388,12 @@ function InteractiveRoom({ zone, onSelect, highlightedZone, onHover }: Pick<Stud
     // A group contains many meshes. Merge their enter/leave events into one zone change.
     hoverFrame.current = requestAnimationFrame(() => {
       hoverFrame.current = null;
+      if (gesture?.current.mode === 'orbit') return;
       if (candidate.current === lastReported.current) return;
       lastReported.current = candidate.current;
       onHover(candidate.current);
     });
-  }, [onHover]);
+  };
 
   const shared = { selected: zone, highlightedZone, onSelect, onSurfaceHover };
   return <>
@@ -496,6 +514,14 @@ const CAMERA_POSES: Record<StudioZone, { target: Point; eye: Point; scale: numbe
   notes: { target: [-3.35, 1.03, -1.6], eye: [9.5, 11.6, 11.8], scale: 1.95 },
 };
 
+const PORTAL_CAMERA_POSES: Record<StudioZone, { target: Point; eye: Point }> = {
+  overview: CAMERA_POSES.overview,
+  work: { target: [0.03, 1.03, 0.45], eye: [9.4, 8.7, 13.7] },
+  build: { target: [2.63, 1.5, -2.84], eye: [7.4, 6.3, 13.4] },
+  notes: { target: [-3.65, 1.31, -1.59], eye: [10.2, 7.5, 12.2] },
+};
+const ORBIT_AXIS = new Vector3(0, 1, 0);
+
 const HOTSPOT_ANCHORS: Record<StudioFocusZone, Point> = {
   work: [0.65, 1.54, 1.15],
   build: [3.55, 2.12, -2.9],
@@ -503,71 +529,150 @@ const HOTSPOT_ANCHORS: Record<StudioFocusZone, Point> = {
 };
 const HOTSPOT_ZONES: StudioFocusZone[] = ['work', 'build', 'notes'];
 
-function CameraRig({ zone, reducedMotion, hotspotRoot }: Pick<StudioSceneProps, 'zone' | 'reducedMotion' | 'hotspotRoot'>) {
+function CameraRig({ zone, reducedMotion, hotspotRoot, presentation = 'room', viewAngle, onViewAngleChange, onHover }: Pick<StudioSceneProps, 'zone' | 'reducedMotion' | 'hotspotRoot' | 'presentation' | 'viewAngle' | 'onViewAngleChange' | 'onHover'>) {
   const getState = useThree((state) => state.get);
   const size = useThree((state) => state.size);
   const gl = useThree((state) => state.gl);
   const invalidate = useThree((state) => state.invalidate);
+  const gesture = useContext(OrbitContext);
   const lookAt = useRef(new Vector3());
   const target = useRef(new Vector3());
   const eye = useRef(new Vector3());
   const pointer = useRef({ x: 0, y: 0 });
+  const angle = useRef(clampViewAngle(viewAngle ?? 0));
   const initialized = useRef(false);
   const projection = useRef(new Vector3());
   const lastHotspots = useRef<Record<string, string>>({});
-  const pose = CAMERA_POSES[zone];
-  const fitZoom = Math.min(size.width / 15.1, size.height / 11.5) * pose.scale;
+  const pose = presentation === 'portal' ? PORTAL_CAMERA_POSES[zone] : CAMERA_POSES[zone];
+  const fitZoom = Math.min(size.width / 15.1, size.height / 11.5) * CAMERA_POSES[zone].scale;
+  const portalDistance = portalCameraDistance(zone, size.width / Math.max(size.height, 1));
 
   useLayoutEffect(() => {
-    const camera = getState().camera as OrthographicCamera;
-    camera.left = -size.width / 2;
-    camera.right = size.width / 2;
-    camera.top = size.height / 2;
-    camera.bottom = -size.height / 2;
+    const camera = getState().camera;
+    if (camera instanceof OrthographicCamera) {
+      camera.left = -size.width / 2;
+      camera.right = size.width / 2;
+      camera.top = size.height / 2;
+      camera.bottom = -size.height / 2;
+    } else if (camera instanceof PerspectiveCamera) {
+      camera.aspect = size.width / Math.max(size.height, 1);
+      camera.fov = PORTAL_FIELD_OF_VIEW;
+    }
     camera.updateProjectionMatrix();
     invalidate();
   }, [getState, size.width, size.height, invalidate]);
 
-  useEffect(() => { invalidate(); }, [zone, reducedMotion, fitZoom, invalidate]);
+  useEffect(() => {
+    if (viewAngle !== undefined) angle.current = clampViewAngle(viewAngle);
+    invalidate();
+  }, [viewAngle, invalidate]);
+
+  useEffect(() => { invalidate(); }, [zone, reducedMotion, fitZoom, portalDistance, presentation, invalidate]);
 
   useEffect(() => {
+    if (!gesture) return;
     const canvas = gl.domElement;
+    const state = gesture.current;
+    const down = (event: PointerEvent) => {
+      if (event.button !== 0 || !event.isPrimary || state.pointerId !== null) return;
+      state.pointerId = event.pointerId;
+      state.pointerType = event.pointerType;
+      state.mode = 'pending';
+      state.startX = event.clientX;
+      state.startY = event.clientY;
+      state.startAngle = angle.current;
+      state.suppressClick = false;
+      pointer.current.x = 0;
+      pointer.current.y = 0;
+    };
     const move = (event: PointerEvent) => {
-      if (reducedMotion || event.pointerType !== 'mouse' || canvas.clientWidth < 600) return;
+      if (state.pointerId === event.pointerId && state.mode !== 'idle') {
+        const deltaX = event.clientX - state.startX;
+        const deltaY = event.clientY - state.startY;
+        if (state.mode === 'pending') {
+          state.mode = getPointerIntent(deltaX, deltaY, state.pointerType);
+          if (state.mode === 'orbit') {
+            canvas.setPointerCapture(event.pointerId);
+            canvas.style.setProperty('cursor', 'grabbing');
+            onHover(null);
+          }
+        }
+        state.suppressClick ||= shouldSuppressSceneClick(deltaX, deltaY, state.mode);
+        if (state.mode === 'orbit') {
+          if (event.cancelable) event.preventDefault();
+          angle.current = viewAngleAfterDrag(state.startAngle, deltaX, canvas.clientWidth);
+          invalidate();
+        }
+        return;
+      }
+      if (reducedMotion || event.pointerType !== 'mouse') return;
       const rect = canvas.getBoundingClientRect();
       pointer.current.x = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
       pointer.current.y = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
       invalidate();
     };
+    const finish = (event: PointerEvent) => {
+      if (state.pointerId !== event.pointerId) return;
+      const moved = state.mode === 'orbit';
+      const pointerId = state.pointerId;
+      state.pointerId = null;
+      state.mode = 'idle';
+      canvas.style.removeProperty('cursor');
+      if (canvas.hasPointerCapture(pointerId)) canvas.releasePointerCapture(pointerId);
+      if (moved) onViewAngleChange?.(angle.current);
+      invalidate();
+    };
+    const suppressDragClick = (event: MouseEvent) => {
+      if (!state.suppressClick) return;
+      // Capture runs before R3F's click handler, including browsers that synthesize a touch click.
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      state.suppressClick = false;
+    };
     const leave = () => {
       pointer.current.x = 0;
       pointer.current.y = 0;
-      canvas.style.cursor = '';
+      if (state.mode !== 'orbit') canvas.style.removeProperty('cursor');
       invalidate();
     };
-    canvas.addEventListener('pointermove', move, { passive: true });
+    canvas.addEventListener('pointerdown', down, { passive: true });
+    canvas.addEventListener('pointermove', move, { passive: false });
     canvas.addEventListener('pointerleave', leave, { passive: true });
+    canvas.addEventListener('lostpointercapture', finish);
+    canvas.addEventListener('click', suppressDragClick, true);
+    window.addEventListener('pointerup', finish);
+    window.addEventListener('pointercancel', finish);
     return () => {
+      canvas.removeEventListener('pointerdown', down);
       canvas.removeEventListener('pointermove', move);
       canvas.removeEventListener('pointerleave', leave);
+      canvas.removeEventListener('lostpointercapture', finish);
+      canvas.removeEventListener('click', suppressDragClick, true);
+      window.removeEventListener('pointerup', finish);
+      window.removeEventListener('pointercancel', finish);
+      const pointerId = state.pointerId;
+      state.pointerId = null;
+      state.mode = 'idle';
+      if (pointerId !== null && canvas.hasPointerCapture(pointerId)) canvas.releasePointerCapture(pointerId);
+      canvas.style.removeProperty('cursor');
     };
-  }, [gl, reducedMotion, invalidate]);
+  }, [gesture, gl, reducedMotion, invalidate, onViewAngleChange, onHover]);
 
   useFrame((state, delta) => {
-    const camera = state.camera as OrthographicCamera;
+    const camera = state.camera;
     target.current.set(...pose.target);
-    eye.current.set(...pose.eye).add(target.current);
-    if (!reducedMotion && size.width >= 600) {
-      eye.current.x += pointer.current.x * 0.42;
-      eye.current.y -= pointer.current.y * 0.22;
-    }
-    const amount = reducedMotion || !initialized.current ? 1 : 1 - Math.exp(-Math.min(delta, 0.06) * 6);
+    const parallaxAngle = reducedMotion ? 0 : pointer.current.x * 0.045;
+    eye.current.set(...pose.eye).applyAxisAngle(ORBIT_AXIS, angle.current + parallaxAngle);
+    if (camera instanceof PerspectiveCamera) eye.current.normalize().multiplyScalar(portalDistance);
+    if (!reducedMotion) eye.current.y -= pointer.current.y * (presentation === 'portal' ? 0.12 : 0.22);
+    eye.current.add(target.current);
+    const directManipulation = gesture?.current.mode === 'orbit';
+    const amount = reducedMotion || directManipulation || !initialized.current ? 1 : 1 - Math.exp(-Math.min(delta, 0.06) * 6);
     camera.position.lerp(eye.current, amount);
     lookAt.current.lerp(target.current, amount);
-    camera.zoom += (fitZoom - camera.zoom) * amount;
+    if (camera instanceof OrthographicCamera) camera.zoom += (fitZoom - camera.zoom) * amount;
     camera.lookAt(lookAt.current);
     camera.updateProjectionMatrix();
-    // Projection must use the camera from this frame, not the previous renderer pass.
     camera.updateMatrixWorld(true);
     const root = hotspotRoot.current;
     if (root) {
@@ -588,7 +693,7 @@ function CameraRig({ zone, reducedMotion, hotspotRoot }: Pick<StudioSceneProps, 
     initialized.current = true;
     const moving = camera.position.distanceToSquared(eye.current) > 0.000005
       || lookAt.current.distanceToSquared(target.current) > 0.000005
-      || Math.abs(camera.zoom - fitZoom) > 0.002;
+      || (camera instanceof OrthographicCamera && Math.abs(camera.zoom - fitZoom) > 0.002);
     if (moving) invalidate();
   });
   return null;
@@ -678,23 +783,24 @@ function SceneLighting({ lighting }: Pick<StudioSceneProps, 'lighting'>) {
   </>;
 }
 
-export default function StudioScene({ zone, onSelect, reducedMotion, onReady, onFailure, lighting, highlightedZone, onHover, hotspotRoot }: StudioSceneProps) {
+export default function StudioScene({ zone, onSelect, reducedMotion, onReady, onFailure, lighting, highlightedZone, onHover, hotspotRoot, presentation = 'room', viewAngle, onViewAngleChange }: StudioSceneProps) {
+  const gesture = useRef<OrbitGesture>({ pointerId: null, pointerType: '', mode: 'idle', startX: 0, startY: 0, startAngle: 0, suppressClick: false });
   return <SceneErrorBoundary onFailure={onFailure}>
     <Canvas
-      orthographic
-      camera={{ position: [12, 12, 14], zoom: 50, near: 0.1, far: 100 }}
+      orthographic={presentation === 'room'}
+      camera={presentation === 'portal' ? { position: [12, 12, 14], fov: PORTAL_FIELD_OF_VIEW, near: 0.1, far: 100 } : { position: [12, 12, 14], zoom: 50, near: 0.1, far: 100 }}
       frameloop="demand"
       dpr={[1, 1.6]}
       shadows={{ type: PCFShadowMap }}
       gl={{ alpha: true, antialias: true, powerPreference: 'low-power' }}
-      style={{ touchAction: 'pan-y', width: '100%', height: '100%' }}
+      style={{ touchAction: 'pan-y pinch-zoom', width: '100%', height: '100%' }}
       fallback={null}
       onCreated={({ gl }) => {
         gl.setClearColor('#e7e7da', 0);
         gl.shadowMap.autoUpdate = false;
         gl.shadowMap.needsUpdate = true;
         gl.domElement.setAttribute('aria-hidden', 'true');
-        gl.domElement.style.touchAction = 'pan-y';
+        gl.domElement.style.touchAction = 'pan-y pinch-zoom';
       }}
     >
       <SceneLighting lighting={lighting} />
@@ -702,13 +808,15 @@ export default function StudioScene({ zone, onSelect, reducedMotion, onReady, on
         <planeGeometry args={[200, 200]} />
         <shadowMaterial transparent opacity={lighting === 'evening' ? 0.25 : 0.14} />
       </mesh>
+      <OrbitContext.Provider value={gesture}>
       <LightingContext.Provider value={lighting}>
         <AssetProvider>
           <Architecture />
           <InteractiveRoom zone={zone} onSelect={onSelect} highlightedZone={highlightedZone} onHover={onHover} />
         </AssetProvider>
       </LightingContext.Provider>
-      <CameraRig zone={zone} reducedMotion={reducedMotion} hotspotRoot={hotspotRoot} />
+      <CameraRig zone={zone} reducedMotion={reducedMotion} hotspotRoot={hotspotRoot} presentation={presentation} viewAngle={viewAngle} onViewAngleChange={onViewAngleChange} onHover={onHover} />
+      </OrbitContext.Provider>
       <SceneLifecycle onReady={onReady} onFailure={onFailure} />
     </Canvas>
   </SceneErrorBoundary>;

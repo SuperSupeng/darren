@@ -9,6 +9,7 @@ import { useStudioSettings } from './StudioSettings';
 
 const StudioScene = dynamic(() => import('@/components/studio/StudioScene'), { ssr: false });
 const labels = { work: ['共创长桌', 'The shared table'], build: ['产品工作台', 'The workbench'], notes: ['窗边手记', 'By the window'] };
+const subscribeHydration = () => () => {};
 function subscribeMotion(callback: () => void) {
   const media = window.matchMedia('(prefers-reduced-motion: reduce)');
   media.addEventListener('change', callback);
@@ -17,7 +18,7 @@ function subscribeMotion(callback: () => void) {
 function getMotion() { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
 
 function Poster({ lighting }: { lighting: StudioLighting }) {
-  return <Image src={lighting === 'day' ? '/images/studio-daylight-preview.png' : '/images/studio-dusk-preview.png'} fill loading="eager" sizes="(max-width: 760px) 90vw, 480px" alt="" className="room-portal-poster" />;
+  return <Image src={lighting === 'day' ? '/images/studio-daylight-preview.png' : '/images/studio-dusk-preview.png'} fill loading="eager" sizes="(max-width: 760px) 100vw, 65vw" alt="" className="room-portal-poster" />;
 }
 
 class PortalBoundary extends Component<{ children: ReactNode; onFailure: () => void }, { failed: boolean }> {
@@ -27,13 +28,15 @@ class PortalBoundary extends Component<{ children: ReactNode; onFailure: () => v
   render() { return this.state.failed ? null : this.props.children; }
 }
 
-function LiveRoom({ zone, lighting }: { zone: StudioFocusZone; lighting: StudioLighting }) {
+function LiveRoom({ zone, lighting, locale, compact, contentHref }: { zone: StudioFocusZone; lighting: StudioLighting; locale: string; compact: boolean; contentHref?: string }) {
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [angle, setAngle] = useState(0);
   const [highlighted, setHighlighted] = useState<StudioFocusZone | null>(null);
   const root = useRef<HTMLDivElement>(null);
   const router = useRouter();
   const motion = useSyncExternalStore(subscribeMotion, getMotion, () => true);
+  const zh = locale === 'zh';
   const onReady = useCallback(() => setReady(true), []);
   const onFailure = useCallback(() => setFailed(true), []);
   useEffect(() => {
@@ -41,15 +44,27 @@ function LiveRoom({ zone, lighting }: { zone: StudioFocusZone; lighting: StudioL
     const timer = setTimeout(onFailure, 20000);
     return () => clearTimeout(timer);
   }, [ready, failed, onFailure]);
-  return <div ref={root} className="room-portal-render" data-portal-status={failed ? 'static' : ready ? 'ready' : 'loading'}>
+  const views = [
+    { angle: -0.42, label: zh ? '左侧' : 'Left', icon: '↶' },
+    { angle: 0, label: zh ? '正面' : 'Front', icon: '◇' },
+    { angle: 0.42, label: zh ? '右侧' : 'Right', icon: '↷' },
+  ];
+  return <div ref={root} className="room-portal-render" data-portal-status={failed ? 'static' : ready ? 'ready' : 'loading'} data-view-angle={angle.toFixed(3)}>
     {(!ready || failed) && <Poster lighting={lighting} />}
-    {!failed && <PortalBoundary onFailure={onFailure}><StudioScene zone={zone} lighting={lighting} reducedMotion={motion} onReady={onReady} onFailure={onFailure} highlightedZone={highlighted} onHover={setHighlighted} hotspotRoot={root} onSelect={next => router.push(`/${lighting === 'evening' ? '?light=evening' : ''}#${next}`)} /></PortalBoundary>}
+    {!failed && <PortalBoundary onFailure={onFailure}><StudioScene presentation="portal" viewAngle={angle} onViewAngleChange={setAngle} zone={zone} lighting={lighting} reducedMotion={motion} onReady={onReady} onFailure={onFailure} highlightedZone={highlighted} onHover={setHighlighted} hotspotRoot={root} onSelect={next => { if (next === zone && contentHref) window.location.hash = contentHref; else router.push(`/${lighting === 'evening' ? '?light=evening' : ''}#${next}`); }} /></PortalBoundary>}
+    {ready && !failed && <div className="room-portal-tools">
+      {!compact && <p>{zh ? '左右拖动，换个角度' : 'Drag sideways to look around'}<span aria-hidden="true">↔</span></p>}
+      <div role="group" aria-label={zh ? '房间视角' : 'Room viewpoint'}>{views.map(view => <button key={view.angle} type="button" aria-label={zh ? `${view.label}视角` : `${view.label} view`} aria-pressed={Math.abs(angle - view.angle) < 0.04} onClick={() => setAngle(view.angle)}><span aria-hidden="true">{view.icon}</span>{!compact && <span>{view.label}</span>}</button>)}</div>
+    </div>}
+    {failed && <p className="room-portal-fallback" role="status">{zh ? '暂以静态画面呈现，仍可继续浏览。' : 'A still view for now. You can keep exploring.'}</p>}
   </div>;
 }
 
-export default function RoomPortal({ zone, locale, compact = false }: { zone: StudioFocusZone; locale: string; compact?: boolean }) {
-  const { lighting, still } = useStudioSettings();
+export default function RoomPortal({ zone, locale, compact = false, contentHref }: { zone: StudioFocusZone; locale: string; compact?: boolean; contentHref?: string }) {
+  const { lighting, still, setStill } = useStudioSettings();
   const [activated, setActivated] = useState(false);
+  const [exploring, setExploring] = useState(false);
+  const hydrated = useSyncExternalStore(subscribeHydration, () => true, () => false);
   const root = useRef<HTMLElement>(null);
   useEffect(() => {
     if (compact) return;
@@ -61,8 +76,12 @@ export default function RoomPortal({ zone, locale, compact = false }: { zone: St
   }, [compact]);
   const zh = locale === 'zh';
   const href = `/${lighting === 'evening' ? '?light=evening' : ''}#${zone}`;
-  return <figure ref={root} className={`room-portal${compact ? ' room-portal-compact' : ''}`} aria-label={zh ? `${labels[zone][0]}的房间视角` : `A view of ${labels[zone][1].toLowerCase()}`}>
-    <div className="room-portal-view">{compact || still || !activated ? <Poster lighting={lighting} /> : <LiveRoom zone={zone} lighting={lighting} />}</div>
-    <figcaption><span><i aria-hidden="true" />{labels[zone][zh ? 0 : 1]}</span><Link href={href}>{zh ? '回到房间' : 'Enter the room'} <span aria-hidden="true">↗</span></Link></figcaption>
+  const live = !still && (compact ? exploring : activated);
+  return <figure ref={root} className={`room-portal${compact ? ' room-portal-compact' : ' room-portal-spatial'}`} data-room-zone={zone} aria-label={zh ? `${labels[zone][0]}的房间视角` : `A view of ${labels[zone][1].toLowerCase()}`}>
+    <div className="room-portal-view">
+      {live ? <LiveRoom zone={zone} lighting={lighting} locale={locale} compact={compact} contentHref={contentHref} /> : <Poster lighting={lighting} />}
+      {hydrated && !live && (compact || still) && <button className="room-portal-explore" type="button" onClick={() => { setStill(false); setExploring(true); setActivated(true); }}>{zh ? '探索 3D' : 'Explore in 3D'} <span aria-hidden="true">↗</span></button>}
+    </div>
+    <figcaption><span><i aria-hidden="true" />{labels[zone][zh ? 0 : 1]}</span><Link href={contentHref ?? href}>{contentHref ? zh ? zone === 'notes' ? '翻开手记' : zone === 'work' ? '翻阅案例' : '查看台上的作品' : zone === 'notes' ? 'Open the notes' : zone === 'work' ? 'Open the work archive' : 'Explore these products' : zh ? '回到房间' : 'Enter the room'} <span aria-hidden="true">↗</span></Link></figcaption>
   </figure>;
 }

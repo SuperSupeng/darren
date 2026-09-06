@@ -14,6 +14,9 @@ export type StudioSceneProps = {
   highlightedZone: StudioFocusZone | null;
   onHover: (zone: StudioFocusZone | null) => void;
   hotspotRoot: RefObject<HTMLDivElement | null>;
+  presentation?: 'room' | 'portal';
+  viewAngle?: number;
+  onViewAngleChange?: (angle: number) => void;
 };
 
 export type StudioItem = {
