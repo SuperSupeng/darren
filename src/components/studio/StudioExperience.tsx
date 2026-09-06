@@ -4,7 +4,8 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { Component, useCallback, useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from 'react';
 import { Link } from '@/i18n/navigation';
-import type { StudioContent, StudioItem, StudioZone } from './types';
+import { getStudioLocation, updateStudioLocation, getStudioHref } from '@/lib/studio-location';
+import type { StudioContent, StudioItem, StudioZone, StudioFocusZone, StudioLighting } from './types';
 import './studio.css';
 
 const StudioScene = dynamic(() => import('./StudioScene'), { ssr: false });
@@ -12,7 +13,8 @@ const zones: Exclude<StudioZone, 'overview'>[] = ['work', 'build', 'notes'];
 
 const copy = {
   zh: {
-    location: '杭州 · 中国', edition: '开放工作室 / 01', preview: '空间实验',
+    location: '杭州 · 中国', edition: '开放工作室 / 02', preview: '欢迎，随意坐坐',
+    day: '日光', evening: '暮色', lightingLabel: '工作室光线',
     title: ['山边，有间', '工作室。'], intro: '我在这里连接人、做产品，也把沿途的经历写下来。',
     invitation: '进来坐坐，看看最近发生的事。', explore: '从长桌开始',
     hint: '点击房间里的物件，或选择下方区域',
@@ -22,6 +24,7 @@ const copy = {
     visit: '打开项目', read: '阅读手记', detail: '查看案例',
     all: { work: '全部工作案例', build: '全部产品', notes: '全部手记' },
     labels: { work: '共创长桌', build: '产品工作台', notes: '窗边手记' },
+    hotspotCopy: { work: '开发者活动与社区合作', build: '从问题出发，做成产品', notes: 'AI、旅途与生活的记录' },
     captions: { work: '让一群人，一起做成一件事', build: '让一个想法，进入真实的生活', notes: '把发生过的事，慢慢写下来' },
     descriptions: {
       work: '活动、社区与真实的连接。这些是我亲手参与推进的工作。',
@@ -32,7 +35,8 @@ const copy = {
     shortcut: '区域导航', close: '收起内容，回到全景',
   },
   en: {
-    location: 'HANGZHOU, CHINA', edition: 'OPEN STUDIO / 01', preview: 'Spatial study',
+    location: 'HANGZHOU, CHINA', edition: 'OPEN STUDIO / 02', preview: 'Come in. Make yourself at home.',
+    day: 'Daylight', evening: 'Dusk', lightingLabel: 'Studio lighting',
     title: ['A studio', 'by the hills.'], intro: 'A place to bring people together, build things, and write along the way.',
     invitation: 'Come in. See what I’ve been working on.', explore: 'Start at the table',
     hint: 'Select an object in the room, or explore a space below',
@@ -42,6 +46,7 @@ const copy = {
     visit: 'Visit project', read: 'Read field note', detail: 'View case study',
     all: { work: 'All selected work', build: 'All products', notes: 'All field notes' },
     labels: { work: 'The shared table', build: 'The workbench', notes: 'By the window' },
+    hotspotCopy: { work: 'People, programs & community', build: 'Ideas put into practice', notes: 'Notes on AI, travel & life' },
     captions: { work: 'Good things start with people', build: 'Ideas, out in the real world', notes: 'A few things worth writing down' },
     descriptions: {
       work: 'Developer programs, communities, and the work of bringing people together.',
@@ -101,7 +106,11 @@ export default function StudioExperience({ locale, content }: { locale: string; 
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
   const [still, setStill] = useState(false);
+  const [lighting, setLighting] = useState<StudioLighting>('day');
+  const [highlightedZone, setHighlightedZone] = useState<StudioFocusZone | null>(null);
   const reducedMotion = useSyncExternalStore(subscribeMotion, getMotion, () => true);
+  const roomRef = useRef<HTMLDivElement>(null);
+  const collectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const navRefs = useRef<Partial<Record<StudioZone, HTMLButtonElement | null>>>({});
   const activeZone = zone === 'overview' ? null : zone;
@@ -109,17 +118,23 @@ export default function StudioExperience({ locale, content }: { locale: string; 
 
   const selectZone = useCallback((next: StudioZone) => {
     setZone(next);
-    const url = new URL(window.location.href);
-    url.hash = next === 'overview' ? '' : next;
+    setHighlightedZone(null);
+    const url = updateStudioLocation(new URL(window.location.href), { zone: next });
     window.history.replaceState(window.history.state, '', url);
   }, []);
+  const changeLighting = (next: StudioLighting) => {
+    setLighting(next);
+    const url = updateStudioLocation(new URL(window.location.href), { lighting: next });
+    window.history.replaceState(window.history.state, '', url);
+  };
   const onReady = useCallback(() => setReady(true), []);
   const onFailure = useCallback(() => { setFailed(true); setReady(false); }, []);
 
   useEffect(() => {
     const restore = () => {
-      const selected = window.location.hash.slice(1);
-      setZone(zones.includes(selected as typeof zones[number]) ? selected as StudioZone : 'overview');
+      const restored = getStudioLocation(new URL(window.location.href));
+      setZone(restored.zone);
+      setLighting(restored.lighting);
     };
     const frame = requestAnimationFrame(restore);
     window.addEventListener('hashchange', restore);
@@ -136,7 +151,7 @@ export default function StudioExperience({ locale, content }: { locale: string; 
     const frame = requestAnimationFrame(() => {
       titleRef.current?.focus({ preventScroll: true });
       if (window.matchMedia('(max-width: 760px)').matches) {
-        titleRef.current?.scrollIntoView({ block: 'start', behavior: 'instant' });
+        collectionRef.current?.scrollIntoView({ block: 'start', behavior: 'instant' });
       }
     });
     const escape = (event: KeyboardEvent) => {
@@ -156,26 +171,38 @@ export default function StudioExperience({ locale, content }: { locale: string; 
   }, [ready, useStill, onFailure]);
 
   return (
-    <main id="main-content" tabIndex={-1} className={`studio-experience ${activeZone ? 'studio-is-focused' : ''}`} lang={locale}>
+    <main id="main-content" tabIndex={-1} className={`studio-experience ${activeZone ? 'studio-is-focused' : ''}`} data-lighting={lighting} lang={locale}>
       <header className="studio-header">
         <Link href="/" className="studio-brand" aria-label={locale === 'zh' ? 'Darren Su 首页' : 'Darren Su home'}>
           <span className="studio-brand-mark" aria-hidden="true">苏</span><span>Darren Su<span className="studio-brand-period">.</span></span>
         </Link>
-        <span className="studio-edition">{t.edition}</span>
+        <div className="studio-light-switch" role="group" aria-label={t.lightingLabel}>
+          {(['day', 'evening'] as const).map(value => <button key={value} type="button" aria-pressed={lighting === value} onClick={() => changeLighting(value)}>
+            <svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              {value === 'day' ? <><circle cx="10" cy="10" r="3.5" /><path d="M10 1v2m0 14v2M1 10h2m14 0h2M3.6 3.6 5 5m10 10 1.4 1.4M3.6 16.4 5 15M15 5l1.4-1.4" /></> : <path d="M16.7 12.2A7 7 0 0 1 7.8 3.3a7 7 0 1 0 8.9 8.9Z" />}
+            </svg>{t[value]}
+          </button>)}
+        </div>
         <div className="studio-header-actions">
-          <Link href={`/studio${activeZone ? `#${activeZone}` : ''}`} locale={locale === 'zh' ? 'en' : 'zh'} hrefLang={locale === 'zh' ? 'en' : 'zh'} className="studio-language">{locale === 'zh' ? 'EN' : '中文'}</Link>
+          <Link href={getStudioHref({ zone, lighting })} locale={locale === 'zh' ? 'en' : 'zh'} hrefLang={locale === 'zh' ? 'en' : 'zh'} className="studio-language">{locale === 'zh' ? 'EN' : '中文'}</Link>
           <Link href="/" className="studio-site-link">{t.back} <span aria-hidden="true">↗</span></Link>
         </div>
       </header>
 
       <div className="studio-stage">
-        <div className="studio-room" aria-label={t.room} role="group" data-scene-status={useStill ? 'static' : ready ? 'ready' : 'loading'}>
+        <div ref={roomRef} className="studio-room" aria-label={t.room} role="group" data-scene-status={useStill ? 'static' : ready ? 'ready' : 'loading'}>
           <div className={`studio-poster ${ready && !useStill ? 'studio-poster-hidden' : ''}`} aria-hidden="true">
-            <Image src="/images/studio-preview.png" alt="" fill sizes="(max-width: 760px) 100vw, 76vw" preload className="studio-poster-image" />
+            <Image src={lighting === 'evening' ? '/images/studio-dusk-preview.png' : '/images/studio-daylight-preview.png'} alt="" fill sizes="(max-width: 760px) 100vw, 76vw" preload className="studio-poster-image" />
           </div>
           {!useStill ? <SceneBoundary onFailure={onFailure}>
-            <StudioScene zone={zone} onSelect={selectZone} reducedMotion={reducedMotion} onReady={onReady} onFailure={onFailure} />
+            <StudioScene zone={zone} onSelect={selectZone} reducedMotion={reducedMotion} onReady={onReady} onFailure={onFailure} lighting={lighting} highlightedZone={highlightedZone} onHover={setHighlightedZone} hotspotRoot={roomRef} />
           </SceneBoundary> : null}
+          <div className="studio-hotspots" hidden={!ready || useStill || Boolean(activeZone)}>
+            {zones.map((item, index) => <button key={item} type="button" data-studio-hotspot={item} className={`studio-hotspot ${highlightedZone === item ? 'is-highlighted' : ''}`} style={{ transform: `translate3d(var(--hotspot-${item}-x, -999px), var(--hotspot-${item}-y, -999px), 0) translate(-50%, -100%)` }} onPointerEnter={() => setHighlightedZone(item)} onPointerLeave={() => setHighlightedZone(null)} onFocus={() => setHighlightedZone(item)} onBlur={() => setHighlightedZone(null)} onClick={() => selectZone(item)} aria-label={`${t.labels[item]} · ${t.hotspotCopy[item]}`}>
+              <span className="studio-hotspot-label">{t.labels[item]}<small>{t.hotspotCopy[item]}</small></span>
+              <span className="studio-hotspot-pin" aria-hidden="true">0{index + 1}<i /></span>
+            </button>)}
+          </div>
           <span className="studio-scene-caption" aria-hidden="true"><span />{t.location} <i>A PLACE FOR IDEAS</i></span>
         </div>
 
@@ -187,9 +214,10 @@ export default function StudioExperience({ locale, content }: { locale: string; 
           <button type="button" className="studio-enter" onClick={() => selectZone('work')}>{t.explore}<span aria-hidden="true">↗</span></button>
           <span className="studio-intro-rule" aria-hidden="true" />
           <p className="studio-intro-signature">Darren Su <span>/ 苏鹏</span></p>
+          <span className="studio-edition studio-intro-edition">{t.edition}</span>
         </div>
 
-        {activeZone ? <section className="studio-collection" aria-labelledby="studio-collection-title" key={activeZone}>
+        {activeZone ? <section ref={collectionRef} className="studio-collection" aria-labelledby="studio-collection-title" key={activeZone}>
           <div className="studio-collection-top"><p className="studio-eyebrow">0{zones.indexOf(activeZone) + 1} / {t.labels[activeZone]}</p>
             <button type="button" className="studio-close" aria-label={t.close} onClick={() => { selectZone('overview'); navRefs.current[activeZone]?.focus({ preventScroll: true }); }}>×</button>
           </div>
@@ -203,7 +231,7 @@ export default function StudioExperience({ locale, content }: { locale: string; 
       <div className="studio-navigation-area">
         <p className="studio-hint" role="status" aria-live="polite">{useStill ? failed ? t.failed : t.paused : ready ? t.hint : t.loading}</p>
         <nav className="studio-zone-nav" aria-label={t.shortcut}>
-          {zones.map((item, index) => <button key={item} type="button" ref={node => { navRefs.current[item] = node; }} className={`studio-zone-button ${zone === item ? 'is-active' : ''}`} aria-pressed={zone === item} onClick={() => selectZone(item)}>
+          {zones.map((item, index) => <button key={item} type="button" ref={node => { navRefs.current[item] = node; }} className={`studio-zone-button ${zone === item ? 'is-active' : ''} ${highlightedZone === item ? 'is-highlighted' : ''}`} aria-pressed={zone === item} onClick={() => selectZone(item)} onPointerEnter={() => setHighlightedZone(item)} onPointerLeave={() => setHighlightedZone(null)} onFocus={() => setHighlightedZone(item)} onBlur={() => setHighlightedZone(null)}>
             <span className="studio-zone-number">0{index + 1}</span><ZoneIcon zone={item} /><span className="studio-zone-text">{t.labels[item]}<small>{item === 'work' ? 'GATHER' : item === 'build' ? 'BUILD' : 'REFLECT'}</small></span><span className="studio-zone-arrow" aria-hidden="true">↗</span>
           </button>)}
         </nav>

@@ -4,6 +4,7 @@ import {
   Component,
   createContext,
   memo,
+  useCallback,
   useContext,
   useEffect,
   useLayoutEffect,
@@ -17,6 +18,7 @@ import {
   BoxGeometry,
   CylinderGeometry,
   DoubleSide,
+  MeshBasicMaterial,
   MeshStandardMaterial,
   OrthographicCamera,
   PCFShadowMap,
@@ -30,7 +32,7 @@ import {
   TorusGeometry,
   Vector3,
 } from 'three';
-import type { StudioSceneProps, StudioZone } from './types';
+import type { StudioFocusZone, StudioLighting, StudioSceneProps, StudioZone } from './types';
 
 type Point = [number, number, number];
 type Surface = keyof typeof COLORS;
@@ -67,6 +69,9 @@ function createAssets() {
     sphere: new SphereGeometry(1, 12, 10),
     torus: new TorusGeometry(1, 0.2, 6, 16),
     plane: new PlaneGeometry(1, 1),
+    emphasisMaterial: new MeshBasicMaterial({ color: '#f1d6a7', transparent: true, opacity: 0.74, depthWrite: false }),
+    markerMaterial: new MeshBasicMaterial({ color: '#fff4dc' }),
+    activeMarkerMaterial: new MeshBasicMaterial({ color: '#eaba71' }),
     materials: Object.fromEntries(
       Object.entries(COLORS).map(([name, color]) => [
         name,
@@ -82,6 +87,7 @@ function createAssets() {
 
 type Assets = ReturnType<typeof createAssets>;
 const AssetContext = createContext<Assets | null>(null);
+const LightingContext = createContext<StudioLighting>('day');
 
 function useAssets() {
   const assets = useContext(AssetContext);
@@ -98,6 +104,9 @@ function AssetProvider({ children }: { children: ReactNode }) {
     assets.sphere.dispose();
     assets.torus.dispose();
     assets.plane.dispose();
+    assets.emphasisMaterial.dispose();
+    assets.markerMaterial.dispose();
+    assets.activeMarkerMaterial.dispose();
     Object.values(assets.materials).forEach((material) => material.dispose());
   }, [assets]);
   return <AssetContext.Provider value={assets}>{children}</AssetContext.Provider>;
@@ -166,14 +175,21 @@ function Chair({ at, rotation = 0, color = 'linen' }: { at: Point; rotation?: nu
 }
 
 function DeskLamp({ at, rotation = 0 }: { at: Point; rotation?: number }) {
+  const evening = useContext(LightingContext) === 'evening';
+  const assets = useAssets();
   return <group position={at} rotation={[0, rotation, 0]}>
     <Cylinder at={[0, 0.035, 0]} size={[0.21, 0.07, 0.21]} color="green" />
     <Cylinder at={[0, 0.41, 0]} size={[0.021, 0.77, 0.021]} color="brass" rotation={[0, 0, -0.15]} />
     <Cylinder at={[0.105, 0.79, 0]} size={[0.23, 0.23, 0.23]} color="green" tapered />
-    <Cylinder at={[0.105, 0.668, 0]} size={[0.219, 0.01, 0.219]} color="white" />
+    <mesh position={[0.105, 0.668, 0]} scale={[0.219, 0.01, 0.219]} geometry={assets.cylinder}>
+      <meshStandardMaterial color="#fff3cd" emissive="#ffd292" emissiveIntensity={evening ? 1.8 : 0.15} toneMapped={false} />
+    </mesh>
+    <pointLight position={[0.105, 0.54, 0]} intensity={evening ? 4.3 : 0} color="#ffc47b" distance={3.4} decay={2} />
   </group>;
 }
 
+// Shared geometry arrives through props, so R3F only disposes the declared local material.
+// Do not put dispose={null} on meshes with an owned <meshStandardMaterial> child.
 function usePhoto(url: string) {
   const [texture, setTexture] = useState<Texture | null>(null);
   const invalidate = useThree((state) => state.invalidate);
@@ -213,14 +229,15 @@ function usePhoto(url: string) {
   return texture;
 }
 
-function Photo({ url, at, size, rotation = [0, 0, 0], frame = 'oakDark' }: { url: string; at: Point; size: [number, number]; rotation?: Point; frame?: Surface }) {
+function Photo({ url, at, size, rotation = [0, 0, 0], frame = 'oakDark', screen = false }: { url: string; at: Point; size: [number, number]; rotation?: Point; frame?: Surface; screen?: boolean }) {
+  const evening = useContext(LightingContext) === 'evening';
   const texture = usePhoto(url);
   const assets = useAssets();
   return <group position={at} rotation={rotation}>
     <Box size={[size[0] + 0.09, size[1] + 0.09, 0.05]} color={frame} />
     <Box at={[0, 0, 0.03]} size={[size[0] + 0.035, size[1] + 0.035, 0.012]} color="paper" />
-    <mesh position={[0, 0, 0.04]} scale={[size[0], size[1], 1]} geometry={assets.plane} dispose={null}>
-      <meshStandardMaterial key={texture?.uuid ?? 'placeholder'} map={texture} color={texture ? '#ffffff' : '#b9c1a7'} roughness={0.94} />
+    <mesh position={[0, 0, 0.04]} scale={[size[0], size[1], 1]} geometry={assets.plane}>
+      <meshStandardMaterial key={texture?.uuid ?? 'placeholder'} map={texture} color={texture ? '#ffffff' : '#b9c1a7'} roughness={screen ? 0.5 : 0.94} emissive={screen ? '#d4e5cc' : '#000000'} emissiveMap={screen ? texture : null} emissiveIntensity={screen ? (evening ? 0.65 : 0.1) : 0} />
     </mesh>
   </group>;
 }
@@ -250,6 +267,7 @@ const MID_PEAKS = [0.38, 0.78, 1.08, 0.73, 1.23, 0.62, 0.7];
 const NEAR_PEAKS = [0.33, 0.51, 0.35, 0.74, 0.67, 0.35, 0.56];
 
 const Architecture = memo(function Architecture() {
+  const evening = useContext(LightingContext) === 'evening';
   return <group>
     <Box at={[0, -0.23, 0]} size={[10.45, 0.38, 8.3]} color="plasterEdge" />
     <Box at={[0, -0.09, 0]} size={[10.25, 0.14, 8.15]} color="oakDark" />
@@ -258,10 +276,17 @@ const Architecture = memo(function Architecture() {
     <Box at={[2.62, 2.35, -4.06]} size={[5.02, 2.1, 0.18]} color="plaster" />
     <Box at={[-4.81, 2.35, -4.06]} size={[0.64, 2.1, 0.18]} color="plaster" />
     <Box at={[-2.2, 3.34, -4.06]} size={[4.55, 0.15, 0.18]} color="plaster" />
-    <Box at={[-2.25, 2.26, -4.19]} size={[4.36, 2.06, 0.035]} color="glass" />
-    <Mountain at={[-2.25, 1.28, -4.157]} color="#c1ccc0" peaks={FAR_PEAKS} />
-    <Mountain at={[-2.25, 1.28, -4.145]} color="#9bae9d" peaks={MID_PEAKS} />
-    <Mountain at={[-2.25, 1.28, -4.133]} color="#809682" peaks={NEAR_PEAKS} />
+    <mesh position={[-2.25, 2.26, -4.19]}>
+      <planeGeometry args={[4.36, 2.06]} />
+      <meshBasicMaterial color={evening ? '#3d565b' : '#c4d0c3'} />
+    </mesh>
+    {evening ? <mesh position={[-1.2, 2.98, -4.18]}>
+      <sphereGeometry args={[0.095, 16, 12]} />
+      <meshBasicMaterial color="#efe5c4" />
+    </mesh> : null}
+    <Mountain at={[-2.25, 1.28, -4.157]} color={evening ? '#3b514f' : '#c1ccc0'} peaks={FAR_PEAKS} />
+    <Mountain at={[-2.25, 1.28, -4.145]} color={evening ? '#304640' : '#9bae9d'} peaks={MID_PEAKS} />
+    <Mountain at={[-2.25, 1.28, -4.133]} color={evening ? '#253c32' : '#809682'} peaks={NEAR_PEAKS} />
     {[-4.5, -2.26, 0.0].map((x) => <Box key={x} at={[x, 2.29, -3.98]} size={[0.085, 2.08, 0.17]} color="oakDark" />)}
     <Box at={[-2.25, 3.31, -3.98]} size={[4.58, 0.09, 0.17]} color="oakDark" />
     <Box at={[-2.25, 1.3, -3.94]} size={[4.65, 0.095, 0.37]} color="lightOak" />
@@ -278,29 +303,86 @@ const Architecture = memo(function Architecture() {
   </group>;
 });
 
-function ZoneObject({ children, zone, selected, onSelect }: { children: ReactNode; zone: StudioZone; selected: StudioZone; onSelect: StudioSceneProps['onSelect'] }) {
+type SurfaceHover = (zone: StudioFocusZone | null, event: ThreeEvent<PointerEvent>) => void;
+
+function ZoneObject({ children, zone, selected, highlightedZone, onSelect, onSurfaceHover }: {
+  children: ReactNode;
+  zone: StudioFocusZone;
+  selected: StudioZone;
+  highlightedZone: StudioFocusZone | null;
+  onSelect: StudioSceneProps['onSelect'];
+  onSurfaceHover: SurfaceHover;
+}) {
   const gl = useThree((state) => state.gl);
-  const [hovered, setHovered] = useState(false);
-  const active = selected === zone;
-  const click = (event: ThreeEvent<MouseEvent>) => {
-    event.stopPropagation();
-    onSelect(zone);
-  };
+  const active = selected === zone || highlightedZone === zone;
   return <group
-    onClick={click}
+    onClick={(event) => {
+      event.stopPropagation();
+      onSelect(zone);
+    }}
     onPointerOver={(event) => {
       event.stopPropagation();
-      setHovered(true);
+      onSurfaceHover(zone, event);
       gl.domElement.style.setProperty('cursor', 'pointer');
     }}
-    onPointerOut={() => {
-      setHovered(false);
+    onPointerOut={(event) => {
+      onSurfaceHover(null, event);
       gl.domElement.style.removeProperty('cursor');
     }}
   >
     {children}
-    <ZoneMarker zone={zone} active={active || hovered} />
+    <ZoneMarker zone={zone} active={active} />
+    {active ? <ZoneEmphasis zone={zone} /> : null}
   </group>;
+}
+
+const TABLE_TOPS: Record<StudioFocusZone, { position: Point; width: number; depth: number }> = {
+  work: { position: [0, 1.227, 0.55], width: 4.15, depth: 1.79 },
+  build: { position: [2.68, 1.167, -2.9], width: 3.78, depth: 1.17 },
+  notes: { position: [-3.83, 1.117, -1.58], width: 1.48, depth: 2.48 },
+};
+
+function ZoneEmphasis({ zone }: { zone: StudioFocusZone }) {
+  const assets = useAssets();
+  const table = TABLE_TOPS[zone];
+  return <group position={table.position}>
+    {[-1, 1].flatMap((side) => [
+      <mesh key={`x-${side}`} position={[side * (table.width / 2 - 0.025), 0, 0]} scale={[0.016, 0.007, table.depth - 0.035]} geometry={assets.box} material={assets.emphasisMaterial} dispose={null} />,
+      <mesh key={`z-${side}`} position={[0, 0, side * (table.depth / 2 - 0.025)]} scale={[table.width - 0.035, 0.007, 0.016]} geometry={assets.box} material={assets.emphasisMaterial} dispose={null} />,
+    ])}
+  </group>;
+}
+
+function InteractiveRoom({ zone, onSelect, highlightedZone, onHover }: Pick<StudioSceneProps, 'zone' | 'onSelect' | 'highlightedZone' | 'onHover'>) {
+  const lastReported = useRef<StudioFocusZone | null>(null);
+  const candidate = useRef<StudioFocusZone | null>(null);
+  const hoverFrame = useRef<number | null>(null);
+
+  useEffect(() => { lastReported.current = highlightedZone; }, [highlightedZone]);
+  useEffect(() => () => {
+    if (hoverFrame.current !== null) cancelAnimationFrame(hoverFrame.current);
+  }, []);
+
+  const onSurfaceHover = useCallback<SurfaceHover>((next, event) => {
+    const related = event.nativeEvent.relatedTarget;
+    const hotspot = related instanceof Element ? related.closest<HTMLElement>('[data-studio-hotspot]')?.dataset.studioHotspot : null;
+    candidate.current = next ?? (hotspot === 'work' || hotspot === 'build' || hotspot === 'notes' ? hotspot : null);
+    if (hoverFrame.current !== null) return;
+    // A group contains many meshes. Merge their enter/leave events into one zone change.
+    hoverFrame.current = requestAnimationFrame(() => {
+      hoverFrame.current = null;
+      if (candidate.current === lastReported.current) return;
+      lastReported.current = candidate.current;
+      onHover(candidate.current);
+    });
+  }, [onHover]);
+
+  const shared = { selected: zone, highlightedZone, onSelect, onSurfaceHover };
+  return <>
+    <ZoneObject zone="work" {...shared}><SharedTable /></ZoneObject>
+    <ZoneObject zone="build" {...shared}><ProductBench /></ZoneObject>
+    <ZoneObject zone="notes" {...shared}><WritingCorner /><Bookshelf /></ZoneObject>
+  </>;
 }
 
 const MARKERS: Record<Exclude<StudioZone, 'overview'>, Point> = {
@@ -313,9 +395,7 @@ function ZoneMarker({ zone, active }: { zone: StudioZone; active: boolean }) {
   const assets = useAssets();
   if (zone === 'overview') return null;
   return <group position={MARKERS[zone]}>
-    <mesh geometry={assets.torus} scale={[0.075, 0.075, 0.06]} rotation={[-Math.PI / 2, 0, 0]} dispose={null}>
-      <meshBasicMaterial color={active ? '#eaba71' : '#fff4dc'} />
-    </mesh>
+    <mesh geometry={assets.torus} scale={active ? [0.1, 0.1, 0.07] : [0.075, 0.075, 0.06]} rotation={[-Math.PI / 2, 0, 0]} material={active ? assets.activeMarkerMaterial : assets.markerMaterial} dispose={null} />
     <Cylinder at={[0, -0.008, 0]} size={[0.034, 0.012, 0.034]} color={active ? 'brass' : 'green'} />
   </group>;
 }
@@ -344,6 +424,8 @@ const SharedTable = memo(function SharedTable() {
 });
 
 const ProductBench = memo(function ProductBench() {
+  const evening = useContext(LightingContext) === 'evening';
+  const assets = useAssets();
   return <group>
     <Box at={[2.68, 1.09, -2.9]} size={[3.78, 0.13, 1.17]} color="lightOak" />
     <Box at={[1.23, 0.56, -2.96]} size={[0.57, 1.01, 0.87]} color="green" />
@@ -351,7 +433,8 @@ const ProductBench = memo(function ProductBench() {
     {[0.34, 0.65, 0.96].map((y) => <Box key={y} at={[1.23, y, -2.507]} size={[0.17, 0.025, 0.02]} color="brass" />)}
     <Box at={[2.56, 1.185, -3.15]} size={[0.59, 0.07, 0.32]} color="dark" />
     <Box at={[2.56, 1.42, -3.23]} size={[0.11, 0.45, 0.09]} color="dark" />
-    <Photo url="/projects/matchpoint.png" at={[2.56, 1.83, -3.2]} size={[1.59, 0.91]} frame="dark" />
+    <Photo url="/projects/matchpoint.png" at={[2.56, 1.83, -3.2]} size={[1.59, 0.91]} frame="dark" screen />
+    <pointLight position={[2.56, 1.72, -2.95]} intensity={evening ? 0.85 : 0} color="#c9e1c9" distance={2.6} decay={2} />
     <Box at={[2.5, 1.18, -2.65]} size={[0.82, 0.04, 0.28]} color="linen" />
     {[0, 1, 2].map((row) => <Box key={row} at={[2.5, 1.203, -2.73 + row * 0.066]} size={[0.67, 0.009, 0.011]} color="plasterEdge" />)}
     <Ellipsoid at={[3.19, 1.2, -2.65]} size={[0.085, 0.035, 0.12]} color="linen" />
@@ -360,6 +443,10 @@ const ProductBench = memo(function ProductBench() {
     <Cup at={[1.65, 1.16, -2.69]} color="clay" />
     <Chair at={[2.71, 0.05, -1.58]} rotation={Math.PI} color="green" />
     <Box at={[2.56, 2.81, -3.78]} size={[3.45, 0.085, 0.39]} color="oak" />
+    <mesh position={[2.56, 2.762, -3.71]} scale={[2.97, 0.012, 0.035]} geometry={assets.box}>
+      <meshStandardMaterial color="#efdbb5" emissive="#ffc580" emissiveIntensity={evening ? 2.3 : 0} toneMapped={false} />
+    </mesh>
+    <pointLight position={[2.56, 2.68, -3.61]} intensity={evening ? 2.4 : 0} color="#ffcf91" distance={3.1} decay={2} />
     <Book at={[1.53, 2.915, -3.78]} size={[0.75, 0.11, 0.34]} color="paper" />
     <Book at={[1.57, 3.02, -3.79]} size={[0.63, 0.1, 0.34]} color="green" />
     <Cylinder at={[3.41, 3.03, -3.77]} size={[0.125, 0.35, 0.125]} color="clay" tapered />
@@ -409,7 +496,14 @@ const CAMERA_POSES: Record<StudioZone, { target: Point; eye: Point; scale: numbe
   notes: { target: [-3.35, 1.03, -1.6], eye: [9.5, 11.6, 11.8], scale: 1.95 },
 };
 
-function CameraRig({ zone, reducedMotion }: Pick<StudioSceneProps, 'zone' | 'reducedMotion'>) {
+const HOTSPOT_ANCHORS: Record<StudioFocusZone, Point> = {
+  work: [0.65, 1.54, 1.15],
+  build: [3.55, 2.12, -2.9],
+  notes: [-3.81, 1.65, -1.26],
+};
+const HOTSPOT_ZONES: StudioFocusZone[] = ['work', 'build', 'notes'];
+
+function CameraRig({ zone, reducedMotion, hotspotRoot }: Pick<StudioSceneProps, 'zone' | 'reducedMotion' | 'hotspotRoot'>) {
   const getState = useThree((state) => state.get);
   const size = useThree((state) => state.size);
   const gl = useThree((state) => state.gl);
@@ -419,6 +513,8 @@ function CameraRig({ zone, reducedMotion }: Pick<StudioSceneProps, 'zone' | 'red
   const eye = useRef(new Vector3());
   const pointer = useRef({ x: 0, y: 0 });
   const initialized = useRef(false);
+  const projection = useRef(new Vector3());
+  const lastHotspots = useRef<Record<string, string>>({});
   const pose = CAMERA_POSES[zone];
   const fitZoom = Math.min(size.width / 15.1, size.height / 11.5) * pose.scale;
 
@@ -471,6 +567,24 @@ function CameraRig({ zone, reducedMotion }: Pick<StudioSceneProps, 'zone' | 'red
     camera.zoom += (fitZoom - camera.zoom) * amount;
     camera.lookAt(lookAt.current);
     camera.updateProjectionMatrix();
+    // Projection must use the camera from this frame, not the previous renderer pass.
+    camera.updateMatrixWorld(true);
+    const root = hotspotRoot.current;
+    if (root) {
+      const canvasBounds = gl.domElement.getBoundingClientRect();
+      const rootBounds = root.getBoundingClientRect();
+      for (const hotspotZone of HOTSPOT_ZONES) {
+        projection.current.fromArray(HOTSPOT_ANCHORS[hotspotZone]).project(camera);
+        const x = (canvasBounds.left - rootBounds.left + (projection.current.x + 1) * canvasBounds.width / 2).toFixed(2);
+        const y = (canvasBounds.top - rootBounds.top + (1 - projection.current.y) * canvasBounds.height / 2).toFixed(2);
+        for (const [axis, value] of [['x', x], ['y', y]]) {
+          const property = `--hotspot-${hotspotZone}-${axis}`;
+          if (lastHotspots.current[property] === value) continue;
+          root.style.setProperty(property, `${value}px`);
+          lastHotspots.current[property] = value;
+        }
+      }
+    }
     initialized.current = true;
     const moving = camera.position.distanceToSquared(eye.current) > 0.000005
       || lookAt.current.distanceToSquared(target.current) > 0.000005
@@ -531,7 +645,40 @@ class SceneErrorBoundary extends Component<{ children: ReactNode; onFailure: () 
   render() { return this.state.failed ? null : this.props.children; }
 }
 
-export default function StudioScene({ zone, onSelect, reducedMotion, onReady, onFailure }: StudioSceneProps) {
+function SceneLighting({ lighting }: Pick<StudioSceneProps, 'lighting'>) {
+  const evening = lighting === 'evening';
+  const gl = useThree((state) => state.gl);
+  const invalidate = useThree((state) => state.invalidate);
+  useLayoutEffect(() => {
+    // The furniture is static, but changing the sun direction needs one new shadow map.
+    Object.assign(gl.shadowMap, { needsUpdate: true });
+    invalidate();
+  }, [gl, invalidate, lighting]);
+  return <>
+    <ambientLight intensity={evening ? 0.32 : 0.85} color={evening ? '#cad1bc' : '#fff3db'} />
+    <hemisphereLight args={[evening ? '#a8c0c5' : '#f7f4e9', evening ? '#4d5140' : '#a9b49a', evening ? 0.72 : 1.65]} />
+    <directionalLight
+      position={evening ? [3.5, 9, 3.5] : [-5, 11, 7]}
+      intensity={evening ? 1.05 : 3.1}
+      color={evening ? '#b6c4c9' : '#ffead0'}
+      castShadow
+      shadow-mapSize={[2048, 2048]}
+      shadow-camera-left={-10}
+      shadow-camera-right={10}
+      shadow-camera-top={10}
+      shadow-camera-bottom={-10}
+      shadow-camera-near={0.5}
+      shadow-camera-far={35}
+      shadow-normalBias={0.035}
+      shadow-bias={-0.0001}
+      shadow-radius={4}
+    />
+    <directionalLight position={[7, 6, -5]} intensity={evening ? 0.62 : 1.3} color={evening ? '#ecbd83' : '#dfe9d9'} />
+    <pointLight position={[0.1, 3.15, 0.7]} intensity={evening ? 3.2 : 0} color="#ffd39a" distance={6.5} decay={2} />
+  </>;
+}
+
+export default function StudioScene({ zone, onSelect, reducedMotion, onReady, onFailure, lighting, highlightedZone, onHover, hotspotRoot }: StudioSceneProps) {
   return <SceneErrorBoundary onFailure={onFailure}>
     <Canvas
       orthographic
@@ -544,43 +691,24 @@ export default function StudioScene({ zone, onSelect, reducedMotion, onReady, on
       fallback={null}
       onCreated={({ gl }) => {
         gl.setClearColor('#e7e7da', 0);
-        // Furniture is static: camera moves can reuse the first shadow map.
         gl.shadowMap.autoUpdate = false;
         gl.shadowMap.needsUpdate = true;
         gl.domElement.setAttribute('aria-hidden', 'true');
         gl.domElement.style.touchAction = 'pan-y';
       }}
     >
-      <ambientLight intensity={0.85} color="#fff3db" />
-      <hemisphereLight args={['#f7f4e9', '#a9b49a', 1.65]} />
-      <directionalLight
-        position={[-5, 11, 7]}
-        intensity={3.1}
-        color="#ffead0"
-        castShadow
-        shadow-mapSize={[2048, 2048]}
-        shadow-camera-left={-10}
-        shadow-camera-right={10}
-        shadow-camera-top={10}
-        shadow-camera-bottom={-10}
-        shadow-camera-near={0.5}
-        shadow-camera-far={35}
-        shadow-normalBias={0.035}
-        shadow-bias={-0.0001}
-        shadow-radius={4}
-      />
-      <directionalLight position={[7, 6, -5]} intensity={1.3} color="#dfe9d9" />
+      <SceneLighting lighting={lighting} />
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.44, 0]} receiveShadow>
         <planeGeometry args={[200, 200]} />
-        <shadowMaterial transparent opacity={0.14} />
+        <shadowMaterial transparent opacity={lighting === 'evening' ? 0.25 : 0.14} />
       </mesh>
-      <AssetProvider>
-        <Architecture />
-        <ZoneObject zone="work" selected={zone} onSelect={onSelect}><SharedTable /></ZoneObject>
-        <ZoneObject zone="build" selected={zone} onSelect={onSelect}><ProductBench /></ZoneObject>
-        <ZoneObject zone="notes" selected={zone} onSelect={onSelect}><WritingCorner /><Bookshelf /></ZoneObject>
-      </AssetProvider>
-      <CameraRig zone={zone} reducedMotion={reducedMotion} />
+      <LightingContext.Provider value={lighting}>
+        <AssetProvider>
+          <Architecture />
+          <InteractiveRoom zone={zone} onSelect={onSelect} highlightedZone={highlightedZone} onHover={onHover} />
+        </AssetProvider>
+      </LightingContext.Provider>
+      <CameraRig zone={zone} reducedMotion={reducedMotion} hotspotRoot={hotspotRoot} />
       <SceneLifecycle onReady={onReady} onFailure={onFailure} />
     </Canvas>
   </SceneErrorBoundary>;

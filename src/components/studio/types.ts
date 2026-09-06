@@ -1,4 +1,8 @@
+import type { RefObject } from 'react';
+
 export type StudioZone = 'overview' | 'work' | 'build' | 'notes';
+export type StudioFocusZone = Exclude<StudioZone, 'overview'>;
+export type StudioLighting = 'day' | 'evening';
 
 export type StudioSceneProps = {
   zone: StudioZone;
@@ -6,6 +10,10 @@ export type StudioSceneProps = {
   reducedMotion: boolean;
   onReady: () => void;
   onFailure: () => void;
+  lighting: StudioLighting;
+  highlightedZone: StudioFocusZone | null;
+  onHover: (zone: StudioFocusZone | null) => void;
+  hotspotRoot: RefObject<HTMLDivElement | null>;
 };
 
 export type StudioItem = {
