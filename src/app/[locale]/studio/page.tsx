@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import StudioExperience from '@/components/studio/StudioExperience';
+import StudioPurpose from '@/components/studio/StudioPurpose';
 import { getStudioContent } from '@/lib/studio-content';
 import { createPageMetadata } from '@/lib/seo';
 
@@ -26,5 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function StudioPage({ params }: Props) {
   const { locale } = await params;
 
-  return <StudioExperience locale={locale} content={getStudioContent(locale)} />;
+  return <StudioExperience locale={locale} content={getStudioContent(locale)}>
+    <StudioPurpose locale={locale} />
+  </StudioExperience>;
 }

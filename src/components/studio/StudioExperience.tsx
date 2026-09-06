@@ -19,8 +19,8 @@ const copy = {
   zh: {
     location: '杭州 · 中国', welcome: '欢迎，随意坐坐',
     directory: '直接前往', routes: { work: '工作案例', build: '产品', blog: '手记', services: '合作方式', about: '关于我' },
-    title: ['山边，有间', '工作室。'], intro: '我在这里连接人、做产品，也把沿途的经历写下来。',
-    invitation: '进来坐坐，看看最近发生的事。', explore: '从长桌开始',
+    title: ['山边，有间', '工作室。'], intro: '我和团队一起做开发者活动与生态项目，组织 AI 产品早期用户 Workshop，也分享 AI 与 Agent 的实践。',
+    projects: '看项目', collaborate: '聊聊合作', actions: '了解工作与合作',
     hint: '左右拖动看看房间，点击物件进入',
     overview: '回到全景', controls: '场景浏览方式',
     still: '静态浏览', live: '开启 3D', loading: '正在打开工作室', ready: '工作室已打开',
@@ -41,8 +41,8 @@ const copy = {
   en: {
     location: 'HANGZHOU, CHINA', welcome: 'Come in. Make yourself at home.',
     directory: 'Go directly to', routes: { work: 'Selected work', build: 'Products', blog: 'Field notes', services: 'Work together', about: 'About me' },
-    title: ['A studio', 'by the hills.'], intro: 'A place to bring people together, build things, and write along the way.',
-    invitation: 'Come in. See what I’ve been working on.', explore: 'Start at the table',
+    title: ['A studio', 'by the hills.'], intro: 'I work with teams on developer events and ecosystem programs, early-user workshops for AI products, and talks on AI and agents.',
+    projects: 'See my work', collaborate: 'Work together', actions: 'Explore work and collaboration',
     hint: 'Drag sideways to look around. Select an object to explore.',
     overview: 'Room overview', controls: 'Scene viewing options',
     still: 'Still view', live: 'Enable 3D', loading: 'Opening the studio', ready: 'The studio is ready',
@@ -104,7 +104,7 @@ function ItemCard({ item, action }: { item: StudioItem; action: string }) {
     : <Link className="studio-card" href={item.href}>{children}</Link>;
 }
 
-export default function StudioExperience({ locale, content }: { locale: string; content: StudioContent }) {
+export default function StudioExperience({ locale, content, children }: { locale: string; content: StudioContent; children: ReactNode }) {
   const t = locale === 'zh' ? copy.zh : copy.en;
   const hydrated = useSyncExternalStore(subscribeHydration, clientHydrationSnapshot, serverHydrationSnapshot);
   const [zone, setZone] = useState<StudioZone>('overview');
@@ -218,8 +218,10 @@ export default function StudioExperience({ locale, content }: { locale: string; 
           <p className="studio-eyebrow"><span /> {t.welcome}</p>
           <h1 aria-label={`${t.title[0]}${locale === 'en' ? ' ' : ''}${t.title[1]}`}>{t.title[0]}<br />{locale === 'en' ? ' ' : null}<em>{t.title[1]}</em></h1>
           <p className="studio-intro-description">{t.intro}</p>
-          <p className="studio-invitation">{t.invitation}</p>
-          <button type="button" className="studio-enter" hidden={!hydrated} onClick={() => selectZone('work')}>{t.explore}<span aria-hidden="true">↗</span></button>
+          <nav className="studio-hero-actions" aria-label={t.actions}>
+            <Link className="studio-enter" href={`/work${lighting === 'evening' ? '?light=evening' : ''}`}>{t.projects}<span aria-hidden="true">↗</span></Link>
+            <Link className="studio-collaborate" href={`/services${lighting === 'evening' ? '?light=evening' : ''}`}>{t.collaborate}<span aria-hidden="true">↗</span></Link>
+          </nav>
           <Link className="studio-host" href={`/about${lighting === 'evening' ? '?light=evening' : ''}`} aria-label={locale === 'zh' ? '认识 Darren Su / 苏鹏' : 'Meet Darren Su'}>
             <span className="studio-host-photo"><Image src="/photo.jpg" alt="Darren Su" fill sizes="104px" loading="eager" /></span>
             <span className="studio-host-copy"><span className="studio-host-name">Darren Su <span>/ 苏鹏</span></span><span className="studio-host-link">{locale === 'zh' ? '认识一下' : 'A little about me'} <span aria-hidden="true">↗</span></span></span>
@@ -259,6 +261,7 @@ export default function StudioExperience({ locale, content }: { locale: string; 
       <noscript><nav className="studio-no-script" aria-label={t.shortcut}>
         <Link href="/work">{t.all.work}</Link><Link href="/build">{t.all.build}</Link><Link href="/blog">{t.all.notes}</Link><Link href="/services">{t.routes.services}</Link><Link href="/about">{t.routes.about}</Link>
       </nav></noscript>
+      {children}
     </main>
   );
 }

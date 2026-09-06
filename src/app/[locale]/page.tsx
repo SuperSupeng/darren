@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import StudioExperience from '@/components/studio/StudioExperience';
+import StudioPurpose from '@/components/studio/StudioPurpose';
 import { getStudioContent } from '@/lib/studio-content';
 import JsonLd from '@/components/JsonLd';
 import { createPageMetadata, getPageKeywords, homeStructuredData } from '@/lib/seo';
@@ -32,7 +33,9 @@ export default async function HomePage({ params }: Props) {
   return (
     <>
       <JsonLd data={homeStructuredData(locale)} />
-      <StudioExperience locale={locale} content={getStudioContent(locale)} />
+      <StudioExperience locale={locale} content={getStudioContent(locale)}>
+        <StudioPurpose locale={locale} />
+      </StudioExperience>
     </>
   );
 }
