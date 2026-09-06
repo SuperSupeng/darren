@@ -9,12 +9,12 @@ import type { Locale } from '@/i18n/config';
 import { useStudioSettings } from './StudioSettings';
 
 export const roomLinks = [
-  { href: '/', zh: '工作室', en: 'Studio', number: '00' },
+  { href: '/', zh: '首页', en: 'Home', number: '00' },
   { href: '/work', zh: '工作案例', en: 'Work', number: '01' },
   { href: '/build', zh: '产品', en: 'Products', number: '02' },
-  { href: '/blog', zh: '手记', en: 'Notes', number: '03' },
+  { href: '/blog', zh: '文章', en: 'Writing', number: '03' },
   { href: '/services', zh: '合作', en: 'Collaborate', number: '04' },
-  { href: '/about', zh: '关于', en: 'About', number: '05' },
+  { href: '/about', zh: '关于我', en: 'About', number: '05' },
 ] as const;
 
 function LightIcon({ evening }: { evening: boolean }) {
@@ -50,9 +50,9 @@ export default function SpatialHeader({ blogLocalesBySlug }: { blogLocalesBySlug
 
   return <header className="spatial-header">
     <div className="spatial-header-row">
-      <Link className="spatial-brand" href={hrefFor('/')} aria-label={zh ? 'Darren Su 工作室首页' : 'Darren Su studio home'} onClick={() => setOpen(false)}>
+      <Link className="spatial-brand" href={hrefFor('/')} aria-label={zh ? 'Darren Su 首页' : 'Darren Su home'} onClick={() => setOpen(false)}>
         <span className="spatial-brand-mark" aria-hidden="true"><Logo size={36} /></span>
-        <span>Darren<span className="spatial-brand-dot">.</span>Su<small>PERSONAL STUDIO</small></span>
+        <span>Darren<span className="spatial-brand-dot">.</span>Su<small>PERSONAL WEBSITE</small></span>
       </Link>
       <nav className="spatial-desktop-nav" aria-label={zh ? '主要导航' : 'Main navigation'}>
         {roomLinks.map(link => <Link key={link.href} href={hrefFor(link.href)} aria-current={current(link.href) ? 'page' : undefined}>{zh ? link.zh : link.en}</Link>)}
@@ -72,7 +72,7 @@ export default function SpatialHeader({ blogLocalesBySlug }: { blogLocalesBySlug
     </div>
     <nav id="spatial-mobile-nav" className="spatial-mobile-nav" aria-label={zh ? '页面导航' : 'Page navigation'} hidden={!open}>
       {roomLinks.map(link => <Link key={link.href} href={hrefFor(link.href)} aria-current={current(link.href) ? 'page' : undefined} onClick={() => setOpen(false)}><span>{link.number}</span>{zh ? link.zh : link.en}<span aria-hidden="true">↗</span></Link>)}
-      <p>{zh ? '每一个入口，都通向正在做的事。' : 'A different corner of the same studio.'}</p>
+      <p>{zh ? '我的项目、产品和文章都在这里。' : 'Find my projects, products, and writing here.'}</p>
     </nav>
     <noscript>
       <style>{'.spatial-header-actions,.spatial-desktop-nav,.spatial-footer button{display:none!important}'}</style>

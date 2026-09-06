@@ -15,10 +15,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ...createPageMetadata({
       locale,
       path: '/',
-      title: locale === 'zh' ? '山边工作室' : 'A studio by the hills',
+      title: locale === 'zh' ? 'Darren Su / 苏鹏的个人网站' : 'Darren Su — Personal website',
       description: locale === 'zh'
-        ? '欢迎来到 Darren 的工作室。从共创长桌、产品工作台和窗边手记，了解我的工作、产品与想法。'
-        : 'Step inside Darren’s studio. Explore work, products, and field notes around the shared table, workbench, and window.',
+        ? '了解 Darren Su / 苏鹏的开发者活动、产品 Workshop 和 AI 实践分享，浏览工作案例、产品与文章。'
+        : 'Explore Darren Su’s developer events, product workshops, and AI talks, alongside his products and writing.',
     }),
     robots: { index: false, follow: true },
   };

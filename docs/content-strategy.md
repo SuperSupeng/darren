@@ -17,6 +17,14 @@ Every public page should help that reader answer four questions:
 
 The site should not imply capabilities, geographic reach, client work, or results that are not supported by a published project or product.
 
+## Voice and Interface Copy
+
+Write in Darren's first-person voice: warm, direct, and specific about the work. Introduce the person on the homepage; use clear names such as Work, Products, Writing, and Collaboration for navigation and page titles.
+
+The 3D studio is a visual setting. Visitors should not need to interpret room metaphors to understand a page or choose a link. Avoid invented brand names, ornamental slogans, and repeated claims that work is “real” or creates “connections”; describe what happened instead.
+
+For teams considering collaboration, explain who a format suits, what Darren can personally contribute, and what information would help start a conversation. Keep the tone conversational without implying an agency, a guaranteed result, or services beyond the published record.
+
 ## Source of Truth
 
 - `src/lib/portfolio.ts` is the source of truth for public work, case studies, metrics, and collaboration paths in both languages.

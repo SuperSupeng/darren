@@ -17,48 +17,48 @@ const serverHydrationSnapshot = () => false;
 
 const copy = {
   zh: {
-    location: '杭州 · 中国', welcome: '欢迎，随意坐坐',
-    directory: '直接前往', routes: { work: '工作案例', build: '产品', blog: '手记', services: '合作方式', about: '关于我' },
-    title: ['山边，有间', '工作室。'], intro: '我和团队一起做开发者活动与生态项目，组织 AI 产品早期用户 Workshop，也分享 AI 与 Agent 的实践。',
+    location: '杭州 · 中国', welcome: '开发者社区 · AI 实践',
+    directory: '页面导航', routes: { work: '工作案例', build: '产品', blog: '文章与手记', services: '合作方式', about: '关于我' },
+    title: ['你好，我是', 'Darren。'], intro: '我策划开发者活动，组织 AI 产品体验和反馈 Workshop，也向团队和社区分享 AI 与 Agent 的实践经验。',
     projects: '看项目', collaborate: '聊聊合作', actions: '了解工作与合作',
-    hint: '左右拖动看看房间，点击物件进入',
+    hint: '左右拖动查看房间，点击标签或物件浏览内容',
     overview: '回到全景', controls: '场景浏览方式',
     still: '静态浏览', live: '开启 3D', loading: '正在打开工作室', ready: '工作室已打开',
     failed: '已切换为静态场景，内容仍可正常浏览。', paused: '静态场景 · 选择区域继续浏览',
-    visit: '打开项目', read: '阅读手记', detail: '查看案例',
-    all: { work: '全部工作案例', build: '全部产品', notes: '全部手记' },
-    labels: { work: '共创长桌', build: '产品工作台', notes: '窗边手记' },
-    hotspotCopy: { work: '开发者活动与社区合作', build: '从问题出发，做成产品', notes: 'AI、旅途与生活的记录' },
-    captions: { work: '让一群人，一起做成一件事', build: '让一个想法，进入真实的生活', notes: '把发生过的事，慢慢写下来' },
+    visit: '打开产品', read: '阅读文章', detail: '查看案例',
+    all: { work: '全部工作案例', build: '全部产品', notes: '全部文章与手记' },
+    labels: { work: '工作案例', build: '产品', notes: '文章与手记' },
+    hotspotCopy: { work: '开发者活动、社区合作与分享', build: '我开发的产品和工具', notes: 'AI 实践、旅行与生活' },
+    captions: { work: '我参与的项目', build: '我做的产品', notes: '最近写的文章' },
     descriptions: {
-      work: '活动、社区与真实的连接。这些是我亲手参与推进的工作。',
-      build: '从日常遇到的问题出发，做出可以被使用的产品。',
-      notes: '关于 AI、旅途与生活的一些记录，也留一点思考的余地。',
+      work: '开发者活动、社区合作和分享。案例里记录了我负责的部分与项目结果。',
+      build: '这些产品来自我在工作中遇到的问题，可以直接打开使用。',
+      notes: 'AI 与 Agent 的使用经验，以及旅行和生活中的见闻。',
     },
-    room: '杭州山边的三维工作室',
-    shortcut: '区域导航', close: '收起内容，回到全景',
+    room: 'Darren 的 3D 工作室',
+    shortcut: '按内容浏览', close: '收起内容，回到全景',
   },
   en: {
-    location: 'HANGZHOU, CHINA', welcome: 'Come in. Make yourself at home.',
-    directory: 'Go directly to', routes: { work: 'Selected work', build: 'Products', blog: 'Field notes', services: 'Work together', about: 'About me' },
-    title: ['A studio', 'by the hills.'], intro: 'I work with teams on developer events and ecosystem programs, early-user workshops for AI products, and talks on AI and agents.',
+    location: 'HANGZHOU, CHINA', welcome: 'DEVELOPER COMMUNITIES · AI PRACTICE',
+    directory: 'Site navigation', routes: { work: 'Selected work', build: 'Products', blog: 'Writing', services: 'Work together', about: 'About me' },
+    title: ["Hi, I'm", 'Darren.'], intro: 'I plan developer events, run hands-on workshops for AI products, and give talks for teams and communities about my work with AI and agents.',
     projects: 'See my work', collaborate: 'Work together', actions: 'Explore work and collaboration',
-    hint: 'Drag sideways to look around. Select an object to explore.',
+    hint: 'Drag sideways to look around. Select a label or object to browse.',
     overview: 'Room overview', controls: 'Scene viewing options',
     still: 'Still view', live: 'Enable 3D', loading: 'Opening the studio', ready: 'The studio is ready',
     failed: 'Showing a still scene. All content is available below.', paused: 'Still scene · Choose a space to explore',
-    visit: 'Visit project', read: 'Read field note', detail: 'View case study',
-    all: { work: 'All selected work', build: 'All products', notes: 'All field notes' },
-    labels: { work: 'The shared table', build: 'The workbench', notes: 'By the window' },
-    hotspotCopy: { work: 'People, programs & community', build: 'Ideas put into practice', notes: 'Notes on AI, travel & life' },
-    captions: { work: 'Good things start with people', build: 'Ideas, out in the real world', notes: 'A few things worth writing down' },
+    visit: 'Open product', read: 'Read article', detail: 'View case study',
+    all: { work: 'All selected work', build: 'All products', notes: 'All writing' },
+    labels: { work: 'Selected work', build: 'Products', notes: 'Writing' },
+    hotspotCopy: { work: 'Developer events, community projects & talks', build: 'Products and tools I build', notes: 'AI practice, travel & life' },
+    captions: { work: 'Projects I’ve worked on', build: 'Products I build', notes: 'Recent writing' },
     descriptions: {
-      work: 'Developer programs, communities, and the work of bringing people together.',
-      build: 'Working products that began with problems I kept encountering.',
-      notes: 'Notes on AI, travel, and life. With room for thoughts to change.',
+      work: 'Developer events, community projects, and talks, with my role and the outcomes of each.',
+      build: 'Products built to solve problems I encountered at work. Open one to try it.',
+      notes: 'What I’ve learned from using AI and agents, alongside notes on travel and life.',
     },
-    room: 'A three-dimensional studio by the Hangzhou hills',
-    shortcut: 'Explore the studio', close: 'Close the collection and return to the room',
+    room: 'Darren’s 3D studio',
+    shortcut: 'Browse by topic', close: 'Close the collection and return to the room',
   },
 };
 
@@ -211,12 +211,12 @@ export default function StudioExperience({ locale, content, children }: { locale
               <span className="studio-hotspot-pin" aria-hidden="true">0{index + 1}<i /></span>
             </button>)}
           </div>
-          <span className="studio-scene-caption" aria-hidden="true"><span />{t.location} <i>A PLACE FOR IDEAS</i></span>
+          <span className="studio-scene-caption" aria-hidden="true"><span />{t.location} <i>DARREN SU</i></span>
         </div>
 
         <div className="studio-intro" hidden={Boolean(activeZone)}>
           <p className="studio-eyebrow"><span /> {t.welcome}</p>
-          <h1 aria-label={`${t.title[0]}${locale === 'en' ? ' ' : ''}${t.title[1]}`}>{t.title[0]}<br />{locale === 'en' ? ' ' : null}<em>{t.title[1]}</em></h1>
+          <h1 aria-label={`${t.title[0]} ${t.title[1]}`}>{t.title[0]}<br />{' '}<em>{t.title[1]}</em></h1>
           <p className="studio-intro-description">{t.intro}</p>
           <nav className="studio-hero-actions" aria-label={t.actions}>
             <Link className="studio-enter" href={`/work${lighting === 'evening' ? '?light=evening' : ''}`}>{t.projects}<span aria-hidden="true">↗</span></Link>
@@ -243,7 +243,7 @@ export default function StudioExperience({ locale, content, children }: { locale
         <p className="studio-hint" role="status" aria-live="polite">{!hydrated ? t.paused : useStill ? failed ? t.failed : t.paused : ready ? t.hint : t.loading}</p>
         <nav className="studio-zone-nav" aria-label={t.shortcut} hidden={!hydrated}>
           {zones.map((item, index) => <button key={item} type="button" ref={node => { navRefs.current[item] = node; }} className={`studio-zone-button ${zone === item ? 'is-active' : ''} ${highlightedZone === item ? 'is-highlighted' : ''}`} aria-pressed={zone === item} onClick={() => selectZone(item)} onPointerEnter={() => setHighlightedZone(item)} onPointerLeave={() => setHighlightedZone(null)} onFocus={() => setHighlightedZone(item)} onBlur={() => setHighlightedZone(null)}>
-            <span className="studio-zone-number">0{index + 1}</span><ZoneIcon zone={item} /><span className="studio-zone-text">{t.labels[item]}<small>{item === 'work' ? 'GATHER' : item === 'build' ? 'BUILD' : 'REFLECT'}</small></span><span className="studio-zone-arrow" aria-hidden="true">↗</span>
+            <span className="studio-zone-number">0{index + 1}</span><ZoneIcon zone={item} /><span className="studio-zone-text">{t.labels[item]}<small>{item === 'work' ? 'WORK' : item === 'build' ? 'PRODUCTS' : 'WRITING'}</small></span><span className="studio-zone-arrow" aria-hidden="true">↗</span>
           </button>)}
         </nav>
       </div>

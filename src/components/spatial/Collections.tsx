@@ -54,7 +54,7 @@ export function CollectionNext({ locale, zone, href, title, description }: {
     <section className="collection-next">
       <div className="collection-next-room"><RoomPortal zone={zone} locale={locale} compact /></div>
       <div>
-        <p className="collection-kicker">{locale === 'zh' ? '继续逛逛 / NEXT SPACE' : 'NEXT SPACE'}</p>
+        <p className="collection-kicker">{locale === 'zh' ? '继续浏览' : 'Explore more'}</p>
         <h2><Link href={href}>{title} <span aria-hidden="true">↗</span></Link></h2>
         <p className="collection-description">{description}</p>
       </div>

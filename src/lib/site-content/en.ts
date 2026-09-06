@@ -4,14 +4,14 @@ export const englishContent = {
       roomEyebrow: "Products & Systems",
       sideEyebrow: "Why I Build",
       sideQuote:
-        "An idea can sound perfectly reasonable in conversation. Once people use the product, the real questions become concrete.",
+        "An idea may sound promising in conversation. Letting people try it shows where the problems are.",
       selectedEyebrow: "Current Products",
       selectedStatement:
         "Each product began with a specific problem: hiring questions several founders kept raising, or the friction I encountered while finding technology events and organizing city programs.",
       projectLabel: "Project",
       visitProject: "Visit project",
-      explainerEyebrow: "Why I still build",
-      explainerTitle: "Once people start using a product, the questions become concrete.",
+      explainerEyebrow: "After launch",
+      explainerTitle: "After launch, I keep watching how people use the product.",
       problem: "Problem",
       signal: "Feedback",
       nextStep: "Next step",
@@ -27,7 +27,7 @@ export const englishContent = {
             "After launch, I watch where users come from, where they drop off, and what feedback suggests that the original idea needs to change.",
         },
         {
-          title: "Know when to stop",
+          title: "Sometimes I stop",
           description:
             "Some experiments do not become long-term products. They still leave useful answers: whether the need exists, whether the problem is too broad, or whether the timing is simply wrong.",
         },
@@ -39,7 +39,7 @@ export const englishContent = {
       sidebarQuote:
         "I usually begin with an event, a product question, or something I experienced firsthand.",
       latestEyebrow: "Latest",
-      recentTitle: "Recently written",
+      recentTitle: "Recent articles",
       recentDescription:
         "The collection covers a China ecosystem visit, lessons from running a 31-agent work system, and a meditation retreat in northern Thailand.",
       empty: "Notes are being organized.",
@@ -48,12 +48,12 @@ export const englishContent = {
     about: {
       roomEyebrow: "About",
       eyebrow: "About",
-      kernelEyebrow: "A few chapters",
-      kernelTitle: "Looking back, these experiences mattered most.",
+      kernelEyebrow: "My background",
+      kernelTitle: "From engineering to communities and products",
       kernelDescription:
         "They were not all planned, but each changed the questions I paid attention to afterward.",
       pullQuote:
-        "Years of community work have taught me that an ecosystem is not a contact list. It is the understanding and trust people build slowly, until they are willing to work on something together.",
+        "Trust grows when people work through problems and projects together. That is what keeps me involved in community work.",
       workEyebrow: "What I Do Now",
       workTitle: "What I spend most of my time doing now.",
       workItems: [
@@ -67,9 +67,9 @@ export const englishContent = {
   fieldNotes: {
     hero: {
       eyebrow: "Field Notes",
-      title: "After something is finished, I write down what happened and what I made of it.",
+      title: "I write about projects, products, and how I use AI.",
       subtitle:
-        "Notes on connecting global and Chinese AI ecosystems, what changes when a 31-agent system enters daily work, and the inner practice behind it all.",
+        "There are also notes from running a 31-agent system, ecosystem visits, and meditation retreats, including what I noticed and where my thinking changed.",
     },
   },
   products: {
@@ -83,7 +83,7 @@ export const englishContent = {
       eyebrow: "AI-native work system",
       title: "I also use 31 agents in my day-to-day work.",
       description:
-        "The system currently includes 31 specialized agents and 44 recurring automations across research, products, content, operations, and personal knowledge. I use it every day and keep adjusting it as new problems appear in real work.",
+        "The system currently includes 31 specialized agents and 44 recurring automations across research, products, content, operations, and personal knowledge. I use it every day and adjust it as problems come up.",
       primaryMetric: "31 specialized agents",
       secondaryMetric: "44 recurring automations",
       image: "/blog/ai-employees/digital-organization.png",
@@ -181,33 +181,33 @@ export const englishContent = {
           "In 2021, I worked on TiCDC at PingCAP. After that, I worked on AI infrastructure, vector databases, AI-native SaaS, commercialization, and AI platform development. The experience taught me to ask what a technology actually solves and where people will use it.",
       },
       {
-        title: "Datawhale became a long-term part of my work",
+        title: "From learner to organizer at Datawhale",
         description:
           "I joined Datawhale as an AI learner in 2019, then worked as a teaching assistant and event organizer and became involved in city programs and community governance. I watched people who had never met become project partners through learning and working together.",
       },
       {
-        title: "Monica and I later started AGI Villa",
+        title: "Starting AGI Villa with Monica",
         description:
-          "Monica and I started AGI Villa to bring founders, product people, and developers interested in AI into the same community, and to see what collaborations or new projects might grow from it. Along the way, I met AI founders from around the world and many teams still looking for their first users.",
+          "Monica and I started AGI Villa so founders, product people, and developers interested in AI could meet and try new projects together. Through the community, I met AI founders from around the world and many teams still looking for their first users.",
       },
       {
-        title: "Then I began building products myself",
+        title: "Building my own products",
         description:
           "I co-founded MatchPoint, built GlobalTechEvents, and operate a work system of 31 agents. Once a product is live, questions about where users come from, why they stay, and whether to continue have to be answered through daily operations.",
       },
       {
-        title: "I have also kept meditation and public-interest work in my life",
+        title: "Meditation and public-interest work",
         description:
-          "They do not make decisions for me, but they remind me to examine my motives and consider who will ultimately be affected.",
+          "These practices remind me to examine my motives and consider who my decisions will affect.",
       },
     ],
     whyThisWork: {
       eyebrow: "Why This Work",
-      title: "Why I work on both communities and products.",
+      title: "Why I work on communities and products",
       quote:
         "Community shows me why people choose to participate. A product quickly shows whether anyone needs the idea.",
       body:
-        "When I organize an event, I can see why people come, when they begin to participate, and which relationships continue afterward. Products are more direct: once people start using one, the original idea quickly meets real feedback. Both kinds of work remind me that bringing people together and building products depend on understanding what someone needs and whether they want to stay involved.",
+        "When I organize an event, I watch why people come, when they take part, and whether they stay in touch afterward. With products, how people use them tells me which assumptions need to change. Both kinds of work depend on understanding what people need and whether they want to stay involved.",
       points: [
         "AI makes it faster to build a new product, but finding the right users has not become simple.",
         "Community does not automatically create growth. Trust and feedback accumulate only when people keep participating.",
@@ -216,7 +216,7 @@ export const englishContent = {
     },
   },
   seo: {
-    ogImageAlt: "Darren Su - AI ecosystem programs, products, and global technology connections",
+    ogImageAlt: "Darren Su - Developer events, products, and practical AI",
     home: {
       jobTitle: "AI Ecosystem Program Lead and Product Builder",
       knowsAbout: [

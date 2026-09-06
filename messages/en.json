@@ -42,13 +42,13 @@
       "title": "Writing",
       "description": "Project reviews and notes on AI, agents, developer communities, products, and day-to-day practice."
     },
-    "backToList": "Back to list",
+    "backToList": "All articles",
     "minRead": "min",
     "share": "Share"
   },
   "build": {
     "meta": {
-      "title": "Products",
+      "title": "Products I build",
       "description": "Products and experiments built by Darren Su, including MatchPoint, GlobalTechEvents, Datawhale AI+X Events, and a multi-agent digital organization."
     }
   },

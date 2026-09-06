@@ -26,14 +26,14 @@ export default async function GlobalNotFound() {
   const copy = locale === 'zh'
     ? {
         label: '404 / 未找到',
-        title: '这个页面不在这里。',
+        title: '未找到这个页面',
         description: '页面可能已经移动，你可以返回首页继续浏览。',
         home: '返回首页',
         alternate: 'English home',
       }
     : {
         label: '404 / NOT FOUND',
-        title: 'This page is not here.',
+        title: 'Page not found',
         description: 'It may have moved. You can return to the home page to continue browsing.',
         home: 'Back home',
         alternate: '中文首页',
@@ -53,7 +53,7 @@ export default async function GlobalNotFound() {
               <Link href={locale === 'zh' ? '/en' : '/zh'} prefetch={false} lang={locale === 'zh' ? 'en' : 'zh-CN'}>{copy.alternate} →</Link>
             </nav>
           </div>
-          <figure className="room-portal"><div className="room-portal-view"><Image src="/images/studio-daylight-preview.png" fill loading="eager" sizes="(max-width: 600px) 88vw, 550px" alt="" className="room-portal-poster" /></div><figcaption>{locale === 'zh' ? '房间还在，随时可以回来。' : 'The studio is here whenever you return.'}</figcaption></figure>
+          <figure className="room-portal"><div className="room-portal-view"><Image src="/images/studio-daylight-preview.png" fill loading="eager" sizes="(max-width: 600px) 88vw, 550px" alt="" className="room-portal-poster" /></div><figcaption>{locale === 'zh' ? '前往首页，查看工作案例、产品与文章。' : 'Visit the home page for work, products, and writing.'}</figcaption></figure>
         </main>
         </div>
       </body>

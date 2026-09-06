@@ -28,18 +28,18 @@ export default async function AboutPage({
   const innerGround =
     locale === 'zh'
       ? {
-          eyebrow: '内在基础',
-          title: '事情多起来以后，我开始更在意自己为什么做它。',
+          eyebrow: '禅修与自我观察',
+          title: '禅修让我在忙碌时，也能停下来想一想。',
           description:
-            'AI、创业和全球化都变化得很快，眼前也总有新的机会。禅修和长期的自我观察，让我在决定做一件事以前多停一下：它是不是真的重要，我是否愿意投入，以及这件事会怎样影响一起参与的人。',
-          closing: '有些事情值得快一点，有些事情需要先想清楚。',
+            '面对新的项目和机会，我会先问自己：这件事为什么值得做，我是否愿意投入，会给参与的人带来什么影响。禅修和长期的自我观察，帮助我更认真地考虑这些问题。',
+          closing: '开始之前，先想清楚自己为什么愿意做。',
         }
       : {
-          eyebrow: 'Inner Ground',
-          title: 'As the work grew, I began to pay more attention to why I was doing it.',
+          eyebrow: 'Meditation and reflection',
+          title: 'Meditation helps me pause, even when work gets busy.',
           description:
-            'AI, entrepreneurship, and cross-border work keep presenting new opportunities. Meditation and long-term reflection help me pause before saying yes: whether the work matters, whether I am willing to commit, and how it may affect the people involved.',
-          closing: 'Some things deserve speed. Others need to be understood first.',
+            'Before taking on a project or opportunity, I ask why it matters, whether I am willing to commit, and how it may affect the people involved. Meditation and reflection help me give those questions more attention.',
+          closing: 'Before I begin, I want to understand why I am willing to do the work.',
         };
 
   return (
@@ -47,7 +47,7 @@ export default async function AboutPage({
       <JsonLd data={aboutStructuredData(locale)} />
       <main id="main-content" tabIndex={-1} className="interior-page interior-about">
         <div className="interior-wrap">
-          <div className="interior-running-line"><span>{site.labels.about.roomEyebrow}</span><span>DARREN SU / {locale === 'zh' ? '工作室主人' : 'AT THE STUDIO'}</span></div>
+          <div className="interior-running-line"><span>{site.labels.about.roomEyebrow}</span><span>DARREN SU / {locale === 'zh' ? '关于我' : 'ABOUT ME'}</span></div>
           <header className="interior-profile">
             <div className="interior-profile-copy">
               <p className="interior-kicker">{site.labels.about.eyebrow}</p>
@@ -71,7 +71,7 @@ export default async function AboutPage({
             <header className="interior-section-heading"><p className="interior-kicker">{site.labels.about.kernelEyebrow}</p><h2>{site.labels.about.kernelTitle}</h2><p>{site.labels.about.kernelDescription}</p></header>
             <div className="interior-chapters">
               {site.about.kernel.map((item, index) => <article key={item.title}>
-                <span className="interior-kicker">{locale === 'zh' ? '阶段' : 'Chapter'} / {String(index + 1).padStart(2, '0')}</span>
+                <span className="interior-kicker">{locale === 'zh' ? '经历' : 'Experience'} / {String(index + 1).padStart(2, '0')}</span>
                 <h3>{item.title}</h3><p>{item.description}</p>
               </article>)}
             </div>

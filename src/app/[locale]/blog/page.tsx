@@ -27,8 +27,8 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
   const latest = posts[0];
   const labels = site.labels.fieldNotes;
   const copy = locale === 'zh'
-    ? { title: '窗边的期刊。', read: '阅读这篇手记', index: '全部手记', topics: '这篇文章的话题' }
-    : { title: 'Pages by the window.', read: 'Read this field note', index: 'All field notes', topics: 'Topics in this article' };
+    ? { title: '文章与手记', read: '阅读全文', index: '全部文章', topics: '这篇文章的话题' }
+    : { title: 'Writing', read: 'Read the article', index: 'All articles', topics: 'Topics in this article' };
 
   return (
     <>
@@ -103,8 +103,8 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
             locale={locale}
             zone="work"
             href="/work"
-            title={locale === 'zh' ? '回到长桌，看看故事的现场' : 'Back to where the stories began'}
-            description={locale === 'zh' ? '开发者活动、城市项目，以及一起做事的人。' : 'Developer gatherings, city programs, and the people who make them happen.'}
+            title={locale === 'zh' ? '查看工作案例' : 'Explore my work'}
+            description={locale === 'zh' ? '开发者活动、产品 Workshop 与 AI 分享的项目记录。' : 'Project records from developer events, product workshops, and AI talks.'}
           />
         </div>
       </main>

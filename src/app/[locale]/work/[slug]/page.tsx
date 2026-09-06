@@ -60,42 +60,42 @@ export default async function WorkCasePage({
   const collaboration = getWorkCollaboration(locale, work.id);
   const copy = locale === 'zh'
     ? {
-        back: '返回项目索引',
-        caseLabel: '项目记录',
+        back: '返回全部案例',
+        caseLabel: '项目案例',
         role: '我的角色',
         result: '规模与结果',
         place: '时间与地点',
-        context: '事情从哪里开始',
+        context: '项目背景',
         responsibilities: '我负责的部分',
-        outcome: '最后完成了什么',
-        reflection: '这件事留下的经验',
-        materials: '可查看的公开记录',
+        outcome: '完成了什么',
+        reflection: '我的体会',
+        materials: '相关文章与资料',
         readMaterial: '阅读全文',
-        note: '阅读相关现场记录',
+        note: '阅读相关手记',
         next: '下一个项目',
         contactEyebrow: '如果你正在做类似的事',
         contactTitle: '告诉我你想解决的问题。',
-        contactBody: '不需要先准备完整方案。简单说明目标、时间和地点，就够我们开始判断是否适合。',
-        collaborationBody: '了解这类合作适合什么情况、可以一起完成什么。已经有具体需求，也可以直接写邮件。',
+        contactBody: '来信说说你的团队、目标、预计时间和地点，我们可以先聊聊。',
+        collaborationBody: '合作页面介绍了适合的项目和具体做法。也可以直接来信，说说你的团队、目标和预计时间。',
       }
     : {
-        back: 'Back to the work index',
-        caseLabel: 'Case record',
+        back: 'Back to all case studies',
+        caseLabel: 'Case study',
         role: 'My role',
         result: 'Scale and outcome',
         place: 'Time and place',
-        context: 'Where it started',
+        context: 'Project background',
         responsibilities: 'What I handled',
         outcome: 'What was completed',
         reflection: 'What the work taught me',
-        materials: 'Published records',
+        materials: 'Related articles and resources',
         readMaterial: 'Read the full article',
         note: 'Read the related field note',
         next: 'Next project',
         contactEyebrow: 'Working on something similar?',
         contactTitle: 'Tell me what you are trying to solve.',
-        contactBody: 'You do not need a finished proposal. A short note with the goal, rough timing, and location is enough for us to decide whether there is a fit.',
-        collaborationBody: 'See who this collaboration is for and what we can work on together. If you already have a specific need, you can also email me directly.',
+        contactBody: 'Send a short note about your team, project goal, rough timing, and location. We can start there.',
+        collaborationBody: 'The collaboration page explains the scope and how I work. You can also email me with your team, goal, and rough timing.',
       };
 
   return (
@@ -130,7 +130,7 @@ export default async function WorkCasePage({
                 <div><dt>{copy.result}</dt><dd>{work.result}</dd></div>
                 <div><dt>{copy.place}</dt><dd>{work.year} · {work.location}</dd></div>
               </dl>
-              <nav className="case-index" aria-label={locale === 'zh' ? '项目档案目录' : 'Case file contents'}>
+              <nav className="case-index" aria-label={locale === 'zh' ? '案例目录' : 'Case study contents'}>
                 <a href="#case-context">01 <span>{copy.context}</span></a>
                 <a href="#case-responsibilities">02 <span>{copy.responsibilities}</span></a>
                 <a href="#case-outcome">03 <span>{copy.outcome}</span></a>

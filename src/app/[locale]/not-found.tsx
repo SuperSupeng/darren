@@ -7,13 +7,13 @@ export default async function NotFound() {
   const copy = locale === 'zh'
     ? {
         label: '404 / 未找到',
-        title: '这个页面不在这里。',
+        title: '未找到这个页面',
         description: '它可能已经移动，也可能暂时没有对应语言的版本。',
         home: '返回首页',
       }
     : {
         label: '404 / NOT FOUND',
-        title: 'This page is not here.',
+        title: 'Page not found',
         description: 'It may have moved, or may not yet be available in this language.',
         home: 'Back home',
       };

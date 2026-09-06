@@ -25,8 +25,8 @@ export default async function BuildPage({ params }: { params: Promise<{ locale: 
   const labels = site.labels.productLab;
   const system = site.products.digitalOrganization;
   const copy = locale === 'zh'
-    ? { title: '工作台上的作品。', details: '问题、反馈与下一步', inactive: '实验已结束', index: '工作台目录', status: '当前状态', tags: '相关方向' }
-    : { title: 'On the workbench.', details: 'Problem, feedback & next step', inactive: 'Experiment ended', index: 'On this workbench', status: 'Current state', tags: 'Related topics' };
+    ? { title: '我做的产品', details: '问题、反馈与下一步', inactive: '实验已结束', index: '产品目录', status: '当前状态', tags: '相关方向' }
+    : { title: 'Products I build', details: 'Problem, feedback & next step', inactive: 'Experiment ended', index: 'Product index', status: 'Current state', tags: 'Related topics' };
 
   return (
     <>
@@ -51,7 +51,7 @@ export default async function BuildPage({ params }: { params: Promise<{ locale: 
           </div>
 
           <section className="collection-section" id="product-workbench">
-            <CollectionHeading eyebrow={labels.selectedEyebrow} title={locale === 'zh' ? '从具体问题开始。' : 'Start with a real problem.'} description={labels.selectedStatement} />
+            <CollectionHeading eyebrow={labels.selectedEyebrow} title={locale === 'zh' ? '产品与实验' : 'Products and experiments'} description={labels.selectedStatement} />
             <nav className="collection-category-nav" aria-label={copy.index}>
               {site.products.items.map((project, index) => (
                 <a key={project.id} href={`#product-${project.id}`}><span>{String(index + 1).padStart(2, '0')}</span>{project.name}</a>
@@ -124,8 +124,8 @@ export default async function BuildPage({ params }: { params: Promise<{ locale: 
             locale={locale}
             zone="notes"
             href="/blog"
-            title={locale === 'zh' ? '到窗边，翻一篇手记' : 'A field note by the window'}
-            description={locale === 'zh' ? '关于做产品、运行 Agent，以及沿途经历的记录。' : 'Notes on building, running agents, and experiences along the way.'}
+            title={locale === 'zh' ? '阅读文章与手记' : 'Read my writing'}
+            description={locale === 'zh' ? '关于产品开发、Agent 实践和工作经历的记录。' : 'Notes on product development, agent practice, and work experiences.'}
           />
         </div>
       </main>

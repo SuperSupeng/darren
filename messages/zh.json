@@ -39,16 +39,16 @@
   },
   "blog": {
     "meta": {
-      "title": "文章",
+      "title": "文章与手记",
       "description": "Darren Su 写下的项目复盘，以及关于 AI、Agent、开发者社区、产品和日常实践的记录。"
     },
-    "backToList": "返回列表",
+    "backToList": "全部文章",
     "minRead": "分钟",
     "share": "分享"
   },
   "build": {
     "meta": {
-      "title": "产品",
+      "title": "我做的产品",
       "description": "Darren Su / 苏鹏正在创造的产品与实验：MatchPoint、GlobalTechEvents、Datawhale AI+X Events 与多 Agent 数字组织。"
     }
   },

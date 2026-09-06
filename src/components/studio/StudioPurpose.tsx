@@ -21,29 +21,29 @@ export default function StudioPurpose({ locale }: { locale: string }) {
   });
   const copy = locale === 'zh'
     ? {
-        eyebrow: '一起做事 / SELECTED COLLABORATIONS',
-        title: '几件一起做成的事。',
-        intro: '开发者活动、产品 Workshop 和 AI 分享。先从这些真实的合作，了解我能怎样参与。',
+        eyebrow: '精选案例 / SELECTED WORK',
+        title: '做过的项目',
+        intro: '开发者活动、产品体验和 AI 分享。每份案例都记录了我的职责、过程和结果。',
         role: '我的角色',
-        result: '完成了什么',
+        result: '项目结果',
         read: '查看案例',
         all: '更多工作案例',
-        invitationEyebrow: '下一次，一起做',
-        invitation: '你正在筹备类似的事情？',
-        invitationText: '来信简单说说你的团队、想达成的目标和预计时间，就可以开始聊。',
+        invitationEyebrow: '聊聊合作',
+        invitation: '有项目想一起做？',
+        invitationText: '欢迎写信介绍你的团队、正在筹备的事情和预计时间，我们可以一起讨论我能怎样参与。',
         directions: '合作方向',
       }
     : {
-        eyebrow: 'SELECTED COLLABORATIONS',
-        title: 'A few things we made happen.',
-        intro: 'Developer events, product workshops, and AI talks. These collaborations show how I can contribute.',
+        eyebrow: 'SELECTED WORK',
+        title: 'Projects I’ve worked on',
+        intro: 'Developer events, product workshops, and AI talks, with my role, the work involved, and the outcomes of each.',
         role: 'My role',
-        result: 'What came out of it',
+        result: 'Outcome',
         read: 'View case study',
         all: 'More selected work',
         invitationEyebrow: 'WORK TOGETHER',
-        invitation: 'Planning something similar?',
-        invitationText: 'A few lines about your team, what you hope to achieve, and the timing are enough to start a conversation.',
+        invitation: 'Have a project in mind?',
+        invitationText: 'Tell me about your team, what you’re planning, and your timeline. We can discuss how I might help.',
         directions: 'Ways to collaborate',
       };
 
