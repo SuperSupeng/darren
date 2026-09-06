@@ -1,0 +1,54 @@
+.studio-stage { isolation: isolate; }
+.studio-atmosphere {
+  --landscape-far: #819980;
+  --landscape-near: #728d74;
+  --landscape-line: #7b9173;
+  position: absolute;
+  inset: 0 0 -35px;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  transition: opacity .8s ease;
+  background: radial-gradient(ellipse at 84% 23%, #e8d3a245, transparent 48%);
+  mask-image: linear-gradient(90deg, transparent 17%, #000 49%), linear-gradient(#000 74%, transparent);
+  mask-composite: intersect;
+}
+.studio-atmosphere-light {
+  position: absolute;
+  top: 0;
+  right: 4%;
+  width: clamp(160px, 23vw, 330px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, #fdf1ce80, #efd6a121 56%, transparent);
+}
+.studio-atmosphere-landscape { position: absolute; inset: 0; width: 100%; height: 100%; }
+.studio-mountain-far { fill: var(--landscape-far); opacity: .15; }
+.studio-mountain-near { fill: var(--landscape-near); opacity: .13; }
+.studio-water-lines { stroke: var(--landscape-line); opacity: .2; }
+.studio-atmosphere-ground {
+  position: absolute;
+  inset: 48% 0 0;
+  background: linear-gradient(transparent, var(--studio-paper) 95%);
+}
+.studio-experience[data-lighting="evening"] .studio-atmosphere {
+  --landscape-far: #90a8a1;
+  --landscape-near: #6e9182;
+  --landscape-line: #9bad95;
+  background: radial-gradient(ellipse at 85% 19%, #8eaaab20, transparent 46%);
+}
+.studio-experience[data-lighting="evening"] .studio-atmosphere-light { background: radial-gradient(closest-side, #ccdace20, #c6d3bc08 56%, transparent); }
+.studio-experience[data-lighting="evening"] .studio-mountain-far { opacity: .11; }
+.studio-experience[data-lighting="evening"] .studio-mountain-near { opacity: .12; }
+.studio-is-focused .studio-atmosphere { opacity: .6; }
+.studio-stage:has(.studio-room:is([data-scene-status="static"], [data-scene-status="loading"])) .studio-atmosphere { opacity: 0; }
+@media (max-width: 760px) {
+  .studio-atmosphere {
+    top: auto;
+    height: clamp(330px, 48svh, 450px);
+    bottom: -18px;
+    mask-image: linear-gradient(transparent, #000 18%, #000 75%, transparent);
+  }
+  .studio-atmosphere-light { top: 0; right: 0; width: 130px; }
+  .studio-is-focused .studio-atmosphere { display: none; }
+}

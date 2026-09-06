@@ -6,6 +6,7 @@ import { Component, useCallback, useEffect, useRef, useState, useSyncExternalSto
 import { Link } from '@/i18n/navigation';
 import { getStudioLocation, updateStudioLocation } from '@/lib/studio-location';
 import { useStudioSettings } from '@/components/spatial/StudioSettings';
+import StudioAtmosphere from './StudioAtmosphere';
 import type { StudioContent, StudioItem, StudioZone, StudioFocusZone } from './types';
 import './studio.css';
 
@@ -198,6 +199,7 @@ export default function StudioExperience({ locale, content, children }: { locale
   return (
     <main id="main-content" tabIndex={-1} className={`studio-experience ${activeZone ? 'studio-is-focused' : ''}`} data-lighting={lighting} lang={locale}>
       <div className="studio-stage">
+        <StudioAtmosphere />
         <div ref={roomRef} className="studio-room" aria-label={t.room} role="group" data-scene-status={!hydrated || useStill ? 'static' : ready ? 'ready' : 'loading'}>
           <div className={`studio-poster ${ready && !useStill ? 'studio-poster-hidden' : ''}`} aria-hidden="true">
             <Image src={lighting === 'evening' ? '/images/studio-dusk-preview.png' : '/images/studio-daylight-preview.png'} alt="" fill sizes="(max-width: 760px) 100vw, 76vw" preload className="studio-poster-image" />
