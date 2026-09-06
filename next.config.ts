@@ -5,6 +5,7 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 const projectRoot = new URL('.', import.meta.url).pathname;
 
 const nextConfig: NextConfig = {
+  devIndicators: false,
   experimental: {
     globalNotFound: true,
   },

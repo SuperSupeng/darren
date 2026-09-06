@@ -6,9 +6,7 @@ import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { isLocale } from '@/i18n/config';
-import Nav from '@/components/Nav';
-import Footer from '@/components/Footer';
-import ScrollCulture from '@/components/home/ScrollCulture';
+import SiteChrome from '@/components/SiteChrome';
 import { getLocalizedBlogRoutes } from '@/lib/blog';
 import '../globals.css';
 import '../home-directed.css';
@@ -90,10 +88,9 @@ export default async function LocaleLayout({ children, params }: Props) {
           <a href="#main-content" className="skip-link">
             {locale === 'zh' ? '跳到主要内容' : 'Skip to main content'}
           </a>
-          <Nav blogLocalesBySlug={blogLocalesBySlug} />
-          <ScrollCulture />
-          <div className="pt-16">{children}</div>
-          <Footer />
+          <SiteChrome blogLocalesBySlug={blogLocalesBySlug}>
+            {children}
+          </SiteChrome>
         </NextIntlClientProvider>
         <Analytics />
       </body>
