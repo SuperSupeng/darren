@@ -50,7 +50,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
       sitemap.push({
         url: `${baseUrl}/${locale}${route}`,
-        lastModified: post.date,
+        // Publication dates do not establish when a page was last updated.
+        // Omit lastModified until the content has an explicit, verified update date.
         changeFrequency: 'monthly',
         priority: 0.7,
         alternates: { languages },

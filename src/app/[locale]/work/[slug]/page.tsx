@@ -136,6 +136,7 @@ export default async function WorkCasePage({
                 <a href="#case-outcome">03 <span>{copy.outcome}</span></a>
                 <a href="#case-reflection">04 <span>{copy.reflection}</span></a>
               </nav>
+              <a href={`/${locale}/work/${work.id}/source.md`} className="interior-text-link" download={`${work.id}.${locale}.md`}>{locale === 'zh' ? '下载纯文本案例' : 'Download case text'} ↓</a>
             </aside>
 
             <div className="case-document">

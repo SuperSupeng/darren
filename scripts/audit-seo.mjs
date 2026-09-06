@@ -5,6 +5,7 @@ import { JSDOM } from 'jsdom';
 const baseUrl = new URL(process.argv[2] ?? 'http://127.0.0.1:3100');
 const failures = [];
 const pages = new Map();
+const sources = new Map();
 const imagePaths = new Set();
 
 async function request(path, userAgent = 'OAI-SearchBot') {
@@ -50,6 +51,12 @@ for (const entry of entries) {
   check(document.documentElement.lang === (path.startsWith('/zh') ? 'zh-CN' : 'en'), `${label} incorrect document language`);
 
   if (meta('og:image')) imagePaths.add(new URL(meta('og:image')).pathname);
+  if (/^\/(en|zh)\/(blog|work)\/[^/]+$/.test(path)) {
+    const sourceUrl = `${canonical}/source.md`;
+    check(document.querySelector('link[rel="alternate"][type="text/markdown"]')?.href === sourceUrl, `${label} missing canonical Markdown alternate`);
+    check([...document.querySelectorAll('main a[href]')].some(link => new URL(link.getAttribute('href'), canonical).href === sourceUrl), `${label} source text has no visible download link`);
+    sources.set(sourceUrl, canonical);
+  }
   const scripts = [...document.querySelectorAll('script[type="application/ld+json"]')];
   check(scripts.length > 0, `${label} missing structured data`);
   for (const script of scripts) {
@@ -73,6 +80,7 @@ for (const [canonical, { document, languages }] of pages) {
   for (const link of document.querySelectorAll('main a[href]')) {
     const target = new URL(link.getAttribute('href'), canonical);
     if (target.origin !== new URL(canonical).origin || !/^\/(en|zh)(\/|$)/.test(target.pathname)) continue;
+    if (sources.has(`${target.origin}${target.pathname}`)) continue;
     const destination = pages.get(`${target.origin}${target.pathname}`);
     check(Boolean(destination), `${canonical}: internal link missing from sitemap: ${target.pathname}`);
     if (destination && target.hash) {
@@ -82,6 +90,16 @@ for (const [canonical, { document, languages }] of pages) {
       check(Boolean(roomView || destination.document.getElementById(fragment)), `${canonical}: broken anchor ${target.pathname}${target.hash}`);
     }
   }
+}
+
+for (const [sourceUrl, canonical] of sources) {
+  const response = await request(new URL(sourceUrl).pathname);
+  const body = await response.text();
+  check(response.status === 200, `${sourceUrl}: source unavailable`);
+  check(response.headers.get('content-type')?.startsWith('text/markdown'), `${sourceUrl}: incorrect source content type`);
+  check(response.headers.get('link') === `<${canonical}>; rel="canonical"`, `${sourceUrl}: missing canonical HTTP link`);
+  check(body.includes(`canonical: "${canonical}"`) && body.includes('author: "Darren Su / 苏鹏"'), `${sourceUrl}: missing source attribution`);
+  check(body.length > 300, `${sourceUrl}: source content is unexpectedly short`);
 }
 
 for (const imagePath of imagePaths) {
@@ -96,10 +114,10 @@ for (const locale of ['en', 'zh']) {
   check(document.querySelector('link[rel="canonical"]')?.href === expected, `${locale}: visual preferences changed canonical URL`);
 }
 
-for (const path of ['/zh/studio', '/en/studio', '/zh/blog/not-a-real-article', '/en/work/not-a-real-case']) {
+for (const path of ['/zh/studio', '/en/studio', '/zh/blog/not-a-real-article', '/en/work/not-a-real-case', '/zh/blog/not-a-real-article/source.md', '/en/work/not-a-real-case/source.md']) {
   const response = await request(path);
   const document = new JSDOM(await response.text()).window.document;
-  check(/noindex/.test(document.querySelector('meta[name="robots"]')?.content ?? ''), `${path}: should be noindex`);
+  check(/noindex/.test(`${document.querySelector('meta[name="robots"]')?.content ?? ''} ${response.headers.get('x-robots-tag') ?? ''}`), `${path}: should be noindex`);
   if (path.includes('not-a-real')) check(response.status === 404, `${path}: missing content should return 404`);
   check(!/hreflang=/i.test(response.headers.get('link') ?? ''), `${path}: should not emit language alternatives in HTTP headers`);
 }
@@ -117,7 +135,7 @@ for (const path of ['/robots.txt', '/llms.txt', '/rss.xml']) {
   check(response.status === 200 && body.length > 100, `${path}: discovery document unavailable`);
   if (path === '/llms.txt') {
     for (const [, href] of body.matchAll(/\]\((https?:\/\/[^)]+)\)/g)) {
-      check(pages.has(href), `${path}: listed page is not in the sitemap: ${href}`);
+      check(pages.has(href) || sources.has(href) || href === `${new URL([...pages.keys()][0]).origin}/rss.xml`, `${path}: listed resource is not a known canonical page or reading format: ${href}`);
     }
   }
   if (path === '/rss.xml') {
@@ -125,8 +143,14 @@ for (const path of ['/robots.txt', '/llms.txt', '/rss.xml']) {
     for (const link of rss.querySelectorAll('item > link')) {
       check(pages.has(link.textContent), `${path}: listed article is not in the sitemap: ${link.textContent}`);
     }
+    const items = [...rss.querySelectorAll('item')];
+    check(items.length === [...pages.keys()].filter(url => /^\/(en|zh)\/blog\/[^/]+$/.test(new URL(url).pathname)).length, `${path}: missing published articles`);
+    for (const item of items) {
+      check((item.getElementsByTagName('content:encoded')[0]?.textContent.length ?? 0) > 1000, `${path}: missing full article content`);
+      check(item.getElementsByTagName('dc:creator')[0]?.textContent === 'Darren Su', `${path}: missing author attribution`);
+    }
   }
 }
 
-console.log(JSON.stringify({ pages: pages.size, shareImages: imagePaths.size, failures }, null, 2));
+console.log(JSON.stringify({ pages: pages.size, shareImages: imagePaths.size, sources: sources.size, failures }, null, 2));
 process.exitCode = failures.length ? 1 : 0;

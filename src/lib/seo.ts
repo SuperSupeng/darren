@@ -141,6 +141,9 @@ export function buildAlternates(
     languages,
     types: {
       'application/rss+xml': `${siteUrl}/rss.xml`,
+      ...(/^\/(?:blog|work)\/[^/]+$/.test(path)
+        ? { 'text/markdown': absoluteLocalizedUrl(locale, `${path}/source.md`) }
+        : {}),
     },
   };
 }

@@ -70,6 +70,14 @@ Before publishing, confirm:
 - Long pieces have a linked table of contents.
 - A second-language version is either complete or intentionally unavailable; never show an empty link.
 
+## Public Source Formats
+
+The HTML page is the canonical source for every article and case. Its `source.md` download is generated from the same content, with author, language, original article date, canonical URL, and absolute reference/image links. RSS includes the full published articles through the same renderer used on the website. Do not hand-edit a second copy of these exports.
+
+Article frontmatter uses single-line `title`, `date`, `description`, and a non-empty inline `tags` list. The production parser accepts LF/CRLF/CR and a UTF-8 BOM, but rejects missing or invalid metadata instead of substituting a build date. Preserve original publication dates. Project years describe the work, not the publication date of the case page. Do not add `lastModified` to the sitemap until a verified editorial update date is maintained separately.
+
+After changing routes or source formats, run `npm run audit:seo` against a built, running preview. Keep all published HTML pages, Markdown variants, feed entries, and language alternatives in agreement. Source-download routes must enumerate both `locale` and `slug` when generated; testing a handler in isolation does not verify the deployed route exists.
+
 ## Maintenance Rhythm
 
 - Add or update a case page when a public project reaches a meaningful milestone.

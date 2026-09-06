@@ -101,6 +101,7 @@
 .reading-deck { color: var(--space-muted); font-size: 14px; line-height: 2; margin-top: 24px !important; }
 .reading-byline { display: flex; flex-wrap: wrap; gap: 8px 12px; color: var(--space-muted); font: 10px/1.8 var(--font-geist-mono); margin-top: 24px; }
 .reading-byline a { text-decoration: underline; text-underline-offset: 3px; }
+.reading-source { display: inline-flex; align-items: center; min-height: 44px; margin-top: 8px; }
 .interior-page .reading-prose { margin-top: 38px; font-size: 16px; line-height: 2.1; color: var(--space-ink); overflow-wrap: anywhere; }
 .interior-page .reading-prose :is(p,li,blockquote) { color: var(--space-ink); }
 .interior-page .reading-prose p { margin-block: 0 1.5em; line-height: 2.1; }

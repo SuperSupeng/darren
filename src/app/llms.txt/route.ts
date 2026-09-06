@@ -2,6 +2,7 @@ import { locales } from '@/i18n/config';
 import { getAllPosts } from '@/lib/blog';
 import { getPortfolio } from '@/lib/portfolio';
 import { siteUrl } from '@/lib/seo';
+import { getSiteContent } from '@/lib/siteContent';
 
 export const dynamic = 'force-static';
 
@@ -18,11 +19,18 @@ export function GET() {
         `- [${work.title}](${siteUrl}/${locale}/work/${work.id}): ${work.summary}`
     )
   );
+  const sourceFiles = locales.flatMap((locale) => [
+    ...getAllPosts(locale).map(post => `- [${post.title} (${locale}, Markdown)](${siteUrl}/${locale}/blog/${post.slug}/source.md)`),
+    ...getPortfolio(locale).work.map(work => `- [${work.title} (${locale}, Markdown)](${siteUrl}/${locale}/work/${work.id}/source.md)`),
+  ]);
+  const profile = getSiteContent('en').about.hero;
 
   const body = [
     '# Darren Su / 苏鹏',
     '',
-    '> Darren Su is based in Hangzhou. He is Datawhale City Ecosystem Lead, co-founder of AGI Villa and MatchPoint, and creator of GlobalTechEvents. He initiates AI developer ecosystem programs, builds products, connects global technology networks, speaks about AI and agents, and operates a multi-agent digital organization.',
+    `> ${profile.subtitle}`,
+    '',
+    profile.tags.join('; '),
     '',
     `Canonical website: ${siteUrl}`,
     'Primary contact: supeng842499467@gmail.com',
@@ -39,6 +47,8 @@ export function GET() {
     `- [产品](${siteUrl}/zh/build)`,
     `- [About Darren](${siteUrl}/en/about)`,
     `- [关于 Darren](${siteUrl}/zh/about)`,
+    `- [Writing](${siteUrl}/en/blog)`,
+    `- [文章与手记](${siteUrl}/zh/blog)`,
     '',
     '## Case studies',
     '',
@@ -47,6 +57,13 @@ export function GET() {
     '## Published writing',
     '',
     ...articles,
+    '',
+    '## Full-text formats',
+    '',
+    'The HTML pages above are the canonical sources. These alternate formats are generated from the same public content, including authorship, article publication dates, images, and references. Case-study years describe when the work happened; they are not publication dates.',
+    '',
+    `- [Full-text RSS, Chinese and English](${siteUrl}/rss.xml)`,
+    ...sourceFiles,
     '',
     '## Public profiles',
     '',

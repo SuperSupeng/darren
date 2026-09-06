@@ -43,39 +43,93 @@ const defaultPostImage: BlogPost['image'] = {
   height: 630,
 };
 
-// 简单的 frontmatter 解析
-function parseFrontmatter(content: string): { data: Record<string, unknown>; content: string } {
-  const frontmatterRegex = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/;
-  const match = content.match(frontmatterRegex);
-  
-  if (!match) {
-    return { data: {}, content };
+type ParsedBlogContent = Pick<BlogPost, 'title' | 'date' | 'description' | 'tags' | 'content'>;
+
+// The local articles use single-line fields and an inline tag list.
+// Invalid source metadata must fail before it can reach HTML, JSON-LD, or feeds.
+export function parseBlogContent(source: string, context = 'Blog article'): ParsedBlogContent {
+  const normalized = source.replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n');
+  const match = normalized.match(/^---\n([\s\S]*?)\n---(?:\n|$)([\s\S]*)$/);
+  const fail = (message: string): never => {
+    throw new Error(`${context}: ${message}`);
+  };
+
+  if (!match) return fail('a complete frontmatter block is required');
+
+  const fields = new Map<string, string>();
+  for (const line of match[1].split('\n')) {
+    if (!line.trim() || line.trimStart().startsWith('#')) continue;
+    const separator = line.indexOf(':');
+    if (separator <= 0) return fail('frontmatter fields must use key: value');
+    const key = line.slice(0, separator).trim();
+    if (fields.has(key)) return fail(`duplicate frontmatter field: ${key}`);
+    fields.set(key, line.slice(separator + 1).trim());
   }
 
-  const frontmatter = match[1];
-  const body = match[2];
-  
-  const data: Record<string, unknown> = {};
-  frontmatter.split('\n').forEach(line => {
-    const colonIndex = line.indexOf(':');
-    if (colonIndex > 0) {
-      const key = line.slice(0, colonIndex).trim();
-      let value: unknown = line.slice(colonIndex + 1).trim();
-      
-      // 处理数组（简单的 YAML 数组格式）
-      if (typeof value === 'string' && value.startsWith('[') && value.endsWith(']')) {
-        value = value.slice(1, -1).split(',').map(s => s.trim().replace(/['"]/g, ''));
+  const text = (raw: string, field: string): string => {
+    let value = raw.trim();
+    if (value.startsWith('"') || value.startsWith("'")) {
+      if (value.length < 2 || !value.endsWith(value[0])) return fail(`${field} has an unclosed quote`);
+      if (value[0] === '"') {
+        try {
+          value = JSON.parse(value) as string;
+        } catch {
+          return fail(`${field} has invalid quoted text`);
+        }
+      } else {
+        if (!/^'(?:[^']|'')*'$/.test(value)) return fail(`${field} has invalid quoted text`);
+        value = value.slice(1, -1).replace(/''/g, "'");
       }
-      // 处理引号
-      if (typeof value === 'string' && ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'")))) {
-        value = value.slice(1, -1);
-      }
-      
-      data[key] = value;
+    } else if (/^[\[\]{|>]/.test(value)) {
+      return fail(`${field} must be single-line text`);
     }
-  });
+    if (!value.trim()) return fail(`${field} must not be empty`);
+    return value;
+  };
+  const requiredText = (field: string) => text(fields.get(field) ?? '', field);
+  const title = requiredText('title');
+  const date = requiredText('date');
+  const description = requiredText('description');
 
-  return { data, content: body };
+  const dateValue = new Date(`${date}T00:00:00Z`);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)
+    || Number.isNaN(dateValue.valueOf())
+    || dateValue.toISOString().slice(0, 10) !== date) {
+    return fail('date must be a valid calendar date in YYYY-MM-DD format');
+  }
+
+  const rawTags = fields.get('tags') ?? '';
+  if (!rawTags.startsWith('[') || !rawTags.endsWith(']')) return fail('tags must be a non-empty inline list');
+  const tagValues: string[] = [];
+  let tag = '';
+  let quote = '';
+  const list = rawTags.slice(1, -1);
+  for (let index = 0; index < list.length; index += 1) {
+    const character = list[index];
+    if (quote === "'" && character === "'" && list[index + 1] === "'") {
+      tag += "''";
+      index += 1;
+      continue;
+    }
+    if (quote === '"' && character === '\\') {
+      tag += character + (list[++index] ?? '');
+      continue;
+    }
+    if (character === quote) quote = '';
+    else if (!quote && (character === '"' || character === "'") && !tag.trim()) quote = character;
+    if (character === ',' && !quote) {
+      tagValues.push(text(tag, 'tags'));
+      tag = '';
+    } else {
+      tag += character;
+    }
+  }
+  if (quote) return fail('tags has an unclosed quote');
+  tagValues.push(text(tag, 'tags'));
+
+  const content = match[2];
+  if (!content.trim()) return fail('article body must not be empty');
+  return { title, date, description, tags: tagValues, content };
 }
 
 // 计算阅读时间（中文按字数，英文按词数）
@@ -113,16 +167,12 @@ export function getAllPosts(locale: string = defaultLocale): BlogPost[] {
     const filePath = path.join(blogDir, filename);
     const fileContent = fs.readFileSync(filePath, 'utf-8');
     
-    const { data, content } = parseFrontmatter(fileContent);
+    const parsed = parseBlogContent(fileContent, path.relative(process.cwd(), filePath));
     
     return {
       slug,
-      title: (data.title as string) || slug,
-      date: (data.date as string) || new Date().toISOString().split('T')[0],
-      description: (data.description as string) || '',
-      tags: (data.tags as string[]) || [],
-      content,
-      readingTime: calculateReadingTime(content),
+      ...parsed,
+      readingTime: calculateReadingTime(parsed.content),
       image: postImages[slug] ?? defaultPostImage,
     };
   });
