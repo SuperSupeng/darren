@@ -3,6 +3,8 @@
   --landscape-far: #819980;
   --landscape-near: #728d74;
   --landscape-line: #7b9173;
+  --atmosphere-light-travel: 24px;
+  --atmosphere-landscape-travel: 9px;
   position: absolute;
   inset: 0 0 -35px;
   z-index: -1;
@@ -42,8 +44,37 @@
 .studio-experience[data-lighting="evening"] .studio-mountain-near { opacity: .12; }
 .studio-is-focused .studio-atmosphere { opacity: .6; }
 .studio-stage:has(.studio-room:is([data-scene-status="static"], [data-scene-status="loading"])) .studio-atmosphere { opacity: 0; }
+
+/* Only these two decorative layers move; the room and its projected links stay put. */
+@media (prefers-reduced-motion: no-preference) {
+  .studio-atmosphere-light {
+    animation: studio-atmosphere-light-drift 28s ease-in-out infinite alternate;
+    animation-play-state: paused;
+  }
+  .studio-atmosphere-landscape {
+    animation: studio-atmosphere-distance-drift 46s ease-in-out infinite alternate;
+    animation-play-state: paused;
+    transform-origin: 60% 65%;
+  }
+  /* Opt in only after visibility is known. Hidden tabs, still view, and loading pause. */
+  .spatial-site[data-motion-paused="false"] .studio-stage[data-motion-visible="true"]:has(.studio-room[data-scene-status="ready"]) .studio-atmosphere :is(.studio-atmosphere-light, .studio-atmosphere-landscape) {
+    animation-play-state: running;
+  }
+}
+
+@keyframes studio-atmosphere-light-drift {
+  from { opacity: .62; transform: translate3d(0, 0, 0) scale(.98); }
+  to { opacity: 1; transform: translate3d(calc(-1 * var(--atmosphere-light-travel)), 9px, 0) scale(1.08); }
+}
+@keyframes studio-atmosphere-distance-drift {
+  from { opacity: .82; transform: translate3d(0, 2px, 0) scale(1.025); }
+  to { opacity: 1; transform: translate3d(var(--atmosphere-landscape-travel), -3px, 0) scale(1.025); }
+}
+
 @media (max-width: 760px) {
   .studio-atmosphere {
+    --atmosphere-light-travel: 12px;
+    --atmosphere-landscape-travel: 5px;
     top: auto;
     height: clamp(330px, 48svh, 450px);
     bottom: -18px;
@@ -51,4 +82,10 @@
   }
   .studio-atmosphere-light { top: 0; right: 0; width: 130px; }
   .studio-is-focused .studio-atmosphere { display: none; }
+  .studio-is-focused .studio-atmosphere :is(.studio-atmosphere-light, .studio-atmosphere-landscape) { animation-play-state: paused !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .studio-atmosphere { transition: none; }
+  .studio-atmosphere :is(.studio-atmosphere-light, .studio-atmosphere-landscape) { animation: none; }
 }

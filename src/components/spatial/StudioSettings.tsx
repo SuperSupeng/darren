@@ -3,6 +3,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { usePathname } from '@/i18n/navigation';
 import type { StudioLighting } from '@/components/studio/types';
+import SpatialMotion from './SpatialMotion';
 
 type Settings = {
   lighting: StudioLighting;
@@ -19,6 +20,7 @@ export function StudioSettings({ children }: { children: ReactNode }) {
   const [lighting, updateLighting] = useState<StudioLighting>('day');
   const [still, updateStill] = useState(false);
   const initialized = useRef(false);
+  const rootRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
   const setLighting = useCallback((value: StudioLighting) => {
@@ -64,7 +66,10 @@ export function StudioSettings({ children }: { children: ReactNode }) {
 
   const value = useMemo(() => ({ lighting, setLighting, still, setStill }), [lighting, setLighting, still, setStill]);
   return <SettingsContext.Provider value={value}>
-    <div className="spatial-site" data-lighting={lighting}>{children}</div>
+    <div ref={rootRef} className="spatial-site" data-lighting={lighting}>
+      <SpatialMotion rootRef={rootRef} still={still} />
+      {children}
+    </div>
   </SettingsContext.Provider>;
 }
 
