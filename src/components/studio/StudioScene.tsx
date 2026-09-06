@@ -14,6 +14,7 @@ import {
   type RefObject,
 } from 'react';
 import { Canvas, useFrame, useThree, type ThreeEvent } from '@react-three/fiber';
+import { getImageProps } from 'next/image';
 import {
   BoxGeometry,
   CylinderGeometry,
@@ -209,7 +210,10 @@ function usePhoto(url: string) {
     let alive = true;
     let loaded: Texture | null = null;
     const loader = new TextureLoader();
-    loader.load(url, (image) => {
+    // Reuse the site's image optimizer before downloading these small scene photos.
+    // The generated 2x source stays close to the existing 1024px texture limit.
+    const { props } = getImageProps({ src: url, alt: '', width: 512, height: 512 });
+    loader.load(props.src, (image) => {
       loaded = image;
       if (!alive) {
         image.dispose();

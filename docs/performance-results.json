@@ -1,0 +1,619 @@
+{
+  "date": "2026-09-06",
+  "scope": "Local production build; browser cold cache, server warm cache; not field data",
+  "baselineCommit": "ae30f0e",
+  "runs": [
+    {
+      "phase": "before",
+      "page": "home",
+      "run": 1,
+      "url": "http://127.0.0.1:3100/zh?light=evening",
+      "fetchTime": "2026-09-06T14:58:52.389Z",
+      "lighthouseVersion": "13.4.1",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+      "conditions": {
+        "formFactor": "mobile",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 390,
+          "height": 844,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        }
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 4890.8331,
+          "unit": "millisecond"
+        },
+        "largest-contentful-paint": {
+          "value": 7861.305050000001,
+          "unit": "millisecond"
+        },
+        "total-blocking-time": {
+          "value": 94,
+          "unit": "millisecond"
+        },
+        "cumulative-layout-shift": {
+          "value": 0.02020949923372376,
+          "unit": "unitless"
+        },
+        "total-byte-weight": {
+          "value": 3493187,
+          "unit": "byte"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "phase": "before",
+      "page": "home",
+      "run": 2,
+      "url": "http://127.0.0.1:3100/zh?light=evening",
+      "fetchTime": "2026-09-06T14:59:13.097Z",
+      "lighthouseVersion": "13.4.1",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+      "conditions": {
+        "formFactor": "mobile",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 390,
+          "height": 844,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        }
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 4512.79545,
+          "unit": "millisecond"
+        },
+        "largest-contentful-paint": {
+          "value": 6012.79545,
+          "unit": "millisecond"
+        },
+        "total-blocking-time": {
+          "value": 104.5,
+          "unit": "millisecond"
+        },
+        "cumulative-layout-shift": {
+          "value": 0.02020949923372376,
+          "unit": "unitless"
+        },
+        "total-byte-weight": {
+          "value": 3493175,
+          "unit": "byte"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "phase": "before",
+      "page": "case",
+      "run": 1,
+      "url": "http://127.0.0.1:3100/zh/work/rumata-workshop",
+      "fetchTime": "2026-09-06T14:58:59.653Z",
+      "lighthouseVersion": "13.4.1",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+      "conditions": {
+        "formFactor": "mobile",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 390,
+          "height": 844,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        }
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 5112.4412,
+          "unit": "millisecond"
+        },
+        "largest-contentful-paint": {
+          "value": 6462.4412,
+          "unit": "millisecond"
+        },
+        "total-blocking-time": {
+          "value": 0,
+          "unit": "millisecond"
+        },
+        "cumulative-layout-shift": {
+          "value": 0,
+          "unit": "unitless"
+        },
+        "total-byte-weight": {
+          "value": 975481,
+          "unit": "byte"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "phase": "before",
+      "page": "case",
+      "run": 2,
+      "url": "http://127.0.0.1:3100/zh/work/rumata-workshop",
+      "fetchTime": "2026-09-06T14:59:20.253Z",
+      "lighthouseVersion": "13.4.1",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+      "conditions": {
+        "formFactor": "mobile",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 390,
+          "height": 844,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        }
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 5110.0954,
+          "unit": "millisecond"
+        },
+        "largest-contentful-paint": {
+          "value": 6460.0954,
+          "unit": "millisecond"
+        },
+        "total-blocking-time": {
+          "value": 0,
+          "unit": "millisecond"
+        },
+        "cumulative-layout-shift": {
+          "value": 0,
+          "unit": "unitless"
+        },
+        "total-byte-weight": {
+          "value": 975481,
+          "unit": "byte"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "phase": "before",
+      "page": "article",
+      "run": 1,
+      "url": "http://127.0.0.1:3100/zh/blog/managing-31-ai-employees",
+      "fetchTime": "2026-09-06T14:59:06.090Z",
+      "lighthouseVersion": "13.4.1",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+      "conditions": {
+        "formFactor": "mobile",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 390,
+          "height": 844,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        }
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 10069.03,
+          "unit": "millisecond"
+        },
+        "largest-contentful-paint": {
+          "value": 12245.933,
+          "unit": "millisecond"
+        },
+        "total-blocking-time": {
+          "value": 0,
+          "unit": "millisecond"
+        },
+        "cumulative-layout-shift": {
+          "value": 0,
+          "unit": "unitless"
+        },
+        "total-byte-weight": {
+          "value": 2412783,
+          "unit": "byte"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "phase": "before",
+      "page": "article",
+      "run": 2,
+      "url": "http://127.0.0.1:3100/zh/blog/managing-31-ai-employees",
+      "fetchTime": "2026-09-06T14:59:26.526Z",
+      "lighthouseVersion": "13.4.1",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+      "conditions": {
+        "formFactor": "mobile",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 390,
+          "height": 844,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        }
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 10066.323250000001,
+          "unit": "millisecond"
+        },
+        "largest-contentful-paint": {
+          "value": 12242.955575000002,
+          "unit": "millisecond"
+        },
+        "total-blocking-time": {
+          "value": 0,
+          "unit": "millisecond"
+        },
+        "cumulative-layout-shift": {
+          "value": 0,
+          "unit": "unitless"
+        },
+        "total-byte-weight": {
+          "value": 2412783,
+          "unit": "byte"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "phase": "after",
+      "page": "home",
+      "run": 1,
+      "url": "http://127.0.0.1:3100/zh?light=evening",
+      "fetchTime": "2026-09-06T15:14:16.552Z",
+      "lighthouseVersion": "13.4.1",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+      "conditions": {
+        "formFactor": "mobile",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 390,
+          "height": 844,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        }
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 3311.7153,
+          "unit": "millisecond"
+        },
+        "largest-contentful-paint": {
+          "value": 5261.7153,
+          "unit": "millisecond"
+        },
+        "total-blocking-time": {
+          "value": 69,
+          "unit": "millisecond"
+        },
+        "cumulative-layout-shift": {
+          "value": 0.02020949923372376,
+          "unit": "unitless"
+        },
+        "total-byte-weight": {
+          "value": 1420643,
+          "unit": "byte"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "phase": "after",
+      "page": "home",
+      "run": 2,
+      "url": "http://127.0.0.1:3100/zh?light=evening",
+      "fetchTime": "2026-09-06T15:14:36.892Z",
+      "lighthouseVersion": "13.4.1",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+      "conditions": {
+        "formFactor": "mobile",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 390,
+          "height": 844,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        }
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 3313.80285,
+          "unit": "millisecond"
+        },
+        "largest-contentful-paint": {
+          "value": 4963.80285,
+          "unit": "millisecond"
+        },
+        "total-blocking-time": {
+          "value": 98,
+          "unit": "millisecond"
+        },
+        "cumulative-layout-shift": {
+          "value": 0.02020949923372376,
+          "unit": "unitless"
+        },
+        "total-byte-weight": {
+          "value": 1418195,
+          "unit": "byte"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "phase": "after",
+      "page": "case",
+      "run": 1,
+      "url": "http://127.0.0.1:3100/zh/work/rumata-workshop",
+      "fetchTime": "2026-09-06T15:14:23.797Z",
+      "lighthouseVersion": "13.4.1",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+      "conditions": {
+        "formFactor": "mobile",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 390,
+          "height": 844,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        }
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 3309.87795,
+          "unit": "millisecond"
+        },
+        "largest-contentful-paint": {
+          "value": 4809.87795,
+          "unit": "millisecond"
+        },
+        "total-blocking-time": {
+          "value": 8,
+          "unit": "millisecond"
+        },
+        "cumulative-layout-shift": {
+          "value": 0,
+          "unit": "unitless"
+        },
+        "total-byte-weight": {
+          "value": 743295,
+          "unit": "byte"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "phase": "after",
+      "page": "case",
+      "run": 2,
+      "url": "http://127.0.0.1:3100/zh/work/rumata-workshop",
+      "fetchTime": "2026-09-06T15:14:44.066Z",
+      "lighthouseVersion": "13.4.1",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+      "conditions": {
+        "formFactor": "mobile",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 390,
+          "height": 844,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        }
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 3307.7898,
+          "unit": "millisecond"
+        },
+        "largest-contentful-paint": {
+          "value": 4807.7898000000005,
+          "unit": "millisecond"
+        },
+        "total-blocking-time": {
+          "value": 10,
+          "unit": "millisecond"
+        },
+        "cumulative-layout-shift": {
+          "value": 0,
+          "unit": "unitless"
+        },
+        "total-byte-weight": {
+          "value": 743295,
+          "unit": "byte"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "phase": "after",
+      "page": "article",
+      "run": 1,
+      "url": "http://127.0.0.1:3100/zh/blog/managing-31-ai-employees",
+      "fetchTime": "2026-09-06T15:14:30.069Z",
+      "lighthouseVersion": "13.4.1",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+      "conditions": {
+        "formFactor": "mobile",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 390,
+          "height": 844,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        }
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 3610.3884,
+          "unit": "millisecond"
+        },
+        "largest-contentful-paint": {
+          "value": 5035.3884,
+          "unit": "millisecond"
+        },
+        "total-blocking-time": {
+          "value": 18,
+          "unit": "millisecond"
+        },
+        "cumulative-layout-shift": {
+          "value": 0,
+          "unit": "unitless"
+        },
+        "total-byte-weight": {
+          "value": 773115,
+          "unit": "byte"
+        }
+      },
+      "warnings": []
+    },
+    {
+      "phase": "after",
+      "page": "article",
+      "run": 2,
+      "url": "http://127.0.0.1:3100/zh/blog/managing-31-ai-employees",
+      "fetchTime": "2026-09-06T15:14:50.236Z",
+      "lighthouseVersion": "13.4.1",
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36",
+      "conditions": {
+        "formFactor": "mobile",
+        "screenEmulation": {
+          "mobile": true,
+          "width": 390,
+          "height": 844,
+          "deviceScaleFactor": 1,
+          "disabled": false
+        },
+        "throttlingMethod": "simulate",
+        "throttling": {
+          "rttMs": 150,
+          "throughputKbps": 1638.4,
+          "requestLatencyMs": 562.5,
+          "downloadThroughputKbps": 1474.5600000000002,
+          "uploadThroughputKbps": 675,
+          "cpuSlowdownMultiplier": 4
+        }
+      },
+      "metrics": {
+        "first-contentful-paint": {
+          "value": 3607.33065,
+          "unit": "millisecond"
+        },
+        "largest-contentful-paint": {
+          "value": 4957.33065,
+          "unit": "millisecond"
+        },
+        "total-blocking-time": {
+          "value": 11,
+          "unit": "millisecond"
+        },
+        "cumulative-layout-shift": {
+          "value": 0,
+          "unit": "unitless"
+        },
+        "total-byte-weight": {
+          "value": 773115,
+          "unit": "byte"
+        }
+      },
+      "warnings": []
+    }
+  ]
+}

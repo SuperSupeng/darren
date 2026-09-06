@@ -1,4 +1,5 @@
 import { createArticleHeadingAnchors } from '@/lib/article-anchors';
+import { getImageProps } from 'next/image';
 
 function escapeHtml(value: string): string {
   return value
@@ -70,7 +71,7 @@ const inlineImageDimensions: Record<string, { width: number; height: number }> =
 };
 
 // Lightweight block renderer for the local field-notes markdown files.
-export function renderMarkdown(content: string, title: string, locale: string): string {
+export function renderMarkdown(content: string, title: string, locale: string, { responsiveImages = false } = {}): string {
   const lines = content.replace(/\r\n/g, '\n').split('\n');
   const output: string[] = [];
   let paragraph: string[] = [];
@@ -162,7 +163,14 @@ export function renderMarkdown(content: string, title: string, locale: string): 
       const sizeAttributes = dimensions
         ? ` width="${dimensions.width}" height="${dimensions.height}"`
         : '';
-      output.push(`<img src="${escapeAttribute(image[2])}" alt="${escapeAttribute(imageAlt)}"${sizeAttributes} loading="lazy" decoding="async" class="my-8 h-auto max-w-full rounded-[8px]" />`);
+      // Web pages select a suitable image for the reading column; feeds keep portable original URLs.
+      const optimized = responsiveImages && dimensions
+        ? getImageProps({ src: image[2], alt: imageAlt, ...dimensions, sizes: '(max-width: 760px) calc(100vw - 80px), 700px' }).props
+        : null;
+      const sourceAttributes = optimized?.srcSet
+        ? ` srcset="${escapeAttribute(optimized.srcSet)}" sizes="${escapeAttribute(optimized.sizes ?? '')}"`
+        : '';
+      output.push(`<img src="${escapeAttribute(optimized?.src ?? image[2])}"${sourceAttributes} alt="${escapeAttribute(imageAlt)}"${sizeAttributes} loading="lazy" decoding="async" class="my-8 h-auto max-w-full rounded-[8px]" />`);
       continue;
     }
 

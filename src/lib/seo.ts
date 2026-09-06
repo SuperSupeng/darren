@@ -457,6 +457,7 @@ export function workCaseStructuredData(work: PortfolioWork, locale: string) {
         citation: work.caseStudy.materials?.map((material) => ({
           '@type': 'CreativeWork',
           name: material.title,
+          description: material.description,
           url: material.href.startsWith('/')
             ? absoluteLocalizedUrl(locale, material.href)
             : material.href,

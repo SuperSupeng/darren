@@ -52,7 +52,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ local
     notFound();
   }
 
-  const renderedContent = renderMarkdown(post.content, post.title, locale);
+  const renderedContent = renderMarkdown(post.content, post.title, locale, { responsiveImages: true });
   const shareUrl = absoluteLocalizedUrl(locale, `/blog/${post.slug}`);
   const authorLabel = locale === 'zh' ? '作者' : 'By';
 

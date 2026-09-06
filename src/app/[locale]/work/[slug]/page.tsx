@@ -70,7 +70,7 @@ export default async function WorkCasePage({
         outcome: '完成了什么',
         reflection: '我的体会',
         materials: '相关文章与资料',
-        readMaterial: '阅读全文',
+        readMaterial: '查看资料',
         note: '阅读相关手记',
         next: '下一个项目',
         contactEyebrow: '如果你正在做类似的事',
@@ -89,7 +89,7 @@ export default async function WorkCasePage({
         outcome: 'What was completed',
         reflection: 'What the work taught me',
         materials: 'Related articles and resources',
-        readMaterial: 'Read the full article',
+        readMaterial: 'View resource',
         note: 'Read the related field note',
         next: 'Next project',
         contactEyebrow: 'Working on something similar?',
@@ -116,7 +116,7 @@ export default async function WorkCasePage({
                 <div className="case-result-stamp"><span>{copy.result}</span><p>{work.result}</p></div>
               </div>
               {work.image ? <figure className="interior-photo case-cover-photo">
-                <div className="case-image-frame"><Image src={work.image} alt={work.imageAlt ?? work.title} fill priority sizes="(min-width: 900px) 47vw, 100vw" className={work.imageClassName ?? 'object-cover'} /></div>
+                <div className="case-image-frame"><Image src={work.image} alt={work.imageAlt ?? work.title} fill loading="eager" fetchPriority="high" sizes="(min-width: 900px) 47vw, 100vw" className={work.imageClassName ?? 'object-cover'} /></div>
                 <figcaption><span>{work.title}</span><span>{work.year}</span></figcaption>
               </figure> : null}
             </div>

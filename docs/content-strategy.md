@@ -35,6 +35,8 @@ For teams considering collaboration, explain who a format suits, what Darren can
 
 When a fact changes, update its source rather than patching several rendered pages independently.
 
+After changing public copy, run `python3 scripts/site-fonts.py` to check the local serif font's character coverage. New characters remain readable through system fallback, but should be added to the same-source font subsets before publishing when consistent typography matters. See `docs/site-fonts.md` for regeneration.
+
 ## Public Themes
 
 - Developer events and multi-city ecosystem programs.
@@ -57,6 +59,8 @@ Every project in the public work index should have a case page containing:
 - Reflection: one useful lesson without turning the case into advertising copy.
 
 Use approximate numbers when the underlying record is approximate. Do not turn participation, reach, or invitations into stronger business outcomes unless they are verified.
+
+Public materials should describe the specific facts they support. A launch announcement does not prove completed activity, registrations are not attendance, and a community-partner logo does not establish a personal client relationship. Keep these descriptions consistent in the page, Markdown export and structured citations. The current evidence and remaining gaps are recorded in `docs/case-evidence.md`.
 
 ## Writing Standard
 

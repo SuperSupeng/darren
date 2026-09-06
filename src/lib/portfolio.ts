@@ -133,6 +133,12 @@ const chinesePortfolio: PortfolioContent = {
             description: '我把陪同走访中的交流整理成五个观察，附上走访路线与现场合影，记录双方关心的问题，以及跨境生态交流需要补足的背景。',
             href: '/blog/superai-china-ecosystem-visit',
           },
+          {
+            type: '主办方报告',
+            title: 'SuperAI 2026 大会报告与社区伙伴',
+            description: '主办方报告将 Datawhale 和 AGI Villa 列为社区伙伴，介绍大会与社区交流的背景。杭州、上海走访中的个人工作记录在上方手记中。',
+            href: 'https://www.superai.com/reports/2026-event-report',
+          },
         ],
       },
     },
@@ -181,6 +187,14 @@ const chinesePortfolio: PortfolioContent = {
         responsibilities: ['发起四城系列并负责整体策划', '与北京、上海、杭州、深圳当地社区协作', '推进参与者招募与现场执行'],
         outcome: '四场活动共触达近 1,000 位开发者。',
         reflection: '多城项目需要共同的目标和安排，也要让当地组织者根据各自社区的情况调整。',
+        materials: [
+          {
+            type: '组织者复盘 · 2026.07.29',
+            title: 'Datawhale 四城开发者活动复盘',
+            description: 'Datawhale 的复盘记录了与阶跃星辰在北京、上海、深圳和杭州联合举办的四场技术沙龙，以及每城单场超过 200 人的报名情况。这里的报名数与触达、实际到场人数采用不同口径。',
+            href: 'https://www.sohu.com/a/1056265438_122105141',
+          },
+        ],
       },
     },
     {
@@ -260,6 +274,14 @@ const chinesePortfolio: PortfolioContent = {
         responsibilities: ['连接学习者、开发者、高校与开源贡献者', '与各地组织者协作完成城市活动', '参与并推动多次全国联动项目'],
         outcome: '持续参与城市活动与全国项目，并逐渐承担城市生态责任。',
         reflection: '社区需要持续维护。成员之间的信任，来自一次次一起学习和做事的经历。',
+        materials: [
+          {
+            type: '开源项目记录',
+            title: '《向量检索与 RAG 实践》贡献名单',
+            description: 'Datawhale 官方仓库将我列为项目负责人，并链接到我的 GitHub 账号。这份记录呈现了我参与的一项具体开源内容协作。',
+            href: 'https://github.com/datawhalechina/what-is-vs#贡献者名单',
+          },
+        ],
       },
     },
   ],
@@ -368,6 +390,12 @@ const englishPortfolio: PortfolioContent = {
             description: 'I documented five observations from the conversations, with the visit route and a group photo. The note records what each side wanted to understand and the context needed for useful cross-border exchanges.',
             href: '/blog/superai-china-ecosystem-visit',
           },
+          {
+            type: 'Organizer report',
+            title: 'SuperAI 2026 report and community partners',
+            description: 'The organizer lists Datawhale and AGI Villa among its community partners, providing conference context. The field note above records my own work during the Hangzhou and Shanghai visits.',
+            href: 'https://www.superai.com/reports/2026-event-report',
+          },
         ],
       },
     },
@@ -416,6 +444,14 @@ const englishPortfolio: PortfolioContent = {
         responsibilities: ['Initiated the series and led the overall program', 'Worked with local communities in Beijing, Shanghai, Hangzhou, and Shenzhen', 'Coordinated participant outreach and event operations'],
         outcome: 'The four-city series reached nearly 1,000 developers.',
         reflection: 'A multi-city program needs a shared plan, with room for local organizers to adapt it to their own communities.',
+        materials: [
+          {
+            type: 'Organizer recap · 2026.07.29',
+            title: 'Datawhale recap of the four-city developer series',
+            description: 'Datawhale documents four jointly hosted technical meetups with StepFun in Beijing, Shanghai, Shenzhen, and Hangzhou, with over 200 registrations per city. Registrations, reach, and attendance are different measures.',
+            href: 'https://www.sohu.com/a/1056265438_122105141',
+          },
+        ],
       },
     },
     {
@@ -495,6 +531,14 @@ const englishPortfolio: PortfolioContent = {
         responsibilities: ['Connected learners, developers, universities, and open-source contributors', 'Worked with local organizers to deliver city events', 'Helped move multiple nationwide collaborations forward'],
         outcome: 'I continued contributing to city programs and nationwide projects, gradually taking responsibility for the city ecosystem.',
         reflection: 'A community needs ongoing care. Trust grows as its members keep learning and working together.',
+        materials: [
+          {
+            type: 'Open-source project record',
+            title: 'Vector Search and RAG: public project credits',
+            description: 'The official Datawhale repository lists me as project lead and links to my GitHub profile, documenting one specific open-source content collaboration.',
+            href: 'https://github.com/datawhalechina/what-is-vs#贡献者名单',
+          },
+        ],
       },
     },
   ],

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/next';
-import { Geist, Noto_Serif_SC } from 'next/font/google';
+import { Geist } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -9,6 +9,7 @@ import { isLocale } from '@/i18n/config';
 import SiteChrome from '@/components/SiteChrome';
 import { getLocalizedBlogRoutes } from '@/lib/blog';
 import '../globals.css';
+import '../fonts/noto-serif-sc/fonts.css';
 
 const siteSans = Geist({
   subsets: ['latin'],
@@ -16,12 +17,10 @@ const siteSans = Geist({
   variable: '--font-site-sans',
 });
 
-const siteSerif = Noto_Serif_SC({
-  weight: ['400', '500', '600'],
-  display: 'swap',
-  preload: false,
-  variable: '--font-site-serif',
-});
+// The same Noto Serif SC outlines, subset from the repository's content.
+// Separate Latin/CJK unicode ranges avoid loading Chinese glyphs on English pages.
+// See docs/site-fonts.md for the offline coverage check and regeneration command.
+const siteSerif = { variable: 'site-serif-local' };
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.darren-su.com';
 
