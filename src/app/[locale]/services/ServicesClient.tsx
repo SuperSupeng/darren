@@ -1,5 +1,7 @@
 import { getPortfolio } from '@/lib/portfolio';
 import ContactActions from '@/components/ContactActions';
+import RoomPortal from '@/components/spatial/RoomPortal';
+import '@/components/spatial/interiors.css';
 
 export default function ServicesClient({ locale }: { locale: string }) {
   const { collaborations } = getPortfolio(locale);
@@ -53,111 +55,40 @@ export default function ServicesClient({ locale }: { locale: string }) {
         };
 
   return (
-    <main id="main-content" tabIndex={-1} className="min-h-screen bg-paper-100 text-ink-950">
-      <section className="site-page-hero site-page-hero-services relative overflow-hidden px-4 py-24 md:px-6 md:py-32">
-        <div
-          aria-hidden="true"
-          className="site-page-hero-media absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/images/hero-services-room.webp')" }}
-        />
-        <div className="site-page-hero-veil" />
-        <div className="container relative pt-8 md:pt-12">
-          <p className="academy-kicker site-page-kicker">{copy.eyebrow}</p>
-          <h1 className="site-page-title mt-6 max-w-5xl font-serif text-[clamp(2.5rem,7vw,6.8rem)] leading-[0.98] tracking-[-0.035em]">{copy.title}</h1>
-          <p className="site-page-lead mt-8 max-w-3xl text-lg leading-9">{copy.subtitle}</p>
+    <main id="main-content" tabIndex={-1} className="interior-page interior-services">
+      <div className="interior-wrap">
+        <div className="interior-running-line"><span>{copy.eyebrow}</span><span>{locale === 'zh' ? '在长桌旁，聊聊下一件事' : 'A CONVERSATION AT THE TABLE'}</span></div>
+        <header className="interior-services-hero">
+          <div><p className="interior-kicker">{copy.eyebrow} / 03</p><h1 className={locale === 'zh' ? 'interior-service-title-zh' : undefined}>{locale === 'zh'
+            ? ['开发者活动、', '产品 Workshop，', '以及 AI 实践分享。'].map(phrase => <span key={phrase}>{phrase}</span>)
+            : copy.title}</h1><p className="interior-lead">{copy.subtitle}</p></div>
+          <RoomPortal zone="work" locale={locale} />
+        </header>
+        <nav className="interior-service-index" aria-label={locale === 'zh' ? '合作方式' : 'Ways to collaborate'}>
+          {collaborations.map(path => <a href={`#${path.id}`} key={path.id}><span>{path.number}</span><span>{path.title}</span><span aria-hidden="true">↓</span></a>)}
+        </nav>
+        <div className="interior-service-files">
+          {collaborations.map(path => <article id={path.id} key={path.id} aria-labelledby={`${path.id}-title`} className="interior-service-file">
+            <header className="interior-service-heading"><p className="interior-kicker">{copy.eyebrow} / {path.number}</p><h2 id={`${path.id}-title`}>{path.title}</h2><p className="interior-kicker">{copy.bestFor}</p><p>{path.bestFor}</p></header>
+            <div className="interior-service-details"><p className="interior-body">{path.description}</p><h3 className="interior-kicker">{copy.whatHappens}</h3>
+              <ul className="interior-plain-list">{path.outcomes.map(outcome => <li key={outcome}>{outcome}</li>)}</ul>
+            </div>
+            <section className="interior-inquiry" aria-labelledby={`${path.id}-inquiry`}><h3 id={`${path.id}-inquiry`}>{copy.inquiryTitle}</h3>
+              <ol>{path.inquiry.map((item, index) => <li key={item}><span>{String(index + 1).padStart(2, '0')}</span><p>{item}</p></li>)}</ol>
+              <ContactActions locale={locale} context={`services-${path.id}`} emailSubject={`${copy.emailSubject}${copy.fieldSeparator} ${path.title}`} emailBody={path.inquiry.map(item => `${item}${copy.fieldSeparator} `).join('\r\n\r\n')} className="interior-contact" />
+            </section>
+          </article>)}
         </div>
-      </section>
-
-      <section className="site-page-section home-reveal px-4 py-20 md:px-6 md:py-28">
-        <div className="container space-y-0">
-          {collaborations.map((path) => (
-            <article id={path.id} key={path.id} aria-labelledby={`${path.id}-title`} className="site-path-row grid scroll-mt-24 gap-8 border-t border-ink-950/12 py-12 first:border-t-0 first:pt-0 lg:grid-cols-[0.12fr_0.38fr_0.5fr] lg:gap-12">
-              <p className="font-mono text-xs text-zen-gold-dim/90">{path.number}</p>
-              <div>
-                <h2 id={`${path.id}-title`} className="font-serif text-4xl leading-tight md:text-5xl">{path.title}</h2>
-                <p className="mt-6 text-sm uppercase tracking-[0.1em] text-zen-gold-dim/90">{copy.bestFor}</p>
-                <p className="mt-3 text-sm font-medium leading-7 text-ink-800">{path.bestFor}</p>
-              </div>
-              <div>
-                <p className="text-base leading-8 text-ink-600">{path.description}</p>
-                <p className="mt-8 text-xs uppercase tracking-[0.12em] text-zen-gold-dim/90">{copy.whatHappens}</p>
-                <ul className="mt-4 grid gap-3">
-                  {path.outcomes.map((outcome) => (
-                    <li key={outcome} className="flex gap-3 border-t border-ink-950/8 pt-3 text-sm leading-7 text-ink-700">
-                      <span className="text-zen-gold-dim/90">—</span>
-                      <span>{outcome}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="border-t border-ink-950/12 pt-6 lg:col-span-2 lg:col-start-2">
-                <h3 className="text-sm font-medium text-ink-800">{copy.inquiryTitle}</h3>
-                <ol className="mt-4 grid gap-3 md:grid-cols-3">
-                  {path.inquiry.map((item, index) => (
-                    <li key={item} className="flex gap-3 text-sm leading-7 text-ink-600">
-                      <span className="font-mono text-xs leading-7 text-zen-gold-dim/90">{index + 1}.</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ol>
-                <ContactActions
-                  locale={locale}
-                  context={`services-${path.id}`}
-                  emailSubject={`${copy.emailSubject}${copy.fieldSeparator} ${path.title}`}
-                  emailBody={path.inquiry.map((item) => `${item}${copy.fieldSeparator} `).join('\r\n\r\n')}
-                  className="mt-5"
-                />
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section className="site-process-section home-reveal border-y border-ink-950/10 bg-paper-200/58 px-4 py-20 md:px-6 md:py-28">
-        <div className="container grid gap-12 lg:grid-cols-[0.38fr_0.62fr] lg:gap-20">
-          <div>
-            <p className="academy-kicker">{copy.methodEyebrow}</p>
-            <h2 className="mt-5 max-w-lg font-serif text-4xl leading-tight md:text-5xl">{copy.methodTitle}</h2>
-          </div>
-          <div className="border-t border-ink-950/12">
-            {copy.steps.map(([number, title, body]) => (
-              <article key={number} className="grid gap-4 border-b border-ink-950/12 py-7 md:grid-cols-[4rem_0.36fr_0.64fr] md:gap-7">
-                <p className="font-mono text-xs text-zen-gold-dim/90">{number}</p>
-                <h3 className="text-xl font-medium text-ink-950">{title}</h3>
-                <p className="text-sm leading-7 text-ink-600">{body}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="site-page-section home-reveal bg-paper-100 px-4 py-20 md:px-6 md:py-24">
-        <div className="container grid gap-10 lg:grid-cols-[0.56fr_0.44fr] lg:gap-20">
-          <div>
-            <p className="academy-kicker">{copy.boundaryEyebrow}</p>
-            <h2 className="mt-5 max-w-3xl font-serif text-4xl leading-tight md:text-5xl">{copy.boundaryTitle}</h2>
-          </div>
-          <ul className="border-t border-ink-950/12">
-            {copy.boundaries.map((boundary) => (
-              <li key={boundary} className="flex gap-4 border-b border-ink-950/12 py-5 text-sm leading-7 text-ink-600">
-                <span className="text-zen-gold-dim/90">—</span>
-                <span>{boundary}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <section className="site-page-cta home-reveal relative overflow-hidden bg-ink-950 px-4 py-20 text-paper-100 md:px-6 md:py-24">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_22%,rgba(138,113,71,0.22),transparent_33%)]" />
-        <div className="container relative grid gap-8 lg:grid-cols-[1.08fr_0.72fr] lg:items-end lg:gap-20">
-          <h2 className="max-w-4xl font-serif text-4xl leading-tight md:text-6xl">{copy.cta}</h2>
-          <div>
-            <p className="max-w-xl text-base leading-8 text-paper-300/74">{copy.ctaBody}</p>
-            <ContactActions locale={locale} context="services-cta" variant="dark" className="mt-7" />
-          </div>
-        </div>
-      </section>
+        <section className="interior-section interior-two-columns">
+          <header className="interior-section-heading"><p className="interior-kicker">{copy.methodEyebrow}</p><h2>{copy.methodTitle}</h2></header>
+          <div className="interior-process">{copy.steps.map(([number, title, body]) => <article key={number}><span className="interior-kicker">{number}</span><div><h3>{title}</h3><p>{body}</p></div></article>)}</div>
+        </section>
+        <section className="interior-section interior-two-columns interior-inset-section">
+          <header className="interior-section-heading"><p className="interior-kicker">{copy.boundaryEyebrow}</p><h2>{copy.boundaryTitle}</h2></header>
+          <ul className="interior-plain-list">{copy.boundaries.map(boundary => <li key={boundary}>{boundary}</li>)}</ul>
+        </section>
+        <section className="interior-invitation"><h2>{copy.cta}</h2><div><p>{copy.ctaBody}</p><ContactActions locale={locale} context="services-cta" className="interior-contact" /></div></section>
+      </div>
     </main>
   );
 }

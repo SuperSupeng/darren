@@ -1,8 +1,10 @@
+import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { getAllPosts } from '@/lib/blog';
 import { getSiteContent } from '@/lib/siteContent';
 import JsonLd from '@/components/JsonLd';
+import { CollectionHero, CollectionHeading, CollectionNext } from '@/components/spatial/Collections';
 import { blogStructuredData, createPageMetadata, getPageKeywords } from '@/lib/seo';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -18,117 +20,93 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   });
 }
 
-export default async function BlogPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function BlogPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const site = getSiteContent(locale);
   const posts = getAllPosts(locale);
-  const titleParts = [site.fieldNotes.hero.title];
+  const latest = posts[0];
+  const labels = site.labels.fieldNotes;
+  const copy = locale === 'zh'
+    ? { title: '窗边的期刊。', read: '阅读这篇手记', index: '全部手记', topics: '这篇文章的话题' }
+    : { title: 'Pages by the window.', read: 'Read this field note', index: 'All field notes', topics: 'Topics in this article' };
 
   return (
     <>
       <JsonLd data={blogStructuredData(posts, locale)} />
-      <main id="main-content" tabIndex={-1} className="min-h-screen bg-paper-100 text-ink-950">
-      <section className="site-page-hero site-page-hero-blog relative flex min-h-[calc(100svh-4rem)] items-center overflow-hidden px-4 py-20 md:px-6 md:py-24">
-        <div
-          aria-hidden="true"
-          className="site-page-hero-media absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url('/images/hero-field-notes-desk.webp')" }}
-        />
-        <div className="site-page-hero-veil" />
-        <div className="absolute inset-x-0 bottom-0 h-px bg-ink-950/10" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_84%_18%,rgba(138,113,71,0.09),rgba(138,113,71,0)_34%)]" />
-        <div className="container relative">
-          <div className="site-page-roomline mb-14 flex items-center gap-5">
-            <span className="h-px flex-1" />
-            <span className="academy-kicker site-page-kicker">{site.labels.fieldNotes.roomEyebrow}</span>
-            <span className="h-px flex-1" />
+      <main id="main-content" tabIndex={-1} className="collection-page collection-notes">
+        <div className="collection-container">
+          <CollectionHero
+            locale={locale}
+            zone="notes"
+            number="03"
+            eyebrow={site.fieldNotes.hero.eyebrow}
+            title={copy.title}
+            lead={site.fieldNotes.hero.title}
+            description={site.fieldNotes.hero.subtitle}
+          >
+            <a className="collection-text-link" href="#notes-index">{copy.index} <span aria-hidden="true">↓</span></a>
+          </CollectionHero>
+
+          <div className="collection-note-strip">
+            <p className="collection-kicker">{labels.sidebarEyebrow}</p>
+            <p>{labels.sidebarQuote}</p>
           </div>
 
-          <div className="grid gap-10 min-[841px]:grid-cols-[0.66fr_1.34fr] min-[841px]:gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
-            <div className="min-w-0">
-              <p className="academy-kicker site-page-kicker">{site.labels.fieldNotes.sidebarEyebrow}</p>
-              <p className="site-page-quote mt-7 max-w-sm border-l pl-5 font-serif text-2xl leading-relaxed">
-                {site.labels.fieldNotes.sidebarQuote}
-              </p>
-            </div>
+          {latest ? (
+            <section className="collection-section collection-latest">
+              <div className="collection-journal-masthead">
+                <p className="collection-kicker">{labels.latestEyebrow} / FIELD NOTE</p>
+                <time dateTime={latest.date}>{latest.date}</time>
+              </div>
+              <article className="collection-latest-story">
+                <Link href={`/blog/${latest.slug}`} className="collection-latest-image" aria-label={`${copy.read} · ${latest.title}`}>
+                  <Image src={latest.image.url} alt="" fill sizes="(min-width: 950px) 58vw, 100vw" />
+                </Link>
+                <div className="collection-latest-copy">
+                  <p className="collection-meta">{latest.readingTime} {labels.minRead}</p>
+                  <h2><Link href={`/blog/${latest.slug}`}>{latest.title}</Link></h2>
+                  <p className="collection-description">{latest.description}</p>
+                  <ul className="collection-tags" aria-label={copy.topics}>{latest.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
+                  <Link href={`/blog/${latest.slug}`} className="collection-text-link">{copy.read} <span aria-hidden="true">↗</span></Link>
+                </div>
+              </article>
+            </section>
+          ) : null}
 
-            <div className="min-w-0">
-              <p className="academy-kicker site-page-kicker">{site.fieldNotes.hero.eyebrow}</p>
-              <h1 className="site-page-title heading-chunks mt-5 max-w-5xl font-serif text-[clamp(2.25rem,5.2vw,5.6rem)] leading-[1.08] [overflow-wrap:anywhere]">
-                {titleParts.map((part) => (
-                  <span key={part}>{part}</span>
+          <section className="collection-section collection-journal-index" id="notes-index">
+            <CollectionHeading eyebrow={`${copy.index} / ${String(posts.length).padStart(2, '0')}`} title={labels.recentTitle} description={labels.recentDescription} />
+            {posts.length > 0 ? (
+              <div className="collection-notes-list">
+                {posts.map((post, index) => (
+                  <article key={post.slug} className="collection-note-entry">
+                    <div className="collection-note-date">
+                      <span>{String(index + 1).padStart(2, '0')}</span>
+                      <time dateTime={post.date}>{post.date}</time>
+                      <small>{post.readingTime} {labels.minRead}</small>
+                    </div>
+                    <div className="collection-note-body">
+                      <h3><Link href={`/blog/${post.slug}`}>{post.title}</Link></h3>
+                      <p className="collection-description">{post.description}</p>
+                      <ul className="collection-tags" aria-label={copy.topics}>{post.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
+                      <Link href={`/blog/${post.slug}`} className="collection-text-link">{copy.read} <span aria-hidden="true">↗</span></Link>
+                    </div>
+                    <Link href={`/blog/${post.slug}`} className="collection-note-image" aria-label={`${copy.read} · ${post.title}`}>
+                      <Image src={post.image.url} alt="" fill sizes="(max-width: 600px) 100vw, 200px" />
+                    </Link>
+                  </article>
                 ))}
-              </h1>
-              <p className="site-page-lead mt-8 max-w-3xl text-lg leading-9">
-                {site.fieldNotes.hero.subtitle}
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+              </div>
+            ) : <p className="collection-description">{labels.empty}</p>}
+          </section>
 
-      <section className="site-page-section home-reveal relative bg-paper-100 px-4 py-20 md:px-6 md:py-28">
-        <div className="container">
-          <div className="grid gap-12 border-t border-ink-950/10 pt-12 lg:grid-cols-[0.34fr_1fr] lg:gap-16">
-          <div className="lg:sticky lg:top-28 lg:self-start">
-            <p className="academy-kicker">{site.labels.fieldNotes.latestEyebrow}</p>
-            <h2 className="mt-5 font-serif text-3xl leading-tight md:text-4xl">
-              {site.labels.fieldNotes.recentTitle}
-            </h2>
-            <p className="mt-7 max-w-xs text-sm leading-8 text-ink-600">
-              {site.labels.fieldNotes.recentDescription}
-            </p>
-          </div>
-
-          {posts.length > 0 ? (
-            <div className="space-y-0">
-              {posts.map((post) => {
-                return (
-                  <Link
-                    key={post.slug}
-                    href={`/blog/${post.slug}`}
-                    className="site-ledger-entry group ledger-entry grid gap-6 py-7 transition duration-500 md:grid-cols-[150px_1fr] md:px-6"
-                  >
-                    <div className="text-sm text-zen-gold-dim/90">
-                      <p>{post.date}</p>
-                      <p className="mt-2">
-                        {post.readingTime} {site.labels.fieldNotes.minRead}
-                      </p>
-                    </div>
-                    <div>
-                      <h3 className="font-serif text-3xl leading-tight transition-transform duration-300 group-hover:translate-x-1">
-                        {post.title}
-                      </h3>
-                      <p className="mt-4 max-w-3xl text-sm leading-8 text-ink-600">
-                        {post.description}
-                      </p>
-                      <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2">
-                        {post.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="text-xs uppercase tracking-[0.12em] text-ink-700/90"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-          ) : (
-            <div className="text-ink-600">
-              {site.labels.fieldNotes.empty}
-            </div>
-          )}
-          </div>
+          <CollectionNext
+            locale={locale}
+            zone="work"
+            href="/work"
+            title={locale === 'zh' ? '回到长桌，看看故事的现场' : 'Back to where the stories began'}
+            description={locale === 'zh' ? '开发者活动、城市项目，以及一起做事的人。' : 'Developer gatherings, city programs, and the people who make them happen.'}
+          />
         </div>
-      </section>
       </main>
     </>
   );

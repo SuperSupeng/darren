@@ -1,5 +1,6 @@
 import { Link } from '@/i18n/navigation';
 import { locale as getRootLocale } from 'next/root-params';
+import RoomPortal from '@/components/spatial/RoomPortal';
 
 export default async function NotFound() {
   const locale = await getRootLocale();
@@ -21,21 +22,21 @@ export default async function NotFound() {
     <main
       id="main-content"
       tabIndex={-1}
-      className="relative -mt-16 flex min-h-screen items-center overflow-hidden bg-ink-950 px-4 py-28 text-paper-100 md:px-6"
+      className="spatial-not-found"
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_78%_20%,rgba(138,113,71,0.2),transparent_32%),linear-gradient(rgba(241,234,220,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(241,234,220,0.035)_1px,transparent_1px)] bg-[size:auto,8rem_8rem,8rem_8rem]" />
-      <div className="container relative max-w-4xl">
-        <p className="font-mono text-sm tracking-[0.18em] text-zen-gold-light">{copy.label}</p>
-        <h1 className="mt-6 max-w-3xl font-serif text-[clamp(3rem,8vw,7rem)] leading-[1.02]">
+      <div>
+        <p className="spatial-kicker">{copy.label}</p>
+        <h1>
           {copy.title}
         </h1>
-        <p className="mt-8 max-w-xl text-base leading-8 text-paper-200/78">
+        <p>
           {copy.description}
         </p>
-        <Link href="/" className="mt-10 inline-flex border-b border-paper-100/40 pb-1 text-sm text-paper-100 hover:border-paper-100">
+        <Link href="/">
           {copy.home} →
         </Link>
       </div>
+      <RoomPortal locale={locale} zone="notes" />
     </main>
   );
 }

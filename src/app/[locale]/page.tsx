@@ -1,11 +1,7 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
-import Hero from '@/components/home/Hero';
-import FieldReel from '@/components/home/FieldReel';
-import SelectedWork from '@/components/home/SelectedWork';
-import CollaborationPaths from '@/components/home/CollaborationPaths';
-import FeaturedProjects from '@/components/home/FeaturedProjects';
-import NotesContact from '@/components/home/NotesContact';
+import StudioExperience from '@/components/studio/StudioExperience';
+import { getStudioContent } from '@/lib/studio-content';
 import JsonLd from '@/components/JsonLd';
 import { createPageMetadata, getPageKeywords, homeStructuredData } from '@/lib/seo';
 
@@ -36,14 +32,7 @@ export default async function HomePage({ params }: Props) {
   return (
     <>
       <JsonLd data={homeStructuredData(locale)} />
-      <main id="main-content" tabIndex={-1}>
-        <Hero locale={locale} />
-        <SelectedWork locale={locale} />
-        <FieldReel locale={locale} />
-        <CollaborationPaths locale={locale} />
-        <FeaturedProjects locale={locale} />
-        <NotesContact locale={locale} />
-      </main>
+      <StudioExperience locale={locale} content={getStudioContent(locale)} />
     </>
   );
 }

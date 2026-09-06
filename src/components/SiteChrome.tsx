@@ -1,10 +1,10 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { usePathname } from '@/i18n/navigation';
-import Nav from '@/components/Nav';
-import Footer from '@/components/Footer';
-import ScrollCulture from '@/components/home/ScrollCulture';
+import { StudioSettings } from '@/components/spatial/StudioSettings';
+import SpatialHeader from '@/components/spatial/SpatialHeader';
+import SpatialFooter from '@/components/spatial/SpatialFooter';
+import '@/components/spatial/spatial.css';
 
 type Props = {
   children: ReactNode;
@@ -12,18 +12,9 @@ type Props = {
 };
 
 export default function SiteChrome({ children, blogLocalesBySlug }: Props) {
-  const pathname = usePathname();
-
-  if (pathname === '/studio') {
-    return children;
-  }
-
-  return (
-    <>
-      <Nav blogLocalesBySlug={blogLocalesBySlug} />
-      <ScrollCulture />
-      <div className="pt-16">{children}</div>
-      <Footer />
-    </>
-  );
+  return <StudioSettings>
+    <SpatialHeader blogLocalesBySlug={blogLocalesBySlug} />
+    {children}
+    <SpatialFooter />
+  </StudioSettings>;
 }

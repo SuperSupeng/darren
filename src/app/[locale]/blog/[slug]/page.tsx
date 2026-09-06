@@ -4,6 +4,8 @@ import { Link } from '@/i18n/navigation';
 import { getAllPosts, getPostBySlug } from '@/lib/blog';
 import { locales } from '@/i18n/config';
 import JsonLd from '@/components/JsonLd';
+import RoomPortal from '@/components/spatial/RoomPortal';
+import '@/components/spatial/interiors.css';
 import { absoluteLocalizedUrl, articleStructuredData, createPageMetadata } from '@/lib/seo';
 import { createArticleHeadingAnchors } from '@/lib/article-anchors';
 
@@ -273,82 +275,37 @@ export default async function BlogPostPage({ params }: { params: Promise<{ local
   return (
     <>
       <JsonLd data={articleStructuredData(post, locale)} />
-      <main id="main-content" tabIndex={-1} className="article-page min-h-screen bg-paper-200 px-4 py-20 text-ink-950 md:px-6 md:py-28">
-        <article className="container">
-        <div className="mx-auto max-w-4xl">
-          <Link
-            href="/blog"
-            className="article-back-link quiet-link mb-10"
-          >
-            <span>{t('backToList')}</span>
-          </Link>
-
-          <div className="article-sheet paper-open px-6 py-8 md:px-10 md:py-12">
-            <header className="border-b border-ink-950/12 pb-12">
-              {post.tags.length > 0 && (
-                <div className="mb-5 flex flex-wrap gap-x-4 gap-y-2">
-                  {post.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs uppercase tracking-[0.12em] text-ink-700/90"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
-
-              <h1 className="font-serif text-[clamp(2.3rem,10.5vw,3rem)] font-medium leading-tight md:text-6xl">
-                {post.title}
-              </h1>
-
-              <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-zen-gold-dim/90">
+      <main id="main-content" tabIndex={-1} className="interior-page reading-page">
+        <div className="interior-wrap">
+          <div className="interior-running-line"><Link href="/blog" className="interior-text-link">← {t('backToList')}</Link><span>{locale === 'zh' ? '窗边手记 / FIELD NOTES' : 'BY THE WINDOW / FIELD NOTES'}</span></div>
+          <div className="reading-layout">
+            <aside className="reading-sidebar">
+              <RoomPortal zone="notes" locale={locale} compact />
+              <div className="reading-colophon">
+                <span className="interior-kicker">{authorLabel}</span>
+                <Link href="/about" rel="author">Darren Su / 苏鹏</Link>
                 <time dateTime={post.date}>{post.date}</time>
-                <span>·</span>
                 <span>{post.readingTime} {t('minRead')}</span>
-                <span>·</span>
-                <span>
-                  {authorLabel}{' '}
-                  <Link href="/about" rel="author" className="underline underline-offset-4 hover:text-ink-950">
-                    Darren Su / 苏鹏
-                  </Link>
-                </span>
               </div>
-            </header>
-
-            <div
-              className="mt-12 text-base leading-8 text-ink-800 md:text-lg md:leading-9"
-              dangerouslySetInnerHTML={{ __html: renderedContent }}
-            />
-
-            <footer className="mt-16 border-t border-ink-950/12 pt-8">
-              <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-                <Link
-                  href="/blog"
-                  className="quiet-link"
-                >
-                  <span>{t('backToList')}</span>
-                </Link>
-
-                <div className="flex items-center gap-3">
-                  <span className="text-sm text-zen-gold-dim/90">{t('share')}</span>
-                  <a
-                    href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(shareUrl)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex h-9 w-9 items-center justify-center border-b border-ink-950/14 text-zen-gold-dim transition-colors hover:border-ink-950/32 hover:text-ink-950"
-                    aria-label={locale === 'zh' ? '分享到 X' : 'Share on X'}
-                  >
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-            </footer>
+              <p className="reading-side-note">{locale === 'zh' ? '把发生过的事，慢慢写下来。' : 'A few things worth writing down.'}</p>
+            </aside>
+            <article className="reading-sheet">
+              <header className="reading-header">
+                {post.tags.length > 0 && <div className="interior-tags">{post.tags.map(tag => <span key={tag}>{tag}</span>)}</div>}
+                <h1>{post.title}</h1>
+                <p className="reading-deck">{post.description}</p>
+                <div className="reading-byline"><time dateTime={post.date}>{post.date}</time><span aria-hidden="true">·</span><span>{post.readingTime} {t('minRead')}</span><span aria-hidden="true">·</span><Link href="/about" rel="author">Darren Su</Link></div>
+              </header>
+              <div className="reading-prose" dangerouslySetInnerHTML={{ __html: renderedContent }} />
+              <footer className="reading-footer">
+                <Link href="/blog" className="interior-text-link">← {t('backToList')}</Link>
+                <div className="reading-share"><span>{t('share')}</span><a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(shareUrl)}`} target="_blank" rel="noopener noreferrer" aria-label={locale === 'zh' ? '分享到 X' : 'Share on X'}>
+                  <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
+                </a></div>
+              </footer>
+            </article>
           </div>
         </div>
-        </article>
       </main>
     </>
   );

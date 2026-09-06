@@ -2,6 +2,8 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import ContactActions from '@/components/ContactActions';
 import JsonLd from '@/components/JsonLd';
+import RoomPortal from '@/components/spatial/RoomPortal';
+import '@/components/spatial/interiors.css';
 import { Link } from '@/i18n/navigation';
 import { locales } from '@/i18n/config';
 import { getAllWorkIds, getPortfolio, getWorkById, getWorkCollaboration } from '@/lib/portfolio';
@@ -99,137 +101,90 @@ export default async function WorkCasePage({
   return (
     <>
       <JsonLd data={workCaseStructuredData(work, locale)} />
-      <main id="main-content" tabIndex={-1} className="min-h-screen bg-paper-100 text-ink-950">
-        <section className="site-page-hero site-work-case-hero relative isolate overflow-hidden bg-ink-950 px-4 py-20 text-paper-100 md:px-6 md:py-28">
-          {work.image ? (
-            <Image
-              src={work.image}
-              alt=""
-              fill
-              priority
-              sizes="100vw"
-              className={`${work.imageClassName ?? 'object-cover'} -z-20 opacity-55 saturate-[0.82]`}
-            />
-          ) : null}
-          <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(15,18,13,0.94)_0%,rgba(15,18,13,0.72)_48%,rgba(15,18,13,0.3)_100%),linear-gradient(180deg,rgba(15,18,13,0.28),rgba(15,18,13,0.76))]" />
-          <div className="container flex min-h-[34rem] flex-col justify-between pt-8 md:pt-12">
-            <Link href="/work" className="quiet-link-inverse w-fit">← {copy.back}</Link>
-            <div className="max-w-5xl">
-              <p className="academy-kicker text-paper-300/72">{copy.caseLabel} · {work.year}</p>
-              <h1 className="mt-6 max-w-4xl font-serif text-[clamp(3rem,8vw,7.4rem)] leading-[0.95] tracking-[-0.04em]">
-                {work.title}
-              </h1>
-              <p className="mt-8 max-w-2xl text-lg leading-9 text-paper-200/82">{work.summary}</p>
+      <main id="main-content" tabIndex={-1} className="interior-page case-page">
+        <div className="interior-wrap">
+          <header className="case-cover">
+            <div className="interior-running-line">
+              <Link href="/work" className="interior-text-link">← {copy.back}</Link>
+              <span>{copy.caseLabel} / {String(currentIndex + 1).padStart(2, '0')}</span>
             </div>
-          </div>
-        </section>
+            <div className="case-cover-grid">
+              <div className="case-cover-copy">
+                <p className="interior-kicker">{work.year} · {work.location}</p>
+                <h1>{work.title}</h1>
+                <p className="interior-lead">{work.summary}</p>
+                <div className="case-result-stamp"><span>{copy.result}</span><p>{work.result}</p></div>
+              </div>
+              {work.image ? <figure className="interior-photo case-cover-photo">
+                <div className="case-image-frame"><Image src={work.image} alt={work.imageAlt ?? work.title} fill priority sizes="(min-width: 900px) 47vw, 100vw" className={work.imageClassName ?? 'object-cover'} /></div>
+                <figcaption><span>{work.title}</span><span>{work.year}</span></figcaption>
+              </figure> : null}
+            </div>
+          </header>
 
-        <section className="px-4 py-16 md:px-6 md:py-24">
-          <div className="container grid gap-12 lg:grid-cols-[0.34fr_0.66fr] lg:gap-20">
-            <aside>
-              <dl className="border-t border-ink-950/12">
-                <div className="border-b border-ink-950/12 py-5">
-                  <dt className="text-xs uppercase tracking-[0.12em] text-ink-700/80">{copy.role}</dt>
-                  <dd className="mt-2 text-sm font-medium leading-7 text-ink-900">{work.role}</dd>
-                </div>
-                <div className="border-b border-ink-950/12 py-5">
-                  <dt className="text-xs uppercase tracking-[0.12em] text-ink-700/80">{copy.result}</dt>
-                  <dd className="mt-2 text-sm font-medium leading-7 text-ink-900">{work.result}</dd>
-                </div>
-                <div className="border-b border-ink-950/12 py-5">
-                  <dt className="text-xs uppercase tracking-[0.12em] text-ink-700/80">{copy.place}</dt>
-                  <dd className="mt-2 text-sm font-medium leading-7 text-ink-900">{work.year} · {work.location}</dd>
-                </div>
+          <div className="case-layout">
+            <aside className="case-sidebar">
+              <RoomPortal zone="work" locale={locale} compact />
+              <dl className="case-facts">
+                <div><dt>{copy.role}</dt><dd>{work.role}</dd></div>
+                <div><dt>{copy.result}</dt><dd>{work.result}</dd></div>
+                <div><dt>{copy.place}</dt><dd>{work.year} · {work.location}</dd></div>
               </dl>
+              <nav className="case-index" aria-label={locale === 'zh' ? '项目档案目录' : 'Case file contents'}>
+                <a href="#case-context">01 <span>{copy.context}</span></a>
+                <a href="#case-responsibilities">02 <span>{copy.responsibilities}</span></a>
+                <a href="#case-outcome">03 <span>{copy.outcome}</span></a>
+                <a href="#case-reflection">04 <span>{copy.reflection}</span></a>
+              </nav>
             </aside>
 
-            <div className="max-w-3xl">
-              <section>
-                <p className="academy-kicker">01 · {copy.context}</p>
-                <p className="mt-5 font-serif text-2xl leading-relaxed text-ink-900 md:text-3xl">{work.caseStudy.context}</p>
+            <div className="case-document">
+              <section id="case-context" className="case-chapter case-opening">
+                <h2 className="interior-kicker">01 · {copy.context}</h2>
+                <p>{work.caseStudy.context}</p>
               </section>
-
-              <section className="mt-16 border-t border-ink-950/12 pt-10">
-                <p className="academy-kicker">02 · {copy.responsibilities}</p>
-                <ol className="mt-6 border-t border-ink-950/10">
-                  {work.caseStudy.responsibilities.map((item, index) => (
-                    <li key={item} className="grid gap-4 border-b border-ink-950/10 py-5 sm:grid-cols-[3rem_1fr]">
-                      <span className="font-mono text-xs text-zen-gold-dim/90">{String(index + 1).padStart(2, '0')}</span>
-                      <span className="text-base leading-8 text-ink-700">{item}</span>
-                    </li>
-                  ))}
+              <section id="case-responsibilities" className="case-chapter">
+                <h2 className="interior-kicker">02 · {copy.responsibilities}</h2>
+                <ol className="interior-numbered-list">
+                  {work.caseStudy.responsibilities.map((item, index) => <li key={item}><span>{String(index + 1).padStart(2, '0')}</span><p>{item}</p></li>)}
                 </ol>
               </section>
-
-              <section className="mt-16 grid gap-10 border-t border-ink-950/12 pt-10 md:grid-cols-2">
-                <div>
-                  <p className="academy-kicker">03 · {copy.outcome}</p>
-                  <p className="mt-5 text-base font-medium leading-8 text-ink-900">{work.caseStudy.outcome}</p>
-                  {work.caseStudy.outcomeNote ? (
-                    <p className="mt-4 border-l-2 border-zen-gold-dim/30 pl-4 text-sm leading-7 text-ink-600">{work.caseStudy.outcomeNote}</p>
-                  ) : null}
-                </div>
-                <div>
-                  <p className="academy-kicker">04 · {copy.reflection}</p>
-                  <p className="mt-5 text-base leading-8 text-ink-600">{work.caseStudy.reflection}</p>
-                </div>
-              </section>
-
-              {work.caseStudy.materials?.length ? (
-                <section aria-labelledby="work-materials-title" className="mt-12 border-t border-ink-950/12 pt-8">
-                  <h2 id="work-materials-title" className="academy-kicker">{copy.materials}</h2>
-                  <ul className="mt-5 space-y-4">
-                    {work.caseStudy.materials.map((material) => (
-                      <li key={material.href}>
-                        <Link href={material.href} className="group block bg-paper-200/65 p-6 transition-colors hover:bg-paper-200 md:p-8">
-                          <p className="text-xs tracking-wide text-ink-600">{material.type}</p>
-                          <h3 className="mt-3 font-serif text-2xl leading-snug text-ink-900 transition-colors group-hover:text-zen-gold-dim">{material.title}</h3>
-                          <p className="mt-4 text-sm leading-7 text-ink-600">{material.description}</p>
-                          <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-ink-900">
-                            {copy.readMaterial} <span aria-hidden="true">→</span>
-                          </span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+              <div className="case-outcomes">
+                <section id="case-outcome" className="case-chapter">
+                  <h2 className="interior-kicker">03 · {copy.outcome}</h2>
+                  <p>{work.caseStudy.outcome}</p>
+                  {work.caseStudy.outcomeNote ? <p className="case-margin-note">{work.caseStudy.outcomeNote}</p> : null}
                 </section>
-              ) : work.noteHref ? (
-                <Link href={work.noteHref} className="quiet-link mt-12 inline-flex">
-                  <span>{copy.note} →</span>
-                </Link>
-              ) : null}
+                <section id="case-reflection" className="case-chapter">
+                  <h2 className="interior-kicker">04 · {copy.reflection}</h2>
+                  <p>{work.caseStudy.reflection}</p>
+                </section>
+              </div>
+              {work.caseStudy.materials?.length ? <section aria-labelledby="work-materials-title" className="case-chapter">
+                <h2 id="work-materials-title" className="interior-kicker">{copy.materials}</h2>
+                <ul className="case-materials">
+                  {work.caseStudy.materials.map(material => <li key={material.href}><Link href={material.href}>
+                    <span className="interior-kicker">{material.type}</span>
+                    <h3>{material.title}</h3><p>{material.description}</p>
+                    <span className="interior-text-link">{copy.readMaterial} <span aria-hidden="true">↗</span></span>
+                  </Link></li>)}
+                </ul>
+              </section> : work.noteHref ? <Link href={work.noteHref} className="interior-text-link case-note-link">{copy.note} →</Link> : null}
             </div>
           </div>
-        </section>
 
-        <section className="site-page-cta relative overflow-hidden bg-ink-950 px-4 py-20 text-paper-100 md:px-6 md:py-24">
-          <div className="container relative grid gap-8 lg:grid-cols-[1.08fr_0.72fr] lg:items-end lg:gap-20">
-            <div>
-              <p className="academy-kicker text-paper-300/72">{copy.contactEyebrow}</p>
-              <h2 className="mt-5 max-w-4xl font-serif text-4xl leading-tight md:text-6xl">{collaboration?.invitation ?? copy.contactTitle}</h2>
-              {collaboration ? (
-                <Link href={`/services#${collaboration.id}`} className="btn mt-7 bg-paper-100 text-ink-950 shadow-none hover:bg-paper-200">
-                  {collaboration.linkLabel} <span aria-hidden="true">→</span>
-                </Link>
-              ) : null}
+          <section className="interior-invitation">
+            <div><p className="interior-kicker">{copy.contactEyebrow}</p><h2>{collaboration?.invitation ?? copy.contactTitle}</h2>
+              {collaboration ? <Link href={`/services#${collaboration.id}`} className="interior-text-link">{collaboration.linkLabel} →</Link> : null}
             </div>
-            <div>
-              <p className="max-w-xl text-base leading-8 text-paper-300/74">{collaboration ? copy.collaborationBody : copy.contactBody}</p>
-              <ContactActions locale={locale} context={`work-case-${work.id}`} variant="dark" className="mt-7" />
-            </div>
-          </div>
-        </section>
-
-        <section className="border-y border-ink-950/10 bg-paper-200/58 px-4 py-14 md:px-6 md:py-20">
-          <Link href={nextWork.href ?? '/work'} className="container group grid gap-5 md:grid-cols-[0.3fr_1fr_auto] md:items-end">
-            <p className="academy-kicker">{copy.next}</p>
-            <div>
-              <h2 className="font-serif text-3xl leading-tight transition-colors group-hover:text-zen-gold-dim md:text-5xl">{nextWork.title}</h2>
-              <p className="mt-3 text-sm text-ink-600">{nextWork.location} · {nextWork.year}</p>
-            </div>
-            <span className="text-2xl text-zen-gold-dim" aria-hidden="true">↗</span>
+            <div><p>{collaboration ? copy.collaborationBody : copy.contactBody}</p><ContactActions locale={locale} context={`work-case-${work.id}`} className="interior-contact" /></div>
+          </section>
+          <Link href={nextWork.href ?? '/work'} className="case-next">
+            <span className="interior-kicker">{copy.next}</span>
+            <div><h2>{nextWork.title}</h2><p>{nextWork.location} · {nextWork.year}</p></div>
+            <span aria-hidden="true">↗</span>
           </Link>
-        </section>
+        </div>
       </main>
     </>
   );

@@ -3,6 +3,7 @@ import { Link } from '@/i18n/navigation';
 import { getFeaturedWork, getPortfolio, type PortfolioWork } from '@/lib/portfolio';
 import JsonLd from '@/components/JsonLd';
 import ContactActions from '@/components/ContactActions';
+import { CollectionHero, CollectionHeading, CollectionNext } from '@/components/spatial/Collections';
 import { createPageMetadata, getPageKeywords, workStructuredData } from '@/lib/seo';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -81,151 +82,123 @@ export default async function WorkPage({ params }: { params: Promise<{ locale: s
 
   return (
     <>
-    <JsonLd data={workStructuredData(locale)} />
-    <main id="main-content" tabIndex={-1} className="min-h-screen bg-paper-100 text-ink-950">
-      <section className="site-page-hero site-page-hero-work relative overflow-hidden px-4 py-24 md:px-6 md:py-32">
-        <Image
-          src="/images/hero-work-archive.webp"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="site-page-hero-media object-cover object-center"
-        />
-        <div className="site-page-hero-veil" />
-        <div className="container relative pt-8 md:pt-12">
-          <p className="academy-kicker site-page-kicker">{copy.eyebrow}</p>
-          <h1 className="site-page-title mt-6 max-w-5xl font-serif text-[clamp(2.6rem,7vw,7rem)] leading-[0.98] tracking-[-0.035em]">
-            {copy.title}
-          </h1>
-          <p className="site-page-lead mt-8 max-w-3xl text-lg leading-9">{copy.subtitle}</p>
+      <JsonLd data={workStructuredData(locale)} />
+      <main id="main-content" tabIndex={-1} className="collection-page collection-work">
+        <div className="collection-container">
+          <CollectionHero
+            locale={locale}
+            zone="work"
+            number="01"
+            eyebrow={copy.eyebrow}
+            title={locale === 'zh' ? '长桌档案。' : 'Around the table.'}
+            lead={copy.title}
+            description={copy.subtitle}
+          >
+            <a className="collection-text-link" href="#work-archive">
+              {locale === 'zh' ? `翻阅全部 ${work.length} 个项目` : `Browse all ${work.length} projects`} <span aria-hidden="true">↓</span>
+            </a>
+          </CollectionHero>
 
-          <div className="site-page-metrics mt-10 grid grid-cols-2 gap-px md:mt-14 lg:grid-cols-4">
+          <div className="collection-metrics">
             {metrics.map((metric) => (
-              <article key={metric.note} className="site-page-metric p-4 backdrop-blur-sm md:p-6">
-                <p className="font-serif text-3xl">{metric.value}</p>
-                <p className="mt-2 text-sm font-medium">{metric.label}</p>
-                <p className="mt-4 font-mono text-xs leading-6">{metric.note}</p>
-              </article>
+              <div key={metric.note}>
+                <strong>{metric.value}</strong>
+                <span>{metric.label}</span>
+                <small>{metric.note}</small>
+              </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      <section className="site-page-section home-reveal px-4 py-20 md:px-6 md:py-28">
-        <div className="container">
-          <div className="grid gap-6 border-b border-ink-950/10 pb-9 md:grid-cols-[0.3fr_1fr] md:gap-12">
-            <p className="academy-kicker">{copy.selected}</p>
-            <h2 className="max-w-4xl font-serif text-4xl leading-tight md:text-6xl">{copy.selectedTitle}</h2>
-          </div>
-
-          <div className="mt-12 space-y-12">
-            {featured.map((item, index) => {
-              const article = (
-                <article className="site-case-card group grid overflow-hidden border border-ink-950/12 bg-paper-100 lg:grid-cols-[1.16fr_0.84fr]">
-                  <div className={`relative min-h-[22rem] overflow-hidden bg-paper-300 ${index % 2 === 1 ? 'lg:order-2' : ''}`}>
+          <section className="collection-section" aria-labelledby="work-selected-title">
+            <CollectionHeading id="work-selected-title" eyebrow={copy.selected} title={copy.selectedTitle} />
+            <div className="collection-work-featured">
+              {featured.map((item, index) => (
+                <article key={item.id} className={`collection-work-card ${index === 0 ? 'collection-work-card-featured' : ''}`}>
+                  <Link href={item.href ?? '/work'} className="collection-photo" aria-label={`${copy.read} · ${item.title}`}>
                     {item.image ? (
                       <Image
                         src={item.image}
                         alt={item.imageAlt ?? ''}
                         fill
-                        sizes="(min-width: 1024px) 58vw, 100vw"
-                        className={`${item.imageClassName ?? 'object-cover'} saturate-[0.9] transition duration-700 group-hover:scale-[1.015]`}
+                        sizes={index === 0 ? '(min-width: 1000px) 60vw, 100vw' : '(min-width: 800px) 33vw, 100vw'}
+                        className={item.imageClassName ?? ''}
                       />
                     ) : null}
-                    <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_62%,rgba(31,33,26,0.42))]" />
-                    <p className="absolute bottom-5 left-5 font-mono text-xs uppercase tracking-[0.12em] text-paper-100">
-                      {item.location} · {item.year}
-                    </p>
-                  </div>
-                  <div className="flex flex-col justify-between p-7 md:p-10 lg:p-12">
-                    <div>
-                      <p className="font-mono text-xs text-zen-gold-dim/90">{String(index + 1).padStart(2, '0')}</p>
-                      <h3 className="mt-6 font-serif text-4xl leading-tight md:text-5xl">{item.title}</h3>
-                      <p className="mt-7 text-base leading-8 text-ink-600">{item.summary}</p>
-                    </div>
-                    <dl className="mt-10 grid gap-5 border-t border-ink-950/10 pt-6">
-                      <div>
-                        <dt className="text-xs uppercase tracking-[0.12em] text-ink-700/90">{copy.role}</dt>
-                        <dd className="mt-2 text-sm font-medium leading-7 text-ink-800">{item.role}</dd>
-                      </div>
-                      <div>
-                        <dt className="text-xs uppercase tracking-[0.12em] text-ink-700/90">{copy.result}</dt>
-                        <dd className="mt-2 text-sm font-medium leading-7 text-ink-800">{item.result}</dd>
-                      </div>
+                    <span className="collection-photo-number">{String(index + 1).padStart(2, '0')}</span>
+                  </Link>
+                  <div className="collection-work-card-body">
+                    <p className="collection-meta">{item.location} · {item.year}</p>
+                    <h3><Link href={item.href ?? '/work'}>{item.title}</Link></h3>
+                    <p className="collection-description">{item.summary}</p>
+                    <dl className="collection-work-facts">
+                      <div><dt>{copy.role}</dt><dd>{item.role}</dd></div>
+                      <div><dt>{copy.result}</dt><dd>{item.result}</dd></div>
                     </dl>
-                    {item.href ? <p className="mt-7 text-xs uppercase tracking-[0.12em] text-zen-gold-dim/90">{copy.read} →</p> : null}
+                    <Link href={item.href ?? '/work'} className="collection-text-link">{copy.read} <span aria-hidden="true">↗</span></Link>
                   </div>
                 </article>
-              );
-
-              return item.href ? <Link key={item.id} href={item.href} className="block">{article}</Link> : <div key={item.id}>{article}</div>;
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className="site-index-section home-reveal border-y border-ink-950/10 bg-paper-200/58 px-4 py-20 md:px-6 md:py-28">
-        <div className="container">
-          <div className="grid gap-7 lg:grid-cols-[0.34fr_1fr] lg:gap-16">
-            <div>
-              <p className="academy-kicker">{copy.archive}</p>
-              <h2 className="mt-5 max-w-md font-serif text-4xl leading-tight md:text-5xl">{copy.archiveTitle}</h2>
+              ))}
             </div>
-            <div>
-              {categories.map((category) => {
-                const items = work.filter((item) => item.category === category.key);
-                return (
-                  <section key={category.key} className="site-index-group border-t border-ink-950/12 py-9 first:border-t-0 first:pt-0">
-                    <div className="grid gap-4 md:grid-cols-[0.42fr_0.58fr] md:gap-10">
-                      <div>
-                        <h3 className="font-serif text-3xl leading-tight">{category.title}</h3>
-                        <p className="mt-4 max-w-md text-sm leading-7 text-ink-600">{category.description}</p>
+          </section>
+
+          <section className="collection-section collection-archive" id="work-archive">
+            <CollectionHeading
+              eyebrow={copy.archive}
+              title={locale === 'zh' ? '每一次聚在一起，都有来路。' : 'Every gathering has a story.'}
+              description={copy.archiveTitle}
+            />
+            <nav className="collection-category-nav" aria-label={locale === 'zh' ? '按合作类型浏览' : 'Browse by collaboration type'}>
+              {categories.map((category) => (
+                <a key={category.key} href={`#category-${category.key}`}>
+                  {category.title}<span>{work.filter((item) => item.category === category.key).length}</span>
+                </a>
+              ))}
+            </nav>
+            {categories.map((category) => (
+              <section key={category.key} id={`category-${category.key}`} className="collection-work-group">
+                <div className="collection-work-group-intro">
+                  <h3>{category.title}</h3>
+                  <p className="collection-description">{category.description}</p>
+                </div>
+                <div className="collection-work-index">
+                  {work.filter((item) => item.category === category.key).map((item) => (
+                    <Link key={item.id} href={item.href ?? '/work'} className="collection-work-row">
+                      <div className="collection-work-row-image">
+                        {item.image ? <Image src={item.image} alt="" fill sizes="(max-width: 600px) 80px, 112px" className={item.imageClassName ?? ''} /> : null}
                       </div>
                       <div>
-                        {items.map((item) => (
-                          <article key={item.id} className="border-b border-ink-950/10 py-5 first:pt-0 last:border-b-0 last:pb-0">
-                            <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-                              <h4 className="text-lg font-medium text-ink-950">
-                                <Link href={item.href ?? '/work'} className="transition-colors hover:text-zen-gold-dim">
-                                  {item.title} <span aria-hidden="true">↗</span>
-                                </Link>
-                              </h4>
-                              <p className="font-mono text-xs text-ink-700/90">{item.year} · {item.location}</p>
-                            </div>
-                            <div className="mt-3 grid gap-2 text-sm leading-7 text-ink-600 md:grid-cols-[0.42fr_0.58fr] md:gap-6">
-                              <p>{item.role}</p>
-                              <p className="font-medium text-ink-800">{item.result}</p>
-                            </div>
-                          </article>
-                        ))}
+                        <p className="collection-meta">{item.year} · {item.location}</p>
+                        <h4>{item.title}</h4>
+                        <p className="collection-work-row-role">{item.role}</p>
+                        <p className="collection-description">{item.result}</p>
                       </div>
-                    </div>
-                  </section>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
+                      <span className="collection-row-arrow" aria-hidden="true">↗</span>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            ))}
+          </section>
 
-      <section className="site-page-cta home-reveal relative overflow-hidden bg-ink-950 px-4 py-20 text-paper-100 md:px-6 md:py-24">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(138,113,71,0.2),transparent_34%)]" />
-        <div className="container relative grid gap-8 lg:grid-cols-[1.08fr_0.72fr] lg:items-end lg:gap-20">
-          <div>
-            <p className="academy-kicker text-paper-300/82">{copy.ctaEyebrow}</p>
-            <h2 className="mt-5 max-w-4xl font-serif text-4xl leading-tight md:text-6xl">{copy.ctaTitle}</h2>
-          </div>
-          <div>
-            <p className="max-w-xl text-base leading-8 text-paper-300/74">{copy.ctaDescription}</p>
-            <div className="mt-7 flex flex-wrap items-center gap-5">
-              <Link href="/services" className="btn bg-paper-100 text-ink-950 shadow-none hover:bg-paper-200">{copy.collaborate}</Link>
-              <ContactActions locale={locale} context="work-cta" variant="dark" />
+          <section className="collection-collaborate">
+            <p className="collection-kicker">{copy.ctaEyebrow}</p>
+            <h2>{copy.ctaTitle}</h2>
+            <p className="collection-description">{copy.ctaDescription}</p>
+            <div className="collection-collaborate-actions">
+              <Link href="/services" className="collection-button">{copy.collaborate} <span aria-hidden="true">↗</span></Link>
+              <ContactActions locale={locale} context="work-cta" variant="light" />
             </div>
-          </div>
+          </section>
+
+          <CollectionNext
+            locale={locale}
+            zone="build"
+            href="/build"
+            title={locale === 'zh' ? '去产品工作台看看' : 'Over to the workbench'}
+            description={locale === 'zh' ? '看看这些经历，怎样变成正在使用的产品。' : 'See how those experiences become working products.'}
+          />
         </div>
-      </section>
-    </main>
+      </main>
     </>
   );
 }

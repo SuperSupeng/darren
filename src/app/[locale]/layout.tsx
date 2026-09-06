@@ -9,7 +9,6 @@ import { isLocale } from '@/i18n/config';
 import SiteChrome from '@/components/SiteChrome';
 import { getLocalizedBlogRoutes } from '@/lib/blog';
 import '../globals.css';
-import '../home-directed.css';
 
 const siteSans = Geist({
   subsets: ['latin'],

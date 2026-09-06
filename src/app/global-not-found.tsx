@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import Link from 'next/link';
+import Image from 'next/image';
 import './globals.css';
+import '@/components/spatial/spatial.css';
 
 async function getErrorLocale() {
   const requestHeaders = await headers();
@@ -39,18 +41,21 @@ export default async function GlobalNotFound() {
 
   return (
     <html lang={locale === 'zh' ? 'zh-CN' : 'en'}>
-      <body className="bg-ink-950 text-paper-100 antialiased">
-        <main className="flex min-h-screen items-center px-6 py-20">
-          <div className="mx-auto w-full max-w-3xl">
-            <p className="font-mono text-sm tracking-[0.18em] text-zen-gold-light">{copy.label}</p>
-            <h1 className="mt-6 font-serif text-[clamp(2.75rem,8vw,6rem)] leading-[1.05]">{copy.title}</h1>
-            <p className="mt-8 max-w-xl text-base leading-8 text-paper-200/80">{copy.description}</p>
+      <body className="antialiased">
+        <div className="spatial-site">
+        <main id="main-content" className="spatial-not-found">
+          <div>
+            <p className="spatial-kicker">{copy.label}</p>
+            <h1>{copy.title}</h1>
+            <p>{copy.description}</p>
             <nav aria-label={locale === 'zh' ? '首页入口' : 'Home pages'} className="mt-10 flex flex-wrap gap-x-8 gap-y-4">
-              <Link href={`/${locale}`} prefetch={false} className="inline-flex border-b border-paper-100/40 pb-1 hover:border-paper-100">{copy.home} →</Link>
-              <Link href={locale === 'zh' ? '/en' : '/zh'} prefetch={false} lang={locale === 'zh' ? 'en' : 'zh-CN'} className="inline-flex border-b border-paper-100/40 pb-1 hover:border-paper-100">{copy.alternate} →</Link>
+              <Link href={`/${locale}`} prefetch={false}>{copy.home} →</Link>
+              <Link href={locale === 'zh' ? '/en' : '/zh'} prefetch={false} lang={locale === 'zh' ? 'en' : 'zh-CN'}>{copy.alternate} →</Link>
             </nav>
           </div>
+          <figure className="room-portal"><div className="room-portal-view"><Image src="/images/studio-daylight-preview.png" fill loading="eager" sizes="(max-width: 600px) 88vw, 550px" alt="" className="room-portal-poster" /></div><figcaption>{locale === 'zh' ? '房间还在，随时可以回来。' : 'The studio is here whenever you return.'}</figcaption></figure>
         </main>
+        </div>
       </body>
     </html>
   );

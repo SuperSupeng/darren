@@ -4,21 +4,25 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { Component, useCallback, useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from 'react';
 import { Link } from '@/i18n/navigation';
-import { getStudioLocation, updateStudioLocation, getStudioHref } from '@/lib/studio-location';
-import type { StudioContent, StudioItem, StudioZone, StudioFocusZone, StudioLighting } from './types';
+import { getStudioLocation, updateStudioLocation } from '@/lib/studio-location';
+import { useStudioSettings } from '@/components/spatial/StudioSettings';
+import type { StudioContent, StudioItem, StudioZone, StudioFocusZone } from './types';
 import './studio.css';
 
 const StudioScene = dynamic(() => import('./StudioScene'), { ssr: false });
 const zones: Exclude<StudioZone, 'overview'>[] = ['work', 'build', 'notes'];
+const subscribeHydration = () => () => {};
+const clientHydrationSnapshot = () => true;
+const serverHydrationSnapshot = () => false;
 
 const copy = {
   zh: {
-    location: '杭州 · 中国', edition: '开放工作室 / 02', preview: '欢迎，随意坐坐',
-    day: '日光', evening: '暮色', lightingLabel: '工作室光线',
+    location: '杭州 · 中国', welcome: '欢迎，随意坐坐',
+    directory: '直接前往', routes: { work: '工作案例', build: '产品', blog: '手记', services: '合作方式', about: '关于我' },
     title: ['山边，有间', '工作室。'], intro: '我在这里连接人、做产品，也把沿途的经历写下来。',
     invitation: '进来坐坐，看看最近发生的事。', explore: '从长桌开始',
     hint: '点击房间里的物件，或选择下方区域',
-    overview: '回到全景', back: '浏览网站', contact: '聊聊你的项目',
+    overview: '回到全景', controls: '场景浏览方式',
     still: '静态浏览', live: '开启 3D', loading: '正在打开工作室', ready: '工作室已打开',
     failed: '已切换为静态场景，内容仍可正常浏览。', paused: '静态场景 · 选择区域继续浏览',
     visit: '打开项目', read: '阅读手记', detail: '查看案例',
@@ -31,16 +35,16 @@ const copy = {
       build: '从日常遇到的问题出发，做出可以被使用的产品。',
       notes: '关于 AI、旅途与生活的一些记录，也留一点思考的余地。',
     },
-    footer: '连接人 · 创造产品 · 保留思考', room: '杭州山边的三维工作室',
+    room: '杭州山边的三维工作室',
     shortcut: '区域导航', close: '收起内容，回到全景',
   },
   en: {
-    location: 'HANGZHOU, CHINA', edition: 'OPEN STUDIO / 02', preview: 'Come in. Make yourself at home.',
-    day: 'Daylight', evening: 'Dusk', lightingLabel: 'Studio lighting',
+    location: 'HANGZHOU, CHINA', welcome: 'Come in. Make yourself at home.',
+    directory: 'Go directly to', routes: { work: 'Selected work', build: 'Products', blog: 'Field notes', services: 'Work together', about: 'About me' },
     title: ['A studio', 'by the hills.'], intro: 'A place to bring people together, build things, and write along the way.',
     invitation: 'Come in. See what I’ve been working on.', explore: 'Start at the table',
     hint: 'Select an object in the room, or explore a space below',
-    overview: 'Room overview', back: 'Browse the site', contact: 'Let’s work together',
+    overview: 'Room overview', controls: 'Scene viewing options',
     still: 'Still view', live: 'Enable 3D', loading: 'Opening the studio', ready: 'The studio is ready',
     failed: 'Showing a still scene. All content is available below.', paused: 'Still scene · Choose a space to explore',
     visit: 'Visit project', read: 'Read field note', detail: 'View case study',
@@ -53,7 +57,7 @@ const copy = {
       build: 'Working products that began with problems I kept encountering.',
       notes: 'Notes on AI, travel, and life. With room for thoughts to change.',
     },
-    footer: 'CONNECTING · BUILDING · REFLECTING', room: 'A three-dimensional studio by the Hangzhou hills',
+    room: 'A three-dimensional studio by the Hangzhou hills',
     shortcut: 'Explore the studio', close: 'Close the collection and return to the room',
   },
 };
@@ -102,11 +106,12 @@ function ItemCard({ item, action }: { item: StudioItem; action: string }) {
 
 export default function StudioExperience({ locale, content }: { locale: string; content: StudioContent }) {
   const t = locale === 'zh' ? copy.zh : copy.en;
+  const hydrated = useSyncExternalStore(subscribeHydration, clientHydrationSnapshot, serverHydrationSnapshot);
   const [zone, setZone] = useState<StudioZone>('overview');
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
-  const [still, setStill] = useState(false);
-  const [lighting, setLighting] = useState<StudioLighting>('day');
+  const { lighting, still, setStill } = useStudioSettings();
+  const [previousStill, setPreviousStill] = useState(still);
   const [highlightedZone, setHighlightedZone] = useState<StudioFocusZone | null>(null);
   const reducedMotion = useSyncExternalStore(subscribeMotion, getMotion, () => true);
   const roomRef = useRef<HTMLDivElement>(null);
@@ -119,30 +124,37 @@ export default function StudioExperience({ locale, content }: { locale: string; 
   const selectZone = useCallback((next: StudioZone) => {
     setZone(next);
     setHighlightedZone(null);
-    const url = updateStudioLocation(new URL(window.location.href), { zone: next });
+    const url = updateStudioLocation(new URL(window.location.href), { zone: next, lighting });
     window.history.replaceState(window.history.state, '', url);
-  }, []);
-  const changeLighting = (next: StudioLighting) => {
-    setLighting(next);
-    const url = updateStudioLocation(new URL(window.location.href), { lighting: next });
-    window.history.replaceState(window.history.state, '', url);
-  };
+  }, [lighting]);
   const onReady = useCallback(() => setReady(true), []);
-  const onFailure = useCallback(() => { setFailed(true); setReady(false); }, []);
+  const onFailure = useCallback(() => { setFailed(true); setReady(false); setStill(true); }, [setStill]);
 
   useEffect(() => {
     const restore = () => {
       const restored = getStudioLocation(new URL(window.location.href));
       setZone(restored.zone);
-      setLighting(restored.lighting);
+    };
+    const syncSamePageLink = (event: MouseEvent) => {
+      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) return;
+      const link = event.target instanceof Element ? event.target.closest<HTMLAnchorElement>('a[href]') : null;
+      if (!link || link.hasAttribute('download') || (link.target && link.target !== '_self')) return;
+      const destination = new URL(link.href);
+      if (destination.origin !== window.location.origin || destination.pathname !== window.location.pathname) return;
+      if (destination.hash && !zones.includes(destination.hash.slice(1) as StudioFocusZone)) return;
+      // Next Link changes same-page hashes through history without a native hashchange.
+      setZone(getStudioLocation(destination).zone);
+      setHighlightedZone(null);
     };
     const frame = requestAnimationFrame(restore);
     window.addEventListener('hashchange', restore);
     window.addEventListener('popstate', restore);
+    document.addEventListener('click', syncSamePageLink);
     return () => {
       cancelAnimationFrame(frame);
       window.removeEventListener('hashchange', restore);
       window.removeEventListener('popstate', restore);
+      document.removeEventListener('click', syncSamePageLink);
     };
   }, []);
 
@@ -154,6 +166,11 @@ export default function StudioExperience({ locale, content }: { locale: string; 
         collectionRef.current?.scrollIntoView({ block: 'start', behavior: 'instant' });
       }
     });
+    return () => cancelAnimationFrame(frame);
+  }, [zone]);
+
+  useEffect(() => {
+    if (zone === 'overview') return;
     const escape = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         selectZone('overview');
@@ -161,7 +178,7 @@ export default function StudioExperience({ locale, content }: { locale: string; 
       }
     };
     window.addEventListener('keydown', escape);
-    return () => { cancelAnimationFrame(frame); window.removeEventListener('keydown', escape); };
+    return () => window.removeEventListener('keydown', escape);
   }, [zone, selectZone]);
 
   useEffect(() => {
@@ -170,31 +187,21 @@ export default function StudioExperience({ locale, content }: { locale: string; 
     return () => window.clearTimeout(timeout);
   }, [ready, useStill, onFailure]);
 
+  // Reset before rendering a new canvas, including changes made in the shared footer.
+  if (previousStill !== still) {
+    setPreviousStill(still);
+    setReady(false);
+    if (!still) setFailed(false);
+  }
+
   return (
     <main id="main-content" tabIndex={-1} className={`studio-experience ${activeZone ? 'studio-is-focused' : ''}`} data-lighting={lighting} lang={locale}>
-      <header className="studio-header">
-        <Link href="/" className="studio-brand" aria-label={locale === 'zh' ? 'Darren Su 首页' : 'Darren Su home'}>
-          <span className="studio-brand-mark" aria-hidden="true">苏</span><span>Darren Su<span className="studio-brand-period">.</span></span>
-        </Link>
-        <div className="studio-light-switch" role="group" aria-label={t.lightingLabel}>
-          {(['day', 'evening'] as const).map(value => <button key={value} type="button" aria-pressed={lighting === value} onClick={() => changeLighting(value)}>
-            <svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              {value === 'day' ? <><circle cx="10" cy="10" r="3.5" /><path d="M10 1v2m0 14v2M1 10h2m14 0h2M3.6 3.6 5 5m10 10 1.4 1.4M3.6 16.4 5 15M15 5l1.4-1.4" /></> : <path d="M16.7 12.2A7 7 0 0 1 7.8 3.3a7 7 0 1 0 8.9 8.9Z" />}
-            </svg>{t[value]}
-          </button>)}
-        </div>
-        <div className="studio-header-actions">
-          <Link href={getStudioHref({ zone, lighting })} locale={locale === 'zh' ? 'en' : 'zh'} hrefLang={locale === 'zh' ? 'en' : 'zh'} className="studio-language">{locale === 'zh' ? 'EN' : '中文'}</Link>
-          <Link href="/" className="studio-site-link">{t.back} <span aria-hidden="true">↗</span></Link>
-        </div>
-      </header>
-
       <div className="studio-stage">
-        <div ref={roomRef} className="studio-room" aria-label={t.room} role="group" data-scene-status={useStill ? 'static' : ready ? 'ready' : 'loading'}>
+        <div ref={roomRef} className="studio-room" aria-label={t.room} role="group" data-scene-status={!hydrated || useStill ? 'static' : ready ? 'ready' : 'loading'}>
           <div className={`studio-poster ${ready && !useStill ? 'studio-poster-hidden' : ''}`} aria-hidden="true">
             <Image src={lighting === 'evening' ? '/images/studio-dusk-preview.png' : '/images/studio-daylight-preview.png'} alt="" fill sizes="(max-width: 760px) 100vw, 76vw" preload className="studio-poster-image" />
           </div>
-          {!useStill ? <SceneBoundary onFailure={onFailure}>
+          {hydrated && !useStill ? <SceneBoundary onFailure={onFailure}>
             <StudioScene zone={zone} onSelect={selectZone} reducedMotion={reducedMotion} onReady={onReady} onFailure={onFailure} lighting={lighting} highlightedZone={highlightedZone} onHover={setHighlightedZone} hotspotRoot={roomRef} />
           </SceneBoundary> : null}
           <div className="studio-hotspots" hidden={!ready || useStill || Boolean(activeZone)}>
@@ -207,14 +214,13 @@ export default function StudioExperience({ locale, content }: { locale: string; 
         </div>
 
         <div className="studio-intro" hidden={Boolean(activeZone)}>
-          <p className="studio-eyebrow"><span /> {t.preview}</p>
+          <p className="studio-eyebrow"><span /> {t.welcome}</p>
           <h1 aria-label={`${t.title[0]}${locale === 'en' ? ' ' : ''}${t.title[1]}`}>{t.title[0]}<br />{locale === 'en' ? ' ' : null}<em>{t.title[1]}</em></h1>
           <p className="studio-intro-description">{t.intro}</p>
           <p className="studio-invitation">{t.invitation}</p>
-          <button type="button" className="studio-enter" onClick={() => selectZone('work')}>{t.explore}<span aria-hidden="true">↗</span></button>
+          <button type="button" className="studio-enter" hidden={!hydrated} onClick={() => selectZone('work')}>{t.explore}<span aria-hidden="true">↗</span></button>
           <span className="studio-intro-rule" aria-hidden="true" />
           <p className="studio-intro-signature">Darren Su <span>/ 苏鹏</span></p>
-          <span className="studio-edition studio-intro-edition">{t.edition}</span>
         </div>
 
         {activeZone ? <section ref={collectionRef} className="studio-collection" aria-labelledby="studio-collection-title" key={activeZone}>
@@ -229,24 +235,25 @@ export default function StudioExperience({ locale, content }: { locale: string; 
       </div>
 
       <div className="studio-navigation-area">
-        <p className="studio-hint" role="status" aria-live="polite">{useStill ? failed ? t.failed : t.paused : ready ? t.hint : t.loading}</p>
-        <nav className="studio-zone-nav" aria-label={t.shortcut}>
+        <p className="studio-hint" role="status" aria-live="polite">{!hydrated ? t.paused : useStill ? failed ? t.failed : t.paused : ready ? t.hint : t.loading}</p>
+        <nav className="studio-zone-nav" aria-label={t.shortcut} hidden={!hydrated}>
           {zones.map((item, index) => <button key={item} type="button" ref={node => { navRefs.current[item] = node; }} className={`studio-zone-button ${zone === item ? 'is-active' : ''} ${highlightedZone === item ? 'is-highlighted' : ''}`} aria-pressed={zone === item} onClick={() => selectZone(item)} onPointerEnter={() => setHighlightedZone(item)} onPointerLeave={() => setHighlightedZone(null)} onFocus={() => setHighlightedZone(item)} onBlur={() => setHighlightedZone(null)}>
             <span className="studio-zone-number">0{index + 1}</span><ZoneIcon zone={item} /><span className="studio-zone-text">{t.labels[item]}<small>{item === 'work' ? 'GATHER' : item === 'build' ? 'BUILD' : 'REFLECT'}</small></span><span className="studio-zone-arrow" aria-hidden="true">↗</span>
           </button>)}
         </nav>
       </div>
 
-      <footer className="studio-footer">
-        <span className="studio-footer-motto">{t.footer}</span>
-        <div className="studio-view-actions">
+      <div className="studio-controls">
+        <nav className="studio-directory" aria-label={t.directory}>
+          {(['work', 'build', 'blog', 'services', 'about'] as const).map(path => <Link key={path} href={`/${path}`}>{t.routes[path]}</Link>)}
+        </nav>
+        <div className="studio-view-actions" role="group" aria-label={t.controls} hidden={!hydrated}>
           {activeZone ? <button type="button" onClick={() => { selectZone('overview'); navRefs.current[activeZone]?.focus({ preventScroll: true }); }}>↶ {t.overview}</button> : null}
           <button type="button" aria-pressed={useStill} onClick={() => { if (useStill) { setStill(false); setFailed(false); setReady(false); } else { setStill(true); setReady(false); } }}><span aria-hidden="true">{useStill ? '◇' : '◈'}</span> {useStill ? t.live : t.still}</button>
         </div>
-        <a href="mailto:supeng842499467@gmail.com" className="studio-contact">{t.contact} <span aria-hidden="true">↗</span></a>
-      </footer>
+      </div>
       <noscript><nav className="studio-no-script" aria-label={t.shortcut}>
-        <Link href="/work">{t.all.work}</Link><Link href="/build">{t.all.build}</Link><Link href="/blog">{t.all.notes}</Link>
+        <Link href="/work">{t.all.work}</Link><Link href="/build">{t.all.build}</Link><Link href="/blog">{t.all.notes}</Link><Link href="/services">{t.routes.services}</Link><Link href="/about">{t.routes.about}</Link>
       </nav></noscript>
     </main>
   );
