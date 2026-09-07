@@ -48,33 +48,25 @@ export default async function WorkPage({ params }: { params: Promise<{ locale: s
   const copy =
     locale === 'zh'
       ? {
-          eyebrow: '项目与合作',
           title: '我发起、负责或参与的项目。',
           subtitle: '开发者活动、大会合作、产品 Workshop 与 AI 分享。每个案例记录合作背景、我的职责、执行过程和结果。',
-          selected: '几个代表项目',
           selectedTitle: '近期项目',
-          archive: '项目索引',
           archiveTitle: '按类型查看项目，了解相应的合作经验。',
           role: '我的角色',
           result: '项目结果',
           read: '查看完整案例',
-          ctaEyebrow: '项目合作',
           ctaTitle: '一起讨论你的项目',
           ctaDescription: '来信说明项目目标、参与对象和预计时间。我们可以先确认需要我参与的环节，再讨论具体安排。',
           collaborate: '查看合作方式',
         }
       : {
-          eyebrow: 'Projects and collaborations',
           title: 'Projects I have initiated, led, or contributed to.',
           subtitle: 'Developer events, conference partnerships, product workshops, and AI talks. Each case records the context, my role, the process, and the results.',
-          selected: 'Selected work',
           selectedTitle: 'Recent projects',
-          archive: 'Work index',
           archiveTitle: 'Browse by type to find relevant collaboration experience.',
           role: 'My role',
           result: 'Project results',
           read: 'View the full case study',
-          ctaEyebrow: 'Project collaboration',
           ctaTitle: 'Let’s discuss your project',
           ctaDescription: 'Tell me about your goals, intended participants, and timing. We can first agree on where I can contribute, then work through the details.',
           collaborate: 'Explore collaboration',
@@ -88,8 +80,6 @@ export default async function WorkPage({ params }: { params: Promise<{ locale: s
           <CollectionHero
             locale={locale}
             zone="work"
-            number="01"
-            eyebrow={copy.eyebrow}
             title={locale === 'zh' ? '工作案例' : 'Selected work'}
             lead={copy.title}
             description={copy.subtitle}
@@ -110,7 +100,7 @@ export default async function WorkPage({ params }: { params: Promise<{ locale: s
           </div>
 
           <section className="collection-section" aria-labelledby="work-selected-title">
-            <CollectionHeading id="work-selected-title" eyebrow={copy.selected} title={copy.selectedTitle} />
+            <CollectionHeading id="work-selected-title" title={copy.selectedTitle} />
             <div className="collection-work-featured">
               {featured.map((item, index) => (
                 <article key={item.id} className={`collection-work-card ${index === 0 ? 'collection-work-card-featured' : ''}`}>
@@ -124,7 +114,6 @@ export default async function WorkPage({ params }: { params: Promise<{ locale: s
                         className={item.imageClassName ?? ''}
                       />
                     ) : null}
-                    <span className="collection-photo-number">{String(index + 1).padStart(2, '0')}</span>
                   </Link>
                   <div className="collection-work-card-body">
                     <p className="collection-meta">{item.location} · {item.year}</p>
@@ -143,14 +132,13 @@ export default async function WorkPage({ params }: { params: Promise<{ locale: s
 
           <section className="collection-section collection-archive" id="work-archive">
             <CollectionHeading
-              eyebrow={copy.archive}
               title={locale === 'zh' ? '全部项目' : 'All projects'}
               description={copy.archiveTitle}
             />
             <nav className="collection-category-nav" aria-label={locale === 'zh' ? '按合作类型浏览' : 'Browse by collaboration type'}>
               {categories.map((category) => (
                 <a key={category.key} href={`#category-${category.key}`}>
-                  {category.title}<span>{work.filter((item) => item.category === category.key).length}</span>
+                  {category.title}
                 </a>
               ))}
             </nav>
@@ -181,7 +169,6 @@ export default async function WorkPage({ params }: { params: Promise<{ locale: s
           </section>
 
           <section className="collection-collaborate">
-            <p className="collection-kicker">{copy.ctaEyebrow}</p>
             <h2>{copy.ctaTitle}</h2>
             <p className="collection-description">{copy.ctaDescription}</p>
             <div className="collection-collaborate-actions">

@@ -53,7 +53,7 @@ function LiveRoom({ zone, lighting, locale, compact, contentHref }: { zone: Stud
     {(!ready || failed) && <Poster lighting={lighting} />}
     {!failed && <PortalBoundary onFailure={onFailure}><StudioScene presentation="portal" viewAngle={angle} onViewAngleChange={setAngle} zone={zone} lighting={lighting} reducedMotion={motion} onReady={onReady} onFailure={onFailure} highlightedZone={highlighted} onHover={setHighlighted} hotspotRoot={root} onSelect={next => { if (next === zone && contentHref) window.location.hash = contentHref; else router.push(`/${lighting === 'evening' ? '?light=evening' : ''}#${next}`); }} /></PortalBoundary>}
     {ready && !failed && <div className="room-portal-tools">
-      {!compact && <p>{zh ? '左右拖动，换个角度' : 'Drag sideways to look around'}<span aria-hidden="true">↔</span></p>}
+      {!compact && <p>{zh ? '拖动查看' : 'Drag to explore'}<span aria-hidden="true">↔</span></p>}
       <div role="group" aria-label={zh ? '房间视角' : 'Room viewpoint'}>{views.map(view => <button key={view.angle} type="button" aria-label={zh ? `${view.label}视角` : `${view.label} view`} aria-pressed={Math.abs(angle - view.angle) < 0.04} onClick={() => setAngle(view.angle)}><span aria-hidden="true">{view.icon}</span>{!compact && <span>{view.label}</span>}</button>)}</div>
     </div>}
     {failed && <p className="room-portal-fallback" role="status">{zh ? '3D 暂时无法加载，已切换为静态画面。' : 'The 3D scene couldn’t load. Showing a still image.'}</p>}
@@ -82,6 +82,6 @@ export default function RoomPortal({ zone, locale, compact = false, contentHref 
       {live ? <LiveRoom zone={zone} lighting={lighting} locale={locale} compact={compact} contentHref={contentHref} /> : <Poster lighting={lighting} />}
       {hydrated && !live && (compact || still) && <button className="room-portal-explore" type="button" onClick={() => { setStill(false); setExploring(true); setActivated(true); }}>{zh ? '查看 3D' : 'View in 3D'} <span aria-hidden="true">↗</span></button>}
     </div>
-    <figcaption><span><i aria-hidden="true" />{labels[zone][zh ? 0 : 1]}</span><Link href={contentHref ?? href}>{contentHref ? zh ? zone === 'notes' ? '查看文章' : zone === 'work' ? '查看案例' : '查看产品' : zone === 'notes' ? 'View articles' : zone === 'work' ? 'View case studies' : 'View products' : zh ? '返回首页' : 'Back to home'} <span aria-hidden="true">↗</span></Link></figcaption>
+    <figcaption><Link href={contentHref ?? href}>{contentHref ? zh ? zone === 'notes' ? '查看文章' : zone === 'work' ? '查看案例' : '查看产品' : zone === 'notes' ? 'View articles' : zone === 'work' ? 'View case studies' : 'View products' : zh ? '返回首页' : 'Back to home'} <span aria-hidden="true">↗</span></Link></figcaption>
   </figure>;
 }

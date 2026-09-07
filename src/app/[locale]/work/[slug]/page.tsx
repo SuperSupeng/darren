@@ -61,7 +61,6 @@ export default async function WorkCasePage({
   const copy = locale === 'zh'
     ? {
         back: '返回全部案例',
-        caseLabel: '项目案例',
         role: '我的角色',
         result: '规模与结果',
         place: '时间与地点',
@@ -73,14 +72,12 @@ export default async function WorkCasePage({
         readMaterial: '查看资料',
         note: '阅读相关手记',
         next: '下一个项目',
-        contactEyebrow: '如果你正在做类似的事',
         contactTitle: '告诉我你想解决的问题。',
         contactBody: '来信说说你的团队、目标、预计时间和地点，我们可以先聊聊。',
         collaborationBody: '合作页面介绍了适合的项目和具体做法。也可以直接来信，说说你的团队、目标和预计时间。',
       }
     : {
         back: 'Back to all case studies',
-        caseLabel: 'Case study',
         role: 'My role',
         result: 'Scale and outcome',
         place: 'Time and place',
@@ -92,7 +89,6 @@ export default async function WorkCasePage({
         readMaterial: 'View resource',
         note: 'Read the related field note',
         next: 'Next project',
-        contactEyebrow: 'Working on something similar?',
         contactTitle: 'Tell me what you are trying to solve.',
         contactBody: 'Send a short note about your team, project goal, rough timing, and location. We can start there.',
         collaborationBody: 'The collaboration page explains the scope and how I work. You can also email me with your team, goal, and rough timing.',
@@ -104,9 +100,8 @@ export default async function WorkCasePage({
       <main id="main-content" tabIndex={-1} className="interior-page case-page">
         <div className="interior-wrap">
           <header className="case-cover">
-            <div className="interior-running-line">
+            <div className="interior-back-link">
               <Link href="/work" className="interior-text-link">← {copy.back}</Link>
-              <span>{copy.caseLabel} / {String(currentIndex + 1).padStart(2, '0')}</span>
             </div>
             <div className="case-cover-grid">
               <div className="case-cover-copy">
@@ -117,7 +112,6 @@ export default async function WorkCasePage({
               </div>
               {work.image ? <figure className="interior-photo case-cover-photo">
                 <div className="case-image-frame"><Image src={work.image} alt={work.imageAlt ?? work.title} fill loading="eager" fetchPriority="high" sizes="(min-width: 900px) 47vw, 100vw" className={work.imageClassName ?? 'object-cover'} /></div>
-                <figcaption><span>{work.title}</span><span>{work.year}</span></figcaption>
               </figure> : null}
             </div>
           </header>
@@ -131,33 +125,33 @@ export default async function WorkCasePage({
                 <div><dt>{copy.place}</dt><dd>{work.year} · {work.location}</dd></div>
               </dl>
               <nav className="case-index" aria-label={locale === 'zh' ? '案例目录' : 'Case study contents'}>
-                <a href="#case-context">01 <span>{copy.context}</span></a>
-                <a href="#case-responsibilities">02 <span>{copy.responsibilities}</span></a>
-                <a href="#case-outcome">03 <span>{copy.outcome}</span></a>
-                <a href="#case-reflection">04 <span>{copy.reflection}</span></a>
+                <a href="#case-context">{copy.context}</a>
+                <a href="#case-responsibilities">{copy.responsibilities}</a>
+                <a href="#case-outcome">{copy.outcome}</a>
+                <a href="#case-reflection">{copy.reflection}</a>
               </nav>
               <a href={`/${locale}/work/${work.id}/source.md`} className="interior-text-link" download={`${work.id}.${locale}.md`}>{locale === 'zh' ? '下载纯文本案例' : 'Download case text'} ↓</a>
             </aside>
 
             <div className="case-document">
               <section id="case-context" className="case-chapter case-opening">
-                <h2 className="interior-kicker">01 · {copy.context}</h2>
+                <h2 className="interior-kicker">{copy.context}</h2>
                 <p>{work.caseStudy.context}</p>
               </section>
               <section id="case-responsibilities" className="case-chapter">
-                <h2 className="interior-kicker">02 · {copy.responsibilities}</h2>
-                <ol className="interior-numbered-list">
-                  {work.caseStudy.responsibilities.map((item, index) => <li key={item}><span>{String(index + 1).padStart(2, '0')}</span><p>{item}</p></li>)}
-                </ol>
+                <h2 className="interior-kicker">{copy.responsibilities}</h2>
+                <ul className="interior-plain-list">
+                  {work.caseStudy.responsibilities.map(item => <li key={item}>{item}</li>)}
+                </ul>
               </section>
               <div className="case-outcomes">
                 <section id="case-outcome" className="case-chapter">
-                  <h2 className="interior-kicker">03 · {copy.outcome}</h2>
+                  <h2 className="interior-kicker">{copy.outcome}</h2>
                   <p>{work.caseStudy.outcome}</p>
                   {work.caseStudy.outcomeNote ? <p className="case-margin-note">{work.caseStudy.outcomeNote}</p> : null}
                 </section>
                 <section id="case-reflection" className="case-chapter">
-                  <h2 className="interior-kicker">04 · {copy.reflection}</h2>
+                  <h2 className="interior-kicker">{copy.reflection}</h2>
                   <p>{work.caseStudy.reflection}</p>
                 </section>
               </div>
@@ -175,7 +169,7 @@ export default async function WorkCasePage({
           </div>
 
           <section className="interior-invitation">
-            <div><p className="interior-kicker">{copy.contactEyebrow}</p><h2>{collaboration?.invitation ?? copy.contactTitle}</h2>
+            <div><h2>{collaboration?.invitation ?? copy.contactTitle}</h2>
               {collaboration ? <Link href={`/services#${collaboration.id}`} className="interior-text-link">{collaboration.linkLabel} →</Link> : null}
             </div>
             <div><p>{collaboration ? copy.collaborationBody : copy.contactBody}</p><ContactActions locale={locale} context={`work-case-${work.id}`} className="interior-contact" /></div>

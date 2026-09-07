@@ -12,8 +12,7 @@
 
 .interior-services .service-evidence-heading > p {
   color: var(--space-muted);
-  font: 10px/1.8 var(--font-geist-mono);
-  letter-spacing: .06em;
+  font: 500 13px/1.8 var(--font-geist-sans);
 }
 
 .interior-services .service-evidence-heading > h3 {
@@ -41,7 +40,7 @@
 
 .interior-services .service-evidence-facts dt {
   color: var(--space-muted);
-  font-size: 11px;
+  font-size: 13px;
   line-height: 1.8;
 }
 
@@ -66,7 +65,7 @@
   min-height: 44px;
   max-width: 100%;
   color: var(--space-ink);
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.8;
   text-decoration: underline;
   text-decoration-color: var(--space-accent);

@@ -18,11 +18,10 @@ const serverHydrationSnapshot = () => false;
 
 const copy = {
   zh: {
-    location: '杭州 · 中国', welcome: '开发者社区 · AI 实践',
-    directory: '页面导航', routes: { work: '工作案例', build: '产品', blog: '文章与手记', services: '合作方式', about: '关于我' },
+    routes: { work: '工作案例', build: '产品', blog: '文章与手记', services: '合作方式', about: '关于我' },
     title: ['你好，我是', 'Darren。'], intro: '我策划开发者活动，组织 AI 产品体验和反馈 Workshop，也向团队和社区分享 AI 与 Agent 的实践经验。',
     projects: '看项目', collaborate: '聊聊合作', actions: '了解工作与合作',
-    hint: '左右拖动查看房间，点击标签或物件浏览内容',
+    hint: '拖动查看房间，点击标签浏览内容',
     overview: '回到全景', controls: '场景浏览方式',
     still: '静态浏览', live: '开启 3D', loading: '正在打开工作室', ready: '工作室已打开',
     failed: '已切换为静态场景，内容仍可正常浏览。', paused: '静态场景 · 选择区域继续浏览',
@@ -40,11 +39,10 @@ const copy = {
     shortcut: '按内容浏览', close: '收起内容，回到全景',
   },
   en: {
-    location: 'HANGZHOU, CHINA', welcome: 'DEVELOPER COMMUNITIES · AI PRACTICE',
-    directory: 'Site navigation', routes: { work: 'Selected work', build: 'Products', blog: 'Writing', services: 'Work together', about: 'About me' },
+    routes: { work: 'Selected work', build: 'Products', blog: 'Writing', services: 'Work together', about: 'About me' },
     title: ["Hi, I'm", 'Darren.'], intro: 'I plan developer events, run hands-on workshops for AI products, and give talks for teams and communities about my work with AI and agents.',
     projects: 'See my work', collaborate: 'Work together', actions: 'Explore work and collaboration',
-    hint: 'Drag sideways to look around. Select a label or object to browse.',
+    hint: 'Drag to rotate. Select a label to explore.',
     overview: 'Room overview', controls: 'Scene viewing options',
     still: 'Still view', live: 'Enable 3D', loading: 'Opening the studio', ready: 'The studio is ready',
     failed: 'Showing a still scene. All content is available below.', paused: 'Still scene · Choose a space to explore',
@@ -208,16 +206,14 @@ export default function StudioExperience({ locale, content, children }: { locale
             <StudioScene zone={zone} onSelect={selectZone} reducedMotion={reducedMotion} onReady={onReady} onFailure={onFailure} lighting={lighting} highlightedZone={highlightedZone} onHover={setHighlightedZone} hotspotRoot={roomRef} viewAngle={viewAngle} onViewAngleChange={setViewAngle} />
           </SceneBoundary> : null}
           <div className="studio-hotspots" hidden={!ready || useStill || Boolean(activeZone)}>
-            {zones.map((item, index) => <button key={item} type="button" data-studio-hotspot={item} className={`studio-hotspot ${highlightedZone === item ? 'is-highlighted' : ''}`} style={{ transform: `translate3d(var(--hotspot-${item}-x, -999px), var(--hotspot-${item}-y, -999px), 0) translate(-50%, -100%)` }} onPointerEnter={() => setHighlightedZone(item)} onPointerLeave={() => setHighlightedZone(null)} onFocus={() => setHighlightedZone(item)} onBlur={() => setHighlightedZone(null)} onClick={() => selectZone(item)} aria-label={`${t.labels[item]} · ${t.hotspotCopy[item]}`}>
-              <span className="studio-hotspot-label">{t.labels[item]}<small>{t.hotspotCopy[item]}</small></span>
-              <span className="studio-hotspot-pin" aria-hidden="true">0{index + 1}<i /></span>
+            {zones.map(item => <button key={item} type="button" data-studio-hotspot={item} className={`studio-hotspot ${highlightedZone === item ? 'is-highlighted' : ''}`} style={{ transform: `translate3d(var(--hotspot-${item}-x, -999px), var(--hotspot-${item}-y, -999px), 0) translate(-50%, -100%)` }} onPointerEnter={() => setHighlightedZone(item)} onPointerLeave={() => setHighlightedZone(null)} onFocus={() => setHighlightedZone(item)} onBlur={() => setHighlightedZone(null)} onClick={() => selectZone(item)} aria-label={`${t.labels[item]} · ${t.hotspotCopy[item]}`}>
+              <span className="studio-hotspot-label">{t.labels[item]}</span>
+              <span className="studio-hotspot-pin" aria-hidden="true"><i /></span>
             </button>)}
           </div>
-          <span className="studio-scene-caption" aria-hidden="true"><span />{t.location} <i>DARREN SU</i></span>
         </div>
 
         <div className="studio-intro" hidden={Boolean(activeZone)}>
-          <p className="studio-eyebrow"><span /> {t.welcome}</p>
           <h1 aria-label={`${t.title[0]} ${t.title[1]}`}>{t.title[0]}<br />{' '}<em>{t.title[1]}</em></h1>
           <p className="studio-intro-description">{t.intro}</p>
           <nav className="studio-hero-actions" aria-label={t.actions}>
@@ -231,10 +227,9 @@ export default function StudioExperience({ locale, content, children }: { locale
         </div>
 
         {activeZone ? <section ref={collectionRef} className="studio-collection" aria-labelledby="studio-collection-title" key={activeZone}>
-          <div className="studio-collection-top"><p className="studio-eyebrow">0{zones.indexOf(activeZone) + 1} / {t.labels[activeZone]}</p>
+          <div className="studio-collection-top"><h2 id="studio-collection-title" ref={titleRef} tabIndex={-1}>{t.captions[activeZone]}</h2>
             <button type="button" className="studio-close" aria-label={t.close} onClick={() => { selectZone('overview'); navRefs.current[activeZone]?.focus({ preventScroll: true }); }}>×</button>
           </div>
-          <h2 id="studio-collection-title" ref={titleRef} tabIndex={-1}>{t.captions[activeZone]}</h2>
           <p className="studio-collection-description">{t.descriptions[activeZone]}</p>
           <div className="studio-collection-cards">{content[activeZone].map(item => <ItemCard key={item.id} item={item} action={activeZone === 'build' ? t.visit : activeZone === 'notes' ? t.read : t.detail} />)}</div>
           <Link href={activeZone === 'notes' ? '/blog' : `/${activeZone}`} className="studio-all-link">{t.all[activeZone]} <span aria-hidden="true">↗</span></Link>
@@ -244,16 +239,13 @@ export default function StudioExperience({ locale, content, children }: { locale
       <div className="studio-navigation-area">
         <p className="studio-hint" role="status" aria-live="polite">{!hydrated ? t.paused : useStill ? failed ? t.failed : t.paused : ready ? t.hint : t.loading}</p>
         <nav className="studio-zone-nav" aria-label={t.shortcut} hidden={!hydrated}>
-          {zones.map((item, index) => <button key={item} type="button" ref={node => { navRefs.current[item] = node; }} className={`studio-zone-button ${zone === item ? 'is-active' : ''} ${highlightedZone === item ? 'is-highlighted' : ''}`} aria-pressed={zone === item} onClick={() => selectZone(item)} onPointerEnter={() => setHighlightedZone(item)} onPointerLeave={() => setHighlightedZone(null)} onFocus={() => setHighlightedZone(item)} onBlur={() => setHighlightedZone(null)}>
-            <span className="studio-zone-number">0{index + 1}</span><ZoneIcon zone={item} /><span className="studio-zone-text">{t.labels[item]}<small>{item === 'work' ? 'WORK' : item === 'build' ? 'PRODUCTS' : 'WRITING'}</small></span><span className="studio-zone-arrow" aria-hidden="true">↗</span>
+          {zones.map(item => <button key={item} type="button" ref={node => { navRefs.current[item] = node; }} className={`studio-zone-button ${zone === item ? 'is-active' : ''} ${highlightedZone === item ? 'is-highlighted' : ''}`} aria-pressed={zone === item} onClick={() => selectZone(item)} onPointerEnter={() => setHighlightedZone(item)} onPointerLeave={() => setHighlightedZone(null)} onFocus={() => setHighlightedZone(item)} onBlur={() => setHighlightedZone(null)}>
+            <ZoneIcon zone={item} /><span className="studio-zone-text">{t.labels[item]}</span><span className="studio-zone-arrow" aria-hidden="true">↗</span>
           </button>)}
         </nav>
       </div>
 
       <div className="studio-controls">
-        <nav className="studio-directory" aria-label={t.directory}>
-          {(['work', 'build', 'blog', 'services', 'about'] as const).map(path => <Link key={path} href={`/${path}`}>{t.routes[path]}</Link>)}
-        </nav>
         <div className="studio-view-actions" role="group" aria-label={t.controls} hidden={!hydrated}>
           {Math.abs(viewAngle) > 0.01 && !useStill ? <button type="button" onClick={() => setViewAngle(0)}>{locale === 'zh' ? '◇ 转回正面' : '◇ Reset angle'}</button> : null}
           {activeZone ? <button type="button" onClick={() => { selectZone('overview'); navRefs.current[activeZone]?.focus({ preventScroll: true }); }}>↶ {t.overview}</button> : null}

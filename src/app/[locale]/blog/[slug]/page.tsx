@@ -54,24 +54,16 @@ export default async function BlogPostPage({ params }: { params: Promise<{ local
 
   const renderedContent = renderMarkdown(post.content, post.title, locale, { responsiveImages: true });
   const shareUrl = absoluteLocalizedUrl(locale, `/blog/${post.slug}`);
-  const authorLabel = locale === 'zh' ? '作者' : 'By';
 
   return (
     <>
       <JsonLd data={articleStructuredData(post, locale)} />
       <main id="main-content" tabIndex={-1} className="interior-page reading-page">
         <div className="interior-wrap">
-          <div className="interior-running-line"><Link href="/blog" className="interior-text-link">← {t('backToList')}</Link><span>{locale === 'zh' ? '文章与手记 / WRITING' : 'ARTICLES AND NOTES'}</span></div>
+          <div className="interior-back-link"><Link href="/blog" className="interior-text-link">← {t('backToList')}</Link></div>
           <div className="reading-layout">
             <aside className="reading-sidebar">
               <RoomPortal zone="notes" locale={locale} compact />
-              <div className="reading-colophon">
-                <span className="interior-kicker">{authorLabel}</span>
-                <Link href="/about" rel="author">Darren Su / 苏鹏</Link>
-                <time dateTime={post.date}>{post.date}</time>
-                <span>{post.readingTime} {t('minRead')}</span>
-              </div>
-              <p className="reading-side-note">{locale === 'zh' ? '记录工作、实践与生活中的思考。' : 'Notes and reflections on work, practice, and life.'}</p>
             </aside>
             <article className="reading-sheet">
               <header className="reading-header">

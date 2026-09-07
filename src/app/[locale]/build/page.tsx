@@ -25,8 +25,8 @@ export default async function BuildPage({ params }: { params: Promise<{ locale: 
   const labels = site.labels.productLab;
   const system = site.products.digitalOrganization;
   const copy = locale === 'zh'
-    ? { title: '我做的产品', details: '问题、反馈与下一步', inactive: '实验已结束', index: '产品目录', status: '当前状态', tags: '相关方向' }
-    : { title: 'Products I build', details: 'Problem, feedback & next step', inactive: 'Experiment ended', index: 'Product index', status: 'Current state', tags: 'Related topics' };
+    ? { title: '我做的产品', details: '问题、反馈与下一步', index: '产品目录' }
+    : { title: 'Products I build', details: 'Problem, feedback & next step', index: 'Product index' };
 
   return (
     <>
@@ -36,8 +36,6 @@ export default async function BuildPage({ params }: { params: Promise<{ locale: 
           <CollectionHero
             locale={locale}
             zone="build"
-            number="02"
-            eyebrow={site.products.hero.eyebrow}
             title={copy.title}
             lead={site.products.hero.title}
             description={site.products.hero.subtitle}
@@ -46,15 +44,14 @@ export default async function BuildPage({ params }: { params: Promise<{ locale: 
           </CollectionHero>
 
           <div className="collection-note-strip">
-            <p className="collection-kicker">{labels.sideEyebrow}</p>
             <p>{labels.sideQuote}</p>
           </div>
 
           <section className="collection-section" id="product-workbench">
-            <CollectionHeading eyebrow={labels.selectedEyebrow} title={locale === 'zh' ? '产品与实验' : 'Products and experiments'} description={labels.selectedStatement} />
+            <CollectionHeading title={locale === 'zh' ? '产品与实验' : 'Products and experiments'} description={labels.selectedStatement} />
             <nav className="collection-category-nav" aria-label={copy.index}>
-              {site.products.items.map((project, index) => (
-                <a key={project.id} href={`#product-${project.id}`}><span>{String(index + 1).padStart(2, '0')}</span>{project.name}</a>
+              {site.products.items.map((project) => (
+                <a key={project.id} href={`#product-${project.id}`}>{project.name}</a>
               ))}
             </nav>
             <div className="collection-products">
@@ -64,21 +61,18 @@ export default async function BuildPage({ params }: { params: Promise<{ locale: 
                 return (
                   <article key={project.id} id={`product-${project.id}`} className={`collection-product ${index === 0 ? 'collection-product-featured' : ''} ${inactive ? 'collection-product-ended' : ''}`}>
                     <div className="collection-product-display">
-                      <div className="collection-screen-bar" aria-hidden="true"><span /><span /><span /><i>{project.name}</i></div>
+                      <div className="collection-screen-bar" aria-hidden="true"><span /><span /><span /></div>
                       {inactive ? <div className="collection-product-image">{media}</div> : (
                         <a className="collection-product-image" href={project.url} target="_blank" rel="noopener noreferrer" aria-label={`${labels.visitProject} · ${project.name}`}>{media}</a>
                       )}
                       <div className="collection-product-strip">
                         <span className={`collection-status ${inactive ? 'collection-status-ended' : ''}`}><i aria-hidden="true" />{project.status}</span>
-                        <span>{labels.projectLabel} {String(index + 1).padStart(2, '0')}</span>
                       </div>
                     </div>
                     <div className="collection-product-body">
-                      <p className="collection-kicker">{project.tagline}</p>
                       <h2>{project.name}</h2>
                       <p className="collection-description">{project.description}</p>
-                      <ul className="collection-tags" aria-label={copy.tags}>{project.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
-                      {inactive ? <p className="collection-inactive-label">{copy.inactive}</p> : (
+                      {inactive ? null : (
                         <a className="collection-text-link" href={project.url} target="_blank" rel="noopener noreferrer">{labels.visitProject} <span aria-hidden="true">↗</span></a>
                       )}
                       <details className="collection-product-details" open={index === 0}>
@@ -99,7 +93,6 @@ export default async function BuildPage({ params }: { params: Promise<{ locale: 
           <section className="collection-system">
             <div className="collection-system-image"><Image src={system.image} alt={system.imageAlt} fill sizes="(min-width: 900px) 50vw, 100vw" /></div>
             <div className="collection-system-body">
-              <p className="collection-kicker">{system.eyebrow}</p>
               <h2>{system.title}</h2>
               <p className="collection-description">{system.description}</p>
               <div className="collection-system-metrics"><strong>{system.primaryMetric}</strong><strong>{system.secondaryMetric}</strong></div>
@@ -108,11 +101,10 @@ export default async function BuildPage({ params }: { params: Promise<{ locale: 
           </section>
 
           <section className="collection-section collection-building-notes">
-            <CollectionHeading eyebrow={labels.explainerEyebrow} title={labels.explainerTitle} />
+            <CollectionHeading title={labels.explainerTitle} />
             <div className="collection-principles">
-              {labels.explainerItems.map((item, index) => (
+              {labels.explainerItems.map((item) => (
                 <article key={item.title}>
-                  <span className="collection-kicker">{String(index + 1).padStart(2, '0')}</span>
                   <h3>{item.title}</h3>
                   <p className="collection-description">{item.description}</p>
                 </article>

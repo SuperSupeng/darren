@@ -27,8 +27,8 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
   const latest = posts[0];
   const labels = site.labels.fieldNotes;
   const copy = locale === 'zh'
-    ? { title: '文章与手记', read: '阅读全文', index: '全部文章', topics: '这篇文章的话题' }
-    : { title: 'Writing', read: 'Read the article', index: 'All articles', topics: 'Topics in this article' };
+    ? { title: '文章与手记', read: '阅读全文', index: '全部文章', latest: '最新文章' }
+    : { title: 'Writing', read: 'Read the article', index: 'All articles', latest: 'Latest article' };
 
   return (
     <>
@@ -38,8 +38,6 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
           <CollectionHero
             locale={locale}
             zone="notes"
-            number="03"
-            eyebrow={site.fieldNotes.hero.eyebrow}
             title={copy.title}
             lead={site.fieldNotes.hero.title}
             description={site.fieldNotes.hero.subtitle}
@@ -48,14 +46,13 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
           </CollectionHero>
 
           <div className="collection-note-strip">
-            <p className="collection-kicker">{labels.sidebarEyebrow}</p>
             <p>{labels.sidebarQuote}</p>
           </div>
 
           {latest ? (
             <section className="collection-section collection-latest">
               <div className="collection-journal-masthead">
-                <p className="collection-kicker">{labels.latestEyebrow} / FIELD NOTE</p>
+                <p>{copy.latest}</p>
                 <time dateTime={latest.date}>{latest.date}</time>
               </div>
               <article className="collection-latest-story">
@@ -63,10 +60,8 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
                   <Image src={latest.image.url} alt="" fill sizes="(min-width: 950px) 58vw, 100vw" />
                 </Link>
                 <div className="collection-latest-copy">
-                  <p className="collection-meta">{latest.readingTime} {labels.minRead}</p>
                   <h2><Link href={`/blog/${latest.slug}`}>{latest.title}</Link></h2>
                   <p className="collection-description">{latest.description}</p>
-                  <ul className="collection-tags" aria-label={copy.topics}>{latest.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
                   <Link href={`/blog/${latest.slug}`} className="collection-text-link">{copy.read} <span aria-hidden="true">↗</span></Link>
                 </div>
               </article>
@@ -74,20 +69,17 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
           ) : null}
 
           <section className="collection-section collection-journal-index" id="notes-index">
-            <CollectionHeading eyebrow={`${copy.index} / ${String(posts.length).padStart(2, '0')}`} title={labels.recentTitle} description={labels.recentDescription} />
+            <CollectionHeading title={labels.recentTitle} description={labels.recentDescription} />
             {posts.length > 0 ? (
               <div className="collection-notes-list">
-                {posts.map((post, index) => (
+                {posts.map((post) => (
                   <article key={post.slug} className="collection-note-entry">
                     <div className="collection-note-date">
-                      <span>{String(index + 1).padStart(2, '0')}</span>
                       <time dateTime={post.date}>{post.date}</time>
-                      <small>{post.readingTime} {labels.minRead}</small>
                     </div>
                     <div className="collection-note-body">
                       <h3><Link href={`/blog/${post.slug}`}>{post.title}</Link></h3>
                       <p className="collection-description">{post.description}</p>
-                      <ul className="collection-tags" aria-label={copy.topics}>{post.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
                       <Link href={`/blog/${post.slug}`} className="collection-text-link">{copy.read} <span aria-hidden="true">↗</span></Link>
                     </div>
                     <Link href={`/blog/${post.slug}`} className="collection-note-image" aria-label={`${copy.read} · ${post.title}`}>

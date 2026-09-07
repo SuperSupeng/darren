@@ -47,10 +47,8 @@ export default async function AboutPage({
       <JsonLd data={aboutStructuredData(locale)} />
       <main id="main-content" tabIndex={-1} className="interior-page interior-about">
         <div className="interior-wrap">
-          <div className="interior-running-line"><span>{site.labels.about.roomEyebrow}</span><span>DARREN SU / {locale === 'zh' ? '关于我' : 'ABOUT ME'}</span></div>
           <header className="interior-profile">
             <div className="interior-profile-copy">
-              <p className="interior-kicker">{site.labels.about.eyebrow}</p>
               <h1>{site.about.hero.title}</h1>
               <p className="interior-lead">{site.about.hero.subtitle}</p>
               <div className="interior-tags">{site.about.hero.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
@@ -59,7 +57,6 @@ export default async function AboutPage({
             <RoomPortal zone="notes" locale={locale} />
             <figure className="interior-photo interior-portrait">
               <div><Image src="/photo.jpg" alt="Darren Su" fill sizes="(min-width: 900px) 360px, 75vw" className="object-cover" priority /></div>
-              <figcaption><span>Darren Su / 苏鹏</span><span>{locale === 'zh' ? '杭州' : 'HANGZHOU'}</span></figcaption>
             </figure>
             </div>
           </header>
@@ -68,19 +65,18 @@ export default async function AboutPage({
           </div>
 
           <section className="interior-section interior-two-columns">
-            <header className="interior-section-heading"><p className="interior-kicker">{site.labels.about.kernelEyebrow}</p><h2>{site.labels.about.kernelTitle}</h2><p>{site.labels.about.kernelDescription}</p></header>
+            <header className="interior-section-heading"><h2>{site.labels.about.kernelTitle}</h2><p>{site.labels.about.kernelDescription}</p></header>
             <div className="interior-chapters">
-              {site.about.kernel.map((item, index) => <article key={item.title}>
-                <span className="interior-kicker">{locale === 'zh' ? '经历' : 'Experience'} / {String(index + 1).padStart(2, '0')}</span>
+              {site.about.kernel.map(item => <article key={item.title}>
                 <h3>{item.title}</h3><p>{item.description}</p>
               </article>)}
             </div>
           </section>
 
           <section className="interior-section interior-two-columns interior-inset-section">
-            <header className="interior-section-heading"><p className="interior-kicker">{site.about.whyThisWork.eyebrow}</p><h2>{site.about.whyThisWork.title}</h2><blockquote>{site.about.whyThisWork.quote}</blockquote></header>
+            <header className="interior-section-heading"><h2>{site.about.whyThisWork.title}</h2><blockquote>{site.about.whyThisWork.quote}</blockquote></header>
             <div><p className="interior-body">{site.about.whyThisWork.body}</p>
-              <ol className="interior-numbered-list">{site.about.whyThisWork.points.map((point, index) => <li key={point}><span>{String(index + 1).padStart(2, '0')}</span><p>{point}</p></li>)}</ol>
+              <ul className="interior-plain-list">{site.about.whyThisWork.points.map(point => <li key={point}>{point}</li>)}</ul>
             </div>
           </section>
 
@@ -89,12 +85,12 @@ export default async function AboutPage({
               <div className="interior-landscape"><Image src="/blog/zongtong-retreat/temple.jpg" alt={locale === 'zh' ? '宗通寺禅修期间的寺院现场' : 'Temple grounds during Darren’s meditation retreat'} fill sizes="(min-width: 900px) 43vw, 100vw" className="object-cover" /></div>
               <figcaption>{innerGround.eyebrow}</figcaption>
             </figure>
-            <div className="interior-section-heading"><p className="interior-kicker">{innerGround.eyebrow}</p><h2>{innerGround.title}</h2><p>{innerGround.description}</p><blockquote>{innerGround.closing}</blockquote></div>
+            <div className="interior-section-heading"><h2>{innerGround.title}</h2><p>{innerGround.description}</p><blockquote>{innerGround.closing}</blockquote></div>
           </section>
 
           <section className="interior-section interior-two-columns interior-current-work">
-            <header className="interior-section-heading"><p className="interior-kicker">{site.labels.about.workEyebrow}</p><h2>{site.labels.about.workTitle}</h2></header>
-            <ol className="interior-numbered-list">{site.labels.about.workItems.map((item, index) => <li key={item}><span>{String(index + 1).padStart(2, '0')}</span><p>{item}</p></li>)}</ol>
+            <header className="interior-section-heading"><h2>{site.labels.about.workTitle}</h2></header>
+            <ul className="interior-plain-list">{site.labels.about.workItems.map(item => <li key={item}>{item}</li>)}</ul>
           </section>
         </div>
       </main>
