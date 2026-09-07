@@ -1,6 +1,7 @@
 ---
 title: Managing 31 AI Employees Changed How I Understand Management
-date: 2026-04-15
+archiveYear: "2026"
+dateNote: "2026 field note"
 description: After putting 31 agents into real daily work, I began rethinking how tasks are understood, how information flows, and which rules need to be made explicit.
 tags: [AI Agents, Digital Organizations, Management, Product Experiments]
 ---

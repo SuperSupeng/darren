@@ -34,6 +34,11 @@ test('responsive article images retain text, anchors, alt text and reserved dime
           assert.match(descriptor, /^\d+w$/);
         }
         assert.ok(image.getAttribute('sizes').includes('700px'));
+        const originalLink = image.closest('a');
+        assert.equal(originalLink?.getAttribute('href'), old.getAttribute('src'), 'Readers can open the unmodified full-resolution image');
+        assert.equal(originalLink?.getAttribute('target'), '_blank');
+        assert.equal(originalLink?.getAttribute('rel'), 'noopener noreferrer');
+        assert.ok(originalLink?.getAttribute('aria-label').includes(image.alt));
         assert.equal(old.hasAttribute('srcset'), false, 'The default feed renderer keeps portable original URLs');
       }
     } finally {

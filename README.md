@@ -46,7 +46,7 @@ tests/                      离线内容完整性检查
 
 ## 添加文章
 
-在 `content/blog/en/` 或 `content/blog/zh/` 新建 Markdown 文件，文件名就是文章地址中的 slug。每篇文章必须包含以下 frontmatter：
+在 `content/blog/en/` 或 `content/blog/zh/` 新建 Markdown 文件，文件名就是文章地址中的 slug。已知原始发表日期的文章使用以下 frontmatter：
 
 ```markdown
 ---
@@ -56,6 +56,21 @@ description: 用于列表页和搜索摘要的一句话介绍。
 tags: [AI, Field Notes]
 ---
 ```
+
+如果旧稿的原始发表日期尚未核实，省略 `date`，使用 `dateNote` 说明归档状态；`archiveYear` 只用于有依据的内容年份。共同作者按原文顺序填写 `authors`，省略时默认为 Darren Su。
+
+```markdown
+---
+title: 2025 年度回顾
+archiveYear: "2025"
+dateNote: "2025 年度回顾"
+authors: [Darren Su]
+description: 用于列表页和搜索摘要的一句话介绍。
+tags: [年度回顾, 社区]
+---
+```
+
+公开副本的上传日、编辑器保存日与网站导入日都不能代替原始发表日。无精确日期时，页面使用归档说明，RSS、JSON-LD 和文章元数据省略发表日期。
 
 图片放在 `public/blog/<主题>/`，Markdown 中使用以 `/` 开头的站内路径，例如：
 

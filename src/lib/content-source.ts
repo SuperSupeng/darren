@@ -36,9 +36,12 @@ export function articleMarkdown(post: BlogPost, locale: string) {
   return [
     frontmatter({
       title: post.title,
-      author: 'Darren Su / 苏鹏',
+      ...(post.authors.length === 1 ? { author: post.authors[0] === 'Darren Su' ? 'Darren Su / 苏鹏' : post.authors[0] } : {}),
+      authors: post.authors,
       language: locale === 'zh' ? 'zh-CN' : 'en',
-      date: post.date,
+      ...(post.date ? { date: post.date } : {}),
+      ...(post.archiveYear ? { archiveYear: post.archiveYear } : {}),
+      ...(post.dateNote ? { dateNote: post.dateNote } : {}),
       canonical,
       description: post.description,
       tags: post.tags,

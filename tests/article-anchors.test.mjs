@@ -67,12 +67,30 @@ test('language switching maps encoded article headings and preserves ordinary or
   }
 });
 
-test('all translated articles have matching section order and every table-of-contents anchor survives a language switch', () => {
+test('every published article has working table-of-contents anchors, including single-language articles', () => {
+  for (const locale of ['zh', 'en']) {
+    const files = fs.readdirSync(new URL(`${locale}/`, contentRoot)).filter(name => /\.mdx?$/.test(name)).sort();
+    for (const filename of files) {
+      const source = fs.readFileSync(new URL(`${locale}/${filename}`, contentRoot), 'utf8');
+      const { dom, page } = headingFixture(source);
+      try {
+        for (const match of visibleMarkdown(source).matchAll(/(?<!!)\[[^\]]+\]\(#([^)]+)\)/g)) {
+          const hash = `#${match[1]}`;
+          assert.ok(page.getElementById(decodeURIComponent(match[1])), `${locale}/${filename}: table-of-contents link must resolve: ${hash}`);
+        }
+      } finally {
+        dom.window.close();
+      }
+    }
+  }
+});
+
+test('available translations have matching section order and every table-of-contents anchor survives a language switch', () => {
   const chineseFiles = fs.readdirSync(new URL('zh/', contentRoot)).filter(name => /\.mdx?$/.test(name)).sort();
   const englishFiles = fs.readdirSync(new URL('en/', contentRoot)).filter(name => /\.mdx?$/.test(name)).sort();
-  assert.deepEqual(englishFiles, chineseFiles, 'Both languages must contain the same complete articles');
+  const translatedFiles = chineseFiles.filter(filename => englishFiles.includes(filename));
 
-  for (const filename of chineseFiles) {
+  for (const filename of translatedFiles) {
     const zhSource = fs.readFileSync(new URL(`zh/${filename}`, contentRoot), 'utf8');
     const enSource = fs.readFileSync(new URL(`en/${filename}`, contentRoot), 'utf8');
     const zh = headingFixture(zhSource);

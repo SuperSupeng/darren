@@ -1,0 +1,101 @@
+{
+  "article": "https://www.mdnice.com/writing/11179254b5d947d68a29d2bd84431c99",
+  "sourceTitle": "如何保持 AI 记忆",
+  "sourceContext": "用户授权收录的 mdnice 公开文章完整正文；图片按原文顺序保存，原文件字节未裁剪、重绘或压缩。",
+  "copyPublishedAt": "2026/09/07",
+  "originalPublicationDate": null,
+  "dateNote": "2024 年技术笔记",
+  "bodyHtmlSha256": "f8d7467f1e3408e96341df358afcbf0f337d831b9e3a50e6c64032113d75b664",
+  "sourceImageCount": 6,
+  "images": [
+    {
+      "file": "figure-01.png",
+      "source": "https://files.mdnice.com/user/3198/d47e2881-d2b7-4216-af50-33c2590fd789.png",
+      "alt": "多轮对话中上下文窗口的工作原理：历史问题和回答随轮次累积",
+      "sha256": "36669891e6526558ad2e7a22d275c7271fc2337078d68e61e73b1b0147fb1d89",
+      "width": 2107,
+      "height": 1363,
+      "bytes": 229012,
+      "hasAlpha": false,
+      "originalBytesPreserved": true,
+      "context": "前几天宝玉老师发了一篇文章，《和 AI 对话多少轮之后重开新的会比较合适？》"
+    },
+    {
+      "file": "figure-02.png",
+      "source": "https://files.mdnice.com/user/3198/ef3adcf5-ddd4-4c73-b652-e6d4423ecb98.png",
+      "alt": "大模型智能体记忆综述中的记忆来源对照表",
+      "sha256": "e90fe73102610be99a2375dad94089609d70555e66236b1dcbadf522ca8c4428",
+      "width": 1186,
+      "height": 1252,
+      "bytes": 181647,
+      "hasAlpha": true,
+      "originalBytesPreserved": true,
+      "context": "这里涉及了一个很有意思的话题，相信不少做陪伴类的或者需要多轮对话的 AI 应用，都会遇到随着对话轮数的增加，导致上下文超出 Token 限制的问题，如果超出的部分不能粗暴的删掉，现在普遍的做法是压缩 + 外置存储的方案，之前也有一篇综述《A Survey on the Memory Mechanism of Large Language Model based Agents》专门介绍了这方面的工作，具体内容可以看一下这篇论文。"
+    },
+    {
+      "file": "figure-03.jpg",
+      "source": "https://files.mdnice.com/user/3198/19de947f-a7b5-411b-b40e-753d4a729304.jpg",
+      "alt": "LongLLMLingua 提示词压缩与响应恢复流程",
+      "sha256": "2e85e7d488dd7872dae763dd6cc9b0845c5e65d1a9ea381a11b565c6e6a35219",
+      "width": 1868,
+      "height": 986,
+      "bytes": 176459,
+      "hasAlpha": false,
+      "originalBytesPreserved": true,
+      "context": "因为上下文最终还是要放在提示词当中与模型进行交互，之前还有一些工作关注的是提示词压缩的方法，例如运用互信息的方法计算文字相关性，判断哪些内容可以被压缩，或者使用小模型/大模型来进行端到端的压缩。"
+    },
+    {
+      "file": "figure-04.png",
+      "source": "https://files.mdnice.com/user/3198/8c6e2692-2ea5-4649-b3cb-cc52fa95bbe3.png",
+      "alt": "分层会话记忆方案：较早对话摘要与近期完整会话组成提示词",
+      "sha256": "b7cc336e3568b6019aa2e9c6d2a6a93511893a7aa68c6d3f07d87bd95ff65ac4",
+      "width": 1254,
+      "height": 946,
+      "bytes": 358851,
+      "hasAlpha": true,
+      "originalBytesPreserved": true,
+      "context": "对于压缩的方案来说，一般来说会采用分层的设计，例如：保留最近五次的完整会话，倒数 5-10 次会话让模型压缩到 200 字以内，其余更久的会话让模型压缩到 100 字以内。"
+    },
+    {
+      "file": "figure-05.png",
+      "source": "https://files.mdnice.com/user/3198/b5ca2ef2-de7c-41fd-85bb-66a157159142.png",
+      "alt": "RAG 系统从索引到回答生成的七个潜在失败点",
+      "sha256": "456054758eda3944932acbd68de479414c05ccf54828626f9274b7e171daf040",
+      "width": 3766,
+      "height": 1420,
+      "bytes": 965697,
+      "hasAlpha": true,
+      "originalBytesPreserved": true,
+      "context": "RAG 系统思路虽然简单，但是实现上有很多细节，之前也有文章《Seven Failure Points When Engineering a Retrieval Augmented Generation System 》专门介绍这方面的内容。"
+    },
+    {
+      "file": "figure-06.png",
+      "source": "https://files.mdnice.com/user/3198/050910b4-42cc-46fd-8985-6e8d74761021.png",
+      "alt": "图记忆示意：Alice、John 与偏好、好友和宠物之间的关系",
+      "sha256": "8891ebc26f3b6e8288ea5720ad2f533f47f7a556b1684331e2348660b9c2cb93",
+      "width": 1096,
+      "height": 534,
+      "bytes": 277006,
+      "hasAlpha": true,
+      "originalBytesPreserved": true,
+      "context": "提取出的信息转成向量存储比较好理解，将其向量化后通过语义检索即可。但是他还提到了图数据库存储记忆，在这篇文档里也介绍了一下他们的思路"
+    }
+  ],
+  "cover": "figure-01.png",
+  "publicationDate": null,
+  "archiveYear": "2024",
+  "dateEvidence": {
+    "checkedAt": "2026-09-07",
+    "precision": "context-year",
+    "originalPublicationDateVerified": false,
+    "note": "年份用于定位文章的历史内容；转载、事件及本次公开副本日期均不作为原始发表日。",
+    "sources": [
+      {
+        "url": "https://www.modb.pro/db/1858334652902158336",
+        "date": "2024-11-18",
+        "kind": "转载页发布日期",
+        "note": "标题下显示AI 搜索引擎与2024-11-18；页尾明确文章转载自AI 搜索引擎并链接微信。开篇、Mem0提示词、图记忆及结尾对应本地旧稿。"
+      }
+    ]
+  }
+}

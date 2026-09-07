@@ -20,7 +20,7 @@ export default function SpatialFooter() {
   const { lighting, still, setStill } = useStudioSettings();
   return <footer className="spatial-footer">
     <div className="spatial-footer-top">
-      <div className="spatial-footer-intro"><h2>{zh ? '保持联系' : 'Let’s keep in touch'}</h2><p>{zh ? '告诉我你在做什么，以及希望我参与的部分。' : 'Tell me what you’re working on and how you’d like me to help.'}</p></div>
+      <div className="spatial-footer-intro"><h2><Link href="/about">Darren Su</Link></h2></div>
       <nav className="spatial-footer-map" aria-label={zh ? '网站导航' : 'Site navigation'}>{roomLinks.map(link => <Link key={link.href} href={`${link.href}${lighting === 'evening' ? '?light=evening' : ''}`}>{zh ? link.zh : link.en}</Link>)}</nav>
       <div className="spatial-footer-contact"><ContactActions locale={locale} context="studio-footer" /><div className="spatial-socials">{socialLinks.map(([label, href]) => <a key={href} href={href} target="_blank" rel="noopener noreferrer">{label} ↗</a>)}</div></div>
     </div>

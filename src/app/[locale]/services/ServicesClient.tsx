@@ -3,7 +3,7 @@ import { getPortfolio, getWorkById, type CollaborationPath } from '@/lib/portfol
 import ContactActions from '@/components/ContactActions';
 import RoomPortal from '@/components/spatial/RoomPortal';
 import '@/components/spatial/interiors.css';
-import '@/components/spatial/service-evidence.css';
+import '@/components/spatial/collaboration-reading.css';
 
 const representativeWork: Record<CollaborationPath['id'], string> = {
   'developer-events': 'wechat-innovation-workshop',
@@ -16,69 +16,65 @@ export default function ServicesClient({ locale }: { locale: string }) {
   const copy =
     locale === 'zh'
       ? {
-          title: '开发者活动、产品 Workshop，以及 AI 实践分享。',
-          subtitle: '这里列了三种合作方式。可以先看看哪一项符合需要，再告诉我你的团队或产品、想做的事和预计时间。',
-          bestFor: '适合',
+          title: '聊聊合作',
+          subtitle: '我参与开发者活动、产品体验和 AI 实践分享。看看哪一项与你的需求接近，也可以直接写信聊聊。',
+          directions: '合作方式',
+          otherDirections: '其他合作方式',
+          studio: '看看工作室',
           whatHappens: '可以一起做什么',
-          relatedCase: '相关案例',
-          caseRole: '我的角色',
-          caseResult: '规模与结果',
-          viewCase: '查看案例',
+          viewCase: '参考案例',
           readArticle: '阅读 Agent 实践文章',
-          inquiryTitle: '来信时，可以说说这三点',
           emailSubject: '合作咨询',
           fieldSeparator: '：',
-          methodTitle: '先说清楚目标，再安排怎么做。',
-          steps: [
-            ['01', '确认目标', '想解决什么问题，希望哪些人参与，结束时需要完成什么。'],
-            ['02', '确定参与者', '根据目标，确认需要邀请的开发者、嘉宾或合作社区，再安排沟通。'],
-            ['03', '安排内容和形式', '根据目标和参与者，确定采用哪种活动或分享形式，并安排内容。'],
-            ['04', '整理反馈', '结束后整理活动记录、产品使用反馈或后续合作意向，和团队商量下一步。'],
-          ],
-          boundaryTitle: '合作前，先说清楚几件事。',
+          needs: {
+            'developer-events': '想组织开发者活动、多城市联动，或开展大会合作。',
+            'product-workshops': '产品已可试用，想听到早期用户反馈，或接触中国开发者。',
+            'ai-talks': '企业、大会、高校或开发者社区，想邀请我分享 AI 与 Agent 的实践经验。',
+          },
+          boundaryTitle: '合作前的几件事',
           boundaries: ['不出售联系人名单，也不提供付费接触社区成员的服务。', '只需要活动执行、但没有明确项目目标的合作，我目前不接。', '只有双方有合适的交流需求时，我才会引荐。', '我的个人合作，与 Datawhale、AGI Villa 的组织合作分开。'],
-          cta: '还没确定形式，也可以先聊需求。',
-          ctaBody: '简单介绍你的团队、想做的事和预计时间，我们再讨论具体的合作方式。',
+          cta: '还没确定形式，也可以先聊需求',
+          ctaBody: '来信可以介绍你的团队或产品、希望达成的目标，以及预计时间。',
+          inquiry: '产品体验可以附上试用链接和最想验证的问题；活动或分享可以说说参与者背景、城市与规模。',
         }
       : {
-          title: 'Developer events, product workshops, and talks on AI in practice.',
-          subtitle: 'Here are three ways to work together. See which one fits your needs, then tell me about your team or product, what you want to do, and the timing.',
-          bestFor: 'Best for',
+          title: 'Work together',
+          subtitle: 'I work on developer events, product workshops, and talks on AI in practice. Explore a direction below, or email me to discuss what you have in mind.',
+          directions: 'Ways to collaborate',
+          otherDirections: 'Other ways to collaborate',
+          studio: 'Look around the studio',
           whatHappens: 'What I can help with',
-          relatedCase: 'Related case study',
-          caseRole: 'My role',
-          caseResult: 'Scale and outcome',
-          viewCase: 'View case study',
+          viewCase: 'Related case study',
           readArticle: 'Read the article on my agent system',
-          inquiryTitle: 'What to include in your email',
           emailSubject: 'Collaboration inquiry',
           fieldSeparator: ':',
-          methodTitle: 'Agree on the goal, then plan the work.',
-          steps: [
-            ['01', 'Agree on the goal', 'What do you want to address, who should take part, and what needs to be completed?'],
-            ['02', 'Decide who to invite', 'Identify the developers, speakers, or community partners relevant to the goal, then contact them.'],
-            ['03', 'Plan the content and format', 'Choose an event or talk format that suits the goal and participants, then plan the content.'],
-            ['04', 'Review the feedback', 'Collect the relevant event notes, user feedback, or follow-up interest, then discuss next steps with the team.'],
-          ],
-          boundaryTitle: 'A few things to be clear about.',
+          needs: {
+            'developer-events': 'For teams planning developer events, a multi-city series, or conference collaborations.',
+            'product-workshops': 'For AI teams with a usable product seeking early feedback or conversations with developers in China.',
+            'ai-talks': 'For companies, conferences, universities, and developer communities seeking practical AI talks.',
+          },
+          boundaryTitle: 'A few things to be clear about',
           boundaries: ['I do not sell contact lists or paid access to community audiences.', 'I do not take on events where the only ask is on-site execution and there is no clear project goal.', 'I make introductions only when both sides have a reason to talk.', 'My personal collaborations are separate from work undertaken through Datawhale or AGI Villa.'],
-          cta: 'You can start with the need, even without a format in mind.',
-          ctaBody: 'Tell me about your team, what you want to do, and the timing. We can discuss the details from there.',
+          cta: 'Start with the need, even without a format in mind',
+          ctaBody: 'Tell me about your team or product, what you hope to achieve, and the approximate timing.',
+          inquiry: 'For a product workshop, include a link people can try and the main question you want to explore. For an event or talk, describe the audience, location, and scale.',
         };
 
   return (
-    <main id="main-content" tabIndex={-1} className="interior-page interior-services">
-      <div className="interior-wrap">
-        <header className="interior-services-hero">
-          <div><h1 className={locale === 'zh' ? 'interior-service-title-zh' : undefined}>{locale === 'zh'
-            ? ['开发者活动、', '产品 Workshop，', '以及 AI 实践分享。'].map(phrase => <span key={phrase}>{phrase}</span>)
-            : copy.title}</h1><p className="interior-lead">{copy.subtitle}</p></div>
-          <RoomPortal zone="work" locale={locale} />
+    <main id="main-content" tabIndex={-1} className="interior-page interior-services collaboration-reading">
+      <div className="collaboration-reading-wrap">
+        <header className="collaboration-reading-intro">
+          <h1>{copy.title}</h1>
+          <p>{copy.subtitle}</p>
+          <details className="collaboration-reading-scene">
+            <summary>{copy.studio}</summary>
+            <RoomPortal zone="work" locale={locale} compact />
+          </details>
         </header>
-        <nav className="interior-service-index" aria-label={locale === 'zh' ? '合作方式' : 'Ways to collaborate'}>
-          {collaborations.map(path => <a href={`#${path.id}`} key={path.id}><span>{path.title}</span><span aria-hidden="true">↓</span></a>)}
+        <nav id="collaboration-options" className="collaboration-reading-index" aria-label={copy.directions}>
+          {collaborations.map(path => <a href={`#${path.id}`} key={path.id}>{path.title}<span aria-hidden="true">↓</span></a>)}
         </nav>
-        <div className="interior-service-files">
+        <div className="collaboration-reading-directions">
           {collaborations.map(path => {
             const work = getWorkById(locale, representativeWork[path.id]);
 
@@ -87,48 +83,33 @@ export default function ServicesClient({ locale }: { locale: string }) {
             }
 
             return (
-              <article id={path.id} key={path.id} aria-labelledby={`${path.id}-title`} className="interior-service-file">
-                <header className="interior-service-heading"><h2 id={`${path.id}-title`}>{path.title}</h2><p className="interior-kicker">{copy.bestFor}</p><p>{path.bestFor}</p></header>
-                <div className="interior-service-details"><p className="interior-body">{path.description}</p><h3 className="interior-kicker">{copy.whatHappens}</h3>
-                  <ul className="interior-plain-list">{path.outcomes.map(outcome => <li key={outcome}>{outcome}</li>)}</ul>
+              <article id={path.id} key={path.id} tabIndex={-1} aria-labelledby={`${path.id}-title`} className="collaboration-reading-direction">
+                <h2 id={`${path.id}-title`}>{path.title}</h2>
+                <p className="collaboration-reading-need">{copy.needs[path.id]}</p>
+                <ContactActions locale={locale} context={`services-${path.id}`} emailSubject={`${copy.emailSubject}${copy.fieldSeparator} ${path.title}`} className="collaboration-reading-contact" />
+                <section className="collaboration-reading-help" aria-labelledby={`${path.id}-help-title`}>
+                  <h3 id={`${path.id}-help-title`}>{copy.whatHappens}</h3>
+                  <ul>{path.outcomes.map(outcome => <li key={outcome}>{outcome}</li>)}</ul>
+                </section>
+                <div className="collaboration-reading-references">
+                  <Link href={`/work/${work.id}`}>{copy.viewCase}{copy.fieldSeparator} {work.title}<span aria-hidden="true">↗</span></Link>
+                  {path.id === 'ai-talks' && work.noteHref ? <Link href={work.noteHref}>{copy.readArticle}<span aria-hidden="true">↗</span></Link> : null}
                 </div>
-                <section className="service-evidence" aria-labelledby={`${path.id}-evidence-title`}>
-                  <header className="service-evidence-heading">
-                    <p>{copy.relatedCase}</p>
-                    <h3 id={`${path.id}-evidence-title`}>{work.title}</h3>
-                  </header>
-                  <div className="service-evidence-detail">
-                    <dl className="service-evidence-facts">
-                      <div><dt>{copy.caseRole}</dt><dd>{work.role}</dd></div>
-                      <div><dt>{copy.caseResult}</dt><dd>{work.result}</dd></div>
-                    </dl>
-                    <div className="service-evidence-links">
-                      <Link href={`/work/${work.id}`} aria-label={`${copy.viewCase}: ${work.title}`}>
-                        {copy.viewCase}<span aria-hidden="true">↗</span>
-                      </Link>
-                      {path.id === 'ai-talks' && work.noteHref ? <Link href={work.noteHref}>
-                        {copy.readArticle}<span aria-hidden="true">↗</span>
-                      </Link> : null}
-                    </div>
-                  </div>
-                </section>
-                <section className="interior-inquiry" aria-labelledby={`${path.id}-inquiry`}><h3 id={`${path.id}-inquiry`}>{copy.inquiryTitle}</h3>
-                  <ul>{path.inquiry.map(item => <li key={item}>{item}</li>)}</ul>
-                  <ContactActions locale={locale} context={`services-${path.id}`} emailSubject={`${copy.emailSubject}${copy.fieldSeparator} ${path.title}`} emailBody={path.inquiry.map(item => `${item}${copy.fieldSeparator} `).join('\r\n\r\n')} className="interior-contact" />
-                </section>
+                <a className="collaboration-reading-back" href="#collaboration-options">{copy.otherDirections}<span aria-hidden="true">↑</span></a>
               </article>
             );
           })}
         </div>
-        <section className="interior-section interior-two-columns">
-          <header className="interior-section-heading"><h2>{copy.methodTitle}</h2></header>
-          <div className="interior-process">{copy.steps.map(([number, title, body]) => <article key={number}><span className="interior-kicker">{number}</span><div><h3>{title}</h3><p>{body}</p></div></article>)}</div>
+        <section className="collaboration-reading-inquiry" aria-labelledby="collaboration-inquiry-title">
+          <h2 id="collaboration-inquiry-title">{copy.cta}</h2>
+          <p>{copy.ctaBody}</p>
+          <p>{copy.inquiry}</p>
+          <ContactActions locale={locale} context="services-cta" className="collaboration-reading-contact" />
         </section>
-        <section className="interior-section interior-two-columns interior-inset-section">
-          <header className="interior-section-heading"><h2>{copy.boundaryTitle}</h2></header>
-          <ul className="interior-plain-list">{copy.boundaries.map(boundary => <li key={boundary}>{boundary}</li>)}</ul>
-        </section>
-        <section className="interior-invitation"><h2>{copy.cta}</h2><div><p>{copy.ctaBody}</p><ContactActions locale={locale} context="services-cta" className="interior-contact" /></div></section>
+        <details className="collaboration-reading-boundaries">
+          <summary>{copy.boundaryTitle}</summary>
+          <ul>{copy.boundaries.map(boundary => <li key={boundary}>{boundary}</li>)}</ul>
+        </details>
       </div>
     </main>
   );

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import { createRequire } from 'node:module';
 import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
@@ -10,7 +11,7 @@ const publicRoot = path.join(projectRoot, 'public');
 const portfolioPath = path.join(projectRoot, 'src', 'lib', 'portfolio.ts');
 const portfolioSource = fs.readFileSync(portfolioPath, 'utf8');
 const locales = ['en', 'zh'];
-const requiredFrontmatter = ['title', 'date', 'description', 'tags'];
+const { parseBlogContent } = createRequire(import.meta.url)('../src/lib/blog.ts');
 
 function markdownFiles() {
   return locales.flatMap((locale) => {
@@ -68,21 +69,6 @@ function stripFencedCode(source) {
   return visibleLines.join('\n');
 }
 
-function parseFrontmatter(source, relativePath) {
-  const match = source.match(/^---\n([\s\S]*?)\n---(?:\n|$)/);
-  assert.ok(match, `${relativePath} must start with a frontmatter block`);
-
-  const values = new Map();
-  for (const line of match[1].split('\n')) {
-    if (!line.trim() || /^\s/.test(line)) continue;
-    const separator = line.indexOf(':');
-    if (separator === -1) continue;
-    values.set(line.slice(0, separator).trim(), line.slice(separator + 1).trim());
-  }
-
-  return values;
-}
-
 function markdownDestination(rawDestination) {
   const destination = rawDestination.trim();
   if (destination.startsWith('<')) {
@@ -127,27 +113,11 @@ function articleRoute(destination, sourceLocale) {
   return null;
 }
 
-test('blog frontmatter is complete in both languages', () => {
+test('blog frontmatter follows production author and publication-date rules in both languages', () => {
   for (const post of markdownFiles()) {
-    const frontmatter = parseFrontmatter(readPost(post), post.relativePath);
-
-    for (const field of requiredFrontmatter) {
-      assert.ok(frontmatter.has(field), `${post.relativePath} is missing frontmatter field: ${field}`);
-      assert.ok(frontmatter.get(field), `${post.relativePath} has an empty frontmatter field: ${field}`);
-    }
-
-    const date = frontmatter.get('date');
-    assert.match(date, /^\d{4}-\d{2}-\d{2}$/, `${post.relativePath} date must use YYYY-MM-DD`);
-    const parsedDate = new Date(`${date}T00:00:00Z`);
-    assert.ok(!Number.isNaN(parsedDate.valueOf()), `${post.relativePath} has an invalid date`);
-    assert.equal(
-      parsedDate.toISOString().slice(0, 10),
-      date,
-      `${post.relativePath} has an invalid calendar date`,
-    );
-
-    const tags = frontmatter.get('tags');
-    assert.match(tags, /^\[\s*[^\]]+\s*\]$/, `${post.relativePath} tags must be a non-empty inline list`);
+    // The production parser validates authors, real dates or explicit archive
+    // context, required metadata, and a non-empty body without a second schema.
+    parseBlogContent(readPost(post), post.relativePath);
   }
 });
 

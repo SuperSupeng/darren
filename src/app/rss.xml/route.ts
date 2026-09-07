@@ -1,5 +1,5 @@
 import { locales } from '@/i18n/config';
-import { getAllPosts } from '@/lib/blog';
+import { compareBlogPosts, getAllPosts } from '@/lib/blog';
 import { renderMarkdown } from '@/lib/render-markdown';
 import { siteUrl } from '@/lib/seo';
 
@@ -42,10 +42,7 @@ export function GET() {
     .flatMap((locale) =>
       getAllPosts(locale).map((post) => ({ locale, post }))
     )
-    .sort(
-      (a, b) =>
-        new Date(b.post.date).getTime() - new Date(a.post.date).getTime()
-    )
+    .sort((a, b) => compareBlogPosts(a.post, b.post))
     .map(({ locale, post }) => {
       const url = `${siteUrl}/${locale}/blog/${post.slug}`;
       return [
@@ -55,9 +52,9 @@ export function GET() {
         `<guid isPermaLink="true">${escapeXml(url)}</guid>`,
         `<description>${escapeXml(post.description)}</description>`,
         `<content:encoded>${escapeXml(renderFeedContent(post.content, post.title, locale, url))}</content:encoded>`,
-        '<dc:creator>Darren Su</dc:creator>',
+        ...post.authors.map((author) => `<dc:creator>${escapeXml(author)}</dc:creator>`),
         ...post.tags.map((tag) => `<category>${escapeXml(tag)}</category>`),
-        `<pubDate>${new Date(`${post.date}T00:00:00+08:00`).toUTCString()}</pubDate>`,
+        ...(post.date ? [`<pubDate>${new Date(`${post.date}T00:00:00+08:00`).toUTCString()}</pubDate>`] : []),
         `<dc:language>${locale === 'zh' ? 'zh-CN' : 'en'}</dc:language>`,
         '</item>',
       ].join('');

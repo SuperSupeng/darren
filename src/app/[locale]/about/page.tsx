@@ -1,9 +1,12 @@
 import Image from 'next/image';
+import { getAboutCopy } from '@/lib/about';
 import { getTranslations } from 'next-intl/server';
+import ContactActions from '@/components/ContactActions';
 import JsonLd from '@/components/JsonLd';
 import RoomPortal from '@/components/spatial/RoomPortal';
+import { Link } from '@/i18n/navigation';
 import '@/components/spatial/interiors.css';
-import { getSiteContent } from '@/lib/siteContent';
+import '@/components/spatial/about-reading.css';
 import { aboutStructuredData, createPageMetadata, getPageKeywords } from '@/lib/seo';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -13,84 +16,67 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     locale,
     path: '/about',
     title: t('meta.title'),
-    description: t('meta.description'),
+    description: getAboutCopy(locale).description,
     keywords: getPageKeywords(locale, 'about'),
   });
 }
 
-export default async function AboutPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const site = getSiteContent(locale);
-  const innerGround =
-    locale === 'zh'
-      ? {
-          eyebrow: '禅修与自我观察',
-          title: '禅修让我在忙碌时，也能停下来想一想。',
-          description:
-            '面对新的项目和机会，我会先问自己：这件事为什么值得做，我是否愿意投入，会给参与的人带来什么影响。禅修和长期的自我观察，帮助我更认真地考虑这些问题。',
-          closing: '开始之前，先想清楚自己为什么愿意做。',
-        }
-      : {
-          eyebrow: 'Meditation and reflection',
-          title: 'Meditation helps me pause, even when work gets busy.',
-          description:
-            'Before taking on a project or opportunity, I ask why it matters, whether I am willing to commit, and how it may affect the people involved. Meditation and reflection help me give those questions more attention.',
-          closing: 'Before I begin, I want to understand why I am willing to do the work.',
-        };
-
+  const copy = getAboutCopy(locale);
   return (
     <>
       <JsonLd data={aboutStructuredData(locale)} />
-      <main id="main-content" tabIndex={-1} className="interior-page interior-about">
-        <div className="interior-wrap">
-          <header className="interior-profile">
-            <div className="interior-profile-copy">
-              <h1>{site.about.hero.title}</h1>
-              <p className="interior-lead">{site.about.hero.subtitle}</p>
-              <div className="interior-tags">{site.about.hero.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
-            </div>
-            <div className="interior-profile-stage">
-            <RoomPortal zone="notes" locale={locale} />
-            <figure className="interior-photo interior-portrait">
-              <div><Image src="/photo.jpg" alt="Darren Su" fill sizes="(min-width: 900px) 360px, 75vw" className="object-cover" priority /></div>
-            </figure>
-            </div>
-          </header>
-          <div className="interior-profile-room">
-            <blockquote>{site.labels.about.pullQuote}</blockquote>
+      <main id="main-content" tabIndex={-1} className="interior-page about-reading">
+        <header className="about-reading-hero">
+          <div className="about-reading-intro">
+            <h1>{copy.title}</h1>
+            <p>{copy.intro}</p>
           </div>
-
-          <section className="interior-section interior-two-columns">
-            <header className="interior-section-heading"><h2>{site.labels.about.kernelTitle}</h2><p>{site.labels.about.kernelDescription}</p></header>
-            <div className="interior-chapters">
-              {site.about.kernel.map(item => <article key={item.title}>
-                <h3>{item.title}</h3><p>{item.description}</p>
-              </article>)}
-            </div>
-          </section>
-
-          <section className="interior-section interior-two-columns interior-inset-section">
-            <header className="interior-section-heading"><h2>{site.about.whyThisWork.title}</h2><blockquote>{site.about.whyThisWork.quote}</blockquote></header>
-            <div><p className="interior-body">{site.about.whyThisWork.body}</p>
-              <ul className="interior-plain-list">{site.about.whyThisWork.points.map(point => <li key={point}>{point}</li>)}</ul>
-            </div>
-          </section>
-
-          <section className="interior-section interior-inner-ground">
-            <figure className="interior-photo">
-              <div className="interior-landscape"><Image src="/blog/zongtong-retreat/temple.jpg" alt={locale === 'zh' ? '宗通寺禅修期间的寺院现场' : 'Temple grounds during Darren’s meditation retreat'} fill sizes="(min-width: 900px) 43vw, 100vw" className="object-cover" /></div>
-              <figcaption>{innerGround.eyebrow}</figcaption>
+          <div className="about-reading-stage">
+            <RoomPortal zone="notes" locale={locale} />
+            <figure className="about-reading-portrait">
+              <Image src="/photo.jpg" alt="Darren Su / 苏鹏" fill sizes="(max-width: 600px) 112px, 148px" loading="eager" className="object-cover" />
             </figure>
-            <div className="interior-section-heading"><h2>{innerGround.title}</h2><p>{innerGround.description}</p><blockquote>{innerGround.closing}</blockquote></div>
-          </section>
+          </div>
+        </header>
 
-          <section className="interior-section interior-two-columns interior-current-work">
-            <header className="interior-section-heading"><h2>{site.labels.about.workTitle}</h2></header>
-            <ul className="interior-plain-list">{site.labels.about.workItems.map(item => <li key={item}>{item}</li>)}</ul>
+        <div className="about-reading-body">
+          <section aria-labelledby="about-engineering-title">
+            <h2 id="about-engineering-title">{copy.engineeringTitle}</h2>
+            {copy.engineering.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+          </section>
+          <section aria-labelledby="about-community-title">
+            <h2 id="about-community-title">{copy.communityTitle}</h2>
+            {copy.community.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+            <Link href="/work/datawhale-city-ecosystem" className="about-reading-link">{copy.communityLink}<span aria-hidden="true">↗</span></Link>
+          </section>
+          <section aria-labelledby="about-making-title">
+            <h2 id="about-making-title">{copy.makingTitle}</h2>
+            {copy.making.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+            <div className="about-reading-links">
+              <Link href="/build" className="about-reading-link">{copy.productsLink}<span aria-hidden="true">↗</span></Link>
+              <Link href="/blog/managing-31-ai-employees" className="about-reading-link">{copy.agentLink}<span aria-hidden="true">↗</span></Link>
+            </div>
+          </section>
+          <section aria-labelledby="about-life-title">
+            <h2 id="about-life-title">{copy.lifeTitle}</h2>
+            {copy.life.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+            <figure className="about-reading-photo">
+              <div><Image src="/blog/zongtong-retreat/temple.jpg" alt={copy.lifeImageAlt} fill sizes="(max-width: 850px) 88vw, 740px" className="object-cover" /></div>
+              <figcaption>{copy.lifeImageCaption}</figcaption>
+            </figure>
+            <Link href="/blog/zongtong-temple-retreat" className="about-reading-link">{copy.lifeLink}<span aria-hidden="true">↗</span></Link>
+          </section>
+          <section className="about-reading-contact" aria-labelledby="about-contact-title">
+            <h2 id="about-contact-title">{copy.contactTitle}</h2>
+            <p>{copy.contactBody}</p>
+            <ContactActions locale={locale} context="about-reading" className="about-reading-contact-actions" />
+            <noscript><style>{'.about-reading-contact-actions > button{display:none!important}'}</style></noscript>
+            <div className="about-reading-links">
+              <Link href="/services" className="about-reading-link">{copy.servicesLink}<span aria-hidden="true">↗</span></Link>
+              <Link href="/blog/superai-china-ecosystem-visit" className="about-reading-link">{copy.visitLink}<span aria-hidden="true">↗</span></Link>
+            </div>
           </section>
         </div>
       </main>

@@ -1,0 +1,49 @@
+{
+  "article": "https://www.mdnice.com/writing/ffe658df0bff409e80c85b9b0ef4fac8",
+  "originalTitle": "我创业啦：AGI Villa，一个 Community-driven Venture Studio",
+  "sourceContext": "用户主动公开的 mdnice 完整正文。公开副本的 publishTime 为本次公开时间，未用于网站发表日期。图片按正文顺序保存，原文件未裁剪、重绘或压缩。",
+  "publicationDate": null,
+  "dateNote": "2025 年创业记录",
+  "cover": null,
+  "images": [],
+  "textIntegrity": {
+    "sourceBodySha256": "48fe9cc98d08e68eebbdc749ac1d65f58f98ff12be203e3099987e64c53e6213",
+    "sourceParagraphCount": 35,
+    "sourceImageCount": 0,
+    "sourceHeadingCount": 10,
+    "omittedDecorativeQuoteMarks": 3,
+    "bodyTextChanges": [],
+    "normalizedTextSha256": "b5363651745ccd6f89e7c7db4f2e70c6b9d81be26cd3f5f31847ea29f2ca936a",
+    "normalizedTextCharacterCount": 1793,
+    "completeNormalizedTextMatchesSource": true,
+    "normalization": "HTML text versus Markdown visible text, preserving all non-whitespace textual characters in order; ignores markup, image alt additions and mdnice decorative opening quote marks."
+  },
+  "editorialChanges": [
+    "标题空格或补充年份用于清楚辨识，原题保存在 originalTitle。",
+    "章节标题统一降低一级，保持原有层级。",
+    "平台样式与无语义容器不导入，正文、引用、列表和配图顺序保留。",
+    "附加归档来源与日期说明，历史计划和招募语气保留。",
+    "逐张查看原图后补充描述性 alt；无修改或重绘配图。",
+    "两条说明书裸链接转为可点击链接，URL 与可见文字保留。"
+  ],
+  "archiveYear": "2025",
+  "dateEvidence": {
+    "checkedAt": "2026-09-07",
+    "precision": "context-year",
+    "originalPublicationDateVerified": false,
+    "note": "年份用于定位文章的历史内容；转载、事件及本次公开副本日期均不作为原始发表日。",
+    "sources": [
+      {
+        "url": "https://www.mdnice.com/writing/16bf272870184d8cb47a6ca44af3556b",
+        "date": "2025-09",
+        "kind": "same-author-selected-article",
+        "note": "该段在 2025 年回顾的“希望”章节中；本文另一处称三个多月做 17 期直播，支持九月开始运营的事件背景。不能倒推出创业文章发表于九月。"
+      },
+      {
+        "url": "https://www.mdnice.com/writing/ffe658df0bff409e80c85b9b0ef4fac8",
+        "kind": "user-public-copy-body",
+        "note": "正文没有年份或明确月份，原稿无内容图片，因此不能从公开稿推定精确首发日。"
+      }
+    ]
+  }
+}

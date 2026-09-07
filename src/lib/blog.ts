@@ -1,11 +1,15 @@
 import fs from 'fs';
 import path from 'path';
 import { defaultLocale, isLocale, locales, type Locale } from '@/i18n/config';
+import { archivedArticleCovers } from '@/lib/blog-images';
 
 export interface BlogPost {
   slug: string;
   title: string;
-  date: string;
+  date?: string;
+  archiveYear?: string;
+  dateNote?: string;
+  authors: string[];
   description: string;
   tags: string[];
   content: string;
@@ -20,6 +24,12 @@ export interface BlogPost {
 const BLOG_DIR = path.join(process.cwd(), 'content/blog');
 
 const postImages: Record<string, BlogPost['image']> = {
+  ...archivedArticleCovers,
+  'turning-expertise-into-an-asset': {
+    url: '/blog/expertise-assets/aim-model.png',
+    width: 673,
+    height: 449,
+  },
   'superai-china-ecosystem-visit': {
     url: '/blog/superai-china/team.jpg',
     width: 1922,
@@ -43,7 +53,7 @@ const defaultPostImage: BlogPost['image'] = {
   height: 630,
 };
 
-type ParsedBlogContent = Pick<BlogPost, 'title' | 'date' | 'description' | 'tags' | 'content'>;
+type ParsedBlogContent = Pick<BlogPost, 'title' | 'date' | 'archiveYear' | 'dateNote' | 'authors' | 'description' | 'tags' | 'content'>;
 
 // The local articles use single-line fields and an inline tag list.
 // Invalid source metadata must fail before it can reach HTML, JSON-LD, or feeds.
@@ -84,52 +94,86 @@ export function parseBlogContent(source: string, context = 'Blog article'): Pars
       return fail(`${field} must be single-line text`);
     }
     if (!value.trim()) return fail(`${field} must not be empty`);
+    if (/[\r\n]/.test(value)) return fail(`${field} must be single-line text`);
     return value;
   };
   const requiredText = (field: string) => text(fields.get(field) ?? '', field);
   const title = requiredText('title');
-  const date = requiredText('date');
+  const optionalText = (field: string) => fields.has(field) ? requiredText(field) : undefined;
+  const date = optionalText('date');
+  const archiveYear = optionalText('archiveYear');
+  const dateNote = optionalText('dateNote');
   const description = requiredText('description');
 
-  const dateValue = new Date(`${date}T00:00:00Z`);
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)
-    || Number.isNaN(dateValue.valueOf())
-    || dateValue.toISOString().slice(0, 10) !== date) {
-    return fail('date must be a valid calendar date in YYYY-MM-DD format');
+  if (date) {
+    const dateValue = new Date(`${date}T00:00:00Z`);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)
+      || Number.isNaN(dateValue.valueOf())
+      || dateValue.toISOString().slice(0, 10) !== date) {
+      return fail('date must be a valid calendar date in YYYY-MM-DD format');
+    }
   }
+  if (archiveYear && !/^[1-9]\d{3}$/.test(archiveYear)) return fail('archiveYear must be a four-digit year');
+  if (!date && !archiveYear && !dateNote) return fail('date is required unless archiveYear or dateNote explains the unknown publication date');
 
-  const rawTags = fields.get('tags') ?? '';
-  if (!rawTags.startsWith('[') || !rawTags.endsWith(']')) return fail('tags must be a non-empty inline list');
-  const tagValues: string[] = [];
-  let tag = '';
-  let quote = '';
-  const list = rawTags.slice(1, -1);
-  for (let index = 0; index < list.length; index += 1) {
-    const character = list[index];
-    if (quote === "'" && character === "'" && list[index + 1] === "'") {
-      tag += "''";
-      index += 1;
-      continue;
+  const inlineList = (field: string): string[] => {
+    const raw = fields.get(field) ?? '';
+    if (!raw.startsWith('[') || !raw.endsWith(']')) return fail(`${field} must be a non-empty inline list`);
+    const values: string[] = [];
+    let item = '';
+    let quote = '';
+    const list = raw.slice(1, -1);
+    for (let index = 0; index < list.length; index += 1) {
+      const character = list[index];
+      if (quote === "'" && character === "'" && list[index + 1] === "'") {
+        item += "''";
+        index += 1;
+        continue;
+      }
+      if (quote === '"' && character === '\\') {
+        item += character + (list[++index] ?? '');
+        continue;
+      }
+      if (character === quote) quote = '';
+      else if (!quote && (character === '"' || character === "'") && !item.trim()) quote = character;
+      if (character === ',' && !quote) {
+        values.push(text(item, field));
+        item = '';
+      } else {
+        item += character;
+      }
     }
-    if (quote === '"' && character === '\\') {
-      tag += character + (list[++index] ?? '');
-      continue;
-    }
-    if (character === quote) quote = '';
-    else if (!quote && (character === '"' || character === "'") && !tag.trim()) quote = character;
-    if (character === ',' && !quote) {
-      tagValues.push(text(tag, 'tags'));
-      tag = '';
-    } else {
-      tag += character;
-    }
-  }
-  if (quote) return fail('tags has an unclosed quote');
-  tagValues.push(text(tag, 'tags'));
+    if (quote) return fail(`${field} has an unclosed quote`);
+    values.push(text(item, field));
+    return values;
+  };
+  const tags = inlineList('tags');
+  if (fields.has('author') && !fields.has('authors')) return fail('use the authors inline list instead of author');
+  const authors = fields.has('authors') ? inlineList('authors') : ['Darren Su'];
+  if (new Set(authors).size !== authors.length) return fail('authors must not contain duplicate names');
 
   const content = match[2];
   if (!content.trim()) return fail('article body must not be empty');
-  return { title, date, description, tags: tagValues, content };
+  return {
+    title,
+    ...(date ? { date } : {}),
+    ...(archiveYear ? { archiveYear } : {}),
+    ...(dateNote ? { dateNote } : {}),
+    authors,
+    description,
+    tags,
+    content,
+  };
+}
+
+// Archive years locate an older text; they are never converted into publication dates.
+// Within the same year, dated entries come first. Undated entries have a stable slug order.
+export function compareBlogPosts(a: Pick<BlogPost, 'slug' | 'date' | 'archiveYear'>, b: Pick<BlogPost, 'slug' | 'date' | 'archiveYear'>): number {
+  const yearDifference = Number(b.date?.slice(0, 4) ?? b.archiveYear ?? 0) - Number(a.date?.slice(0, 4) ?? a.archiveYear ?? 0);
+  if (yearDifference) return yearDifference;
+  if (a.date && b.date && a.date !== b.date) return a.date < b.date ? 1 : -1;
+  if (Boolean(a.date) !== Boolean(b.date)) return a.date ? -1 : 1;
+  return a.slug < b.slug ? -1 : a.slug > b.slug ? 1 : 0;
 }
 
 // 计算阅读时间（中文按字数，英文按词数）
@@ -177,8 +221,7 @@ export function getAllPosts(locale: string = defaultLocale): BlogPost[] {
     };
   });
 
-  // 按日期排序，最新的在前
-  return posts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  return posts.sort(compareBlogPosts);
 }
 
 export function getPostBySlug(slug: string, locale: string = defaultLocale): BlogPost | null {

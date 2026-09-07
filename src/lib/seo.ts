@@ -1,3 +1,4 @@
+import { getAboutCopy } from './about';
 import type { Metadata } from 'next';
 import { defaultLocale, isLocale, locales, type Locale } from '@/i18n/config';
 import type { BlogPost } from '@/lib/blog';
@@ -155,6 +156,10 @@ export function getPageKeywords(locale: string, group: KeywordGroup) {
 
 const areaServed = ['China'];
 
+function isSiteAuthor(name: string) {
+  return name === 'Darren Su' || name === '苏鹏' || name === 'Darren Su / 苏鹏';
+}
+
 export function createPageMetadata({
   locale,
   path = '/',
@@ -168,6 +173,7 @@ export function createPageMetadata({
   availableLocales = locales,
   openGraphType = 'website',
   publishedTime,
+  authors = ['Darren Su'],
 }: {
   locale: string;
   path?: string;
@@ -181,6 +187,7 @@ export function createPageMetadata({
   availableLocales?: readonly string[];
   openGraphType?: 'website' | 'article';
   publishedTime?: string;
+  authors?: string[];
 }): Metadata {
   const site = getSiteContent(locale);
   const commonOpenGraph = {
@@ -203,8 +210,8 @@ export function createPageMetadata({
     title,
     description,
     keywords,
-    authors: [{ name: 'Darren Su', url: siteUrl }],
-    creator: 'Darren Su',
+    authors: authors.map((name) => ({ name, ...(isSiteAuthor(name) ? { url: siteUrl } : {}) })),
+    creator: authors.join(', '),
     metadataBase: new URL(siteUrl),
     alternates: buildAlternates(locale, path, availableLocales),
     openGraph:
@@ -212,8 +219,8 @@ export function createPageMetadata({
         ? {
             ...commonOpenGraph,
             type: 'article',
-            publishedTime,
-            authors: [`${siteUrl}/${locale}/about`],
+            ...(publishedTime ? { publishedTime } : {}),
+            authors: authors.map((name) => isSiteAuthor(name) ? `${siteUrl}/${locale}/about` : name),
           }
         : {
             ...commonOpenGraph,
@@ -360,7 +367,7 @@ export function aboutStructuredData(locale: string) {
         url: absoluteLocalizedUrl(locale, '/about'),
         name,
         inLanguage: locale === 'zh' ? 'zh-CN' : 'en',
-        description: getSiteContent(locale).about.hero.subtitle,
+        description: getAboutCopy(locale).description,
         isPartOf: { '@id': `${siteUrl}/#website` },
         mainEntity: { '@id': `${siteUrl}/#person` },
       },
@@ -491,6 +498,17 @@ export function workCaseStructuredData(work: PortfolioWork, locale: string) {
   };
 }
 
+function articleAuthors(post: BlogPost, locale: string) {
+  return post.authors.map((name) => ({
+    '@type': 'Person',
+    name,
+    ...(isSiteAuthor(name) ? {
+      '@id': `${siteUrl}/#person`,
+      url: absoluteLocalizedUrl(locale, '/about'),
+    } : {}),
+  }));
+}
+
 export function articleStructuredData(post: BlogPost, locale: string) {
   const url = absoluteLocalizedUrl(locale, `/blog/${post.slug}`);
   const blogName = locale === 'zh' ? '文章' : 'Writing';
@@ -505,8 +523,8 @@ export function articleStructuredData(post: BlogPost, locale: string) {
         url,
         headline: post.title,
         description: post.description,
-        datePublished: post.date,
-        author: { '@id': `${siteUrl}/#person` },
+        ...(post.date ? { datePublished: post.date } : {}),
+        author: articleAuthors(post, locale),
         publisher: { '@id': `${siteUrl}/#person` },
         image: `${siteUrl}${post.image.url}`,
         keywords: post.tags.join(', '),
@@ -559,10 +577,10 @@ export function blogStructuredData(posts: BlogPost[], locale: string) {
           '@type': 'BlogPosting',
           headline: post.title,
           description: post.description,
-          datePublished: post.date,
+          ...(post.date ? { datePublished: post.date } : {}),
           url: absoluteLocalizedUrl(locale, `/blog/${post.slug}`),
           image: `${siteUrl}${post.image.url}`,
-          author: { '@id': `${siteUrl}/#person` },
+          author: articleAuthors(post, locale),
         })),
       },
       personNode(locale),

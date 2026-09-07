@@ -1,6 +1,7 @@
 ---
 title: Notes from a Meditation Retreat at Zongtong Temple
-date: 2026-02-27
+archiveYear: "2026"
+dateNote: "2026 retreat"
 description: During the 2026 Lunar New Year, I joined a meditation retreat at Zongtong Temple in northern Thailand. These notes record Venerable Ani, a pigeon caught in a typhoon, the temple's dog sanctuary, and what those days taught me about impermanence, suffering, and non-self.
 tags: [Retreat Notes, Northern Thailand, Inner Practice, Four Foundations of Mindfulness]
 ---

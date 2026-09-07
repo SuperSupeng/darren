@@ -187,7 +187,7 @@
   .case-next > .interior-kicker { grid-column: 1/-1; }
   .case-next h2 { font-size: 26px; }
   .reading-layout { grid-template-columns: 1fr; gap: 22px; margin-top: 25px; }
-  .reading-sidebar { position: static; max-width: 360px; }
+  .reading-sidebar { position: static; max-width: 360px; order: 1; }
   .reading-sheet { padding: 35px 26px; }
   .reading-header h1 { font-size: clamp(29px,5.5vw,41px); }
   .interior-profile { grid-template-columns: 1fr .65fr; padding: 40px 0; gap: 27px; }

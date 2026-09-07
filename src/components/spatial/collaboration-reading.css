@@ -1,0 +1,229 @@
+.collaboration-reading {
+  padding-block: 64px 80px;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.collaboration-reading .collaboration-reading-wrap {
+  width: min(820px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+.collaboration-reading .collaboration-reading-intro h1 {
+  font: 400 clamp(40px, 5vw, 60px)/1.25 var(--font-noto-serif);
+  letter-spacing: -.035em;
+}
+
+.collaboration-reading .collaboration-reading-intro > p {
+  max-width: 660px;
+  margin-top: 24px;
+  color: var(--space-muted);
+}
+
+.collaboration-reading .collaboration-reading-scene {
+  width: min(260px, 100%);
+  margin-top: 20px;
+}
+
+.collaboration-reading .collaboration-reading-scene summary {
+  width: fit-content;
+  padding-block: 8px;
+  color: var(--space-muted);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.collaboration-reading .collaboration-reading-scene .room-portal {
+  margin-top: 12px;
+}
+
+.collaboration-reading .collaboration-reading-index {
+  display: grid;
+  gap: 0;
+  margin-block: 32px 44px;
+  border-block: 1px solid var(--space-line);
+  scroll-margin-top: 20px;
+}
+
+.collaboration-reading .collaboration-reading-index a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  min-height: 56px;
+  padding: 14px 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.collaboration-reading .collaboration-reading-index a + a {
+  border-top: 1px solid var(--space-line);
+}
+
+.collaboration-reading .collaboration-reading-index a > span {
+  flex-shrink: 0;
+  color: var(--space-accent);
+}
+
+.collaboration-reading .collaboration-reading-direction {
+  margin-bottom: 28px;
+  padding: 32px;
+  border: 1px solid var(--space-line);
+  border-left: 3px solid var(--space-line);
+  background: var(--space-surface);
+  scroll-margin-top: 20px;
+}
+
+.collaboration-reading .collaboration-reading-direction:target {
+  border-left-color: var(--space-accent);
+  box-shadow: 0 0 0 1px var(--space-accent);
+}
+
+.collaboration-reading .collaboration-reading-direction > h2 {
+  font: 400 clamp(26px, 3vw, 34px)/1.4 var(--font-noto-serif);
+  letter-spacing: -.025em;
+}
+
+.collaboration-reading .collaboration-reading-need {
+  margin-top: 12px;
+  color: var(--space-muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.collaboration-reading .collaboration-reading-contact {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  margin-top: 18px;
+}
+
+.collaboration-reading .collaboration-reading-contact > :is(a, button) {
+  min-height: 44px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.collaboration-reading .collaboration-reading-contact > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  border: 1px solid var(--space-ink);
+  border-radius: 2px;
+  background: var(--space-ink);
+  color: var(--space-paper);
+  box-shadow: none;
+}
+
+.collaboration-reading .collaboration-reading-contact > button {
+  color: var(--space-ink);
+  border-color: var(--space-line);
+}
+
+.collaboration-reading .collaboration-reading-help {
+  margin-top: 30px;
+  padding-top: 24px;
+  border-top: 1px solid var(--space-line);
+}
+
+.collaboration-reading .collaboration-reading-help h3 {
+  font: 500 16px/1.6 var(--font-geist-sans);
+}
+
+.collaboration-reading .collaboration-reading-help ul,
+.collaboration-reading .collaboration-reading-boundaries ul {
+  padding-left: 1.25em;
+  margin-top: 14px;
+  list-style: disc;
+}
+
+.collaboration-reading .collaboration-reading-help li,
+.collaboration-reading .collaboration-reading-boundaries li {
+  padding-left: 4px;
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.collaboration-reading .collaboration-reading-help li + li,
+.collaboration-reading .collaboration-reading-boundaries li + li {
+  margin-top: 8px;
+}
+
+.collaboration-reading .collaboration-reading-references {
+  display: grid;
+  justify-items: start;
+  gap: 4px;
+  margin-top: 22px;
+}
+
+.collaboration-reading .collaboration-reading-references a,
+.collaboration-reading .collaboration-reading-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  max-width: 100%;
+  font-size: 14px;
+  line-height: 1.7;
+  text-decoration: underline;
+  text-decoration-color: var(--space-line);
+  text-underline-offset: 5px;
+}
+
+.collaboration-reading .collaboration-reading-references a > span,
+.collaboration-reading .collaboration-reading-back > span {
+  flex-shrink: 0;
+}
+
+.collaboration-reading .collaboration-reading-back {
+  margin-top: 14px;
+  color: var(--space-muted);
+}
+
+.collaboration-reading .collaboration-reading-inquiry {
+  padding-block: 32px;
+}
+
+.collaboration-reading .collaboration-reading-inquiry h2 {
+  font: 400 clamp(25px, 3vw, 32px)/1.5 var(--font-noto-serif);
+  letter-spacing: -.025em;
+}
+
+.collaboration-reading .collaboration-reading-inquiry p {
+  margin-top: 16px;
+  color: var(--space-muted);
+}
+
+.collaboration-reading .collaboration-reading-boundaries {
+  border-top: 1px solid var(--space-line);
+  margin-top: 16px;
+  padding-top: 16px;
+}
+
+.collaboration-reading .collaboration-reading-boundaries summary {
+  width: fit-content;
+  padding-block: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.collaboration-reading .collaboration-reading-boundaries ul {
+  color: var(--space-muted);
+}
+
+.collaboration-reading a:hover {
+  text-decoration-color: var(--space-accent);
+}
+
+.collaboration-reading .collaboration-reading-index a:hover {
+  color: var(--space-accent);
+}
+
+@media (max-width: 600px) {
+  .collaboration-reading { padding-block: 34px 48px; }
+  .collaboration-reading .collaboration-reading-wrap { width: calc(100% - 32px); }
+  .collaboration-reading .collaboration-reading-direction { padding: 24px 20px; }
+  .collaboration-reading .collaboration-reading-index { margin-block: 24px 30px; }
+}

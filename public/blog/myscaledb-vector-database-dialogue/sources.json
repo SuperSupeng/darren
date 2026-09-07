@@ -1,0 +1,245 @@
+{
+  "article": "https://www.mdnice.com/writing/5076589a233f4bc597a0bf5d9055d042",
+  "sourceContext": "用户公开的 mdnice 完整原稿。公开副本标示 2026/09/07；用户明确该日不是原写作/发表日。原图依出现顺序保存，未经重绘、裁剪或压缩。",
+  "archiveYear": "2024",
+  "dateNote": "2024 年对谈",
+  "originalPublicationDate": null,
+  "dateEvidence": {
+    "checkedAt": "2026-09-07",
+    "precision": "context-year",
+    "originalPublicationDateVerified": false,
+    "note": "年份用于定位文章的历史内容；转载、事件及本次公开副本日期均不作为原始发表日。",
+    "sources": [
+      {
+        "url": "https://www.53ai.com/news/qianyanjishu/2108.html",
+        "date": "2024-05-12 22:59:07",
+        "kind": "第三方转载页发布日期",
+        "note": "页面作者为向量检索实验室，署名与苏鹏、汤林鹏对谈一致；页面日期与Article JSON-LD均为2024-05-12 22:59:07。不能据此认定公众号首发日。"
+      }
+    ]
+  },
+  "contributors": [
+    {
+      "name": "苏鹏 / Darren Su",
+      "role": "对谈嘉宾、提问与补充观点；本文保留源稿的逐段发言归属。"
+    },
+    {
+      "name": "汤林鹏",
+      "role": "对谈嘉宾；MyScale 联合创始人兼 CTO，访谈回答及产品/性能主张归属于受访者。"
+    },
+    {
+      "name": "机器之心",
+      "role": "源稿明确致谢的直播策划方。"
+    }
+  ],
+  "images": [
+    {
+      "file": "image-01.png",
+      "source": "https://files.mdnice.com/user/3198/2d606259-6bba-4bc8-a314-11dc326a6cf3.png",
+      "sha256": "a7750bb72ed9824c6c1b0837b80191c610a82ba2bcf6bbaeb51abeba51d6119e",
+      "width": 1280,
+      "height": 573,
+      "bytes": 263373,
+      "hasAlpha": false,
+      "originalBytesPreserved": true,
+      "alt": "向量数据库相关知识的思维导图"
+    },
+    {
+      "file": "image-02.png",
+      "source": "https://files.mdnice.com/user/3198/6d8608ad-d6c8-4d8c-a548-7ee992f89ae5.png",
+      "sha256": "5149dae828bf54b54c1999085502518f6fd4222aead7a244a12bbd6ef613fb11",
+      "width": 1280,
+      "height": 960,
+      "bytes": 1440931,
+      "hasAlpha": false,
+      "originalBytesPreserved": true,
+      "alt": "机器之心直播海报：苏鹏与汤林鹏对话 MyScaleDB"
+    },
+    {
+      "file": "image-03.png",
+      "source": "https://files.mdnice.com/user/3198/9886399b-ff49-4b73-a147-21f41039f57a.png",
+      "sha256": "b0df9734578dae5574bfa2a73c0d81e9811d8010aa3a0ac532ae1e14d1081738",
+      "width": 1280,
+      "height": 472,
+      "bytes": 304562,
+      "hasAlpha": true,
+      "originalBytesPreserved": true,
+      "alt": "图片经卷积神经网络转换为向量的示意图",
+      "presentationNote": "原图含透明通道，包含深色文字；建议使用浅色背景，原文件保持不变。"
+    },
+    {
+      "file": "image-04.png",
+      "source": "https://files.mdnice.com/user/3198/9835817b-7512-494f-9e0c-32625aa423a9.png",
+      "sha256": "c438298bbc5c1d9270d76e841af8f93e3bfff7e381f1a5bde41364a58a2c2b09",
+      "width": 1280,
+      "height": 582,
+      "bytes": 403957,
+      "hasAlpha": true,
+      "originalBytesPreserved": true,
+      "alt": "查询图片与数据库图片进行向量相似性检索的示意图",
+      "presentationNote": "原图含透明通道，包含深色文字；建议使用浅色背景，原文件保持不变。"
+    },
+    {
+      "file": "image-05.png",
+      "source": "https://files.mdnice.com/user/3198/17fb3c3f-72bc-41c3-a10f-43bf5e89ba31.png",
+      "sha256": "b709838ce68379423e73557185845b2322a3370f07f699018e8e592acc8e83a8",
+      "width": 1280,
+      "height": 580,
+      "bytes": 213030,
+      "hasAlpha": false,
+      "originalBytesPreserved": true,
+      "alt": "Superlinked 向量数据库产品对比表截图"
+    },
+    {
+      "file": "image-06.png",
+      "source": "https://files.mdnice.com/user/3198/4f23b101-fa18-41aa-9419-0a3e536ff2f3.png",
+      "sha256": "e20eb1d48e69f2f714c8c24dbebb4c1584a69b11c526f4c182b01ab7f8cbb3a1",
+      "width": 2398,
+      "height": 1018,
+      "bytes": 274073,
+      "hasAlpha": false,
+      "originalBytesPreserved": true,
+      "alt": "RAG 的检索、增强和生成三个过程"
+    },
+    {
+      "file": "image-07.png",
+      "source": "https://files.mdnice.com/user/3198/e12feadc-aa9a-4346-9318-838ced291be9.png",
+      "sha256": "075cc016ac5a03852631c61682c04fe92862ca7ae2eeb31fe25b6e1115135c07",
+      "width": 1280,
+      "height": 454,
+      "bytes": 321921,
+      "hasAlpha": false,
+      "originalBytesPreserved": true,
+      "alt": "从文档分块、向量化到检索并生成回答的流程图"
+    },
+    {
+      "file": "image-08.png",
+      "source": "https://files.mdnice.com/user/3198/363e7e4c-0dae-4882-9738-37af4375a49b.png",
+      "sha256": "735ab6ba1b9fecff84b8b39f64bbe6714894391922200a094b59a5896067e6c8",
+      "width": 1280,
+      "height": 945,
+      "bytes": 444849,
+      "hasAlpha": false,
+      "originalBytesPreserved": true,
+      "alt": "Vellum 的长上下文与 RAG 对照表"
+    },
+    {
+      "file": "image-09.png",
+      "source": "https://files.mdnice.com/user/3198/5aa29af0-fb93-4b15-8193-998d9b1250b3.png",
+      "sha256": "9bfd243e1f6df2592cc8814f987136ff45103856c7d865f46c56361cdcaef403",
+      "width": 1280,
+      "height": 669,
+      "bytes": 190237,
+      "hasAlpha": false,
+      "originalBytesPreserved": true,
+      "alt": "源稿中的专用向量数据库、关键词与向量检索及 SQL 向量数据库定位示意图"
+    },
+    {
+      "file": "image-10.png",
+      "source": "https://files.mdnice.com/user/3198/f4545aa4-1d19-4e5b-95d0-903162c5c80c.png",
+      "sha256": "cc7fad94f2c49afd8b4756b8ae21fb58287f0dbdc64715922ee04e9683c287ac",
+      "width": 1280,
+      "height": 854,
+      "bytes": 1247876,
+      "hasAlpha": false,
+      "originalBytesPreserved": true,
+      "alt": "用于说明数据表示方式的数字特写"
+    },
+    {
+      "file": "image-11.png",
+      "source": "https://files.mdnice.com/user/3198/c575fead-a25e-4eb1-9e2b-861e75a1e295.png",
+      "sha256": "61dcbe525a85f3a85c37550379a7dbcf2a82e2b9e65397152352abce9ba3c936",
+      "width": 1280,
+      "height": 572,
+      "bytes": 109086,
+      "hasAlpha": false,
+      "originalBytesPreserved": true,
+      "alt": "MyScale 将 SQL 与向量查询结合的架构示意图"
+    },
+    {
+      "file": "image-12.png",
+      "source": "https://files.mdnice.com/user/3198/b49a4f08-3c6d-4aa8-8685-a1d8b67112e9.png",
+      "sha256": "8ac44e4d0281855349352104edea8c7b5e06ccc0728f9852d62be211e2753fb4",
+      "width": 841,
+      "height": 730,
+      "bytes": 58431,
+      "hasAlpha": false,
+      "originalBytesPreserved": true,
+      "alt": "SQL 的易用性、可靠性、数据管理和规模能力示意图"
+    },
+    {
+      "file": "image-13.png",
+      "source": "https://files.mdnice.com/user/3198/c543fe36-a1e1-4b34-9767-0c3f38671b01.png",
+      "sha256": "c31f99536921125dd09e3cc1f71aec886015b0074be6faed15b854cd34378049",
+      "width": 1280,
+      "height": 640,
+      "bytes": 316625,
+      "hasAlpha": false,
+      "originalBytesPreserved": true,
+      "alt": "开源与闭源软件的解锁和锁定图示"
+    },
+    {
+      "file": "image-14.png",
+      "source": "https://files.mdnice.com/user/3198/ebf8fe70-9a08-4515-b54f-00685756cf63.png",
+      "sha256": "0dde80bc15b7ee140a40f507404d4edf6a418d75ce7b8210267d2fe8ae8b1532",
+      "width": 1280,
+      "height": 630,
+      "bytes": 165767,
+      "hasAlpha": false,
+      "originalBytesPreserved": true,
+      "alt": "源稿中 MyScale AI 数据库与 Agent 工具链的规划示意图"
+    },
+    {
+      "file": "image-15.png",
+      "source": "https://files.mdnice.com/user/3198/46624864-cddd-43bd-8d3e-05c40f9b5be2.png",
+      "sha256": "54dece468330e8a9a710ec287fe9f24295557c110fa800a4ad534ec47037dae1",
+      "width": 1080,
+      "height": 648,
+      "bytes": 270418,
+      "hasAlpha": false,
+      "originalBytesPreserved": true,
+      "alt": "源稿中的 MyScale、Pgvector 与 Elasticsearch 性能和精度对比图"
+    },
+    {
+      "file": "image-16.png",
+      "source": "https://files.mdnice.com/user/3198/85dbdd10-2e0a-4534-b5b5-a7fa2958d9e9.png",
+      "sha256": "8a97c4c5be25b65d77514691bb24590cfbe89c6c643ab3c713ed6b952af03476",
+      "width": 1024,
+      "height": 1024,
+      "bytes": 1714956,
+      "hasAlpha": false,
+      "originalBytesPreserved": true,
+      "alt": "使用 OpenAI DALL-E 创作的宇航员与机器人插画"
+    }
+  ],
+  "cover": "image-02.png",
+  "editorialChanges": [
+    "仅转为站内 Markdown 排版，原文所有段落、16 张配图、12 节对谈及 12 个问答均保留。",
+    "源稿三项一级标题降为二级，其下各节降为三级，使页面文章标题为唯一一级标题。",
+    "Q&A 的连续编号问题改为三级标题，保留问题顺序、编号及完整回答，便于长文导航。",
+    "为原无替代文字的图片补充依据实图的 alt；裸 URL 改为文字保持原 URL 的可点击链接。",
+    "增加 2024 年语境的归档说明与 mdnice 公开原文链接；不采纳副本公开日期为原始发表日期。"
+  ],
+  "contentReviewNotes": [
+    "产品性能对比、“唯一”等定位及技术路线判断保留受访者当时的发言归属；未经独立复现实验，不改写为本站当前事实。",
+    "前置知识中的向量相减与接近 0 为源稿通俗化描述，未扩写成严格距离度量公式。",
+    "第一段、对谈和 Q&A 的观点及用语未做实质改写；Q&A 原文未逐题注明回答者，保留该集体整理语境。"
+  ],
+  "completeness": {
+    "sourceHtmlCharacters": 188672,
+    "sourceTextCharacters": 13827,
+    "images": 16,
+    "sourceTopLevelSections": 3,
+    "interviewSections": 12,
+    "questionsAndAnswers": 12,
+    "firstText": "2023 年可以说是大模型元年",
+    "lastText": "如果是生产级别的需求，或者需要结构化、向量、关键字等联合查询，还是推荐用数据库。"
+  },
+  "validation": {
+    "sourceTextPreserved": true,
+    "method": "将 mdnice 公开 HTML 与本站实际 Markdown 渲染结果提取正文，去除空白与新增问答编号后逐字相等；另核对 16 图、3 大节、14 小节（含前置 2 节与对谈 12 节）、12 问答、完整末段、全部可见 URL。",
+    "sourceTextCharactersWithoutWhitespace": 13827,
+    "metadataChecked": "没有 date，archiveYear=2024，dateNote=2024 年对谈。"
+  },
+  "publicationDate": null
+}

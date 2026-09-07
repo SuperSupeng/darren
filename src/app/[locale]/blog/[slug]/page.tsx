@@ -1,9 +1,11 @@
 import { notFound } from 'next/navigation';
+import { Fragment } from 'react';
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { getAllPosts, getPostBySlug } from '@/lib/blog';
 import { locales } from '@/i18n/config';
 import JsonLd from '@/components/JsonLd';
+import ArticleDate from '@/components/blog/ArticleDate';
 import RoomPortal from '@/components/spatial/RoomPortal';
 import '@/components/spatial/interiors.css';
 import { absoluteLocalizedUrl, articleStructuredData, createPageMetadata } from '@/lib/seo';
@@ -40,6 +42,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     availableLocales,
     openGraphType: 'article',
     publishedTime: post.date,
+    authors: post.authors,
   });
 }
 
@@ -70,7 +73,20 @@ export default async function BlogPostPage({ params }: { params: Promise<{ local
                 {post.tags.length > 0 && <div className="interior-tags">{post.tags.map(tag => <span key={tag}>{tag}</span>)}</div>}
                 <h1>{post.title}</h1>
                 <p className="reading-deck">{post.description}</p>
-                <div className="reading-byline"><time dateTime={post.date}>{post.date}</time><span aria-hidden="true">·</span><span>{post.readingTime} {t('minRead')}</span><span aria-hidden="true">·</span><Link href="/about" rel="author">Darren Su</Link></div>
+                <div className="reading-byline">
+                  <ArticleDate post={post} locale={locale} />
+                  <span aria-hidden="true">·</span>
+                  <span>{post.readingTime} {t('minRead')}</span>
+                  <span aria-hidden="true">·</span>
+                  <span>{post.authors.map((author, index) => (
+                    <Fragment key={author}>
+                      {index > 0 ? locale === 'zh' ? '、' : ', ' : null}
+                      {author === 'Darren Su' || author === '苏鹏' || author === 'Darren Su / 苏鹏'
+                        ? <Link href="/about" rel="author">{author}</Link>
+                        : author}
+                    </Fragment>
+                  ))}</span>
+                </div>
                 <a className="interior-text-link reading-source" href={`/${locale}/blog/${post.slug}/source.md`} type="text/markdown" download={`${post.slug}.${locale}.md`}>{locale === 'zh' ? '下载纯文本原文' : 'Download article text'} ↓</a>
               </header>
               <div className="reading-prose" dangerouslySetInnerHTML={{ __html: renderedContent }} />

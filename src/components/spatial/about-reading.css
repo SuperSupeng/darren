@@ -1,0 +1,45 @@
+.about-reading { padding-block: 24px 76px; }
+.about-reading .about-reading-hero { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: center; gap: 24px; width: min(1160px, 88%); margin: 0 auto 58px; }
+.about-reading .about-reading-intro { position: relative; z-index: 2; }
+.about-reading h1 { font: 400 clamp(38px, 4.3vw, 60px)/1.4 var(--font-noto-serif); letter-spacing: -.035em; }
+.about-reading .about-reading-intro p { max-width: 32em; margin-top: 26px; color: var(--space-ink); font-size: 18px; line-height: 1.95; text-wrap: pretty; }
+.about-reading .about-reading-stage { position: relative; min-width: 0; margin-right: -3vw; }
+.about-reading .about-reading-stage .room-portal-view { height: 460px; }
+.about-reading .about-reading-portrait { position: absolute; bottom: 100px; left: 9%; width: 148px; aspect-ratio: 4/5; border: 7px solid var(--space-surface); background: var(--space-surface); box-shadow: 0 14px 32px var(--space-shadow); transform: rotate(-5deg); z-index: 3; }
+.about-reading .about-reading-body { width: min(740px, 88%); margin-inline: auto; }
+.about-reading .about-reading-body > section { padding-block: 44px; border-top: 1px solid var(--space-line); scroll-margin-top: 100px; }
+.about-reading .about-reading-body h2 { font: 400 clamp(27px, 3vw, 36px)/1.55 var(--font-noto-serif); letter-spacing: -.025em; margin-bottom: 24px; text-wrap: balance; }
+.about-reading .about-reading-body p { color: var(--space-ink); font-size: 17px; line-height: 2; text-wrap: pretty; }
+.about-reading .about-reading-body p + p { margin-top: 22px; }
+.about-reading .about-reading-link { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; margin-top: 20px; color: var(--space-ink); font-size: 16px; line-height: 1.8; text-decoration: underline; text-decoration-color: var(--space-line); text-underline-offset: 6px; }
+.about-reading .about-reading-link:hover { color: var(--space-accent); text-decoration-color: var(--space-accent); }
+.about-reading .about-reading-link > span { flex-shrink: 0; color: var(--space-accent); }
+.about-reading .about-reading-links { display: flex; flex-wrap: wrap; column-gap: 30px; }
+.about-reading .about-reading-photo { margin-top: 34px; }
+.about-reading .about-reading-photo > div { position: relative; aspect-ratio: 4/3; overflow: hidden; background: var(--space-inset); border: 8px solid var(--space-surface); box-shadow: 0 10px 30px var(--space-shadow); }
+.about-reading .about-reading-photo figcaption { margin-top: 14px; color: var(--space-muted); font-size: 14px; line-height: 1.8; }
+.about-reading .about-reading-contact-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 20px 24px; margin-top: 28px; }
+.about-reading .about-reading-contact-actions > a { min-height: 46px; padding: 12px 20px; color: var(--space-paper); background: var(--space-ink); border: 1px solid var(--space-ink); border-radius: 2px; box-shadow: none; font-size: 16px; }
+.about-reading .about-reading-contact-actions > a:hover { background: var(--space-accent); border-color: var(--space-accent); }
+.about-reading .about-reading-contact-actions > button { color: var(--space-ink); border-color: var(--space-line); min-height: 44px; font-size: 16px; }
+.about-reading .about-reading-contact-actions > input { color: var(--space-ink); border-color: var(--space-line); }
+
+@media (max-width: 850px) {
+  .about-reading .about-reading-hero { grid-template-columns: minmax(0, 1fr); gap: 10px; margin-bottom: 22px; }
+  .about-reading .about-reading-intro { max-width: 740px; }
+  .about-reading .about-reading-intro p { max-width: none; }
+  .about-reading .about-reading-stage { margin-inline: -5vw; }
+  .about-reading .about-reading-stage .room-portal-view { height: 410px; }
+}
+@media (max-width: 600px) {
+  .about-reading { padding-block: 30px 42px; }
+  .about-reading h1 { font-size: clamp(33px, 8vw, 44px); }
+  .about-reading .about-reading-intro p { margin-top: 22px; font-size: 17px; }
+  .about-reading .about-reading-stage .room-portal-view { height: 340px; }
+  .about-reading .about-reading-portrait { width: 112px; border-width: 5px; bottom: 88px; left: 9%; }
+  .about-reading .about-reading-body > section { padding-block: 32px; }
+  .about-reading .about-reading-body h2 { margin-bottom: 21px; font-size: 28px; }
+  .about-reading .about-reading-body p { font-size: 17px; line-height: 1.95; }
+  .about-reading .about-reading-body p + p { margin-top: 20px; }
+  .about-reading .about-reading-photo > div { border-width: 5px; }
+}

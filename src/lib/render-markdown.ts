@@ -1,4 +1,5 @@
 import { createArticleHeadingAnchors } from '@/lib/article-anchors';
+import { archivedArticleImages } from '@/lib/blog-images';
 import { getImageProps } from 'next/image';
 
 function escapeHtml(value: string): string {
@@ -52,7 +53,14 @@ function renderInlineMarkdown(value: string): string {
   return html.replace(/@@MDTOKEN(\d+)@@/g, (_, index: string) => tokens[Number(index)] ?? '');
 }
 
-const inlineImageDimensions: Record<string, { width: number; height: number }> = {
+const inlineImageDimensions: Record<string, { width: number; height: number; backgroundColor?: string }> = {
+  ...archivedArticleImages,
+  '/blog/expertise-assets/expert-agents.png': { width: 768, height: 390, backgroundColor: '#17241d' },
+  '/blog/expertise-assets/expert-knowledge.png': { width: 696, height: 438, backgroundColor: '#f4f1e8' },
+  '/blog/expertise-assets/solo-scalable.png': { width: 696, height: 462, backgroundColor: '#f4f1e8' },
+  '/blog/expertise-assets/aim-model.png': { width: 673, height: 449, backgroundColor: '#f4f1e8' },
+  '/blog/expertise-assets/unique-value.png': { width: 1032, height: 606, backgroundColor: '#f4f1e8' },
+  '/blog/expertise-assets/be-unique.png': { width: 480, height: 505, backgroundColor: '#f4f1e8' },
   '/blog/ai-employees/agent-roles.png': { width: 1480, height: 2866 },
   '/blog/ai-employees/agent-town.png': { width: 1922, height: 1080 },
   '/blog/ai-employees/digital-organization.png': { width: 878, height: 834 },
@@ -163,14 +171,21 @@ export function renderMarkdown(content: string, title: string, locale: string, {
       const sizeAttributes = dimensions
         ? ` width="${dimensions.width}" height="${dimensions.height}"`
         : '';
+      const backgroundAttribute = dimensions?.backgroundColor
+        ? ` style="background-color:${escapeAttribute(dimensions.backgroundColor)}"`
+        : '';
       // Web pages select a suitable image for the reading column; feeds keep portable original URLs.
       const optimized = responsiveImages && dimensions
-        ? getImageProps({ src: image[2], alt: imageAlt, ...dimensions, sizes: '(max-width: 760px) calc(100vw - 80px), 700px' }).props
+        ? getImageProps({ src: image[2], alt: imageAlt, width: dimensions.width, height: dimensions.height, sizes: '(max-width: 760px) calc(100vw - 80px), 700px' }).props
         : null;
       const sourceAttributes = optimized?.srcSet
         ? ` srcset="${escapeAttribute(optimized.srcSet)}" sizes="${escapeAttribute(optimized.sizes ?? '')}"`
         : '';
-      output.push(`<img src="${escapeAttribute(optimized?.src ?? image[2])}"${sourceAttributes} alt="${escapeAttribute(imageAlt)}"${sizeAttributes} loading="lazy" decoding="async" class="my-8 h-auto max-w-full rounded-[8px]" />`);
+      const imageMarkup = `<img src="${escapeAttribute(optimized?.src ?? image[2])}"${sourceAttributes} alt="${escapeAttribute(imageAlt)}"${sizeAttributes}${backgroundAttribute} loading="lazy" decoding="async" class="my-8 h-auto max-w-full rounded-[8px]" />`;
+      const originalLabel = locale === 'zh' ? `查看原图：${imageAlt}` : `Open original image: ${imageAlt}`;
+      output.push(optimized
+        ? `<a href="${escapeAttribute(image[2])}" target="_blank" rel="noopener noreferrer" aria-label="${escapeAttribute(originalLabel)}" title="${escapeAttribute(originalLabel)}">${imageMarkup}</a>`
+        : imageMarkup);
       continue;
     }
 

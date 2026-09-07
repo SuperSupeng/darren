@@ -23,7 +23,9 @@ test('RSS provides the complete bilingual article collection with stable identit
     const document = dom.window.document;
     const posts = locales.flatMap(locale => getAllPosts(locale).map(post => ({ locale, post })));
     const items = [...document.querySelectorAll('item')];
-    assert.equal(posts.length, 6, 'The source currently contains three complete articles in two languages');
+    const sourceCount = locales.reduce((count, locale) => count + fs.readdirSync(path.join(process.cwd(), 'content/blog', locale)).filter(name => /\.mdx?$/.test(name)).length, 0);
+    assert.ok(sourceCount > 0, 'The published article collection must not be empty');
+    assert.equal(posts.length, sourceCount, 'Every published language version must be included, without requiring a translation');
     assert.equal(items.length, posts.length);
     assert.equal(document.querySelector('lastBuildDate'), null, 'A build must not manufacture an editorial update date');
     const self = document.getElementsByTagNameNS('http://www.w3.org/2005/Atom', 'link')[0];
@@ -40,8 +42,9 @@ test('RSS provides the complete bilingual article collection with stable identit
       assert.equal(item.querySelector('link').textContent, url);
       assert.equal(item.querySelector('title').textContent, post.title);
       assert.equal(item.querySelector('description').textContent, post.description);
-      assert.equal(item.querySelector('pubDate').textContent, new Date(`${post.date}T00:00:00+08:00`).toUTCString());
-      assert.equal(item.getElementsByTagNameNS(dcNamespace, 'creator')[0]?.textContent, 'Darren Su');
+      if (post.date) assert.equal(item.querySelector('pubDate').textContent, new Date(`${post.date}T00:00:00+08:00`).toUTCString());
+      else assert.equal(item.querySelector('pubDate'), null);
+      assert.deepEqual([...item.getElementsByTagNameNS(dcNamespace, 'creator')].map(author => author.textContent), post.authors);
       assert.equal(item.getElementsByTagNameNS(dcNamespace, 'language')[0]?.textContent, locale === 'zh' ? 'zh-CN' : 'en');
       assert.deepEqual([...item.querySelectorAll('category')].map(value => value.textContent), post.tags);
 

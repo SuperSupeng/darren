@@ -1,21 +1,23 @@
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
-import { getFeaturedWork, getPortfolio, type PortfolioWork } from '@/lib/portfolio';
+import { getFeaturedWork, getPortfolio } from '@/lib/portfolio';
+import { getExperienceArchive, getWorkCaseDate } from '@/lib/experience-archive';
 import JsonLd from '@/components/JsonLd';
 import ContactActions from '@/components/ContactActions';
 import { CollectionHero, CollectionHeading, CollectionNext } from '@/components/spatial/Collections';
 import { createPageMetadata, getPageKeywords, workStructuredData } from '@/lib/seo';
+import '@/components/spatial/experience-archive.css';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const copy = locale === 'zh'
     ? {
         title: '工作案例',
-        description: 'Darren Su 的开发者活动、科技大会合作、产品 Workshop 与 AI 分享案例，记录项目职责、执行过程和结果。',
+        description: 'Darren Su 的项目与工作经历：开发者活动、产品共创、大会主持、AI 分享与跨境交流，了解他在不同项目中的实际参与。',
       }
     : {
         title: 'Selected work',
-        description: 'Developer events, technology conference collaborations, product workshops, and AI talks, with Darren Su’s role, process, and results in each case.',
+        description: 'Darren Su’s projects and experience in developer events, product workshops, hosting, AI talks, and international technology exchanges.',
       };
 
   return createPageMetadata({
@@ -29,29 +31,17 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function WorkPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const { work, metrics } = getPortfolio(locale);
+  const { work } = getPortfolio(locale);
   const featured = getFeaturedWork(locale);
-  const categories: Array<{ key: PortfolioWork['category']; title: string; description: string }> =
-    locale === 'zh'
-      ? [
-          { key: 'ecosystem', title: '开发者生态项目', description: '城市社区、多城市联动和面向开发者的长期项目。' },
-          { key: 'conference', title: '大会与科技品牌合作', description: '活动内容、嘉宾邀请、现场执行，以及我在项目中的具体职责。' },
-          { key: 'global', title: '跨境产品与交流', description: '邀请海外创始人来中国做产品 Workshop，也陪海外团队走访高校、社区和 AI 公司。' },
-          { key: 'speaking', title: 'AI 与 Agent 分享', description: 'AI 使用、Agent 构建，以及运行多 Agent 工作系统的实践经验。' },
-        ]
-      : [
-          { key: 'ecosystem', title: 'Developer ecosystem programs', description: 'City communities, multi-city collaborations, and longer-running programs for developers.' },
-          { key: 'conference', title: 'Conference and technology partnerships', description: 'Program content, speaker invitations, on-site delivery, and my responsibilities in each project.' },
-          { key: 'global', title: 'Cross-border products and exchanges', description: 'Inviting overseas founders to China for product workshops, and accompanying teams on visits to universities, communities, and AI companies.' },
-          { key: 'speaking', title: 'AI and agent talks', description: 'Practical experience with AI tools, agent building, and running a multi-agent work system.' },
-        ];
+  const experienceSections = getExperienceArchive(locale);
   const copy =
     locale === 'zh'
       ? {
           title: '我发起、负责或参与的项目。',
-          subtitle: '开发者活动、大会合作、产品 Workshop 与 AI 分享。每个案例记录合作背景、我的职责、执行过程和结果。',
-          selectedTitle: '近期项目',
-          archiveTitle: '按类型查看项目，了解相应的合作经验。',
+          subtitle: '从社区活动、产品共创，到大会主持和跨境交流，这里记下我参与过的事。',
+          selectedTitle: '代表项目',
+          archiveTitle: '项目案例',
+          experiencesTitle: '其他活动与交流',
           role: '我的角色',
           result: '项目结果',
           read: '查看完整案例',
@@ -61,9 +51,10 @@ export default async function WorkPage({ params }: { params: Promise<{ locale: s
         }
       : {
           title: 'Projects I have initiated, led, or contributed to.',
-          subtitle: 'Developer events, conference partnerships, product workshops, and AI talks. Each case records the context, my role, the process, and the results.',
-          selectedTitle: 'Recent projects',
-          archiveTitle: 'Browse by type to find relevant collaboration experience.',
+          subtitle: 'I’ve organized community events, worked with founders on product workshops, hosted sessions, and joined exchanges across borders.',
+          selectedTitle: 'Selected projects',
+          archiveTitle: 'Case studies',
+          experiencesTitle: 'Other events and exchanges',
           role: 'My role',
           result: 'Project results',
           read: 'View the full case study',
@@ -85,19 +76,9 @@ export default async function WorkPage({ params }: { params: Promise<{ locale: s
             description={copy.subtitle}
           >
             <a className="collection-text-link" href="#work-archive">
-              {locale === 'zh' ? `查看全部 ${work.length} 个项目` : `Browse all ${work.length} projects`} <span aria-hidden="true">↓</span>
+              {locale === 'zh' ? '查看项目与经历' : 'Browse projects and experience'} <span aria-hidden="true">↓</span>
             </a>
           </CollectionHero>
-
-          <div className="collection-metrics">
-            {metrics.map((metric) => (
-              <div key={metric.note}>
-                <strong>{metric.value}</strong>
-                <span>{metric.label}</span>
-                <small>{metric.note}</small>
-              </div>
-            ))}
-          </div>
 
           <section className="collection-section" aria-labelledby="work-selected-title">
             <CollectionHeading id="work-selected-title" title={copy.selectedTitle} />
@@ -130,40 +111,42 @@ export default async function WorkPage({ params }: { params: Promise<{ locale: s
             </div>
           </section>
 
-          <section className="collection-section collection-archive" id="work-archive">
-            <CollectionHeading
-              title={locale === 'zh' ? '全部项目' : 'All projects'}
-              description={copy.archiveTitle}
-            />
-            <nav className="collection-category-nav" aria-label={locale === 'zh' ? '按合作类型浏览' : 'Browse by collaboration type'}>
-              {categories.map((category) => (
-                <a key={category.key} href={`#category-${category.key}`}>
-                  {category.title}
-                </a>
+          <section className="collection-section" id="work-archive" aria-labelledby="work-archive-title">
+            <CollectionHeading id="work-archive-title" title={copy.archiveTitle} />
+            <ul className="work-case-index">
+              {work.map((item) => (
+                <li key={item.id}>
+                  <Link href={item.href ?? '/work'} className="work-case-index-link">
+                    <div>
+                      <h3>{item.title}</h3>
+                      <p className="work-case-index-meta">
+                        <span>{item.role}</span>
+                        <span>{getWorkCaseDate(item.id, locale) ?? item.year}</span>
+                      </p>
+                    </div>
+                    <span className="work-case-index-arrow" aria-hidden="true">↗</span>
+                  </Link>
+                </li>
               ))}
-            </nav>
-            {categories.map((category) => (
-              <section key={category.key} id={`category-${category.key}`} className="collection-work-group">
-                <div className="collection-work-group-intro">
-                  <h3>{category.title}</h3>
-                  <p className="collection-description">{category.description}</p>
-                </div>
-                <div className="collection-work-index">
-                  {work.filter((item) => item.category === category.key).map((item) => (
-                    <Link key={item.id} href={item.href ?? '/work'} className="collection-work-row">
-                      <div className="collection-work-row-image">
-                        {item.image ? <Image src={item.image} alt="" fill sizes="(max-width: 600px) 80px, 112px" className={item.imageClassName ?? ''} /> : null}
+            </ul>
+          </section>
+
+          <section className="collection-section work-experience-archive" id="experience-archive" aria-labelledby="experience-archive-title">
+            <CollectionHeading id="experience-archive-title" title={copy.experiencesTitle} />
+            {experienceSections.map((section) => (
+              <section key={section.id} className="work-experience-group" aria-labelledby={section.id}>
+                <h3 id={section.id}>{section.title}</h3>
+                <ul className="work-experience-list">
+                  {section.entries.map((entry) => (
+                    <li key={entry.id}>
+                      <div className="work-experience-entry-heading">
+                        <h4>{entry.title}</h4>
+                        {entry.date ? <p className="work-experience-date">{entry.date}</p> : null}
                       </div>
-                      <div>
-                        <p className="collection-meta">{item.year} · {item.location}</p>
-                        <h4>{item.title}</h4>
-                        <p className="collection-work-row-role">{item.role}</p>
-                        <p className="collection-description">{item.result}</p>
-                      </div>
-                      <span className="collection-row-arrow" aria-hidden="true">↗</span>
-                    </Link>
+                      <p className="work-experience-role">{entry.role}</p>
+                    </li>
                   ))}
-                </div>
+                </ul>
               </section>
             ))}
           </section>

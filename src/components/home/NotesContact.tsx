@@ -2,10 +2,13 @@ import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { getAllPosts } from '@/lib/blog';
 import ContactActions from '@/components/ContactActions';
+import ArticleDate from '@/components/blog/ArticleDate';
 
 export default function NotesContact({ locale }: { locale: string }) {
   const posts = getAllPosts(locale);
-  const featured = posts.find((post) => post.slug === 'managing-31-ai-employees') ?? posts[0];
+  const featured = posts.find((post) => post.slug === 'managing-31-ai-employees')
+    ?? posts.find((post) => post.date)
+    ?? posts[0];
   const others = posts.filter((post) => post.slug !== featured?.slug).slice(0, 2);
   const isAgentEssay = featured?.slug === 'managing-31-ai-employees';
   const featuredNumber = isAgentEssay
@@ -70,7 +73,7 @@ export default function NotesContact({ locale }: { locale: string }) {
           </div>
           <div className="writing-feature-copy">
             <span>{copy.featured}</span>
-            <p>{featured.date} · {featured.readingTime} {copy.readingTime}</p>
+            <p><ArticleDate post={featured} locale={locale} /> · {featured.readingTime} {copy.readingTime}</p>
             <h3>{featured.title}</h3>
             <strong>{featured.description}</strong>
             <i>{copy.read} →</i>
@@ -88,7 +91,7 @@ export default function NotesContact({ locale }: { locale: string }) {
             <Link key={post.slug} href={`/blog/${post.slug}`}>
               <span>{String(index + 2).padStart(2, '0')}</span>
               <strong>{post.title}</strong>
-              <small>{post.date}</small>
+              <small><ArticleDate post={post} locale={locale} /></small>
               <i aria-hidden="true">↗</i>
             </Link>
           ))}

@@ -45,7 +45,7 @@ export const chineseContent: LocalizedContent = {
       sidebarQuote: "这些文章大多从一次活动、一个产品问题，或者一段亲身经历开始。",
       latestEyebrow: "最新",
       recentTitle: "最近的文章",
-      recentDescription: "关于多 Agent 工作系统、科技访问和禅修经历的文章。",
+      recentDescription: "AI 技术与实践、创业与社区，也有公益行动和生活中的思考。",
       empty: "文章正在整理中。",
       minRead: "分钟阅读",
     },
@@ -73,7 +73,7 @@ export const chineseContent: LocalizedContent = {
       eyebrow: "手记",
       title: "我把做项目、做产品和使用 AI 的经验写在这里。",
       subtitle:
-        "也有科技访问和禅修的记录，写下当时的观察，以及后来改变的看法。",
+        "也记录社区、公益和生活中的经历，写下当时的观察，以及后来改变的看法。",
     },
   },
   products: {
@@ -87,7 +87,7 @@ export const chineseContent: LocalizedContent = {
       eyebrow: "AI 原生工作系统",
       title: "我也在日常工作中使用多 Agent 系统。",
       description:
-        "我在 2026 年 4 月 15 日发布的实践文章里，记录了当时的 31 个专业 Agent 和 44 个自动任务，分别处理研究、产品、内容、运营和个人知识管理。我仍在日常工作中使用这套系统，并根据遇到的问题继续调整。",
+        "我在 2026 年的实践文章里，记录了当时的 31 个专业 Agent 和 44 个自动任务，分别处理研究、产品、内容、运营和个人知识管理。我仍在日常工作中使用这套系统，并根据遇到的问题继续调整。",
       primaryMetric: "31 个专业 Agent",
       secondaryMetric: "44 个自动任务",
       image: "/blog/ai-employees/digital-organization.png",

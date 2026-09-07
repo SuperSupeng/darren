@@ -41,7 +41,7 @@ export const englishContent = {
       latestEyebrow: "Latest",
       recentTitle: "Recent articles",
       recentDescription:
-        "The collection covers a China ecosystem visit, lessons from running a 31-agent work system, and a meditation retreat in northern Thailand.",
+        "Essays and conversations on AI, products, and communities, alongside records of teaching, starting a venture, and everyday life.",
       empty: "Notes are being organized.",
       minRead: "min read",
     },
@@ -69,7 +69,7 @@ export const englishContent = {
       eyebrow: "Field Notes",
       title: "I write about projects, products, and how I use AI.",
       subtitle:
-        "There are also notes from running a 31-agent system, ecosystem visits, and meditation retreats, including what I noticed and where my thinking changed.",
+        "These notes also follow my work in communities, AI classes for young people, and experiences beyond technology—from starting a venture to a meditation retreat.",
     },
   },
   products: {
@@ -83,7 +83,7 @@ export const englishContent = {
       eyebrow: "AI-native work system",
       title: "I also use a multi-agent system in my day-to-day work.",
       description:
-        "In the essay I published on April 15, 2026, I documented 31 specialized agents and 44 recurring automations across research, products, content, operations, and personal knowledge. I continue to use and refine the system in my daily work.",
+        "In my 2026 essay, I documented 31 specialized agents and 44 recurring automations across research, products, content, operations, and personal knowledge. I continue to use and refine the system in my daily work.",
       primaryMetric: "31 specialized agents",
       secondaryMetric: "44 recurring automations",
       image: "/blog/ai-employees/digital-organization.png",

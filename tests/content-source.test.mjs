@@ -22,9 +22,11 @@ test('Markdown articles preserve the full source, author, publication date, and 
     for (const post of getAllPosts(locale)) {
       const canonical = `${siteUrl}/${locale}/blog/${post.slug}`;
       const text = articleMarkdown(post, locale);
-      assert.ok(text.includes(`date: "${post.date}"`));
+      if (post.date) assert.ok(text.includes(`date: "${post.date}"`));
+      else assert.ok(!/^date:/m.test(text));
       assert.ok(text.includes(`canonical: "${canonical}"`));
-      assert.ok(text.includes('author: "Darren Su / 苏鹏"'));
+      assert.ok(text.includes(`authors: ${JSON.stringify(post.authors)}`));
+      if (post.authors.length > 1) assert.ok(!/^author:/m.test(text));
       assert.ok(text.endsWith(`${absoluteMarkdownLinks(post.content.trim(), canonical)}\n\n`));
       const response = await articleGET(new Request(`${canonical}/source.md`), { params: Promise.resolve({ locale, slug: post.slug }) });
       assert.equal(response.status, 200);

@@ -80,7 +80,7 @@ const chinesePortfolio: PortfolioContent = {
     {
       value: '31 + 44',
       label: 'Agent 和自动任务',
-      note: '2026.04 实践记录',
+      note: '2026 年实践记录',
     },
     {
       value: '2019—',
@@ -145,15 +145,16 @@ const chinesePortfolio: PortfolioContent = {
     {
       id: 'agent-speaking',
       category: 'speaking',
-      title: '31 个 Agent 实践分享',
+      title: '31 个 Agent 的数字组织实践',
+      heroSummary: '我把日常运行的 31 个 Agent 组织成一个工作系统，记录它们怎样协作、哪里会出错，以及我怎样重新理解管理。',
       year: '2026',
       location: '中国及海外科技活动',
       role: '作者、分享嘉宾',
       summary: '关于 31 个 Agent 的文章发布后，我陆续收到分享邀请。我会讲这些 Agent 怎样分工、哪里会出错，以及把任务交给 AI 后，我怎样调整自己的管理方式。',
       result: '文章发布后，陆续带来多次分享与合作邀请',
-      image: '/images/work/10.jpg',
-      imageAlt: 'Darren 在科技活动现场进行主题分享',
-      imageClassName: 'object-cover object-center',
+      image: '/blog/ai-employees/digital-organization.png',
+      imageAlt: '31 个 Agent 实践文章中的数字组织结构图',
+      imageClassName: 'object-contain bg-[#f7f5e9] p-4',
       noteHref: '/blog/managing-31-ai-employees',
       caseStudy: {
         context: '一篇关于 31 个 Agent 工作系统的文章发布后，不同的企业、大会与社区开始邀请我把这套实践讲清楚。',
@@ -162,7 +163,7 @@ const chinesePortfolio: PortfolioContent = {
         reflection: '对 Agent 的分享最有价值的部分，往往不是工具清单，而是任务怎样被理解、授权和检查。',
         materials: [
           {
-            type: '实践长文 · 2026.04.15',
+            type: '实践长文 · 2026',
             title: '管了 31 个 AI 员工之后，我重新理解了管理学',
             description: '文中保留了当时的组织结构、Agent 分工和产品界面，具体记录信息同步、授权与检查规则，也写下任务失败和停用的经历。',
             href: '/blog/managing-31-ai-employees',
@@ -207,9 +208,9 @@ const chinesePortfolio: PortfolioContent = {
       role: '发起人、项目负责人',
       summary: '我发起 AI+X 创造节，并和各地组织者一起在 40 座城市举办活动。我们希望各地的 AI 学习者和开发者，可以在自己的城市见面、交流和动手做东西。',
       result: '40 座城市同步参与',
-      image: '/images/work/11.jpg',
-      imageAlt: 'AI 创造者活动现场的大型开发者合影',
-      imageClassName: 'object-cover object-[center_78%]',
+      image: '/images/work/aix-creation-festival.jpg',
+      imageAlt: 'AI+X 创造节 OPC 能力专场的现场合影',
+      imageClassName: 'object-cover object-center',
       caseStudy: {
         context: '很多 AI 学习者和开发者不在一线城市，但他们同样需要在本地见面、交流和动手创作的机会。',
         responsibilities: ['发起 AI+X 创造节，确定共同的项目安排', '与各地组织者协作推进', '协调 40 座城市的活动安排'],
@@ -337,7 +338,7 @@ const englishPortfolio: PortfolioContent = {
     {
       value: '31 + 44',
       label: 'agents and automations',
-      note: 'Documented in April 2026',
+      note: 'Documented in 2026',
     },
     {
       value: 'Since 2019',
@@ -402,15 +403,16 @@ const englishPortfolio: PortfolioContent = {
     {
       id: 'agent-speaking',
       category: 'speaking',
-      title: 'Talks on Working with 31 Agents',
+      title: 'A Digital Organization with 31 Agents',
+      heroSummary: 'I organized 31 agents into a working system and documented how they collaborate, where they fail, and what the experience taught me about management.',
       year: '2026',
       location: 'Technology events in China and abroad',
       role: 'Author and invited speaker',
       summary: 'After publishing my essay about working with 31 agents, I received invitations to speak. I explain how the agents divide tasks, where they fail, and how I manage the work I delegate to AI.',
       result: 'The essay led to several talks and collaboration invitations',
-      image: '/images/work/10.jpg',
-      imageAlt: 'Darren speaking at a technology event',
-      imageClassName: 'object-cover object-center',
+      image: '/blog/ai-employees/digital-organization.png',
+      imageAlt: 'The digital organization diagram from Darren’s article on working with 31 agents',
+      imageClassName: 'object-contain bg-[#f7f5e9] p-4',
       noteHref: '/blog/managing-31-ai-employees',
       caseStudy: {
         context: 'After an essay about my 31-agent work system was published, companies, conferences, and communities began inviting me to explain the practice in person.',
@@ -419,7 +421,7 @@ const englishPortfolio: PortfolioContent = {
         reflection: 'The most useful part of an agent talk is rarely a tool list. It is the design of how work is understood, delegated, checked, and improved.',
         materials: [
           {
-            type: 'Practice essay · 2026.04.15',
+            type: 'Practice essay · 2026',
             title: 'Managing 31 AI Employees Changed How I Understand Management',
             description: 'The essay includes the organization chart, agent roles, and product screenshots from that stage of the system. It explains information sharing, delegation, and review rules, alongside failed tasks and automations I disabled.',
             href: '/blog/managing-31-ai-employees',
@@ -464,8 +466,8 @@ const englishPortfolio: PortfolioContent = {
       role: 'Initiator and program lead',
       summary: 'I initiated the AI+X Creation Festival and worked with local organizers to bring it to 40 cities, so AI learners and developers could meet and build where they lived rather than having to travel to a major hub.',
       result: 'A coordinated program across 40 cities',
-      image: '/images/work/11.jpg',
-      imageAlt: 'A large group of developers at an AI Creators event',
+      image: '/images/work/aix-creation-festival.jpg',
+      imageAlt: 'Participants at an OPC workshop during the AI+X Creation Festival',
       imageClassName: 'object-cover object-center',
       caseStudy: {
         context: 'Many AI learners and developers live outside the largest technology hubs. They still need local opportunities to meet, exchange ideas, and build together.',
@@ -582,9 +584,9 @@ const englishPortfolio: PortfolioContent = {
 const portfolioImageDimensions: Record<string, { width: number; height: number }> = {
   '/images/work/03.jpg': { width: 3200, height: 2100 },
   '/blog/superai-china/team.jpg': { width: 1922, height: 1280 },
-  '/images/work/10.jpg': { width: 1600, height: 1067 },
+  '/blog/ai-employees/digital-organization.png': { width: 878, height: 834 },
   '/images/work/14.jpg': { width: 2064, height: 3200 },
-  '/images/work/11.jpg': { width: 3200, height: 2134 },
+  '/images/work/aix-creation-festival.jpg': { width: 2276, height: 1280 },
   '/images/work/01-cover.png': { width: 1620, height: 1080 },
   '/images/work/05.jpg': { width: 1706, height: 1279 },
   '/images/work/12.jpg': { width: 1920, height: 1279 },
@@ -640,7 +642,7 @@ export function getAllWorkIds(): string[] {
 const featuredWorkIds = [
   'aix-creation-festival',
   'rumata-workshop',
-  'waic-pioneers-night',
+  'superai-china',
   'agent-speaking',
 ] as const;
 

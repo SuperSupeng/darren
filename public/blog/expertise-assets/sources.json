@@ -1,0 +1,74 @@
+{
+  "article": "https://mp.weixin.qq.com/s/ydALVwE_H_yCp1lywr9Yhw",
+  "sourceContext": "作者 mdnice 原稿内的图片 URL；按原文顺序保存，原 PNG 未裁剪、重绘或压缩。",
+  "cover": "aim-model.png",
+  "responsiveImages": "使用现有 Next.js 图片优化器，通过已注册原始尺寸生成 srcset 和 sizes；RSS 及 Markdown 使用本站原 PNG 地址。",
+  "images": [
+    {
+      "file": "expert-agents.png",
+      "source": "https://files.mdnice.com/user/3198/88f57d0e-38ed-4cff-a97c-973a2eb611bf.png",
+      "sha256": "1a1b3b22ae733b8c77c2a02f9e26ed01b1b4967cb9103b28fdeba157dd86ea81",
+      "width": 768,
+      "height": 390,
+      "bytes": 39478,
+      "hasAlpha": true,
+      "originalBytesPreserved": true,
+      "presentationNote": "原图含白色标题和说明；渲染器为此图单独设置固定深色背景 #17241d，原文件不变。"
+    },
+    {
+      "file": "expert-knowledge.png",
+      "source": "https://files.mdnice.com/user/3198/0ecb21bd-6169-45a0-a924-66e62789a478.png",
+      "sha256": "946537445e1225cc318c2434f2fccbc40e09ab4275468456c50f4e2394b935a9",
+      "width": 696,
+      "height": 438,
+      "bytes": 41371,
+      "hasAlpha": true,
+      "originalBytesPreserved": true,
+      "presentationNote": "原图为透明背景、深色文字；页面和 RSS 指定浅色背景 #f4f1e8，列表封面以 contain 完整显示。原文件不变。"
+    },
+    {
+      "file": "solo-scalable.png",
+      "source": "https://files.mdnice.com/user/3198/3043e361-2714-4687-b2e8-c721a56fb48e.png",
+      "sha256": "a4e72047f87a9f8a8f6653303ada4ac8fe63b4b5ddbea15e2bb188bc21ef22f7",
+      "width": 696,
+      "height": 462,
+      "bytes": 38510,
+      "hasAlpha": true,
+      "originalBytesPreserved": true,
+      "presentationNote": "原图为透明背景、深色文字；页面和 RSS 指定浅色背景 #f4f1e8，列表封面以 contain 完整显示。原文件不变。"
+    },
+    {
+      "file": "aim-model.png",
+      "source": "https://files.mdnice.com/user/3198/ea6729e1-9cd4-4e79-a648-8025a9170b8f.png",
+      "sha256": "e1dc7811588c74c32a5861bfab5a607b54a29dbc004b1a4d500eb0b3d9ff27b9",
+      "width": 673,
+      "height": 449,
+      "bytes": 84420,
+      "hasAlpha": true,
+      "originalBytesPreserved": true,
+      "presentationNote": "原图为透明背景、深色文字；页面和 RSS 指定浅色背景 #f4f1e8，列表封面以 contain 完整显示。原文件不变。"
+    },
+    {
+      "file": "unique-value.png",
+      "source": "https://files.mdnice.com/user/3198/4dcebea8-cad4-4778-99c9-94c7ba511ea8.png",
+      "sha256": "2d3be849ace41baffe91e3f54a9790c67b35000e821112556248678d061b7b36",
+      "width": 1032,
+      "height": 606,
+      "bytes": 62102,
+      "hasAlpha": true,
+      "originalBytesPreserved": true,
+      "presentationNote": "原图为透明背景、深色文字；页面和 RSS 指定浅色背景 #f4f1e8，列表封面以 contain 完整显示。原文件不变。"
+    },
+    {
+      "file": "be-unique.png",
+      "source": "https://files.mdnice.com/user/3198/2ceed91c-70a4-455e-ae40-022c642c5701.png",
+      "sha256": "cc796437fd21cfa98ac40e9f32d8469d84532839d70db22fdad03376fe29cd15",
+      "width": 480,
+      "height": 505,
+      "bytes": 32345,
+      "hasAlpha": true,
+      "originalBytesPreserved": true,
+      "presentationNote": "原图为透明背景、深色文字；页面和 RSS 指定浅色背景 #f4f1e8，列表封面以 contain 完整显示。原文件不变。"
+    }
+  ]
+}

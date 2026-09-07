@@ -157,6 +157,8 @@
 .collection-note-body .collection-text-link { margin-top: 12px; }
 .collection-note-image { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--space-inset); border: 6px solid var(--space-surface); box-shadow: 0 3px 10px var(--space-shadow); transform: rotate(2deg); }
 .collection-note-image img { object-fit: cover; }
+/* Transparent diagrams need an opaque reading surface in both lighting modes. */
+.collection-notes :is(.collection-latest-image, .collection-note-image) img[src*="expertise-assets"] { object-fit: contain; padding: 12px; background: #f4f1e8; }
 .collection-note-entry:nth-child(even) .collection-note-image { transform: rotate(-2deg); }
 
 @media (max-width: 1050px) {
@@ -262,3 +264,5 @@
 @media (prefers-reduced-motion: reduce) {
   .collection-page, .collection-page *, .collection-page *::before, .collection-page *::after { transition: none !important; animation: none !important; }
 }
+
+.collection-photo img.object-contain, .collection-work-row-image img.object-contain { object-fit: contain; }

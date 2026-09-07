@@ -1,0 +1,187 @@
+{
+  "article": "https://www.mdnice.com/writing/16bf272870184d8cb47a6ca44af3556b",
+  "originalTitle": "年终总结",
+  "sourceContext": "用户主动公开的 mdnice 完整正文。公开副本的 publishTime 为本次公开时间，未用于网站发表日期。图片按正文顺序保存，原文件未裁剪、重绘或压缩。",
+  "publicationDate": null,
+  "dateNote": "2025 年度回顾",
+  "cover": "image-13.jpg",
+  "images": [
+    {
+      "file": "image-01.png",
+      "source": "https://files.mdnice.com/user/3198/706c8bae-6b4e-4e5f-93fc-0677aee65600.png",
+      "sha256": "c806cf0790e2f76456a0de418bb2435ecb95e47c51aba46b64e859c497cf7364",
+      "width": 1042,
+      "height": 360,
+      "bytes": 91839,
+      "hasAlpha": true,
+      "originalBytesPreserved": true,
+      "alt": "年末回看 DeepSeek、Manus 与 CES 的朋友圈记录"
+    },
+    {
+      "file": "image-02.png",
+      "source": "https://files.mdnice.com/user/3198/f746ba1b-2fca-4462-bf2d-6bcfb8b84e03.png",
+      "sha256": "7e0c382ac1b3b54595eec2a57f4cb827e99d969cac3f926c8b0640e34412a38b",
+      "width": 684,
+      "height": 640,
+      "bytes": 76786,
+      "hasAlpha": true,
+      "originalBytesPreserved": true,
+      "alt": "AGI Villa 开始运营时核对公司材料的聊天记录"
+    },
+    {
+      "file": "image-03.jpg",
+      "source": "https://files.mdnice.com/user/3198/70c3e3a6-72e8-4e94-802a-ea4d36728693.jpg",
+      "sha256": "8c947fce86b7c01e15c359def6215ebba351753552e7ba979f3b2bc82483922a",
+      "width": 1600,
+      "height": 900,
+      "bytes": 166067,
+      "hasAlpha": false,
+      "originalBytesPreserved": true,
+      "alt": "与海外开发者和社区伙伴交流时的活动合影"
+    },
+    {
+      "file": "image-04.jpg",
+      "source": "https://files.mdnice.com/user/3198/37d8777e-6d13-40be-8f49-c5ebc8808b04.jpg",
+      "sha256": "cb2f8fe4045d94256fcec82fc01456bac783f19a059b29f36d316c9440cd954e",
+      "width": 1236,
+      "height": 2061,
+      "bytes": 92185,
+      "hasAlpha": false,
+      "originalBytesPreserved": true,
+      "alt": "AGI Villa 小宇宙播客介绍及订阅码"
+    },
+    {
+      "file": "image-05.jpg",
+      "source": "https://files.mdnice.com/user/3198/c29a1699-7fd0-4bae-b3dd-fdbf799c549f.jpg",
+      "sha256": "96ab3fb5efdd48941d1f476426bc8830bd45b1e9432a8093559e57c6afbed89a",
+      "width": 1059,
+      "height": 1164,
+      "bytes": 54959,
+      "hasAlpha": false,
+      "originalBytesPreserved": true,
+      "alt": "原文附的 AGI Villa 公众号二维码"
+    },
+    {
+      "file": "image-06.png",
+      "source": "https://files.mdnice.com/user/3198/82ec6594-f05e-48f4-8166-a36a96eb1a4f.png",
+      "sha256": "76c77caae18cb618d0263413bc3c3b686edaf748fe3fb3624980b8f9a41c30de",
+      "width": 1370,
+      "height": 1150,
+      "bytes": 190861,
+      "hasAlpha": true,
+      "originalBytesPreserved": true,
+      "alt": "与周莫发现曾同在智识训练营的聊天记录"
+    },
+    {
+      "file": "image-07.jpg",
+      "source": "https://files.mdnice.com/user/3198/5621e6c8-39aa-41a0-bb25-432effebe721.jpg",
+      "sha256": "413acba4136a7e7bd0a3ec82a29b02ce582014a37418f26370e17a74293ab7e7",
+      "width": 1620,
+      "height": 1080,
+      "bytes": 212014,
+      "hasAlpha": false,
+      "originalBytesPreserved": true,
+      "alt": "杭州 AI Creators Day 活动现场合影"
+    },
+    {
+      "file": "image-08.jpg",
+      "source": "https://files.mdnice.com/user/3198/f249e058-f31a-481b-b623-e20ff3068d0a.jpg",
+      "sha256": "c3b009254a0d0c6221a4f1a1168e13570890f07f1fe5a5bfe4116acfa209dde5",
+      "width": 2538,
+      "height": 1512,
+      "bytes": 330775,
+      "hasAlpha": false,
+      "originalBytesPreserved": true,
+      "alt": "企鹅智慧学练平台上的 AI 与甲骨文课程列表"
+    },
+    {
+      "file": "image-09.jpg",
+      "source": "https://files.mdnice.com/user/3198/a94d256c-1998-4694-ae05-cc6b8d12e416.jpg",
+      "sha256": "b797dc4c261277e0161553238a1e11667cb92e351c1710813679e82eb561744f",
+      "width": 1080,
+      "height": 2339,
+      "bytes": 84811,
+      "hasAlpha": false,
+      "originalBytesPreserved": true,
+      "alt": "2025 微信读书年度报告中的读书笔记记录"
+    },
+    {
+      "file": "image-10.jpg",
+      "source": "https://files.mdnice.com/user/3198/17b1f3e7-8cd0-4547-a289-84dd2694207e.jpg",
+      "sha256": "4be54fd834ee67f96c1b9a3bf8fbd8b85cddb75748a005c86d5ec7f31497c302",
+      "width": 688,
+      "height": 1058,
+      "bytes": 43822,
+      "hasAlpha": false,
+      "originalBytesPreserved": true,
+      "alt": "在工作桌旁观察 3D 打印设备"
+    },
+    {
+      "file": "image-11.png",
+      "source": "https://files.mdnice.com/user/3198/9124cb10-355c-4749-bbab-0d0a95021695.png",
+      "sha256": "a6f57a2465c144f1e07757516e3642f2512b343ae65511aa4af76c0b1babc488",
+      "width": 1280,
+      "height": 720,
+      "bytes": 291606,
+      "hasAlpha": true,
+      "originalBytesPreserved": true,
+      "alt": "AI 向善语料库招募伙伴的介绍图"
+    },
+    {
+      "file": "image-12.jpg",
+      "source": "https://files.mdnice.com/user/3198/121c6729-94e0-4873-83ed-419e0333c288.jpg",
+      "sha256": "3ff5d4adb2fe7cfb1053550f74ec19160a28a369725370664c5ce279052e53c8",
+      "width": 1440,
+      "height": 1080,
+      "bytes": 67389,
+      "hasAlpha": false,
+      "originalBytesPreserved": true,
+      "alt": "交大活动中的分享现场"
+    },
+    {
+      "file": "image-13.jpg",
+      "source": "https://files.mdnice.com/user/3198/f5363995-02ae-485e-9f85-ccc5e7c03652.jpg",
+      "sha256": "d2df29f74276161d21d8097592cbc990ea657c91c2241dbdbf410ca766e2fd44",
+      "width": 1440,
+      "height": 1080,
+      "bytes": 194088,
+      "hasAlpha": false,
+      "originalBytesPreserved": true,
+      "alt": "树荫下写着「莫向外求」的门楼"
+    }
+  ],
+  "textIntegrity": {
+    "sourceBodySha256": "b53665ba947a640198a0b39a952fa2845569e46a23ccefefc3cae542e656bd4c",
+    "sourceParagraphCount": 31,
+    "sourceImageCount": 13,
+    "sourceHeadingCount": 4,
+    "omittedDecorativeQuoteMarks": 1,
+    "bodyTextChanges": [],
+    "normalizedTextSha256": "110a58266bdaf0d1998450d1013c518a7846d5a9dbfd179953a777dcfe1ed9c1",
+    "normalizedTextCharacterCount": 1981,
+    "completeNormalizedTextMatchesSource": true,
+    "normalization": "HTML text versus Markdown visible text, preserving all non-whitespace textual characters in order; ignores markup, image alt additions and mdnice decorative opening quote marks."
+  },
+  "editorialChanges": [
+    "标题空格或补充年份用于清楚辨识，原题保存在 originalTitle。",
+    "章节标题统一降低一级，保持原有层级。",
+    "平台样式与无语义容器不导入，正文、引用、列表和配图顺序保留。",
+    "附加归档来源与日期说明，历史计划和招募语气保留。",
+    "逐张查看原图后补充描述性 alt；无修改或重绘配图。"
+  ],
+  "archiveYear": "2025",
+  "dateEvidence": {
+    "checkedAt": "2026-09-07",
+    "precision": "context-year",
+    "originalPublicationDateVerified": false,
+    "note": "年份用于定位文章的历史内容；转载、事件及本次公开副本日期均不作为原始发表日。",
+    "sources": [
+      {
+        "url": "https://www.mdnice.com/writing/16bf272870184d8cb47a6ca44af3556b",
+        "date": "2025",
+        "kind": "user-public-copy-body",
+        "note": "正文把 2026 相关计划称作“明年”，是年末写作语境；不是发布栏日期。"
+      }
+    ]
+  }
+}

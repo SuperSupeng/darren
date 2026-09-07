@@ -1,11 +1,12 @@
 ---
 title: Five Observations from Accompanying the SuperAI Team in Hangzhou and Shanghai
-date: 2026-05-18
+archiveYear: "2026"
+dateNote: "2026 field visit"
 description: A field note from visits to universities, open-source communities, and AI companies in Hangzhou and Shanghai, and what those conversations revealed about cross-border technology exchange.
 tags: [China AI, SuperAI, Ecosystem Building, Field Visit]
 ---
 
-Last week, I accompanied SuperAI co-founder Peter and the ecosystem team through Hangzhou and Shanghai. Over several days, we visited Zhejiang University, ModelScope, Qwen, Qoder, Datawhale, ZhenFund, MiniMax, Volcano Engine, Trae, and SenseTime.
+Last week, SuperAI co-founder Peter and the ecosystem team came to China at the invitation of WAVE, an initiative started by Guohao. I accompanied them through Hangzhou and Shanghai. Over several days, we visited Zhejiang University, ModelScope, Qwen, Qoder, Datawhale, ZhenFund, MiniMax, Volcano Engine, Trae, and SenseTime.
 
 The team came with two practical goals: to understand China's AI ecosystem more systematically and to invite relevant Chinese teams to SuperAI in Singapore that June. As we moved from one conversation to the next, I realized that the more useful thing to record was not the itinerary, but where each side's understanding of the other still broke down.
 

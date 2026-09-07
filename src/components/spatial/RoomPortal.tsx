@@ -51,7 +51,7 @@ function LiveRoom({ zone, lighting, locale, compact, contentHref }: { zone: Stud
   ];
   return <div ref={root} className="room-portal-render" data-portal-status={failed ? 'static' : ready ? 'ready' : 'loading'} data-view-angle={angle.toFixed(3)}>
     {(!ready || failed) && <Poster lighting={lighting} />}
-    {!failed && <PortalBoundary onFailure={onFailure}><StudioScene presentation="portal" viewAngle={angle} onViewAngleChange={setAngle} zone={zone} lighting={lighting} reducedMotion={motion} onReady={onReady} onFailure={onFailure} highlightedZone={highlighted} onHover={setHighlighted} hotspotRoot={root} onSelect={next => { if (next === zone && contentHref) window.location.hash = contentHref; else router.push(`/${lighting === 'evening' ? '?light=evening' : ''}#${next}`); }} /></PortalBoundary>}
+    {!failed && <PortalBoundary onFailure={onFailure}><StudioScene presentation="portal" viewAngle={angle} onViewAngleChange={setAngle} zone={zone} lighting={lighting} reducedMotion={motion} onReady={onReady} onFailure={onFailure} highlightedZone={highlighted} onHover={setHighlighted} hotspotRoot={root} onSelect={next => { if (next === zone && contentHref) window.location.hash = contentHref; else if (next !== 'overview') router.push(`/${next === 'notes' ? 'blog' : next}${lighting === 'evening' ? '?light=evening' : ''}`); }} /></PortalBoundary>}
     {ready && !failed && <div className="room-portal-tools">
       {!compact && <p>{zh ? '拖动查看' : 'Drag to explore'}<span aria-hidden="true">↔</span></p>}
       <div role="group" aria-label={zh ? '房间视角' : 'Room viewpoint'}>{views.map(view => <button key={view.angle} type="button" aria-label={zh ? `${view.label}视角` : `${view.label} view`} aria-pressed={Math.abs(angle - view.angle) < 0.04} onClick={() => setAngle(view.angle)}><span aria-hidden="true">{view.icon}</span>{!compact && <span>{view.label}</span>}</button>)}</div>
@@ -75,7 +75,7 @@ export default function RoomPortal({ zone, locale, compact = false, contentHref 
     return () => observer.disconnect();
   }, [compact]);
   const zh = locale === 'zh';
-  const href = `/${lighting === 'evening' ? '?light=evening' : ''}#${zone}`;
+  const href = `/${lighting === 'evening' ? '?light=evening' : ''}`;
   const live = !still && (compact ? exploring : activated);
   return <figure ref={root} className={`room-portal${compact ? ' room-portal-compact' : ' room-portal-spatial'}`} data-room-zone={zone} aria-label={zh ? `工作室场景：${labels[zone][0]}` : `Studio view: ${labels[zone][1].toLowerCase()}`}>
     <div className="room-portal-view">

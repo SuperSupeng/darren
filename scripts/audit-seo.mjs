@@ -7,6 +7,7 @@ const failures = [];
 const pages = new Map();
 const sources = new Map();
 const imagePaths = new Set();
+const articleImagePaths = new Set();
 
 async function request(path, userAgent = 'OAI-SearchBot') {
   return fetch(new URL(path, baseUrl), {
@@ -17,6 +18,53 @@ async function request(path, userAgent = 'OAI-SearchBot') {
 
 function check(condition, message) {
   if (!condition) failures.push(message);
+}
+
+function checkValues(actual, expected, message) {
+  check(JSON.stringify(actual) === JSON.stringify(expected), message);
+}
+
+function articleIdentity(document, label) {
+  const authors = [...document.querySelectorAll('meta[name="author"]')].map(meta => meta.content);
+  check(authors.length > 0 && authors.every(author => author.trim()), `${label} article author metadata is missing or empty`);
+  const published = [...document.querySelectorAll('meta[property="article:published_time"]')];
+  const times = [...document.querySelectorAll('.reading-byline time')];
+  check(published.length <= 1, `${label} duplicate publication metadata`);
+  const date = published[0]?.content;
+  if (published.length) {
+    const parsed = new Date(`${date}T00:00:00Z`);
+    check(/^\d{4}-\d{2}-\d{2}$/.test(date) && !Number.isNaN(parsed.valueOf()) && parsed.toISOString().slice(0, 10) === date, `${label} invalid publication date metadata`);
+    checkValues(times.map(time => time.getAttribute('datetime')), [date], `${label} visible publication datetime differs from metadata`);
+    checkValues(times.map(time => time.textContent.trim()), [date], `${label} visible publication date differs from metadata`);
+  } else {
+    check(times.length === 0, `${label} undated article must not have a publication time element`);
+  }
+  return { authors, date };
+}
+
+function checkArticleSchema(schema, article, nodes, label) {
+  const authors = Array.isArray(schema.author) ? schema.author : [schema.author];
+  const names = authors.map(author => author?.name ?? nodes.find(node => author?.['@id'] && node['@id'] === author['@id'])?.name);
+  checkValues(names, article.authors, `${label} JSON-LD authors differ from page metadata`);
+  if (article.date) check(schema.datePublished === article.date, `${label} JSON-LD publication date differs from page metadata`);
+  else check(!Object.hasOwn(schema, 'datePublished'), `${label} undated article must not declare datePublished`);
+}
+
+function sourceFrontmatter(body, label) {
+  const match = body.match(/^---\n([\s\S]*?)\n---(?:\n|$)/);
+  check(Boolean(match), `${label} missing source frontmatter`);
+  const fields = {};
+  for (const line of match?.[1].split('\n') ?? []) {
+    const separator = line.indexOf(':');
+    const key = line.slice(0, separator);
+    try {
+      if (separator <= 0 || Object.hasOwn(fields, key)) throw new Error('invalid field');
+      fields[key] = JSON.parse(line.slice(separator + 1).trim());
+    } catch {
+      failures.push(`${label} invalid or duplicate source field: ${key}`);
+    }
+  }
+  return fields;
 }
 
 const sitemapResponse = await request('/sitemap.xml');
@@ -51,6 +99,13 @@ for (const entry of entries) {
   check(document.documentElement.lang === (path.startsWith('/zh') ? 'zh-CN' : 'en'), `${label} incorrect document language`);
 
   if (meta('og:image')) imagePaths.add(new URL(meta('og:image')).pathname);
+  for (const image of document.querySelectorAll('.reading-prose img')) {
+    const candidates = (image.getAttribute('srcset') ?? '').split(',').map(value => value.trim().split(/\s+/));
+    const source = candidates.find(([, width]) => Number.parseInt(width, 10) >= 640)?.[0] ?? image.getAttribute('src');
+    if (!source) continue;
+    const url = new URL(source, canonical);
+    if (url.origin === new URL(canonical).origin) articleImagePaths.add(`${url.pathname}${url.search}`);
+  }
   if (/^\/(en|zh)\/(blog|work)\/[^/]+$/.test(path)) {
     const sourceUrl = `${canonical}/source.md`;
     check(document.querySelector('link[rel="alternate"][type="text/markdown"]')?.href === sourceUrl, `${label} missing canonical Markdown alternate`);
@@ -58,19 +113,29 @@ for (const entry of entries) {
     sources.set(sourceUrl, canonical);
   }
   const scripts = [...document.querySelectorAll('script[type="application/ld+json"]')];
+  const nodes = [];
   check(scripts.length > 0, `${label} missing structured data`);
   for (const script of scripts) {
     try {
       const graph = JSON.parse(script.textContent);
       check(graph['@context'] === 'https://schema.org', `${label} unexpected structured data context`);
+      nodes.push(...(Array.isArray(graph['@graph']) ? graph['@graph'] : [graph]));
     } catch {
       failures.push(`${label} invalid JSON-LD`);
     }
   }
-  pages.set(canonical, { document, languages });
+  const article = /^\/(en|zh)\/blog\/[^/]+$/.test(path) ? articleIdentity(document, label) : undefined;
+  if (article) check(nodes.filter(node => node['@type'] === 'BlogPosting').length === 1, `${label} expected one article JSON-LD node`);
+  pages.set(canonical, { document, languages, nodes, article });
 }
 
-for (const [canonical, { document, languages }] of pages) {
+for (const [canonical, { document, languages, nodes }] of pages) {
+  const articles = nodes.flatMap(node => node['@type'] === 'BlogPosting' ? [node] : node['@type'] === 'Blog' ? node.blogPost ?? [] : []);
+  for (const schema of articles) {
+    const article = pages.get(schema.url)?.article;
+    check(Boolean(article), `${canonical}: article JSON-LD has no matching article page: ${schema.url}`);
+    if (article) checkArticleSchema(schema, article, nodes, `${canonical} (${schema.url}):`);
+  }
   for (const [language, href] of Object.entries(languages)) {
     check(pages.has(href), `${canonical}: ${language} alternate is not a published page`);
     if (language !== 'x-default' && pages.has(href)) {
@@ -98,13 +163,43 @@ for (const [sourceUrl, canonical] of sources) {
   check(response.status === 200, `${sourceUrl}: source unavailable`);
   check(response.headers.get('content-type')?.startsWith('text/markdown'), `${sourceUrl}: incorrect source content type`);
   check(response.headers.get('link') === `<${canonical}>; rel="canonical"`, `${sourceUrl}: missing canonical HTTP link`);
-  check(body.includes(`canonical: "${canonical}"`) && body.includes('author: "Darren Su / 苏鹏"'), `${sourceUrl}: missing source attribution`);
+  const fields = sourceFrontmatter(body, `${sourceUrl}:`);
+  check(fields.canonical === canonical, `${sourceUrl}: source canonical differs from page`);
+  const article = pages.get(canonical)?.article;
+  if (article) {
+    checkValues(fields.authors, article.authors, `${sourceUrl}: source authors differ from page metadata`);
+    if (Object.hasOwn(fields, 'author')) {
+      check(article.authors.length === 1 && (fields.author === article.authors[0] || (article.authors[0] === 'Darren Su' && fields.author === 'Darren Su / 苏鹏')), `${sourceUrl}: legacy author field conflicts with the complete author list`);
+    }
+    if (article.date) check(fields.date === article.date, `${sourceUrl}: source date differs from page metadata`);
+    else check(!Object.hasOwn(fields, 'date'), `${sourceUrl}: undated article must not export a publication date`);
+  } else {
+    check(fields.author === 'Darren Su / 苏鹏', `${sourceUrl}: missing case source attribution`);
+  }
   check(body.length > 300, `${sourceUrl}: source content is unexpectedly short`);
 }
 
 for (const imagePath of imagePaths) {
   const response = await fetch(new URL(imagePath, baseUrl), { method: 'HEAD', signal: AbortSignal.timeout(15_000) });
   check(response.status === 200 && response.headers.get('content-type')?.startsWith('image/'), `Share image unavailable: ${imagePath}`);
+}
+
+// Exercise the actual optimized response, including its body. A valid source
+// file or successful HEAD request does not detect a stalled image conversion.
+const articleImageRequests = [...articleImagePaths];
+for (let index = 0; index < articleImageRequests.length; index += 4) {
+  await Promise.all(articleImageRequests.slice(index, index + 4).map(async (imagePath) => {
+    try {
+      const response = await fetch(new URL(imagePath, baseUrl), {
+        headers: { Accept: 'image/webp,image/*,*/*;q=0.8' },
+        signal: AbortSignal.timeout(15_000),
+      });
+      const body = await response.arrayBuffer();
+      check(response.status === 200 && response.headers.get('content-type')?.startsWith('image/') && body.byteLength > 0, `Article image unavailable: ${imagePath}`);
+    } catch (error) {
+      failures.push(`Article image failed or timed out: ${imagePath} (${error.message})`);
+    }
+  }));
 }
 
 for (const locale of ['en', 'zh']) {
@@ -147,10 +242,21 @@ for (const path of ['/robots.txt', '/llms.txt', '/rss.xml']) {
     check(items.length === [...pages.keys()].filter(url => /^\/(en|zh)\/blog\/[^/]+$/.test(new URL(url).pathname)).length, `${path}: missing published articles`);
     for (const item of items) {
       check((item.getElementsByTagName('content:encoded')[0]?.textContent.length ?? 0) > 1000, `${path}: missing full article content`);
-      check(item.getElementsByTagName('dc:creator')[0]?.textContent === 'Darren Su', `${path}: missing author attribution`);
+      const url = item.querySelector('link')?.textContent;
+      const article = pages.get(url)?.article;
+      check(Boolean(article), `${path}: item has no matching article page: ${url}`);
+      if (!article) continue;
+      const authors = [...item.getElementsByTagNameNS('http://purl.org/dc/elements/1.1/', 'creator')].map(author => author.textContent);
+      checkValues(authors, article.authors, `${path} (${url}): RSS authors differ from page metadata`);
+      const dates = [...item.querySelectorAll('pubDate')].map(date => date.textContent);
+      if (article.date) {
+        checkValues(dates, [new Date(`${article.date}T00:00:00+08:00`).toUTCString()], `${path} (${url}): RSS publication date differs from page metadata`);
+      } else {
+        check(dates.length === 0, `${path} (${url}): undated article must not declare pubDate`);
+      }
     }
   }
 }
 
-console.log(JSON.stringify({ pages: pages.size, shareImages: imagePaths.size, sources: sources.size, failures }, null, 2));
+console.log(JSON.stringify({ pages: pages.size, shareImages: imagePaths.size, articleImages: articleImagePaths.size, sources: sources.size, failures }, null, 2));
 process.exitCode = failures.length ? 1 : 0;

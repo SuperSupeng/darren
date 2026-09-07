@@ -2,7 +2,7 @@ import { locales } from '@/i18n/config';
 import { getAllPosts } from '@/lib/blog';
 import { getPortfolio } from '@/lib/portfolio';
 import { siteUrl } from '@/lib/seo';
-import { getSiteContent } from '@/lib/siteContent';
+import { getAboutCopy } from '@/lib/about';
 
 export const dynamic = 'force-static';
 
@@ -23,14 +23,12 @@ export function GET() {
     ...getAllPosts(locale).map(post => `- [${post.title} (${locale}, Markdown)](${siteUrl}/${locale}/blog/${post.slug}/source.md)`),
     ...getPortfolio(locale).work.map(work => `- [${work.title} (${locale}, Markdown)](${siteUrl}/${locale}/work/${work.id}/source.md)`),
   ]);
-  const profile = getSiteContent('en').about.hero;
+  const profile = getAboutCopy('en');
 
   const body = [
     '# Darren Su / 苏鹏',
     '',
-    `> ${profile.subtitle}`,
-    '',
-    profile.tags.join('; '),
+    `> ${profile.intro}`,
     '',
     `Canonical website: ${siteUrl}`,
     'Primary contact: supeng842499467@gmail.com',

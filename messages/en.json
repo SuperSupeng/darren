@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Darren Su | AI Products, Developer Communities & Technology Events",
-    "description": "Darren Su leads AI developer programs, helps early products meet users, and shares practical experience in AI use and agent building."
+    "description": "Darren Su’s personal website: AI products and agent experiments, developer communities and events, and writing on technology, meditation, and everyday life."
   },
   "nav": {
     "home": "Home",
@@ -55,7 +55,7 @@
   "about": {
     "meta": {
       "title": "About me",
-      "description": "Darren Su's path from engineering and Datawhale to developer programs, product building, and a multi-agent work system."
+      "description": "Darren Su’s experiences in engineering, communities, and product building, alongside meditation and an interest in charitable work."
     }
   }
 }

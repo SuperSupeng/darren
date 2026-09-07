@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Darren Su / 苏鹏 | AI 产品、开发者社区与科技活动",
-    "description": "Darren Su 发起和负责 AI 开发者活动，帮助早期产品接触用户，也分享 AI 使用与 Agent 构建经验。"
+    "description": "Darren Su / 苏鹏的个人网站：AI 产品与 Agent 实验、Datawhale 社区与开发者活动，以及关于技术、禅修和生活的文字。"
   },
   "nav": {
     "home": "首页",
@@ -55,7 +55,7 @@
   "about": {
     "meta": {
       "title": "关于我",
-      "description": "Darren Su / 苏鹏：从工程工作进入 Datawhale，后来开始负责开发者项目、做产品，也长期使用多 Agent 工作系统。"
+      "description": "Darren Su / 苏鹏的工程、社区和产品经历，以及禅修与公益关注。"
     }
   }
 }
