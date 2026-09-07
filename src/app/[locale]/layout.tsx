@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/next';
-import { Geist } from 'next/font/google';
+import { Geist, Noto_Serif } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -10,11 +10,19 @@ import SiteChrome from '@/components/SiteChrome';
 import { getLocalizedBlogRoutes } from '@/lib/blog';
 import '../globals.css';
 import '../fonts/noto-serif-sc/fonts.css';
+import '../typography.css';
 
 const siteSans = Geist({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-site-sans',
+});
+
+const englishSerif = Noto_Serif({
+  subsets: ['latin'],
+  display: 'swap',
+  preload: false,
+  variable: '--font-english-serif',
 });
 
 // The same Noto Serif SC outlines, subset from the repository's content.
@@ -81,7 +89,7 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html lang={locale === 'zh' ? 'zh-CN' : 'en'} data-scroll-behavior="smooth">
-      <body className={`${siteSans.variable} ${siteSerif.variable} bg-paper-200 text-ink-950 antialiased`}>
+      <body className={`${siteSans.variable} ${siteSerif.variable} ${locale === 'en' ? englishSerif.variable : ''} bg-paper-200 text-ink-950 antialiased`}>
         <NextIntlClientProvider messages={messages}>
           <a href="#main-content" className="skip-link">
             {locale === 'zh' ? '跳到主要内容' : 'Skip to main content'}

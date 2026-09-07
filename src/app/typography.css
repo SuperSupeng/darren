@@ -1,0 +1,7 @@
+/* English needs proportional Latin punctuation, not Noto Serif SC's em-wide quotes.
+   Resolve aliases on body, where next/font defines its variables. */
+html[lang="en"] body.site-serif-local {
+  --font-site-serif: var(--font-english-serif), Georgia, 'Darren Noto Serif SC', serif;
+  --font-noto-serif: var(--font-site-serif);
+  --font-geist-sans: var(--font-site-sans), ui-sans-serif, system-ui, sans-serif;
+}

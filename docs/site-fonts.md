@@ -1,10 +1,12 @@
 # 本地 Noto Serif SC 字体维护
 
-站点继续使用 Noto Serif SC 的原始字形。Google Fonts 原先为 400、500、600 三个字重重复生成了大量 Unicode 分段声明；现在从同一官方字体生成两份本地 WOFF2，使用 400–600 可变字重范围：Latin 与 CJK 各一份。浏览器根据实际文字和 `unicode-range` 下载所需部分，英文页面不会仅因全局字体声明而下载 CJK 文件。
+中文页面继续使用 Noto Serif SC 的原始字形。Google Fonts 原先为 400、500、600 三个字重重复生成了大量 Unicode 分段声明；现在从同一官方字体生成两份本地 WOFF2，使用 400–600 可变字重范围：Latin 与 CJK 各一份。浏览器根据实际文字和 `unicode-range` 下载所需部分，英文页面不会仅因全局字体声明而下载 CJK 文件。
+
+英文页面使用 `next/font/google` 的 Noto Serif 可变字体，保留西文衬线风格及比例正确的弯引号、撇号。Noto Serif SC 的这些标点具有一个汉字的宽度，不适合英语缩写与所有格。英文使用的字体变量仅绑定在英文 body 上，关闭预加载；浏览器从同域按需下载，不访问 Google Fonts。中文页面仍使用本地 Noto Serif SC。
 
 字体通过布局导入的 CSS 由 Next 打包并从同域提供。中文字体构建无需下载 Google Fonts；访问时与原配置一样从同域获取。Geist 仍使用现有的 `next/font/google` 配置。保留 `font-display: swap` 与系统宋体/serif 回退；超出子集的新汉字会使用系统字体，不会因此变成不可读内容。
 
-`--font-site-serif` 与内页使用的 `--font-noto-serif` 别名必须在同一元素上定义。只在 `:root` 引用一个稍后才在 body 定义的变量，会提前固定为回退字体。浏览器验证应检查实际使用的字体及请求，不能仅凭页面更快或字体文件存在判断优化成功。
+`--font-site-serif` 与内页使用的 `--font-noto-serif` 别名必须在同一元素上定义。只在 `:root` 引用一个稍后才在 body 定义的变量，会提前固定为回退字体。英文版的 `--font-geist-sans` 同样在 body 上重算，使正文使用已加载的 Geist。语言差异维护在 `src/app/typography.css`，不要直接编辑自动生成的字体 CSS。浏览器验证应检查实际使用的字体及请求，不能仅凭页面更快或字体文件存在判断优化成功。
 
 ## 来源与许可
 
