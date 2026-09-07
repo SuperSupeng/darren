@@ -2,8 +2,7 @@ import { MetadataRoute } from 'next';
 import { defaultLocale, locales } from '@/i18n/config';
 import { getAllPosts, getPostBySlug } from '@/lib/blog';
 import { getPortfolio } from '@/lib/portfolio';
-
-const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.darren-su.com';
+import { siteUrl as baseUrl } from '@/lib/site-config';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseRoutes = [

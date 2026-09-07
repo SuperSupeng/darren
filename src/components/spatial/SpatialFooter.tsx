@@ -3,16 +3,8 @@
 import { useLocale } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import ContactActions from '@/components/ContactActions';
-import { roomLinks } from './SpatialHeader';
+import { navigationLinks as roomLinks, socialLinks } from '@/lib/site-config';
 import { useStudioSettings } from './StudioSettings';
-
-const socialLinks = [
-  ['GitHub', 'https://github.com/SuperSupeng'],
-  ['LinkedIn', 'https://www.linkedin.com/in/darrenzenshipai'],
-  ['X', 'https://x.com/zenshipai'],
-  ['Instagram', 'https://www.instagram.com/0xdarren_su'],
-  ['小红书', 'https://xhslink.cn/m/1JL3lV0NGmO'],
-];
 
 export default function SpatialFooter() {
   const locale = useLocale();

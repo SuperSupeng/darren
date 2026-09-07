@@ -4,8 +4,8 @@ import { defaultLocale, isLocale, locales, type Locale } from '@/i18n/config';
 import type { BlogPost } from '@/lib/blog';
 import { getPortfolio, type PortfolioWork } from '@/lib/portfolio';
 import { getSiteContent } from '@/lib/siteContent';
-
-export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.darren-su.com';
+import { contactEmail, siteUrl, socialLinks } from '@/lib/site-config';
+export { siteUrl } from '@/lib/site-config';
 
 type KeywordGroup = 'home' | 'services' | 'work' | 'blog' | 'about';
 
@@ -258,7 +258,7 @@ function personNode(locale: string) {
     url: absoluteLocalizedUrl(locale, '/about'),
     mainEntityOfPage: `${absoluteLocalizedUrl(locale, '/about')}#profile`,
     image: `${siteUrl}/photo.jpg`,
-    email: 'supeng842499467@gmail.com',
+    email: contactEmail,
     jobTitle: site.seo.home.jobTitle,
     homeLocation: {
       '@type': 'City',
@@ -283,13 +283,7 @@ function personNode(locale: string) {
         name: locale === 'zh' ? 'MatchPoint 联合创始人' : 'MatchPoint Co-founder',
       },
     ],
-    sameAs: [
-      'https://xhslink.cn/m/1JL3lV0NGmO',
-      'https://x.com/zenshipai',
-      'https://www.instagram.com/0xdarren_su',
-      'https://www.linkedin.com/in/darrenzenshipai',
-      'https://github.com/SuperSupeng',
-    ],
+    sameAs: socialLinks.map(([, href]) => href),
     knowsAbout: site.seo.home.knowsAbout,
     knowsLanguage: ['zh-CN', 'en'],
   };

@@ -1,93 +1,78 @@
-# Content Strategy
+# 内容维护规范
 
-The site is Darren Su's bilingual public record of work: developer ecosystem programs, conference collaborations, early-user product workshops, AI and agent talks, products, and writing.
+网站让读者认识 Darren 做过什么、如何思考，以及技术、社区、公益和生活怎样影响他。有合作意向的人应能进一步了解职责、成果与联系方法；生活手记不必承担证明商业能力的任务。
 
-Chinese and English should communicate the same verified facts. They do not need to be literal translations: English copy should add context that an international reader may not have, while Chinese copy can assume more familiarity with China's technology and community landscape.
+## 叙述与事实
 
-## Audience and Promise
+使用温暖、直接、具体的第一人称表达。首页介绍本人，案例解释工作，产品展示实践，文章保留观察与判断，关于页串联个人经历。3D 是视觉环境，导航和文案不能要求读者猜测房间隐喻。
 
-The primary audience is a team, event organizer, community, university, or conference considering a concrete collaboration with Darren.
+中英文传达同样的已核验事实。页面文案可按读者背景调整，完整文章译文必须保留原意、论证、署名、图片、引用及写作时的语境；不能把译文摘要当作全文。历史计划仍然是当时的计划，不改写成已完成成果。
 
-Every public page should help that reader answer four questions:
+合作说明讲清适合谁、Darren 具体能做什么、怎样开始联系。不展示未经确认的费用或周期，不暗示代理公司、保证结果或缺乏公开记录的能力。保留“约”“近”等限定，区分报名、触达、到场、参与、主持与组织。公益项目保留团队与共同作者的贡献，不把一次嘉宾分享写成长期项目负责。
 
-1. What kind of work does Darren do?
-2. What did he personally handle?
-3. What was actually completed?
-4. What is the simplest way to begin a relevant conversation?
+## 修改入口
 
-The site should not imply capabilities, geographic reach, client work, or results that are not supported by a published project or product.
+| 内容 | 唯一维护入口 |
+| --- | --- |
+| 案例、角色、规模、结果、合作方式 | `src/lib/portfolio/`；通过 `index.ts` 的共享接口读取 |
+| 关于页的个人叙述 | `src/lib/about.ts` |
+| 案例之外的活动与交流经历 | `src/lib/experience-archive.ts` |
+| 产品、共享页面介绍与标签 | `src/lib/site-content/{zh,en}.ts` |
+| 首页精选文章 | `src/lib/studio-content.ts` 中的 `featuredNotes` |
+| 文章全文 | `content/blog/{zh,en}/` |
+| 导航等短界面标签 | `messages/{zh,en}.json` |
 
-## Voice and Interface Copy
+事实变化时修改对应来源，不在多个页面分别修补。首页的中英文精选各自固定，新增翻译或归档文章不自动改变它们。调整精选属于编辑决定，需要与文章库是否收录分开处理。
 
-Write in Darren's first-person voice: warm, direct, and specific about the work. Introduce the person on the homepage; use clear names such as Work, Products, Writing, and Collaboration for navigation and page titles.
+## 新增与维护文章
 
-The 3D studio is a visual setting. Visitors should not need to interpret room metaphors to understand a page or choose a link. Avoid invented brand names, ornamental slogans, and repeated claims that work is “real” or creates “connections”; describe what happened instead.
+文件名就是 slug。对应译文使用相同 slug，并放入另一语言目录。文章是完成并获准公开的内容；未完成版本不放入 `content/blog/`，避免被列表、RSS 与 sitemap 自动收录。
 
-For teams considering collaboration, explain who a format suits, what Darren can personally contribute, and what information would help start a conversation. Keep the tone conversational without implying an agency, a guaranteed result, or services beyond the published record.
+已核实原始发表日期的文章使用：
 
-## Source of Truth
+```markdown
+---
+title: 文章标题
+date: 2026-09-04
+description: 用于列表页和搜索摘要的一句话介绍。
+tags: [AI, Field Notes]
+authors: [Darren Su]
+---
+```
 
-- `src/lib/portfolio.ts` is the source of truth for public work, case studies, metrics, and collaboration paths in both languages.
-- `src/lib/site-content/{en,zh}.ts` holds the About, Products, Writing, and SEO narratives still used by those routes.
-- `content/blog/{en,zh}/` holds finished public essays and field notes. A translated version may share a slug, but each language must be reviewed on its own.
-- `messages/*.json` should contain navigation and small interface labels rather than strategic page copy.
-- Page-local copy is acceptable for a page-specific editorial introduction, but facts and repeated service claims should come from the shared sources above.
+无法核实精确日期时省略 `date`，使用 `dateNote`；有依据的内容年份可填写 `archiveYear`：
 
-When a fact changes, update its source rather than patching several rendered pages independently.
+```markdown
+---
+title: 2025 年度回顾
+archiveYear: "2025"
+dateNote: "2025 年度回顾"
+description: 回顾这一年的社区、产品与生活经历。
+tags: [年度回顾, 社区]
+authors: [Darren Su]
+---
+```
 
-After changing public copy, run `python3 scripts/site-fonts.py` to check the local serif font's character coverage. New characters remain readable through system fallback, but should be added to the same-source font subsets before publishing when consistent typography matters. See `docs/site-fonts.md` for regeneration.
+`title`、`description` 为单行，`tags` 是非空行内列表。共同作者按原文顺序填写非空 `authors` 列表，省略时默认为 Darren Su。解析器支持 LF / CRLF / CR 和 UTF-8 BOM；元数据无效时明确失败，不用构建日补齐。
 
-## Public Themes
+公开副本上传日、编辑器保存日、翻译日与网站导入日都不能代替原始发表日。没有精确日期时，页面显示归档说明，HTML metadata、JSON-LD、RSS 和 Markdown 导出均省略发表日期。项目年份描述项目本身，不是案例页发表日；sitemap 不从这些日期推导 `lastModified`。
 
-- Developer events and multi-city ecosystem programs.
-- Conference and technology-brand collaborations.
-- Cross-border ecosystem visits and product feedback workshops.
-- Practical AI and multi-agent work systems.
-- Products built from recurring problems in community, events, and hiring work.
-- Long-term community practice and the personal disciplines behind it.
+长文用清晰的二、三级标题组织，由正文渲染器生成可链接的目录。不要把代码示例中的中文提示词擅自翻译或修改；它们可能影响示例行为。完整译文保留原文链接，核对章节层级、代码、图片顺序、引用目标、作者和日期字段。只有完整、复核过的语言版本进入文章目录。
 
-Robotics, hardware, supply chain, market-entry work, or other adjacent topics should only become primary themes after there is real, publishable work to support them.
+## 图片与来源
 
-## Case Study Standard
+文章图片放在 `public/blog/<主题>/`，项目图片放在 `public/images/work/`。正文使用站内绝对路径，例如：
 
-Every project in the public work index should have a case page containing:
+```markdown
+![准确描述图片内容的替代文字](/blog/example/cover.webp)
+```
 
-- Context: why the work existed.
-- Role: what Darren personally handled.
-- Process: the small number of actions that moved it forward.
-- Outcome: a concrete, supportable result.
-- Reflection: one useful lesson without turning the case into advertising copy.
+导入原图时保留原始字节与来源，不改绘人物、现场或图表来修饰事实。图片清单 `sources.json` 记录来源与原始尺寸；归档文章在 `src/lib/blog-images.ts` 注册清单，正文和封面复用尺寸。其他文章封面由 `src/lib/blog.ts` 的 `postImages` 管理。新增图片后确认实际渲染尺寸与替代文字；透明图表需要能读清的背景。
 
-Use approximate numbers when the underlying record is approximate. Do not turn participation, reach, or invitations into stronger business outcomes unless they are verified.
+外部资料只支持其实际记录的内容。预告不等于完成记录，社区伙伴标志不等于个人客户关系。现有案例材料的支持范围和待补项见 [案例证据](case-evidence.md)。不能因一次访问受限就删除仍有效的引用，也不能仅凭链接可访问就宣称所有论断已独立核验。
 
-Public materials should describe the specific facts they support. A launch announcement does not prove completed activity, registrations are not attendance, and a community-partner logo does not establish a personal client relationship. Keep these descriptions consistent in the page, Markdown export and structured citations. The current evidence and remaining gaps are recorded in `docs/case-evidence.md`.
+## 导出与发布
 
-## Writing Standard
+HTML 是文章和案例的规范版本。Markdown 来源、全文 RSS、`llms.txt` 与结构化数据从同一份内容生成，不手工维护第二份正文。来源路由的静态参数必须同时枚举语言与 slug，单独测试处理函数不能证明部署地址可访问。
 
-Publish after there is something real to record. Field notes should preserve what happened and what changed in Darren's understanding; essays should make a clear argument grounded in direct practice.
-
-Before publishing, confirm:
-
-- Frontmatter is complete. Use a verified original publication date, or an explicit archive note when it is unknown.
-- Every local image exists and has meaningful alternative text.
-- Every external reference still resolves and is described honestly.
-- Long pieces have a linked table of contents.
-- A second-language version is either complete or intentionally unavailable; never show an empty link.
-
-## Public Source Formats
-
-The HTML page is the canonical source for every article and case. Its `source.md` download is generated from the same content, with author, language, original article date, canonical URL, and absolute reference/image links. RSS includes the full published articles through the same renderer used on the website. Do not hand-edit a second copy of these exports.
-
-Article frontmatter uses single-line `title`, `description`, and a non-empty inline `tags` list. Supply a verified `date`, or omit it and provide `dateNote` and/or an evidence-backed `archiveYear`. Coauthored work uses an ordered, non-empty inline `authors` list; the default is Darren Su. The production parser accepts LF/CRLF/CR and a UTF-8 BOM, but rejects missing or invalid metadata instead of substituting a build date. Preserve original publication dates; a public mirror upload, editor save, or site import date is not a substitute. Undated articles omit publication-date fields in HTML metadata, JSON-LD, RSS, and the Markdown source. Project years describe the work, not the publication date of the case page. Do not add `lastModified` to the sitemap until a verified editorial update date is maintained separately.
-
-After changing routes or source formats, run `npm run audit:seo` against a built, running preview. Keep all published HTML pages, Markdown variants, feed entries, and language alternatives in agreement. Source-download routes must enumerate both `locale` and `slug` when generated; testing a handler in isolation does not verify the deployed route exists.
-
-## Maintenance Rhythm
-
-- Add or update a case page when a public project reaches a meaningful milestone.
-- Add a field note when the experience contains evidence or judgment that the case page cannot show.
-- Update Product pages only when status, signal, or direction changes.
-- Keep private relationship knowledge in the appropriate private system, not on the public site.
-- Run the repository's full quality check before publishing.
-
-The goal is a compact, credible body of work: cases prove execution, writing shows judgment, products demonstrate building ability, and the collaboration page sets clear expectations.
+修改内容后运行 `npm run check`，新字形按 [字体维护](site-fonts.md) 处理。内容与界面实际呈现的检查方法见 [验证与发布](verification.md)。私有关系记录、未采用的原稿和审阅摘要在项目外保存，不放入公开仓库。

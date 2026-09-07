@@ -9,7 +9,7 @@ import { JSDOM } from 'jsdom';
 const require = createRequire(import.meta.url);
 const { locales, defaultLocale } = require('../src/i18n/config.ts');
 const { routing } = require('../src/i18n/routing.ts');
-const { getPortfolio } = require('../src/lib/portfolio.ts');
+const { getPortfolio } = require('../src/lib/portfolio/index.ts');
 const {
   siteUrl,
   buildAlternates,

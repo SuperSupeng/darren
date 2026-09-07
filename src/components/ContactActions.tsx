@@ -2,8 +2,7 @@
 
 import { track } from '@vercel/analytics';
 import { useEffect, useRef, useState } from 'react';
-
-const email = 'supeng842499467@gmail.com';
+import { contactEmail as email } from '@/lib/site-config';
 
 type ContactActionsProps = {
   locale: string;

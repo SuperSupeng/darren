@@ -44,11 +44,11 @@
     transition: scale 650ms var(--motion-ease);
   }
   .spatial-site[data-motion-paused="false"] :is(.studio-purpose-photo, .collection-product-image, .collection-note-image):hover img { scale: 1.025; }
-  .spatial-site[data-motion-paused="false"] :is(.studio-collaborate, .studio-enter, .studio-purpose-link, .service-evidence-links a, .interior-text-link) > span[aria-hidden] {
+  .spatial-site[data-motion-paused="false"] :is(a.studio-collaborate, a.studio-enter, a.studio-purpose-link, .interior-text-link) > span[aria-hidden] {
     display: inline-block;
     transition: translate 240ms var(--motion-ease);
   }
-  .spatial-site[data-motion-paused="false"] :is(.studio-collaborate, .studio-enter, .studio-purpose-link, .service-evidence-links a, .interior-text-link):hover > span[aria-hidden] { translate: 2px -2px; }
+  .spatial-site[data-motion-paused="false"] :is(a.studio-collaborate, a.studio-enter, a.studio-purpose-link, .interior-text-link):hover > span[aria-hidden] { translate: 2px -2px; }
 }
 
 @keyframes spatial-panel-enter {

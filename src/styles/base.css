@@ -1,0 +1,94 @@
+/* Document defaults shared by localized pages and the global 404. */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    linear-gradient(180deg, rgba(251, 248, 241, 0.9), rgba(241, 234, 220, 0.96)),
+    var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  line-height: 1.7;
+  letter-spacing: 0;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--zen-gold);
+  color: var(--paper-100);
+}
+
+:focus-visible {
+  outline: 3px solid #9b6e2f;
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid rgba(251, 248, 241, 0.28);
+  border-radius: 999px;
+  background: #171a14;
+  color: var(--paper-100);
+  font-size: 0.875rem;
+  transform: translateY(-180%);
+  transition: transform 0.2s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.font-serif {
+  font-family: var(--font-noto-serif), 'Noto Serif SC', 'Source Han Serif SC', Georgia, serif;
+}
+
+.font-mono {
+  font-family: var(--font-geist-mono), 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+h1, h2, h3 {
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+@supports (word-break: auto-phrase) {
+  h1, h2, h3 {
+    word-break: auto-phrase;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--paper-200);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--paper-400);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ink-500);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

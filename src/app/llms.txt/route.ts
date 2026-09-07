@@ -1,7 +1,7 @@
 import { locales } from '@/i18n/config';
 import { getAllPosts } from '@/lib/blog';
 import { getPortfolio } from '@/lib/portfolio';
-import { siteUrl } from '@/lib/seo';
+import { contactEmail, siteUrl } from '@/lib/site-config';
 import { getAboutCopy } from '@/lib/about';
 
 export const dynamic = 'force-static';
@@ -31,7 +31,7 @@ export function GET() {
     `> ${profile.intro}`,
     '',
     `Canonical website: ${siteUrl}`,
-    'Primary contact: supeng842499467@gmail.com',
+    `Primary contact: ${contactEmail}`,
     '',
     '## Main pages',
     '',

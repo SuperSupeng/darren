@@ -8,15 +8,7 @@ import Logo from '@/components/Logo';
 import HeaderContact from './HeaderContact';
 import type { Locale } from '@/i18n/config';
 import { useStudioSettings } from './StudioSettings';
-
-export const roomLinks = [
-  { href: '/', zh: '首页', en: 'Home' },
-  { href: '/work', zh: '工作案例', en: 'Work' },
-  { href: '/build', zh: '产品', en: 'Products' },
-  { href: '/blog', zh: '文章', en: 'Writing' },
-  { href: '/services', zh: '合作', en: 'Collaborate' },
-  { href: '/about', zh: '关于我', en: 'About' },
-] as const;
+import { navigationLinks as roomLinks } from '@/lib/site-config';
 
 function LightIcon({ evening }: { evening: boolean }) {
   return <svg viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" aria-hidden="true">

@@ -4,7 +4,7 @@ import test from 'node:test';
 
 const require = createRequire(import.meta.url);
 const { getAllPosts } = require('../src/lib/blog.ts');
-const { getPortfolio } = require('../src/lib/portfolio.ts');
+const { getPortfolio } = require('../src/lib/portfolio/index.ts');
 const { siteUrl } = require('../src/lib/seo.ts');
 const { articleMarkdown, caseMarkdown, absoluteMarkdownLinks, markdownResponse } = require('../src/lib/content-source.ts');
 const { GET: articleGET, generateStaticParams: articleParams } = require('../src/app/[locale]/blog/[slug]/source.md/route.ts');

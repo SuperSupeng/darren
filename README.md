@@ -1,89 +1,60 @@
 # Darren Su — Personal Site
 
-这是 Darren Su 的中英双语个人网站，用来整理公开项目、产品实验、服务方向与长期写作。中文和英文面向不同读者，不要求逐字互译；新增内容前请先阅读 [内容策略](docs/content-strategy.md)。
+Darren Su 的中英双语个人网站，记录项目、产品、写作、社区与生活经历，并为合作提供清楚的联系入口。3D 工作室负责视觉与交互，正文、导航和联系信息独立可读。
 
-线上地址：[www.darren-su.com](https://www.darren-su.com)
+正式站：[www.darren-su.com](https://www.darren-su.com)
 
-全站采用 3D 工作室设计，保留可直接读取的正文、案例与联系入口。交互与静态回退说明见 [3D 版本说明](docs/studio-preview.md)，修改文案后请执行 [本地字体覆盖检查](docs/site-fonts.md)。
+## 本地开发
 
-## 技术栈
+使用 Node.js 24 和 npm 10.9.2。仓库通过 `.nvmrc`、`package.json` 和锁文件固定运行环境与依赖。
 
-- Next.js 16（App Router）与 React 19
-- TypeScript、Tailwind CSS
-- `next-intl` 双语路由
-- Vercel Analytics
-
-## 本地运行
-
-请使用 Node.js 24 LTS 与 npm。运行 `nvm use` 可直接切换到仓库指定的版本。
-
-```bash
+```sh
+nvm use
 npm ci
 npm run dev
 ```
 
-开发服务启动后，访问终端显示的本地地址。日常提交前运行完整检查：
+访问终端显示的地址。需要指定端口时，例如：
 
-```bash
-npm run lint
-npm run typecheck
-npm test
-npm run build
+```sh
+npm run dev -- --hostname 127.0.0.1 --port 3101
 ```
 
-## 目录
+## 检查与发布
 
-```text
-content/blog/{en,zh}/       中英文文章
-public/blog/                文章图片
-public/images/work/         项目图片
-src/app/[locale]/           页面与双语路由
-src/components/             页面组件
-src/lib/                    内容、SEO 与数据读取逻辑
-messages/                   界面翻译
-tests/                      离线内容完整性检查
+```sh
+npm run check
 ```
 
-## 添加文章
+完整检查包含代码规范、类型、测试、字体覆盖、生产构建及运行后的抓取检查；CI 执行相同命令。抓取检查使用临时本地服务，结束后自动关闭。它不能代替交互与视觉走查，具体方法见 [验证与发布](docs/verification.md)。
 
-在 `content/blog/en/` 或 `content/blog/zh/` 新建 Markdown 文件，文件名就是文章地址中的 slug。已知原始发表日期的文章使用以下 frontmatter：
+本项目使用现有 Git / Vercel 集成。推送到 `main` 会触发正式发布；检查完成后再发布，发布后核对正式域名。开发与整理工作使用独立分支。
 
-```markdown
----
-title: 文章标题
-date: 2026-09-04
-description: 用于列表页和搜索摘要的一句话介绍。
-tags: [AI, Field Notes]
----
-```
+## 从哪里修改
 
-如果旧稿的原始发表日期尚未核实，省略 `date`，使用 `dateNote` 说明归档状态；`archiveYear` 只用于有依据的内容年份。共同作者按原文顺序填写 `authors`，省略时默认为 Darren Su。
+| 内容 | 位置 |
+| --- | --- |
+| 页面与中英路由 | `src/app/[locale]/`、`src/i18n/` |
+| 域名、联系邮箱、社交链接与导航 | `src/lib/site-config.ts` |
+| 3D 房间、镜头与首页 | `src/components/studio/` |
+| 共用界面、动效与内页样式 | `src/components/spatial/` |
+| 全局配色、基础样式与通用控件 | `src/styles/` |
+| 案例、职责、成果与合作资料 | `src/lib/portfolio/` |
+| 个人介绍与活动经历 | `src/lib/about.ts`、`src/lib/experience-archive.ts` |
+| 产品、页面文案与首页精选文章 | `src/lib/site-content/`、`src/lib/studio-content.ts` |
+| 中英文文章 | `content/blog/{zh,en}/` |
+| 文章与项目图片 | `public/blog/`、`public/images/work/` |
+| 界面短标签 | `messages/` |
+| 内容、路由与交互逻辑检查 | `tests/`、`scripts/` |
 
-```markdown
----
-title: 2025 年度回顾
-archiveYear: "2025"
-dateNote: "2025 年度回顾"
-authors: [Darren Su]
-description: 用于列表页和搜索摘要的一句话介绍。
-tags: [年度回顾, 社区]
----
-```
+组件负责展示，公开事实在共享内容层维护。新增文章、修改案例或调整首页精选前，先阅读 [内容维护规范](docs/content-strategy.md)。
 
-公开副本的上传日、编辑器保存日与网站导入日都不能代替原始发表日。无精确日期时，页面使用归档说明，RSS、JSON-LD 和文章元数据省略发表日期。
+## 维护文档
 
-图片放在 `public/blog/<主题>/`，Markdown 中使用以 `/` 开头的站内路径，例如：
+- [架构与模块边界](docs/architecture.md)：数据流、服务器与浏览器职责、3D 回退、SEO 与内容导出。
+- [验证与发布](docs/verification.md)：命令、浏览器走查、发布和回退流程。
+- [内容维护规范](docs/content-strategy.md)：文案、文章日期、署名、图片和双语规则。
+- [案例证据](docs/case-evidence.md)：公开资料能支持什么，哪些事实仍需要补充来源。
+- [字体维护](docs/site-fonts.md)：字形覆盖、重新生成、来源与许可。
 
-```markdown
-![准确描述图片内容的替代文字](/blog/example/cover.webp)
-```
-
-如果文章需要自定义列表封面，同时在 `src/lib/blog.ts` 的 `postImages` 中登记图片尺寸。中文与英文可以使用相同 slug，但应分别服务各自的读者。
-
-## 添加项目
-
-项目资料集中维护在 `src/lib/portfolio.ts`，图片放在 `public/images/work/`。新增或替换图片时保留明确的替代文字，并填写真实的角色、范围和结果；不要发布仍是占位内容的案例。
-
-## 部署
-
-站点按标准 Next.js 项目部署到 Vercel。发布前先完成上述全部检查，再通过项目已有的 Vercel 配置发布；密钥和环境变量只保存在 Vercel 项目设置或本地 `.env.local`，不要提交进仓库。本仓库的持续检查会在提交和拉取请求上执行同一套质量命令。
+仓库只保留公开内容和持续维护需要的文档。未采用的稿件、资料摘录、审阅记录与一次性测量报告在项目外归档；不要作为站点内容提交。`AGENTS.md` 是项目协作规则入口，`CLAUDE.md` 引用同一份规则。

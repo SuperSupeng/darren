@@ -1,0 +1,73 @@
+/* Shared contact controls; each page owns its local layout and color overrides. */
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.82rem 1.55rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: 999px;
+  transition:
+    background-color 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  overflow: hidden;
+  min-height: 2.75rem;
+}
+
+.quiet-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  color: var(--ink-800);
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(74, 77, 63, 0.24);
+  transition:
+    border-color 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.quiet-link:hover {
+  color: var(--ink-950);
+  border-color: rgba(31, 33, 26, 0.62);
+  transform: translateX(2px);
+}
+
+.quiet-link-inverse {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.5rem;
+  color: var(--paper-100);
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(251, 248, 241, 0.42);
+  transition:
+    border-color 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.quiet-link-inverse:hover {
+  color: var(--paper-100);
+  border-color: rgba(251, 248, 241, 0.86);
+  transform: translateX(2px);
+}
+
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem 1.2rem;
+}
+
+.contact-actions button {
+  min-height: 2.75rem;
+}

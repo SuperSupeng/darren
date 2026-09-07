@@ -8,14 +8,15 @@
   },
   "scripts": {
     "dev": "next dev",
-    "dev:studio": "next dev --hostname 127.0.0.1 --port 3100",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
     "test": "node --import tsx --test tests/*.test.mjs",
     "audit:seo": "node scripts/audit-seo.mjs",
-    "check": "npm run lint && npm run typecheck && npm test && npm run build"
+    "check:fonts": "python3 scripts/site-fonts.py",
+    "verify:site": "node scripts/verify-site.mjs",
+    "check": "npm run lint && npm run typecheck && npm test && npm run check:fonts && npm run build && npm run verify:site"
   },
   "dependencies": {
     "@react-three/fiber": "^9.7.0",

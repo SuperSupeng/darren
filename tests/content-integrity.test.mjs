@@ -8,10 +8,16 @@ import { fileURLToPath } from 'node:url';
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const contentRoot = path.join(projectRoot, 'content', 'blog');
 const publicRoot = path.join(projectRoot, 'public');
-const portfolioPath = path.join(projectRoot, 'src', 'lib', 'portfolio.ts');
-const portfolioSource = fs.readFileSync(portfolioPath, 'utf8');
 const locales = ['en', 'zh'];
-const { parseBlogContent } = createRequire(import.meta.url)('../src/lib/blog.ts');
+const require = createRequire(import.meta.url);
+const { getPostBySlug, parseBlogContent } = require('../src/lib/blog.ts');
+const {
+  getAllWorkIds,
+  getFeaturedWork,
+  getPortfolio,
+  getWorkById,
+  getWorkCollaboration,
+} = require('../src/lib/portfolio/index.ts');
 
 function markdownFiles() {
   return locales.flatMap((locale) => {
@@ -161,56 +167,64 @@ test('internal Markdown links to blog articles resolve', () => {
   assert.deepEqual(missingArticles, [], `Missing linked articles:\n${missingArticles.join('\n')}`);
 });
 
-test('portfolio case routes, notes, and local images stay complete', () => {
-  const chineseStart = portfolioSource.indexOf('const chinesePortfolio');
-  const englishStart = portfolioSource.indexOf('const englishPortfolio');
-  const dimensionsStart = portfolioSource.indexOf('const portfolioImageDimensions');
+test('portfolio queries expose the same complete case routes in both languages', () => {
+  const routeIds = getAllWorkIds();
+  assert.ok(routeIds.length > 0, 'No portfolio cases found');
+  assert.equal(new Set(routeIds).size, routeIds.length, 'Portfolio route IDs must be unique');
 
-  assert.ok(chineseStart >= 0 && englishStart > chineseStart, 'Chinese portfolio data is missing');
-  assert.ok(dimensionsStart > englishStart, 'English portfolio data is missing');
+  for (const locale of locales) {
+    const { work, collaborations } = getPortfolio(locale);
+    assert.deepEqual(work.map(item => item.id), routeIds, `${locale} must expose every case route once`);
 
-  const workIds = (source) => [...source.matchAll(/\n\s{6}id: '([^']+)'/g)].map((match) => match[1]);
-  const chinesePortfolioSource = portfolioSource.slice(chineseStart, englishStart);
-  const englishPortfolioSource = portfolioSource.slice(englishStart, dimensionsStart);
-  const chineseIds = workIds(chinesePortfolioSource);
-  const englishIds = workIds(englishPortfolioSource);
+    for (const item of work) {
+      assert.equal(item.href, `/work/${item.id}`, `Invalid ${locale} case route: ${item.id}`);
+      assert.deepEqual(getWorkById(locale, item.id), item, `Missing ${locale} case detail: ${item.id}`);
+      const collaboration = getWorkCollaboration(locale, item.id);
+      assert.ok(collaboration, `Missing ${locale} collaboration for case: ${item.id}`);
+      assert.ok(collaborations.some(path => path.id === collaboration.id));
+    }
 
-  assert.ok(chineseIds.length > 0, 'No portfolio cases found');
-  assert.equal(new Set(chineseIds).size, chineseIds.length, 'Chinese portfolio IDs must be unique');
-  assert.equal(new Set(englishIds).size, englishIds.length, 'English portfolio IDs must be unique');
-  assert.deepEqual(englishIds, chineseIds, 'Both locales must expose the same portfolio case routes');
-  assert.match(
-    portfolioSource,
-    /href: `\/work\/\$\{item\.id\}`/,
-    'Portfolio cases must link to their generated detail routes',
-  );
+    const featured = getFeaturedWork(locale);
+    assert.ok(featured.length > 0, `${locale} homepage must feature existing cases`);
+    assert.equal(new Set(featured.map(item => item.id)).size, featured.length, 'Featured cases must be unique');
+    for (const item of featured) {
+      assert.deepEqual(item, getWorkById(locale, item.id), `Invalid ${locale} featured case: ${item.id}`);
+    }
 
-  const imagePaths = [...portfolioSource.matchAll(/\n\s+(?:image|src): '([^']+)'/g)].map(
-    (match) => match[1],
-  );
-  assert.ok(imagePaths.length > 0, 'Portfolio images are missing');
-
-  for (const imagePath of new Set(imagePaths)) {
-    const assetPath = localAssetPath(imagePath);
-    assert.ok(assetPath && fs.existsSync(assetPath), `Missing portfolio image: ${imagePath}`);
-    assert.ok(fs.statSync(assetPath).isFile(), `Portfolio image is not a file: ${imagePath}`);
+    assert.equal(getWorkById(locale, 'nonexistent-case'), null);
+    assert.equal(getWorkCollaboration(locale, 'nonexistent-case'), null);
   }
+});
 
-  const knownArticles = new Set(markdownFiles().map(({ locale, slug }) => `${locale}/${slug}`));
-  const localePortfolioSources = {
-    zh: chinesePortfolioSource,
-    en: englishPortfolioSource,
-  };
+test('portfolio cases return existing images with accessible descriptions and dimensions', () => {
+  for (const locale of locales) {
+    const workWithImages = getPortfolio(locale).work.filter(item => item.image);
+    assert.ok(workWithImages.length > 0, `${locale} portfolio images are missing`);
 
-  for (const [locale, source] of Object.entries(localePortfolioSources)) {
-    const noteHrefs = [...source.matchAll(/\n\s+noteHref: '([^']+)'/g)].map((match) => match[1]);
-    for (const noteHref of new Set(noteHrefs)) {
-      const route = articleRoute(noteHref, locale);
-      assert.ok(route, `Invalid portfolio note link: ${noteHref}`);
-      assert.ok(
-        knownArticles.has(`${route.locale}/${route.slug}`),
-        `Missing ${locale} portfolio note: ${noteHref}`,
-      );
+    for (const item of workWithImages) {
+      const assetPath = localAssetPath(item.image);
+      assert.ok(assetPath && fs.existsSync(assetPath), `Missing ${locale} portfolio image: ${item.image}`);
+      assert.ok(fs.statSync(assetPath).isFile(), `Portfolio image is not a file: ${item.image}`);
+      assert.ok(item.imageAlt?.trim(), `Missing ${locale} image description: ${item.image}`);
+      assert.ok(item.imageWidth > 0 && item.imageHeight > 0, `Missing image dimensions: ${item.id}`);
+    }
+  }
+});
+
+test('portfolio note and supporting-material links resolve to published articles', () => {
+  for (const locale of locales) {
+    for (const item of getPortfolio(locale).work) {
+      const links = [item.noteHref, ...(item.caseStudy.materials ?? []).map(material => material.href)]
+        .filter(Boolean);
+      if (item.noteHref) {
+        assert.ok(articleRoute(item.noteHref, locale), `Invalid ${locale} portfolio note: ${item.noteHref}`);
+      }
+      for (const href of links) {
+        const route = articleRoute(href, locale);
+        if (!route) continue;
+        const post = getPostBySlug(route.slug, route.locale);
+        assert.ok(post, `Missing ${locale} article linked from ${item.id}: ${href}`);
+      }
     }
   }
 });

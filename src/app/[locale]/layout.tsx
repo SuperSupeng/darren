@@ -8,6 +8,7 @@ import { routing } from '@/i18n/routing';
 import { isLocale } from '@/i18n/config';
 import SiteChrome from '@/components/SiteChrome';
 import { getLocalizedBlogRoutes } from '@/lib/blog';
+import { siteUrl } from '@/lib/site-config';
 import '../globals.css';
 import '../fonts/noto-serif-sc/fonts.css';
 import '../typography.css';
@@ -29,8 +30,6 @@ const englishSerif = Noto_Serif({
 // Separate Latin/CJK unicode ranges avoid loading Chinese glyphs on English pages.
 // See docs/site-fonts.md for the offline coverage check and regeneration command.
 const siteSerif = { variable: 'site-serif-local' };
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.darren-su.com';
 
 export const dynamicParams = false;
 

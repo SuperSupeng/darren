@@ -7,7 +7,7 @@ const revealSelector = [
   '.collection-journal-masthead', '.collection-latest-story', '.collection-note-entry', '.collection-next > div:last-of-type',
   '.case-cover-copy > *', '.case-cover-photo', '.case-chapter', '.case-next',
   '.interior-profile-copy > *', '.interior-section-heading', '.interior-chapters > *', '.interior-invitation > div',
-  '.interior-services-hero > div > *', '.interior-service-heading', '.interior-service-details', '.service-evidence', '.interior-inquiry',
+  '.interior-services-hero > div > *', '.interior-service-heading', '.interior-service-details', '.interior-inquiry',
   '.reading-header > *', '.reading-footer', '.spatial-footer-top > *',
 ].join(',');
 

@@ -42,7 +42,6 @@
 .studio-experience[data-lighting="evening"] .studio-atmosphere-light { background: radial-gradient(closest-side, #ccdace20, #c6d3bc08 56%, transparent); }
 .studio-experience[data-lighting="evening"] .studio-mountain-far { opacity: .11; }
 .studio-experience[data-lighting="evening"] .studio-mountain-near { opacity: .12; }
-.studio-is-focused .studio-atmosphere { opacity: .6; }
 .studio-stage:has(.studio-room:is([data-scene-status="static"], [data-scene-status="loading"])) .studio-atmosphere { opacity: 0; }
 
 /* Only these two decorative layers move; the room and its projected links stay put. */
@@ -81,8 +80,6 @@
     mask-image: linear-gradient(transparent, #000 18%, #000 75%, transparent);
   }
   .studio-atmosphere-light { top: 0; right: 0; width: 130px; }
-  .studio-is-focused .studio-atmosphere { display: none; }
-  .studio-is-focused .studio-atmosphere :is(.studio-atmosphere-light, .studio-atmosphere-landscape) { animation-play-state: paused !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
