@@ -4,6 +4,8 @@
 
 线上地址：[www.darren-su.com](https://www.darren-su.com)
 
+全站采用 3D 工作室设计，保留可直接读取的正文、案例与联系入口。交互与静态回退说明见 [3D 版本说明](docs/studio-preview.md)，修改文案后请执行 [本地字体覆盖检查](docs/site-fonts.md)。
+
 ## 技术栈
 
 - Next.js 16（App Router）与 React 19
