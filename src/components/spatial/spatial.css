@@ -1,5 +1,8 @@
 html:has(.spatial-site) { scroll-padding-top: 100px; }
 .spatial-site {
+  --content-width: 1200px;
+  --content-gutter: clamp(22px, 5vw, 72px);
+  --content-section-gap: clamp(64px, 7vw, 100px);
   --spatial-header-height: 80px;
   --space-paper: #e7e7da;
   --space-surface: #f7f5e9;

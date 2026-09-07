@@ -42,40 +42,54 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         </header>
 
         <div className="about-reading-body">
-          <section aria-labelledby="about-engineering-title">
-            <h2 id="about-engineering-title">{copy.engineeringTitle}</h2>
-            {copy.engineering.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
-          </section>
-          <section aria-labelledby="about-community-title">
-            <h2 id="about-community-title">{copy.communityTitle}</h2>
-            {copy.community.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
-            <Link href="/work/datawhale-city-ecosystem" className="about-reading-link">{copy.communityLink}<span aria-hidden="true">↗</span></Link>
-          </section>
-          <section aria-labelledby="about-making-title">
-            <h2 id="about-making-title">{copy.makingTitle}</h2>
-            {copy.making.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
-            <div className="about-reading-links">
-              <Link href="/build" className="about-reading-link">{copy.productsLink}<span aria-hidden="true">↗</span></Link>
-              <Link href="/blog/managing-31-ai-employees" className="about-reading-link">{copy.agentLink}<span aria-hidden="true">↗</span></Link>
+          <section className="about-reading-chapter about-reading-engineering" aria-labelledby="about-engineering-title">
+            <header><h2 id="about-engineering-title">{copy.engineeringTitle}</h2></header>
+            <div className="about-reading-prose">
+              {copy.engineering.map((paragraph, index) => <p key={paragraph} className={index === 0 ? 'about-reading-lead' : undefined}>{paragraph}</p>)}
             </div>
           </section>
-          <section aria-labelledby="about-life-title">
-            <h2 id="about-life-title">{copy.lifeTitle}</h2>
-            {copy.life.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+          <section className="about-reading-chapter about-reading-community" aria-labelledby="about-community-title">
+            <header><h2 id="about-community-title">{copy.communityTitle}</h2></header>
+            <div className="about-reading-prose">
+              {copy.community.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+              <blockquote className="about-reading-reflection">{copy.communityReflection}</blockquote>
+              <Link href="/work/datawhale-city-ecosystem" className="about-reading-link">{copy.communityLink}<span aria-hidden="true">↗</span></Link>
+            </div>
+          </section>
+          <section className="about-reading-chapter about-reading-making" aria-labelledby="about-making-title">
+            <header><h2 id="about-making-title">{copy.makingTitle}</h2></header>
+            <div className="about-reading-prose">
+              {copy.making.map((paragraph, index) => <p key={paragraph} className={index === 0 ? 'about-reading-lead' : undefined}>{paragraph}</p>)}
+              <div className="about-reading-links">
+                <Link href="/build" className="about-reading-link">{copy.productsLink}<span aria-hidden="true">↗</span></Link>
+                <Link href="/blog/managing-31-ai-employees" className="about-reading-link">{copy.agentLink}<span aria-hidden="true">↗</span></Link>
+              </div>
+            </div>
+          </section>
+          <section className="about-reading-chapter about-reading-life" aria-labelledby="about-life-title">
+            <header><h2 id="about-life-title">{copy.lifeTitle}</h2></header>
+            <div className="about-reading-prose about-reading-life-intro">
+              {copy.life.slice(0, 2).map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+            </div>
             <figure className="about-reading-photo">
-              <div><Image src="/blog/zongtong-retreat/temple.jpg" alt={copy.lifeImageAlt} fill sizes="(max-width: 850px) 88vw, 740px" className="object-cover" /></div>
+              <div><Image src="/blog/zongtong-retreat/temple.jpg" alt={copy.lifeImageAlt} fill sizes="(max-width: 760px) 90vw, (max-width: 1200px) 35vw, 360px" className="object-cover" /></div>
               <figcaption>{copy.lifeImageCaption}</figcaption>
             </figure>
-            <Link href="/blog/zongtong-temple-retreat" className="about-reading-link">{copy.lifeLink}<span aria-hidden="true">↗</span></Link>
+            <div className="about-reading-prose about-reading-life-notes">
+              {copy.life.slice(2).map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+              <Link href="/blog/zongtong-temple-retreat" className="about-reading-link">{copy.lifeLink}<span aria-hidden="true">↗</span></Link>
+            </div>
           </section>
-          <section className="about-reading-contact" aria-labelledby="about-contact-title">
-            <h2 id="about-contact-title">{copy.contactTitle}</h2>
-            <p>{copy.contactBody}</p>
-            <ContactActions locale={locale} context="about-reading" className="about-reading-contact-actions" />
-            <noscript><style>{'.about-reading-contact-actions > button{display:none!important}'}</style></noscript>
-            <div className="about-reading-links">
-              <Link href="/services" className="about-reading-link">{copy.servicesLink}<span aria-hidden="true">↗</span></Link>
-              <Link href="/blog/superai-china-ecosystem-visit" className="about-reading-link">{copy.visitLink}<span aria-hidden="true">↗</span></Link>
+          <section className="about-reading-chapter about-reading-contact" aria-labelledby="about-contact-title">
+            <header><h2 id="about-contact-title">{copy.contactTitle}</h2></header>
+            <div className="about-reading-prose">
+              <p>{copy.contactBody}</p>
+              <ContactActions locale={locale} context="about-reading" className="about-reading-contact-actions" />
+              <noscript><style>{'.about-reading-contact-actions > button{display:none!important}'}</style></noscript>
+              <div className="about-reading-links">
+                <Link href="/services" className="about-reading-link">{copy.servicesLink}<span aria-hidden="true">↗</span></Link>
+                <Link href="/blog/superai-china-ecosystem-visit" className="about-reading-link">{copy.visitLink}<span aria-hidden="true">↗</span></Link>
+              </div>
             </div>
           </section>
         </div>

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { getPortfolio, getWorkById, type CollaborationPath } from '@/lib/portfolio';
 import ContactActions from '@/components/ContactActions';
@@ -24,7 +25,6 @@ export default function ServicesClient({ locale }: { locale: string }) {
           whatHappens: '可以一起做什么',
           viewCase: '参考案例',
           readArticle: '阅读 Agent 实践文章',
-          emailSubject: '合作咨询',
           fieldSeparator: '：',
           needs: {
             'developer-events': '想组织开发者活动、多城市联动，或开展大会合作。',
@@ -46,7 +46,6 @@ export default function ServicesClient({ locale }: { locale: string }) {
           whatHappens: 'What I can help with',
           viewCase: 'Related case study',
           readArticle: 'Read the article on my agent system',
-          emailSubject: 'Collaboration inquiry',
           fieldSeparator: ':',
           needs: {
             'developer-events': 'For teams planning developer events, a multi-city series, or conference collaborations.',
@@ -83,33 +82,41 @@ export default function ServicesClient({ locale }: { locale: string }) {
             }
 
             return (
-              <article id={path.id} key={path.id} tabIndex={-1} aria-labelledby={`${path.id}-title`} className="collaboration-reading-direction">
-                <h2 id={`${path.id}-title`}>{path.title}</h2>
-                <p className="collaboration-reading-need">{copy.needs[path.id]}</p>
-                <ContactActions locale={locale} context={`services-${path.id}`} emailSubject={`${copy.emailSubject}${copy.fieldSeparator} ${path.title}`} className="collaboration-reading-contact" />
-                <section className="collaboration-reading-help" aria-labelledby={`${path.id}-help-title`}>
-                  <h3 id={`${path.id}-help-title`}>{copy.whatHappens}</h3>
-                  <ul>{path.outcomes.map(outcome => <li key={outcome}>{outcome}</li>)}</ul>
-                </section>
-                <div className="collaboration-reading-references">
-                  <Link href={`/work/${work.id}`}>{copy.viewCase}{copy.fieldSeparator} {work.title}<span aria-hidden="true">↗</span></Link>
-                  {path.id === 'ai-talks' && work.noteHref ? <Link href={work.noteHref}>{copy.readArticle}<span aria-hidden="true">↗</span></Link> : null}
+              <article id={path.id} key={path.id} tabIndex={-1} aria-labelledby={`${path.id}-title`} className={`collaboration-reading-direction collaboration-reading-${path.id}`}>
+                <header className="collaboration-reading-heading">
+                  <h2 id={`${path.id}-title`}>{path.title}</h2>
+                  <p className="collaboration-reading-need">{copy.needs[path.id]}</p>
+                </header>
+                <div className="collaboration-reading-detail">
+                  <section className="collaboration-reading-help" aria-labelledby={`${path.id}-help-title`}>
+                    <h3 id={`${path.id}-help-title`}>{copy.whatHappens}</h3>
+                    <ul>{path.outcomes.map(outcome => <li key={outcome}>{outcome}</li>)}</ul>
+                  </section>
+                  <div className="collaboration-reading-references">
+                    <Link href={`/work/${work.id}`} className="collaboration-reading-case">
+                      {work.image ? <div className="collaboration-reading-case-image"><Image src={work.image} alt={work.imageAlt ?? work.title} fill sizes="(max-width: 760px) 80vw, (max-width: 1200px) 45vw, 600px" className={work.imageClassName ?? 'object-cover'} /></div> : null}
+                      <span className="collaboration-reading-case-title">{copy.viewCase}{copy.fieldSeparator} {work.title}<span aria-hidden="true">↗</span></span>
+                    </Link>
+                    {path.id === 'ai-talks' && work.noteHref ? <Link href={work.noteHref}>{copy.readArticle}<span aria-hidden="true">↗</span></Link> : null}
+                  </div>
+                  <a className="collaboration-reading-back" href="#collaboration-options">{copy.otherDirections}<span aria-hidden="true">↑</span></a>
                 </div>
-                <a className="collaboration-reading-back" href="#collaboration-options">{copy.otherDirections}<span aria-hidden="true">↑</span></a>
               </article>
             );
           })}
         </div>
         <section className="collaboration-reading-inquiry" aria-labelledby="collaboration-inquiry-title">
-          <h2 id="collaboration-inquiry-title">{copy.cta}</h2>
-          <p>{copy.ctaBody}</p>
-          <p>{copy.inquiry}</p>
-          <ContactActions locale={locale} context="services-cta" className="collaboration-reading-contact" />
+          <header><h2 id="collaboration-inquiry-title">{copy.cta}</h2></header>
+          <div className="collaboration-reading-inquiry-body">
+            <p>{copy.ctaBody}</p>
+            <p>{copy.inquiry}</p>
+            <ContactActions locale={locale} context="services-cta" className="collaboration-reading-contact" />
+            <details className="collaboration-reading-boundaries">
+              <summary>{copy.boundaryTitle}</summary>
+              <ul>{copy.boundaries.map(boundary => <li key={boundary}>{boundary}</li>)}</ul>
+            </details>
+          </div>
         </section>
-        <details className="collaboration-reading-boundaries">
-          <summary>{copy.boundaryTitle}</summary>
-          <ul>{copy.boundaries.map(boundary => <li key={boundary}>{boundary}</li>)}</ul>
-        </details>
       </div>
     </main>
   );

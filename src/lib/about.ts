@@ -11,8 +11,9 @@ const aboutCopy = {
     communityTitle: '在社区里，从学习者到组织者',
     community: [
       '2019 年，我因为学习 AI 接触 Datawhale。后来做过助教、组织活动，也逐渐参与城市生态和社区治理。现在，我和各地伙伴一起支持 AI 学习与实践活动，让学习者、开发者、高校和开源贡献者有机会见面，一起做事。',
-      '我和 Monica 共同发起了 AGI Villa，和对 AI 感兴趣的创造者、产品团队与创业者交流。做这些事时，我会留意人为什么愿意来、怎样参与，以及活动结束后是否还会继续交流。相识之后发生了什么，是我在社区工作里反复碰到的问题。',
+      '我和 Monica 共同发起了 AGI Villa，和对 AI 感兴趣的创造者、产品团队与创业者交流。做这些事时，我会留意人为什么愿意来、怎样参与，以及活动结束后是否还会继续交流。',
     ],
+    communityReflection: '相识之后发生了什么，是我在社区工作里反复碰到的问题。',
     communityLink: '看看我的社区经历',
     makingTitle: '把遇到的问题做成产品',
     making: [
@@ -50,8 +51,9 @@ const aboutCopy = {
     communityTitle: 'From learning together to organizing together',
     community: [
       'I joined Datawhale in 2019 to learn AI. I later became a teaching assistant and event organizer, and became involved in city programs and community governance. Today, I work with local partners on AI learning and practical activities, bringing together learners, developers, universities, and open-source contributors.',
-      'Monica and I also started AGI Villa, where we meet AI builders, product teams, and founders. In this work, I pay attention to why people show up, how they take part, and whether they keep talking afterward. What happens after an introduction is a question I keep returning to.',
+      'Monica and I also started AGI Villa, where we meet AI builders, product teams, and founders. In this work, I pay attention to why people show up, how they take part, and whether they keep talking afterward.',
     ],
+    communityReflection: 'What happens after an introduction is a question I keep returning to.',
     communityLink: 'Explore my community work',
     makingTitle: 'Making products from problems I encounter',
     making: [
