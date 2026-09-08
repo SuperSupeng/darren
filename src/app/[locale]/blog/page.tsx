@@ -95,8 +95,6 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
           </section>
 
           <CollectionNext
-            locale={locale}
-            zone="work"
             href="/work"
             title={locale === 'zh' ? '查看工作案例' : 'Explore my work'}
             description={locale === 'zh' ? '开发者活动、产品 Workshop 与 AI 分享的项目记录。' : 'Project records from developer events, product workshops, and AI talks.'}

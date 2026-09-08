@@ -2,7 +2,6 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import ContactActions from '@/components/ContactActions';
 import JsonLd from '@/components/JsonLd';
-import RoomPortal from '@/components/spatial/RoomPortal';
 import '@/components/spatial/interiors.css';
 import { Link } from '@/i18n/navigation';
 import { locales } from '@/i18n/config';
@@ -63,7 +62,6 @@ export default async function WorkCasePage({
         back: '返回全部案例',
         role: '我的角色',
         result: '规模与结果',
-        place: '时间与地点',
         context: '项目背景',
         responsibilities: '我负责的部分',
         outcome: '完成了什么',
@@ -80,7 +78,6 @@ export default async function WorkCasePage({
         back: 'Back to all case studies',
         role: 'My role',
         result: 'Scale and outcome',
-        place: 'Time and place',
         context: 'Project background',
         responsibilities: 'What I handled',
         outcome: 'What was completed',
@@ -118,11 +115,8 @@ export default async function WorkCasePage({
 
           <div className="case-layout">
             <aside className="case-sidebar">
-              <RoomPortal zone="work" locale={locale} compact />
               <dl className="case-facts">
                 <div><dt>{copy.role}</dt><dd>{work.role}</dd></div>
-                <div><dt>{copy.result}</dt><dd>{work.result}</dd></div>
-                <div><dt>{copy.place}</dt><dd>{work.year} · {work.location}</dd></div>
               </dl>
               <nav className="case-index" aria-label={locale === 'zh' ? '案例目录' : 'Case study contents'}>
                 <a href="#case-context">{copy.context}</a>
@@ -130,7 +124,6 @@ export default async function WorkCasePage({
                 <a href="#case-outcome">{copy.outcome}</a>
                 <a href="#case-reflection">{copy.reflection}</a>
               </nav>
-              <a href={`/${locale}/work/${work.id}/source.md`} className="interior-text-link" download={`${work.id}.${locale}.md`}>{locale === 'zh' ? '下载纯文本案例' : 'Download case text'} ↓</a>
             </aside>
 
             <div className="case-document">

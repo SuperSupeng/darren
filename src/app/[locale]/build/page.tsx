@@ -113,8 +113,6 @@ export default async function BuildPage({ params }: { params: Promise<{ locale: 
           </section>
 
           <CollectionNext
-            locale={locale}
-            zone="notes"
             href="/blog"
             title={locale === 'zh' ? '阅读文章与手记' : 'Read my writing'}
             description={locale === 'zh' ? '关于产品开发、Agent 实践和工作经历的记录。' : 'Notes on product development, agent practice, and work experiences.'}

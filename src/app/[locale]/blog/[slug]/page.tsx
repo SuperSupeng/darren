@@ -6,7 +6,6 @@ import { getAllPosts, getPostBySlug } from '@/lib/blog';
 import { locales } from '@/i18n/config';
 import JsonLd from '@/components/JsonLd';
 import ArticleDate from '@/components/blog/ArticleDate';
-import RoomPortal from '@/components/spatial/RoomPortal';
 import '@/components/spatial/interiors.css';
 import { absoluteLocalizedUrl, articleStructuredData, createPageMetadata } from '@/lib/seo';
 import { renderMarkdown } from '@/lib/render-markdown';
@@ -65,9 +64,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ local
         <div className="interior-wrap">
           <div className="interior-back-link"><Link href="/blog" className="interior-text-link">← {t('backToList')}</Link></div>
           <div className="reading-layout">
-            <aside className="reading-sidebar">
-              <RoomPortal zone="notes" locale={locale} compact />
-            </aside>
             <article className="reading-sheet">
               <header className="reading-header">
                 {post.tags.length > 0 && <div className="interior-tags">{post.tags.map(tag => <span key={tag}>{tag}</span>)}</div>}
@@ -87,7 +83,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ local
                     </Fragment>
                   ))}</span>
                 </div>
-                <a className="interior-text-link reading-source" href={`/${locale}/blog/${post.slug}/source.md`} type="text/markdown" download={`${post.slug}.${locale}.md`}>{locale === 'zh' ? '下载纯文本原文' : 'Download article text'} ↓</a>
               </header>
               <div className="reading-prose" dangerouslySetInnerHTML={{ __html: renderedContent }} />
               <footer className="reading-footer">

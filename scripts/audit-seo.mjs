@@ -108,8 +108,9 @@ for (const entry of entries) {
   }
   if (/^\/(en|zh)\/(blog|work)\/[^/]+$/.test(path)) {
     const sourceUrl = `${canonical}/source.md`;
-    check(document.querySelector('link[rel="alternate"][type="text/markdown"]')?.href === sourceUrl, `${label} missing canonical Markdown alternate`);
-    check([...document.querySelectorAll('main a[href]')].some(link => new URL(link.getAttribute('href'), canonical).href === sourceUrl), `${label} source text has no visible download link`);
+    check(document.head.querySelector('link[rel="alternate"][type="text/markdown"]')?.href === sourceUrl, `${label} missing canonical Markdown alternate in head`);
+    // Reading pages stay focused on their content. Crawlers discover the
+    // complete text through the head alternate and llms.txt, without a UI link.
     sources.set(sourceUrl, canonical);
   }
   const scripts = [...document.querySelectorAll('script[type="application/ld+json"]')];
@@ -229,6 +230,10 @@ for (const path of ['/robots.txt', '/llms.txt', '/rss.xml']) {
   const body = await response.text();
   check(response.status === 200 && body.length > 100, `${path}: discovery document unavailable`);
   if (path === '/llms.txt') {
+    const listedUrls = new Set([...body.matchAll(/\]\((https?:\/\/[^)]+)\)/g)].map(([, href]) => href));
+    for (const sourceUrl of sources.keys()) {
+      check(listedUrls.has(sourceUrl), `${path}: missing full-text source: ${sourceUrl}`);
+    }
     for (const [, href] of body.matchAll(/\]\((https?:\/\/[^)]+)\)/g)) {
       check(pages.has(href) || sources.has(href) || href === `${new URL([...pages.keys()][0]).origin}/rss.xml`, `${path}: listed resource is not a known canonical page or reading format: ${href}`);
     }

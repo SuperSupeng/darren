@@ -42,7 +42,6 @@
 .interior-page .interior-profile-stage .interior-portrait { position: absolute; z-index: 3; bottom: 110px; left: 9%; width: 160px; padding: 7px; transform: perspective(800px) rotateY(12deg) rotate(-5deg); }
 .interior-page .interior-profile-room { display: block; margin: 12px 0 35px; padding: 30px 0; border-block: 1px solid var(--space-line); }
 .interior-page .interior-profile-room blockquote { font-size: clamp(23px,2.2vw,32px); max-width: 950px; padding-left: 25px; }
-.interior-page .reading-sidebar .room-portal { border-bottom: 5px solid var(--space-inset); box-shadow: 0 12px 25px var(--space-shadow); }
 
 @media (max-width: 1100px) {
   .collection-page .collection-hero { grid-template-columns: minmax(0,.8fr) minmax(0,1.2fr); }

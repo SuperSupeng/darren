@@ -39,16 +39,13 @@ export function CollectionHeading({ id, title, description }: { id?: string; tit
   );
 }
 
-export function CollectionNext({ locale, zone, href, title, description }: {
-  locale: string;
-  zone: CollectionZone;
+export function CollectionNext({ href, title, description }: {
   href: string;
   title: string;
   description: string;
 }) {
   return (
     <section className="collection-next">
-      <div className="collection-next-room"><RoomPortal zone={zone} locale={locale} compact /></div>
       <div>
         <h2><Link href={href}>{title} <span aria-hidden="true">↗</span></Link></h2>
         <p className="collection-description">{description}</p>

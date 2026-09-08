@@ -161,8 +161,6 @@ export default async function WorkPage({ params }: { params: Promise<{ locale: s
           </section>
 
           <CollectionNext
-            locale={locale}
-            zone="build"
             href="/build"
             title={locale === 'zh' ? '看看我做的产品' : 'Explore my products'}
             description={locale === 'zh' ? '了解产品解决的问题、收到的反馈和当前状态。' : 'The problems they address, the feedback so far, and their current status.'}

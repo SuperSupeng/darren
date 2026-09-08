@@ -151,7 +151,7 @@
 /* Transparent source diagrams retain their own opaque paper in both lighting modes. */
 .collection-notes :is(.collection-latest-image, .collection-note-image) img[src*="expertise-assets"] { object-fit: contain; padding: 12px; background: #f4f1e8; }
 
-/* The last invitation and the next room are separate, legible destinations. */
+/* The last invitation and the next collection are separate, legible destinations. */
 .collection-page .collection-collaborate { --space-paper: #263d31; --space-ink: #f4ecd9; --space-muted: #c4cebc; --space-line: #e4e9d42e; --space-accent: #dec28f; padding: clamp(30px, 5vw, 64px); background: #263d31; color: var(--space-ink); border: 0; box-shadow: 0 8px 0 -3px #172d23; }
 .collection-page .collection-collaborate h2 { max-width: 780px; }
 .collection-page .collection-collaborate .collection-description { margin-top: 24px; max-width: 660px; }
@@ -159,9 +159,7 @@
 .collection-page .collection-button, .collection-page .collection-collaborate .contact-actions .btn { display: inline-flex; align-items: center; justify-content: center; gap: 20px; min-height: 48px; padding: 12px 22px; border: 1px solid var(--space-ink); border-radius: 2px; color: var(--space-paper); background: var(--space-ink); font-size: 16px; line-height: 1.6; box-shadow: none; }
 .collection-page .collection-collaborate .contact-actions :is(.quiet-link, input) { color: var(--space-ink); border-color: var(--space-line); font-size: 16px; }
 .collection-page .collection-collaborate .contact-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; }
-.collection-page .collection-next { display: grid; grid-template-columns: 220px minmax(0, 1fr) 54px; align-items: center; gap: 40px; margin-block: var(--content-section-gap, 80px) 48px; padding-top: 36px; border-top: 1px solid var(--space-line); }
-.collection-next-room { min-width: 0; }
-.collection-next-room .room-portal figcaption { flex-wrap: wrap; gap: 4px; }
+.collection-page .collection-next { display: grid; grid-template-columns: minmax(0, 1fr) 54px; align-items: center; gap: 40px; margin-block: var(--content-section-gap, 80px) 48px; padding-top: 36px; border-top: 1px solid var(--space-line); }
 .collection-page .collection-next h2 { font-family: var(--font-noto-serif, var(--font-site-serif, serif)); font-size: clamp(27px, 3vw, 38px); line-height: 1.45; font-weight: 400; }
 .collection-next h2 span { color: var(--space-accent); font-size: .7em; }
 .collection-page .collection-next .collection-description { margin-top: 14px; font-size: 17px; }
@@ -211,7 +209,7 @@
   .collection-page.collection-notes .collection-latest-image { grid-column: 1; grid-row: 1; aspect-ratio: 16 / 10; transform: rotate(1deg); }
   .collection-page.collection-notes .collection-latest-copy { grid-column: 1; grid-row: 2; padding: 0; }
   .collection-page.collection-notes .collection-note-entry { grid-template-columns: 160px minmax(0, 1fr); gap: 10px 26px; }
-  .collection-page .collection-next { grid-template-columns: 150px minmax(0, 1fr); gap: 28px; }
+  .collection-page .collection-next { grid-template-columns: minmax(0, 1fr); }
   .collection-round-link { display: none; }
 }
 
@@ -248,8 +246,6 @@
   .collection-page.collection-notes .collection-note-body h3 { font-size: 28px; }
   .collection-page .collection-collaborate { padding: 30px 24px; }
   .collection-page .collection-collaborate-actions { gap: 18px; }
-  .collection-page .collection-next { grid-template-columns: 1fr; gap: 20px; }
-  .collection-next-room { width: 185px; }
   .collection-page .collection-next .collection-description { max-width: 33em; }
 }
 
