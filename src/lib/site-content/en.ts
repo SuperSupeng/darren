@@ -1,4 +1,7 @@
 export const englishContent = {
+  home: {
+    intro: "I build AI products and connect builders around the world. I share what I learn from agents and automation, and write about communities, meditation, and everyday life.",
+  },
   labels: {
     productLab: {
       roomEyebrow: "Products & Systems",
@@ -57,10 +60,10 @@ export const englishContent = {
       workEyebrow: "What I Do Now",
       workTitle: "What I spend most of my time doing now.",
       workItems: [
-        "Initiate and lead AI developer programs, coordinated events across cities, and conference partnerships.",
+        "Continue building MatchPoint, GlobalTechEvents, and AI+X Events around problems I encounter.",
+        "Connect AI and open-source builders around the world through Datawhale, AGI Villa, and community activities.",
         "Help AI products from abroad meet developers in China, organize hands-on sessions, and collect early feedback.",
-        "Share what I have learned from using AI, building agents, and running a multi-agent work system.",
-        "Continue building MatchPoint, GlobalTechEvents, and AI+X Events.",
+        "Share what I learn from agents, automation, and running a multi-agent work system.",
       ],
     },
   },
@@ -166,12 +169,12 @@ export const englishContent = {
     hero: {
       title: "Darren Su / 苏鹏",
       subtitle:
-        "I am based in Hangzhou. I began in engineering and joined Datawhale in 2019 while learning AI. Later I started organizing developer events and city programs. Today I also build products and use a multi-agent system in my daily work.",
+        "I build AI products and connect builders around the world. My path has taken me from engineering to community work. Today I build products, share what I learn from agents and automation, and write about meditation and everyday life.",
       tags: [
-        "AI Ecosystem Program Lead",
-        "AGI Villa & MatchPoint Co-founder",
-        "Datawhale City Ecosystem Lead",
-        "GlobalTechEvents Creator",
+        "AI Builder",
+        "Head of City Ecosystem at Datawhale",
+        "AGI Villa Co-founder",
+        "n8n Ambassador",
       ],
     },
     kernel: [
@@ -216,11 +219,14 @@ export const englishContent = {
     },
   },
   seo: {
-    ogImageAlt: "Darren Su - Developer events, products, and practical AI",
+    ogImageAlt: "Darren Su — Building AI products and connecting builders around the world",
     home: {
-      jobTitle: "AI Ecosystem Program Lead and Product Builder",
+      jobTitle: "AI Builder, Head of City Ecosystem at Datawhale, AGI Villa Co-founder, n8n Ambassador",
       knowsAbout: [
+        "AI products",
+        "agents and automation",
         "China AI ecosystem",
+        "global AI and open-source communities",
         "developer communities",
         "AI ecosystem programs",
         "AI product workshops",

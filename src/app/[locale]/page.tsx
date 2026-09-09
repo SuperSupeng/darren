@@ -4,6 +4,7 @@ import StudioExperience from '@/components/studio/StudioExperience';
 import StudioPurpose from '@/components/studio/StudioPurpose';
 import JsonLd from '@/components/JsonLd';
 import { createPageMetadata, getPageKeywords, homeStructuredData } from '@/lib/seo';
+import { getSiteContent } from '@/lib/siteContent';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -28,11 +29,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function HomePage({ params }: Props) {
   const { locale } = await params;
+  const site = getSiteContent(locale);
 
   return (
     <>
       <JsonLd data={homeStructuredData(locale)} />
-      <StudioExperience locale={locale}>
+      <StudioExperience locale={locale} intro={site.home.intro} roles={site.about.hero.tags}>
         <StudioPurpose locale={locale} />
       </StudioExperience>
     </>

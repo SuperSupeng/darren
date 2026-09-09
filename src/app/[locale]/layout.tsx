@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/next';
 import { Geist, Noto_Serif } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages } from 'next-intl/server';
+import { getMessages, getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { isLocale } from '@/i18n/config';
@@ -40,6 +40,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'meta' });
 
   return {
     metadataBase: new URL(siteUrl),
@@ -47,9 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       default: locale === 'zh' ? 'Darren Su / 苏鹏' : 'Darren Su',
       template: `%s | Darren Su`,
     },
-    description: locale === 'zh'
-      ? 'Darren Su 组织 AI 开发者活动，帮助早期产品接触用户，也在做软件产品和分享 AI 与 Agent 实践。'
-      : 'Darren Su leads AI developer programs, helps early products meet users, builds software, and shares practical experience with AI and agents.',
+    description: t('description'),
     icons: {
       icon: [
         { url: '/favicon.svg', type: 'image/svg+xml' },

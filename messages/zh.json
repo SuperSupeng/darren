@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Darren Su / 苏鹏 | AI 产品、开发者社区与科技活动",
-    "description": "Darren Su / 苏鹏的个人网站：AI 产品与 Agent 实验、Datawhale 社区与开发者活动，以及关于技术、禅修和生活的文字。"
+    "title": "Darren Su / 苏鹏 | AI Builder，连接全球创造者",
+    "description": "苏鹏 Darren：AI Builder、Datawhale 城市生态负责人、AGI Villa 联合创始人、n8n Ambassador。做 AI 产品，连接世界各地的创造者，分享 Agent 与自动化实践，以及社区、禅修和生活的思考。"
   },
   "nav": {
     "home": "首页",
@@ -24,7 +24,7 @@
   "footer": {
     "name": "Darren Su / 苏鹏",
     "location": "杭州 / 全球",
-    "bio": "组织开发者活动，帮助早期 AI 产品接触用户，也在做自己的产品。",
+    "bio": "做 AI 产品，连接世界各地的创造者。分享 Agent 实践，也记录社区、禅修和生活。",
     "contactTitle": "找到我",
     "copyright": "© {year} Darren Su. 保留所有权利。"
   },
@@ -55,7 +55,7 @@
   "about": {
     "meta": {
       "title": "关于我",
-      "description": "Darren Su / 苏鹏的工程、社区和产品经历，以及禅修与公益关注。"
+      "description": "认识苏鹏 Darren：AI Builder、Datawhale 城市生态负责人、AGI Villa 联合创始人、n8n Ambassador，以及他的产品、全球社区交流、禅修与公益经历。"
     }
   }
 }

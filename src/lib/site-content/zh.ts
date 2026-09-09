@@ -3,6 +3,9 @@ import type { LocalizedContent } from './types';
 
 export const chineseContent: LocalizedContent = {
   ...englishContent,
+  home: {
+    intro: "我做 AI 产品，连接世界各地的创造者。分享 Agent 与自动化实践，也记录社区、禅修和生活。",
+  },
   labels: {
     ...englishContent.labels,
     productLab: {
@@ -61,10 +64,10 @@ export const chineseContent: LocalizedContent = {
       workEyebrow: "现在在做什么",
       workTitle: "现在，我的时间主要花在这些事情上。",
       workItems: [
-        "发起并负责 AI 开发者项目、多城市联动与大会生态合作。",
+        "继续做 MatchPoint、GlobalTechEvents 和 AI+X Events，把遇到的问题做成产品。",
+        "通过 Datawhale、AGI Villa 和社区活动，连接世界各地的 AI 与开源创造者。",
         "帮助海外 AI 产品在中国接触开发者，组织体验并收集早期反馈。",
-        "分享自己使用 AI、构建 Agent 和运行多 Agent 工作系统的经验。",
-        "继续做 MatchPoint、GlobalTechEvents 和 AI+X Events。",
+        "分享 Agent、自动化与多 Agent 工作系统的实践。",
       ],
     },
   },
@@ -161,8 +164,8 @@ export const chineseContent: LocalizedContent = {
     hero: {
       title: "Darren Su / 苏鹏",
       subtitle:
-        "我常驻杭州。最早做工程，2019 年因为学习 AI 进入 Datawhale，后来开始组织开发者活动和城市项目。现在我也在做自己的产品，并用一套多 Agent 系统处理日常工作。",
-      tags: ["AI 生态项目负责人", "AGI Villa 与 MatchPoint 联合创始人", "Datawhale 城市生态负责人", "GlobalTechEvents 创造者"],
+        "做 AI 产品，连接世界各地的创造者。我从工程研发走到社区建设，现在一边做产品，一边分享 Agent 与自动化实践，也记录禅修和生活。",
+      tags: ["AI Builder", "Datawhale 城市生态负责人", "AGI Villa 联合创始人", "n8n Ambassador"],
     },
     kernel: [
       {
@@ -206,11 +209,14 @@ export const chineseContent: LocalizedContent = {
     },
   },
   seo: {
-    ogImageAlt: "Darren Su - 开发者活动、产品与 AI 实践",
+    ogImageAlt: "Darren Su / 苏鹏 — 做 AI 产品，连接世界各地的创造者",
     home: {
-      jobTitle: "AI 生态项目负责人和产品创造者",
+      jobTitle: "AI Builder、Datawhale 城市生态负责人、AGI Villa 联合创始人、n8n Ambassador",
       knowsAbout: [
+        "AI 产品",
+        "Agent 与自动化",
         "中国 AI 生态",
+        "全球 AI 与开源社区",
         "开发者社区",
         "AI 生态项目",
         "AI 产品 Workshop",

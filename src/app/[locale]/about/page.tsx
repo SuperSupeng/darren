@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import { getAboutCopy } from '@/lib/about';
+import { getSiteContent } from '@/lib/siteContent';
+import ProfileRoles from '@/components/ProfileRoles';
 import { getTranslations } from 'next-intl/server';
 import ContactActions from '@/components/ContactActions';
 import JsonLd from '@/components/JsonLd';
@@ -32,6 +34,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           <div className="about-reading-intro">
             <h1>{copy.title}</h1>
             <p>{copy.intro}</p>
+            <ProfileRoles roles={getSiteContent(locale).about.hero.tags} />
           </div>
           <div className="about-reading-stage">
             <RoomPortal zone="notes" locale={locale} />

@@ -12,6 +12,10 @@ type KeywordGroup = 'home' | 'services' | 'work' | 'blog' | 'about';
 const pageKeywords: Record<Locale, Record<KeywordGroup, string[]>> = {
   en: {
     home: [
+      'AI Builder',
+      'global AI communities',
+      'n8n Ambassador',
+      'AI agents and automation',
       'China AI ecosystem',
       'China developer community',
       'AI developer ecosystem programs',
@@ -52,13 +56,20 @@ const pageKeywords: Record<Locale, Record<KeywordGroup, string[]>> = {
       'Datawhale',
       'MatchPoint',
       'GlobalTechEvents',
-      'AI ecosystem program lead',
+      'AI Builder',
+      'Head of City Ecosystem at Datawhale',
+      'n8n Ambassador',
+      'global AI communities',
       'multi-agent organization',
       'Zen practitioner',
     ],
   },
   zh: {
     home: [
+      'AI Builder',
+      '全球 AI 社区',
+      'n8n Ambassador',
+      'Agent 与自动化',
       'AI 开发者生态',
       'AI 开发者活动',
       'AI 产品 Workshop',
@@ -100,7 +111,10 @@ const pageKeywords: Record<Locale, Record<KeywordGroup, string[]>> = {
       'Datawhale',
       'MatchPoint',
       'GlobalTechEvents',
-      'AI 生态项目负责人',
+      'AI Builder',
+      'Datawhale 城市生态负责人',
+      'n8n Ambassador',
+      '全球 AI 社区',
       '多 Agent 数字组织',
       '禅修',
     ],
@@ -267,6 +281,7 @@ function personNode(locale: string) {
     affiliation: [
       { '@type': 'Organization', name: 'AGI Villa' },
       { '@type': 'Organization', name: 'Datawhale' },
+      { '@type': 'Organization', name: 'n8n' },
       { '@type': 'Organization', name: 'MatchPoint' },
     ],
     hasOccupation: [
@@ -276,7 +291,7 @@ function personNode(locale: string) {
       },
       {
         '@type': 'Occupation',
-        name: locale === 'zh' ? 'Datawhale 城市生态负责人' : 'Datawhale City Ecosystem Lead',
+        name: locale === 'zh' ? 'Datawhale 城市生态负责人' : 'Head of City Ecosystem at Datawhale',
       },
       {
         '@type': 'Occupation',

@@ -6,6 +6,7 @@ import { Component, useCallback, useEffect, useRef, useState, useSyncExternalSto
 import { Link, useRouter } from '@/i18n/navigation';
 import { getStudioLocation } from '@/lib/studio-location';
 import { useStudioSettings } from '@/components/spatial/StudioSettings';
+import ProfileRoles from '@/components/ProfileRoles';
 import StudioAtmosphere from './StudioAtmosphere';
 import type { StudioZone, StudioFocusZone } from './types';
 import './studio.css';
@@ -19,7 +20,7 @@ const serverHydrationSnapshot = () => false;
 const copy = {
   zh: {
     routes: { work: '工作案例', build: '产品', blog: '文章与手记', services: '合作方式', about: '关于我' },
-    title: ['你好，我是', 'Darren'], intro: '我做 AI 产品，也和社区伙伴一起组织活动、分享实践。这里记录我做过的事，以及技术、人与生活之间的思考。',
+    title: ['你好，我是', 'Darren'],
     projects: '看项目', collaborate: '聊聊合作', actions: '了解工作与合作',
     hint: '拖动查看房间，点击标签打开对应页面',
     controls: '场景浏览方式',
@@ -33,7 +34,7 @@ const copy = {
   },
   en: {
     routes: { work: 'Selected work', build: 'Products', blog: 'Writing', services: 'Work together', about: 'About me' },
-    title: ["Hi, I'm", 'Darren'], intro: 'I build AI products, bring communities together, and share what I learn. This is a place for my projects and reflections on technology, people, and everyday life.',
+    title: ["Hi, I'm", 'Darren'],
     projects: 'See my work', collaborate: 'Work together', actions: 'Explore work and collaboration',
     hint: 'Drag to rotate. Select a label to open a page.',
     controls: 'Scene viewing options',
@@ -74,7 +75,7 @@ function ZoneIcon({ zone }: { zone: Exclude<StudioZone, 'overview'> }) {
   );
 }
 
-export default function StudioExperience({ locale, children }: { locale: string; children: ReactNode }) {
+export default function StudioExperience({ locale, intro, roles, children }: { locale: string; intro: string; roles: string[]; children: ReactNode }) {
   const t = locale === 'zh' ? copy.zh : copy.en;
   const hydrated = useSyncExternalStore(subscribeHydration, clientHydrationSnapshot, serverHydrationSnapshot);
   const router = useRouter();
@@ -139,7 +140,8 @@ export default function StudioExperience({ locale, children }: { locale: string;
 
         <div className="studio-intro">
           <h1 aria-label={`${t.title[0]} ${t.title[1]}`}>{t.title[0]}<br />{' '}<em>{t.title[1]}</em></h1>
-          <p className="studio-intro-description">{t.intro}</p>
+          <p className="studio-intro-description">{intro}</p>
+          <ProfileRoles roles={roles} />
           <nav className="studio-hero-actions" aria-label={t.actions}>
             <Link className="studio-enter" href={`/work${lighting === 'evening' ? '?light=evening' : ''}`}>{t.projects}<span aria-hidden="true">↗</span></Link>
             <Link className="studio-collaborate" href={`/services${lighting === 'evening' ? '?light=evening' : ''}`}>{t.collaborate}<span aria-hidden="true">↗</span></Link>

@@ -1,7 +1,7 @@
 import { locales } from '@/i18n/config';
 import { getAllPosts } from '@/lib/blog';
 import { getPortfolio } from '@/lib/portfolio';
-import { contactEmail, siteUrl } from '@/lib/site-config';
+import { contactEmail, siteUrl, socialLinks } from '@/lib/site-config';
 import { getAboutCopy } from '@/lib/about';
 
 export const dynamic = 'force-static';
@@ -65,10 +65,7 @@ export function GET() {
     '',
     '## Public profiles',
     '',
-    '- X: https://x.com/zenshipai',
-    '- Instagram: https://www.instagram.com/0xdarren_su',
-    '- LinkedIn: https://www.linkedin.com/in/darrenzenshipai',
-    '- GitHub: https://github.com/SuperSupeng',
+    ...socialLinks.map(([label, href]) => `- ${label}: ${href}`),
   ].join('\n');
 
   return new Response(body, {

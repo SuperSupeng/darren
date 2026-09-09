@@ -1,8 +1,8 @@
 const aboutCopy = {
   zh: {
     title: '我是 Darren，也是苏鹏。',
-    intro: '我常驻杭州。做过研发，在 Datawhale 从学习者慢慢变成组织者，现在也做自己的产品和 Agent 实验。我参与过青少年 AI 公益课程，也参加禅修，把做事和生活里的经历写下来。',
-    description: 'Darren Su / 苏鹏的个人经历：工程研发、Datawhale 与 AGI Villa 社区实践、产品和 Agent 实验，以及青少年 AI 公益课程与禅修手记。',
+    intro: '我做 AI 产品，连接世界各地的创造者。从工程研发出发，我在 Datawhale 从学习者慢慢变成组织者，也和伙伴发起社区、做自己的产品，探索 Agent 和自动化。工作之外，我参与过青少年 AI 公益课程，也参加禅修，把做事和生活里的经历写下来。',
+    description: 'Darren Su / 苏鹏，AI Builder、Datawhale 城市生态负责人、AGI Villa 联合创始人、n8n Ambassador。做 AI 产品，连接世界各地的创造者，记录工程、社区、公益课程与禅修经历。',
     engineeringTitle: '从工程开始',
     engineering: [
       '2021 年，我在 PingCAP 做 TiCDC 研发实习，后来参与过 AI 基础设施、向量数据库和 AI 产品相关的工作。',
@@ -10,8 +10,9 @@ const aboutCopy = {
     ],
     communityTitle: '在社区里，从学习者到组织者',
     community: [
-      '2019 年，我因为学习 AI 接触 Datawhale。后来做过助教、组织活动，也逐渐参与城市生态和社区治理。现在，我和各地伙伴一起支持 AI 学习与实践活动，让学习者、开发者、高校和开源贡献者有机会见面，一起做事。',
-      '我和 Monica 共同发起了 AGI Villa，和对 AI 感兴趣的创造者、产品团队与创业者交流。做这些事时，我会留意人为什么愿意来、怎样参与，以及活动结束后是否还会继续交流。',
+      '2019 年，我因为学习 AI 接触 Datawhale。后来做过助教、组织活动，也逐渐参与城市生态和社区治理。现在，作为 Datawhale 城市生态负责人，我和各地伙伴一起支持 AI 学习与实践活动，让学习者、开发者、高校和开源贡献者有机会见面，一起做事。',
+      '我和 Monica 共同发起了 AGI Villa，和来自世界各地的 AI 创造者、产品团队与创业者交流。我希望把中国与全球的 AI 和开源社区连接起来，让大家有机会一起做事。做这些事时，我会留意人为什么愿意来、怎样参与，以及活动结束后是否还会继续交流。',
+      '我也是 n8n Ambassador，使用 n8n 搭建营销自动化工作流，也参与中文学习资料的建设。我希望让开发者和业务伙伴围绕真实需求，一起做出有用的自动化。',
     ],
     communityReflection: '相识之后发生了什么，是我在社区工作里反复碰到的问题。',
     communityLink: '看看我的社区经历',
@@ -41,8 +42,8 @@ const aboutCopy = {
   },
   en: {
     title: 'I’m Darren Su. My Chinese name is 苏鹏.',
-    intro: 'I’m based in Hangzhou. I began in engineering, grew from a learner into an organizer at Datawhale, and now build products and experiment with agents. I have also helped run volunteer AI classes for young people and practice meditation. I write about what I encounter in work and life.',
-    description: 'Meet Darren Su: his engineering background, community work with Datawhale and AGI Villa, product and agent experiments, volunteer AI classes, and meditation experiences.',
+    intro: 'I build AI products and connect builders around the world. I began in engineering, grew from a learner into an organizer at Datawhale, and now start communities with others, build products, and explore agents and automation. Beyond work, I have helped run volunteer AI classes for young people and practice meditation. I write about what I encounter in work and life.',
+    description: 'Darren Su is an AI Builder, Head of City Ecosystem at Datawhale, AGI Villa co-founder, and n8n Ambassador. He builds AI products, connects builders worldwide, and writes about engineering, communities, volunteer teaching, and meditation.',
     engineeringTitle: 'Beginning in engineering',
     engineering: [
       'In 2021, I interned on TiCDC development at PingCAP. Later, I worked on AI infrastructure, vector databases, and AI products. ',
@@ -50,8 +51,9 @@ const aboutCopy = {
     ],
     communityTitle: 'From learning together to organizing together',
     community: [
-      'I joined Datawhale in 2019 to learn AI. I later became a teaching assistant and event organizer, and became involved in city programs and community governance. Today, I work with local partners on AI learning and practical activities, bringing together learners, developers, universities, and open-source contributors.',
-      'Monica and I also started AGI Villa, where we meet AI builders, product teams, and founders. In this work, I pay attention to why people show up, how they take part, and whether they keep talking afterward.',
+      'I joined Datawhale in 2019 to learn AI. I later became a teaching assistant and event organizer, and became involved in city programs and community governance. Today, as Head of City Ecosystem at Datawhale, I work with local partners on AI learning and practical activities, bringing together learners, developers, universities, and open-source contributors.',
+      'Monica and I also started AGI Villa, where we meet AI builders, product teams, and founders from around the world. I want to connect AI and open-source communities in China with their peers worldwide, giving people a chance to work together. In this work, I pay attention to why people show up, how they take part, and whether they keep talking afterward.',
+      'I am also an n8n Ambassador. I use n8n for marketing automation and support the development of Chinese-language learning resources. I want to bring developers and business users together to build useful automations around real needs.',
     ],
     communityReflection: 'What happens after an introduction is a question I keep returning to.',
     communityLink: 'Explore my community work',
