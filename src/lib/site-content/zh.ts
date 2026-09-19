@@ -51,6 +51,8 @@ export const chineseContent: LocalizedContent = {
       recentDescription: "AI 技术与实践、创业与社区，也有公益行动和生活中的思考。",
       empty: "文章正在整理中。",
       minRead: "分钟阅读",
+      rss: "RSS",
+      rssLabel: "通过 RSS 订阅文章",
     },
     about: {
       ...englishContent.labels.about,
@@ -71,13 +73,98 @@ export const chineseContent: LocalizedContent = {
       ],
     },
   },
+  writing: {
+    hero: {
+      eyebrow: "文章",
+      title: "我把做项目、做产品和使用 AI 的经验写在这里。",
+      subtitle:
+        "AI 技术与实践、创业与社区，也有公益行动和生活中的思考。",
+    },
+  },
   fieldNotes: {
     hero: {
       eyebrow: "手记",
-      title: "我把做项目、做产品和使用 AI 的经验写在这里。",
+      title: "现场的观察和短记。",
       subtitle:
-        "也记录社区、公益和生活中的经历，写下当时的观察，以及后来改变的看法。",
+        "旅行、禅修和活动里的记录，和长文分开存放。",
     },
+    empty: "手记正在整理中。",
+    sidebarQuote: "这些短记都从我当时在场的事情开始。",
+    recentDescription: "走访、旅行、禅修和其他第一手观察。",
+  },
+  podcast: {
+    hero: {
+      eyebrow: "播客",
+      title: "《重新组织》",
+      subtitle: "节目入口：介绍和收听链接。这里是集合页，不是日更更新墙。",
+    },
+    listen: "收听",
+    listenPending: "公开收听页确认后会挂在这里。本页作为稳定入口保留。",
+    summary:
+      "这一页只收节目入口。不按日更维护，也不把外链目录混进文章或手记。公开收听页一经核对，会挂在下面。",
+  },
+  elsewhere: {
+    hero: {
+      eyebrow: "别处",
+      title: "其他平台上的公开入口。",
+      subtitle: "一份外链目录，不是更新流。",
+    },
+    reservedTitle: "先放这些",
+    socialsTitle: "也可以在这些地方找到我",
+    visit: "访问",
+    items: [
+      {
+        id: "wechat",
+        name: "公众号精选",
+        description: "部分文章先在公众号发表。这里放一篇已核对的原文，更多篇目收入站内文章。",
+        href: "https://mp.weixin.qq.com/s/ydALVwE_H_yCp1lywr9Yhw",
+        external: true,
+      },
+      {
+        id: "substack",
+        name: "Substack: China AI, On the Ground",
+        description: "面向全球创始人和建设者的中国 AI 生态观察。",
+        href: "https://darrensu101.substack.com",
+        external: true,
+      },
+      {
+        id: "podcast",
+        name: "播客《重新组织》",
+        description: "本站的节目入口。",
+        href: "/podcast",
+        external: false,
+      },
+      {
+        id: "public-projects",
+        name: "MatchPoint / AGI Villa",
+        description: "站内已经使用的产品和社区公开页。",
+        links: [
+          { label: "MatchPoint", href: "https://matchpoint.careers" },
+          { label: "AGI Villa", href: "https://agivilla.com" },
+        ],
+      },
+      {
+        id: "github",
+        name: "GitHub @SuperSupeng",
+        description: "公开仓库和个人主页。",
+        href: "https://github.com/SuperSupeng",
+        external: true,
+      },
+    ],
+  },
+  projects: {
+    hero: {
+      eyebrow: "项目",
+      title: "MatchPoint、GlobalTechEvents 和 AI+X Events，都来自我在工作里反复遇到的问题。",
+      subtitle: "这里收纳我做的产品，以及我发起、负责或参与的项目。",
+    },
+    productsTitle: "产品",
+    casesTitle: "代表项目",
+    archiveTitle: "项目案例",
+    experiencesTitle: "其他活动与交流",
+    role: "我的角色",
+    result: "项目结果",
+    read: "查看完整案例",
   },
   products: {
     hero: {

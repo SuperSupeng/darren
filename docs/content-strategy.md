@@ -19,7 +19,7 @@
 | 案例之外的活动与交流经历 | `src/lib/experience-archive.ts` |
 | 产品、共享页面介绍与标签 | `src/lib/site-content/{zh,en}.ts` |
 | 首页精选文章 | `src/lib/studio-content.ts` 中的 `featuredNotes` |
-| 文章全文 | `content/blog/{zh,en}/` |
+| 文章全文 | `content/blog/{zh,en}/`；`section: field-notes` 的篇目进入手记页，其余进入文章页 |
 | 导航等短界面标签 | `messages/{zh,en}.json` |
 
 事实变化时修改对应来源，不在多个页面分别修补。首页的中英文精选各自固定，新增翻译或归档文章不自动改变它们。调整精选属于编辑决定，需要与文章库是否收录分开处理。
@@ -37,8 +37,11 @@ date: 2026-09-04
 description: 用于列表页和搜索摘要的一句话介绍。
 tags: [AI, Field Notes]
 authors: [Darren Su]
+section: field-notes
 ---
 ```
+
+`section` 可选，缺省为 `writing`。`field-notes` 进入手记页；长文保持 `writing`。
 
 无法核实精确日期时省略 `date`，使用 `dateNote`；有依据的内容年份可填写 `archiveYear`：
 

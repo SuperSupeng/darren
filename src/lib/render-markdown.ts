@@ -1,6 +1,11 @@
 import { createArticleHeadingAnchors } from '@/lib/article-anchors';
 import { archivedArticleImages } from '@/lib/blog-images';
-import { getImageProps } from 'next/image';
+
+export type MarkdownImageProps = {
+  src?: string;
+  srcSet?: string;
+  sizes?: string;
+};
 
 function escapeHtml(value: string): string {
   return value
@@ -79,7 +84,18 @@ const inlineImageDimensions: Record<string, { width: number; height: number; bac
 };
 
 // Lightweight block renderer for the local field-notes markdown files.
-export function renderMarkdown(content: string, title: string, locale: string, { responsiveImages = false } = {}): string {
+export function renderMarkdown(
+  content: string,
+  title: string,
+  locale: string,
+  {
+    responsiveImages = false,
+    optimizeImage,
+  }: {
+    responsiveImages?: boolean;
+    optimizeImage?: (image: { src: string; alt: string; width: number; height: number }) => MarkdownImageProps;
+  } = {},
+): string {
   const lines = content.replace(/\r\n/g, '\n').split('\n');
   const output: string[] = [];
   let paragraph: string[] = [];
@@ -175,8 +191,8 @@ export function renderMarkdown(content: string, title: string, locale: string, {
         ? ` style="background-color:${escapeAttribute(dimensions.backgroundColor)}"`
         : '';
       // Web pages select a suitable image for the reading column; feeds keep portable original URLs.
-      const optimized = responsiveImages && dimensions
-        ? getImageProps({ src: image[2], alt: imageAlt, width: dimensions.width, height: dimensions.height, sizes: '(max-width: 760px) calc(100vw - 80px), 700px' }).props
+      const optimized = responsiveImages && dimensions && optimizeImage
+        ? optimizeImage({ src: image[2], alt: imageAlt, width: dimensions.width, height: dimensions.height })
         : null;
       const sourceAttributes = optimized?.srcSet
         ? ` srcset="${escapeAttribute(optimized.srcSet)}" sizes="${escapeAttribute(optimized.sizes ?? '')}"`

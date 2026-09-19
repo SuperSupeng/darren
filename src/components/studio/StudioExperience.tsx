@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic';
 import { Component, useCallback, useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from 'react';
 import { Link, useRouter } from '@/i18n/navigation';
 import { getStudioLocation } from '@/lib/studio-location';
+import { collaborateHref, studioZoneHrefs } from '@/lib/site-config';
 import { useStudioSettings } from '@/components/spatial/StudioSettings';
 import ProfileRoles from '@/components/ProfileRoles';
 import StudioAtmosphere from './StudioAtmosphere';
@@ -19,30 +20,30 @@ const serverHydrationSnapshot = () => false;
 
 const copy = {
   zh: {
-    routes: { work: '工作案例', build: '产品', blog: '文章与手记', services: '合作方式', about: '关于我' },
+    routes: { work: '项目', build: '产品', blog: '文章', services: '合作方式', about: '关于我' },
     title: ['你好，我是', 'Darren'],
     projects: '看项目', collaborate: '聊聊合作', actions: '了解工作与合作',
     hint: '拖动查看房间，点击标签打开对应页面',
     controls: '场景浏览方式',
     still: '静态浏览', live: '开启 3D', loading: '正在打开工作室', ready: '工作室已打开',
     failed: '已切换为静态场景，内容仍可正常浏览。', paused: '静态场景 · 选择区域继续浏览',
-    all: { work: '全部工作案例', build: '全部产品', notes: '全部文章与手记' },
-    labels: { work: '工作案例', build: '产品', notes: '文章与手记' },
-    hotspotCopy: { work: '开发者活动、社区合作与分享', build: '我开发的产品和工具', notes: 'AI 实践、旅行与生活' },
+    all: { work: '全部项目', build: '全部产品', notes: '全部文章' },
+    labels: { work: '项目', build: '产品', notes: '文章' },
+    hotspotCopy: { work: '产品、社区项目与案例', build: '我开发的产品和工具', notes: 'AI 实践与长文' },
     room: 'Darren 的 3D 工作室',
     shortcut: '按内容浏览',
   },
   en: {
-    routes: { work: 'Selected work', build: 'Products', blog: 'Writing', services: 'Work together', about: 'About me' },
+    routes: { work: 'Projects', build: 'Products', blog: 'Writing', services: 'Work together', about: 'About me' },
     title: ["Hi, I'm", 'Darren'],
     projects: 'See my work', collaborate: 'Work together', actions: 'Explore work and collaboration',
     hint: 'Drag to rotate. Select a label to open a page.',
     controls: 'Scene viewing options',
     still: 'Still view', live: 'Enable 3D', loading: 'Opening the studio', ready: 'The studio is ready',
     failed: 'Showing a still scene. All content is available below.', paused: 'Still scene · Choose a space to explore',
-    all: { work: 'All selected work', build: 'All products', notes: 'All writing' },
-    labels: { work: 'Selected work', build: 'Products', notes: 'Writing' },
-    hotspotCopy: { work: 'Developer events, community projects & talks', build: 'Products and tools I build', notes: 'AI practice, travel & life' },
+    all: { work: 'All projects', build: 'All products', notes: 'All writing' },
+    labels: { work: 'Projects', build: 'Products', notes: 'Writing' },
+    hotspotCopy: { work: 'Products, community projects & case studies', build: 'Products and tools I build', notes: 'AI practice and essays' },
     room: 'Darren’s 3D studio',
     shortcut: 'Browse by topic',
   },
@@ -88,7 +89,7 @@ export default function StudioExperience({ locale, intro, roles, children }: { l
   const reducedMotion = useSyncExternalStore(subscribeMotion, getMotion, () => true);
   const roomRef = useRef<HTMLDivElement>(null);
   const useStill = still || failed;
-  const destinationFor = useCallback((next: StudioFocusZone) => `/${next === 'notes' ? 'blog' : next}${lighting === 'evening' ? '?light=evening' : ''}`, [lighting]);
+  const destinationFor = useCallback((next: StudioFocusZone) => `${studioZoneHrefs[next]}${lighting === 'evening' ? '?light=evening' : ''}`, [lighting]);
   const selectZone = useCallback((next: StudioZone) => {
     if (next !== 'overview') router.push(destinationFor(next));
   }, [router, destinationFor]);
@@ -99,7 +100,7 @@ export default function StudioExperience({ locale, intro, roles, children }: { l
   useEffect(() => {
     const restore = () => {
       const { zone: previousZone, lighting: previousLighting } = getStudioLocation(new URL(window.location.href));
-      if (previousZone !== 'overview') router.replace(`/${previousZone === 'notes' ? 'blog' : previousZone}${previousLighting === 'evening' ? '?light=evening' : ''}`);
+      if (previousZone !== 'overview') router.replace(`${studioZoneHrefs[previousZone]}${previousLighting === 'evening' ? '?light=evening' : ''}`);
     };
     restore();
     window.addEventListener('hashchange', restore);
@@ -143,8 +144,8 @@ export default function StudioExperience({ locale, intro, roles, children }: { l
           <p className="studio-intro-description">{intro}</p>
           <ProfileRoles roles={roles} />
           <nav className="studio-hero-actions" aria-label={t.actions}>
-            <Link className="studio-enter" href={`/work${lighting === 'evening' ? '?light=evening' : ''}`}>{t.projects}<span aria-hidden="true">↗</span></Link>
-            <Link className="studio-collaborate" href={`/services${lighting === 'evening' ? '?light=evening' : ''}`}>{t.collaborate}<span aria-hidden="true">↗</span></Link>
+            <Link className="studio-enter" href={`/projects${lighting === 'evening' ? '?light=evening' : ''}`}>{t.projects}<span aria-hidden="true">↗</span></Link>
+            <Link className="studio-collaborate" href={`${collaborateHref}${lighting === 'evening' ? '?light=evening' : ''}`}>{t.collaborate}<span aria-hidden="true">↗</span></Link>
           </nav>
           <Link className="studio-host" href={`/about${lighting === 'evening' ? '?light=evening' : ''}`} aria-label={locale === 'zh' ? '认识 Darren Su / 苏鹏' : 'Meet Darren Su'}>
             <span className="studio-host-photo"><Image src="/photo.jpg" alt="Darren Su" fill sizes="104px" loading="eager" /></span>
@@ -170,7 +171,7 @@ export default function StudioExperience({ locale, intro, roles, children }: { l
         </div>
       </div>
       <noscript><nav className="studio-no-script" aria-label={t.shortcut}>
-        <Link href="/work">{t.all.work}</Link><Link href="/build">{t.all.build}</Link><Link href="/blog">{t.all.notes}</Link><Link href="/services">{t.routes.services}</Link><Link href="/about">{t.routes.about}</Link>
+        <Link href="/projects">{t.all.work}</Link><Link href="/blog">{t.all.notes}</Link><Link href="/podcast">{locale === 'zh' ? '播客' : 'Podcast'}</Link><Link href="/field-notes">{locale === 'zh' ? '手记' : 'Field Notes'}</Link><Link href="/elsewhere">{locale === 'zh' ? '别处' : 'Elsewhere'}</Link><Link href={collaborateHref}>{t.routes.services}</Link><Link href="/about">{t.routes.about}</Link>
       </nav></noscript>
       {children}
     </main>

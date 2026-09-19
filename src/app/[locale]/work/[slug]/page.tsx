@@ -59,7 +59,7 @@ export default async function WorkCasePage({
   const collaboration = getWorkCollaboration(locale, work.id);
   const copy = locale === 'zh'
     ? {
-        back: '返回全部案例',
+        back: '返回项目',
         role: '我的角色',
         result: '规模与结果',
         context: '项目背景',
@@ -75,7 +75,7 @@ export default async function WorkCasePage({
         collaborationBody: '合作页面介绍了适合的项目和具体做法。也可以直接来信，说说你的团队、目标和预计时间。',
       }
     : {
-        back: 'Back to all case studies',
+        back: 'Back to projects',
         role: 'My role',
         result: 'Scale and outcome',
         context: 'Project background',
@@ -98,7 +98,7 @@ export default async function WorkCasePage({
         <div className="interior-wrap">
           <header className="case-cover">
             <div className="interior-back-link">
-              <Link href="/work" className="interior-text-link">← {copy.back}</Link>
+              <Link href="/projects" className="interior-text-link">← {copy.back}</Link>
             </div>
             <div className="case-cover-grid">
               <div className="case-cover-copy">
@@ -167,7 +167,7 @@ export default async function WorkCasePage({
             </div>
             <div><p>{collaboration ? copy.collaborationBody : copy.contactBody}</p><ContactActions locale={locale} context={`work-case-${work.id}`} className="interior-contact" /></div>
           </section>
-          <Link href={nextWork.href ?? '/work'} className="case-next">
+          <Link href={nextWork.href ?? '/projects'} className="case-next">
             <span className="interior-kicker">{copy.next}</span>
             <div><h2>{nextWork.title}</h2><p>{nextWork.location} · {nextWork.year}</p></div>
             <span aria-hidden="true">↗</span>

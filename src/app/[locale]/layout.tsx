@@ -7,7 +7,7 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { isLocale } from '@/i18n/config';
 import SiteChrome from '@/components/SiteChrome';
-import { getLocalizedBlogRoutes } from '@/lib/blog';
+import { getFieldNoteSlugs, getLocalizedBlogRoutes } from '@/lib/blog';
 import { siteUrl } from '@/lib/site-config';
 import '../globals.css';
 import '../fonts/noto-serif-sc/fonts.css';
@@ -92,7 +92,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           <a href="#main-content" className="skip-link">
             {locale === 'zh' ? '跳到主要内容' : 'Skip to main content'}
           </a>
-          <SiteChrome blogLocalesBySlug={blogLocalesBySlug}>
+          <SiteChrome blogLocalesBySlug={blogLocalesBySlug} fieldNoteSlugs={getFieldNoteSlugs()}>
             {children}
           </SiteChrome>
         </NextIntlClientProvider>

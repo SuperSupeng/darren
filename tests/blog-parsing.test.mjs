@@ -25,6 +25,7 @@ test('the production parser preserves metadata and body with CRLF, CR, and a UTF
     authors: ['Darren Su'],
     description: 'A published observation: with its original date.',
     tags: ['AI agents', 'Research'],
+    section: 'writing',
     content: '\n## Evidence\n\nA first-hand observation with a [source](https://example.com/source).\n',
   };
   for (const newline of ['\n', '\r\n', '\r']) {
@@ -57,7 +58,7 @@ test('incomplete or ambiguous source metadata fails with the source filename', (
     fixture.replace('tags: [AI agents, Research]', 'tags: AI agents'),
     fixture.replace('tags: [AI agents, Research]', 'tags: []'),
     fixture.replace('tags: [AI agents, Research]', 'tags: [AI agents, ""]'),
-    fixture.replace('tags: [AI agents, Research]', 'tags: [AI agents,]'),
+    fixture.replace('tags: [AI agents, Research]', 'tags: [AI agents, Research]\nsection: diary'),
     fixture.replace('tags: [AI agents, Research]', 'tags: ["AI agents, Research]'),
     fixture.replace('date: 2024-02-29', 'date: 2024-02-29\ndate: 2025-01-01'),
     fixture.slice(0, fixture.indexOf('\n---\n') + '\n---\n'.length),
@@ -137,7 +138,7 @@ test('published articles retain complete metadata and Markdown, with only suppor
       assert.ok(post.tags.length > 0);
       assert.ok(post.content.length > 1000);
       assert.equal(post.content, source.slice(source.indexOf('\n---\n') + '\n---\n'.length));
-      for (const field of ['title', 'date', 'archiveYear', 'dateNote', 'authors', 'description', 'tags', 'content']) {
+      for (const field of ['title', 'date', 'archiveYear', 'dateNote', 'authors', 'description', 'tags', 'section', 'content']) {
         assert.deepEqual(post[field], parsed[field]);
       }
       assert.deepEqual(parseBlogContent(`\uFEFF${source.replace(/\n/g, '\r\n')}`), parsed);
@@ -165,4 +166,8 @@ test('published articles retain complete metadata and Markdown, with only suppor
   assert.deepEqual(chinesePosts.map(post => post.date?.slice(0, 4) ?? post.archiveYear), [
     '2026', '2026', '2026', '2026', '2025', '2025', '2024', '2024', '2024', '2024',
   ]);
+  assert.deepEqual(
+    chinesePosts.filter(post => post.section === 'field-notes').map(post => post.slug).sort(),
+    ['superai-china-ecosystem-visit', 'zongtong-temple-retreat'],
+  );
 });

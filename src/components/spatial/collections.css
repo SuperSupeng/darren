@@ -249,6 +249,25 @@
   .collection-page .collection-next .collection-description { max-width: 33em; }
 }
 
+.collection-hero-actions { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 24px; }
+.collection-hero .collection-hero-actions .collection-text-link { margin-top: 0; }
+
+.collection-page.collection-elsewhere .elsewhere-list { list-style: none; padding: 0; }
+.collection-page.collection-elsewhere .elsewhere-item { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px 32px; align-items: start; border-top: 1px solid var(--space-line); padding-block: 32px; }
+.collection-page.collection-elsewhere .elsewhere-item h2 { font-family: var(--font-noto-serif, var(--font-site-serif, serif)); font-size: clamp(24px, 2.4vw, 32px); font-weight: 400; line-height: 1.4; }
+.collection-page.collection-elsewhere .elsewhere-item .collection-description { margin-top: 12px; max-width: 40em; }
+.collection-page.collection-elsewhere .elsewhere-item-links { display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: flex-end; }
+.collection-page.collection-elsewhere .elsewhere-socials { display: flex; flex-wrap: wrap; gap: 12px 22px; }
+.collection-page.collection-elsewhere .elsewhere-socials a { min-height: 44px; display: inline-flex; align-items: center; color: var(--space-muted); }
+.collection-page.collection-elsewhere .elsewhere-socials a:hover { color: var(--space-accent); }
+.collection-page.collection-podcast .collection-section h2 { font-family: var(--font-noto-serif, var(--font-site-serif, serif)); font-size: clamp(28px, 3vw, 40px); font-weight: 400; line-height: 1.35; }
+.collection-page.collection-podcast .collection-section .collection-description { margin-top: 18px; max-width: 40em; }
+
+@media (max-width: 560px) {
+  .collection-page.collection-elsewhere .elsewhere-item { grid-template-columns: 1fr; padding-block: 26px; }
+  .collection-page.collection-elsewhere .elsewhere-item-links { justify-content: flex-start; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .collection-page, .collection-page *, .collection-page *::before, .collection-page *::after { transition: none !important; animation: none !important; }
 }

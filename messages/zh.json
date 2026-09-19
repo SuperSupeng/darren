@@ -5,11 +5,12 @@
   },
   "nav": {
     "home": "首页",
-    "services": "合作",
-    "work": "案例",
-    "build": "产品",
+    "writing": "文章",
+    "podcast": "播客",
+    "fieldNotes": "手记",
+    "projects": "项目",
+    "elsewhere": "别处",
     "about": "关于",
-    "blog": "文章",
     "contact": "联系我",
     "openMenu": "打开菜单",
     "closeMenu": "关闭菜单",
@@ -39,12 +40,36 @@
   },
   "blog": {
     "meta": {
-      "title": "文章与手记",
-      "description": "Darren Su 写下的项目复盘，以及关于 AI、Agent、开发者社区、产品和日常实践的记录。"
+      "title": "文章",
+      "description": "关于 AI、Agent、开发者社区、产品和日常实践的长文。"
     },
     "backToList": "全部文章",
     "minRead": "分钟",
     "share": "分享"
+  },
+  "fieldNotes": {
+    "meta": {
+      "title": "手记",
+      "description": "走访、旅行和禅修里的现场观察，和长文分开存放。"
+    }
+  },
+  "podcast": {
+    "meta": {
+      "title": "播客《重新组织》",
+      "description": "Darren Su 播客《重新组织》的入口：节目介绍与收听链接。"
+    }
+  },
+  "projects": {
+    "meta": {
+      "title": "项目",
+      "description": "Darren Su / 苏鹏的产品与项目：MatchPoint、GlobalTechEvents、Datawhale AI+X Events，以及代表案例。"
+    }
+  },
+  "elsewhere": {
+    "meta": {
+      "title": "别处",
+      "description": "Darren Su 在公众号、Substack、GitHub、MatchPoint、AGI Villa 和其他平台上的公开入口。"
+    }
   },
   "build": {
     "meta": {

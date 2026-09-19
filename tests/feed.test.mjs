@@ -15,7 +15,7 @@ const contentNamespace = 'http://purl.org/rss/1.0/modules/content/';
 const dcNamespace = 'http://purl.org/dc/elements/1.1/';
 
 test('RSS provides the complete bilingual article collection with stable identity and publication dates', async () => {
-  const response = GET();
+  const response = await GET();
   assert.equal(response.headers.get('Content-Type'), 'application/rss+xml; charset=utf-8');
   const xml = await response.text();
   const dom = new JSDOM(xml, { contentType: 'application/xml' });
@@ -74,7 +74,7 @@ test('RSS provides the complete bilingual article collection with stable identit
       }
     }
 
-    assert.equal(await GET().text(), xml, 'Repeated feed generation must not change GUIDs or invent timestamps');
+    assert.equal(await (await GET()).text(), xml, 'Repeated feed generation must not change GUIDs or invent timestamps');
   } finally {
     dom.window.close();
   }
@@ -96,7 +96,7 @@ test('RSS preserves special characters through XML and HTML while keeping unsafe
     return originalRead.call(this, filename, ...options);
   });
 
-  const dom = new JSDOM(await GET().text(), { contentType: 'application/xml' });
+  const dom = new JSDOM(await (await GET()).text(), { contentType: 'application/xml' });
   try {
     const items = [...dom.window.document.querySelectorAll('item')];
     assert.equal(items.length, locales.length);

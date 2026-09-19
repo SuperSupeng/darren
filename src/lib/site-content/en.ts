@@ -47,6 +47,8 @@ export const englishContent = {
         "Essays and conversations on AI, products, and communities, alongside records of teaching, starting a venture, and everyday life.",
       empty: "Notes are being organized.",
       minRead: "min read",
+      rss: "RSS",
+      rssLabel: "Subscribe to Writing by RSS",
     },
     about: {
       roomEyebrow: "About",
@@ -67,13 +69,103 @@ export const englishContent = {
       ],
     },
   },
+  writing: {
+    hero: {
+      eyebrow: "Writing",
+      title: "I write about projects, products, and how I use AI.",
+      subtitle:
+        "Essays and conversations on AI, products, and communities, alongside records of teaching, starting a venture, and everyday life.",
+    },
+  },
   fieldNotes: {
     hero: {
       eyebrow: "Field Notes",
-      title: "I write about projects, products, and how I use AI.",
+      title: "Notes from visits, travel, and practice.",
       subtitle:
-        "These notes also follow my work in communities, AI classes for young people, and experiences beyond technology—from starting a venture to a meditation retreat.",
+        "Short records from events, travel, and meditation, kept apart from longer essays.",
     },
+    empty: "Field notes are being organized.",
+    sidebarQuote: "These notes start from something I was present for.",
+    recentDescription: "Visits, travel, retreats, and other first-hand observations.",
+  },
+  podcast: {
+    hero: {
+      eyebrow: "Podcast",
+      title: "《重新组织》",
+      subtitle:
+        "The show entrance: a short introduction and listening links. This is a hub, not a daily feed.",
+    },
+    listen: "Listen",
+    listenPending:
+      "A public listening page will be linked here once it is confirmed. This page remains the stable entrance.",
+    summary:
+      "This page is only the show entrance. It is not a daily feed, and it is not mixed into Writing or Field Notes. When a public listening URL is confirmed, it will be linked below.",
+  },
+  elsewhere: {
+    hero: {
+      eyebrow: "Elsewhere",
+      title: "Public pages on other platforms.",
+      subtitle: "A small directory of outbound links. It is not a feed.",
+    },
+    reservedTitle: "Selected places",
+    socialsTitle: "Also here",
+    visit: "Visit",
+    items: [
+      {
+        id: "wechat",
+        name: "公众号精选",
+        description:
+          "Selected WeChat essays. One original is linked here; more pieces are archived in Writing.",
+        href: "https://mp.weixin.qq.com/s/ydALVwE_H_yCp1lywr9Yhw",
+        external: true,
+      },
+      {
+        id: "substack",
+        name: "Substack: China AI, On the Ground",
+        description:
+          "A ground-level guide to China’s AI ecosystem for global founders and builders.",
+        href: "https://darrensu101.substack.com",
+        external: true,
+      },
+      {
+        id: "podcast",
+        name: "Podcast 《重新组织》",
+        description: "The show hub on this site.",
+        href: "/podcast",
+        external: false,
+      },
+      {
+        id: "public-projects",
+        name: "MatchPoint / AGI Villa",
+        description: "Public product and community pages already linked from this site.",
+        links: [
+          { label: "MatchPoint", href: "https://matchpoint.careers" },
+          { label: "AGI Villa", href: "https://agivilla.com" },
+        ],
+      },
+      {
+        id: "github",
+        name: "GitHub @SuperSupeng",
+        description: "Public repositories and profile.",
+        href: "https://github.com/SuperSupeng",
+        external: true,
+      },
+    ],
+  },
+  projects: {
+    hero: {
+      eyebrow: "Projects",
+      title: "MatchPoint, GlobalTechEvents, and AI+X Events all began with problems I kept encountering at work.",
+      subtitle:
+        "This page gathers products I build with projects I have initiated, led, or contributed to.",
+    },
+    productsTitle: "Products",
+    casesTitle: "Selected work",
+    archiveTitle: "Case studies",
+    experiencesTitle: "Other events and exchanges",
+    role: "My role",
+    result: "Project results",
+    read: "View the full case study",
   },
   products: {
     hero: {

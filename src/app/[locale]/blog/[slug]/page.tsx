@@ -9,6 +9,7 @@ import ArticleDate from '@/components/blog/ArticleDate';
 import '@/components/spatial/interiors.css';
 import { absoluteLocalizedUrl, articleStructuredData, createPageMetadata } from '@/lib/seo';
 import { renderMarkdown } from '@/lib/render-markdown';
+import { optimizeArticleImage } from '@/lib/optimize-article-image';
 
 export function generateStaticParams({ params }: { params: { locale: string } }) {
   return getAllPosts(params.locale).map(({ slug }) => ({ slug }));
@@ -33,7 +34,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     path: `/blog/${slug}`,
     title: post.title,
     description: post.description,
-    keywords: [...post.tags, 'Darren Su', 'field notes'],
+    keywords: [...post.tags, 'Darren Su', post.section === 'field-notes' ? 'field notes' : 'writing'],
     image: post.image.url,
     imageWidth: post.image.width,
     imageHeight: post.image.height,
@@ -54,15 +55,22 @@ export default async function BlogPostPage({ params }: { params: Promise<{ local
     notFound();
   }
 
-  const renderedContent = renderMarkdown(post.content, post.title, locale, { responsiveImages: true });
+  const renderedContent = renderMarkdown(post.content, post.title, locale, {
+    responsiveImages: true,
+    optimizeImage: optimizeArticleImage,
+  });
   const shareUrl = absoluteLocalizedUrl(locale, `/blog/${post.slug}`);
+  const listHref = post.section === 'field-notes' ? '/field-notes' : '/blog';
+  const backLabel = post.section === 'field-notes'
+    ? (locale === 'zh' ? '全部手记' : 'All field notes')
+    : t('backToList');
 
   return (
     <>
       <JsonLd data={articleStructuredData(post, locale)} />
       <main id="main-content" tabIndex={-1} className="interior-page reading-page">
         <div className="interior-wrap">
-          <div className="interior-back-link"><Link href="/blog" className="interior-text-link">← {t('backToList')}</Link></div>
+          <div className="interior-back-link"><Link href={listHref} className="interior-text-link">← {backLabel}</Link></div>
           <div className="reading-layout">
             <article className="reading-sheet">
               <header className="reading-header">
@@ -86,7 +94,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ local
               </header>
               <div className="reading-prose" dangerouslySetInnerHTML={{ __html: renderedContent }} />
               <footer className="reading-footer">
-                <Link href="/blog" className="interior-text-link">← {t('backToList')}</Link>
+                <Link href={listHref} className="interior-text-link">← {backLabel}</Link>
                 <div className="reading-share"><span>{t('share')}</span><a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(shareUrl)}`} target="_blank" rel="noopener noreferrer" aria-label={locale === 'zh' ? '分享到 X' : 'Share on X'}>
                   <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" /></svg>
                 </a></div>

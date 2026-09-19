@@ -4,6 +4,7 @@ archiveYear: "2026"
 dateNote: "2026 年走访记录"
 description: 这次走访经过高校、开源社区和 AI 公司。我更关心的是，一场国际科技大会如何在会期之外，继续与本地公司和开发者保持联系。
 tags: [全球科技生态, SuperAI, 中国AI, 海外连接]
+section: field-notes
 ---
 
 上周，SuperAI 联合创始人 Peter 和生态团队受国皓发起的 WAVE 邀请来到中国，我陪他们走访了杭州、上海。几天里，我们去了浙大、魔搭社区、Qwen、Qoder、Datawhale、真格基金、MiniMax、火山引擎、Trae 和商汤等高校、社区和公司。
