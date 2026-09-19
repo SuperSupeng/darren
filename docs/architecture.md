@@ -8,7 +8,7 @@
 | --- | --- |
 | `src/app/[locale]/` | 路由、页面组合、metadata 和静态参数；不复制共享事实。 |
 | `src/i18n/` | 支持的语言、语言路由及保留本地化地址的导航工具。 |
-| `src/lib/site-config.ts` | 域名、联系邮箱、社交链接与导航的统一配置，供页面、联系组件和 SEO 读取。 |
+| `src/lib/site-config.ts` | 域名、联系邮箱、社交链接与主导航（首页 / 文章 / 播客 / 手记 / 项目 / 别处）的统一配置，供页面、联系组件和 SEO 读取。 |
 | `src/lib/portfolio/` | 案例与合作数据；`types.ts` 定义结构，`en.ts`、`zh.ts` 管理文案，`images.ts` 管理图片，`index.ts` 提供统一读取接口。 |
 | `src/lib/about.ts`、`experience-archive.ts` | 关于页叙述、补充活动经历；与正式案例区分，保留具体身份与参与范围。 |
 | `src/lib/site-content/`、`siteContent.ts` | 产品及页面共享文案，通过 `getSiteContent` 读取。 |

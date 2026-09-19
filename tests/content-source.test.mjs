@@ -63,6 +63,10 @@ test('standalone Markdown links keep their language and origin while code exampl
     '![Image](/blog/images/example.png)',
     '[Other article](/blog/other)',
     '[Case](/work/project)',
+    '[Projects](/projects)',
+    '[Podcast](/podcast)',
+    '[Field Notes](/field-notes)',
+    '[Elsewhere](/elsewhere)',
     '[English](/en/blog/other)',
     '[External](https://example.org/source)',
     '[External relative](//example.org/blog/source)',
@@ -76,6 +80,10 @@ test('standalone Markdown links keep their language and origin while code exampl
   assert.ok(output.includes(`![Image](${siteUrl}/blog/images/example.png)`));
   assert.ok(output.includes(`[Other article](${siteUrl}/zh/blog/other)`));
   assert.ok(output.includes(`[Case](${siteUrl}/zh/work/project)`));
+  assert.ok(output.includes(`[Projects](${siteUrl}/zh/projects)`));
+  assert.ok(output.includes(`[Podcast](${siteUrl}/zh/podcast)`));
+  assert.ok(output.includes(`[Field Notes](${siteUrl}/zh/field-notes)`));
+  assert.ok(output.includes(`[Elsewhere](${siteUrl}/zh/elsewhere)`));
   assert.ok(output.includes(`[English](${siteUrl}/en/blog/other)`));
   assert.ok(output.includes('[External](https://example.org/source)'));
   assert.ok(output.includes('[External relative](https://example.org/blog/source)'));

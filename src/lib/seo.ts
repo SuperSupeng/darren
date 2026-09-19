@@ -4,7 +4,7 @@ import { defaultLocale, isLocale, locales, type Locale } from '@/i18n/config';
 import type { BlogPost } from '@/lib/blog';
 import { getPortfolio, type PortfolioWork } from '@/lib/portfolio';
 import { getSiteContent } from '@/lib/siteContent';
-import { contactEmail, siteUrl, socialLinks } from '@/lib/site-config';
+import { contactEmail, rssPath, siteUrl, socialLinks } from '@/lib/site-config';
 export { siteUrl } from '@/lib/site-config';
 
 type KeywordGroup = 'home' | 'services' | 'work' | 'blog' | 'about';
@@ -155,7 +155,7 @@ export function buildAlternates(
     canonical: localizedPath(locale, path),
     languages,
     types: {
-      'application/rss+xml': `${siteUrl}/rss.xml`,
+      'application/rss+xml': `${siteUrl}${rssPath}`,
       ...(/^\/(?:blog|work)\/[^/]+$/.test(path)
         ? { 'text/markdown': absoluteLocalizedUrl(locale, `${path}/source.md`) }
         : {}),
@@ -424,7 +424,7 @@ export function servicesStructuredData(locale: string) {
 
 export function workStructuredData(locale: string) {
   const { work } = getPortfolio(locale);
-  const name = locale === 'zh' ? 'Darren Su 的工作与案例' : 'Darren Su Work and Case Studies';
+  const name = locale === 'zh' ? 'Darren Su 的项目' : 'Darren Su Projects';
 
   return {
     '@context': 'https://schema.org',
@@ -432,7 +432,7 @@ export function workStructuredData(locale: string) {
       {
         '@type': 'ItemList',
         name,
-        url: absoluteLocalizedUrl(locale, '/work'),
+        url: absoluteLocalizedUrl(locale, '/projects'),
         itemListElement: work.map((item, index) => ({
           '@type': 'ListItem',
           position: index + 1,
@@ -446,14 +446,14 @@ export function workStructuredData(locale: string) {
         })),
       },
       personNode(locale),
-      breadcrumbNode(locale, '/work', name),
+      breadcrumbNode(locale, '/projects', name),
     ],
   };
 }
 
 export function workCaseStructuredData(work: PortfolioWork, locale: string) {
   const url = absoluteLocalizedUrl(locale, `/work/${work.id}`);
-  const workIndexName = locale === 'zh' ? '工作与案例' : 'Work and case studies';
+  const workIndexName = locale === 'zh' ? '项目' : 'Projects';
 
   return {
     '@context': 'https://schema.org',
@@ -493,7 +493,7 @@ export function workCaseStructuredData(work: PortfolioWork, locale: string) {
             '@type': 'ListItem',
             position: 2,
             name: workIndexName,
-            item: absoluteLocalizedUrl(locale, '/work'),
+            item: absoluteLocalizedUrl(locale, '/projects'),
           },
           {
             '@type': 'ListItem',
@@ -519,8 +519,11 @@ function articleAuthors(post: BlogPost, locale: string) {
 }
 
 export function articleStructuredData(post: BlogPost, locale: string) {
+  const listPath = post.section === 'field-notes' ? '/field-notes' : '/blog';
   const url = absoluteLocalizedUrl(locale, `/blog/${post.slug}`);
-  const blogName = locale === 'zh' ? '文章' : 'Writing';
+  const blogName = post.section === 'field-notes'
+    ? (locale === 'zh' ? '手记' : 'Field Notes')
+    : (locale === 'zh' ? '文章' : 'Writing');
 
   return {
     '@context': 'https://schema.org',
@@ -554,7 +557,7 @@ export function articleStructuredData(post: BlogPost, locale: string) {
             '@type': 'ListItem',
             position: 2,
             name: blogName,
-            item: absoluteLocalizedUrl(locale, '/blog'),
+            item: absoluteLocalizedUrl(locale, listPath),
           },
           {
             '@type': 'ListItem',
@@ -598,9 +601,40 @@ export function blogStructuredData(posts: BlogPost[], locale: string) {
   };
 }
 
-export function productLabStructuredData(locale: string) {
+export function fieldNotesStructuredData(posts: BlogPost[], locale: string) {
+  const url = absoluteLocalizedUrl(locale, '/field-notes');
+  const name = locale === 'zh' ? 'Darren Su 的手记' : 'Darren Su Field Notes';
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'CollectionPage',
+        '@id': `${url}#notes`,
+        name,
+        url,
+        inLanguage: locale === 'zh' ? 'zh-CN' : 'en',
+        author: { '@id': `${siteUrl}/#person` },
+        hasPart: posts.map((post) => ({
+          '@type': 'BlogPosting',
+          headline: post.title,
+          description: post.description,
+          ...(post.date ? { datePublished: post.date } : {}),
+          url: absoluteLocalizedUrl(locale, `/blog/${post.slug}`),
+          image: `${siteUrl}${post.image.url}`,
+          author: articleAuthors(post, locale),
+        })),
+      },
+      personNode(locale),
+      breadcrumbNode(locale, '/field-notes', name),
+    ],
+  };
+}
+
+export function projectsStructuredData(locale: string) {
   const site = getSiteContent(locale);
-  const name = locale === 'zh' ? '产品' : 'Products';
+  const { work } = getPortfolio(locale);
+  const name = locale === 'zh' ? '项目' : 'Projects';
   const digitalOrganization = site.products.digitalOrganization;
 
   return {
@@ -609,22 +643,22 @@ export function productLabStructuredData(locale: string) {
       {
         '@type': 'ItemList',
         name,
-        url: absoluteLocalizedUrl(locale, '/build'),
+        url: absoluteLocalizedUrl(locale, '/projects'),
         itemListElement: [
           ...site.products.items.map((project, index) => ({
-          '@type': 'ListItem',
-          position: index + 1,
-          item: {
-            '@type': 'CreativeWork',
-            name: project.name,
-            description: project.description,
-            url:
-              project.status === 'stopped' || project.status === '已停止'
-                ? undefined
-                : project.url,
-            creator: { '@id': `${siteUrl}/#person` },
-            keywords: project.tags.join(', '),
-          },
+            '@type': 'ListItem',
+            position: index + 1,
+            item: {
+              '@type': 'CreativeWork',
+              name: project.name,
+              description: project.description,
+              url:
+                project.status === 'stopped' || project.status === '已停止'
+                  ? undefined
+                  : project.url,
+              creator: { '@id': `${siteUrl}/#person` },
+              keywords: project.tags.join(', '),
+            },
           })),
           {
             '@type': 'ListItem',
@@ -635,15 +669,25 @@ export function productLabStructuredData(locale: string) {
               description: digitalOrganization.description,
               url: digitalOrganization.href
                 ? absoluteLocalizedUrl(locale, digitalOrganization.href)
-                : absoluteLocalizedUrl(locale, '/build'),
+                : absoluteLocalizedUrl(locale, '/projects'),
               creator: { '@id': `${siteUrl}/#person` },
-              keywords: locale === 'zh' ? '多 Agent 数字组织, AI 原生管理' : 'multi-agent organization, AI-native management',
             },
           },
+          ...work.map((item, index) => ({
+            '@type': 'ListItem',
+            position: site.products.items.length + 2 + index,
+            item: {
+              '@type': 'CreativeWork',
+              name: item.title,
+              description: item.summary,
+              creator: { '@id': `${siteUrl}/#person` },
+              url: absoluteLocalizedUrl(locale, `/work/${item.id}`),
+            },
+          })),
         ],
       },
       personNode(locale),
-      breadcrumbNode(locale, '/build', name),
+      breadcrumbNode(locale, '/projects', name),
     ],
   };
 }

@@ -3,6 +3,9 @@ import path from 'path';
 import { defaultLocale, isLocale, locales, type Locale } from '@/i18n/config';
 import { archivedArticleCovers } from '@/lib/blog-images';
 
+export const articleSections = ['writing', 'field-notes'] as const;
+export type ArticleSection = (typeof articleSections)[number];
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -12,6 +15,7 @@ export interface BlogPost {
   authors: string[];
   description: string;
   tags: string[];
+  section: ArticleSection;
   content: string;
   readingTime: number;
   image: {
@@ -53,7 +57,7 @@ const defaultPostImage: BlogPost['image'] = {
   height: 630,
 };
 
-type ParsedBlogContent = Pick<BlogPost, 'title' | 'date' | 'archiveYear' | 'dateNote' | 'authors' | 'description' | 'tags' | 'content'>;
+type ParsedBlogContent = Pick<BlogPost, 'title' | 'date' | 'archiveYear' | 'dateNote' | 'authors' | 'description' | 'tags' | 'section' | 'content'>;
 
 // The local articles use single-line fields and an inline tag list.
 // Invalid source metadata must fail before it can reach HTML, JSON-LD, or feeds.
@@ -151,6 +155,11 @@ export function parseBlogContent(source: string, context = 'Blog article'): Pars
   if (fields.has('author') && !fields.has('authors')) return fail('use the authors inline list instead of author');
   const authors = fields.has('authors') ? inlineList('authors') : ['Darren Su'];
   if (new Set(authors).size !== authors.length) return fail('authors must not contain duplicate names');
+  const sectionValue = optionalText('section') ?? 'writing';
+  if (!articleSections.includes(sectionValue as ArticleSection)) {
+    return fail('section must be writing or field-notes');
+  }
+  const section = sectionValue as ArticleSection;
 
   const content = match[2];
   if (!content.trim()) return fail('article body must not be empty');
@@ -162,6 +171,7 @@ export function parseBlogContent(source: string, context = 'Blog article'): Pars
     authors,
     description,
     tags,
+    section,
     content,
   };
 }
@@ -233,4 +243,14 @@ export function getLocalizedBlogRoutes(): Array<{ locale: Locale; slug: string }
   return locales.flatMap((locale) =>
     getAllPosts(locale).map((post) => ({ locale, slug: post.slug }))
   );
+}
+
+export function getPostsBySection(locale: string, section: ArticleSection): BlogPost[] {
+  return getAllPosts(locale).filter((post) => post.section === section);
+}
+
+export function getFieldNoteSlugs(): string[] {
+  return [...new Set(
+    locales.flatMap((locale) => getPostsBySection(locale, 'field-notes').map((post) => post.slug)),
+  )];
 }

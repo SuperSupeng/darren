@@ -1,9 +1,11 @@
 import { locales } from '@/i18n/config';
 import { compareBlogPosts, getAllPosts } from '@/lib/blog';
 import { renderMarkdown } from '@/lib/render-markdown';
-import { siteUrl } from '@/lib/seo';
+import { rssPath, siteUrl } from '@/lib/site-config';
 
 export const dynamic = 'force-static';
+export const revalidate = false;
+export const runtime = 'nodejs';
 
 function escapeXml(value: string) {
   return value
@@ -37,7 +39,7 @@ function renderFeedContent(content: string, title: string, locale: string, artic
   });
 }
 
-export function GET() {
+export async function GET() {
   const items = locales
     .flatMap((locale) =>
       getAllPosts(locale).map((post) => ({ locale, post }))
@@ -65,10 +67,10 @@ export function GET() {
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">',
     '<channel>',
-    '<title>Darren Su — Field Notes / 手记</title>',
+    '<title>Darren Su — Writing / 文章</title>',
     `<link>${escapeXml(siteUrl)}</link>`,
-    `<atom:link href="${escapeXml(`${siteUrl}/rss.xml`)}" rel="self" type="application/rss+xml" />`,
-    '<description>Field notes on China AI ecosystems, products, communities, global technology connections, and long-term practice.</description>',
+    `<atom:link href="${escapeXml(`${siteUrl}${rssPath}`)}" rel="self" type="application/rss+xml" />`,
+    '<description>Longform writing and field notes on China AI ecosystems, products, communities, and practice.</description>',
     items,
     '</channel>',
     '</rss>',

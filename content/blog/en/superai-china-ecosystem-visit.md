@@ -4,6 +4,7 @@ archiveYear: "2026"
 dateNote: "2026 field visit"
 description: A field note from visits to universities, open-source communities, and AI companies in Hangzhou and Shanghai, and what those conversations revealed about cross-border technology exchange.
 tags: [China AI, SuperAI, Ecosystem Building, Field Visit]
+section: field-notes
 ---
 
 Last week, SuperAI co-founder Peter and the ecosystem team came to China at the invitation of WAVE, an initiative started by Guohao. I accompanied them through Hangzhou and Shanghai. Over several days, we visited Zhejiang University, ModelScope, Qwen, Qoder, Datawhale, ZhenFund, MiniMax, Volcano Engine, Trae, and SenseTime.

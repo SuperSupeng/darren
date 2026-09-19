@@ -7,11 +7,13 @@ import { siteUrl as baseUrl } from '@/lib/site-config';
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseRoutes = [
     '',
-    '/work',
+    '/projects',
     '/services',
-    '/build',
     '/about',
     '/blog',
+    '/field-notes',
+    '/podcast',
+    '/elsewhere',
   ];
 
   const sitemap: MetadataRoute.Sitemap = [];
@@ -25,7 +27,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const locale of locales) {
       sitemap.push({
         url: `${baseUrl}/${locale}${route}`,
-        changeFrequency: route === '' || route === '/blog' ? 'weekly' : 'monthly',
+        changeFrequency: route === '' || route === '/blog' || route === '/field-notes' ? 'weekly' : 'monthly',
         priority: route === '' ? 1 : 0.8,
         alternates: { languages },
       });

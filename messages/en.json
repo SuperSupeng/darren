@@ -5,11 +5,12 @@
   },
   "nav": {
     "home": "Home",
-    "services": "Collaborate",
-    "work": "Work",
-    "build": "Products",
+    "writing": "Writing",
+    "podcast": "Podcast",
+    "fieldNotes": "Field Notes",
+    "projects": "Projects",
+    "elsewhere": "Elsewhere",
     "about": "About",
-    "blog": "Writing",
     "contact": "Contact",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
@@ -40,11 +41,35 @@
   "blog": {
     "meta": {
       "title": "Writing",
-      "description": "Project reviews and notes on AI, agents, developer communities, products, and day-to-day practice."
+      "description": "Essays on AI, agents, developer communities, products, and practice."
     },
     "backToList": "All articles",
     "minRead": "min",
     "share": "Share"
+  },
+  "fieldNotes": {
+    "meta": {
+      "title": "Field Notes",
+      "description": "Field observations from visits, travel, and practice, kept apart from longer essays."
+    }
+  },
+  "podcast": {
+    "meta": {
+      "title": "Podcast 《重新组织》",
+      "description": "The entrance for Darren Su’s podcast 《重新组织》: introduction and listening links."
+    }
+  },
+  "projects": {
+    "meta": {
+      "title": "Projects",
+      "description": "Products and projects by Darren Su, including MatchPoint, GlobalTechEvents, Datawhale AI+X Events, and selected case studies."
+    }
+  },
+  "elsewhere": {
+    "meta": {
+      "title": "Elsewhere",
+      "description": "Public pages for Darren Su on WeChat, Substack, GitHub, MatchPoint, AGI Villa, and other platforms."
+    }
   },
   "build": {
     "meta": {

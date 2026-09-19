@@ -4,11 +4,12 @@ import { Component, useCallback, useEffect, useRef, useState, useSyncExternalSto
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { Link, useRouter } from '@/i18n/navigation';
+import { studioZoneHrefs } from '@/lib/site-config';
 import type { StudioFocusZone, StudioLighting } from '@/components/studio/types';
 import { useStudioSettings } from './StudioSettings';
 
 const StudioScene = dynamic(() => import('@/components/studio/StudioScene'), { ssr: false });
-const labels = { work: ['工作案例', 'Selected work'], build: ['产品', 'Products'], notes: ['文章与手记', 'Writing'] };
+const labels = { work: ['项目', 'Projects'], build: ['产品', 'Products'], notes: ['文章', 'Writing'] };
 const subscribeHydration = () => () => {};
 function subscribeMotion(callback: () => void) {
   const media = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -51,7 +52,7 @@ function LiveRoom({ zone, lighting, locale, compact, contentHref }: { zone: Stud
   ];
   return <div ref={root} className="room-portal-render" data-portal-status={failed ? 'static' : ready ? 'ready' : 'loading'} data-view-angle={angle.toFixed(3)}>
     {(!ready || failed) && <Poster lighting={lighting} />}
-    {!failed && <PortalBoundary onFailure={onFailure}><StudioScene presentation="portal" viewAngle={angle} onViewAngleChange={setAngle} zone={zone} lighting={lighting} reducedMotion={motion} onReady={onReady} onFailure={onFailure} highlightedZone={highlighted} onHover={setHighlighted} hotspotRoot={root} onSelect={next => { if (next === zone && contentHref) window.location.hash = contentHref; else if (next !== 'overview') router.push(`/${next === 'notes' ? 'blog' : next}${lighting === 'evening' ? '?light=evening' : ''}`); }} /></PortalBoundary>}
+    {!failed && <PortalBoundary onFailure={onFailure}><StudioScene presentation="portal" viewAngle={angle} onViewAngleChange={setAngle} zone={zone} lighting={lighting} reducedMotion={motion} onReady={onReady} onFailure={onFailure} highlightedZone={highlighted} onHover={setHighlighted} hotspotRoot={root} onSelect={next => { if (next === zone && contentHref) window.location.hash = contentHref; else if (next !== 'overview') router.push(`${studioZoneHrefs[next]}${lighting === 'evening' ? '?light=evening' : ''}`); }} /></PortalBoundary>}
     {ready && !failed && <div className="room-portal-tools">
       {!compact && <p>{zh ? '拖动查看' : 'Drag to explore'}<span aria-hidden="true">↔</span></p>}
       <div role="group" aria-label={zh ? '房间视角' : 'Room viewpoint'}>{views.map(view => <button key={view.angle} type="button" aria-label={zh ? `${view.label}视角` : `${view.label} view`} aria-pressed={Math.abs(angle - view.angle) < 0.04} onClick={() => setAngle(view.angle)}><span aria-hidden="true">{view.icon}</span>{!compact && <span>{view.label}</span>}</button>)}</div>
@@ -82,6 +83,6 @@ export default function RoomPortal({ zone, locale, compact = false, contentHref 
       {live ? <LiveRoom zone={zone} lighting={lighting} locale={locale} compact={compact} contentHref={contentHref} /> : <Poster lighting={lighting} />}
       {hydrated && !live && (compact || still) && <button className="room-portal-explore" type="button" onClick={() => { setStill(false); setExploring(true); setActivated(true); }}>{zh ? '查看 3D' : 'View in 3D'} <span aria-hidden="true">↗</span></button>}
     </div>
-    <figcaption><Link href={contentHref ?? href}>{contentHref ? zh ? zone === 'notes' ? '查看文章' : zone === 'work' ? '查看案例' : '查看产品' : zone === 'notes' ? 'View articles' : zone === 'work' ? 'View case studies' : 'View products' : zh ? '返回首页' : 'Back to home'} <span aria-hidden="true">↗</span></Link></figcaption>
+    <figcaption><Link href={contentHref ?? href}>{contentHref ? zh ? zone === 'notes' ? '查看文章' : zone === 'work' ? '查看项目' : '查看产品' : zone === 'notes' ? 'View writing' : zone === 'work' ? 'View projects' : 'View products' : zh ? '返回首页' : 'Back to home'} <span aria-hidden="true">↗</span></Link></figcaption>
   </figure>;
 }

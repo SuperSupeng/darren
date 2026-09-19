@@ -14,9 +14,9 @@ export default function StudioPurpose({ locale }: { locale: string }) {
     ? {
         title: '项目与经历',
         read: '了解这件事',
-        all: '查看全部项目与经历',
+        all: '查看全部项目',
         products: '正在做的产品',
-        allProducts: '了解产品与实验',
+        allProducts: '了解产品与项目',
         writing: '精选文章',
         allWriting: '阅读全部文章',
         invitation: '有想一起做的事？',
@@ -27,9 +27,9 @@ export default function StudioPurpose({ locale }: { locale: string }) {
     : {
         title: 'Selected work',
         read: 'Read the story',
-        all: 'All projects and experiences',
+        all: 'All projects',
         products: 'Products I’m building',
-        allProducts: 'Explore products and experiments',
+        allProducts: 'Explore products and projects',
         writing: 'Selected writing',
         allWriting: 'Read all articles',
         invitation: 'Something we could do together?',
@@ -44,7 +44,7 @@ export default function StudioPurpose({ locale }: { locale: string }) {
         <section className="studio-purpose-evidence" aria-labelledby="studio-purpose-title">
           <div className="studio-purpose-heading">
             <h2 id="studio-purpose-title">{copy.title}</h2>
-            <Link className="studio-purpose-link" href="/work">{copy.all} <span aria-hidden="true">↗</span></Link>
+            <Link className="studio-purpose-link" href="/projects">{copy.all} <span aria-hidden="true">↗</span></Link>
           </div>
           <div className="studio-purpose-cases">
             {cases.map((work, index) => (
@@ -70,7 +70,7 @@ export default function StudioPurpose({ locale }: { locale: string }) {
         <div className="studio-purpose-wrap">
           <div className="studio-purpose-heading">
             <h2 id="studio-products-title">{copy.products}</h2>
-            <Link className="studio-purpose-link" href="/build">{copy.allProducts} <span aria-hidden="true">↗</span></Link>
+            <Link className="studio-purpose-link" href="/projects">{copy.allProducts} <span aria-hidden="true">↗</span></Link>
           </div>
           <div className="studio-purpose-product-grid">
             {build.map(item => <a className="studio-purpose-product" key={item.id} href={item.href} target="_blank" rel="noopener noreferrer">

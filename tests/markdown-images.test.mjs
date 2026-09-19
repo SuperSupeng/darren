@@ -5,12 +5,13 @@ import { JSDOM } from 'jsdom';
 
 const require = createRequire(import.meta.url);
 const { renderMarkdown } = require('../src/lib/render-markdown.ts');
+const { optimizeArticleImage } = require('../src/lib/optimize-article-image.ts');
 const { getAllPosts } = require('../src/lib/blog.ts');
 
 test('responsive article images retain text, anchors, alt text and reserved dimensions in both languages', () => {
   for (const locale of ['zh', 'en']) for (const post of getAllPosts(locale)) {
     const original = new JSDOM(renderMarkdown(post.content, post.title, locale));
-    const responsive = new JSDOM(renderMarkdown(post.content, post.title, locale, { responsiveImages: true }));
+    const responsive = new JSDOM(renderMarkdown(post.content, post.title, locale, { responsiveImages: true, optimizeImage: optimizeArticleImage }));
     try {
       const before = original.window.document;
       const after = responsive.window.document;
@@ -50,7 +51,7 @@ test('responsive article images retain text, anchors, alt text and reserved dime
 
 test('unknown and remote image sources remain usable without an image-optimizer allowlist', () => {
   const markdown = '![New asset](/new-image.jpg)\n\n![Remote](https://example.org/image.jpg?one=1&two=2)';
-  const dom = new JSDOM(renderMarkdown(markdown, 'Images', 'en', { responsiveImages: true }));
+  const dom = new JSDOM(renderMarkdown(markdown, 'Images', 'en', { responsiveImages: true, optimizeImage: optimizeArticleImage }));
   try {
     const images = [...dom.window.document.querySelectorAll('img')];
     assert.deepEqual(images.map(e => e.getAttribute('src')), ['/new-image.jpg', 'https://example.org/image.jpg?one=1&two=2']);

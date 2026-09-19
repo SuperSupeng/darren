@@ -21,7 +21,7 @@ export function absoluteMarkdownLinks(content: string, canonical: string) {
       if (part.startsWith('`')) return part;
       return part.replace(/(!?\[[^\]]*\]\()([/#][^\s)]*)(\))/g, (_, start: string, href: string, end: string) => {
         const target = new URL(href, canonical);
-        if (target.origin === new URL(canonical).origin && /^\/(?:blog|work)\/[^/.]+$|^\/(?:about|services|build|blog|work)$/.test(target.pathname)) {
+        if (target.origin === new URL(canonical).origin && /^\/(?:blog|work)\/[^/.]+$|^\/(?:about|services|build|blog|work|projects|podcast|field-notes|elsewhere)$/.test(target.pathname)) {
           const locale = new URL(canonical).pathname.split('/')[1];
           target.pathname = `/${locale}${target.pathname}`;
         }

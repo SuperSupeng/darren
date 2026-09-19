@@ -12,6 +12,20 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: projectRoot,
   },
+  async redirects() {
+    return [
+      {
+        source: '/:locale(en|zh)/work',
+        destination: '/:locale/projects',
+        permanent: true,
+      },
+      {
+        source: '/:locale(en|zh)/build',
+        destination: '/:locale/projects',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default withNextIntl(nextConfig);

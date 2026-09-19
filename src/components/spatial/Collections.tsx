@@ -5,14 +5,16 @@ import './collections.css';
 
 type CollectionZone = 'work' | 'build' | 'notes';
 
-export function CollectionHero({ locale, zone, title, lead, description, children }: {
+export function CollectionHero({ locale, zone, title, lead, description, contentHref, children }: {
   locale: string;
   zone: CollectionZone;
   title: string;
   lead: string;
   description?: string;
+  contentHref?: string;
   children?: ReactNode;
 }) {
+  const href = contentHref ?? (zone === 'work' ? '#work-archive' : zone === 'build' ? '#product-workbench' : '#notes-index');
   return (
     <header className={`collection-hero collection-hero-${zone}`}>
       <div className="collection-hero-copy">
@@ -22,7 +24,7 @@ export function CollectionHero({ locale, zone, title, lead, description, childre
         {children}
       </div>
       <div className="collection-room">
-        <RoomPortal zone={zone} locale={locale} contentHref={zone === 'work' ? '#work-archive' : zone === 'build' ? '#product-workbench' : '#notes-index'} />
+        <RoomPortal zone={zone} locale={locale} contentHref={href} />
       </div>
     </header>
   );

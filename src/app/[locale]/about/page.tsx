@@ -64,7 +64,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             <div className="about-reading-prose">
               {copy.making.map((paragraph, index) => <p key={paragraph} className={index === 0 ? 'about-reading-lead' : undefined}>{paragraph}</p>)}
               <div className="about-reading-links">
-                <Link href="/build" className="about-reading-link">{copy.productsLink}<span aria-hidden="true">↗</span></Link>
+                <Link href="/projects" className="about-reading-link">{copy.productsLink}<span aria-hidden="true">↗</span></Link>
                 <Link href="/blog/managing-31-ai-employees" className="about-reading-link">{copy.agentLink}<span aria-hidden="true">↗</span></Link>
               </div>
             </div>

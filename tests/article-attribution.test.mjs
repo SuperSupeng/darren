@@ -50,7 +50,7 @@ test('source authors and date uncertainty propagate through metadata, both JSON-
     return originalRead.call(this, filename, ...options);
   });
 
-  const feedText = await feedGET().text();
+  const feedText = await (await feedGET()).text();
   const dom = new JSDOM(feedText, { contentType: 'application/xml' });
   try {
     assert.equal(dom.window.document.querySelector('parsererror'), null);
@@ -109,7 +109,7 @@ test('source authors and date uncertainty propagate through metadata, both JSON-
         assert.equal(item.querySelector('link').textContent, canonical);
       }
     }
-    assert.equal(await feedGET().text(), feedText, 'Feed generation must not add the current date or unstable identities');
+    assert.equal(await (await feedGET()).text(), feedText, 'Feed generation must not add the current date or unstable identities');
     assert.ok(!feedText.includes('Invalid Date'));
   } finally {
     dom.window.close();
