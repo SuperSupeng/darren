@@ -42,6 +42,7 @@ export default async function PodcastPage({ params }: { params: Promise<{ locale
           />
           <section className="collection-section" aria-labelledby="podcast-listen-title">
             <h2 id="podcast-listen-title">{site.podcast.listen}</h2>
+            <p className="collection-description">{site.podcast.summary}</p>
             <p className="collection-description">{site.podcast.listenPending}</p>
           </section>
           <CollectionNext

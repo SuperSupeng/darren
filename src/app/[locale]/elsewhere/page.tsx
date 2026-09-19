@@ -61,7 +61,7 @@ export default async function ElsewherePage({ params }: { params: Promise<{ loca
                     </div>
                     <div className="elsewhere-item-links">
                       {links.map((link) => (
-                        link.internal
+                        'internal' in link && link.internal
                           ? <Link key={link.href} href={link.href} className="collection-text-link">{link.label} <span aria-hidden="true">↗</span></Link>
                           : <a key={link.href} href={link.href} className="collection-text-link" target="_blank" rel="noopener noreferrer">{link.label} <span aria-hidden="true">↗</span></a>
                       ))}

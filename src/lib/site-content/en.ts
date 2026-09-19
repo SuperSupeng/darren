@@ -98,6 +98,8 @@ export const englishContent = {
     listen: "Listen",
     listenPending:
       "A public listening page will be linked here once it is confirmed. This page remains the stable entrance.",
+    summary:
+      "This page is only the show entrance. It is not a daily feed, and it is not mixed into Writing or Field Notes. When a public listening URL is confirmed, it will be linked below.",
   },
   elsewhere: {
     hero: {

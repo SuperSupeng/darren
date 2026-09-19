@@ -100,6 +100,8 @@ export const chineseContent: LocalizedContent = {
     },
     listen: "收听",
     listenPending: "公开收听页确认后会挂在这里。本页作为稳定入口保留。",
+    summary:
+      "这一页只收节目入口。不按日更维护，也不把外链目录混进文章或手记。公开收听页一经核对，会挂在下面。",
   },
   elsewhere: {
     hero: {
