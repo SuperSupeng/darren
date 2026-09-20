@@ -8,9 +8,12 @@ const {
   collaborateHref,
   footerLinks,
   githubProfileUrl,
+  linkedinProfileUrl,
   navigationLinks,
+  personSameAs,
   socialLinks,
   studioZoneHrefs,
+  substackUrl,
 } = require('../src/lib/site-config.ts');
 const { getAllPosts, getPostsBySection } = require('../src/lib/blog.ts');
 
@@ -75,4 +78,15 @@ test('footer keeps existing platform links without an Elsewhere section', () => 
     'n8n Ambassador',
   ]);
   assert.ok(socialLinks.some(([, href]) => href === githubProfileUrl));
+});
+
+test('Person sameAs uses the confirmed public profiles, including LinkedIn', () => {
+  assert.ok(personSameAs.includes(githubProfileUrl));
+  assert.ok(personSameAs.includes(linkedinProfileUrl));
+  assert.ok(personSameAs.includes('https://x.com/zenshipai'));
+  assert.ok(personSameAs.includes('https://www.threads.net/@0xdarren_su'));
+  assert.ok(personSameAs.includes(substackUrl));
+  assert.ok(personSameAs.includes('https://www.zhihu.com/people/superssssss'));
+  assert.ok(personSameAs.includes('https://www.instagram.com/0xdarren_su/'));
+  assert.ok(!personSameAs.some((href) => /xhslink|xiaohongshu/i.test(href)));
 });

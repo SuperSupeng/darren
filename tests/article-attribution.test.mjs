@@ -19,6 +19,7 @@ test('source authors and date uncertainty propagate through metadata, both JSON-
     { slug: 'coauthored-archive', authors: ['苏鹏', '王瑞楠'], dates: ['archiveYear: "2024"', 'dateNote: 2024 年旧文，原发表日期未核实。'] },
     { slug: 'uncertain-date', authors: ['Guest & <Writer>'], dates: ['dateNote: 原发表日期未核实。'] },
     { slug: 'dated-default', dates: ['date: 2026-07-22'] },
+    { slug: 'updated-dated', dates: ['date: 2026-07-22', 'dateModified: 2026-08-01'] },
     { slug: 'coauthored-dated', authors: ['苏鹏', '王瑞楠'], dates: ['date: 2024-07-01'] },
   ];
   const sources = new Map(fixtures.map(fixture => [`${fixture.slug}.md`, [
@@ -58,7 +59,7 @@ test('source authors and date uncertainty propagate through metadata, both JSON-
     assert.equal(items.length, fixtures.length * locales.length);
     for (const locale of locales) {
       const posts = getAllPosts(locale);
-      assert.deepEqual(posts.map(post => post.slug), ['dated-default', 'coauthored-dated', 'coauthored-archive', 'uncertain-date']);
+      assert.deepEqual(posts.map(post => post.slug), ['dated-default', 'updated-dated', 'coauthored-dated', 'coauthored-archive', 'uncertain-date']);
       const index = blogStructuredData(posts, locale)['@graph'].find(node => node['@type'] === 'Blog');
       for (const post of posts) {
         const fixture = fixtures.find(value => value.slug === post.slug);
@@ -80,21 +81,24 @@ test('source authors and date uncertainty propagate through metadata, both JSON-
           }
           if (post.date) assert.equal(schema.datePublished, post.date);
           else assert.ok(!Object.hasOwn(schema, 'datePublished'));
-          assert.ok(!Object.hasOwn(schema, 'dateModified'));
+          if (post.dateModified) assert.equal(schema.dateModified, post.dateModified);
+          else assert.ok(!Object.hasOwn(schema, 'dateModified'));
         }
         assert.deepEqual(article.publisher, { '@id': `${siteUrl}/#person` }, 'Website publishing and article authorship are distinct');
 
-        const metadata = createPageMetadata({ locale, path: `/blog/${post.slug}`, title: post.title, description: post.description, openGraphType: 'article', publishedTime: post.date, authors: post.authors });
+        const metadata = createPageMetadata({ locale, path: `/blog/${post.slug}`, title: post.title, description: post.description, openGraphType: 'article', publishedTime: post.date, modifiedTime: post.dateModified, authors: post.authors });
         assert.deepEqual(metadata.authors.map(author => author.name), expectedAuthors);
         assert.equal(metadata.creator, expectedAuthors.join(', '));
-        assert.deepEqual(metadata.openGraph.authors, expectedAuthors.map(name => ['Darren Su', '苏鹏'].includes(name) ? `${siteUrl}/${locale}/about` : name));
-        for (const author of metadata.authors.filter(author => !['Darren Su', '苏鹏'].includes(author.name))) assert.ok(!Object.hasOwn(author, 'url'));
+        assert.deepEqual(metadata.openGraph.authors, expectedAuthors.map(name => ['Darren Su', '苏鹏', 'Darren'].includes(name) ? `${siteUrl}/${locale}/about` : name));
+        for (const author of metadata.authors.filter(author => !['Darren Su', '苏鹏', 'Darren'].includes(author.name))) assert.ok(!Object.hasOwn(author, 'url'));
         if (post.date) assert.equal(metadata.openGraph.publishedTime, post.date);
         else assert.ok(!Object.hasOwn(metadata.openGraph, 'publishedTime'));
+        if (post.dateModified) assert.equal(metadata.openGraph.modifiedTime, post.dateModified);
+        else assert.ok(!Object.hasOwn(metadata.openGraph, 'modifiedTime'));
 
         const markdown = articleMarkdown(post, locale);
         const exported = parseBlogContent(markdown);
-        for (const field of ['authors', 'date', 'archiveYear', 'dateNote']) assert.deepEqual(exported[field], post[field]);
+        for (const field of ['authors', 'date', 'dateModified', 'archiveYear', 'dateNote']) assert.deepEqual(exported[field], post[field]);
         if (post.authors.length > 1) assert.ok(!/^author:/m.test(markdown), 'A coauthored export must not retain a contradictory sole-author field');
         if (post.slug === 'dated-default') assert.ok(markdown.includes('author: "Darren Su / 苏鹏"'), 'The existing single-author export stays compatible');
         const response = await sourceGET(new Request(`${canonical}/source.md`), { params: Promise.resolve({ locale, slug: post.slug }) });

@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     path: '/podcast',
     title: t('meta.title'),
     description: t('meta.description'),
-    keywords: ['《重新组织》', 'podcast', 'Darren Su'],
+    keywords: ['《重新组织》', 'Re:Organize', 'podcast', 'Darren Su'],
   });
 }
 

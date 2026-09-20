@@ -4,7 +4,17 @@ import { defaultLocale, isLocale, locales, type Locale } from '@/i18n/config';
 import type { BlogPost } from '@/lib/blog';
 import { getPortfolio, type PortfolioWork } from '@/lib/portfolio';
 import { getSiteContent } from '@/lib/siteContent';
-import { contactEmail, rssPath, siteUrl, socialLinks } from '@/lib/site-config';
+import {
+  contactEmail,
+  getPersonJobTitle,
+  getPersonOccupations,
+  personAffiliations,
+  personAlternateNames,
+  personName,
+  personSameAs,
+  rssPath,
+  siteUrl,
+} from '@/lib/site-config';
 export { siteUrl } from '@/lib/site-config';
 
 type KeywordGroup = 'home' | 'services' | 'work' | 'blog' | 'about';
@@ -12,9 +22,12 @@ type KeywordGroup = 'home' | 'services' | 'work' | 'blog' | 'about';
 const pageKeywords: Record<Locale, Record<KeywordGroup, string[]>> = {
   en: {
     home: [
-      'AI Builder',
-      'global AI communities',
+      'Darren Su',
+      'MatchPoint Co-founder',
+      'AGI Villa Co-founder',
+      'Head of City Ecosystem at Datawhale',
       'n8n Ambassador',
+      'Re:Organize',
       'AI agents and automation',
       'China AI ecosystem',
       'China developer community',
@@ -52,23 +65,30 @@ const pageKeywords: Record<Locale, Record<KeywordGroup, string[]>> = {
     ],
     about: [
       'Darren Su',
+      '苏鹏',
       'AGI Villa',
       'Datawhale',
       'MatchPoint',
+      'MatchPoint Co-founder',
       'GlobalTechEvents',
-      'AI Builder',
       'Head of City Ecosystem at Datawhale',
       'n8n Ambassador',
+      'Re:Organize',
+      '《重新组织》',
       'global AI communities',
       'multi-agent organization',
-      'Zen practitioner',
     ],
   },
   zh: {
     home: [
-      'AI Builder',
-      '全球 AI 社区',
+      '苏鹏',
+      'Darren Su',
+      'MatchPoint 联合创始人',
+      'AGI Villa 联合创始人',
+      'Datawhale 城市生态负责人',
       'n8n Ambassador',
+      '《重新组织》',
+      'Re:Organize',
       'Agent 与自动化',
       'AI 开发者生态',
       'AI 开发者活动',
@@ -110,13 +130,14 @@ const pageKeywords: Record<Locale, Record<KeywordGroup, string[]>> = {
       'AGI Villa',
       'Datawhale',
       'MatchPoint',
+      'MatchPoint 联合创始人',
       'GlobalTechEvents',
-      'AI Builder',
       'Datawhale 城市生态负责人',
       'n8n Ambassador',
+      '《重新组织》',
+      'Re:Organize',
       '全球 AI 社区',
       '多 Agent 数字组织',
-      '禅修',
     ],
   },
 };
@@ -171,7 +192,7 @@ export function getPageKeywords(locale: string, group: KeywordGroup) {
 const areaServed = ['China'];
 
 function isSiteAuthor(name: string) {
-  return name === 'Darren Su' || name === '苏鹏' || name === 'Darren Su / 苏鹏';
+  return name === personName || name === '苏鹏' || name === 'Darren' || name === 'Darren Su / 苏鹏';
 }
 
 export function createPageMetadata({
@@ -187,7 +208,8 @@ export function createPageMetadata({
   availableLocales = locales,
   openGraphType = 'website',
   publishedTime,
-  authors = ['Darren Su'],
+  modifiedTime,
+  authors = [personName],
 }: {
   locale: string;
   path?: string;
@@ -201,6 +223,7 @@ export function createPageMetadata({
   availableLocales?: readonly string[];
   openGraphType?: 'website' | 'article';
   publishedTime?: string;
+  modifiedTime?: string;
   authors?: string[];
 }): Metadata {
   const site = getSiteContent(locale);
@@ -234,6 +257,7 @@ export function createPageMetadata({
             ...commonOpenGraph,
             type: 'article',
             ...(publishedTime ? { publishedTime } : {}),
+            ...(modifiedTime ? { modifiedTime } : {}),
             authors: authors.map((name) => isSiteAuthor(name) ? `${siteUrl}/${locale}/about` : name),
           }
         : {
@@ -267,38 +291,23 @@ function personNode(locale: string) {
   return {
     '@type': 'Person',
     '@id': `${siteUrl}/#person`,
-    name: 'Darren Su',
-    alternateName: '苏鹏',
+    name: personName,
+    alternateName: [...personAlternateNames],
     url: absoluteLocalizedUrl(locale, '/about'),
     mainEntityOfPage: `${absoluteLocalizedUrl(locale, '/about')}#profile`,
     image: `${siteUrl}/photo.jpg`,
     email: contactEmail,
-    jobTitle: site.seo.home.jobTitle,
+    jobTitle: getPersonJobTitle(locale),
     homeLocation: {
       '@type': 'City',
       name: locale === 'zh' ? '杭州' : 'Hangzhou',
     },
-    affiliation: [
-      { '@type': 'Organization', name: 'AGI Villa' },
-      { '@type': 'Organization', name: 'Datawhale' },
-      { '@type': 'Organization', name: 'n8n' },
-      { '@type': 'Organization', name: 'MatchPoint' },
-    ],
-    hasOccupation: [
-      {
-        '@type': 'Occupation',
-        name: locale === 'zh' ? 'AGI Villa 联合创始人' : 'AGI Villa Co-founder',
-      },
-      {
-        '@type': 'Occupation',
-        name: locale === 'zh' ? 'Datawhale 城市生态负责人' : 'Head of City Ecosystem at Datawhale',
-      },
-      {
-        '@type': 'Occupation',
-        name: locale === 'zh' ? 'MatchPoint 联合创始人' : 'MatchPoint Co-founder',
-      },
-    ],
-    sameAs: socialLinks.map(([, href]) => href),
+    affiliation: personAffiliations.map((name) => ({ '@type': 'Organization', name })),
+    hasOccupation: getPersonOccupations(locale).map((name) => ({
+      '@type': 'Occupation',
+      name,
+    })),
+    sameAs: [...personSameAs],
     knowsAbout: site.seo.home.knowsAbout,
     knowsLanguage: ['zh-CN', 'en'],
   };
@@ -534,6 +543,7 @@ export function articleStructuredData(post: BlogPost, locale: string) {
         headline: post.title,
         description: post.description,
         ...(post.date ? { datePublished: post.date } : {}),
+        ...(post.dateModified ? { dateModified: post.dateModified } : {}),
         author: articleAuthors(post, locale),
         publisher: { '@id': `${siteUrl}/#person` },
         image: `${siteUrl}${post.image.url}`,
@@ -588,6 +598,7 @@ export function blogStructuredData(posts: BlogPost[], locale: string) {
           headline: post.title,
           description: post.description,
           ...(post.date ? { datePublished: post.date } : {}),
+          ...(post.dateModified ? { dateModified: post.dateModified } : {}),
           url: absoluteLocalizedUrl(locale, `/blog/${post.slug}`),
           image: `${siteUrl}${post.image.url}`,
           author: articleAuthors(post, locale),

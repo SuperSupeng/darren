@@ -24,6 +24,8 @@ test('Markdown articles preserve the full source, author, publication date, and 
       const text = articleMarkdown(post, locale);
       if (post.date) assert.ok(text.includes(`date: "${post.date}"`));
       else assert.ok(!/^date:/m.test(text));
+      if (post.dateModified) assert.ok(text.includes(`dateModified: "${post.dateModified}"`));
+      else assert.ok(!/^dateModified:/m.test(text));
       assert.ok(text.includes(`canonical: "${canonical}"`));
       assert.ok(text.includes(`authors: ${JSON.stringify(post.authors)}`));
       if (post.authors.length > 1) assert.ok(!/^author:/m.test(text));

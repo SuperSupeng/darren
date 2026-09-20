@@ -40,6 +40,7 @@ export function articleMarkdown(post: BlogPost, locale: string) {
       authors: post.authors,
       language: locale === 'zh' ? 'zh-CN' : 'en',
       ...(post.date ? { date: post.date } : {}),
+      ...(post.dateModified ? { dateModified: post.dateModified } : {}),
       ...(post.archiveYear ? { archiveYear: post.archiveYear } : {}),
       ...(post.dateNote ? { dateNote: post.dateNote } : {}),
       canonical,

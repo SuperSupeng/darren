@@ -1,8 +1,13 @@
 import { locales } from '@/i18n/config';
 import { getAllPosts } from '@/lib/blog';
 import { getPortfolio } from '@/lib/portfolio';
-import { contactEmail, siteUrl, socialLinks } from '@/lib/site-config';
-import { getAboutCopy } from '@/lib/about';
+import {
+  contactEmail,
+  getPersonJobTitle,
+  personDisplayName,
+  personProfileLinks,
+  siteUrl,
+} from '@/lib/site-config';
 
 export const dynamic = 'force-static';
 
@@ -23,13 +28,22 @@ export function GET() {
     ...getAllPosts(locale).map(post => `- [${post.title} (${locale}, Markdown)](${siteUrl}/${locale}/blog/${post.slug}/source.md)`),
     ...getPortfolio(locale).work.map(work => `- [${work.title} (${locale}, Markdown)](${siteUrl}/${locale}/work/${work.id}/source.md)`),
   ]);
-  const profile = getAboutCopy('en');
 
   const body = [
-    '# Darren Su / 苏鹏',
+    `# ${personDisplayName}`,
     '',
-    `> ${profile.intro}`,
+    '## Identity',
     '',
+    '- Public name: Darren / Darren Su',
+    '- Chinese name: 苏鹏',
+    `- Roles (EN): ${getPersonJobTitle('en')}`,
+    `- Roles (ZH): ${getPersonJobTitle('zh')}`,
+    '- MatchPoint · Co-founder / 联合创始人',
+    '- AGI Villa · Co-founder / 联合创始人',
+    '- Datawhale · Head of City Ecosystem / 城市生态负责人',
+    '- n8n · Ambassador',
+    '- Podcast: 《重新组织》 / Re:Organize · Host',
+    '- Site purpose: bilingual zh/en public archive hub for writing, the podcast entrance, projects, about, and collaboration',
     `Canonical website: ${siteUrl}`,
     `Primary contact: ${contactEmail}`,
     '',
@@ -37,18 +51,20 @@ export function GET() {
     '',
     `- [English home](${siteUrl}/en)`,
     `- [中文首页](${siteUrl}/zh)`,
-    `- [Projects](${siteUrl}/en/projects)`,
-    `- [项目](${siteUrl}/zh/projects)`,
-    `- [Collaborate](${siteUrl}/en/services)`,
-    `- [合作](${siteUrl}/zh/services)`,
-    `- [About Darren](${siteUrl}/en/about)`,
-    `- [关于 Darren](${siteUrl}/zh/about)`,
     `- [Writing](${siteUrl}/en/blog)`,
     `- [文章](${siteUrl}/zh/blog)`,
-    `- [Podcast 《重新组织》](${siteUrl}/en/podcast)`,
-    `- [播客《重新组织》](${siteUrl}/zh/podcast)`,
+    `- [Podcast Re:Organize / 《重新组织》](${siteUrl}/en/podcast)`,
+    `- [播客《重新组织》 / Re:Organize](${siteUrl}/zh/podcast)`,
+    `- [Projects](${siteUrl}/en/projects)`,
+    `- [项目](${siteUrl}/zh/projects)`,
+    `- [About Darren](${siteUrl}/en/about)`,
+    `- [关于苏鹏](${siteUrl}/zh/about)`,
+    `- [Collaborate](${siteUrl}/en/services)`,
+    `- [合作](${siteUrl}/zh/services)`,
     '',
     '## Case studies',
+    '',
+    'Individual case studies remain at their current `/work/[slug]` URLs. The projects index is `/projects`; `/work` without a slug redirects there.',
     '',
     ...cases,
     '',
@@ -65,7 +81,7 @@ export function GET() {
     '',
     '## Public profiles',
     '',
-    ...socialLinks.map(([label, href]) => `- ${label}: ${href}`),
+    ...personProfileLinks.map(([label, href]) => `- ${label}: ${href}`),
   ].join('\n');
 
   return new Response(body, {
