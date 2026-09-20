@@ -42,6 +42,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     availableLocales,
     openGraphType: 'article',
     publishedTime: post.date,
+    modifiedTime: post.dateModified,
     authors: post.authors,
   });
 }

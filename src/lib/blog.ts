@@ -10,6 +10,7 @@ export interface BlogPost {
   slug: string;
   title: string;
   date?: string;
+  dateModified?: string;
   archiveYear?: string;
   dateNote?: string;
   authors: string[];
@@ -57,7 +58,7 @@ const defaultPostImage: BlogPost['image'] = {
   height: 630,
 };
 
-type ParsedBlogContent = Pick<BlogPost, 'title' | 'date' | 'archiveYear' | 'dateNote' | 'authors' | 'description' | 'tags' | 'section' | 'content'>;
+type ParsedBlogContent = Pick<BlogPost, 'title' | 'date' | 'dateModified' | 'archiveYear' | 'dateNote' | 'authors' | 'description' | 'tags' | 'section' | 'content'>;
 
 // The local articles use single-line fields and an inline tag list.
 // Invalid source metadata must fail before it can reach HTML, JSON-LD, or feeds.
@@ -105,18 +106,22 @@ export function parseBlogContent(source: string, context = 'Blog article'): Pars
   const title = requiredText('title');
   const optionalText = (field: string) => fields.has(field) ? requiredText(field) : undefined;
   const date = optionalText('date');
+  const dateModified = optionalText('dateModified');
   const archiveYear = optionalText('archiveYear');
   const dateNote = optionalText('dateNote');
   const description = requiredText('description');
 
-  if (date) {
-    const dateValue = new Date(`${date}T00:00:00Z`);
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)
+  const calendarDate = (value: string, field: string) => {
+    const dateValue = new Date(`${value}T00:00:00Z`);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(value)
       || Number.isNaN(dateValue.valueOf())
-      || dateValue.toISOString().slice(0, 10) !== date) {
-      return fail('date must be a valid calendar date in YYYY-MM-DD format');
+      || dateValue.toISOString().slice(0, 10) !== value) {
+      return fail(`${field} must be a valid calendar date in YYYY-MM-DD format`);
     }
-  }
+    return value;
+  };
+  if (date) calendarDate(date, 'date');
+  if (dateModified) calendarDate(dateModified, 'dateModified');
   if (archiveYear && !/^[1-9]\d{3}$/.test(archiveYear)) return fail('archiveYear must be a four-digit year');
   if (!date && !archiveYear && !dateNote) return fail('date is required unless archiveYear or dateNote explains the unknown publication date');
 
@@ -166,6 +171,7 @@ export function parseBlogContent(source: string, context = 'Blog article'): Pars
   return {
     title,
     ...(date ? { date } : {}),
+    ...(dateModified ? { dateModified } : {}),
     ...(archiveYear ? { archiveYear } : {}),
     ...(dateNote ? { dateNote } : {}),
     authors,

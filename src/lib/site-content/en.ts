@@ -251,7 +251,7 @@ export const englishContent = {
   seo: {
     ogImageAlt: "Darren Su — Building AI products and connecting builders around the world",
     home: {
-      jobTitle: "AI Builder, Head of City Ecosystem at Datawhale, AGI Villa Co-founder, n8n Ambassador",
+      jobTitle: "MatchPoint Co-founder, AGI Villa Co-founder, Head of City Ecosystem at Datawhale, n8n Ambassador, Host of Re:Organize",
       knowsAbout: [
         "AI products",
         "agents and automation",

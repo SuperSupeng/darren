@@ -15,10 +15,21 @@ const {
   buildAlternates,
   createPageMetadata,
   homeStructuredData,
+  articleStructuredData,
   servicesStructuredData,
 } = require('../src/lib/seo.ts');
+const {
+  getPersonJobTitle,
+  getPersonOccupations,
+  linkedinProfileUrl,
+  personAlternateNames,
+  personName,
+  personSameAs,
+} = require('../src/lib/site-config.ts');
+const { getAllPosts } = require('../src/lib/blog.ts');
 const { default: sitemap } = require('../src/app/sitemap.ts');
 const { default: robots } = require('../src/app/robots.ts');
+const { GET: llmsGET } = require('../src/app/llms.txt/route.ts');
 const { default: JsonLd } = require('../src/components/JsonLd.tsx');
 
 function array(value) {
@@ -72,6 +83,7 @@ test('the sitemap contains every real localized page once and only advertises ex
     assert.equal(url.search, '', 'Lighting and other display preferences must not create indexable URLs');
     assert.equal(url.hash, '', 'Fragments must not create separate sitemap entries');
     assert.ok(!url.pathname.split('/').includes('studio'), 'The experimental studio route must stay out of the sitemap');
+    assert.ok(!['/work', '/build', '/field-notes', '/elsewhere'].includes(url.pathname.replace(/^\/(en|zh)/, '')), `${entry.url} is a retired index and must not be a primary sitemap entry`);
     const languageUrls = entry.alternates?.languages;
     assert.ok(languageUrls, `${entry.url} must describe its actual language versions`);
     const locale = url.pathname.split('/')[1];
@@ -116,11 +128,61 @@ test('homepage structured data identifies Darren as a person and the provider of
     const service = graph.find(node => node['@type'] === 'Service');
     const website = graph.find(node => node['@type'] === 'WebSite');
     assert.equal(person['@id'], `${siteUrl}/#person`);
+    assert.equal(person.name, personName);
+    assert.deepEqual(person.alternateName, [...personAlternateNames]);
+    assert.equal(person.jobTitle, getPersonJobTitle(locale));
+    assert.deepEqual(person.sameAs, [...personSameAs]);
+    assert.ok(person.sameAs.includes(linkedinProfileUrl));
+    assert.ok(person.sameAs.includes(`${siteUrl}`));
+    assert.ok(!person.jobTitle.includes('Builder-Monk'));
+    assert.ok(!person.jobTitle.includes('Zen Ship'));
+    assert.deepEqual(person.hasOccupation.map((item) => item.name), getPersonOccupations(locale));
     assert.deepEqual(page.mainEntity, { '@id': person['@id'] });
     assert.deepEqual(service.provider, { '@id': person['@id'] });
     assert.deepEqual(website.publisher, { '@id': person['@id'] });
     assert.equal(page.url, `${siteUrl}/${locale}`);
     assert.equal(service.url, `${siteUrl}/${locale}/services`);
+  }
+});
+
+test('llms.txt uses the current IA, canonical identity, and confirmed public profiles', async () => {
+  const body = await (await llmsGET()).text();
+  assert.match(body, /^# Darren Su \/ 苏鹏/m);
+  assert.match(body, /Public name: Darren \/ Darren Su/);
+  assert.match(body, /Chinese name: 苏鹏/);
+  assert.match(body, /MatchPoint · Co-founder/);
+  assert.match(body, /Re:Organize · Host/);
+  assert.match(body, new RegExp(`Canonical website: ${siteUrl}`));
+  assert.ok(body.includes(linkedinProfileUrl));
+  for (const href of personSameAs) {
+    assert.ok(body.includes(href), `llms.txt must list ${href}`);
+  }
+  assert.ok(!body.includes('Zen Ship Lab'));
+  assert.ok(!body.includes('GoChina'));
+  assert.ok(!body.includes('Builder-Monk'));
+  for (const locale of locales) {
+    for (const route of ['', '/blog', '/podcast', '/projects', '/about', '/services']) {
+      assert.ok(body.includes(`${siteUrl}/${locale}${route}`), `llms.txt must list ${locale}${route || '/'}`);
+    }
+    assert.ok(!body.includes(`](${siteUrl}/${locale}/work)`));
+    assert.ok(!body.includes(`](${siteUrl}/${locale}/build)`));
+    assert.ok(!body.includes(`](${siteUrl}/${locale}/field-notes)`));
+    assert.ok(!body.includes(`](${siteUrl}/${locale}/elsewhere)`));
+  }
+});
+
+test('article JSON-LD keeps title, description, author, and dates from source metadata', () => {
+  for (const locale of locales) {
+    for (const post of getAllPosts(locale)) {
+      const article = articleStructuredData(post, locale)['@graph'].find((node) => node['@type'] === 'BlogPosting');
+      assert.equal(article.headline, post.title);
+      assert.equal(article.description, post.description);
+      assert.deepEqual(article.author.map((author) => author.name), post.authors);
+      if (post.date) assert.equal(article.datePublished, post.date);
+      else assert.ok(!Object.hasOwn(article, 'datePublished'));
+      if (post.dateModified) assert.equal(article.dateModified, post.dateModified);
+      else assert.ok(!Object.hasOwn(article, 'dateModified'));
+    }
   }
 });
 

@@ -46,6 +46,19 @@ test('source dates never fall back to the build day or accept an impossible cale
   assert.equal(parseBlogContent(fixture.replace('date: 2024-02-29', 'date: "2024-02-29"')).date, '2024-02-29');
 });
 
+test('dateModified is optional and uses the same calendar-date rule as date', () => {
+  const parsed = parseBlogContent(fixture.replace('date: 2024-02-29', 'date: 2024-02-29\ndateModified: 2024-03-01'));
+  assert.equal(parsed.date, '2024-02-29');
+  assert.equal(parsed.dateModified, '2024-03-01');
+  assert.ok(!Object.hasOwn(parseBlogContent(fixture), 'dateModified'));
+  for (const invalidDate of ['2025-02-29', 'yesterday', '2026-05-18T12:00:00Z']) {
+    assert.throws(
+      () => parseBlogContent(fixture.replace('date: 2024-02-29', `date: 2024-02-29\ndateModified: ${invalidDate}`)),
+      /dateModified/,
+    );
+  }
+});
+
 test('incomplete or ambiguous source metadata fails with the source filename', () => {
   const invalidSources = [
     fixture.replace(/^---\n/, ''),
@@ -138,7 +151,7 @@ test('published articles retain complete metadata and Markdown, with only suppor
       assert.ok(post.tags.length > 0);
       assert.ok(post.content.length > 1000);
       assert.equal(post.content, source.slice(source.indexOf('\n---\n') + '\n---\n'.length));
-      for (const field of ['title', 'date', 'archiveYear', 'dateNote', 'authors', 'description', 'tags', 'section', 'content']) {
+      for (const field of ['title', 'date', 'dateModified', 'archiveYear', 'dateNote', 'authors', 'description', 'tags', 'section', 'content']) {
         assert.deepEqual(post[field], parsed[field]);
       }
       assert.deepEqual(parseBlogContent(`\uFEFF${source.replace(/\n/g, '\r\n')}`), parsed);
