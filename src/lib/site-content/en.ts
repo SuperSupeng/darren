@@ -77,17 +77,6 @@ export const englishContent = {
         "Essays and conversations on AI, products, and communities, alongside records of teaching, starting a venture, and everyday life.",
     },
   },
-  fieldNotes: {
-    hero: {
-      eyebrow: "Field Notes",
-      title: "Notes from visits, travel, and practice.",
-      subtitle:
-        "Short records from events, travel, and meditation, kept apart from longer essays.",
-    },
-    empty: "Field notes are being organized.",
-    sidebarQuote: "These notes start from something I was present for.",
-    recentDescription: "Visits, travel, retreats, and other first-hand observations.",
-  },
   podcast: {
     hero: {
       eyebrow: "Podcast",
@@ -99,7 +88,7 @@ export const englishContent = {
     listenPending:
       "A public listening page will be linked here once it is confirmed. This page remains the stable entrance.",
     summary:
-      "This page is only the show entrance. It is not a daily feed, and it is not mixed into Writing or Field Notes. When a public listening URL is confirmed, it will be linked below.",
+      "This page is only the show entrance. It is not a daily feed, and it is not mixed into Writing. When a public listening URL is confirmed, it will be linked below.",
   },
   elsewhere: {
     hero: {

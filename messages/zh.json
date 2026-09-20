@@ -7,7 +7,6 @@
     "home": "首页",
     "writing": "文章",
     "podcast": "播客",
-    "fieldNotes": "手记",
     "projects": "项目",
     "elsewhere": "别处",
     "about": "关于",
@@ -46,12 +45,6 @@
     "backToList": "全部文章",
     "minRead": "分钟",
     "share": "分享"
-  },
-  "fieldNotes": {
-    "meta": {
-      "title": "手记",
-      "description": "走访、旅行和禅修里的现场观察，和长文分开存放。"
-    }
   },
   "podcast": {
     "meta": {

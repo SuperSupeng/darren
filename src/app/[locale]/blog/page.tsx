@@ -1,10 +1,10 @@
 import { getTranslations } from 'next-intl/server';
-import { getPostsBySection } from '@/lib/blog';
+import { getAllPosts } from '@/lib/blog';
 import { getSiteContent } from '@/lib/siteContent';
 import { rssPath } from '@/lib/site-config';
 import JsonLd from '@/components/JsonLd';
 import { ArticleIndex, FeaturedArticle } from '@/components/spatial/ArticleIndex';
-import { CollectionHero, CollectionHeading, CollectionNext } from '@/components/spatial/Collections';
+import { CollectionHero, CollectionHeading } from '@/components/spatial/Collections';
 import { blogStructuredData, createPageMetadata, getPageKeywords } from '@/lib/seo';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function BlogPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const site = getSiteContent(locale);
-  const posts = getPostsBySection(locale, 'writing');
+  const posts = getAllPosts(locale);
   const featured = posts.find((post) => post.date)
     ?? posts.find((post) => post.slug === 'managing-31-ai-employees')
     ?? posts[0];
@@ -62,12 +62,6 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
             <CollectionHeading title={copy.index} description={labels.recentDescription} />
             <ArticleIndex posts={posts} locale={locale} empty={labels.empty} readLabel={copy.read} />
           </section>
-
-          <CollectionNext
-            href="/field-notes"
-            title={locale === 'zh' ? '去看现场手记' : 'Read Field Notes'}
-            description={locale === 'zh' ? '走访、旅行和禅修里的短记，和长文分开。' : 'Short records from visits, travel, and practice, kept apart from longer essays.'}
-          />
         </div>
       </main>
     </>

@@ -519,11 +519,9 @@ function articleAuthors(post: BlogPost, locale: string) {
 }
 
 export function articleStructuredData(post: BlogPost, locale: string) {
-  const listPath = post.section === 'field-notes' ? '/field-notes' : '/blog';
+  const listPath = '/blog';
   const url = absoluteLocalizedUrl(locale, `/blog/${post.slug}`);
-  const blogName = post.section === 'field-notes'
-    ? (locale === 'zh' ? '手记' : 'Field Notes')
-    : (locale === 'zh' ? '文章' : 'Writing');
+  const blogName = locale === 'zh' ? '文章' : 'Writing';
 
   return {
     '@context': 'https://schema.org',
@@ -597,36 +595,6 @@ export function blogStructuredData(posts: BlogPost[], locale: string) {
       },
       personNode(locale),
       breadcrumbNode(locale, '/blog', name),
-    ],
-  };
-}
-
-export function fieldNotesStructuredData(posts: BlogPost[], locale: string) {
-  const url = absoluteLocalizedUrl(locale, '/field-notes');
-  const name = locale === 'zh' ? 'Darren Su 的手记' : 'Darren Su Field Notes';
-
-  return {
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'CollectionPage',
-        '@id': `${url}#notes`,
-        name,
-        url,
-        inLanguage: locale === 'zh' ? 'zh-CN' : 'en',
-        author: { '@id': `${siteUrl}/#person` },
-        hasPart: posts.map((post) => ({
-          '@type': 'BlogPosting',
-          headline: post.title,
-          description: post.description,
-          ...(post.date ? { datePublished: post.date } : {}),
-          url: absoluteLocalizedUrl(locale, `/blog/${post.slug}`),
-          image: `${siteUrl}${post.image.url}`,
-          author: articleAuthors(post, locale),
-        })),
-      },
-      personNode(locale),
-      breadcrumbNode(locale, '/field-notes', name),
     ],
   };
 }

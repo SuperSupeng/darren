@@ -3,8 +3,8 @@
   position: relative;
   color: var(--space-ink);
   background: var(--space-paper);
-  padding-top: var(--content-section-gap);
-  padding-bottom: calc(var(--content-section-gap) + 20px);
+  padding-top: calc(var(--content-section-gap) - 16px);
+  padding-bottom: var(--content-section-gap);
 }
 .studio-purpose .studio-purpose-wrap { width: min(var(--content-width), calc(100% - 2 * var(--content-gutter))); margin-inline: auto; }
 .studio-purpose :is(h2, h3, p) { margin: 0; }
@@ -18,12 +18,10 @@
 .studio-purpose .studio-purpose-link:hover { text-decoration: underline; text-decoration-color: var(--space-accent); }
 .studio-purpose .studio-purpose-heading > .studio-purpose-link { flex-shrink: 0; border-bottom: 1px solid var(--space-line); }
 
-/* A lead project followed by three smaller stories, without nested photo frames. */
-.studio-purpose .studio-purpose-cases { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 68px 40px; padding-bottom: 60px; }
+/* A lead project followed by two smaller stories, without nested photo frames. */
+.studio-purpose .studio-purpose-cases { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px 40px; padding-bottom: 36px; }
 .studio-purpose .studio-purpose-case { min-width: 0; display: flex; flex-direction: column; }
 .studio-purpose .studio-purpose-photo { position: relative; display: block; overflow: hidden; aspect-ratio: 4 / 3; background: var(--space-surface); }
-.studio-purpose .studio-purpose-case:nth-child(3) { padding-top: 70px; }
-.studio-purpose .studio-purpose-case:nth-child(4) .studio-purpose-photo { aspect-ratio: 1; }
 .studio-purpose .studio-purpose-photo img { object-fit: cover; }
 .studio-purpose .studio-purpose-photo img.object-contain { object-fit: contain; }
 .studio-purpose .studio-purpose-case-copy { display: flex; flex: 1; flex-direction: column; align-items: start; padding-top: 25px; border-top: 0; }
@@ -41,7 +39,7 @@
 .studio-purpose .studio-purpose-case-featured .studio-purpose-link { margin-top: 20px; padding-top: 0; }
 
 /* Products are shown as things to use, separate from the reading list below. */
-.studio-purpose .studio-purpose-products { position: relative; margin-top: 24px; padding-block: var(--content-section-gap); color: #f3eedf; background: #263c31; border-block: 1px solid #e0d0a52b; }
+.studio-purpose .studio-purpose-products { position: relative; margin-top: 8px; padding-block: calc(var(--content-section-gap) - 12px); color: #f3eedf; background: #263c31; border-block: 1px solid #e0d0a52b; }
 .studio-purpose .studio-purpose-products .studio-purpose-heading > .studio-purpose-link { border-color: #e0d0a54a; }
 .studio-purpose .studio-purpose-products .studio-purpose-link span { color: #dec391; }
 .studio-purpose .studio-purpose-product-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; align-items: start; }
@@ -61,11 +59,11 @@
 .studio-purpose .studio-purpose-product p { margin-top: 14px; color: #c5ceb9; font-size: 17px; line-height: 1.8; text-wrap: pretty; }
 .studio-purpose .studio-purpose-product:hover h3 { color: #dec391; }
 
-.studio-purpose .studio-purpose-writing { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 64px; padding-block: var(--content-section-gap); }
+.studio-purpose .studio-purpose-writing { display: grid; grid-template-columns: 250px minmax(0, 1fr); gap: 64px; padding-block: calc(var(--content-section-gap) - 16px); }
 .studio-purpose .studio-purpose-writing .studio-purpose-heading { align-self: start; position: sticky; top: 112px; flex-direction: column; align-items: start; gap: 24px; margin: 0; padding-top: 25px; border-top: 3px solid var(--space-ink); }
 .studio-purpose .studio-purpose-writing h2 { max-width: 4em; font-size: clamp(46px, 4.5vw, 64px); line-height: 1.25; }
 .studio-purpose .studio-purpose-note-list { border-top: 1px solid var(--space-line); }
-.studio-purpose .studio-purpose-note { display: grid; grid-template-columns: 150px minmax(0, 1fr) 24px; grid-template-areas: "image copy arrow" "image description arrow"; gap: 12px 28px; align-items: center; padding-block: 32px; border-bottom: 1px solid var(--space-line); }
+.studio-purpose .studio-purpose-note { display: grid; grid-template-columns: 150px minmax(0, 1fr) 24px; grid-template-areas: "image copy arrow" "image description arrow"; gap: 12px 28px; align-items: center; padding-block: 24px; border-bottom: 1px solid var(--space-line); }
 .studio-purpose .studio-purpose-note-image { grid-area: image; position: relative; aspect-ratio: 4 / 3; background: var(--space-surface); overflow: hidden; }
 .studio-purpose .studio-purpose-note-image img { object-fit: cover; }
 .studio-purpose .studio-purpose-note-image img[src*="expertise-assets"] { object-fit: contain; padding: 8px; background: #f4f1e8; }

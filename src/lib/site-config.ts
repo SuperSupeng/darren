@@ -22,7 +22,6 @@ export const navigationLinks = [
   { href: '/', zh: '首页', en: 'Home' },
   { href: '/blog', zh: '文章', en: 'Writing' },
   { href: '/podcast', zh: '播客', en: 'Podcast' },
-  { href: '/field-notes', zh: '手记', en: 'Field Notes' },
   { href: '/projects', zh: '项目', en: 'Projects' },
   { href: '/elsewhere', zh: '别处', en: 'Elsewhere' },
 ] as const;

@@ -11,12 +11,11 @@ import '@/components/spatial/immersive.css';
 type Props = {
   children: ReactNode;
   blogLocalesBySlug: Record<string, string[]>;
-  fieldNoteSlugs: string[];
 };
 
-export default function SiteChrome({ children, blogLocalesBySlug, fieldNoteSlugs }: Props) {
+export default function SiteChrome({ children, blogLocalesBySlug }: Props) {
   return <StudioSettings>
-    <SpatialHeader blogLocalesBySlug={blogLocalesBySlug} fieldNoteSlugs={fieldNoteSlugs} />
+    <SpatialHeader blogLocalesBySlug={blogLocalesBySlug} />
     {children}
     <SpatialFooter />
   </StudioSettings>;

@@ -8,7 +8,7 @@ import { getStudioContent } from '@/lib/studio-content';
 import './studio-purpose.css';
 
 export default function StudioPurpose({ locale }: { locale: string }) {
-  const cases = getFeaturedWork(locale);
+  const cases = getFeaturedWork(locale).slice(0, 3);
   const { build, notes } = getStudioContent(locale);
   const copy = locale === 'zh'
     ? {

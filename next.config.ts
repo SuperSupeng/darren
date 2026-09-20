@@ -24,6 +24,16 @@ const nextConfig: NextConfig = {
         destination: '/:locale/projects',
         permanent: true,
       },
+      {
+        source: '/field-notes',
+        destination: '/blog',
+        permanent: true,
+      },
+      {
+        source: '/:locale(en|zh)/field-notes',
+        destination: '/:locale/blog',
+        permanent: true,
+      },
     ];
   },
 };

@@ -1,6 +1,5 @@
 import { locales } from '@/i18n/config';
 import { compareBlogPosts, getAllPosts } from '@/lib/blog';
-import { renderMarkdown } from '@/lib/render-markdown';
 import { rssPath, siteUrl } from '@/lib/site-config';
 
 export const dynamic = 'force-static';
@@ -14,29 +13,6 @@ function escapeXml(value: string) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&apos;');
-}
-
-// The shared renderer escapes attributes. Decode once before resolving them,
-// then escape the resolved URL for its HTML attribute and the enclosing XML.
-function renderFeedContent(content: string, title: string, locale: string, articleUrl: string) {
-  return renderMarkdown(content, title, locale).replace(/\s(href|src)="([^"]*)"/g, (_, attribute: string, encodedUrl: string) => {
-    const rawUrl = encodedUrl
-      .replace(/&#96;/g, '`')
-      .replace(/&#39;/g, "'")
-      .replace(/&quot;/g, '"')
-      .replace(/&gt;/g, '>')
-      .replace(/&lt;/g, '<')
-      .replace(/&amp;/g, '&');
-
-    try {
-      const url = new URL(rawUrl, articleUrl);
-      const safeProtocol = url.protocol === 'https:' || url.protocol === 'http:'
-        || (attribute === 'href' && url.protocol === 'mailto:');
-      return safeProtocol ? ` ${attribute}="${escapeXml(url.href)}"` : '';
-    } catch {
-      return '';
-    }
-  });
 }
 
 export async function GET() {
@@ -53,7 +29,6 @@ export async function GET() {
         `<link>${escapeXml(url)}</link>`,
         `<guid isPermaLink="true">${escapeXml(url)}</guid>`,
         `<description>${escapeXml(post.description)}</description>`,
-        `<content:encoded>${escapeXml(renderFeedContent(post.content, post.title, locale, url))}</content:encoded>`,
         ...post.authors.map((author) => `<dc:creator>${escapeXml(author)}</dc:creator>`),
         ...post.tags.map((tag) => `<category>${escapeXml(tag)}</category>`),
         ...(post.date ? [`<pubDate>${new Date(`${post.date}T00:00:00+08:00`).toUTCString()}</pubDate>`] : []),
@@ -65,12 +40,12 @@ export async function GET() {
 
   const xml = [
     '<?xml version="1.0" encoding="UTF-8"?>',
-    '<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">',
+    '<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom">',
     '<channel>',
     '<title>Darren Su — Writing / 文章</title>',
     `<link>${escapeXml(siteUrl)}</link>`,
     `<atom:link href="${escapeXml(`${siteUrl}${rssPath}`)}" rel="self" type="application/rss+xml" />`,
-    '<description>Longform writing and field notes on China AI ecosystems, products, communities, and practice.</description>',
+    '<description>Writing on China AI ecosystems, products, communities, and practice.</description>',
     items,
     '</channel>',
     '</rss>',
