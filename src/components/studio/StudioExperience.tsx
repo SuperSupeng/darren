@@ -171,7 +171,7 @@ export default function StudioExperience({ locale, intro, roles, children }: { l
         </div>
       </div>
       <noscript><nav className="studio-no-script" aria-label={t.shortcut}>
-        <Link href="/projects">{t.all.work}</Link><Link href="/blog">{t.all.notes}</Link><Link href="/podcast">{locale === 'zh' ? '播客' : 'Podcast'}</Link><Link href="/elsewhere">{locale === 'zh' ? '别处' : 'Elsewhere'}</Link><Link href={collaborateHref}>{t.routes.services}</Link><Link href="/about">{t.routes.about}</Link>
+        <Link href="/projects">{t.all.work}</Link><Link href="/blog">{t.all.notes}</Link><Link href="/podcast">{locale === 'zh' ? '播客' : 'Podcast'}</Link><Link href={collaborateHref}>{t.routes.services}</Link><Link href="/about">{t.routes.about}</Link>
       </nav></noscript>
       {children}
     </main>

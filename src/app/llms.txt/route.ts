@@ -47,8 +47,6 @@ export function GET() {
     `- [文章](${siteUrl}/zh/blog)`,
     `- [Podcast 《重新组织》](${siteUrl}/en/podcast)`,
     `- [播客《重新组织》](${siteUrl}/zh/podcast)`,
-    `- [Elsewhere](${siteUrl}/en/elsewhere)`,
-    `- [别处](${siteUrl}/zh/elsewhere)`,
     '',
     '## Case studies',
     '',

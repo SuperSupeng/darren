@@ -92,55 +92,6 @@ export const chineseContent: LocalizedContent = {
     summary:
       "这一页只收节目入口。不按日更维护，也不把外链目录混进文章。公开收听页一经核对，会挂在下面。",
   },
-  elsewhere: {
-    hero: {
-      eyebrow: "别处",
-      title: "其他平台上的公开入口。",
-      subtitle: "一份外链目录，不是更新流。",
-    },
-    reservedTitle: "先放这些",
-    socialsTitle: "也可以在这些地方找到我",
-    visit: "访问",
-    items: [
-      {
-        id: "wechat",
-        name: "公众号精选",
-        description: "部分文章先在公众号发表。这里放一篇已核对的原文，更多篇目收入站内文章。",
-        href: "https://mp.weixin.qq.com/s/ydALVwE_H_yCp1lywr9Yhw",
-        external: true,
-      },
-      {
-        id: "substack",
-        name: "Substack: China AI, On the Ground",
-        description: "面向全球创始人和建设者的中国 AI 生态观察。",
-        href: "https://darrensu101.substack.com",
-        external: true,
-      },
-      {
-        id: "podcast",
-        name: "播客《重新组织》",
-        description: "本站的节目入口。",
-        href: "/podcast",
-        external: false,
-      },
-      {
-        id: "public-projects",
-        name: "MatchPoint / AGI Villa",
-        description: "站内已经使用的产品和社区公开页。",
-        links: [
-          { label: "MatchPoint", href: "https://matchpoint.careers" },
-          { label: "AGI Villa", href: "https://agivilla.com" },
-        ],
-      },
-      {
-        id: "github",
-        name: "GitHub @SuperSupeng",
-        description: "公开仓库和个人主页。",
-        href: "https://github.com/SuperSupeng",
-        external: true,
-      },
-    ],
-  },
   projects: {
     hero: {
       eyebrow: "项目",

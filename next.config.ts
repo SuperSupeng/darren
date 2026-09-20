@@ -34,6 +34,16 @@ const nextConfig: NextConfig = {
         destination: '/:locale/blog',
         permanent: true,
       },
+      {
+        source: '/elsewhere',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/:locale(en|zh)/elsewhere',
+        destination: '/:locale',
+        permanent: true,
+      },
     ];
   },
 };

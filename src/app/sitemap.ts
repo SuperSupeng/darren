@@ -12,7 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/about',
     '/blog',
     '/podcast',
-    '/elsewhere',
   ];
 
   const sitemap: MetadataRoute.Sitemap = [];

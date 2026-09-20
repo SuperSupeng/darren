@@ -1,6 +1,6 @@
 # Darren Su — Personal Site
 
-Darren Su 的中英双语个人网站，记录项目、写作、播客与站外入口，并为合作提供清楚的联系入口。3D 工作室负责视觉与交互，正文、导航和联系信息独立可读。
+Darren Su 的中英双语个人网站，记录项目、写作与播客，并为合作提供清楚的联系入口。3D 工作室负责视觉与交互，正文、导航和联系信息独立可读。
 
 正式站：[www.darren-su.com](https://www.darren-su.com)
 

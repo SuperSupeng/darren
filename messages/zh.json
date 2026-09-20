@@ -8,7 +8,6 @@
     "writing": "文章",
     "podcast": "播客",
     "projects": "项目",
-    "elsewhere": "别处",
     "about": "关于",
     "contact": "联系我",
     "openMenu": "打开菜单",
@@ -56,12 +55,6 @@
     "meta": {
       "title": "项目",
       "description": "Darren Su / 苏鹏的产品与项目：MatchPoint、GlobalTechEvents、Datawhale AI+X Events，以及代表案例。"
-    }
-  },
-  "elsewhere": {
-    "meta": {
-      "title": "别处",
-      "description": "Darren Su 在公众号、Substack、GitHub、MatchPoint、AGI Villa 和其他平台上的公开入口。"
     }
   },
   "build": {
