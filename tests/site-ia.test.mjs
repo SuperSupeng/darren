@@ -9,39 +9,35 @@ const {
   footerLinks,
   githubProfileUrl,
   navigationLinks,
+  socialLinks,
   studioZoneHrefs,
-  substackUrl,
 } = require('../src/lib/site-config.ts');
 const { getAllPosts, getPostsBySection } = require('../src/lib/blog.ts');
-const { getSiteContent } = require('../src/lib/siteContent.ts');
 
-test('top navigation is the signed-off five items in both languages', () => {
+test('top navigation is the signed-off four items in both languages', () => {
   assert.deepEqual(navigationLinks.map((link) => link.href), [
     '/',
     '/blog',
     '/podcast',
     '/projects',
-    '/elsewhere',
   ]);
   assert.deepEqual(navigationLinks.map((link) => link.en), [
     'Home',
     'Writing',
     'Podcast',
     'Projects',
-    'Elsewhere',
   ]);
   assert.deepEqual(navigationLinks.map((link) => link.zh), [
     '首页',
     '文章',
     '播客',
     '项目',
-    '别处',
   ]);
-  assert.ok(!navigationLinks.some((link) => link.href === '/field-notes'));
+  assert.ok(!navigationLinks.some((link) => link.href === '/elsewhere' || link.href === '/field-notes'));
   assert.ok(!navigationLinks.some((link) => link.href === collaborateHref || link.href === aboutLink.href));
   assert.ok(footerLinks.some((link) => link.href === aboutLink.href));
   assert.ok(!footerLinks.some((link) => link.href === collaborateHref));
-  assert.ok(!footerLinks.some((link) => link.href === '/field-notes'));
+  assert.ok(!footerLinks.some((link) => link.href === '/elsewhere' || link.href === '/field-notes'));
 });
 
 test('studio hotspots map into the remapped hub routes', () => {
@@ -69,17 +65,14 @@ test('Writing lists every published article, including former field notes', () =
   }
 });
 
-test('Elsewhere keeps reserved destinations that are already public', () => {
-  const items = getSiteContent('en').elsewhere.items;
-  assert.ok(items.some((item) => item.id === 'wechat' && item.name === '公众号精选'));
-  assert.ok(items.some((item) => item.href === substackUrl));
-  assert.ok(items.some((item) => item.href === githubProfileUrl));
-  assert.ok(items.some((item) => item.href === '/podcast'));
-  const publicProjects = items.find((item) => item.id === 'public-projects');
-  assert.deepEqual(
-    publicProjects.links.map((link) => link.href),
-    ['https://matchpoint.careers', 'https://agivilla.com'],
-  );
-  const chinese = getSiteContent('zh').elsewhere.items;
-  assert.deepEqual(chinese.map((item) => item.id), items.map((item) => item.id));
+test('footer keeps existing platform links without an Elsewhere section', () => {
+  assert.deepEqual(socialLinks.map(([label]) => label), [
+    'GitHub',
+    'LinkedIn',
+    'X',
+    'Instagram',
+    '小红书',
+    'n8n Ambassador',
+  ]);
+  assert.ok(socialLinks.some(([, href]) => href === githubProfileUrl));
 });

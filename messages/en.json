@@ -8,7 +8,6 @@
     "writing": "Writing",
     "podcast": "Podcast",
     "projects": "Projects",
-    "elsewhere": "Elsewhere",
     "about": "About",
     "contact": "Contact",
     "openMenu": "Open menu",
@@ -56,12 +55,6 @@
     "meta": {
       "title": "Projects",
       "description": "Products and projects by Darren Su, including MatchPoint, GlobalTechEvents, Datawhale AI+X Events, and selected case studies."
-    }
-  },
-  "elsewhere": {
-    "meta": {
-      "title": "Elsewhere",
-      "description": "Public pages for Darren Su on WeChat, Substack, GitHub, MatchPoint, AGI Villa, and other platforms."
     }
   },
   "build": {

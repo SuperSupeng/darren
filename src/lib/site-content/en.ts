@@ -90,57 +90,6 @@ export const englishContent = {
     summary:
       "This page is only the show entrance. It is not a daily feed, and it is not mixed into Writing. When a public listening URL is confirmed, it will be linked below.",
   },
-  elsewhere: {
-    hero: {
-      eyebrow: "Elsewhere",
-      title: "Public pages on other platforms.",
-      subtitle: "A small directory of outbound links. It is not a feed.",
-    },
-    reservedTitle: "Selected places",
-    socialsTitle: "Also here",
-    visit: "Visit",
-    items: [
-      {
-        id: "wechat",
-        name: "公众号精选",
-        description:
-          "Selected WeChat essays. One original is linked here; more pieces are archived in Writing.",
-        href: "https://mp.weixin.qq.com/s/ydALVwE_H_yCp1lywr9Yhw",
-        external: true,
-      },
-      {
-        id: "substack",
-        name: "Substack: China AI, On the Ground",
-        description:
-          "A ground-level guide to China’s AI ecosystem for global founders and builders.",
-        href: "https://darrensu101.substack.com",
-        external: true,
-      },
-      {
-        id: "podcast",
-        name: "Podcast 《重新组织》",
-        description: "The show hub on this site.",
-        href: "/podcast",
-        external: false,
-      },
-      {
-        id: "public-projects",
-        name: "MatchPoint / AGI Villa",
-        description: "Public product and community pages already linked from this site.",
-        links: [
-          { label: "MatchPoint", href: "https://matchpoint.careers" },
-          { label: "AGI Villa", href: "https://agivilla.com" },
-        ],
-      },
-      {
-        id: "github",
-        name: "GitHub @SuperSupeng",
-        description: "Public repositories and profile.",
-        href: "https://github.com/SuperSupeng",
-        external: true,
-      },
-    ],
-  },
   projects: {
     hero: {
       eyebrow: "Projects",

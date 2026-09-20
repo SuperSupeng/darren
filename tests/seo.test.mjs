@@ -47,7 +47,7 @@ test('every crawler rule protects API routes and preserves the existing public c
 
 test('the sitemap contains every real localized page once and only advertises existing alternate URLs', () => {
   const expected = new Set();
-  const basePaths = ['', '/projects', '/services', '/about', '/blog', '/podcast', '/elsewhere'];
+  const basePaths = ['', '/projects', '/services', '/about', '/blog', '/podcast'];
   for (const locale of locales) {
     for (const route of basePaths) expected.add(`${siteUrl}/${locale}${route}`);
     const postFiles = fs.readdirSync(new URL(`../content/blog/${locale}/`, import.meta.url))

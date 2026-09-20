@@ -46,9 +46,9 @@ export default async function PodcastPage({ params }: { params: Promise<{ locale
             <p className="collection-description">{site.podcast.listenPending}</p>
           </section>
           <CollectionNext
-            href="/elsewhere"
-            title={locale === 'zh' ? '去别处看看' : 'Look elsewhere'}
-            description={locale === 'zh' ? '其他平台上的公开入口。' : 'Public pages on other platforms.'}
+            href="/about"
+            title={locale === 'zh' ? '关于我' : 'About'}
+            description={locale === 'zh' ? '一段更完整的个人介绍。' : 'A short page with more of the background.'}
           />
         </div>
       </main>
