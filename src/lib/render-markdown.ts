@@ -83,7 +83,7 @@ const inlineImageDimensions: Record<string, { width: number; height: number; bac
   '/blog/zongtong-retreat/temple.jpg': { width: 1707, height: 1280 },
 };
 
-// Lightweight block renderer for the local field-notes markdown files.
+// Lightweight block renderer for the local article markdown files.
 export function renderMarkdown(
   content: string,
   title: string,

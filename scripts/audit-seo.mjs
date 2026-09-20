@@ -246,7 +246,10 @@ for (const path of ['/robots.txt', '/llms.txt', '/rss.xml']) {
     const items = [...rss.querySelectorAll('item')];
     check(items.length === [...pages.keys()].filter(url => /^\/(en|zh)\/blog\/[^/]+$/.test(new URL(url).pathname)).length, `${path}: missing published articles`);
     for (const item of items) {
-      check((item.getElementsByTagName('content:encoded')[0]?.textContent.length ?? 0) > 1000, `${path}: missing full article content`);
+      const excerpt = item.querySelector('description')?.textContent ?? '';
+      check(excerpt.length > 20 && excerpt.length < 2000, `${path}: missing article excerpt`);
+      check(!item.getElementsByTagName('content:encoded')[0], `${path}: feed must use excerpts, not full HTML`);
+      check(!excerpt.includes('<img'), `${path}: excerpts must not embed images`);
       const url = item.querySelector('link')?.textContent;
       const article = pages.get(url)?.article;
       check(Boolean(article), `${path}: item has no matching article page: ${url}`);

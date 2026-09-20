@@ -7,8 +7,8 @@ import { getSiteContent } from '@/lib/siteContent';
 
 // Editorial selections stay fixed when translations or archive entries are added.
 const featuredNotes = {
-  zh: ['turning-expertise-into-an-asset', 'managing-31-ai-employees', 'superai-china-ecosystem-visit'],
-  en: ['managing-31-ai-employees', 'superai-china-ecosystem-visit', 'zongtong-temple-retreat'],
+  zh: ['turning-expertise-into-an-asset', 'managing-31-ai-employees'],
+  en: ['managing-31-ai-employees', 'superai-china-ecosystem-visit'],
 };
 
 // Keep filesystem access and full content records on the server. The room only

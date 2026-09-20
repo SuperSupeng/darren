@@ -16,7 +16,7 @@ function LightIcon({ evening }: { evening: boolean }) {
   </svg>;
 }
 
-export default function SpatialHeader({ blogLocalesBySlug, fieldNoteSlugs }: { blogLocalesBySlug: Record<string, string[]>; fieldNoteSlugs: string[] }) {
+export default function SpatialHeader({ blogLocalesBySlug }: { blogLocalesBySlug: Record<string, string[]> }) {
   const locale = useLocale();
   const zh = locale === 'zh';
   const pathname = usePathname();
@@ -28,11 +28,7 @@ export default function SpatialHeader({ blogLocalesBySlug, fieldNoteSlugs }: { b
   const current = (href: string) => {
     if (href === '/') return pathname === '/' || pathname === '/studio';
     if (href === '/blog') {
-      if (slug && fieldNoteSlugs.includes(slug)) return false;
       return pathname === '/blog' || pathname.startsWith('/blog/');
-    }
-    if (href === '/field-notes') {
-      return pathname === '/field-notes' || Boolean(slug && fieldNoteSlugs.includes(slug));
     }
     if (href === '/projects') {
       return pathname === '/projects' || pathname === '/work' || pathname === '/build' || pathname.startsWith('/work/');

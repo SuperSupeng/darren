@@ -81,17 +81,6 @@ export const chineseContent: LocalizedContent = {
         "AI 技术与实践、创业与社区，也有公益行动和生活中的思考。",
     },
   },
-  fieldNotes: {
-    hero: {
-      eyebrow: "手记",
-      title: "现场的观察和短记。",
-      subtitle:
-        "旅行、禅修和活动里的记录，和长文分开存放。",
-    },
-    empty: "手记正在整理中。",
-    sidebarQuote: "这些短记都从我当时在场的事情开始。",
-    recentDescription: "走访、旅行、禅修和其他第一手观察。",
-  },
   podcast: {
     hero: {
       eyebrow: "播客",
@@ -101,7 +90,7 @@ export const chineseContent: LocalizedContent = {
     listen: "收听",
     listenPending: "公开收听页确认后会挂在这里。本页作为稳定入口保留。",
     summary:
-      "这一页只收节目入口。不按日更维护，也不把外链目录混进文章或手记。公开收听页一经核对，会挂在下面。",
+      "这一页只收节目入口。不按日更维护，也不把外链目录混进文章。公开收听页一经核对，会挂在下面。",
   },
   elsewhere: {
     hero: {

@@ -8,7 +8,7 @@
 | --- | --- |
 | `src/app/[locale]/` | 路由、页面组合、metadata 和静态参数；不复制共享事实。 |
 | `src/i18n/` | 支持的语言、语言路由及保留本地化地址的导航工具。 |
-| `src/lib/site-config.ts` | 域名、联系邮箱、社交链接与主导航（首页 / 文章 / 播客 / 手记 / 项目 / 别处）的统一配置，供页面、联系组件和 SEO 读取。 |
+| `src/lib/site-config.ts` | 域名、联系邮箱、社交链接与主导航（首页 / 文章 / 播客 / 项目 / 别处）的统一配置，供页面、联系组件和 SEO 读取。 |
 | `src/lib/portfolio/` | 案例与合作数据；`types.ts` 定义结构，`en.ts`、`zh.ts` 管理文案，`images.ts` 管理图片，`index.ts` 提供统一读取接口。 |
 | `src/lib/about.ts`、`experience-archive.ts` | 关于页叙述、补充活动经历；与正式案例区分，保留具体身份与参与范围。 |
 | `src/lib/site-content/`、`siteContent.ts` | 产品及页面共享文案，通过 `getSiteContent` 读取。 |
@@ -32,7 +32,7 @@
 
 `seo.ts` 维护 canonical、语言替代链接、分享图片信息与结构化数据。`sitemap.ts`、`robots.ts` 根据公开路由生成抓取入口。语言替代地址只包含真实存在的内容，缺失页面返回 404；旧 `/studio` 兼容页不进入索引。
 
-文章和案例的 HTML 页面是规范地址。`content-source.ts` 从相同数据生成 `source.md`，附带规范地址、语言、作者与绝对链接；文章正文通过 `render-markdown.ts` 渲染。RSS 复用正文渲染器，`llms.txt` 从公开内容生成索引，不维护另一套事实。新增内容或修改元数据时，同时检查页面、导出、RSS 和 sitemap 的一致性。
+文章和案例的 HTML 页面是规范地址。`content-source.ts` 从相同数据生成 `source.md`，附带规范地址、语言、作者与绝对链接；文章正文通过 `render-markdown.ts` 渲染。RSS 使用文章摘要，不嵌入全文 HTML；`llms.txt` 从公开内容生成索引，不维护另一套事实。新增内容或修改元数据时，同时检查页面、导出、RSS 和 sitemap 的一致性。
 
 没有核实原始发表日期的文章不声明 `datePublished`，归档年份也不是发表日。sitemap 不用构建日或发表日代替实际更新日期。结构化数据描述页面已有事实，公开来源的支持范围见 [案例证据](case-evidence.md)。
 

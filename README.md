@@ -1,6 +1,6 @@
 # Darren Su — Personal Site
 
-Darren Su 的中英双语个人网站，记录项目、写作、播客、现场手记与站外入口，并为合作提供清楚的联系入口。3D 工作室负责视觉与交互，正文、导航和联系信息独立可读。
+Darren Su 的中英双语个人网站，记录项目、写作、播客与站外入口，并为合作提供清楚的联系入口。3D 工作室负责视觉与交互，正文、导航和联系信息独立可读。
 
 正式站：[www.darren-su.com](https://www.darren-su.com)
 
@@ -42,7 +42,7 @@ npm run check
 | 案例、职责、成果与合作资料 | `src/lib/portfolio/` |
 | 个人介绍与活动经历 | `src/lib/about.ts`、`src/lib/experience-archive.ts` |
 | 产品、页面文案与首页精选文章 | `src/lib/site-content/`、`src/lib/studio-content.ts` |
-| 中英文文章与手记 | `content/blog/{zh,en}/`（`section: field-notes` 进入手记） |
+| 中英文文章 | `content/blog/{zh,en}/`（全部篇目进入 `/blog`） |
 | 文章与项目图片 | `public/blog/`、`public/images/work/` |
 | 界面短标签 | `messages/` |
 | 内容、路由与交互逻辑检查 | `tests/`、`scripts/` |

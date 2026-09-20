@@ -12,15 +12,14 @@ const {
   studioZoneHrefs,
   substackUrl,
 } = require('../src/lib/site-config.ts');
-const { getPostsBySection } = require('../src/lib/blog.ts');
+const { getAllPosts, getPostsBySection } = require('../src/lib/blog.ts');
 const { getSiteContent } = require('../src/lib/siteContent.ts');
 
-test('top navigation is the signed-off six items in both languages', () => {
+test('top navigation is the signed-off five items in both languages', () => {
   assert.deepEqual(navigationLinks.map((link) => link.href), [
     '/',
     '/blog',
     '/podcast',
-    '/field-notes',
     '/projects',
     '/elsewhere',
   ]);
@@ -28,7 +27,6 @@ test('top navigation is the signed-off six items in both languages', () => {
     'Home',
     'Writing',
     'Podcast',
-    'Field Notes',
     'Projects',
     'Elsewhere',
   ]);
@@ -36,13 +34,14 @@ test('top navigation is the signed-off six items in both languages', () => {
     '首页',
     '文章',
     '播客',
-    '手记',
     '项目',
     '别处',
   ]);
+  assert.ok(!navigationLinks.some((link) => link.href === '/field-notes'));
   assert.ok(!navigationLinks.some((link) => link.href === collaborateHref || link.href === aboutLink.href));
   assert.ok(footerLinks.some((link) => link.href === aboutLink.href));
   assert.ok(!footerLinks.some((link) => link.href === collaborateHref));
+  assert.ok(!footerLinks.some((link) => link.href === '/field-notes'));
 });
 
 test('studio hotspots map into the remapped hub routes', () => {
@@ -51,16 +50,22 @@ test('studio hotspots map into the remapped hub routes', () => {
   assert.equal(studioZoneHrefs.notes, '/blog');
 });
 
-test('Writing and Field Notes partition the published articles without dropping either language', () => {
+test('Writing lists every published article, including former field notes', () => {
   for (const locale of ['zh', 'en']) {
+    const archive = getAllPosts(locale);
     const writing = getPostsBySection(locale, 'writing');
     const notes = getPostsBySection(locale, 'field-notes');
-    assert.ok(writing.length > 0, `${locale} writing must not be empty`);
-    assert.ok(notes.length > 0, `${locale} field notes must not be empty`);
-    assert.equal(
-      new Set([...writing, ...notes].map((post) => post.slug)).size,
-      writing.length + notes.length,
+    assert.ok(archive.length > 0, `${locale} writing archive must not be empty`);
+    assert.ok(writing.length > 0, `${locale} writing posts must not be empty`);
+    assert.ok(notes.length > 0, `${locale} former field notes must remain in the article collection`);
+    assert.equal(archive.length, writing.length + notes.length);
+    assert.deepEqual(
+      new Set(archive.map((post) => post.slug)),
+      new Set([...writing, ...notes].map((post) => post.slug)),
     );
+    for (const post of notes) {
+      assert.ok(archive.some((item) => item.slug === post.slug), `${locale} archive must include ${post.slug}`);
+    }
   }
 });
 

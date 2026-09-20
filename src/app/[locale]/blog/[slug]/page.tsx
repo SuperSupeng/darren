@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     path: `/blog/${slug}`,
     title: post.title,
     description: post.description,
-    keywords: [...post.tags, 'Darren Su', post.section === 'field-notes' ? 'field notes' : 'writing'],
+    keywords: [...post.tags, 'Darren Su', 'writing'],
     image: post.image.url,
     imageWidth: post.image.width,
     imageHeight: post.image.height,
@@ -60,10 +60,8 @@ export default async function BlogPostPage({ params }: { params: Promise<{ local
     optimizeImage: optimizeArticleImage,
   });
   const shareUrl = absoluteLocalizedUrl(locale, `/blog/${post.slug}`);
-  const listHref = post.section === 'field-notes' ? '/field-notes' : '/blog';
-  const backLabel = post.section === 'field-notes'
-    ? (locale === 'zh' ? '全部手记' : 'All field notes')
-    : t('backToList');
+  const listHref = '/blog';
+  const backLabel = t('backToList');
 
   return (
     <>

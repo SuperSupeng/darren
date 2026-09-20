@@ -248,9 +248,3 @@ export function getLocalizedBlogRoutes(): Array<{ locale: Locale; slug: string }
 export function getPostsBySection(locale: string, section: ArticleSection): BlogPost[] {
   return getAllPosts(locale).filter((post) => post.section === section);
 }
-
-export function getFieldNoteSlugs(): string[] {
-  return [...new Set(
-    locales.flatMap((locale) => getPostsBySection(locale, 'field-notes').map((post) => post.slug)),
-  )];
-}

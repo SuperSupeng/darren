@@ -1,6 +1,6 @@
 # 内容维护规范
 
-网站让读者认识 Darren 做过什么、如何思考，以及技术、社区、公益和生活怎样影响他。有合作意向的人应能进一步了解职责、成果与联系方法；生活手记不必承担证明商业能力的任务。
+网站让读者认识 Darren 做过什么、如何思考，以及技术、社区、公益和生活怎样影响他。有合作意向的人应能进一步了解职责、成果与联系方法；生活记录不必单独承担证明商业能力的任务。
 
 ## 叙述与事实
 
@@ -19,7 +19,7 @@
 | 案例之外的活动与交流经历 | `src/lib/experience-archive.ts` |
 | 产品、共享页面介绍与标签 | `src/lib/site-content/{zh,en}.ts` |
 | 首页精选文章 | `src/lib/studio-content.ts` 中的 `featuredNotes` |
-| 文章全文 | `content/blog/{zh,en}/`；`section: field-notes` 的篇目进入手记页，其余进入文章页 |
+| 文章全文 | `content/blog/{zh,en}/`；全部篇目进入文章页（`/blog`），不再分出手记页 |
 | 导航等短界面标签 | `messages/{zh,en}.json` |
 
 事实变化时修改对应来源，不在多个页面分别修补。首页的中英文精选各自固定，新增翻译或归档文章不自动改变它们。调整精选属于编辑决定，需要与文章库是否收录分开处理。
@@ -35,13 +35,12 @@
 title: 文章标题
 date: 2026-09-04
 description: 用于列表页和搜索摘要的一句话介绍。
-tags: [AI, Field Notes]
+tags: [AI, Community]
 authors: [Darren Su]
-section: field-notes
 ---
 ```
 
-`section` 可选，缺省为 `writing`。`field-notes` 进入手记页；长文保持 `writing`。
+`section` 可选，缺省为 `writing`。历史稿件里的 `field-notes` 仍可保留，但所有篇目都出现在文章归档。
 
 无法核实精确日期时省略 `date`，使用 `dateNote`；有依据的内容年份可填写 `archiveYear`：
 
@@ -76,7 +75,7 @@ authors: [Darren Su]
 
 ## 导出与发布
 
-HTML 是文章和案例的规范版本。Markdown 来源、全文 RSS、`llms.txt` 与结构化数据从同一份内容生成，不手工维护第二份正文。来源路由的静态参数必须同时枚举语言与 slug，单独测试处理函数不能证明部署地址可访问。
+HTML 是文章和案例的规范版本。Markdown 来源、摘要 RSS、`llms.txt` 与结构化数据从同一份内容生成，不手工维护第二份正文。RSS 只放摘要，不嵌入全文 HTML 和图片。来源路由的静态参数必须同时枚举语言与 slug，单独测试处理函数不能证明部署地址可访问。
 
 阅读页优先展示正文、作者、项目职责和资料来源，避免重复信息与无关操作。纯文本导出通过页面 head 的 alternate 和 `llms.txt` 提供发现入口，不需要在正文中放下载按钮；精简界面时保留这些入口与完整正文。抓取成功只说明内容可以获取，实际收录与 AI 引用需要另行核验。
 

@@ -11,7 +11,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/services',
     '/about',
     '/blog',
-    '/field-notes',
     '/podcast',
     '/elsewhere',
   ];
@@ -27,7 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     for (const locale of locales) {
       sitemap.push({
         url: `${baseUrl}/${locale}${route}`,
-        changeFrequency: route === '' || route === '/blog' || route === '/field-notes' ? 'weekly' : 'monthly',
+        changeFrequency: route === '' || route === '/blog' ? 'weekly' : 'monthly',
         priority: route === '' ? 1 : 0.8,
         alternates: { languages },
       });

@@ -7,7 +7,6 @@
     "home": "Home",
     "writing": "Writing",
     "podcast": "Podcast",
-    "fieldNotes": "Field Notes",
     "projects": "Projects",
     "elsewhere": "Elsewhere",
     "about": "About",
@@ -46,12 +45,6 @@
     "backToList": "All articles",
     "minRead": "min",
     "share": "Share"
-  },
-  "fieldNotes": {
-    "meta": {
-      "title": "Field Notes",
-      "description": "Field observations from visits, travel, and practice, kept apart from longer essays."
-    }
   },
   "podcast": {
     "meta": {
