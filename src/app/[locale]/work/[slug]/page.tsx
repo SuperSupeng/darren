@@ -6,7 +6,7 @@ import '@/components/spatial/interiors.css';
 import { Link } from '@/i18n/navigation';
 import { locales } from '@/i18n/config';
 import { getAllWorkIds, getPortfolio, getWorkById, getWorkCollaboration } from '@/lib/portfolio';
-import { createPageMetadata, getPageKeywords, workCaseStructuredData } from '@/lib/seo';
+import { createPageMetadata, getWorkPageMetadata, workCaseStructuredData } from '@/lib/seo';
 
 export const dynamicParams = false;
 
@@ -29,12 +29,13 @@ export async function generateMetadata({
     };
   }
 
+  const document = getWorkPageMetadata(work, locale);
   return createPageMetadata({
     locale,
     path: `/work/${work.id}`,
-    title: work.title,
-    description: work.summary,
-    keywords: [...getPageKeywords(locale, 'work'), work.title, work.location],
+    title: document.title,
+    description: document.description,
+    keywords: document.keywords,
     image: work.image,
     imageWidth: work.imageWidth,
     imageHeight: work.imageHeight,

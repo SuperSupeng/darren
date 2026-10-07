@@ -3,6 +3,10 @@ title: AI 时代，如何把一个人的经验变成一项资产？
 date: 2026-07-22
 description: 和 Leapility 跃向 CEO 白双聊专家智能体：怎样提取隐性经验，把个人判断变成可重复交付的产品，以及创业为什么仍要回到自己愿意长期创造的价值。
 tags: [专家智能体, 个人创业, 经验产品化, 对谈]
+seoTitle: AI 时代，如何把一个人的经验变成一项资产？｜一人公司（OPC）与专家智能体
+seoDescription: 和 Leapility 跃向 CEO 白双聊专家智能体：真正的 OPC，不是一个人完成所有工作，而是把个人经验产品化——Solo 和 Scalable。也聊怎样提取隐性知识、AIM 模型，以及为什么 AI 时代效率不是最终竞争力。
+seoKeywords: [一人公司, OPC, 专家智能体, 通用智能体, 隐性知识, know-how, Solo 和 Scalable, AIM 模型, 个人创业, 经验产品化, Leapility]
+about: [一人公司, 专家智能体, 个人创业]
 ---
 
 最近，我和 **Leapility 跃向 CEO 白双**聊了一次专家智能体。一开始，我们讨论的还是一个看起来偏技术的问题：通用智能体和专家智能体，到底有什么区别？

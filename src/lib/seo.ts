@@ -189,6 +189,31 @@ export function getPageKeywords(locale: string, group: KeywordGroup) {
   return pageKeywords[safeLocale][group];
 }
 
+// Search-document fields. Pages without them keep the visible title, summary, and keyword list.
+export function getBlogPageMetadata(post: BlogPost) {
+  return {
+    title: post.seoTitle ?? post.title,
+    description: post.seoDescription ?? post.description,
+    keywords: [...post.tags, ...(post.seoKeywords ?? []), 'Darren Su', 'writing'],
+  };
+}
+
+export function getWorkPageMetadata(work: PortfolioWork, locale: string) {
+  return {
+    title: work.seoTitle ?? work.title,
+    description: work.seoDescription ?? work.summary,
+    keywords: work.seoKeywords ?? [...getPageKeywords(locale, 'work'), work.title, work.location],
+  };
+}
+
+export function getProjectsPageKeywords(locale: string) {
+  const safeLocale = isLocale(locale) ? locale : defaultLocale;
+  const additions = safeLocale === 'zh'
+    ? ['AI 原生工作系统', '多 Agent 系统']
+    : ['AI-native work system', 'multi-agent system'];
+  return [...getPageKeywords(safeLocale, 'work'), 'MatchPoint', 'GlobalTechEvents', 'Datawhale AI+X Events', ...additions];
+}
+
 const areaServed = ['China'];
 
 function isSiteAuthor(name: string) {
@@ -527,10 +552,61 @@ function articleAuthors(post: BlogPost, locale: string) {
   }));
 }
 
+type JsonLdNamed = { '@type': string; name: string };
+
+// Names that appear in the article. Typed only where the metadata spec names a type.
+const articleMentions: Record<string, JsonLdNamed[]> = {
+  'zh/managing-31-ai-employees': [
+    { '@type': 'Thing', name: 'OpenClaw' },
+    { '@type': 'Thing', name: 'Claude Code' },
+    { '@type': 'Thing', name: 'GlobalTechEvents' },
+  ],
+  'zh/turning-expertise-into-an-asset': [
+    { '@type': 'Person', name: '白双' },
+    { '@type': 'Organization', name: 'Leapility 跃向' },
+  ],
+  'en/superai-china-ecosystem-visit': [
+    'Zhejiang University',
+    'ModelScope',
+    'Qwen',
+    'Qoder',
+    'Datawhale',
+    'ZhenFund',
+    'MiniMax',
+    'Volcano Engine',
+    'Trae',
+    'SenseTime',
+  ].map((name) => ({ '@type': 'Organization', name })),
+};
+
+const articleContentLocations: Record<string, string[]> = {
+  'en/superai-china-ecosystem-visit': ['Hangzhou', 'Shanghai'],
+};
+
+// The reference list is a single markdown section, so citation stays derived from the article
+// instead of a multi-line frontmatter field. Other articles do not get a citation property.
+function referenceCitations(content: string): Array<{ '@type': 'CreativeWork'; name: string; url: string }> {
+  const match = content.match(/(?:^|\n)### 参考与延伸阅读\n([\s\S]*)$/);
+  if (!match) return [];
+  const citations = [];
+  for (const line of match[1].split('\n')) {
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+    const item = trimmed.match(/^- \[(.+)\]\((https?:\/\/[^)\s]+)\)$/);
+    if (!item) break;
+    citations.push({ '@type': 'CreativeWork' as const, name: item[1], url: item[2] });
+  }
+  return citations;
+}
+
 export function articleStructuredData(post: BlogPost, locale: string) {
   const listPath = '/blog';
   const url = absoluteLocalizedUrl(locale, `/blog/${post.slug}`);
   const blogName = locale === 'zh' ? '文章' : 'Writing';
+  const articleKey = `${locale}/${post.slug}`;
+  const mentions = articleMentions[articleKey] ?? [];
+  const contentLocations = articleContentLocations[articleKey] ?? [];
+  const citations = referenceCitations(post.content);
 
   return {
     '@context': 'https://schema.org',
@@ -541,13 +617,18 @@ export function articleStructuredData(post: BlogPost, locale: string) {
         mainEntityOfPage: url,
         url,
         headline: post.title,
+        ...(post.seoTitle ? { alternativeHeadline: post.seoTitle } : {}),
         description: post.description,
         ...(post.date ? { datePublished: post.date } : {}),
         ...(post.dateModified ? { dateModified: post.dateModified } : {}),
         author: articleAuthors(post, locale),
         publisher: { '@id': `${siteUrl}/#person` },
         image: `${siteUrl}${post.image.url}`,
-        keywords: post.tags.join(', '),
+        keywords: [...post.tags, ...(post.seoKeywords ?? [])].join(', '),
+        ...(post.about?.length ? { about: post.about.map((name) => ({ '@type': 'Thing', name })) } : {}),
+        ...(mentions.length ? { mentions } : {}),
+        ...(contentLocations.length ? { contentLocation: contentLocations.map((name) => ({ '@type': 'Place', name })) } : {}),
+        ...(citations.length ? { citation: citations } : {}),
         inLanguage: locale === 'zh' ? 'zh-CN' : 'en',
         isPartOf: { '@id': `${siteUrl}/#website` },
       },

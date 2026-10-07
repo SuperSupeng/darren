@@ -81,6 +81,30 @@ test('incomplete or ambiguous source metadata fails with the source filename', (
   }
 });
 
+test('optional seo fields stay off the visible title and are omitted when absent', () => {
+  const parsed = parseBlogContent(fixture);
+  for (const field of ['seoTitle', 'seoDescription', 'seoKeywords', 'about']) {
+    assert.ok(!Object.hasOwn(parsed, field), field);
+  }
+  const source = fixture.replace(
+    'tags: [AI agents, Research]',
+    'tags: [AI agents, Research]\nseoTitle: "Search title: agents"\nseoDescription: A search description.\nseoKeywords: [AI agents, "practice, notes"]\nabout: [Practice]',
+  );
+  const withSeo = parseBlogContent(source);
+  assert.equal(withSeo.title, 'An original field note');
+  assert.equal(withSeo.description, 'A published observation: with its original date.');
+  assert.deepEqual(withSeo.tags, ['AI agents', 'Research']);
+  assert.equal(withSeo.seoTitle, 'Search title: agents');
+  assert.equal(withSeo.seoDescription, 'A search description.');
+  assert.deepEqual(withSeo.seoKeywords, ['AI agents', 'practice, notes']);
+  assert.deepEqual(withSeo.about, ['Practice']);
+  assert.equal(withSeo.content, parsed.content);
+  assert.throws(
+    () => parseBlogContent(fixture.replace('tags: [AI agents, Research]', 'tags: [AI agents, Research]\nseoKeywords: agents')),
+    /seoKeywords/,
+  );
+});
+
 test('quoted metadata preserves commas, apostrophes, and colons as source text', () => {
   const source = fixture
     .replace('title: An original field note', "title: 'Darren''s field note'")

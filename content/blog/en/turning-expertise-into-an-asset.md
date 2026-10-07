@@ -3,6 +3,10 @@ title: How Can Personal Experience Become an Asset in the AI Era?
 date: 2026-07-22
 description: A conversation with Bai Shuang, CEO of Leapility, about expert agents, drawing out tacit knowledge, turning personal judgment into a repeatable product, and building a business around value you want to create over the long term.
 tags: [Expert agents, Solo entrepreneurship, Productizing expertise, Conversations]
+seoTitle: "How Can Personal Experience Become an Asset in the AI Era? Expert Agents and One-Person Companies"
+seoDescription: "A conversation with Bai Shuang, CEO of Leapility, on expert agents and OPCs: a real OPC is not about doing every job yourself, but about turning personal experience into a product — Solo and Scalable."
+seoKeywords: [one-person company, OPC, expert agents, general-purpose agents, tacit knowledge, know-how, Solo and Scalable, AIM model, solo entrepreneurship, productizing expertise]
+about: [One-person companies, Expert agents, Solo entrepreneurship]
 ---
 
 *English translation of [the Chinese original](/zh/blog/turning-expertise-into-an-asset).*

@@ -4,6 +4,10 @@ archiveYear: "2026"
 dateNote: "2026 年手记"
 description: 我把 31 个 Agent 真正用进日常工作以后，开始重新思考任务怎样被理解、信息怎样流动，以及哪些规则应该写清楚。
 tags: [AI Agent, 数字组织, 管理学, 产品实验]
+seoTitle: 管了 31 个 AI 员工之后，我重新理解了管理学：多 Agent 分工与数字组织设计
+seoDescription: 我搭建了一个基于 OpenClaw 的多 Agent 协作系统：31 个 Agent 组成「四部一室」，44 个定时任务每天自动执行。当员工变成 AI，管理的核心矛盾从「意愿问题」变成了「理解问题」；在 AI 时代，组织的稀缺资源变成了人类的判断力和注意力。
+seoKeywords: [AI 员工, 数字员工, 多 Agent 协作系统, 数字组织设计, Harness Engineering, 沙漏型组织, 管理幅度, 双向门原则, 球权原则, OpenClaw, GlobalTechEvents]
+about: [多 Agent 协作, 数字组织设计, 管理学]
 ---
 
 **目录**

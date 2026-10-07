@@ -250,6 +250,7 @@ export const chineseContent: LocalizedContent = {
         "多 Agent 数字组织",
         "全球科技活动",
         "社区驱动增长",
+        "数字组织设计",
       ],
       professionalServiceName: "Darren Su - AI 生态项目与产品 Workshop",
       serviceTypes: [

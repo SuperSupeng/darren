@@ -5,7 +5,7 @@ import { getFeaturedWork, getPortfolio } from '@/lib/portfolio';
 import { getExperienceArchive, getWorkCaseDate } from '@/lib/experience-archive';
 import JsonLd from '@/components/JsonLd';
 import { CollectionHero, CollectionHeading, CollectionNext } from '@/components/spatial/Collections';
-import { createPageMetadata, getPageKeywords, projectsStructuredData } from '@/lib/seo';
+import { createPageMetadata, getProjectsPageKeywords, projectsStructuredData } from '@/lib/seo';
 import { getSiteContent } from '@/lib/siteContent';
 import '@/components/spatial/experience-archive.css';
 
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     path: '/projects',
     title: t('meta.title'),
     description: t('meta.description'),
-    keywords: [...getPageKeywords(locale, 'work'), 'MatchPoint', 'GlobalTechEvents', 'Datawhale AI+X Events'],
+    keywords: getProjectsPageKeywords(locale),
   });
 }
 

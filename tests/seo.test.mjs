@@ -17,6 +17,11 @@ const {
   homeStructuredData,
   articleStructuredData,
   servicesStructuredData,
+  getPageKeywords,
+  getBlogPageMetadata,
+  getWorkPageMetadata,
+  getProjectsPageKeywords,
+  workCaseStructuredData,
 } = require('../src/lib/seo.ts');
 const {
   getPersonJobTitle,
@@ -26,7 +31,11 @@ const {
   personName,
   personSameAs,
 } = require('../src/lib/site-config.ts');
-const { getAllPosts } = require('../src/lib/blog.ts');
+const { getAllPosts, parseBlogContent } = require('../src/lib/blog.ts');
+const { getWorkById } = require('../src/lib/portfolio/index.ts');
+const { getSiteContent } = require('../src/lib/siteContent.ts');
+const { articleMarkdown } = require('../src/lib/content-source.ts');
+const { GET: rssGET } = require('../src/app/rss.xml/route.ts');
 const { default: sitemap } = require('../src/app/sitemap.ts');
 const { default: robots } = require('../src/app/robots.ts');
 const { GET: llmsGET } = require('../src/app/llms.txt/route.ts');
@@ -206,6 +215,305 @@ test('service structured data points each collaboration to its public section an
       assert.deepEqual(item.item.provider, { '@id': person['@id'] });
     }
   }
+});
+
+function articleNode(post, locale) {
+  return articleStructuredData(post, locale)['@graph'].find((node) => node['@type'] === 'BlogPosting');
+}
+
+function postFrom(source, slug = 'example') {
+  return {
+    slug,
+    ...parseBlogContent(source),
+    readingTime: 1,
+    image: { url: '/og-image.png', width: 1200, height: 630 },
+  };
+}
+
+const plainArticle = [
+  '---',
+  'title: An original field note',
+  'date: 2024-02-29',
+  'description: A published observation: with its original date.',
+  'tags: [AI agents, Research]',
+  '---',
+  '',
+  '## Evidence',
+  '',
+  'A first-hand observation.',
+  '',
+].join('\n');
+
+test('seo fields change the document title and description while JSON-LD keeps the visible headline', () => {
+  const source = plainArticle.replace(
+    'tags: [AI agents, Research]',
+    [
+      'tags: [AI agents, Research]',
+      'seoTitle: "Search title: agents"',
+      'seoDescription: A longer search description for the same note.',
+      'seoKeywords: [practice, notes]',
+      'about: [Practice]',
+    ].join('\n'),
+  );
+  const post = postFrom(source);
+  const metadata = createPageMetadata({
+    locale: 'en',
+    path: '/blog/example',
+    ...getBlogPageMetadata(post),
+    openGraphType: 'article',
+    publishedTime: post.date,
+    authors: post.authors,
+  });
+  assert.equal(metadata.title, 'Search title: agents');
+  assert.equal(metadata.description, 'A longer search description for the same note.');
+  assert.deepEqual(metadata.keywords, ['AI agents', 'Research', 'practice', 'notes', 'Darren Su', 'writing']);
+  assert.equal(metadata.openGraph.title, metadata.title);
+  const article = articleNode(post, 'en');
+  assert.equal(article.headline, 'An original field note');
+  assert.equal(article.alternativeHeadline, 'Search title: agents');
+  assert.equal(article.description, 'A published observation: with its original date.');
+  assert.equal(article.keywords, 'AI agents, Research, practice, notes');
+  assert.deepEqual(article.about, [{ '@type': 'Thing', name: 'Practice' }]);
+  assert.ok(!Object.hasOwn(article, 'mentions'));
+  assert.ok(!Object.hasOwn(article, 'citation'));
+});
+
+test('articles without seo fields keep the current metadata and JSON-LD', () => {
+  const post = postFrom(plainArticle);
+  for (const field of ['seoTitle', 'seoDescription', 'seoKeywords', 'about']) {
+    assert.ok(!Object.hasOwn(post, field), field);
+  }
+  const metadata = createPageMetadata({
+    locale: 'en',
+    path: '/blog/example',
+    ...getBlogPageMetadata(post),
+    openGraphType: 'article',
+    publishedTime: post.date,
+    authors: post.authors,
+  });
+  assert.equal(metadata.title, post.title);
+  assert.equal(metadata.description, post.description);
+  assert.deepEqual(metadata.keywords, [...post.tags, 'Darren Su', 'writing']);
+  const article = articleNode(post, 'en');
+  assert.deepEqual(Object.keys(article), [
+    '@type',
+    '@id',
+    'mainEntityOfPage',
+    'url',
+    'headline',
+    'description',
+    'datePublished',
+    'author',
+    'publisher',
+    'image',
+    'keywords',
+    'inLanguage',
+    'isPartOf',
+  ]);
+  assert.equal(article.headline, post.title);
+  assert.equal(article.description, post.description);
+  assert.equal(article.keywords, post.tags.join(', '));
+  assert.equal(article.datePublished, '2024-02-29');
+});
+
+test('filled articles use the researched search fields and leave visible text and dates alone', () => {
+  const expected = {
+    'zh/managing-31-ai-employees': {
+      seoTitle: '管了 31 个 AI 员工之后，我重新理解了管理学：多 Agent 分工与数字组织设计',
+      seoDescription: '我搭建了一个基于 OpenClaw 的多 Agent 协作系统：31 个 Agent 组成「四部一室」，44 个定时任务每天自动执行。当员工变成 AI，管理的核心矛盾从「意愿问题」变成了「理解问题」；在 AI 时代，组织的稀缺资源变成了人类的判断力和注意力。',
+    },
+    'en/managing-31-ai-employees': {
+      seoTitle: 'Managing 31 AI Employees: Multi-Agent Roles and Digital Organization Design',
+      seoDescription: 'I built a multi-agent system on OpenClaw: 31 agents in “four departments and one office,” 44 daily scheduled tasks, and a product whose daily operation I handed entirely to agents. What operating it taught me about management.',
+    },
+    'zh/turning-expertise-into-an-asset': {
+      seoTitle: 'AI 时代，如何把一个人的经验变成一项资产？｜一人公司（OPC）与专家智能体',
+      seoDescription: '和 Leapility 跃向 CEO 白双聊专家智能体：真正的 OPC，不是一个人完成所有工作，而是把个人经验产品化——Solo 和 Scalable。也聊怎样提取隐性知识、AIM 模型，以及为什么 AI 时代效率不是最终竞争力。',
+    },
+    'en/turning-expertise-into-an-asset': {
+      seoTitle: 'How Can Personal Experience Become an Asset in the AI Era? Expert Agents and One-Person Companies',
+      seoDescription: 'A conversation with Bai Shuang, CEO of Leapility, on expert agents and OPCs: a real OPC is not about doing every job yourself, but about turning personal experience into a product — Solo and Scalable.',
+    },
+    'en/superai-china-ecosystem-visit': {
+      seoTitle: "China's AI Ecosystem: Five Observations from Hangzhou and Shanghai",
+      seoDescription: 'Field notes from visiting Zhejiang University, ModelScope, Qwen, MiniMax, SenseTime and others with the SuperAI team: global teams are curious about China, but the entry points are weak, and Chinese companies should bring their understanding of the industry, not only products.',
+    },
+    'zh/superai-china-ecosystem-visit': {
+      seoTitle: '海外到底怎么看中国 AI 生态？陪 SuperAI 团队走访杭州和上海的五个现场观察',
+      seoDescription: '陪 SuperAI 团队走访浙大、魔搭社区、Qwen、MiniMax、商汤等高校、社区和公司后的五个观察：一年一次的大会不够了；海外不是不关心中国，而是缺少理解中国的入口；中国科技企业出海，真正应该讲什么。',
+    },
+  };
+
+  for (const locale of locales) {
+    for (const post of getAllPosts(locale)) {
+      const key = `${locale}/${post.slug}`;
+      const metadata = getBlogPageMetadata(post);
+      const article = articleNode(post, locale);
+      assert.equal(article.headline, post.title);
+      assert.equal(article.description, post.description);
+      if (post.slug === 'turning-expertise-into-an-asset') assert.equal(post.date, '2026-07-22');
+      else assert.ok(!Object.hasOwn(post, 'date') && !Object.hasOwn(post, 'dateModified'));
+      if (!expected[key]) {
+        assert.equal(metadata.title, post.title);
+        assert.equal(metadata.description, post.description);
+        assert.deepEqual(metadata.keywords, [...post.tags, 'Darren Su', 'writing']);
+        assert.ok(!Object.hasOwn(article, 'alternativeHeadline'));
+        assert.ok(!Object.hasOwn(article, 'about'));
+        assert.equal(article.keywords, post.tags.join(', '));
+        continue;
+      }
+      assert.equal(post.seoTitle, expected[key].seoTitle);
+      assert.equal(post.seoDescription, expected[key].seoDescription);
+      assert.equal(metadata.title, post.seoTitle);
+      assert.equal(metadata.description, post.seoDescription);
+      assert.notEqual(metadata.title, post.title);
+      assert.equal(article.alternativeHeadline, post.seoTitle);
+      assert.equal(article.keywords, [...post.tags, ...post.seoKeywords].join(', '));
+      if (post.about) assert.deepEqual(article.about, post.about.map((name) => ({ '@type': 'Thing', name })));
+      else assert.ok(!Object.hasOwn(article, 'about'));
+    }
+  }
+});
+
+test('listed JSON-LD extras use names that appear in the article and skip unlisted pages', () => {
+  const zhManaging = getAllPosts('zh').find((post) => post.slug === 'managing-31-ai-employees');
+  const managing = articleNode(zhManaging, 'zh');
+  assert.deepEqual(managing.mentions.map((item) => item.name), ['OpenClaw', 'Claude Code', 'GlobalTechEvents']);
+  for (const name of managing.mentions.map((item) => item.name)) {
+    assert.ok(zhManaging.content.includes(name), name);
+  }
+  assert.deepEqual(managing.citation.map((item) => item.url), [
+    'https://openai.com/index/harness-engineering/',
+    'https://martinfowler.com/articles/harness-engineering.html',
+    'https://www.library.hbs.edu/hc/hawthorne/intro.html',
+    'https://www.nber.org/papers/w15016',
+    'https://code.claude.com/docs/en/memory',
+    'https://code.claude.com/docs/en/agent-teams',
+    'https://code.claude.com/docs/en/worktrees',
+    'https://github.com/ximing/claude-code-source/blob/main/articles/10-memory-system.md',
+    'https://www.axios.com/2026/03/31/anthropic-leaked-source-code-ai',
+    'https://techcrunch.com/2026/03/31/anthropic-is-having-a-month/',
+  ]);
+  for (const citation of managing.citation) assert.ok(zhManaging.content.includes(citation.url));
+
+  const enManaging = articleNode(getAllPosts('en').find((post) => post.slug === 'managing-31-ai-employees'), 'en');
+  assert.ok(!Object.hasOwn(enManaging, 'mentions'));
+  assert.ok(!Object.hasOwn(enManaging, 'citation'));
+
+  const zhConversation = getAllPosts('zh').find((post) => post.slug === 'turning-expertise-into-an-asset');
+  const conversation = articleNode(zhConversation, 'zh');
+  assert.deepEqual(conversation.mentions, [
+    { '@type': 'Person', name: '白双' },
+    { '@type': 'Organization', name: 'Leapility 跃向' },
+  ]);
+  for (const mention of conversation.mentions) assert.ok(zhConversation.content.includes(mention.name));
+  assert.ok(!Object.hasOwn(articleNode(getAllPosts('en').find((post) => post.slug === 'turning-expertise-into-an-asset'), 'en'), 'mentions'));
+
+  const visit = getAllPosts('en').find((post) => post.slug === 'superai-china-ecosystem-visit');
+  const visitArticle = articleNode(visit, 'en');
+  assert.deepEqual(visitArticle.contentLocation, [
+    { '@type': 'Place', name: 'Hangzhou' },
+    { '@type': 'Place', name: 'Shanghai' },
+  ]);
+  for (const place of visitArticle.contentLocation) assert.ok(visit.content.includes(place.name));
+  for (const mention of visitArticle.mentions) {
+    assert.equal(mention['@type'], 'Organization');
+    assert.ok(visit.content.includes(mention.name), mention.name);
+  }
+  assert.deepEqual(visitArticle.mentions.map((item) => item.name), [
+    'Zhejiang University', 'ModelScope', 'Qwen', 'Qoder', 'Datawhale', 'ZhenFund', 'MiniMax', 'Volcano Engine', 'Trae', 'SenseTime',
+  ]);
+  const zhVisit = articleNode(getAllPosts('zh').find((post) => post.slug === 'superai-china-ecosystem-visit'), 'zh');
+  assert.ok(!Object.hasOwn(zhVisit, 'mentions'));
+  assert.ok(!Object.hasOwn(zhVisit, 'contentLocation'));
+});
+
+test('case-study search fields replace only the pages that define them', () => {
+  const speaking = getWorkById('zh', 'agent-speaking');
+  const speakingMetadata = getWorkPageMetadata(speaking, 'zh');
+  assert.equal(speakingMetadata.title, '31 个 Agent 的数字组织实践：Agent 怎样分工、哪里会出错');
+  assert.equal(speakingMetadata.description, speaking.summary);
+  assert.deepEqual(speakingMetadata.keywords, ['多 Agent 分工', 'AI Agent 分享', '数字组织', '31 个 Agent', '44 个自动任务', '把任务交给 AI 后的管理方式']);
+  assert.ok(!speakingMetadata.keywords.includes('WAIC 官方夜场'));
+  const speakingCase = workCaseStructuredData(speaking, 'zh')['@graph'].find((node) => node['@type'] === 'CreativeWork');
+  assert.equal(speakingCase.name, speaking.title);
+  assert.equal(speakingCase.description, speaking.summary);
+
+  const englishSpeaking = getWorkById('en', 'agent-speaking');
+  assert.equal(getWorkPageMetadata(englishSpeaking, 'en').title, 'A Digital Organization with 31 Agents: How Agents Divide Tasks and Where They Fail');
+  assert.equal(getWorkPageMetadata(englishSpeaking, 'en').description, englishSpeaking.summary);
+
+  const superai = getWorkById('en', 'superai-china');
+  assert.equal(getWorkPageMetadata(superai, 'en').title, 'SuperAI’s China Visit: Learning About China’s AI Ecosystem in Hangzhou and Shanghai');
+  assert.deepEqual(getWorkPageMetadata(superai, 'en').keywords, ['China AI ecosystem', 'Hangzhou', 'Shanghai', 'Singapore', 'SuperAI', 'Datawhale', 'Zhejiang University', 'ModelScope', 'Qwen', 'MiniMax']);
+  assert.equal(getWorkPageMetadata(getWorkById('zh', 'superai-china'), 'zh').title, 'SuperAI 中国 AI 生态走访：杭州、上海与新加坡');
+  assert.deepEqual(
+    getWorkPageMetadata(getWorkById('zh', 'superai-china'), 'zh').keywords,
+    [...getPageKeywords('zh', 'work'), 'SuperAI 中国 AI 生态走访', '杭州 · 上海 · 新加坡'],
+  );
+
+  const festival = getWorkById('en', 'aix-creation-festival');
+  assert.equal(getWorkPageMetadata(festival, 'en').title, 'AI+X Creation Festival: 40 Cities, for AI Learners Outside the Largest Tech Hubs');
+  assert.equal(getWorkPageMetadata(getWorkById('zh', 'aix-creation-festival'), 'zh').title, 'AI+X 创造节：40 座城市，让不在一线城市的 AI 学习者和开发者在本地见面');
+
+  const unchanged = getWorkById('zh', 'wechat-innovation-workshop');
+  const unchangedMetadata = getWorkPageMetadata(unchanged, 'zh');
+  assert.equal(unchangedMetadata.title, unchanged.title);
+  assert.equal(unchangedMetadata.description, unchanged.summary);
+  assert.deepEqual(unchangedMetadata.keywords, [...getPageKeywords('zh', 'work'), unchanged.title, unchanged.location]);
+  assert.ok(unchangedMetadata.keywords.includes('WAIC 官方夜场'));
+});
+
+test('project index metadata mentions the AI-native work system without a new publication date', () => {
+  assert.deepEqual(getProjectsPageKeywords('zh').slice(-2), ['AI 原生工作系统', '多 Agent 系统']);
+  assert.deepEqual(getProjectsPageKeywords('en').slice(-2), ['AI-native work system', 'multi-agent system']);
+  assert.ok(getProjectsPageKeywords('zh').includes('WAIC 官方夜场'));
+  const zh = JSON.parse(fs.readFileSync(new URL('../messages/zh.json', import.meta.url), 'utf8'));
+  const en = JSON.parse(fs.readFileSync(new URL('../messages/en.json', import.meta.url), 'utf8'));
+  assert.equal(zh.projects.meta.description, 'Darren Su / 苏鹏的产品与项目：MatchPoint、GlobalTechEvents、Datawhale AI+X Events，日常使用的 AI 原生工作系统（31 个专业 Agent、44 个自动任务），以及代表案例。');
+  assert.equal(en.projects.meta.description, 'Products and projects by Darren Su, including MatchPoint, GlobalTechEvents, Datawhale AI+X Events, an AI-native work system with 31 specialized agents and 44 recurring automations, and selected case studies.');
+  assert.equal(getSiteContent('zh').seo.home.knowsAbout.at(-1), '数字组织设计');
+  assert.equal(getSiteContent('en').seo.home.knowsAbout.at(-1), 'Digital Organization Design');
+  assert.ok(getSiteContent('zh').seo.home.knowsAbout.includes('多 Agent 数字组织'));
+  assert.ok(getSiteContent('en').seo.home.knowsAbout.includes('China AI ecosystem'));
+});
+
+test('llms.txt and RSS keep visible titles, and every topic URL is in the sitemap', async () => {
+  const body = await (await llmsGET()).text();
+  const writingAt = body.indexOf('## Published writing');
+  const topicsAt = body.indexOf('## Topics / 主题索引');
+  assert.ok(topicsAt >= 0 && topicsAt < writingAt);
+  const topics = body.slice(topicsAt, writingAt);
+  const urls = [...topics.matchAll(/\]\((https?:\/\/[^)]+)\)/g)].map((match) => match[1]);
+  const sitemapUrls = new Set(sitemap().map((entry) => entry.url));
+  assert.equal(urls.length, 19);
+  for (const url of urls) assert.ok(sitemapUrls.has(url), `${url} must already be in the sitemap`);
+  const xml = await (await rssGET()).text();
+  for (const locale of locales) {
+    for (const post of getAllPosts(locale)) {
+      assert.ok(body.includes(`- [${post.title}](${siteUrl}/${locale}/blog/${post.slug}): ${post.description}`));
+      const markdown = articleMarkdown(post, locale);
+      assert.ok(markdown.includes(`# ${post.title}`));
+      assert.ok(markdown.startsWith(`---\ntitle: ${JSON.stringify(post.title)}`));
+      if (!post.seoTitle) continue;
+      assert.ok(!body.includes(post.seoTitle));
+      assert.ok(!body.includes(post.seoDescription));
+      assert.ok(!xml.includes(post.seoTitle));
+      assert.ok(!xml.includes(post.seoDescription));
+      assert.ok(!markdown.includes(post.seoTitle));
+      assert.ok(!markdown.includes(post.seoDescription));
+    }
+  }
+});
+
+test('article and case pages still bind the visible title, summary, and tags', () => {
+  const articlePage = fs.readFileSync(new URL('../src/app/[locale]/blog/[slug]/page.tsx', import.meta.url), 'utf8');
+  assert.match(articlePage, /<h1>\{post\.title\}<\/h1>/);
+  assert.match(articlePage, /<p className="reading-deck">\{post\.description\}<\/p>/);
+  assert.match(articlePage, /post\.tags\.map\(tag =>/);
+  const casePage = fs.readFileSync(new URL('../src/app/[locale]/work/[slug]/page.tsx', import.meta.url), 'utf8');
+  assert.match(casePage, /<h1>\{work\.title\}<\/h1>/);
+  assert.match(casePage, /<p className="interior-lead">\{work\.summary\}<\/p>/);
 });
 
 test('JSON-LD remains valid JSON without allowing content to close its script element', () => {
