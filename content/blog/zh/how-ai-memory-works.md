@@ -1,7 +1,7 @@
 ---
 title: "如何保持 AI 记忆"
-archiveYear: "2024"
-dateNote: "2024 年技术笔记"
+date: 2024-11-17
+originalUrl: https://mp.weixin.qq.com/s/E0m0j8ZCrGg9mId3Q4eF0w
 authors: ["Darren Su"]
 description: "从对话压缩、外部存储到 Mem0 的记忆提取与搜索，讨论 AI 应用怎样保留关键信息。保留原文所依据的历史版本、提示词和代码示例。"
 tags: ["AI 记忆", "Mem0", "RAG", "技术笔记"]

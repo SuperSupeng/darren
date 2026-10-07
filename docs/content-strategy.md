@@ -55,7 +55,7 @@ authors: [Darren Su]
 ---
 ```
 
-`title`、`description` 为单行，`tags` 是非空行内列表。共同作者按原文顺序填写非空 `authors` 列表，省略时默认为 Darren Su。解析器支持 LF / CRLF / CR 和 UTF-8 BOM；元数据无效时明确失败，不用构建日补齐。
+`title`、`description` 为单行，`tags` 是非空行内列表。共同作者按原文顺序填写非空 `authors` 列表，省略时默认为 Darren Su。已核实的首发页面可另写单行 `originalUrl`（https）。它只记录来源，不代替 `date`，也不改写正文。解析器支持 LF / CRLF / CR 和 UTF-8 BOM；元数据无效时明确失败，不用构建日补齐。
 
 公开副本上传日、编辑器保存日、翻译日与网站导入日都不能代替原始发表日。没有精确日期时，页面显示归档说明，HTML metadata、JSON-LD、RSS 和 Markdown 导出均省略发表日期。项目年份描述项目本身，不是案例页发表日；sitemap 不从这些日期推导 `lastModified`。
 

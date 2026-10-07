@@ -76,6 +76,12 @@ test('footer keeps existing platform links without an Elsewhere section', () => 
     'Instagram',
     '小红书',
     'n8n Ambassador',
+    'Substack',
+    '公众号 / WeChat',
+    '抖音',
+    '即刻',
+    'Threads',
+    '知乎',
   ]);
   assert.ok(socialLinks.some(([, href]) => href === githubProfileUrl));
 });

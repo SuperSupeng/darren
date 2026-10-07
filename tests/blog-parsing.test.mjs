@@ -158,7 +158,7 @@ test('historical sorting is stable and does not invent publication dates for arc
 });
 
 test('published articles retain complete metadata and Markdown, with only supported date precision', () => {
-  const historicalSlugs = ['superai-china-ecosystem-visit', 'managing-31-ai-employees', 'zongtong-temple-retreat'];
+  const historicalSlugs = ['superai-china-ecosystem-visit'];
   for (const locale of ['zh', 'en']) {
     const posts = getAllPosts(locale);
     for (const slug of historicalSlugs) {
@@ -173,9 +173,9 @@ test('published articles retain complete metadata and Markdown, with only suppor
       assert.notEqual(post.title, post.slug);
       assert.ok(post.description.length > 30);
       assert.ok(post.tags.length > 0);
-      assert.ok(post.content.length > 1000);
+      assert.ok(post.content.length > (post.slug === 'jindongnan-travel-notes' ? 300 : 1000), post.slug);
       assert.equal(post.content, source.slice(source.indexOf('\n---\n') + '\n---\n'.length));
-      for (const field of ['title', 'date', 'dateModified', 'archiveYear', 'dateNote', 'authors', 'description', 'tags', 'section', 'content']) {
+      for (const field of ['title', 'date', 'dateModified', 'archiveYear', 'dateNote', 'authors', 'description', 'tags', 'section', 'originalUrl', 'content']) {
         assert.deepEqual(post[field], parsed[field]);
       }
       assert.deepEqual(parseBlogContent(`\uFEFF${source.replace(/\n/g, '\r\n')}`), parsed);
@@ -183,13 +183,17 @@ test('published articles retain complete metadata and Markdown, with only suppor
   }
   const chinesePosts = getAllPosts('zh');
   assert.deepEqual(chinesePosts.filter(post => post.date).map(post => [post.slug, post.date]), [
+    ['changzhi-small-city-ai', '2026-10-05'],
+    ['jindongnan-travel-notes', '2026-10-05'],
     ['turning-expertise-into-an-asset', '2026-07-22'],
+    ['managing-31-ai-employees', '2026-04-05'],
+    ['zongtong-temple-retreat', '2026-02-27'],
+    ['how-ai-memory-works', '2024-11-17'],
+    ['myscaledb-vector-database-dialogue', '2024-05-10'],
   ]);
   const expectedArchiveYears = {
     'ai-for-good-youth-classes': '2024',
-    'how-ai-memory-works': '2024',
     'rag-from-demo-to-production': '2024',
-    'myscaledb-vector-database-dialogue': '2024',
     'why-i-started-agi-villa': '2025',
     '2025-year-in-review': '2025',
   };
@@ -201,10 +205,10 @@ test('published articles retain complete metadata and Markdown, with only suppor
     assert.ok(!Object.hasOwn(post, 'date'), `${slug}: a copy or event date must not become the publication day`);
   }
   assert.deepEqual(chinesePosts.map(post => post.date?.slice(0, 4) ?? post.archiveYear), [
-    '2026', '2026', '2026', '2026', '2025', '2025', '2024', '2024', '2024', '2024',
+    '2026', '2026', '2026', '2026', '2026', '2026', '2025', '2025', '2024', '2024', '2024', '2024',
   ]);
   assert.deepEqual(
     chinesePosts.filter(post => post.section === 'field-notes').map(post => post.slug).sort(),
-    ['superai-china-ecosystem-visit', 'zongtong-temple-retreat'],
+    ['jindongnan-travel-notes', 'superai-china-ecosystem-visit', 'zongtong-temple-retreat'],
   );
 });

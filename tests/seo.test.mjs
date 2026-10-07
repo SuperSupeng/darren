@@ -342,6 +342,10 @@ test('filled articles use the researched search fields and leave visible text an
       seoTitle: '海外到底怎么看中国 AI 生态？陪 SuperAI 团队走访杭州和上海的五个现场观察',
       seoDescription: '陪 SuperAI 团队走访浙大、魔搭社区、Qwen、MiniMax、商汤等高校、社区和公司后的五个观察：一年一次的大会不够了；海外不是不关心中国，而是缺少理解中国的入口；中国科技企业出海，真正应该讲什么。',
     },
+    'zh/changzhi-small-city-ai': {
+      seoTitle: '在长治，我看到了小城市做AI的机会｜小城市做 AI，可以从哪里开始？',
+      seoDescription: '小城市做 AI，可以从哪里开始？ 在长治和当地伙伴交流后，我的一个思路是：聚起想做事的人，梳理产业需求和真实场景，再把全国的人才与资源连接进来。产业、文化和文旅，都有值得一起探索的方向。',
+    },
   };
 
   for (const locale of locales) {
@@ -351,15 +355,29 @@ test('filled articles use the researched search fields and leave visible text an
       const article = articleNode(post, locale);
       assert.equal(article.headline, post.title);
       assert.equal(article.description, post.description);
-      if (post.slug === 'turning-expertise-into-an-asset') assert.equal(post.date, '2026-07-22');
-      else assert.ok(!Object.hasOwn(post, 'date') && !Object.hasOwn(post, 'dateModified'));
+      const verifiedDates = {
+        'turning-expertise-into-an-asset': '2026-07-22',
+        'changzhi-small-city-ai': '2026-10-05',
+        'jindongnan-travel-notes': '2026-10-05',
+        'managing-31-ai-employees': '2026-04-05',
+        'zongtong-temple-retreat': '2026-02-27',
+        'how-ai-memory-works': '2024-11-17',
+        'myscaledb-vector-database-dialogue': '2024-05-10',
+      };
+      if (verifiedDates[post.slug]) {
+        assert.equal(post.date, verifiedDates[post.slug]);
+        assert.ok(!Object.hasOwn(post, 'dateModified'));
+      } else {
+        assert.ok(!Object.hasOwn(post, 'date') && !Object.hasOwn(post, 'dateModified'));
+      }
       if (!expected[key]) {
-        assert.equal(metadata.title, post.title);
-        assert.equal(metadata.description, post.description);
-        assert.deepEqual(metadata.keywords, [...post.tags, 'Darren Su', 'writing']);
-        assert.ok(!Object.hasOwn(article, 'alternativeHeadline'));
+        assert.equal(metadata.title, post.seoTitle ?? post.title);
+        assert.equal(metadata.description, post.seoDescription ?? post.description);
+        assert.deepEqual(metadata.keywords, [...post.tags, ...(post.seoKeywords ?? []), 'Darren Su', 'writing']);
+        if (post.seoTitle) assert.equal(article.alternativeHeadline, post.seoTitle);
+        else assert.ok(!Object.hasOwn(article, 'alternativeHeadline'));
         assert.ok(!Object.hasOwn(article, 'about'));
-        assert.equal(article.keywords, post.tags.join(', '));
+        assert.equal(article.keywords, [...post.tags, ...(post.seoKeywords ?? [])].join(', '));
         continue;
       }
       assert.equal(post.seoTitle, expected[key].seoTitle);
@@ -486,7 +504,7 @@ test('llms.txt and RSS keep visible titles, and every topic URL is in the sitema
   const topics = body.slice(topicsAt, writingAt);
   const urls = [...topics.matchAll(/\]\((https?:\/\/[^)]+)\)/g)].map((match) => match[1]);
   const sitemapUrls = new Set(sitemap().map((entry) => entry.url));
-  assert.equal(urls.length, 19);
+  assert.equal(urls.length, 21);
   for (const url of urls) assert.ok(sitemapUrls.has(url), `${url} must already be in the sitemap`);
   const xml = await (await rssGET()).text();
   for (const locale of locales) {
@@ -497,11 +515,13 @@ test('llms.txt and RSS keep visible titles, and every topic URL is in the sitema
       assert.ok(markdown.startsWith(`---\ntitle: ${JSON.stringify(post.title)}`));
       if (!post.seoTitle) continue;
       assert.ok(!body.includes(post.seoTitle));
-      assert.ok(!body.includes(post.seoDescription));
       assert.ok(!xml.includes(post.seoTitle));
-      assert.ok(!xml.includes(post.seoDescription));
       assert.ok(!markdown.includes(post.seoTitle));
-      assert.ok(!markdown.includes(post.seoDescription));
+      if (post.seoDescription && post.seoDescription !== post.description) {
+        assert.ok(!body.includes(post.seoDescription));
+        assert.ok(!xml.includes(post.seoDescription));
+        assert.ok(!markdown.includes(post.seoDescription));
+      }
     }
   }
 });
@@ -514,6 +534,33 @@ test('article and case pages still bind the visible title, summary, and tags', (
   const casePage = fs.readFileSync(new URL('../src/app/[locale]/work/[slug]/page.tsx', import.meta.url), 'utf8');
   assert.match(casePage, /<h1>\{work\.title\}<\/h1>/);
   assert.match(casePage, /<p className="interior-lead">\{work\.summary\}<\/p>/);
+});
+
+test('the Changzhi video page publishes one VideoObject and stays Chinese-only', () => {
+  assert.equal(getAllPosts('en').some((post) => post.slug === 'changzhi-small-city-ai' || post.slug === 'jindongnan-travel-notes'), false);
+  const post = getAllPosts('zh').find((item) => item.slug === 'changzhi-small-city-ai');
+  const graph = articleStructuredData(post, 'zh')['@graph'];
+  const video = graph.find((node) => node['@type'] === 'VideoObject');
+  const article = graph.find((node) => node['@type'] === 'BlogPosting');
+  assert.equal(video.name, '在长治，我看到了小城市做AI的机会');
+  assert.equal(video.description, post.description);
+  assert.equal(video.thumbnailUrl, `${siteUrl}/blog/changzhi/cover.jpg`);
+  assert.equal(video.uploadDate, '2026-10-05T20:30:22+08:00');
+  assert.equal(video.duration, 'PT5M51S');
+  assert.equal(video.embedUrl, 'https://open.douyin.com/player/video?vid=7693160082292477235&autoplay=0');
+  assert.equal(video.url, 'https://www.douyin.com/video/7693160082292477235');
+  assert.deepEqual(video.author, { '@id': `${siteUrl}/#person` });
+  assert.equal(article.headline, post.title);
+  assert.equal(article.description, post.description);
+  assert.equal(article.datePublished, '2026-10-05');
+  assert.ok(!Object.hasOwn(article, 'dateModified'));
+  assert.ok(!post.seoKeywords.includes('县城'));
+  const entry = sitemap().find((item) => item.url === `${siteUrl}/zh/blog/changzhi-small-city-ai`);
+  assert.deepEqual(entry.alternates.languages, { zh: `${siteUrl}/zh/blog/changzhi-small-city-ai` });
+  assert.ok(!Object.hasOwn(entry, 'lastModified'));
+  const travel = sitemap().find((item) => item.url === `${siteUrl}/zh/blog/jindongnan-travel-notes`);
+  assert.deepEqual(travel.alternates.languages, { zh: `${siteUrl}/zh/blog/jindongnan-travel-notes` });
+  assert.ok(!Object.hasOwn(travel, 'lastModified'));
 });
 
 test('JSON-LD remains valid JSON without allowing content to close its script element', () => {

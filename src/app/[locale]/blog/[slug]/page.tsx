@@ -76,7 +76,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ local
               <header className="reading-header">
                 {post.tags.length > 0 && <div className="interior-tags">{post.tags.map(tag => <span key={tag}>{tag}</span>)}</div>}
                 <h1>{post.title}</h1>
-                <p className="reading-deck">{post.description}</p>
+                {post.slug === 'changzhi-small-city-ai' ? null : <p className="reading-deck">{post.description}</p>}
                 <div className="reading-byline">
                   <ArticleDate post={post} locale={locale} />
                   <span aria-hidden="true">·</span>

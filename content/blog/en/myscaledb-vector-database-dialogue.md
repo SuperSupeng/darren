@@ -1,7 +1,7 @@
 ---
 title: "After a Year of Rapid Growth, Where Do Vector Databases Go Next? A Conversation with MyScaleDB"
-archiveYear: "2024"
-dateNote: "A conversation from 2024"
+date: 2024-05-10
+originalUrl: https://mp.weixin.qq.com/s/R4XZ5vDCifa-a3CaQSxP6g
 authors: [Darren Su]
 description: A conversation with MyScale co-founder and CTO Linpeng Tang about vector databases, RAG and long context, combining SQL with vector queries, open source, commercialization, and technological ideals. The discussion retains its 2024 context.
 tags: [Vector databases, RAG, MyScale, Open source, Technical conversations]

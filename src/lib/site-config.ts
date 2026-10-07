@@ -73,6 +73,12 @@ export const socialLinks = [
   ['Instagram', instagramProfileUrl],
   ['小红书', 'https://xhslink.cn/m/1JL3lV0NGmO'],
   ['n8n Ambassador', n8nAmbassadorProfileUrl],
+  ['Substack', substackUrl],
+  ['公众号 / WeChat', wechatSelectedUrl],
+  ['抖音', 'https://www.douyin.com/user/MS4wLjABAAAA0d1aGLhG9NnpnfnNkfV4RUKpAHWyLiQrDf2S6W0Pqj4'],
+  ['即刻', 'https://web.okjike.com/u/03212cf6-2692-420e-be04-b512a0108dad'],
+  ['Threads', threadsProfileUrl],
+  ['知乎', zhihuProfileUrl],
 ] as const;
 
 export const navigationLinks = [

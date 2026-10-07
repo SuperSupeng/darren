@@ -43,6 +43,7 @@ export function articleMarkdown(post: BlogPost, locale: string) {
       ...(post.dateModified ? { dateModified: post.dateModified } : {}),
       ...(post.archiveYear ? { archiveYear: post.archiveYear } : {}),
       ...(post.dateNote ? { dateNote: post.dateNote } : {}),
+      ...(post.originalUrl ? { originalUrl: post.originalUrl } : {}),
       canonical,
       description: post.description,
       tags: post.tags,

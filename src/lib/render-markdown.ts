@@ -81,6 +81,15 @@ const inlineImageDimensions: Record<string, { width: number; height: number; bac
   '/blog/zongtong-retreat/pigeon.jpg': { width: 960, height: 2079 },
   '/blog/zongtong-retreat/relic.jpg': { width: 960, height: 1696 },
   '/blog/zongtong-retreat/temple.jpg': { width: 1707, height: 1280 },
+  '/blog/jindongnan/01.jpg': { width: 1499, height: 1999 },
+  '/blog/jindongnan/02.jpg': { width: 1500, height: 2000 },
+  '/blog/jindongnan/03.jpg': { width: 2000, height: 1500 },
+  '/blog/jindongnan/04.jpg': { width: 1499, height: 1999 },
+  '/blog/jindongnan/05.jpg': { width: 2000, height: 1500 },
+  '/blog/jindongnan/06.jpg': { width: 1999, height: 1499 },
+  '/blog/jindongnan/07.jpg': { width: 2000, height: 1500 },
+  '/blog/jindongnan/08.jpg': { width: 1500, height: 2000 },
+  '/blog/changzhi/cover.jpg': { width: 941, height: 1255 },
 };
 
 // Lightweight block renderer for the local article markdown files.
@@ -171,6 +180,18 @@ export function renderMarkdown(
       } else {
         output.push(`<h${level} ${anchorAttributes} class="scroll-mt-24 mt-8 mb-3 text-lg font-medium leading-relaxed text-ink-950">${text}</h${level}>`);
       }
+      continue;
+    }
+
+    const douyin = trimmed.match(/^:::douyin\s+(https:\/\/open\.douyin\.com\/player\/video\?\S+)\s+(\/blog\/[A-Za-z0-9./_-]+)\s+(.+)$/);
+    if (douyin) {
+      flushParagraph();
+      flushList();
+      const embedUrl = douyin[1];
+      const poster = douyin[2];
+      const embedTitle = douyin[3].trim();
+      if (!embedUrl.startsWith('https://open.douyin.com/player/video?')) continue;
+      output.push(`<div class="douyin-frame" style="background-image:url('${escapeAttribute(poster)}')"><iframe src="${escapeAttribute(embedUrl)}" title="${escapeAttribute(embedTitle)}" loading="lazy" allow="fullscreen" allowfullscreen></iframe></div>`);
       continue;
     }
 

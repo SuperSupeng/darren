@@ -15,6 +15,16 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
+        source: '/fr',
+        destination: '/en',
+        permanent: true,
+      },
+      {
+        source: '/fr/:path*',
+        destination: '/en/:path*',
+        permanent: true,
+      },
+      {
         source: '/:locale(en|zh)/work',
         destination: '/:locale/projects',
         permanent: true,

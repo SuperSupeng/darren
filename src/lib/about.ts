@@ -2,7 +2,7 @@ const aboutCopy = {
   zh: {
     title: '我是 Darren，也是苏鹏。',
     intro: '我做 AI 产品，连接世界各地的创造者。从工程研发出发，我在 Datawhale 从学习者慢慢变成组织者，也和伙伴发起社区、做自己的产品，探索 Agent 和自动化。工作之外，我参与过青少年 AI 公益课程，也参加禅修，把做事和生活里的经历写下来。',
-    description: 'Darren Su / 苏鹏，AI Builder、Datawhale 城市生态负责人、AGI Villa 联合创始人、n8n Ambassador。做 AI 产品，连接世界各地的创造者，记录工程、社区、公益课程与禅修经历。',
+    description: 'Darren，AI 创业者、野生人类学爱好者、禅修实践者。长期研究 AI 时代的人与组织。经常和 Founder、企业主聊天，有一档播客《重新组织》。关注全球 AI 与海外市场。',
     engineeringTitle: '从工程开始',
     engineering: [
       '2021 年，我在 PingCAP 做 TiCDC 研发实习，后来参与过 AI 基础设施、向量数据库和 AI 产品相关的工作。',
@@ -43,7 +43,7 @@ const aboutCopy = {
   en: {
     title: 'I’m Darren Su. My Chinese name is 苏鹏.',
     intro: 'I build AI products and connect builders around the world. I began in engineering, grew from a learner into an organizer at Datawhale, and now start communities with others, build products, and explore agents and automation. Beyond work, I have helped run volunteer AI classes for young people and practice meditation. I write about what I encounter in work and life.',
-    description: 'Darren Su is an AI Builder, Head of City Ecosystem at Datawhale, AGI Villa co-founder, and n8n Ambassador. He builds AI products, connects builders worldwide, and writes about engineering, communities, volunteer teaching, and meditation.',
+    description: 'Co-founder @ MatchPoint & AGI Villa · Head of City Ecosystem @ Datawhale · n8n Ambassador. Connecting global founders and builders with China’s AI ecosystem.',
     engineeringTitle: 'Beginning in engineering',
     engineering: [
       'In 2021, I interned on TiCDC development at PingCAP. Later, I worked on AI infrastructure, vector databases, and AI products. ',

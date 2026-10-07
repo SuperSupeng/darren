@@ -56,6 +56,12 @@ export function GET() {
     `- [How to Preserve AI Memory](${siteUrl}/en/blog/how-ai-memory-works) · [如何保持 AI 记忆](${siteUrl}/zh/blog/how-ai-memory-works)`,
     `- [A RAG Demo in a Week, Still Not in Production Six Months Later](${siteUrl}/en/blog/rag-from-demo-to-production) · [RAG 一周出 Demo，半年不上线。怎么解？](${siteUrl}/zh/blog/rag-from-demo-to-production)`,
     `- [Where Do Vector Databases Go Next? A Conversation with MyScaleDB](${siteUrl}/en/blog/myscaledb-vector-database-dialogue) · [狂奔一年后的向量数据库，何去何从？](${siteUrl}/zh/blog/myscaledb-vector-database-dialogue)`,
+    '',
+    '### Small-city AI / 小城市 AI',
+    `- [在长治，我看到了小城市做AI的机会](${siteUrl}/zh/blog/changzhi-small-city-ai): 小城市做 AI，可以从哪里开始？在长治和当地伙伴交流后，我的一个思路是：聚起想做事的人，梳理产业需求和真实场景，再把全国的人才与资源连接进来。产业、文化和文旅，都有值得一起探索的方向。`,
+    '',
+    '### Life and travel / 生活与游记',
+    `- [晋东南游记：长治、晋城与南太行](${siteUrl}/zh/blog/jindongnan-travel-notes): 山西真是一个值得多来的地方，文化底蕴深厚，风景也美，美食简直不要太多。`,
   ].join('\n');
 
   const body = [
