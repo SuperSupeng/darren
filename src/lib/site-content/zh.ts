@@ -236,7 +236,7 @@ export const chineseContent: LocalizedContent = {
     },
   },
   seo: {
-    ogImageAlt: "Darren Su / 苏鹏 — 做 AI 产品，连接世界各地的创造者",
+    ogImageAlt: "Darren Su / 苏鹏",
     home: {
       jobTitle: "MatchPoint 联合创始人、AGI Villa 联合创始人、Datawhale 城市生态负责人、n8n Ambassador、《重新组织》主持人",
       knowsAbout: [
