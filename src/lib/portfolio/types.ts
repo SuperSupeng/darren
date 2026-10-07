@@ -8,6 +8,9 @@ export type PortfolioWork = {
   id: string;
   category: 'ecosystem' | 'conference' | 'global' | 'speaking';
   title: string;
+  seoTitle?: string;
+  seoDescription?: string;
+  seoKeywords?: string[];
   year: string;
   location: string;
   role: string;

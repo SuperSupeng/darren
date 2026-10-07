@@ -263,6 +263,7 @@ export const englishContent = {
         "multi-agent organizations",
         "global technology events",
         "community-led growth",
+        "Digital Organization Design",
       ],
       professionalServiceName:
         "Darren Su - AI Ecosystem Programs and Product Workshops",

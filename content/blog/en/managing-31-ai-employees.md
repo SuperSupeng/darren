@@ -4,6 +4,10 @@ archiveYear: "2026"
 dateNote: "2026 field note"
 description: After putting 31 agents into real daily work, I began rethinking how tasks are understood, how information flows, and which rules need to be made explicit.
 tags: [AI Agents, Digital Organizations, Management, Product Experiments]
+seoTitle: "Managing 31 AI Employees: Multi-Agent Roles and Digital Organization Design"
+seoDescription: "I built a multi-agent system on OpenClaw: 31 agents in “four departments and one office,” 44 daily scheduled tasks, and a product whose daily operation I handed entirely to agents. What operating it taught me about management."
+seoKeywords: [AI employees, AI agents, multi-agent collaboration system, multi-agent organization, digital organization, Digital Organization Design, Harness Engineering, hourglass organization, span of control, two-way-door principle, possession principle, OpenClaw, GlobalTechEvents]
+about: [Multi-agent collaboration, Digital Organization Design, Management]
 ---
 
 **Contents**

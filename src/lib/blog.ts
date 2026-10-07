@@ -15,6 +15,10 @@ export interface BlogPost {
   dateNote?: string;
   authors: string[];
   description: string;
+  seoTitle?: string;
+  seoDescription?: string;
+  seoKeywords?: string[];
+  about?: string[];
   tags: string[];
   section: ArticleSection;
   content: string;
@@ -58,7 +62,7 @@ const defaultPostImage: BlogPost['image'] = {
   height: 630,
 };
 
-type ParsedBlogContent = Pick<BlogPost, 'title' | 'date' | 'dateModified' | 'archiveYear' | 'dateNote' | 'authors' | 'description' | 'tags' | 'section' | 'content'>;
+type ParsedBlogContent = Pick<BlogPost, 'title' | 'date' | 'dateModified' | 'archiveYear' | 'dateNote' | 'authors' | 'description' | 'seoTitle' | 'seoDescription' | 'seoKeywords' | 'about' | 'tags' | 'section' | 'content'>;
 
 // The local articles use single-line fields and an inline tag list.
 // Invalid source metadata must fail before it can reach HTML, JSON-LD, or feeds.
@@ -157,6 +161,11 @@ export function parseBlogContent(source: string, context = 'Blog article'): Pars
     return values;
   };
   const tags = inlineList('tags');
+  const optionalInlineList = (field: string) => fields.has(field) ? inlineList(field) : undefined;
+  const seoTitle = optionalText('seoTitle');
+  const seoDescription = optionalText('seoDescription');
+  const seoKeywords = optionalInlineList('seoKeywords');
+  const about = optionalInlineList('about');
   if (fields.has('author') && !fields.has('authors')) return fail('use the authors inline list instead of author');
   const authors = fields.has('authors') ? inlineList('authors') : ['Darren Su'];
   if (new Set(authors).size !== authors.length) return fail('authors must not contain duplicate names');
@@ -176,6 +185,10 @@ export function parseBlogContent(source: string, context = 'Blog article'): Pars
     ...(dateNote ? { dateNote } : {}),
     authors,
     description,
+    ...(seoTitle ? { seoTitle } : {}),
+    ...(seoDescription ? { seoDescription } : {}),
+    ...(seoKeywords ? { seoKeywords } : {}),
+    ...(about ? { about } : {}),
     tags,
     section,
     content,

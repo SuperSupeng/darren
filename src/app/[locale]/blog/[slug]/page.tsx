@@ -7,7 +7,7 @@ import { locales } from '@/i18n/config';
 import JsonLd from '@/components/JsonLd';
 import ArticleDate from '@/components/blog/ArticleDate';
 import '@/components/spatial/interiors.css';
-import { absoluteLocalizedUrl, articleStructuredData, createPageMetadata } from '@/lib/seo';
+import { absoluteLocalizedUrl, articleStructuredData, createPageMetadata, getBlogPageMetadata } from '@/lib/seo';
 import { renderMarkdown } from '@/lib/render-markdown';
 import { optimizeArticleImage } from '@/lib/optimize-article-image';
 
@@ -29,12 +29,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   }
 
   const availableLocales = locales.filter((item) => getPostBySlug(slug, item));
+  const document = getBlogPageMetadata(post);
   return createPageMetadata({
     locale,
     path: `/blog/${slug}`,
-    title: post.title,
-    description: post.description,
-    keywords: [...post.tags, 'Darren Su', 'writing'],
+    title: document.title,
+    description: document.description,
+    keywords: document.keywords,
     image: post.image.url,
     imageWidth: post.image.width,
     imageHeight: post.image.height,
