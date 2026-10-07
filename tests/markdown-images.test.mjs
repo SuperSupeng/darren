@@ -59,9 +59,9 @@ test('the Changzhi page embeds only the logged-out Douyin player', () => {
     assert.equal(frame.getAttribute('loading'), 'lazy');
     assert.equal(frame.closest('.douyin-frame').style.backgroundImage, 'url("/blog/changzhi/cover.jpg")');
     assert.equal(dom.window.document.querySelectorAll('iframe').length, 1);
-    assert.ok(dom.window.document.body.textContent.includes('视频字幕'));
-    assert.ok(!dom.window.document.body.textContent.includes('⚠'));
-    assert.ok(!dom.window.document.body.textContent.includes(' / '));
+    assert.ok(dom.window.document.body.textContent.includes('小城市做 AI，可以从哪里开始？'));
+    assert.ok(!dom.window.document.body.textContent.includes('视频字幕'));
+    assert.ok(!post.content.includes('这几天其实一直都在山西'));
   } finally {
     dom.window.close();
   }

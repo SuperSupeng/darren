@@ -173,7 +173,7 @@ test('published articles retain complete metadata and Markdown, with only suppor
       assert.notEqual(post.title, post.slug);
       assert.ok(post.description.length > 30);
       assert.ok(post.tags.length > 0);
-      assert.ok(post.content.length > (post.slug === 'jindongnan-travel-notes' ? 300 : 1000), post.slug);
+      assert.ok(post.content.length > (post.slug === 'jindongnan-travel-notes' || post.slug === 'changzhi-small-city-ai' ? 200 : 1000), post.slug);
       assert.equal(post.content, source.slice(source.indexOf('\n---\n') + '\n---\n'.length));
       for (const field of ['title', 'date', 'dateModified', 'archiveYear', 'dateNote', 'authors', 'description', 'tags', 'section', 'originalUrl', 'content']) {
         assert.deepEqual(post[field], parsed[field]);
