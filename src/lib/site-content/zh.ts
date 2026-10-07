@@ -4,7 +4,7 @@ import type { LocalizedContent } from './types';
 export const chineseContent: LocalizedContent = {
   ...englishContent,
   home: {
-    intro: "我做 AI 产品，连接世界各地的创造者。分享 Agent 与自动化实践，也记录社区、禅修和生活。",
+    intro: "Darren，AI 创业者、野生人类学爱好者、禅修实践者。长期研究 AI 时代的人与组织。经常和 Founder、企业主聊天，有一档播客《重新组织》。关注全球 AI 与海外市场。",
   },
   labels: {
     ...englishContent.labels,
@@ -192,7 +192,7 @@ export const chineseContent: LocalizedContent = {
       title: "Darren Su / 苏鹏",
       subtitle:
         "做 AI 产品，连接世界各地的创造者。我从工程研发走到社区建设，现在一边做产品，一边分享 Agent 与自动化实践，也记录禅修和生活。",
-      tags: ["AI Builder", "Datawhale 城市生态负责人", "AGI Villa 联合创始人", "n8n Ambassador"],
+      tags: ["AI 创业者", "Datawhale 城市生态负责人", "AGI Villa 联合创始人", "n8n Ambassador"],
     },
     kernel: [
       {
@@ -236,7 +236,7 @@ export const chineseContent: LocalizedContent = {
     },
   },
   seo: {
-    ogImageAlt: "Darren Su / 苏鹏 — 做 AI 产品，连接世界各地的创造者",
+    ogImageAlt: "Darren Su / 苏鹏",
     home: {
       jobTitle: "MatchPoint 联合创始人、AGI Villa 联合创始人、Datawhale 城市生态负责人、n8n Ambassador、《重新组织》主持人",
       knowsAbout: [
