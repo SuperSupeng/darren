@@ -54,7 +54,7 @@ test('the Changzhi page embeds only the logged-out Douyin player', () => {
   const dom = new JSDOM(renderMarkdown(post.content, post.title, 'zh'));
   try {
     const frame = dom.window.document.querySelector('iframe');
-    assert.equal(frame.getAttribute('src'), 'https://open.douyin.com/player/video?vid=7693160082292477235&autoplay=0');
+    assert.equal(frame.getAttribute('src'), 'https://open.douyin.com/player/video?vid=7693160082292477235&autoplay=0&width=100vw&height=calc(100vh%20%2B%2048px)');
     assert.equal(frame.getAttribute('title'), post.title);
     assert.equal(frame.getAttribute('loading'), 'lazy');
     assert.equal(frame.closest('.douyin-frame').style.backgroundImage, 'url("/blog/changzhi/cover.jpg")');

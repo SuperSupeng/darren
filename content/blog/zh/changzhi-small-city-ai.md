@@ -11,7 +11,7 @@ originalUrl: https://www.douyin.com/video/7693160082292477235
 
 原发于抖音（2026-10-05）：[https://www.douyin.com/video/7693160082292477235](https://www.douyin.com/video/7693160082292477235)
 
-:::douyin https://open.douyin.com/player/video?vid=7693160082292477235&autoplay=0 /blog/changzhi/cover.jpg 在长治，我看到了小城市做AI的机会
+:::douyin https://open.douyin.com/player/video?vid=7693160082292477235&autoplay=0&width=100vw&height=calc(100vh%20%2B%2048px) /blog/changzhi/cover.jpg 在长治，我看到了小城市做AI的机会
 
 小城市做 AI，可以从哪里开始？
 
