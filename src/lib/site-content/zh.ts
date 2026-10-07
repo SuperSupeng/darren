@@ -190,8 +190,6 @@ export const chineseContent: LocalizedContent = {
   about: {
     hero: {
       title: "Darren Su / 苏鹏",
-      subtitle:
-        "做 AI 产品，连接世界各地的创造者。我从工程研发走到社区建设，现在一边做产品，一边分享 Agent 与自动化实践，也记录禅修和生活。",
       tags: ["AI 创业者", "Datawhale 城市生态负责人", "AGI Villa 联合创始人", "n8n Ambassador"],
     },
     kernel: [
