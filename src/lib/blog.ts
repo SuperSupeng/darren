@@ -19,6 +19,7 @@ export interface BlogPost {
   seoDescription?: string;
   seoKeywords?: string[];
   about?: string[];
+  originalUrl?: string;
   tags: string[];
   section: ArticleSection;
   content: string;
@@ -54,6 +55,16 @@ const postImages: Record<string, BlogPost['image']> = {
     width: 1707,
     height: 1280,
   },
+  'jindongnan-travel-notes': {
+    url: '/blog/jindongnan/01.jpg',
+    width: 1499,
+    height: 1999,
+  },
+  'changzhi-small-city-ai': {
+    url: '/blog/changzhi/cover.jpg',
+    width: 941,
+    height: 1255,
+  },
 };
 
 const defaultPostImage: BlogPost['image'] = {
@@ -62,7 +73,7 @@ const defaultPostImage: BlogPost['image'] = {
   height: 630,
 };
 
-type ParsedBlogContent = Pick<BlogPost, 'title' | 'date' | 'dateModified' | 'archiveYear' | 'dateNote' | 'authors' | 'description' | 'seoTitle' | 'seoDescription' | 'seoKeywords' | 'about' | 'tags' | 'section' | 'content'>;
+type ParsedBlogContent = Pick<BlogPost, 'title' | 'date' | 'dateModified' | 'archiveYear' | 'dateNote' | 'authors' | 'description' | 'seoTitle' | 'seoDescription' | 'seoKeywords' | 'about' | 'originalUrl' | 'tags' | 'section' | 'content'>;
 
 // The local articles use single-line fields and an inline tag list.
 // Invalid source metadata must fail before it can reach HTML, JSON-LD, or feeds.
@@ -166,6 +177,8 @@ export function parseBlogContent(source: string, context = 'Blog article'): Pars
   const seoDescription = optionalText('seoDescription');
   const seoKeywords = optionalInlineList('seoKeywords');
   const about = optionalInlineList('about');
+  const originalUrl = optionalText('originalUrl');
+  if (originalUrl && !/^https:\/\/\S+$/.test(originalUrl)) return fail('originalUrl must be an https URL');
   if (fields.has('author') && !fields.has('authors')) return fail('use the authors inline list instead of author');
   const authors = fields.has('authors') ? inlineList('authors') : ['Darren Su'];
   if (new Set(authors).size !== authors.length) return fail('authors must not contain duplicate names');
@@ -189,6 +202,7 @@ export function parseBlogContent(source: string, context = 'Blog article'): Pars
     ...(seoDescription ? { seoDescription } : {}),
     ...(seoKeywords ? { seoKeywords } : {}),
     ...(about ? { about } : {}),
+    ...(originalUrl ? { originalUrl } : {}),
     tags,
     section,
     content,

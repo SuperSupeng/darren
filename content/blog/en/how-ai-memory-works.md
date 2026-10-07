@@ -1,7 +1,7 @@
 ---
 title: "How to Preserve AI Memory"
-archiveYear: "2024"
-dateNote: "2024 technical note"
+date: 2024-11-17
+originalUrl: https://mp.weixin.qq.com/s/E0m0j8ZCrGg9mId3Q4eF0w
 authors: ["Darren Su"]
 description: "A 2024 technical note on conversational compression, external storage, and memory extraction and search in Mem0, preserving the original historical version, prompts, and code examples."
 tags: ["AI Memory", "Mem0", "RAG", "Technical Notes"]

@@ -608,6 +608,20 @@ export function articleStructuredData(post: BlogPost, locale: string) {
   const contentLocations = articleContentLocations[articleKey] ?? [];
   const citations = referenceCitations(post.content);
 
+  const changzhiVideo = post.slug === 'changzhi-small-city-ai'
+    ? [{
+        '@type': 'VideoObject',
+        name: post.title,
+        description: post.description,
+        thumbnailUrl: `${siteUrl}${post.image.url}`,
+        uploadDate: '2026-10-05T20:30:22+08:00',
+        duration: 'PT5M51S',
+        embedUrl: 'https://open.douyin.com/player/video?vid=7693160082292477235&autoplay=0',
+        url: 'https://www.douyin.com/video/7693160082292477235',
+        author: { '@id': `${siteUrl}/#person` },
+      }]
+    : [];
+
   return {
     '@context': 'https://schema.org',
     '@graph': [
@@ -632,6 +646,7 @@ export function articleStructuredData(post: BlogPost, locale: string) {
         inLanguage: locale === 'zh' ? 'zh-CN' : 'en',
         isPartOf: { '@id': `${siteUrl}/#website` },
       },
+      ...changzhiVideo,
       personNode(locale),
       {
         '@type': 'BreadcrumbList',

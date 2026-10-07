@@ -1,7 +1,7 @@
 ---
 title: 狂奔一年后的向量数据库，何去何从？｜对话 MyScaleDB
-archiveYear: "2024"
-dateNote: "2024 年对谈"
+date: 2024-05-10
+originalUrl: https://mp.weixin.qq.com/s/R4XZ5vDCifa-a3CaQSxP6g
 authors: [Darren Su]
 description: 我和 MyScale 联合创始人兼 CTO 汤林鹏对谈向量数据库、RAG 与长文本、SQL 与向量查询的结合，以及开源、商业化和技术理想。保留 2024 年对谈时的观点与语境。
 tags: [向量数据库, RAG, MyScale, 开源, 技术对谈]

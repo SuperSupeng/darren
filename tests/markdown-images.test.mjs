@@ -49,6 +49,24 @@ test('responsive article images retain text, anchors, alt text and reserved dime
   }
 });
 
+test('the Changzhi page embeds only the logged-out Douyin player', () => {
+  const post = getAllPosts('zh').find((item) => item.slug === 'changzhi-small-city-ai');
+  const dom = new JSDOM(renderMarkdown(post.content, post.title, 'zh'));
+  try {
+    const frame = dom.window.document.querySelector('iframe');
+    assert.equal(frame.getAttribute('src'), 'https://open.douyin.com/player/video?vid=7693160082292477235&autoplay=0');
+    assert.equal(frame.getAttribute('title'), post.title);
+    assert.equal(frame.getAttribute('loading'), 'lazy');
+    assert.equal(frame.closest('.douyin-frame').style.backgroundImage, 'url("/blog/changzhi/cover.jpg")');
+    assert.equal(dom.window.document.querySelectorAll('iframe').length, 1);
+    assert.ok(dom.window.document.body.textContent.includes('小城市做 AI，可以从哪里开始？'));
+    assert.ok(!dom.window.document.body.textContent.includes('视频字幕'));
+    assert.ok(!post.content.includes('这几天其实一直都在山西'));
+  } finally {
+    dom.window.close();
+  }
+});
+
 test('unknown and remote image sources remain usable without an image-optimizer allowlist', () => {
   const markdown = '![New asset](/new-image.jpg)\n\n![Remote](https://example.org/image.jpg?one=1&two=2)';
   const dom = new JSDOM(renderMarkdown(markdown, 'Images', 'en', { responsiveImages: true, optimizeImage: optimizeArticleImage }));

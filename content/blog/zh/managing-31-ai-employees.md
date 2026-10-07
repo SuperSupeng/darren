@@ -1,7 +1,7 @@
 ---
 title: 管了 31 个 AI 员工之后，我重新理解了管理学
-archiveYear: "2026"
-dateNote: "2026 年手记"
+date: 2026-04-05
+originalUrl: https://mp.weixin.qq.com/s/x1ANkowOniuSSqT5Mcm1vQ
 description: 我把 31 个 Agent 真正用进日常工作以后，开始重新思考任务怎样被理解、信息怎样流动，以及哪些规则应该写清楚。
 tags: [AI Agent, 数字组织, 管理学, 产品实验]
 seoTitle: 管了 31 个 AI 员工之后，我重新理解了管理学：多 Agent 分工与数字组织设计
