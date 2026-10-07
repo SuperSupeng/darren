@@ -198,8 +198,6 @@ export const englishContent = {
   about: {
     hero: {
       title: "Darren Su / 苏鹏",
-      subtitle:
-        "I build AI products and connect builders around the world. My path has taken me from engineering to community work. Today I build products, share what I learn from agents and automation, and write about meditation and everyday life.",
       tags: [
         "AI Founder",
         "Head of City Ecosystem at Datawhale",
