@@ -1,7 +1,7 @@
 const aboutCopy = {
   zh: {
     title: '我是 Darren，也是苏鹏。',
-    intro: '我做 AI 产品，连接世界各地的创造者。从工程研发出发，我在 Datawhale 从学习者慢慢变成组织者，也和伙伴发起社区、做自己的产品，探索 Agent 和自动化。工作之外，我参与过青少年 AI 公益课程，也参加禅修，把做事和生活里的经历写下来。',
+    intro: 'Darren，AI 创业者、野生人类学爱好者、禅修实践者。长期研究 AI 时代的人与组织。经常和 Founder、企业主聊天，有一档播客《重新组织》。关注全球 AI 与海外市场。从工程研发出发，我在 Datawhale 从学习者慢慢变成组织者，也和伙伴发起社区、做自己的产品，探索 Agent 和自动化。工作之外，我参与过青少年 AI 公益课程，也参加禅修，把做事和生活里的经历写下来。',
     description: 'Darren，AI 创业者、野生人类学爱好者、禅修实践者。长期研究 AI 时代的人与组织。经常和 Founder、企业主聊天，有一档播客《重新组织》。关注全球 AI 与海外市场。',
     engineeringTitle: '从工程开始',
     engineering: [
@@ -42,7 +42,7 @@ const aboutCopy = {
   },
   en: {
     title: 'I’m Darren Su. My Chinese name is 苏鹏.',
-    intro: 'I build AI products and connect builders around the world. I began in engineering, grew from a learner into an organizer at Datawhale, and now start communities with others, build products, and explore agents and automation. Beyond work, I have helped run volunteer AI classes for young people and practice meditation. I write about what I encounter in work and life.',
+    intro: 'Co-founder @ MatchPoint & AGI Villa · Head of City Ecosystem @ Datawhale · n8n Ambassador. Connecting global founders and builders with China’s AI ecosystem. I began in engineering, grew from a learner into an organizer at Datawhale, and now start communities with others, build products, and explore agents and automation. Beyond work, I have helped run volunteer AI classes for young people and practice meditation. I write about what I encounter in work and life.',
     description: 'Co-founder @ MatchPoint & AGI Villa · Head of City Ecosystem @ Datawhale · n8n Ambassador. Connecting global founders and builders with China’s AI ecosystem.',
     engineeringTitle: 'Beginning in engineering',
     engineering: [

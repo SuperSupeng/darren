@@ -1,6 +1,6 @@
 export const englishContent = {
   home: {
-    intro: "I build AI products and connect builders around the world. I share what I learn from agents and automation, and write about communities, meditation, and everyday life.",
+    intro: "Co-founder @ MatchPoint & AGI Villa · Head of City Ecosystem @ Datawhale · n8n Ambassador. Connecting global founders and builders with China’s AI ecosystem.",
   },
   labels: {
     productLab: {
@@ -201,7 +201,7 @@ export const englishContent = {
       subtitle:
         "I build AI products and connect builders around the world. My path has taken me from engineering to community work. Today I build products, share what I learn from agents and automation, and write about meditation and everyday life.",
       tags: [
-        "AI Builder",
+        "AI Founder",
         "Head of City Ecosystem at Datawhale",
         "AGI Villa Co-founder",
         "n8n Ambassador",
