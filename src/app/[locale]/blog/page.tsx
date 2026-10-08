@@ -1,8 +1,10 @@
 import { getTranslations } from 'next-intl/server';
 import { getAllPosts } from '@/lib/blog';
+import { getSeriesCopy, seriesSlugs } from '@/lib/series';
 import { getSiteContent } from '@/lib/siteContent';
 import { rssPath } from '@/lib/site-config';
 import JsonLd from '@/components/JsonLd';
+import { Link } from '@/i18n/navigation';
 import { ArticleIndex, FeaturedArticle } from '@/components/spatial/ArticleIndex';
 import { CollectionHero, CollectionHeading } from '@/components/spatial/Collections';
 import { blogStructuredData, createPageMetadata, getPageKeywords } from '@/lib/seo';
@@ -48,6 +50,11 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
               <a className="collection-text-link" href="#notes-index">{copy.index} <span aria-hidden="true">↓</span></a>
               <a className="collection-text-link" href={rssPath}>{labels.rssLabel} <span aria-hidden="true">↗</span></a>
             </div>
+            <p className="collection-series-row">
+              {seriesSlugs.map((slug) => (
+                <Link key={slug} href={`/blog/topic/${slug}`}>{getSeriesCopy(slug, locale).name}</Link>
+              ))}
+            </p>
           </CollectionHero>
 
           <div className="collection-note-strip">

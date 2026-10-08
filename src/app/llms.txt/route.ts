@@ -1,5 +1,6 @@
 import { locales } from '@/i18n/config';
-import { getAllPosts } from '@/lib/blog';
+import { getAllPosts, getPostsBySeries } from '@/lib/blog';
+import { seriesCatalog, seriesSlugs } from '@/lib/series';
 import { getPortfolio } from '@/lib/portfolio';
 import {
   contactEmail,
@@ -28,9 +29,25 @@ export function GET() {
     ...getAllPosts(locale).map(post => `- [${post.title} (${locale}, Markdown)](${siteUrl}/${locale}/blog/${post.slug}/source.md)`),
     ...getPortfolio(locale).work.map(work => `- [${work.title} (${locale}, Markdown)](${siteUrl}/${locale}/work/${work.id}/source.md)`),
   ]);
+  const seriesTopics = seriesSlugs.flatMap((slug) => {
+    const series = seriesCatalog[slug];
+    const items = locales.flatMap((locale) =>
+      getPostsBySeries(locale, slug).map(
+        (post) => `- [${post.title}](${siteUrl}/${locale}/blog/${post.slug})`
+      )
+    );
+    return [
+      `### ${series.name.zh} / ${series.name.en}`,
+      `- [${series.name.zh}](${siteUrl}/zh/blog/topic/${slug})`,
+      `- [${series.name.en}](${siteUrl}/en/blog/topic/${slug})`,
+      ...items,
+      '',
+    ];
+  });
   const topicIndex = [
     '## Topics / 主题索引',
     '',
+    ...seriesTopics,
     '### Managing AI agents as a digital organization / 管理 AI 员工与多 Agent 数字组织',
     `- [管了 31 个 AI 员工之后，我重新理解了管理学](${siteUrl}/zh/blog/managing-31-ai-employees): 过去三个月，我搭建了一个基于 OpenClaw 的多 Agent 协作系统。31 个 Agent，组成「四部一室」；44 个定时任务每天自动执行。当员工变成 AI，管理的核心矛盾从「意愿问题」变成了「理解问题」。`,
     `- [Managing 31 AI Employees Changed How I Understand Management](${siteUrl}/en/blog/managing-31-ai-employees): Over the past three months, I built a multi-agent collaboration system on OpenClaw. Thirty-one agents form what I call “four departments and one office.” I handed the daily operation of Global Tech Events entirely to the agent system.`,

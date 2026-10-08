@@ -5,6 +5,7 @@ originalUrl: https://zhuanlan.zhihu.com/p/2011164194263831852
 description: During the 2026 Lunar New Year, I joined a meditation retreat at Zongtong Temple in northern Thailand. These notes record Venerable Ani, a pigeon caught in a typhoon, the temple's dog sanctuary, and what those days taught me about impermanence, suffering, and non-self.
 tags: [Retreat Notes, Northern Thailand, Inner Practice, Four Foundations of Mindfulness]
 section: field-notes
+series: practice
 ---
 
 During the 2026 Lunar New Year, I spent a few days on a meditation retreat at Zongtong Temple in northern Thailand. The course follows the insight meditation system of Mahasi Sayadaw, with practice centered on the four foundations of mindfulness.

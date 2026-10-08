@@ -1,7 +1,8 @@
 import { getAboutCopy } from './about';
 import type { Metadata } from 'next';
 import { defaultLocale, isLocale, locales, type Locale } from '@/i18n/config';
-import type { BlogPost } from '@/lib/blog';
+import { getPostsBySeries, type BlogPost } from '@/lib/blog';
+import { getSeriesCopy, seriesMetaDescription, type SeriesSlug } from '@/lib/series';
 import { getPortfolio, type PortfolioWork } from '@/lib/portfolio';
 import { getSiteContent } from '@/lib/siteContent';
 import {
@@ -670,6 +671,40 @@ export function articleStructuredData(post: BlogPost, locale: string) {
             item: url,
           },
         ],
+      },
+    ],
+  };
+}
+
+export function seriesStructuredData(slug: SeriesSlug, locale: string) {
+  const copy = getSeriesCopy(slug, locale);
+  const url = absoluteLocalizedUrl(locale, `/blog/topic/${slug}`);
+  const posts = getPostsBySeries(locale, slug);
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'CollectionPage',
+        '@id': `${url}#page`,
+        name: copy.name,
+        description: seriesMetaDescription(slug, locale),
+        url,
+        inLanguage: locale === 'zh' ? 'zh-CN' : 'en',
+        isPartOf: { '@id': `${siteUrl}/#website` },
+        mainEntity: { '@id': `${url}#items` },
+      },
+      {
+        '@type': 'ItemList',
+        '@id': `${url}#items`,
+        name: copy.name,
+        numberOfItems: posts.length,
+        itemListElement: posts.map((post, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: post.title,
+          url: absoluteLocalizedUrl(locale, `/blog/${post.slug}`),
+        })),
       },
     ],
   };

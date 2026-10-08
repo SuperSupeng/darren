@@ -47,6 +47,7 @@ export function articleMarkdown(post: BlogPost, locale: string) {
       canonical,
       description: post.description,
       tags: post.tags,
+      ...(post.series ? { series: post.series } : {}),
     }),
     `# ${post.title}`,
     post.description,

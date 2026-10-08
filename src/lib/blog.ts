@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { defaultLocale, isLocale, locales, type Locale } from '@/i18n/config';
 import { archivedArticleCovers } from '@/lib/blog-images';
+import { isSeriesSlug, type SeriesSlug } from '@/lib/series';
 
 export const articleSections = ['writing', 'field-notes'] as const;
 export type ArticleSection = (typeof articleSections)[number];
@@ -21,6 +22,7 @@ export interface BlogPost {
   about?: string[];
   originalUrl?: string;
   tags: string[];
+  series?: SeriesSlug;
   section: ArticleSection;
   content: string;
   readingTime: number;
@@ -73,7 +75,7 @@ const defaultPostImage: BlogPost['image'] = {
   height: 630,
 };
 
-type ParsedBlogContent = Pick<BlogPost, 'title' | 'date' | 'dateModified' | 'archiveYear' | 'dateNote' | 'authors' | 'description' | 'seoTitle' | 'seoDescription' | 'seoKeywords' | 'about' | 'originalUrl' | 'tags' | 'section' | 'content'>;
+type ParsedBlogContent = Pick<BlogPost, 'title' | 'date' | 'dateModified' | 'archiveYear' | 'dateNote' | 'authors' | 'description' | 'seoTitle' | 'seoDescription' | 'seoKeywords' | 'about' | 'originalUrl' | 'tags' | 'series' | 'section' | 'content'>;
 
 // The local articles use single-line fields and an inline tag list.
 // Invalid source metadata must fail before it can reach HTML, JSON-LD, or feeds.
@@ -182,6 +184,11 @@ export function parseBlogContent(source: string, context = 'Blog article'): Pars
   if (fields.has('author') && !fields.has('authors')) return fail('use the authors inline list instead of author');
   const authors = fields.has('authors') ? inlineList('authors') : ['Darren Su'];
   if (new Set(authors).size !== authors.length) return fail('authors must not contain duplicate names');
+  const seriesValue = optionalText('series');
+  if (seriesValue && !isSeriesSlug(seriesValue)) {
+    return fail('series must be people-and-orgs, china-ai-on-the-ground, or practice');
+  }
+  const series = seriesValue as SeriesSlug | undefined;
   const sectionValue = optionalText('section') ?? 'writing';
   if (!articleSections.includes(sectionValue as ArticleSection)) {
     return fail('section must be writing or field-notes');
@@ -204,6 +211,7 @@ export function parseBlogContent(source: string, context = 'Blog article'): Pars
     ...(about ? { about } : {}),
     ...(originalUrl ? { originalUrl } : {}),
     tags,
+    ...(series ? { series } : {}),
     section,
     content,
   };
@@ -280,4 +288,15 @@ export function getLocalizedBlogRoutes(): Array<{ locale: Locale; slug: string }
 
 export function getPostsBySection(locale: string, section: ArticleSection): BlogPost[] {
   return getAllPosts(locale).filter((post) => post.section === section);
+}
+
+// Dated items stay reverse-chronological. Undated items, including archive-year notes, go last.
+export function compareSeriesItems<T extends Pick<BlogPost, 'slug' | 'date'>>(a: T, b: T): number {
+  if (a.date && b.date && a.date !== b.date) return a.date < b.date ? 1 : -1;
+  if (Boolean(a.date) !== Boolean(b.date)) return a.date ? -1 : 1;
+  return a.slug < b.slug ? -1 : a.slug > b.slug ? 1 : 0;
+}
+
+export function getPostsBySeries(locale: string, series: SeriesSlug): BlogPost[] {
+  return getAllPosts(locale).filter((post) => post.series === series).sort(compareSeriesItems);
 }

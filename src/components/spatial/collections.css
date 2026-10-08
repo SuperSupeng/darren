@@ -249,11 +249,33 @@
   .collection-page .collection-next .collection-description { max-width: 33em; }
 }
 
+.collection-series-row { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 18px; }
+.collection-series-row a { color: var(--space-ink); font-size: 16px; line-height: 1.7; text-underline-offset: 5px; }
+.collection-series-row a:hover { text-decoration: underline; text-decoration-color: var(--space-accent); }
+.series-heading { padding-block: 72px 8px; }
+.series-heading h1 { font-family: var(--font-noto-serif, var(--font-site-serif, serif)); font-size: clamp(40px, 5vw, 64px); font-weight: 400; line-height: 1.2; letter-spacing: -.04em; }
+.series-intro { margin-top: 22px; max-width: 40em; color: var(--space-ink); font-size: 17px; line-height: 1.85; }
+.series-placeholder { color: var(--space-muted); font-style: italic; }
+.series-empty { margin-top: 36px; }
+.series-text-list { margin-top: 28px; }
+.collection-page.collection-notes .series-text-entry { grid-template-columns: 11em minmax(0, 1fr); grid-template-rows: auto; align-items: baseline; padding-block: 28px; }
+.collection-page.collection-notes .series-text-entry .collection-note-date { grid-column: 1; grid-row: 1; }
+.collection-page.collection-notes .series-text-entry .collection-note-body { grid-column: 2; grid-row: 1; }
+.collection-page.collection-notes .series-text-entry .collection-note-body h2 { font-family: var(--font-noto-serif, var(--font-site-serif, serif)); font-size: clamp(26px, 2.5vw, 34px); font-weight: 400; line-height: 1.45; }
+.series-text-entry .collection-note-body h2 a:hover { color: var(--space-accent); }
+
 .collection-hero-actions { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 24px; }
 .collection-hero .collection-hero-actions .collection-text-link { margin-top: 0; }
 
 .collection-page.collection-podcast .collection-section h2 { font-family: var(--font-noto-serif, var(--font-site-serif, serif)); font-size: clamp(28px, 3vw, 40px); font-weight: 400; line-height: 1.35; }
 .collection-page.collection-podcast .collection-section .collection-description { margin-top: 18px; max-width: 40em; }
+
+@media (max-width: 560px) {
+  .collection-page.collection-notes .series-text-entry { grid-template-columns: 1fr; }
+  .collection-page.collection-notes .series-text-entry .collection-note-body h2 { font-size: 28px; }
+  .series-heading { padding-top: 40px; }
+  .series-heading h1 { font-size: 40px; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .collection-page, .collection-page *, .collection-page *::before, .collection-page *::after { transition: none !important; animation: none !important; }
