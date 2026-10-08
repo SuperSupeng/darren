@@ -1,7 +1,7 @@
 import { locales } from '@/i18n/config';
 import { getAllPosts } from '@/lib/blog';
 import { getPortfolio } from '@/lib/portfolio';
-import { homepageOneLiner, homepageServiceLine, serviceOffers } from '@/lib/services-copy';
+import { homepageOneLiner, homepageServiceLine, serviceDescription, serviceOffers } from '@/lib/services-copy';
 import {
   contactEmail,
   getPersonJobTitle,
@@ -102,7 +102,7 @@ export function GET() {
     '',
     '## Collaboration / 合作',
     '',
-    `- ${serviceOffers.talks.zh.title}`,
+    `- ${serviceOffers.talks.zh.title}: ${serviceDescription('talks', 'zh')}`,
     `- ${serviceOffers.visits.zh.title}`,
     `- ${homepageServiceLine}`,
     `- ${serviceOffers.visits.en.title}`,

@@ -8,11 +8,11 @@ const { getAboutCopy } = require('../src/lib/about.ts');
 const { getExperienceArchive } = require('../src/lib/experience-archive.ts');
 const { getFeaturedWork, getPortfolio, getWorkById, getWorkCollaboration } = require('../src/lib/portfolio/index.ts');
 const { homeStructuredData } = require('../src/lib/seo.ts');
-const { jobsCopy, homepageOneLiner, homepageServiceLine, pricingLine, talkList } = require('../src/lib/services-copy.ts');
+const { jobsCopy, homepageOneLiner, homepageServiceLine, pricingLine, serviceOffers, talkList } = require('../src/lib/services-copy.ts');
 const { getAboutRoles, getPersonJobTitle, getPersonOccupations, socialLinks } = require('../src/lib/site-config.ts');
 const { getSiteContent } = require('../src/lib/siteContent.ts');
 
-const forbidden = ['付费合作', '商业合作', 'paid partnership', 'commercial partnership', 'CryptoTime', '夜校', 'Night School', '金华', '武义', '农机', '中康', '高金', 'Gaojin', 'Zhongkang', '不接什么', '我目前不接'];
+const forbidden = ['付费合作', '商业合作', 'paid partnership', 'commercial partnership', 'CryptoTime', '夜校', 'Night School', '金华', '武义', '农机', '中康', '高金', 'Gaojin', 'Zhongkang', '不接什么', '我目前不接', '找谁来做', '具体怎么做、找谁来做', '我不做'];
 
 const repoRoot = new URL('..', import.meta.url).pathname;
 
@@ -56,8 +56,12 @@ test('services are A and B in the approved order, with the eight talks and one p
   assert.equal(talkList.zh.length, 8);
   assert.equal(talkList.en.length, 8);
   assert.equal(talkList.zh[3], '2026 在南京做过一场线下分享《AI 革命：我们正在进入什么时代》');
-  assert.equal(talkList.zh[4], '2025-12 上海交通大学 MEM 行业论坛特邀嘉宾分享');
-  assert.equal(talkList.zh[5], '2025-12 在株洲主持过一场 AI 职业教育论坛');
+  assert.equal(talkList.zh[4], '上海交通大学 MEM 行业论坛特邀嘉宾分享（2025-12）');
+  assert.equal(talkList.en[4], 'Invited guest talk, Shanghai Jiao Tong University MEM Industry Forum (Dec 2025)');
+  assert.equal(talkList.zh[5], '在株洲主持过一场 AI 职业教育论坛');
+  assert.equal(talkList.en[5], 'Hosted an AI vocational education forum in Zhuzhou');
+  assert.equal(serviceOffers.talks.zh.paragraphs[1], '③动手工作坊和 Agent 构建。');
+  assert.equal(serviceOffers.talks.en.title, 'Talks, in-house sessions and hands-on workshops on where AI is now, what it can do, and how teams work once people and agents work together; agent building too.');
   assert.equal(pricingLine.zh, '按场次或按项目报价，来信时说一下人数、时长和想解决的问题');
   for (const locale of ['zh', 'en']) {
     for (const item of getPortfolio(locale).work) {

@@ -38,7 +38,7 @@ const pageKeywords: Record<Locale, Record<KeywordGroup, string[]>> = {
     ],
     services: [
       'China AI field visits & events for global investors and founders',
-      'Talks and in-house sessions on where AI is now, what it can do, and how teams work once people and agents work together.',
+      'Talks, in-house sessions and hands-on workshops on where AI is now, what it can do, and how teams work once people and agents work together; agent building too.',
     ],
     work: [
       'AI developer ecosystem case studies',
