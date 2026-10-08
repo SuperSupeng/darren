@@ -32,14 +32,14 @@ export function getWorkById(locale: string, id: string): PortfolioWork | null {
 }
 
 const workCollaborationIds: Record<string, CollaborationPath['id']> = {
-  'wechat-innovation-workshop': 'developer-events',
-  'superai-china': 'developer-events',
-  'agent-speaking': 'ai-talks',
-  'stepfun-four-cities': 'developer-events',
-  'aix-creation-festival': 'developer-events',
-  'waic-pioneers-night': 'developer-events',
-  'rumata-workshop': 'product-workshops',
-  'datawhale-city-ecosystem': 'developer-events',
+  'wechat-innovation-workshop': 'field-visits',
+  'superai-china': 'field-visits',
+  'agent-speaking': 'field-visits',
+  'stepfun-four-cities': 'field-visits',
+  'aix-creation-festival': 'field-visits',
+  'waic-pioneers-night': 'field-visits',
+  'rumata-workshop': 'field-visits',
+  'datawhale-city-ecosystem': 'field-visits',
 };
 
 export function getWorkCollaboration(locale: string, workId: string): CollaborationPath | null {
@@ -53,9 +53,8 @@ export function getAllWorkIds(): string[] {
 }
 
 const featuredWorkIds = [
-  'aix-creation-festival',
-  'rumata-workshop',
   'superai-china',
+  'rumata-workshop',
   'agent-speaking',
 ] as const;
 

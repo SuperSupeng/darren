@@ -161,12 +161,12 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
                 <h3 id={section.id}>{section.title}</h3>
                 <ul className="work-experience-list">
                   {section.entries.map((entry) => (
-                    <li key={entry.id}>
+                    <li key={entry.id} id={entry.id}>
                       <div className="work-experience-entry-heading">
                         <h4>{entry.title}</h4>
                         {entry.date ? <p className="work-experience-date">{entry.date}</p> : null}
                       </div>
-                      <p className="work-experience-role">{entry.role}</p>
+                      {entry.role ? <p className="work-experience-role">{entry.role}</p> : null}
                     </li>
                   ))}
                 </ul>

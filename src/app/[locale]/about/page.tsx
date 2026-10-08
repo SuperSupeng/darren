@@ -1,6 +1,7 @@
 import Image from 'next/image';
+import JobsNote from '@/components/JobsNote';
 import { getAboutCopy } from '@/lib/about';
-import { getSiteContent } from '@/lib/siteContent';
+import { getAboutRoles } from '@/lib/site-config';
 import ProfileRoles from '@/components/ProfileRoles';
 import { getTranslations } from 'next-intl/server';
 import ContactActions from '@/components/ContactActions';
@@ -34,7 +35,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           <div className="about-reading-intro">
             <h1>{copy.title}</h1>
             <p>{copy.intro}</p>
-            <ProfileRoles roles={getSiteContent(locale).about.hero.tags} />
+            <ProfileRoles roles={getAboutRoles(locale)} />
           </div>
           <div className="about-reading-stage">
             <RoomPortal zone="notes" locale={locale} />
@@ -88,6 +89,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             <div className="about-reading-prose">
               <p>{copy.contactBody}</p>
               <ContactActions locale={locale} context="about-reading" className="about-reading-contact-actions" />
+              <JobsNote locale={locale} />
               <noscript><style>{'.about-reading-contact-actions > button{display:none!important}'}</style></noscript>
               <div className="about-reading-links">
                 <Link href="/services" className="about-reading-link">{copy.servicesLink}<span aria-hidden="true">↗</span></Link>

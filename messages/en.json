@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Darren Su | Connecting global founders and builders with China’s AI ecosystem",
-    "description": "Co-founder @ MatchPoint & AGI Villa · Head of City Ecosystem @ Datawhale · n8n Ambassador. Connecting global founders and builders with China’s AI ecosystem."
+    "description": "Connecting global founders and builders with China’s AI ecosystem."
   },
   "nav": {
     "home": "Home",
@@ -16,8 +16,8 @@
   },
   "servicesPage": {
     "meta": {
-      "title": "Collaborate | Developer Programs, Product Workshops & Agent Talks",
-      "description": "Work with Darren on AI developer ecosystem programs, product workshops, and talks grounded in real multi-agent practice."
+      "title": "Work with me | China AI Field Visits & Events, AI Talks & Advisory",
+      "description": "China AI field visits & events for global investors and founders. Talks, in-house sessions and hands-on workshops on where AI is now, what it can do, and how teams work once people and agents work together; agent building too."
     }
   },
   "footer": {
@@ -53,19 +53,19 @@
   "projects": {
     "meta": {
       "title": "Projects",
-      "description": "Products and projects by Darren Su, including MatchPoint, GlobalTechEvents, Datawhale AI+X Events, an AI-native work system with 31 specialized agents and 44 recurring automations, and selected case studies."
+      "description": "Products and projects by Darren Su, including GlobalTechEvents, Datawhale AI+X Events, an AI-native work system with 31 specialized agents and 44 recurring automations, and selected case studies."
     }
   },
   "build": {
     "meta": {
       "title": "Products I build",
-      "description": "Products and experiments built by Darren Su, including MatchPoint, GlobalTechEvents, Datawhale AI+X Events, and a multi-agent digital organization."
+      "description": "Products and experiments built by Darren Su, including GlobalTechEvents, Datawhale AI+X Events, and a multi-agent digital organization."
     }
   },
   "about": {
     "meta": {
       "title": "About me",
-      "description": "Co-founder @ MatchPoint & AGI Villa · Head of City Ecosystem @ Datawhale · n8n Ambassador. Connecting global founders and builders with China’s AI ecosystem."
+      "description": "Co-founder, AGI Villa & MatchPoint · Head of City Ecosystem, Datawhale · n8n Ambassador. Connecting global founders and builders with China’s AI ecosystem."
     }
   }
 }

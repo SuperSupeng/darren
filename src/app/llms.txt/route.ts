@@ -1,6 +1,7 @@
 import { locales } from '@/i18n/config';
 import { getAllPosts } from '@/lib/blog';
 import { getPortfolio } from '@/lib/portfolio';
+import { homepageOneLiner, homepageServiceLine, serviceDescription, serviceOffers } from '@/lib/services-copy';
 import {
   contactEmail,
   getPersonJobTitle,
@@ -73,10 +74,6 @@ export function GET() {
     '- Chinese name: 苏鹏',
     `- Roles (EN): ${getPersonJobTitle('en')}`,
     `- Roles (ZH): ${getPersonJobTitle('zh')}`,
-    '- MatchPoint · Co-founder / 联合创始人',
-    '- AGI Villa · Co-founder / 联合创始人',
-    '- Datawhale · Head of City Ecosystem / 城市生态负责人',
-    '- n8n · Ambassador',
     '- Podcast: 《重新组织》 / Re:Organize · Host',
     '- Site purpose: bilingual zh/en public archive hub for writing, the podcast entrance, projects, about, and collaboration',
     `Canonical website: ${siteUrl}`,
@@ -102,6 +99,17 @@ export function GET() {
     'Individual case studies remain at their current `/work/[slug]` URLs. The projects index is `/projects`; `/work` without a slug redirects there.',
     '',
     ...cases,
+    '',
+    '## Collaboration / 合作',
+    '',
+    `- ${serviceOffers.talks.zh.title}: ${serviceDescription('talks', 'zh')}`,
+    `- ${serviceOffers.visits.zh.title}`,
+    `- ${homepageServiceLine}`,
+    `- ${serviceOffers.visits.en.title}`,
+    `- ${serviceOffers.talks.en.title}`,
+    `- ${homepageOneLiner}`,
+    `- [合作](${siteUrl}/zh/services)`,
+    `- [Collaborate](${siteUrl}/en/services)`,
     '',
     topicIndex,
     '',

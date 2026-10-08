@@ -105,6 +105,11 @@
   padding: clamp(32px, 4vw, 56px);
 }
 
+.collaboration-reading .collaboration-reading-help p + p,
+.collaboration-reading .collaboration-reading-help ul {
+  margin-top: 16px;
+}
+
 .collaboration-reading .collaboration-reading-help h3 {
   color: var(--space-muted);
   font: 500 16px/1.8 var(--font-geist-sans);

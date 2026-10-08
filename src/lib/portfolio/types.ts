@@ -40,15 +40,11 @@ export type PortfolioWork = {
 };
 
 export type CollaborationPath = {
-  id: 'developer-events' | 'product-workshops' | 'ai-talks';
-  number: string;
+  id: 'field-visits' | 'talks';
   title: string;
-  bestFor: string;
   description: string;
-  outcomes: string[];
   invitation: string;
   linkLabel: string;
-  inquiry: string[];
 };
 
 export type PortfolioContent = {

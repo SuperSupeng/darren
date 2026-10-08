@@ -76,7 +76,7 @@ function ZoneIcon({ zone }: { zone: Exclude<StudioZone, 'overview'> }) {
   );
 }
 
-export default function StudioExperience({ locale, intro, roles, children }: { locale: string; intro: string; roles: string[]; children: ReactNode }) {
+export default function StudioExperience({ locale, intro, detail, roles, children }: { locale: string; intro: string; detail?: string; roles: string[]; children: ReactNode }) {
   const t = locale === 'zh' ? copy.zh : copy.en;
   const hydrated = useSyncExternalStore(subscribeHydration, clientHydrationSnapshot, serverHydrationSnapshot);
   const router = useRouter();
@@ -142,6 +142,7 @@ export default function StudioExperience({ locale, intro, roles, children }: { l
         <div className="studio-intro">
           <h1 aria-label={`${t.title[0]} ${t.title[1]}`}>{t.title[0]}<br />{' '}<em>{t.title[1]}</em></h1>
           <p className="studio-intro-description">{intro}</p>
+          {detail ? <p className="studio-intro-description">{detail}</p> : null}
           <ProfileRoles roles={roles} />
           <nav className="studio-hero-actions" aria-label={t.actions}>
             <Link className="studio-enter" href={`/projects${lighting === 'evening' ? '?light=evening' : ''}`}>{t.projects}<span aria-hidden="true">↗</span></Link>
