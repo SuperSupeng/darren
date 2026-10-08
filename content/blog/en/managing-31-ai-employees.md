@@ -8,6 +8,7 @@ seoTitle: "Managing 31 AI Employees: Multi-Agent Roles and Digital Organization 
 seoDescription: "I built a multi-agent system on OpenClaw: 31 agents in “four departments and one office,” 44 daily scheduled tasks, and a product whose daily operation I handed entirely to agents. What operating it taught me about management."
 seoKeywords: [AI employees, AI agents, multi-agent collaboration system, multi-agent organization, digital organization, Digital Organization Design, Harness Engineering, hourglass organization, span of control, two-way-door principle, possession principle, OpenClaw, GlobalTechEvents]
 about: [Multi-agent collaboration, Digital Organization Design, Management]
+series: people-and-orgs
 ---
 
 **Contents**

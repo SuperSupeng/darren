@@ -2,6 +2,7 @@ import { MetadataRoute } from 'next';
 import { defaultLocale, locales } from '@/i18n/config';
 import { getAllPosts, getPostBySlug } from '@/lib/blog';
 import { getPortfolio } from '@/lib/portfolio';
+import { seriesSlugs } from '@/lib/series';
 import { siteUrl as baseUrl } from '@/lib/site-config';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -53,6 +54,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
         ...(post.dateModified ? { lastModified: post.dateModified } : {}),
         changeFrequency: 'monthly',
         priority: 0.7,
+        alternates: { languages },
+      });
+    }
+  }
+
+  for (const slug of seriesSlugs) {
+    const route = `/blog/topic/${slug}`;
+    const languages = Object.fromEntries(
+      locales.map((locale) => [locale, `${baseUrl}/${locale}${route}`])
+    );
+    languages['x-default'] = `${baseUrl}/${defaultLocale}${route}`;
+
+    for (const locale of locales) {
+      sitemap.push({
+        url: `${baseUrl}/${locale}${route}`,
+        changeFrequency: 'weekly',
+        priority: 0.74,
         alternates: { languages },
       });
     }

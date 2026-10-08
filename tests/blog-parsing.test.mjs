@@ -72,6 +72,8 @@ test('incomplete or ambiguous source metadata fails with the source filename', (
     fixture.replace('tags: [AI agents, Research]', 'tags: []'),
     fixture.replace('tags: [AI agents, Research]', 'tags: [AI agents, ""]'),
     fixture.replace('tags: [AI agents, Research]', 'tags: [AI agents, Research]\nsection: diary'),
+    fixture.replace('tags: [AI agents, Research]', 'tags: [AI agents, Research]\nseries: diary'),
+    fixture.replace('tags: [AI agents, Research]', 'tags: [AI agents, Research]\nseries: ""'),
     fixture.replace('tags: [AI agents, Research]', 'tags: ["AI agents, Research]'),
     fixture.replace('date: 2024-02-29', 'date: 2024-02-29\ndate: 2025-01-01'),
     fixture.slice(0, fixture.indexOf('\n---\n') + '\n---\n'.length),
@@ -83,7 +85,7 @@ test('incomplete or ambiguous source metadata fails with the source filename', (
 
 test('optional seo fields stay off the visible title and are omitted when absent', () => {
   const parsed = parseBlogContent(fixture);
-  for (const field of ['seoTitle', 'seoDescription', 'seoKeywords', 'about']) {
+  for (const field of ['seoTitle', 'seoDescription', 'seoKeywords', 'about', 'series']) {
     assert.ok(!Object.hasOwn(parsed, field), field);
   }
   const source = fixture.replace(

@@ -32,6 +32,7 @@ const {
   personSameAs,
 } = require('../src/lib/site-config.ts');
 const { getAllPosts, parseBlogContent } = require('../src/lib/blog.ts');
+const { seriesSlugs } = require('../src/lib/series.ts');
 const { getWorkById } = require('../src/lib/portfolio/index.ts');
 const { getSiteContent } = require('../src/lib/siteContent.ts');
 const { articleMarkdown } = require('../src/lib/content-source.ts');
@@ -77,6 +78,7 @@ test('the sitemap contains every real localized page once and only advertises ex
       const slug = filename.slice(0, filename.lastIndexOf('.'));
       expected.add(`${siteUrl}/${locale}/blog/${slug}`);
     }
+    for (const slug of seriesSlugs) expected.add(`${siteUrl}/${locale}/blog/topic/${slug}`);
     const { work } = getPortfolio(locale);
     assert.ok(work.length > 0, `${locale} portfolio must not be empty`);
     for (const item of work) expected.add(`${siteUrl}/${locale}/work/${item.id}`);
@@ -508,7 +510,13 @@ test('llms.txt and RSS keep visible titles, and every topic URL is in the sitema
   const topics = body.slice(topicsAt, writingAt);
   const urls = [...topics.matchAll(/\]\((https?:\/\/[^)]+)\)/g)].map((match) => match[1]);
   const sitemapUrls = new Set(sitemap().map((entry) => entry.url));
-  assert.equal(urls.length, 21);
+  for (const slug of seriesSlugs) {
+    for (const locale of locales) {
+      const url = `${siteUrl}/${locale}/blog/topic/${slug}`;
+      assert.ok(topics.includes(url), `Topics must list ${url}`);
+    }
+  }
+  assert.equal(urls.length, 37);
   for (const url of urls) assert.ok(sitemapUrls.has(url), `${url} must already be in the sitemap`);
   const xml = await (await rssGET()).text();
   for (const locale of locales) {

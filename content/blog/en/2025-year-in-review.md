@@ -5,6 +5,7 @@ dateNote: "2025 year in review"
 authors: ["Darren Su"]
 description: "Looking back on a year of entrepreneurship, community events, and nonprofit collaboration, alongside a search for inner steadiness and the hopes I held for 2026."
 tags: ["Year in Review", "Entrepreneurship", "Community", "Life"]
+series: practice
 ---
 
 *English translation of [the Chinese original](/zh/blog/2025-year-in-review).*

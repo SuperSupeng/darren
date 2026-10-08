@@ -8,6 +8,7 @@ section: field-notes
 seoTitle: 海外到底怎么看中国 AI 生态？陪 SuperAI 团队走访杭州和上海的五个现场观察
 seoDescription: 陪 SuperAI 团队走访浙大、魔搭社区、Qwen、MiniMax、商汤等高校、社区和公司后的五个观察：一年一次的大会不够了；海外不是不关心中国，而是缺少理解中国的入口；中国科技企业出海，真正应该讲什么。
 seoKeywords: [中国 AI 生态, 中国科技企业出海, 全球科技生态, SuperAI, 新加坡, 杭州, 上海, 魔搭社区, Qwen, MiniMax, 商汤]
+series: china-ai-on-the-ground
 ---
 
 上周，SuperAI 联合创始人 Peter 和生态团队受国皓发起的 WAVE 邀请来到中国，我陪他们走访了杭州、上海。几天里，我们去了浙大、魔搭社区、Qwen、Qoder、Datawhale、真格基金、MiniMax、火山引擎、Trae 和商汤等高校、社区和公司。

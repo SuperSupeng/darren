@@ -5,6 +5,7 @@ description: 山西真是一个值得多来的地方，文化底蕴深厚，风�
 seoDescription: 太行一号公路、八泉峡、浊漳河谷、龙门寺、司徒小镇打铁花、驴肉甩饼、壶关羊汤
 tags: [晋东南, 长治, 晋城, 南太行]
 section: field-notes
+series: practice
 originalUrl: https://m.okjike.com/originalPosts/6ac2efe6756bbb6658e72652
 ---
 

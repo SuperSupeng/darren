@@ -7,6 +7,7 @@ seoDescription: 小城市做 AI，可以从哪里开始？ 在长治和当地伙
 seoKeywords: [小城市 AI, 三四线城市, AI 落地, AI 应用, 长治, 人工智能]
 tags: [长治, 小城市, 三四线城市]
 originalUrl: https://www.douyin.com/video/7693160082292477235
+series: china-ai-on-the-ground
 ---
 
 原发于抖音（2026-10-05）：[https://www.douyin.com/video/7693160082292477235](https://www.douyin.com/video/7693160082292477235)
