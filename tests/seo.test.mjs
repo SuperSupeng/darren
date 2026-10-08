@@ -512,7 +512,7 @@ test('llms.txt and RSS keep visible titles, and every topic URL is in the sitema
       assert.ok(topics.includes(url), `Topics must list ${url}`);
     }
   }
-  assert.equal(urls.length, 35);
+  assert.equal(urls.length, 37);
   for (const url of urls) assert.ok(sitemapUrls.has(url), `${url} must already be in the sitemap`);
   const xml = await (await rssGET()).text();
   for (const locale of locales) {

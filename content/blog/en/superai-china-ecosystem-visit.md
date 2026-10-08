@@ -9,6 +9,7 @@ seoTitle: "China's AI Ecosystem: Five Observations from Hangzhou and Shanghai"
 seoDescription: "Field notes from visiting Zhejiang University, ModelScope, Qwen, MiniMax, SenseTime and others with the SuperAI team: global teams are curious about China, but the entry points are weak, and Chinese companies should bring their understanding of the industry, not only products."
 seoKeywords: [China AI ecosystem, China's AI ecosystem, China's technology ecosystem, Chinese technology companies, Hangzhou, Shanghai, ModelScope, Qwen, MiniMax, SenseTime, SuperAI, Singapore, field visit]
 about: [China's AI ecosystem, Cross-border technology exchange]
+series: china-ai-on-the-ground
 ---
 
 Last week, SuperAI co-founder Peter and the ecosystem team came to China at the invitation of WAVE, an initiative started by Guohao. I accompanied them through Hangzhou and Shanghai. Over several days, we visited Zhejiang University, ModelScope, Qwen, Qoder, Datawhale, ZhenFund, MiniMax, Volcano Engine, Trae, and SenseTime.

@@ -18,6 +18,7 @@ const sitemap = require('../src/app/sitemap.ts').default;
 const classified = {
   'managing-31-ai-employees': 'people-and-orgs',
   'changzhi-small-city-ai': 'china-ai-on-the-ground',
+  'superai-china-ecosystem-visit': 'china-ai-on-the-ground',
   'zongtong-temple-retreat': 'practice',
   'jindongnan-travel-notes': 'practice',
   '2025-year-in-review': 'practice',
@@ -82,8 +83,13 @@ test('only clear fits receive a series, and Chinese-only posts stay off the Engl
   }
   assert.deepEqual(getPostsBySeries('zh', 'people-and-orgs').map((post) => post.slug), ['managing-31-ai-employees']);
   assert.deepEqual(getPostsBySeries('en', 'people-and-orgs').map((post) => post.slug), ['managing-31-ai-employees']);
-  assert.deepEqual(getPostsBySeries('zh', 'china-ai-on-the-ground').map((post) => post.slug), ['changzhi-small-city-ai']);
-  assert.deepEqual(getPostsBySeries('en', 'china-ai-on-the-ground'), []);
+  assert.deepEqual(getPostsBySeries('zh', 'china-ai-on-the-ground').map((post) => post.slug), [
+    'changzhi-small-city-ai',
+    'superai-china-ecosystem-visit',
+  ]);
+  assert.deepEqual(getPostsBySeries('en', 'china-ai-on-the-ground').map((post) => post.slug), [
+    'superai-china-ecosystem-visit',
+  ]);
   assert.deepEqual(getPostsBySeries('zh', 'practice').map((post) => post.slug), [
     'jindongnan-travel-notes',
     'zongtong-temple-retreat',
@@ -107,8 +113,11 @@ test('series pages publish CollectionPage and ItemList data for the posts that e
     `${siteUrl}/zh/blog/zongtong-temple-retreat`,
     `${siteUrl}/zh/blog/2025-year-in-review`,
   ]);
-  const empty = seriesStructuredData('china-ai-on-the-ground', 'en')['@graph'].find((node) => node['@type'] === 'ItemList');
-  assert.deepEqual(empty.itemListElement, []);
+  const china = seriesStructuredData('china-ai-on-the-ground', 'en')['@graph'].find((node) => node['@type'] === 'ItemList');
+  assert.equal(china.numberOfItems, 1);
+  assert.deepEqual(china.itemListElement.map((item) => item.url), [
+    `${siteUrl}/en/blog/superai-china-ecosystem-visit`,
+  ]);
   for (const slug of seriesSlugs) {
     for (const locale of locales) {
       const url = `${siteUrl}/${locale}/blog/topic/${slug}`;
