@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import StudioExperience from '@/components/studio/StudioExperience';
 import StudioPurpose from '@/components/studio/StudioPurpose';
 import { createPageMetadata } from '@/lib/seo';
+import { getPersonOccupations } from '@/lib/site-config';
 import { getSiteContent } from '@/lib/siteContent';
 import { getTranslations } from 'next-intl/server';
 
@@ -28,7 +29,7 @@ export default async function StudioPage({ params }: Props) {
   const { locale } = await params;
   const site = getSiteContent(locale);
 
-  return <StudioExperience locale={locale} intro={site.home.intro} roles={site.about.hero.tags}>
+  return <StudioExperience locale={locale} intro={site.home.intro} detail={site.home.detail} roles={getPersonOccupations(locale)}>
     <StudioPurpose locale={locale} />
   </StudioExperience>;
 }

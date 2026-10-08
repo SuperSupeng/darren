@@ -6,6 +6,7 @@ const aboutCopy = {
     engineeringTitle: '从工程开始',
     engineering: [
       '2021 年，我在 PingCAP 做 TiCDC 研发实习，后来参与过 AI 基础设施、向量数据库和 AI 产品相关的工作。',
+      '曾任爱可生 AI 创新事业部负责人。',
       '现在我也组织产品 Workshop，让开发者直接试用产品，把使用中遇到的问题带回给创始人。写代码、观察使用过程、和人聊清楚需求，是我接触技术的几种方式。',
     ],
     communityTitle: '在社区里，从学习者到组织者',
@@ -18,7 +19,7 @@ const aboutCopy = {
     communityLink: '看看我的社区经历',
     makingTitle: '把遇到的问题做成产品',
     making: [
-      '在社区里，一些创始人会来问招聘的事。我也看到，简历和职位描述很难讲清楚一个人怎样面对陌生问题，或者一份工作的真实日常。后来，我联合创办 MatchPoint，尝试把职业探索和岗位理解做得更具体。',
+      '在社区里，一些创始人会来问招聘的事。我也看到，简历和职位描述很难讲清楚一个人怎样面对陌生问题，或者一份工作的真实日常。后来，我联合创办 MatchPoint，尝试把职业探索和岗位理解做得更具体。想找工作或想招人，都可以找我聊聊。',
       'GlobalTechEvents 把散落在不同平台和城市的科技活动整理到一起，让人更容易找到值得关注的活动与社区。我也把它的日常运营交给了多 Agent 系统。',
       '2026 年，我写下了当时运行 31 个 Agent 的经历。文章里有它们怎样分工，也有任务失败和停用的过程。使用 AI 没有让我免于判断，反而让我更清楚地看见自己的注意力和理解能力也是限制。',
     ],
@@ -42,16 +43,17 @@ const aboutCopy = {
   },
   en: {
     title: 'I’m Darren Su. My Chinese name is 苏鹏.',
-    intro: 'Co-founder @ MatchPoint & AGI Villa · Head of City Ecosystem @ Datawhale · n8n Ambassador. Connecting global founders and builders with China’s AI ecosystem. I began in engineering, grew from a learner into an organizer at Datawhale, and now start communities with others, build products, and explore agents and automation. Beyond work, I have helped run volunteer AI classes for young people and practice meditation. I write about what I encounter in work and life.',
-    description: 'Co-founder @ MatchPoint & AGI Villa · Head of City Ecosystem @ Datawhale · n8n Ambassador. Connecting global founders and builders with China’s AI ecosystem.',
+    intro: 'Co-founder, AGI Villa & MatchPoint · Head of City Ecosystem, Datawhale · n8n Ambassador. Connecting global founders and builders with China’s AI ecosystem. I began in engineering, grew from a learner into an organizer at Datawhale, and now start communities with others, build products, and explore agents and automation. Beyond work, I have helped run volunteer AI classes for young people and practice meditation. I write about what I encounter in work and life.',
+    description: 'Co-founder, AGI Villa & MatchPoint · Head of City Ecosystem, Datawhale · n8n Ambassador. Connecting global founders and builders with China’s AI ecosystem.',
     engineeringTitle: 'Beginning in engineering',
     engineering: [
       'In 2021, I interned on TiCDC development at PingCAP. Later, I worked on AI infrastructure, vector databases, and AI products. ',
+      'Former head of the AI Innovation Division at 爱可生.',
       'Today I also organize product workshops where developers try a product and discuss their feedback with its founders. Writing code, observing how people use it, and talking through their needs are different ways I engage with technology.',
     ],
     communityTitle: 'From learning together to organizing together',
     community: [
-      'I joined Datawhale in 2019 to learn AI. I later became a teaching assistant and event organizer, and became involved in city programs and community governance. Today, as Head of City Ecosystem at Datawhale, I work with local partners on AI learning and practical activities, bringing together learners, developers, universities, and open-source contributors.',
+      'I joined Datawhale in 2019 to learn AI. I later became a teaching assistant and event organizer, and became involved in city programs and community governance. Today, as Head of City Ecosystem, Datawhale, I work with local partners on AI learning and practical activities, bringing together learners, developers, universities, and open-source contributors.',
       'Monica and I also started AGI Villa, where we meet AI builders, product teams, and founders from around the world. I want to connect AI and open-source communities in China with their peers worldwide, giving people a chance to work together. In this work, I pay attention to why people show up, how they take part, and whether they keep talking afterward.',
       'I am also an n8n Ambassador. I use n8n for marketing automation and support the development of Chinese-language learning resources. I want to bring developers and business users together to build useful automations around real needs.',
     ],
@@ -59,7 +61,7 @@ const aboutCopy = {
     communityLink: 'Explore my community work',
     makingTitle: 'Making products from problems I encounter',
     making: [
-      'Founders in the community would ask me about hiring. I also saw how little a résumé or job description reveals about how someone approaches an unfamiliar problem, or what a job is actually like. I co-founded MatchPoint to make career exploration and understanding a role more concrete.',
+      'Founders in the community would ask me about hiring. I also saw how little a résumé or job description reveals about how someone approaches an unfamiliar problem, or what a job is actually like. I co-founded MatchPoint to make career exploration and understanding a role more concrete. Looking for a job or hiring? Happy to chat.',
       'GlobalTechEvents brings together technology events scattered across different platforms and cities, making it easier to find events and communities worth following. I have also handed its daily operations to a multi-agent system.',
       'In 2026, I wrote about the 31 agents I was running at the time. The article covers how they divided the work, but also failed tasks and automations I stopped. Using AI has not removed the need for my judgment. It has made the limits of my own attention and understanding more visible.',
     ],

@@ -1,3 +1,4 @@
+import { homepageServiceLine } from '@/lib/services-copy';
 import { englishContent } from './en';
 import type { LocalizedContent } from './types';
 
@@ -5,6 +6,7 @@ export const chineseContent: LocalizedContent = {
   ...englishContent,
   home: {
     intro: "Darren，AI 创业者、野生人类学爱好者、禅修实践者。长期研究 AI 时代的人与组织。经常和 Founder、企业主聊天，有一档播客《重新组织》。关注全球 AI 与海外市场。",
+    detail: homepageServiceLine,
   },
   labels: {
     ...englishContent.labels,
@@ -66,7 +68,7 @@ export const chineseContent: LocalizedContent = {
       workEyebrow: "现在在做什么",
       workTitle: "现在，我的时间主要花在这些事情上。",
       workItems: [
-        "继续做 MatchPoint、GlobalTechEvents 和 AI+X Events，把遇到的问题做成产品。",
+        "继续做 GlobalTechEvents 和 AI+X Events，把遇到的问题做成产品。",
         "通过 Datawhale、AGI Villa 和社区活动，连接世界各地的 AI 与开源创造者。",
         "帮助海外 AI 产品在中国接触开发者，组织体验并收集早期反馈。",
         "分享 Agent、自动化与多 Agent 工作系统的实践。",
@@ -95,7 +97,7 @@ export const chineseContent: LocalizedContent = {
   projects: {
     hero: {
       eyebrow: "项目",
-      title: "MatchPoint、GlobalTechEvents 和 AI+X Events，都来自我在工作里反复遇到的问题。",
+      title: "GlobalTechEvents 和 AI+X Events，都来自我在工作里反复遇到的问题。",
       subtitle: "这里收纳我做的产品，以及我发起、负责或参与的项目。",
     },
     productsTitle: "产品",
@@ -109,9 +111,9 @@ export const chineseContent: LocalizedContent = {
   products: {
     hero: {
       eyebrow: "产品",
-      title: "MatchPoint、GlobalTechEvents 和 AI+X Events，都来自我在工作里反复遇到的问题。",
+      title: "GlobalTechEvents 和 AI+X Events，都来自我在工作里反复遇到的问题。",
       subtitle:
-        "MatchPoint 处理人才匹配，GlobalTechEvents 整理全球科技活动，AI+X Events 服务 Datawhale 的城市活动。我也长期运行一套多 Agent 工作系统。",
+        "GlobalTechEvents 整理全球科技活动，AI+X Events 服务 Datawhale 的城市活动。我也长期运行一套多 Agent 工作系统。",
     },
     digitalOrganization: {
       eyebrow: "AI 原生工作系统",
@@ -127,24 +129,7 @@ export const chineseContent: LocalizedContent = {
     },
     items: [
       {
-        id: "matchpoint",
-        name: "MatchPoint",
-        tagline: "职业探索与岗位匹配",
-        description:
-          "求职者可以先和 AI 讨论自己的方向，再进一步了解具体岗位。平台也会记录候选人在实际任务中的思考和行动，补充简历很难呈现的部分。",
-        image: "/projects/matchpoint.png",
-        url: "https://matchpoint.careers",
-        status: "运行中",
-        problem:
-          "简历很难说明一个人遇到陌生问题时会怎么想、怎么做；候选人也很难只凭职位描述理解这份工作的日常。",
-        signal:
-          "网站已经上线，候选人、招聘团队和日常运营所需的工具都已可用。产品也已经用于实际招聘，目前还在根据双方的使用情况继续调整。",
-        nextStep:
-          "继续用于实际招聘，根据候选人和团队的反馈调整职业探索、岗位理解和申请流程。",
-        tags: ["AI Native", "职业", "Agent"],
-      },
-      {
-        ...englishContent.products.items[1],
+        ...englishContent.products.items[0],
         tagline: "全球科技活动索引",
         description:
           "把分散在不同城市和平台上的科技活动整理到一起，方便我和其他用户了解接下来有哪些会议与社区活动。",
@@ -158,7 +143,7 @@ export const chineseContent: LocalizedContent = {
         tags: ["全球生态", "活动", "市场情报"],
       },
       {
-        ...englishContent.products.items[2],
+        ...englishContent.products.items[1],
         tagline: "AI+X 社区活动日历",
         description:
           "集中收录 Meetup、Workshop、Hackathon，以及高校、城市和产业相关的 AI 活动，用户也可以自己提交和订阅。",
@@ -172,7 +157,7 @@ export const chineseContent: LocalizedContent = {
         tags: ["Datawhale", "AI+X", "社区活动"],
       },
       {
-        ...englishContent.products.items[3],
+        ...englishContent.products.items[2],
         tagline: "一次已经结束的跨境人才实验",
         description:
           "这个项目曾尝试把企业与国际学生、年轻创作者连接起来，为双方找到第一份具体的项目或实习合作。",
@@ -190,7 +175,7 @@ export const chineseContent: LocalizedContent = {
   about: {
     hero: {
       title: "Darren Su / 苏鹏",
-      tags: ["AI 创业者", "Datawhale 城市生态负责人", "AGI Villa 联合创始人", "n8n Ambassador"],
+      tags: ["AGI Villa & MatchPoint 联合创始人", "Datawhale 城市生态负责人", "n8n Ambassador", "《重新组织》主持人"],
     },
     kernel: [
       {
@@ -211,7 +196,7 @@ export const chineseContent: LocalizedContent = {
       {
         title: "开始做自己的产品",
         description:
-          "我联合创办 MatchPoint，也做了 GlobalTechEvents，并持续运行一套多 Agent 工作系统。产品上线以后，用户从哪里来、为什么留下，以及要不要继续做，都需要在日常运营里回答。",
+          "我做了 GlobalTechEvents，并持续运行一套多 Agent 工作系统。产品上线以后，用户从哪里来、为什么留下，以及要不要继续做，都需要在日常运营里回答。",
       },
       {
         title: "禅修和公益也是生活的一部分",
@@ -236,26 +221,22 @@ export const chineseContent: LocalizedContent = {
   seo: {
     ogImageAlt: "Darren Su / 苏鹏",
     home: {
-      jobTitle: "MatchPoint 联合创始人、AGI Villa 联合创始人、Datawhale 城市生态负责人、n8n Ambassador、《重新组织》主持人",
+      jobTitle: "AGI Villa & MatchPoint 联合创始人 · Datawhale 城市生态负责人 · n8n Ambassador",
       knowsAbout: [
         "AI 产品",
         "Agent 与自动化",
         "中国 AI 生态",
         "全球 AI 与开源社区",
         "开发者社区",
-        "AI 生态项目",
-        "AI 产品 Workshop",
         "多 Agent 数字组织",
         "全球科技活动",
         "社区驱动增长",
         "数字组织设计",
       ],
-      professionalServiceName: "Darren Su - AI 生态项目与产品 Workshop",
+      professionalServiceName: "讲座和内训 / AI 转型咨询",
       serviceTypes: [
-        "AI 开发者生态项目",
-        "在中国开展的 AI 产品 Workshop",
-        "AI 与 Agent 分享",
-        "大会与社区生态合作",
+        "讲座和内训 / AI 转型咨询",
+        "带海外投资人和创始人了解、走访中国 AI，一起办活动",
       ],
     },
     services: {

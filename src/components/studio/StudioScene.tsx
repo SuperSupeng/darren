@@ -455,7 +455,6 @@ const ProductBench = memo(function ProductBench() {
     {[0.34, 0.65, 0.96].map((y) => <Box key={y} at={[1.23, y, -2.507]} size={[0.17, 0.025, 0.02]} color="brass" />)}
     <Box at={[2.56, 1.185, -3.15]} size={[0.59, 0.07, 0.32]} color="dark" />
     <Box at={[2.56, 1.42, -3.23]} size={[0.11, 0.45, 0.09]} color="dark" />
-    <Photo url="/projects/matchpoint.png" at={[2.56, 1.83, -3.2]} size={[1.59, 0.91]} frame="dark" screen />
     <pointLight position={[2.56, 1.72, -2.95]} intensity={evening ? 0.85 : 0} color="#c9e1c9" distance={2.6} decay={2} />
     <Box at={[2.5, 1.18, -2.65]} size={[0.82, 0.04, 0.28]} color="linen" />
     {[0, 1, 2].map((row) => <Box key={row} at={[2.5, 1.203, -2.73 + row * 0.066]} size={[0.67, 0.009, 0.011]} color="plasterEdge" />)}

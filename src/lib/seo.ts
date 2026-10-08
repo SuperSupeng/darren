@@ -23,17 +23,13 @@ const pageKeywords: Record<Locale, Record<KeywordGroup, string[]>> = {
   en: {
     home: [
       'Darren Su',
-      'MatchPoint Co-founder',
-      'AGI Villa Co-founder',
-      'Head of City Ecosystem at Datawhale',
+      'Co-founder, AGI Villa & MatchPoint',
+      'Head of City Ecosystem, Datawhale',
       'n8n Ambassador',
       'Re:Organize',
       'AI agents and automation',
       'China AI ecosystem',
       'China developer community',
-      'AI developer ecosystem programs',
-      'AI product workshop China',
-      'AI agent speaker',
       'multi-agent organization',
       'AGI Villa',
       'Datawhale',
@@ -41,12 +37,8 @@ const pageKeywords: Record<Locale, Record<KeywordGroup, string[]>> = {
       'GlobalTechEvents',
     ],
     services: [
-      'AI developer events China',
-      'developer ecosystem program',
-      'AI product workshop China',
-      'China early user feedback',
-      'AI agent keynote speaker',
-      'multi-agent workshop',
+      'China AI field visits & events for global investors and founders',
+      'Talks and in-house sessions on where AI is now, what it can do, and how teams work once people and agents work together.',
     ],
     work: [
       'AI developer ecosystem case studies',
@@ -69,9 +61,9 @@ const pageKeywords: Record<Locale, Record<KeywordGroup, string[]>> = {
       'AGI Villa',
       'Datawhale',
       'MatchPoint',
-      'MatchPoint Co-founder',
+      'Co-founder, AGI Villa & MatchPoint',
       'GlobalTechEvents',
-      'Head of City Ecosystem at Datawhale',
+      'Head of City Ecosystem, Datawhale',
       'n8n Ambassador',
       'Re:Organize',
       '《重新组织》',
@@ -83,17 +75,12 @@ const pageKeywords: Record<Locale, Record<KeywordGroup, string[]>> = {
     home: [
       '苏鹏',
       'Darren Su',
-      'MatchPoint 联合创始人',
-      'AGI Villa 联合创始人',
+      'AGI Villa & MatchPoint 联合创始人',
       'Datawhale 城市生态负责人',
       'n8n Ambassador',
       '《重新组织》',
       'Re:Organize',
       'Agent 与自动化',
-      'AI 开发者生态',
-      'AI 开发者活动',
-      'AI 产品 Workshop',
-      'Agent 分享',
       '多 Agent 数字组织',
       'AGI Villa',
       'Datawhale',
@@ -101,12 +88,8 @@ const pageKeywords: Record<Locale, Record<KeywordGroup, string[]>> = {
       'GlobalTechEvents',
     ],
     services: [
-      'AI 开发者活动',
-      '开发者生态项目',
-      'AI 产品 Workshop',
-      '早期用户反馈',
-      'AI Agent 分享',
-      '多 Agent 工作坊',
+      '讲座和内训 / AI 转型咨询',
+      '带海外投资人和创始人了解、走访中国 AI，一起办活动',
     ],
     work: [
       'AI 生态项目案例',
@@ -130,7 +113,7 @@ const pageKeywords: Record<Locale, Record<KeywordGroup, string[]>> = {
       'AGI Villa',
       'Datawhale',
       'MatchPoint',
-      'MatchPoint 联合创始人',
+      'AGI Villa & MatchPoint 联合创始人',
       'GlobalTechEvents',
       'Datawhale 城市生态负责人',
       'n8n Ambassador',
@@ -211,7 +194,7 @@ export function getProjectsPageKeywords(locale: string) {
   const additions = safeLocale === 'zh'
     ? ['AI 原生工作系统', '多 Agent 系统']
     : ['AI-native work system', 'multi-agent system'];
-  return [...getPageKeywords(safeLocale, 'work'), 'MatchPoint', 'GlobalTechEvents', 'Datawhale AI+X Events', ...additions];
+  return [...getPageKeywords(safeLocale, 'work'), 'GlobalTechEvents', 'Datawhale AI+X Events', ...additions];
 }
 
 const areaServed = ['China'];
@@ -328,6 +311,10 @@ function personNode(locale: string) {
       name: locale === 'zh' ? '杭州' : 'Hangzhou',
     },
     affiliation: personAffiliations.map((name) => ({ '@type': 'Organization', name })),
+    worksFor: {
+      '@type': 'Organization',
+      name: 'Datawhale',
+    },
     hasOccupation: getPersonOccupations(locale).map((name) => ({
       '@type': 'Occupation',
       name,

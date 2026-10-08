@@ -101,6 +101,9 @@ html:has(.spatial-site) { scroll-padding-top: 100px; }
 .spatial-footer-contact .btn { padding: 9px 15px; min-height: 40px; font-size: 14px; border-radius: 2px; }
 .spatial-footer-contact .quiet-link { font-size: 14px; min-height: 36px; }
 .spatial-socials { display: flex; flex-wrap: wrap; gap: 12px 17px; margin-top: 22px; color: var(--space-muted); font-size: 13px; }
+.spatial-socials span { color: var(--space-ink); }
+.jobs-note { display: grid; gap: 6px; margin-top: 18px; max-width: 42em; font-size: 14px; line-height: 1.7; }
+.jobs-note a { width: fit-content; text-decoration: underline; text-underline-offset: 4px; }
 .spatial-footer-bottom { max-width: 1280px; margin: 44px auto 0; padding: 20px 0; border-top: 1px solid var(--space-line); display: flex; align-items: center; justify-content: space-between; gap: 20px; color: var(--space-muted); font: 13px/1.6 var(--font-geist-sans); }
 .spatial-footer-bottom button { min-height: 32px; font-size: 13px; }
 .spatial-footer-feed { display: inline-flex; align-items: center; min-height: 44px; text-underline-offset: 4px; }

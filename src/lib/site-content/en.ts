@@ -1,6 +1,7 @@
 export const englishContent = {
   home: {
-    intro: "Co-founder @ MatchPoint & AGI Villa · Head of City Ecosystem @ Datawhale · n8n Ambassador. Connecting global founders and builders with China’s AI ecosystem.",
+    intro: "Connecting global founders and builders with China’s AI ecosystem.",
+    detail: "",
   },
   labels: {
     productLab: {
@@ -62,7 +63,7 @@ export const englishContent = {
       workEyebrow: "What I Do Now",
       workTitle: "What I spend most of my time doing now.",
       workItems: [
-        "Continue building MatchPoint, GlobalTechEvents, and AI+X Events around problems I encounter.",
+        "Continue building GlobalTechEvents and AI+X Events around problems I encounter.",
         "Connect AI and open-source builders around the world through Datawhale, AGI Villa, and community activities.",
         "Help AI products from abroad meet developers in China, organize hands-on sessions, and collect early feedback.",
         "Share what I learn from agents, automation, and running a multi-agent work system.",
@@ -93,7 +94,7 @@ export const englishContent = {
   projects: {
     hero: {
       eyebrow: "Projects",
-      title: "MatchPoint, GlobalTechEvents, and AI+X Events all began with problems I kept encountering at work.",
+      title: "GlobalTechEvents and AI+X Events all began with problems I kept encountering at work.",
       subtitle:
         "This page gathers products I build with projects I have initiated, led, or contributed to.",
     },
@@ -108,9 +109,9 @@ export const englishContent = {
   products: {
     hero: {
       eyebrow: "Products",
-      title: "MatchPoint, GlobalTechEvents, and AI+X Events all began with problems I kept encountering at work.",
+      title: "GlobalTechEvents and AI+X Events all began with problems I kept encountering at work.",
       subtitle:
-        "MatchPoint works on talent matching, GlobalTechEvents collects technology events worldwide, and AI+X Events supports Datawhale city activities. I also run a multi-agent work system over the long term.",
+        "GlobalTechEvents collects technology events worldwide, and AI+X Events supports Datawhale city activities. I also run a multi-agent work system over the long term.",
     },
     digitalOrganization: {
       eyebrow: "AI-native work system",
@@ -125,23 +126,6 @@ export const englishContent = {
       linkLabel: "Read the full essay",
     },
     items: [
-      {
-        id: "matchpoint",
-        name: "MatchPoint",
-        tagline: "Career exploration and role matching",
-        description:
-          "People can first talk through their direction with AI, then explore specific roles in more depth. The platform also records how candidates think and act in practical tasks, adding context a résumé rarely captures.",
-        image: "/projects/matchpoint.png",
-        url: "https://matchpoint.careers",
-        status: "live",
-        problem:
-          "A résumé says little about how someone thinks and acts in an unfamiliar situation. A job description also tells candidates very little about the role's actual day-to-day work.",
-        signal:
-          "The site is live, with working tools for candidates, hiring teams, and day-to-day operations. The product is being used in real hiring, and we continue to improve it based on how both sides use it.",
-        nextStep:
-          "Keep using it in real hiring and adjust career exploration, role understanding, and application flows around feedback from candidates and teams.",
-        tags: ["AI native", "Careers", "Agent"],
-      },
       {
         id: "globaltechevents",
         name: "GlobalTechEvents",
@@ -199,10 +183,10 @@ export const englishContent = {
     hero: {
       title: "Darren Su / 苏鹏",
       tags: [
-        "AI Founder",
-        "Head of City Ecosystem at Datawhale",
-        "AGI Villa Co-founder",
+        "Co-founder, AGI Villa & MatchPoint",
+        "Head of City Ecosystem, Datawhale",
         "n8n Ambassador",
+        "Host of Re:Organize",
       ],
     },
     kernel: [
@@ -224,7 +208,7 @@ export const englishContent = {
       {
         title: "Building my own products",
         description:
-          "I co-founded MatchPoint, built GlobalTechEvents, and operate a multi-agent work system. Once a product is live, questions about where users come from, why they stay, and whether to continue have to be answered through daily operations.",
+          "I built GlobalTechEvents and operate a multi-agent work system. Once a product is live, questions about where users come from, why they stay, and whether to continue have to be answered through daily operations.",
       },
       {
         title: "Meditation and public-interest work",
@@ -249,27 +233,23 @@ export const englishContent = {
   seo: {
     ogImageAlt: "Darren Su",
     home: {
-      jobTitle: "MatchPoint Co-founder, AGI Villa Co-founder, Head of City Ecosystem at Datawhale, n8n Ambassador, Host of Re:Organize",
+      jobTitle: "Co-founder, AGI Villa & MatchPoint · Head of City Ecosystem, Datawhale · n8n Ambassador",
       knowsAbout: [
         "AI products",
         "agents and automation",
         "China AI ecosystem",
         "global AI and open-source communities",
         "developer communities",
-        "AI ecosystem programs",
-        "AI product workshops",
         "multi-agent organizations",
         "global technology events",
         "community-led growth",
         "Digital Organization Design",
       ],
       professionalServiceName:
-        "Darren Su - AI Ecosystem Programs and Product Workshops",
+        "China AI field visits & events for global investors and founders",
       serviceTypes: [
-        "AI developer ecosystem programs",
-        "AI product workshops in China",
-        "AI and agent talks",
-        "conference and community partnerships",
+        "China AI field visits & events for global investors and founders",
+        "Talks and in-house sessions on where AI is now, what it can do, and how teams work once people and agents work together.",
       ],
     },
     services: {

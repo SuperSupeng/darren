@@ -4,6 +4,7 @@ import StudioExperience from '@/components/studio/StudioExperience';
 import StudioPurpose from '@/components/studio/StudioPurpose';
 import JsonLd from '@/components/JsonLd';
 import { createPageMetadata, getPageKeywords, homeStructuredData } from '@/lib/seo';
+import { getPersonOccupations } from '@/lib/site-config';
 import { getSiteContent } from '@/lib/siteContent';
 
 type Props = {
@@ -34,7 +35,7 @@ export default async function HomePage({ params }: Props) {
   return (
     <>
       <JsonLd data={homeStructuredData(locale)} />
-      <StudioExperience locale={locale} intro={site.home.intro} roles={site.about.hero.tags}>
+      <StudioExperience locale={locale} intro={site.home.intro} detail={site.home.detail} roles={getPersonOccupations(locale)}>
         <StudioPurpose locale={locale} />
       </StudioExperience>
     </>

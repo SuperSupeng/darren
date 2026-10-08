@@ -13,11 +13,17 @@ export const xProfileUrl = 'https://x.com/zenshipai';
 export const instagramProfileUrl = 'https://www.instagram.com/0xdarren_su';
 export const threadsProfileUrl = 'https://www.threads.net/@0xdarren_su';
 export const zhihuProfileUrl = 'https://www.zhihu.com/people/superssssss';
-export const matchpointUrl = 'https://matchpoint.careers';
 export const wechatSelectedUrl = 'https://mp.weixin.qq.com/s/ydALVwE_H_yCp1lywr9Yhw';
+export const youtubeUrl = 'https://www.youtube.com/@darren_su';
+export const bilibiliUrl = 'https://space.bilibili.com/358177309';
 export const rssPath = '/rss.xml';
 
-export const personAffiliations = ['MatchPoint', 'AGI Villa', 'Datawhale', 'n8n'] as const;
+export const personAffiliations = ['AGI Villa', 'MatchPoint', 'Datawhale', 'n8n'] as const;
+
+export const personTitles = {
+  zh: ['AGI Villa & MatchPoint 联合创始人', 'Datawhale 城市生态负责人', 'n8n Ambassador'],
+  en: ['Co-founder, AGI Villa & MatchPoint', 'Head of City Ecosystem, Datawhale', 'n8n Ambassador'],
+} as const;
 
 export const personSameAs = [
   siteUrl,
@@ -42,44 +48,44 @@ export const personProfileLinks = [
   ['n8n Ambassador', n8nAmbassadorProfileUrl],
 ] as const;
 
-export function getPersonJobTitle(locale: string) {
-  return locale === 'zh'
-    ? 'MatchPoint 联合创始人、AGI Villa 联合创始人、Datawhale 城市生态负责人、n8n Ambassador、《重新组织》主持人'
-    : 'MatchPoint Co-founder, AGI Villa Co-founder, Head of City Ecosystem at Datawhale, n8n Ambassador, Host of Re:Organize';
-}
-
 export function getPersonOccupations(locale: string) {
-  return locale === 'zh'
-    ? [
-        'MatchPoint 联合创始人',
-        'AGI Villa 联合创始人',
-        'Datawhale 城市生态负责人',
-        'n8n Ambassador',
-        '《重新组织》主持人',
-      ]
-    : [
-        'MatchPoint Co-founder',
-        'AGI Villa Co-founder',
-        'Head of City Ecosystem at Datawhale',
-        'n8n Ambassador',
-        'Host of Re:Organize',
-      ];
+  return locale === 'zh' ? [...personTitles.zh] : [...personTitles.en];
 }
 
-export const socialLinks = [
-  ['GitHub', githubProfileUrl],
-  ['LinkedIn', linkedinProfileUrl],
-  ['X', xProfileUrl],
-  ['Instagram', instagramProfileUrl],
-  ['小红书', 'https://xhslink.cn/m/1JL3lV0NGmO'],
-  ['n8n Ambassador', n8nAmbassadorProfileUrl],
-  ['Substack', substackUrl],
-  ['公众号 / WeChat', wechatSelectedUrl],
-  ['抖音', 'https://www.douyin.com/user/MS4wLjABAAAA0d1aGLhG9NnpnfnNkfV4RUKpAHWyLiQrDf2S6W0Pqj4'],
-  ['即刻', 'https://web.okjike.com/u/03212cf6-2692-420e-be04-b512a0108dad'],
-  ['Threads', threadsProfileUrl],
-  ['知乎', zhihuProfileUrl],
-] as const;
+export function getAboutRoles(locale: string) {
+  return locale === 'zh'
+    ? [...personTitles.zh, '《重新组织》主持人']
+    : [...personTitles.en, 'Host of Re:Organize'];
+}
+
+export function getPersonJobTitle(locale: string) {
+  return getPersonOccupations(locale).join(' · ');
+}
+
+export type FooterPlatform = {
+  label: string;
+  href?: string;
+  detail?: string;
+};
+
+// One shared list for both locales. Entries without href render as text.
+export const socialLinks: readonly FooterPlatform[] = [
+  { label: 'GitHub', href: githubProfileUrl },
+  { label: 'LinkedIn', href: linkedinProfileUrl },
+  { label: 'X', href: xProfileUrl },
+  { label: 'Instagram', href: instagramProfileUrl },
+  { label: '小红书', href: 'https://xhslink.cn/m/1JL3lV0NGmO' },
+  { label: 'n8n Ambassador', href: n8nAmbassadorProfileUrl },
+  { label: 'Substack', href: substackUrl },
+  { label: '公众号 / WeChat', href: wechatSelectedUrl },
+  { label: '抖音', href: 'https://www.douyin.com/user/MS4wLjABAAAA0d1aGLhG9NnpnfnNkfV4RUKpAHWyLiQrDf2S6W0Pqj4' },
+  { label: '即刻', href: 'https://web.okjike.com/u/03212cf6-2692-420e-be04-b512a0108dad' },
+  { label: 'Threads', href: threadsProfileUrl },
+  { label: '知乎', href: zhihuProfileUrl },
+  { label: 'YouTube', href: youtubeUrl },
+  { label: 'Bilibili', href: bilibiliUrl, detail: 'Darren的创业田野' },
+  { label: '视频号', detail: 'Darren 的创业田野' },
+];
 
 export const navigationLinks = [
   { href: '/', zh: '首页', en: 'Home' },

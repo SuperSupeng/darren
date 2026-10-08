@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { usePathname } from '@/i18n/navigation';
 import ContactActions from '@/components/ContactActions';
+import JobsNote from '@/components/JobsNote';
 import './header-contact.css';
 
 export default function HeaderContact({ locale, menuOpen, onOpen }: { locale: string; menuOpen: boolean; onOpen: () => void }) {
@@ -48,6 +49,7 @@ export default function HeaderContact({ locale, menuOpen, onOpen }: { locale: st
       <h2>{zh ? '联系 Darren' : 'Contact Darren'}</h2>
       <p>{zh ? '欢迎介绍你的团队和想做的事。点击邮箱写信，或复制地址。' : 'Tell me about your team and what you have in mind. Click the email address to write, or copy it.'}</p>
       <ContactActions locale={locale} context="header-contact" variant="quiet" className="spatial-contact-options" />
+      <JobsNote locale={locale} />
     </div>
   </details>;
 }

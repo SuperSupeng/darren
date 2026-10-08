@@ -79,6 +79,14 @@ const organizationRecords: ArchiveRecord[] = [
 
 const exchangeRecords: ArchiveRecord[] = [
   {
+    id: 'singapore-opc',
+    title: {
+      zh: '在新加坡联合主办一人公司活动，并做开场分享',
+      en: 'Co-hosted a one-person-company event in Singapore and gave the opening talk.',
+    },
+    role: { zh: '', en: '' },
+  },
+  {
     id: 'mushanghai-speaking',
     title: { zh: 'MuShanghai', en: 'MuShanghai' },
     role: { zh: '作为官方合作伙伴代表发言。', en: 'Spoke as a representative of an official partner.' },
@@ -100,8 +108,8 @@ const exchangeRecords: ArchiveRecord[] = [
   },
   {
     id: 'networked-os-chiang-mai',
-    title: { zh: 'Networked OS 清迈大会', en: 'Networked OS conference in Chiang Mai' },
-    role: { zh: '作为特邀嘉宾分享。', en: 'Spoke as an invited guest.' },
+    title: { zh: '2025-12 Networked OS 清迈大会特邀嘉宾分享', en: '2025-12 Invited talk at the Networked OS conference in Chiang Mai' },
+    role: { zh: '', en: '' },
   },
   {
     id: 'cursor-hackathon-chiang-mai',
@@ -110,8 +118,11 @@ const exchangeRecords: ArchiveRecord[] = [
   },
   {
     id: 'google-ai-builder-exchange',
-    title: { zh: '与 Google 团队交流', en: 'Conversations with Google teams' },
-    role: { zh: '以 AI Builder 身份，与 Google 开发者关系、云及开发者生态负责人交流。', en: 'Joined conversations as an AI builder with leaders in Google developer relations, Cloud, and developer ecosystems.' },
+    title: {
+      zh: '在 Google I/O Connect China 活动中与 Google 开发者关系、云及开发者生态负责人交流',
+      en: 'At Google I/O Connect China, conversations with leads in Google developer relations, Cloud, and developer ecosystems',
+    },
+    role: { zh: '', en: '' },
   },
 ];
 

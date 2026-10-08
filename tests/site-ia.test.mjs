@@ -69,7 +69,7 @@ test('Writing lists every published article, including former field notes', () =
 });
 
 test('footer keeps existing platform links without an Elsewhere section', () => {
-  assert.deepEqual(socialLinks.map(([label]) => label), [
+  assert.deepEqual(socialLinks.map((item) => item.label), [
     'GitHub',
     'LinkedIn',
     'X',
@@ -82,8 +82,20 @@ test('footer keeps existing platform links without an Elsewhere section', () => 
     '即刻',
     'Threads',
     '知乎',
+    'YouTube',
+    'Bilibili',
+    '视频号',
   ]);
-  assert.ok(socialLinks.some(([, href]) => href === githubProfileUrl));
+  assert.ok(socialLinks.some((item) => item.href === githubProfileUrl));
+  const youtube = socialLinks.find((item) => item.label === 'YouTube');
+  const bilibili = socialLinks.find((item) => item.label === 'Bilibili');
+  const channels = socialLinks.find((item) => item.label === '视频号');
+  assert.equal(youtube.href, 'https://www.youtube.com/@darren_su');
+  assert.equal(bilibili.href, 'https://space.bilibili.com/358177309');
+  assert.equal(bilibili.detail, 'Darren的创业田野');
+  assert.equal(channels.detail, 'Darren 的创业田野');
+  assert.equal(channels.href, undefined);
+  assert.ok(!socialLinks.some((item) => /facebook|xiaoyuzhou|小宇宙/i.test(`${item.label} ${item.href ?? ''} ${item.detail ?? ''}`)));
 });
 
 test('Person sameAs uses the confirmed public profiles, including LinkedIn', () => {

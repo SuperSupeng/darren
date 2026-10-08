@@ -93,9 +93,9 @@ I also spoke a few days ago with the team behind Tencent Research Institute's AI
 
 ## A Final Thought
 
-At an event at Jiao Tong University recently, a student asked Teacher Cao what he thought about trends such as one-person companies, highly empowered individuals, and AI.
+At an event recently, a student asked Teacher Cao what he thought about trends such as one-person companies, highly empowered individuals, and AI.
 
-![A talk at the Jiao Tong University event](/blog/2025-year-in-review/image-12.jpg)
+![A talk at the event](/blog/2025-year-in-review/image-12.jpg)
 
 His answer stayed with me: **"All of these are like waves in the sea. They rise, and they fall. What truly matters is how you find steadiness within yourself."**
 
