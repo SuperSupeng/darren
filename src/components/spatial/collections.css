@@ -263,6 +263,11 @@
 .collection-page.collection-notes .series-text-entry .collection-note-body { grid-column: 2; grid-row: 1; }
 .collection-page.collection-notes .series-text-entry .collection-note-body h2 { font-family: var(--font-noto-serif, var(--font-site-serif, serif)); font-size: clamp(26px, 2.5vw, 34px); font-weight: 400; line-height: 1.45; }
 .series-text-entry .collection-note-body h2 a:hover { color: var(--space-accent); }
+.series-group { margin-top: 56px; }
+.series-group > h2 { font-family: var(--font-noto-serif, var(--font-site-serif, serif)); font-size: clamp(28px, 3vw, 40px); font-weight: 400; line-height: 1.35; }
+.series-group .series-text-list { margin-top: 8px; }
+.collection-page.collection-notes .series-text-entry .collection-note-body h3 { font-family: var(--font-noto-serif, var(--font-site-serif, serif)); font-size: clamp(26px, 2.5vw, 34px); font-weight: 400; line-height: 1.45; }
+.series-text-entry .collection-note-body h3 a:hover { color: var(--space-accent); }
 
 .collection-hero-actions { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 24px; }
 .collection-hero .collection-hero-actions .collection-text-link { margin-top: 0; }
@@ -272,7 +277,8 @@
 
 @media (max-width: 560px) {
   .collection-page.collection-notes .series-text-entry { grid-template-columns: 1fr; }
-  .collection-page.collection-notes .series-text-entry .collection-note-body h2 { font-size: 28px; }
+  .collection-page.collection-notes .series-text-entry .collection-note-body :is(h2, h3) { font-size: 28px; }
+  .series-group > h2 { font-size: 32px; }
   .series-heading { padding-top: 40px; }
   .series-heading h1 { font-size: 40px; }
 }

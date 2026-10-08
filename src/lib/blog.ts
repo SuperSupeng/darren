@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { defaultLocale, isLocale, locales, type Locale } from '@/i18n/config';
 import { archivedArticleCovers } from '@/lib/blog-images';
-import { isSeriesSlug, type SeriesSlug } from '@/lib/series';
+import { isSeriesGroupSlug, isSeriesSlug, seriesGroups, type SeriesGroupSlug, type SeriesSlug } from '@/lib/series';
 
 export const articleSections = ['writing', 'field-notes'] as const;
 export type ArticleSection = (typeof articleSections)[number];
@@ -23,6 +23,7 @@ export interface BlogPost {
   originalUrl?: string;
   tags: string[];
   series?: SeriesSlug;
+  seriesGroup?: SeriesGroupSlug;
   section: ArticleSection;
   content: string;
   readingTime: number;
@@ -75,7 +76,7 @@ const defaultPostImage: BlogPost['image'] = {
   height: 630,
 };
 
-type ParsedBlogContent = Pick<BlogPost, 'title' | 'date' | 'dateModified' | 'archiveYear' | 'dateNote' | 'authors' | 'description' | 'seoTitle' | 'seoDescription' | 'seoKeywords' | 'about' | 'originalUrl' | 'tags' | 'series' | 'section' | 'content'>;
+type ParsedBlogContent = Pick<BlogPost, 'title' | 'date' | 'dateModified' | 'archiveYear' | 'dateNote' | 'authors' | 'description' | 'seoTitle' | 'seoDescription' | 'seoKeywords' | 'about' | 'originalUrl' | 'tags' | 'series' | 'seriesGroup' | 'section' | 'content'>;
 
 // The local articles use single-line fields and an inline tag list.
 // Invalid source metadata must fail before it can reach HTML, JSON-LD, or feeds.
@@ -189,6 +190,14 @@ export function parseBlogContent(source: string, context = 'Blog article'): Pars
     return fail('series must be people-and-orgs, china-ai-on-the-ground, or practice');
   }
   const series = seriesValue as SeriesSlug | undefined;
+  const seriesGroupValue = optionalText('seriesGroup');
+  if (seriesGroupValue && !isSeriesGroupSlug(seriesGroupValue)) {
+    return fail('seriesGroup must be going-global');
+  }
+  const seriesGroup = seriesGroupValue as SeriesGroupSlug | undefined;
+  if (seriesGroup && series !== seriesGroups[seriesGroup].series) {
+    return fail('seriesGroup going-global belongs on the practice series');
+  }
   const sectionValue = optionalText('section') ?? 'writing';
   if (!articleSections.includes(sectionValue as ArticleSection)) {
     return fail('section must be writing or field-notes');
@@ -212,6 +221,7 @@ export function parseBlogContent(source: string, context = 'Blog article'): Pars
     ...(originalUrl ? { originalUrl } : {}),
     tags,
     ...(series ? { series } : {}),
+    ...(seriesGroup ? { seriesGroup } : {}),
     section,
     content,
   };

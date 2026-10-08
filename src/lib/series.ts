@@ -17,7 +17,7 @@ type SeriesDefinition = {
 export const seriesCatalog: Record<SeriesSlug, SeriesDefinition> = {
   'people-and-orgs': {
     name: {
-      zh: 'AI 时代的人和组织',
+      zh: 'AI 时代的人与组织',
       en: 'AI-Era People & Organizations',
     },
     intro: {
@@ -57,6 +57,29 @@ export function isSeriesSlug(value: string): value is SeriesSlug {
   return (seriesSlugs as readonly string[]).includes(value);
 }
 
+// Sub-groups belong to one series. The practice page shows a heading only when a post uses it.
+export const seriesGroupSlugs = ['going-global'] as const;
+export type SeriesGroupSlug = (typeof seriesGroupSlugs)[number];
+
+export const seriesGroups: Record<SeriesGroupSlug, { series: SeriesSlug; name: Record<Locale, string> }> = {
+  'going-global': {
+    series: 'practice',
+    name: {
+      zh: '我的出海探索笔记',
+      en: 'My notes on going global',
+    },
+  },
+};
+
+export function isSeriesGroupSlug(value: string): value is SeriesGroupSlug {
+  return (seriesGroupSlugs as readonly string[]).includes(value);
+}
+
+export function visibleSeriesGroups(slug: SeriesSlug, posts: { seriesGroup?: SeriesGroupSlug }[]) {
+  if (slug !== 'practice') return [];
+  return seriesGroupSlugs.filter((group) => posts.some((post) => post.seriesGroup === group));
+}
+
 function seriesLocale(locale: string): Locale {
   return isLocale(locale) ? locale : defaultLocale;
 }
@@ -65,6 +88,10 @@ export function getSeriesCopy(slug: SeriesSlug, locale: string) {
   const language = seriesLocale(locale);
   const series = seriesCatalog[slug];
   return { name: series.name[language], intro: series.intro[language] };
+}
+
+export function getSeriesGroupCopy(slug: SeriesGroupSlug, locale: string) {
+  return seriesGroups[slug].name[seriesLocale(locale)];
 }
 
 // A placeholder is not a description. Pages with only a placeholder use the series name.

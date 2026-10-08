@@ -9,9 +9,11 @@ const { defaultLocale, locales } = require('../src/i18n/config.ts');
 const { siteUrl } = require('../src/lib/site-config.ts');
 const {
   getSeriesCopy,
+  getSeriesGroupCopy,
   seriesCatalog,
   seriesMetaDescription,
   seriesSlugs,
+  visibleSeriesGroups,
 } = require('../src/lib/series.ts');
 const sitemap = require('../src/app/sitemap.ts').default;
 
@@ -23,6 +25,16 @@ const classified = {
   'jindongnan-travel-notes': 'practice',
   '2025-year-in-review': 'practice',
 };
+
+test('series names use the decided wording and keep the three slugs', () => {
+  assert.deepEqual(seriesSlugs, ['people-and-orgs', 'china-ai-on-the-ground', 'practice']);
+  assert.equal(seriesCatalog['people-and-orgs'].name.zh, 'AI 时代的人与组织');
+  assert.equal(seriesCatalog['people-and-orgs'].name.en, 'AI-Era People & Organizations');
+  assert.equal(seriesCatalog['china-ai-on-the-ground'].name.zh, 'China AI 现场');
+  assert.equal(seriesCatalog['china-ai-on-the-ground'].name.en, 'China AI, On the Ground');
+  assert.equal(seriesCatalog.practice.name.zh, '实践与生活');
+  assert.equal(seriesCatalog.practice.name.en, 'Practice & Life');
+});
 
 test('series intros stay limited to the approved strings', () => {
   assert.deepEqual(seriesCatalog['people-and-orgs'].intro.zh, [
@@ -124,6 +136,33 @@ test('series pages publish CollectionPage and ItemList data for the posts that e
       assert.equal(sitemap().some((entry) => entry.url === url), true, url);
     }
   }
+});
+
+test('going-global is a practice sub-group and stays hidden until an article uses it', () => {
+  assert.equal(getSeriesGroupCopy('going-global', 'zh'), '我的出海探索笔记');
+  assert.equal(getSeriesGroupCopy('going-global', 'en'), 'My notes on going global');
+  assert.deepEqual(visibleSeriesGroups('practice', []), []);
+  assert.deepEqual(visibleSeriesGroups('people-and-orgs', [{ seriesGroup: 'going-global' }]), []);
+  assert.deepEqual(visibleSeriesGroups('practice', [{ seriesGroup: 'going-global' }]), ['going-global']);
+  for (const locale of locales) {
+    assert.equal(getAllPosts(locale).some((post) => post.seriesGroup), false);
+  }
+  const source = [
+    '---',
+    'title: A note',
+    'date: 2026-01-02',
+    'description: A note.',
+    'tags: [AI]',
+    'series: practice',
+    'seriesGroup: going-global',
+    '---',
+    '',
+    'Body.',
+    '',
+  ].join('\n');
+  assert.equal(parseBlogContent(source).seriesGroup, 'going-global');
+  assert.throws(() => parseBlogContent(source.replace('seriesGroup: going-global', 'seriesGroup: outbound')), /seriesGroup/);
+  assert.throws(() => parseBlogContent(source.replace('series: practice', 'series: people-and-orgs')), /practice series/);
 });
 
 test('the series field accepts only the three slugs', () => {

@@ -3,10 +3,25 @@ import { notFound } from 'next/navigation';
 import { Link } from '@/i18n/navigation';
 import ArticleDate from '@/components/blog/ArticleDate';
 import JsonLd from '@/components/JsonLd';
-import { getPostsBySeries } from '@/lib/blog';
+import { getPostsBySeries, type BlogPost } from '@/lib/blog';
 import { createPageMetadata, seriesStructuredData } from '@/lib/seo';
-import { getSeriesCopy, isSeriesSlug, seriesMetaDescription, seriesSlugs } from '@/lib/series';
+import { getSeriesCopy, getSeriesGroupCopy, isSeriesSlug, seriesMetaDescription, seriesSlugs, visibleSeriesGroups } from '@/lib/series';
 import '@/components/spatial/collections.css';
+
+function SeriesEntries({ locale, posts, titleTag }: { locale: string; posts: BlogPost[]; titleTag: 'h2' | 'h3' }) {
+  const Title = titleTag;
+  return posts.map((post) => (
+    <article key={post.slug} className="collection-note-entry series-text-entry">
+      <div className="collection-note-date">
+        <ArticleDate post={post} locale={locale} />
+      </div>
+      <div className="collection-note-body">
+        <Title><Link href={`/blog/${post.slug}`}>{post.title}</Link></Title>
+        <p className="collection-description">{post.description}</p>
+      </div>
+    </article>
+  ));
+}
 
 export function generateStaticParams() {
   return seriesSlugs.map((slug) => ({ slug }));
@@ -35,6 +50,8 @@ export default async function SeriesPage({ params }: { params: Promise<{ locale:
 
   const copy = getSeriesCopy(slug, locale);
   const posts = getPostsBySeries(locale, slug);
+  const groups = visibleSeriesGroups(slug, posts);
+  const ungrouped = posts.filter((post) => !post.seriesGroup);
 
   return (
     <>
@@ -55,19 +72,21 @@ export default async function SeriesPage({ params }: { params: Promise<{ locale:
           {posts.length === 0 ? (
             <p className="collection-description series-empty">{locale === 'zh' ? '暂无' : 'Nothing yet'}</p>
           ) : (
-            <div className="collection-notes-list series-text-list">
-              {posts.map((post) => (
-                <article key={post.slug} className="collection-note-entry series-text-entry">
-                  <div className="collection-note-date">
-                    <ArticleDate post={post} locale={locale} />
+            <>
+              {ungrouped.length > 0 ? (
+                <div className="collection-notes-list series-text-list">
+                  <SeriesEntries locale={locale} posts={ungrouped} titleTag="h2" />
+                </div>
+              ) : null}
+              {groups.map((group) => (
+                <section key={group} className="series-group" aria-labelledby={`series-group-${group}`}>
+                  <h2 id={`series-group-${group}`}>{getSeriesGroupCopy(group, locale)}</h2>
+                  <div className="collection-notes-list series-text-list">
+                    <SeriesEntries locale={locale} posts={posts.filter((post) => post.seriesGroup === group)} titleTag="h3" />
                   </div>
-                  <div className="collection-note-body">
-                    <h2><Link href={`/blog/${post.slug}`}>{post.title}</Link></h2>
-                    <p className="collection-description">{post.description}</p>
-                  </div>
-                </article>
+                </section>
               ))}
-            </div>
+            </>
           )}
         </div>
       </main>
