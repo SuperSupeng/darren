@@ -87,6 +87,7 @@ test('the sitemap contains every real localized page once and only advertises ex
   const entries = sitemap();
   const urls = entries.map(entry => entry.url);
   assert.equal(new Set(urls).size, urls.length, 'Canonical sitemap URLs must be unique');
+  assert.ok(!urls.some((url) => new URL(url).pathname.endsWith('/privacy')), 'The privacy policy is not a search asset');
   assert.deepEqual(new Set(urls), expected, 'Only real public routes belong in the sitemap');
 
   for (const entry of entries) {
@@ -182,6 +183,7 @@ test('llms.txt uses the current IA, canonical identity, and confirmed public pro
     assert.ok(!body.includes(`](${siteUrl}/${locale}/field-notes)`));
     assert.ok(!body.includes(`](${siteUrl}/${locale}/elsewhere)`));
   }
+  assert.ok(!body.includes('/privacy'), 'llms.txt must not list the privacy policy');
 });
 
 test('article JSON-LD keeps title, description, author, and dates from source metadata', () => {
