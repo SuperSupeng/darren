@@ -90,11 +90,19 @@ test('case edits, homepage cards, and jobs copy use the approved strings', () =>
   assert.equal(person.jobTitle.includes('Datawhale 城市生态负责人'), true);
 });
 
-test('MatchPoint stays a co-founder title and leaves the product list; Intern Planet stays stopped', () => {
+test('MatchPoint stays a co-founder title and leaves the product list; 观木 is live and Intern Planet is off the showcase', () => {
   const products = getSiteContent('en').products.items;
-  assert.deepEqual(products.map((item) => item.id), ['globaltechevents', 'datawhale-aix-events', 'internplanet']);
-  assert.equal(products.find((item) => item.id === 'internplanet').status, 'stopped');
-  assert.equal(getSiteContent('zh').products.items.find((item) => item.id === 'internplanet').status, '已停止');
+  const zhProducts = getSiteContent('zh').products.items;
+  assert.deepEqual(products.map((item) => item.id), ['globaltechevents', 'datawhale-aix-events', 'guanmu']);
+  assert.deepEqual(zhProducts.map((item) => item.id), ['globaltechevents', 'datawhale-aix-events', 'guanmu']);
+  assert.equal(products.find((item) => item.id === 'guanmu').status, 'live');
+  assert.equal(products.find((item) => item.id === 'guanmu').url, 'https://guanmu.darren-su.com/');
+  assert.equal(zhProducts.find((item) => item.id === 'guanmu').status, '运行中');
+  assert.equal(zhProducts.find((item) => item.id === 'guanmu').tagline, '拆懂一座古建筑');
+  assert.equal(products.some((item) => item.id === 'internplanet' || item.id === 'matchpoint'), false);
+  assert.equal(zhProducts.some((item) => item.id === 'internplanet'), false);
+  assert.equal(fs.readFileSync(new URL('../src/lib/site-content/en.ts', import.meta.url), 'utf8').includes('internplanet.tech'), false);
+  assert.equal(fs.readFileSync(new URL('../src/lib/site-content/zh.ts', import.meta.url), 'utf8').includes('Intern Planet'), false);
   assert.equal(fs.readFileSync(new URL('../src/components/studio/StudioScene.tsx', import.meta.url), 'utf8').includes('matchpoint.png'), false);
   assert.equal(socialLinks.some((item) => item.label === '视频号' && !item.href), true);
 });

@@ -76,7 +76,7 @@
 .collection-page.collection-build .collection-product { --product-stage: #e4d0a2; --product-stage-ink: #24382c; min-width: 0; padding: 0; background: transparent; border: 0; }
 .collection-page.collection-build #product-globaltechevents { --product-stage: #dc9275; }
 .collection-page.collection-build #product-datawhale-aix-events { --product-stage: #b7d0bf; }
-.collection-page.collection-build #product-internplanet { --product-stage: #d6d4c9; }
+.collection-page.collection-build #product-guanmu { --product-stage: #e4d5c0; }
 .collection-page.collection-build .collection-product-display { min-width: 0; position: relative; isolation: auto; padding: clamp(28px, 4vw, 54px) clamp(24px, 3vw, 42px) 18px; margin: 0; background: var(--product-stage); border: 0; box-shadow: inset 0 -4px 0 #24382c12; }
 .collection-page.collection-build #product-globaltechevents .collection-product-display { margin-top: 30px; }
 .collection-page.collection-build #product-datawhale-aix-events .collection-product-display { margin-top: 0; }
