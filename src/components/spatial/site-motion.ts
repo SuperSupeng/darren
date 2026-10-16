@@ -8,7 +8,7 @@ const revealSelector = [
   '.case-cover-copy > *', '.case-cover-photo', '.case-chapter', '.case-next',
   '.interior-profile-copy > *', '.interior-section-heading', '.interior-chapters > *', '.interior-invitation > div',
   '.interior-services-hero > div > *', '.interior-service-heading', '.interior-service-details', '.interior-inquiry',
-  '.reading-header > *', '.reading-footer', '.spatial-footer-top > *',
+  '.reading-header > *', '.reading-footer', '.spatial-footer-top > *', '.spatial-footer-socials',
 ].join(',');
 
 export function observeSiteMotion(root: HTMLElement, revealed: WeakSet<Element>) {
