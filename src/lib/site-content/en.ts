@@ -11,7 +11,7 @@ export const englishContent = {
         "An idea may sound promising in conversation. Letting people try it shows where the problems are.",
       selectedEyebrow: "Current Products",
       selectedStatement:
-        "Each product began with a specific problem: hiring questions several founders kept raising, or the friction I encountered while finding technology events and organizing city programs.",
+        "Each product began with a specific problem: the friction I encountered while finding technology events and organizing city programs, or the difficulty of seeing how an ancient timber hall fits together.",
       projectLabel: "Project",
       visitProject: "Visit project",
       explainerEyebrow: "After launch",
@@ -161,21 +161,21 @@ export const englishContent = {
         tags: ["Datawhale", "AI+X", "Community events"],
       },
       {
-        id: "internplanet",
-        name: "Intern Planet",
-        tagline: "A concluded cross-border talent experiment",
+        id: "guanmu",
+        name: "观木",
+        tagline: "An interactive look at one ancient timber hall",
         description:
-          "The project tried to connect companies with international students and young builders through a first concrete project or internship.",
-        image: "/projects/internplanet.png",
-        url: "https://internplanet.tech",
-        status: "stopped",
+          "An interactive prototype for Chinese ancient architecture. It starts from the Amitabha Hall of Dayun Temple in Pingshun, Shanxi: turn the hall, take the timber apart, and learn the parts.",
+        image: "/projects/guanmu.webp",
+        url: "https://guanmu.darren-su.com/",
+        status: "live",
         problem:
-          "Both sides were open to working together, but lacked a concrete starting point that could also build trust.",
+          "The timber under an ancient eave is hard to make out in a photo or a plan. The parts sit above eye level, and how they join is easy to lose in the whole building.",
         signal:
-          "The experiment suggested that a concrete project or internship may be a better starting point than a broad talent community.",
+          "The first hall is open: Dayun Temple’s Amitabha Hall, with a 3D breakdown, close looks at the components, and a short story walk.",
         nextStep:
-          "The experiment has ended. Its lessons about concrete projects, trust, and early talent matching remain useful for future work.",
-        tags: ["Talent", "Asia", "Community"],
+          "Keep this hall open to turn, take apart, and set next to photographs of the building.",
+        tags: ["Ancient architecture", "Timber", "Interactive"],
       },
     ],
   },

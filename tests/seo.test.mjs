@@ -494,8 +494,10 @@ test('project index metadata mentions the AI-native work system without a new pu
   assert.ok(getProjectsPageKeywords('zh').includes('WAIC 官方夜场'));
   const zh = JSON.parse(fs.readFileSync(new URL('../messages/zh.json', import.meta.url), 'utf8'));
   const en = JSON.parse(fs.readFileSync(new URL('../messages/en.json', import.meta.url), 'utf8'));
-  assert.equal(zh.projects.meta.description, 'Darren Su / 苏鹏的产品与项目：GlobalTechEvents、Datawhale AI+X Events，日常使用的 AI 原生工作系统（31 个专业 Agent、44 个自动任务），以及代表案例。');
-  assert.equal(en.projects.meta.description, 'Products and projects by Darren Su, including GlobalTechEvents, Datawhale AI+X Events, an AI-native work system with 31 specialized agents and 44 recurring automations, and selected case studies.');
+  assert.equal(zh.projects.meta.description, 'Darren Su / 苏鹏的产品与项目：GlobalTechEvents、Datawhale AI+X Events、观木，日常使用的 AI 原生工作系统（31 个专业 Agent、44 个自动任务），以及代表案例。');
+  assert.equal(en.projects.meta.description, 'Products and projects by Darren Su, including GlobalTechEvents, Datawhale AI+X Events, 观木, an AI-native work system with 31 specialized agents and 44 recurring automations, and selected case studies.');
+  assert.ok(getProjectsPageKeywords('zh').includes('观木'));
+  assert.ok(getProjectsPageKeywords('en').includes('观木'));
   assert.ok(!zh.projects.meta.description.includes('MatchPoint'));
   assert.ok(!en.projects.meta.description.includes('MatchPoint'));
   assert.equal(getSiteContent('zh').seo.home.knowsAbout.at(-1), '数字组织设计');

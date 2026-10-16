@@ -195,7 +195,7 @@ export function getProjectsPageKeywords(locale: string) {
   const additions = safeLocale === 'zh'
     ? ['AI 原生工作系统', '多 Agent 系统']
     : ['AI-native work system', 'multi-agent system'];
-  return [...getPageKeywords(safeLocale, 'work'), 'GlobalTechEvents', 'Datawhale AI+X Events', ...additions];
+  return [...getPageKeywords(safeLocale, 'work'), 'GlobalTechEvents', 'Datawhale AI+X Events', '观木', ...additions];
 }
 
 const areaServed = ['China'];
