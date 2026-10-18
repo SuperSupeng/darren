@@ -54,6 +54,21 @@ const nextConfig: NextConfig = {
         destination: '/:locale',
         permanent: true,
       },
+      {
+        source: '/feed',
+        destination: '/rss.xml',
+        permanent: true,
+      },
+      {
+        source: '/atom.xml',
+        destination: '/rss.xml',
+        permanent: true,
+      },
+      {
+        source: '/:locale(en|zh)/feed',
+        destination: '/rss.xml',
+        permanent: true,
+      },
     ];
   },
 };

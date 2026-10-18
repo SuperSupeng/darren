@@ -85,6 +85,35 @@ const aboutCopy = {
   },
 };
 
+const agiVillaLink = { phrase: 'AGI Villa', href: '/blog/why-i-started-agi-villa' } as const;
+const matchPointLink = { phrase: 'MatchPoint', href: '/projects' } as const;
+const globalTechEventsLink = {
+  phrase: 'GlobalTechEvents',
+  href: 'https://www.globaltechevents.xyz/authors/darren-su',
+  external: true,
+} as const;
+const agentsLink = {
+  en: { phrase: '31 agents', href: '/blog/managing-31-ai-employees' },
+  zh: { phrase: '31 个 Agent', href: '/blog/managing-31-ai-employees' },
+} as const;
+
+const aboutInlineLinks = {
+  zh: {
+    community: [agiVillaLink],
+    making: [matchPointLink, globalTechEventsLink, agentsLink.zh],
+  },
+  en: {
+    community: [agiVillaLink],
+    making: [matchPointLink, globalTechEventsLink, agentsLink.en],
+  },
+} as const;
+
+export type AboutInlineLink = (typeof aboutInlineLinks)['en']['making'][number] | (typeof aboutInlineLinks)['zh']['making'][number] | (typeof aboutInlineLinks)['en']['community'][number];
+
 export function getAboutCopy(locale: string) {
   return aboutCopy[locale === 'zh' ? 'zh' : 'en'];
+}
+
+export function getAboutInlineLinks(locale: string) {
+  return aboutInlineLinks[locale === 'zh' ? 'zh' : 'en'];
 }
