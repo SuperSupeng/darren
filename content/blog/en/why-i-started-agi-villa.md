@@ -1,9 +1,9 @@
 ---
-title: "I've Started a Venture: AGI Villa, a Community-Driven Venture Studio"
+title: "Why I Started AGI Villa — Community Venture Studio"
 archiveYear: "2025"
 dateNote: "2025 startup notes"
 authors: ["Darren Su"]
-description: "Why Monica and I started AGI Villa: making community the foundation for building products together, with partners, resources, and social responsibility considered from the start."
+description: "Darren Su on founding AGI Villa: a community-driven venture studio where products are built with users from day one—not alone for six months behind closed doors."
 tags: ["AGI Villa", "Entrepreneurship", "Community", "Giving"]
 ---
 

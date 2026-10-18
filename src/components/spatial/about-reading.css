@@ -50,6 +50,17 @@
   margin-top: 24px;
 }
 
+.about-reading .about-reading-prose p a {
+  color: var(--space-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+.about-reading .about-reading-prose p a:hover {
+  color: var(--space-ink);
+}
+
 .about-reading .about-reading-link {
   display: inline-flex;
   align-items: center;

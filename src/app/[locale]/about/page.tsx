@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import JobsNote from '@/components/JobsNote';
-import { getAboutCopy } from '@/lib/about';
+import AboutParagraph from '@/components/AboutParagraph';
+import { getAboutCopy, getAboutInlineLinks } from '@/lib/about';
 import { getAboutRoles } from '@/lib/site-config';
 import ProfileRoles from '@/components/ProfileRoles';
 import { getTranslations } from 'next-intl/server';
@@ -27,6 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const copy = getAboutCopy(locale);
+  const inlineLinks = getAboutInlineLinks(locale);
   return (
     <>
       <JsonLd data={aboutStructuredData(locale)} />
@@ -55,7 +57,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           <section className="about-reading-chapter about-reading-community" aria-labelledby="about-community-title">
             <header><h2 id="about-community-title">{copy.communityTitle}</h2></header>
             <div className="about-reading-prose">
-              {copy.community.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+              {copy.community.map(paragraph => <AboutParagraph key={paragraph} text={paragraph} links={inlineLinks.community} />)}
               <blockquote className="about-reading-reflection">{copy.communityReflection}</blockquote>
               <Link href="/work/datawhale-city-ecosystem" className="about-reading-link">{copy.communityLink}<span aria-hidden="true">↗</span></Link>
             </div>
@@ -63,7 +65,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           <section className="about-reading-chapter about-reading-making" aria-labelledby="about-making-title">
             <header><h2 id="about-making-title">{copy.makingTitle}</h2></header>
             <div className="about-reading-prose">
-              {copy.making.map((paragraph, index) => <p key={paragraph} className={index === 0 ? 'about-reading-lead' : undefined}>{paragraph}</p>)}
+              {copy.making.map((paragraph, index) => <AboutParagraph key={paragraph} text={paragraph} links={inlineLinks.making} className={index === 0 ? 'about-reading-lead' : undefined} />)}
               <div className="about-reading-links">
                 <Link href="/projects" className="about-reading-link">{copy.productsLink}<span aria-hidden="true">↗</span></Link>
                 <Link href="/blog/managing-31-ai-employees" className="about-reading-link">{copy.agentLink}<span aria-hidden="true">↗</span></Link>
