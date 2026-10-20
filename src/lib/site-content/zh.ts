@@ -90,9 +90,10 @@ export const chineseContent: LocalizedContent = {
       subtitle: "节目入口：介绍和收听链接。这里是集合页，不是日更更新墙。",
     },
     listen: "收听",
-    listenPending: "公开收听页确认后会挂在这里。本页作为稳定入口保留。",
+    listenUrl: "https://www.xiaoyuzhoufm.com/podcast/6aacb9b82527cf1af35662c9",
+    listenCta: "在小宇宙收听",
     summary:
-      "这一页只收节目入口。不按日更维护，也不把外链目录混进文章。公开收听页一经核对，会挂在下面。",
+      "这一页只收节目入口。不按日更维护，也不把外链目录混进文章。",
   },
   projects: {
     hero: {

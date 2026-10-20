@@ -86,10 +86,10 @@ export const englishContent = {
         "The show entrance: a short introduction and listening links. This is a hub, not a daily feed.",
     },
     listen: "Listen",
-    listenPending:
-      "A public listening page will be linked here once it is confirmed. This page remains the stable entrance.",
+    listenUrl: "https://www.xiaoyuzhoufm.com/podcast/6aacb9b82527cf1af35662c9",
+    listenCta: "Listen on Xiaoyuzhou",
     summary:
-      "This page is only the show entrance. It is not a daily feed, and it is not mixed into Writing. When a public listening URL is confirmed, it will be linked below.",
+      "This page is only the show entrance. It is not a daily feed, and it is not mixed into Writing.",
   },
   projects: {
     hero: {
