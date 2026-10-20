@@ -87,12 +87,14 @@ export const chineseContent: LocalizedContent = {
     hero: {
       eyebrow: "播客",
       title: "《重新组织》",
-      subtitle: "节目入口：介绍和收听链接。这里是集合页，不是日更更新墙。",
+      subtitle:
+        "节目入口：一段简短介绍，以及在小宇宙收听《重新组织》的链接。这里是集合页，不是日更更新墙。",
     },
     listen: "收听",
-    listenPending: "公开收听页确认后会挂在这里。本页作为稳定入口保留。",
+    listenUrl: "https://www.xiaoyuzhoufm.com/podcast/6aacb9b82527cf1af35662c9",
+    listenCta: "在小宇宙收听",
     summary:
-      "这一页只收节目入口。不按日更维护，也不把外链目录混进文章。公开收听页一经核对，会挂在下面。",
+      "这一页只收节目入口，并给出在小宇宙收听的链接。不按日更维护，也不列出其他平台和单集，也不把外链目录混进文章。",
   },
   projects: {
     hero: {
