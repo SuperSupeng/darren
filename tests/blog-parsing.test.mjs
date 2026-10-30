@@ -185,6 +185,7 @@ test('published articles retain complete metadata and Markdown, with only suppor
   }
   const chinesePosts = getAllPosts('zh');
   assert.deepEqual(chinesePosts.filter(post => post.date).map(post => [post.slug, post.date]), [
+    ['tiandao-and-diamond-sutra', '2026-10-30'],
     ['changzhi-small-city-ai', '2026-10-05'],
     ['jindongnan-travel-notes', '2026-10-05'],
     ['turning-expertise-into-an-asset', '2026-07-22'],
@@ -207,7 +208,7 @@ test('published articles retain complete metadata and Markdown, with only suppor
     assert.ok(!Object.hasOwn(post, 'date'), `${slug}: a copy or event date must not become the publication day`);
   }
   assert.deepEqual(chinesePosts.map(post => post.date?.slice(0, 4) ?? post.archiveYear), [
-    '2026', '2026', '2026', '2026', '2026', '2026', '2025', '2025', '2024', '2024', '2024', '2024',
+    '2026', '2026', '2026', '2026', '2026', '2026', '2026', '2025', '2025', '2024', '2024', '2024', '2024',
   ]);
   assert.deepEqual(
     chinesePosts.filter(post => post.section === 'field-notes').map(post => post.slug).sort(),

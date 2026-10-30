@@ -362,6 +362,7 @@ test('filled articles use the researched search fields and leave visible text an
       assert.equal(article.headline, post.title);
       assert.equal(article.description, post.description);
       const verifiedDates = {
+        'tiandao-and-diamond-sutra': '2026-10-30',
         'turning-expertise-into-an-asset': '2026-07-22',
         'changzhi-small-city-ai': '2026-10-05',
         'jindongnan-travel-notes': '2026-10-05',
