@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { usePathname } from '@/i18n/navigation';
+import { Link, usePathname } from '@/i18n/navigation';
 import ContactActions from '@/components/ContactActions';
 import JobsNote from '@/components/JobsNote';
+import { consultingCopy } from '@/lib/consulting-copy';
 import './header-contact.css';
 
 export default function HeaderContact({ locale, menuOpen, onOpen }: { locale: string; menuOpen: boolean; onOpen: () => void }) {
@@ -11,6 +12,7 @@ export default function HeaderContact({ locale, menuOpen, onOpen }: { locale: st
   const summaryRef = useRef<HTMLElement>(null);
   const pathname = usePathname();
   const zh = locale === 'zh';
+  const pointer = zh ? consultingCopy.zh.contactPointer : consultingCopy.en.contactPointer;
 
   useEffect(() => {
     detailsRef.current?.removeAttribute('open');
@@ -48,6 +50,7 @@ export default function HeaderContact({ locale, menuOpen, onOpen }: { locale: st
     <div className="spatial-contact-panel">
       <h2>{zh ? '联系 Darren' : 'Contact Darren'}</h2>
       <p>{zh ? '欢迎介绍你的团队和想做的事。点击邮箱写信，或复制地址。' : 'Tell me about your team and what you have in mind. Click the email address to write, or copy it.'}</p>
+      <p><Link href="/consulting">{pointer.link}</Link>{pointer.after}</p>
       <ContactActions locale={locale} context="header-contact" variant="quiet" className="spatial-contact-options" />
       <JobsNote locale={locale} />
     </div>

@@ -68,7 +68,7 @@ test('every crawler rule protects API routes and preserves the existing public c
 
 test('the sitemap contains every real localized page once and only advertises existing alternate URLs', () => {
   const expected = new Set();
-  const basePaths = ['', '/projects', '/services', '/about', '/blog', '/podcast'];
+  const basePaths = ['', '/projects', '/services', '/consulting', '/about', '/blog', '/podcast'];
   for (const locale of locales) {
     for (const route of basePaths) expected.add(`${siteUrl}/${locale}${route}`);
     const postFiles = fs.readdirSync(new URL(`../content/blog/${locale}/`, import.meta.url))
@@ -175,7 +175,7 @@ test('llms.txt uses the current IA, canonical identity, and confirmed public pro
   assert.ok(!body.includes('GoChina'));
   assert.ok(!body.includes('Builder-Monk'));
   for (const locale of locales) {
-    for (const route of ['', '/blog', '/podcast', '/projects', '/about', '/services']) {
+    for (const route of ['', '/blog', '/podcast', '/projects', '/about', '/services', '/consulting']) {
       assert.ok(body.includes(`${siteUrl}/${locale}${route}`), `llms.txt must list ${locale}${route || '/'}`);
     }
     assert.ok(!body.includes(`](${siteUrl}/${locale}/work)`));

@@ -75,17 +75,12 @@
 .studio-purpose .studio-purpose-note:hover h3 { color: var(--space-accent); }
 
 /* A warm, distinct closing invitation in both lighting modes. */
-.studio-purpose .studio-purpose-invitation { display: grid; grid-template-columns: 1.05fr 1fr; align-items: center; gap: 60px; position: relative; margin-top: 0; padding: clamp(32px, 4.5vw, 64px); color: #25382c; background: #e4dbc2; border: 1px solid #a6946c; box-shadow: 12px 12px 0 #9d88552e; }
+.studio-purpose .studio-purpose-invitation { position: relative; margin-top: 0; padding: clamp(32px, 4.5vw, 64px); color: #25382c; background: #e4dbc2; border: 1px solid #a6946c; box-shadow: 12px 12px 0 #9d88552e; }
 .studio-purpose .studio-purpose-invitation::after { content: ""; position: absolute; right: -1px; top: -1px; width: 38px; height: 38px; background: linear-gradient(225deg, var(--space-paper) 49%, #b5a582 50%); }
-.studio-purpose .studio-purpose-invitation h2 { max-width: 11em; font-size: clamp(33px, 3.5vw, 48px); line-height: 1.3; }
-.studio-purpose .studio-purpose-invitation-copy > p { margin-top: 24px; font-size: 18px; line-height: 1.85; max-width: 26em; text-wrap: pretty; }
-.studio-purpose .studio-purpose-invitation-actions { min-width: 0; padding-left: 36px; border-left: 1px dashed #25382c55; }
-.studio-purpose .studio-purpose-contact { display: flex; flex-direction: column; align-items: start; gap: 18px; }
-.studio-purpose .studio-purpose-contact > a { color: #25382c; font-size: clamp(17px, 1.7vw, 24px); line-height: 1.7; font-weight: 500; overflow-wrap: anywhere; min-height: 44px; text-decoration: underline; text-decoration-color: #25382c55; text-underline-offset: 8px; }
-.studio-purpose .studio-purpose-contact > button { padding: 10px 20px; min-height: 44px; color: #f6f0e1; background: #25382c; border: 1px solid #25382c; font-size: 16px; line-height: 1.5; }
-.studio-purpose .studio-purpose-contact > button:hover { background: #3c503c; }
-.studio-purpose .studio-purpose-contact > input { color: #25382c; border-color: #25382c66; }
-.studio-purpose .studio-purpose-invitation-links { display: flex; align-items: start; flex-direction: column; gap: 4px; margin-top: 25px; }
+.studio-purpose .studio-purpose-invitation-label { margin-bottom: 12px; color: #606957; font: 500 15px/1.6 var(--font-geist-sans); }
+.studio-purpose .studio-purpose-invitation h2 { max-width: 16em; font-size: clamp(32px, 3.2vw, 46px); line-height: 1.35; }
+.studio-purpose .studio-purpose-invitation-copy > p:not(.studio-purpose-invitation-label) { margin-top: 22px; font-size: 18px; line-height: 1.85; max-width: 40em; text-wrap: pretty; }
+.studio-purpose .studio-purpose-invitation-copy > .studio-purpose-link { margin-top: 28px; }
 .studio-purpose .studio-purpose-invitation .studio-purpose-link span { color: #765639; }
 .studio-purpose .studio-purpose-invitation :is(a, button):focus-visible { outline-color: #25382c; }
 
@@ -95,8 +90,6 @@
   .studio-purpose .studio-purpose-writing { grid-template-columns: 210px minmax(0, 1fr); gap: 38px; }
   .studio-purpose .studio-purpose-note { grid-template-columns: 120px minmax(0, 1fr); grid-template-areas: "image copy" "description description"; column-gap: 24px; }
   .studio-purpose .studio-purpose-note-arrow { display: none; }
-  .studio-purpose .studio-purpose-invitation { gap: 30px; }
-  .studio-purpose .studio-purpose-invitation-actions { padding-left: 28px; }
 }
 @media (max-width: 800px) {
   .studio-purpose .studio-purpose-heading { align-items: start; flex-direction: column; gap: 15px; margin-bottom: 30px; }
@@ -115,9 +108,7 @@
   .studio-purpose .studio-purpose-writing { grid-template-columns: 1fr; gap: 36px; }
   .studio-purpose .studio-purpose-writing .studio-purpose-heading { position: static; }
   .studio-purpose .studio-purpose-writing h2 { max-width: none; font-size: 44px; }
-  .studio-purpose .studio-purpose-invitation { grid-template-columns: 1fr; gap: 30px; }
-  .studio-purpose .studio-purpose-invitation-actions { border-left: 0; border-top: 1px solid #25382c30; padding: 28px 0 0; }
-  .studio-purpose .studio-purpose-contact > a { font-size: 22px; }
+  .studio-purpose .studio-purpose-invitation-copy > p:not(.studio-purpose-invitation-label) { font-size: 17px; }
 }
 @media (max-width: 600px) {
   .studio-purpose .studio-purpose-case-featured .studio-purpose-case-copy { padding: 27px 24px; }
@@ -132,9 +123,8 @@
   .studio-purpose .studio-purpose-note h3 { font-size: 25px; }
   .studio-purpose .studio-purpose-note-arrow { display: none; }
   .studio-purpose .studio-purpose-invitation { padding: 30px 24px; }
-  .studio-purpose .studio-purpose-invitation h2 { font-size: 34px; }
-  .studio-purpose .studio-purpose-invitation-copy > p { font-size: 17px; }
-  .studio-purpose .studio-purpose-contact > a { font-size: 18px; }
+  .studio-purpose .studio-purpose-invitation h2 { font-size: 32px; }
+  .studio-purpose .studio-purpose-invitation-copy > p:not(.studio-purpose-invitation-label) { font-size: 17px; }
 }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .studio-purpose :is(.studio-purpose-photo, .studio-purpose-product-image, .studio-purpose-note-image) img { transition: transform 450ms ease; }
