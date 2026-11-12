@@ -110,6 +110,8 @@ export function GET() {
     `- [关于苏鹏](${siteUrl}/zh/about)`,
     `- [Collaborate](${siteUrl}/en/services)`,
     `- [合作](${siteUrl}/zh/services)`,
+    `- [Understand the question before deciding what to do next](${siteUrl}/en/consulting)`,
+    `- [先把问题看清，再决定下一步](${siteUrl}/zh/consulting)`,
     '',
     '## Case studies',
     '',

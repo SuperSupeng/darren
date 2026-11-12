@@ -7,6 +7,7 @@
 .spatial-site .spatial-contact-panel { position: absolute; right: 0; top: calc(100% + 12px); width: min(340px, calc(100vw - 24px)); padding: 25px; border: 1px solid var(--space-line); border-radius: 3px; background: var(--space-surface); color: var(--space-ink); box-shadow: 0 16px 45px var(--space-shadow); z-index: 1; }
 .spatial-site .spatial-contact-panel h2 { font: 500 18px/1.5 var(--font-geist-sans); margin: 0; }
 .spatial-site .spatial-contact-panel > p { font-size: 12px; line-height: 1.9; color: var(--space-muted); margin: 12px 0 0; }
+.spatial-site .spatial-contact-panel > p a { color: var(--space-ink); text-decoration: underline; text-underline-offset: 3px; }
 .spatial-site .spatial-contact-options { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 19px; }
 .spatial-site .spatial-contact-options > a { font-size: 13px; line-height: 1.8; color: var(--space-ink); min-height: 44px; padding-block: 10px; overflow-wrap: anywhere; text-decoration: underline; text-decoration-color: var(--space-line); text-underline-offset: 5px; }
 .spatial-site .spatial-contact-options > button { color: var(--space-ink); font-size: 12px; min-height: 44px; padding: 9px 14px; border: 1px solid var(--space-line); border-radius: 2px; background: var(--space-paper); }

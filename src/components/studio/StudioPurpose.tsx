@@ -2,7 +2,7 @@ import 'server-only';
 
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
-import ContactActions from '@/components/ContactActions';
+import { consultingCopy } from '@/lib/consulting-copy';
 import { getFeaturedWork } from '@/lib/portfolio';
 import { getStudioContent } from '@/lib/studio-content';
 import './studio-purpose.css';
@@ -19,10 +19,6 @@ export default function StudioPurpose({ locale }: { locale: string }) {
         allProducts: '了解产品与项目',
         writing: '精选文章',
         allWriting: '阅读全部文章',
-        invitation: '有想一起做的事？',
-        invitationText: '项目合作、分享邀请，或只是对某篇文章有共鸣，都欢迎来信聊聊。',
-        directions: '先了解合作方式',
-        about: '也可以先多认识我一点',
       }
     : {
         title: 'Selected work',
@@ -32,11 +28,8 @@ export default function StudioPurpose({ locale }: { locale: string }) {
         allProducts: 'Explore products and projects',
         writing: 'Selected writing',
         allWriting: 'Read all articles',
-        invitation: 'Something we could do together?',
-        invitationText: 'Write to me about a project, a speaking invitation, or something in an article that resonated with you.',
-        directions: 'Explore ways to work together',
-        about: 'Get to know me a little better',
       };
+  const invitation = locale === 'zh' ? consultingCopy.zh.home : consultingCopy.en.home;
 
   return (
     <div className="studio-purpose">
@@ -111,17 +104,11 @@ export default function StudioPurpose({ locale }: { locale: string }) {
 
         <section className="studio-purpose-invitation" aria-labelledby="studio-purpose-invitation-title">
           <div className="studio-purpose-invitation-copy">
-            <h2 id="studio-purpose-invitation-title">{copy.invitation}</h2>
-            <p>{copy.invitationText}</p>
+            <p className="studio-purpose-invitation-label">{invitation.label}</p>
+            <h2 id="studio-purpose-invitation-title">{invitation.heading}</h2>
+            <p>{invitation.body}</p>
+            <Link className="studio-purpose-link" href="/consulting">{invitation.link} <span aria-hidden="true">↗</span></Link>
           </div>
-          <div className="studio-purpose-invitation-actions">
-            <ContactActions locale={locale} context="home-purpose" variant="quiet" className="studio-purpose-contact" />
-            <div className="studio-purpose-invitation-links">
-              <Link className="studio-purpose-link" href="/services">{copy.directions} <span aria-hidden="true">↗</span></Link>
-              <Link className="studio-purpose-link" href="/about">{copy.about} <span aria-hidden="true">↗</span></Link>
-            </div>
-          </div>
-          <noscript><style>{'.studio-purpose-contact > button{display:none!important}'}</style></noscript>
         </section>
       </div>
     </div>
