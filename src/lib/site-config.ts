@@ -18,11 +18,11 @@ export const youtubeUrl = 'https://www.youtube.com/@darren_su';
 export const bilibiliUrl = 'https://space.bilibili.com/358177309';
 export const rssPath = '/rss.xml';
 
-export const personAffiliations = ['AGI Villa', 'MatchPoint', 'Datawhale', 'n8n'] as const;
+export const personAffiliations = ['AGI Villa', 'Datawhale', 'n8n'] as const;
 
 export const personTitles = {
-  zh: ['AGI Villa & MatchPoint 联合创始人', 'Datawhale 城市生态负责人', 'n8n Ambassador'],
-  en: ['Co-founder, AGI Villa & MatchPoint', 'Head of City Ecosystem, Datawhale', 'n8n Ambassador'],
+  zh: ['AGI Villa 联合创始人', 'Datawhale 城市生态负责人', 'n8n Ambassador'],
+  en: ['Co-founder, AGI Villa', 'Head of City Ecosystem, Datawhale', 'n8n Ambassador'],
 } as const;
 
 export const personSameAs = [
@@ -87,20 +87,20 @@ export const socialLinks: readonly FooterPlatform[] = [
   { label: '视频号', detail: 'Darren 的创业田野' },
 ];
 
+export const aboutLink = { href: '/about', zh: '关于', en: 'About' } as const;
 export const navigationLinks = [
   { href: '/', zh: '首页', en: 'Home' },
+  { href: '/consulting', zh: '咨询', en: 'Consulting' },
+  { href: '/projects', zh: '案例与产品', en: 'Work' },
   { href: '/blog', zh: '文章', en: 'Writing' },
-  { href: '/podcast', zh: '播客', en: 'Podcast' },
-  { href: '/projects', zh: '项目', en: 'Projects' },
+  aboutLink,
 ] as const;
 
-export const aboutLink = { href: '/about', zh: '关于我', en: 'About' } as const;
-export const collaborateHref = '/services';
-
-export const footerLinks = [...navigationLinks, aboutLink] as const;
+export const collaborateHref = '/consulting';
+export const footerLinks = [...navigationLinks, { href: '/podcast', zh: '播客', en: 'Podcast' }] as const;
 
 export const studioZoneHrefs = {
-  work: '/projects',
-  build: '/projects',
+  work: '/projects#work-archive',
+  build: '/projects#product-workbench',
   notes: '/blog',
 } as const;

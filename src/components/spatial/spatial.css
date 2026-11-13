@@ -84,7 +84,7 @@ html:has(.spatial-site) { scroll-padding-top: 100px; }
 .spatial-language > div > button svg:last-child { width: 10px; }
 .spatial-language > div > div { background: var(--space-surface); border-color: var(--space-line); color: var(--space-ink); }
 .spatial-mobile-light, .spatial-menu-toggle { display: none; }
-.spatial-mobile-nav { max-height: calc(100svh - var(--spatial-header-height)); overflow: auto; padding: 12px 6% 28px; border-top: 1px solid var(--space-line); }
+.spatial-mobile-nav { position: absolute; inset: 100% 0 auto; max-height: calc(100svh - var(--spatial-header-height)); overflow: auto; padding: 12px 6% 28px; border-top: 1px solid var(--space-line); background: var(--space-paper); box-shadow: 0 16px 25px var(--space-shadow); }
 .spatial-mobile-nav a { display: flex; gap: 22px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--space-line); font-family: var(--font-noto-serif); font-size: 23px; }
 .spatial-mobile-nav a span:last-child { margin-left: auto; font-family: var(--font-geist-sans); font-size: 18px; color: var(--space-muted); }
 .spatial-mobile-nav a[aria-current="page"] { color: var(--space-accent); }
@@ -102,6 +102,11 @@ html:has(.spatial-site) { scroll-padding-top: 100px; }
 .spatial-footer-contact .btn { padding: 9px 15px; min-height: 40px; font-size: 14px; border-radius: 2px; }
 .spatial-footer-contact .quiet-link { font-size: 14px; min-height: 36px; }
 .spatial-footer-socials { max-width: 1280px; margin: 36px auto 0; }
+.spatial-footer-socials > .spatial-socials { display: flex; flex-wrap: wrap; gap: 8px 28px; }
+.spatial-footer-more { margin-top: 10px; }
+.spatial-footer-more summary { min-height: 44px; padding-block: 10px; cursor: pointer; font-size: 13px; color: var(--space-muted); }
+.spatial-footer-more > .spatial-socials { margin-top: 12px; padding-bottom: 12px; }
+.spatial-footer-socials .spatial-socials a { min-height: 44px; align-items: center; }
 .spatial-socials { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); column-gap: 24px; row-gap: 12px; align-items: start; min-width: 0; margin: 0; padding: 0; list-style: none; color: var(--space-muted); font-size: 13px; line-height: 1.45; }
 .spatial-socials li { min-width: 0; }
 .spatial-socials a, .spatial-socials-static { display: flex; align-items: baseline; gap: 0.35em; width: fit-content; max-width: 100%; min-width: 0; }
@@ -176,4 +181,13 @@ html:has(.spatial-site) { scroll-padding-top: 100px; }
 @media (prefers-reduced-motion: reduce) {
   html:has(.spatial-site) { scroll-behavior: auto; }
   .spatial-site *, .spatial-site *::before, .spatial-site *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+/* Keep contact visible; browsing preferences belong in the mobile menu/footer. */
+.spatial-menu-settings { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; padding-top: 20px; }
+.spatial-menu-light { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 14px; }
+.spatial-menu-settings .spatial-language > div > div { position: relative; margin-top: 8px; }
+@media(max-width:960px) {
+ .spatial-desktop-language { display: none; }
+ .spatial-menu-toggle { display: flex; align-items: center; justify-content: center; gap: 7px; width: auto; padding: 0 8px; font-size: 13px; margin-right: -8px; }
 }

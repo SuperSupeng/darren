@@ -27,9 +27,9 @@ export function observeSiteMotion(root: HTMLElement, revealed: WeakSet<Element>)
     // Focus and deep links must never wait for motion or move while being used.
     if (element.contains(document.activeElement) || element.matches(':target') || element.querySelector(':target')) return;
     const animation = element.animate([
-      { opacity: .3, translate: '0 16px' },
-      { opacity: 1, translate: '0 0' },
-    ], { duration: 560, delay, easing: 'cubic-bezier(.22, .75, .25, 1)', fill: 'backwards' });
+      { opacity: .8 },
+      { opacity: 1 },
+    ], { duration: 180, delay, easing: 'ease-out', fill: 'backwards' });
     running.set(element, animation);
     animation.onfinish = () => running.delete(element);
   };

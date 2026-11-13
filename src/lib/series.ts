@@ -22,12 +22,10 @@ export const seriesCatalog: Record<SeriesSlug, SeriesDefinition> = {
     },
     intro: {
       zh: [
-        { text: '长期研究 AI 时代的人与组织。' },
-        { text: '（导语待 Darren 写）', placeholder: true },
+        { text: '把任务交给 Agent 后，我开始重新思考分工、授权和管理。这些文章记录我遇到的问题。' },
       ],
       en: [
-        { text: 'Exploring AI, people & organizations.' },
-        { text: '(Intro to be written by Darren)', placeholder: true },
+        { text: 'Delegating tasks to agents led me to rethink how work is assigned, who can make decisions, and how I manage it all. These essays describe the problems I encountered.' },
       ],
     },
   },
@@ -37,8 +35,8 @@ export const seriesCatalog: Record<SeriesSlug, SeriesDefinition> = {
       en: 'China AI, On the Ground',
     },
     intro: {
-      zh: [{ text: '（导语待 Darren 写）', placeholder: true }],
-      en: [{ text: 'A ground-level guide to China’s AI ecosystem for global founders and builders.' }],
+      zh: [{ text: '走访公司、参加社区活动、和各地伙伴聊天。我把这些经历写下来，记录自己看到的中国 AI 行业。' }],
+      en: [{ text: 'Notes from company visits, community events, and conversations with people working on AI across China.' }],
     },
   },
   practice: {
@@ -47,8 +45,8 @@ export const seriesCatalog: Record<SeriesSlug, SeriesDefinition> = {
       en: 'Practice & Life',
     },
     intro: {
-      zh: [{ text: '（导语待 Darren 写）', placeholder: true }],
-      en: [{ text: '(Intro to be written by Darren)', placeholder: true }],
+      zh: [{ text: '创业、公益课程、禅修和旅行。有些是当时的见闻，有些是过了一段时间才写下的回顾。' }],
+      en: [{ text: 'Starting a business, volunteer teaching, meditation, and travel. Some notes were written at the time; others look back on those experiences.' }],
     },
   },
 };

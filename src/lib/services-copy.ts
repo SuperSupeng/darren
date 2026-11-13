@@ -7,8 +7,8 @@ export const serviceIds = {
 export type ServiceId = (typeof serviceIds)[keyof typeof serviceIds];
 
 export const caseButtonLabel = {
-  zh: '了解活动与生态合作',
-  en: 'Explore event and ecosystem collaborations',
+  zh: '了解讲座与交流',
+  en: 'Explore talks and visits',
 } as const;
 
 export const pricingLine = {
@@ -19,30 +19,31 @@ export const pricingLine = {
 export const serviceOffers = {
   talks: {
     zh: {
-      title: '讲座和内训 / AI 转型咨询',
+      title: 'AI 讲座与工作坊',
       paragraphs: [
-        '给想用 AI、但还不知道从哪下手的企业老板和团队。①讲座/内训：AI 现在发展到哪一步、能做什么；还有 AI 时代的组织，人和 Agent、人和人、Agent 和 Agent 之间怎么配合。我会拿自己每天在用的一整套 AI 助手当例子，出过错的地方也讲。②转型咨询：和老板、管理团队一起看哪些事适合交给 AI，组织要跟着怎么调整。',
-        '③动手工作坊和 Agent 构建。',
+        '为企业和团队做 AI 讲座、内训和动手工作坊。内容包括 AI 能做什么、人和智能助手怎样配合。我会结合自己使用多 Agent 的经历，讲怎么分工，也讲哪里出过错。',
       ],
     },
     en: {
-      title: 'Talks, in-house sessions and hands-on workshops on where AI is now, what it can do, and how teams work once people and agents work together; agent building too.',
-      paragraphs: [],
+      title: 'AI talks and workshops',
+      paragraphs: ['Talks, in-house sessions, and hands-on workshops on what AI can do and how people and agents work together. I draw on my own multi-agent experiments, including where things went wrong.'],
     },
   },
   visits: {
     zh: {
-      title: '带海外投资人和创始人了解、走访中国 AI，一起办活动',
+      title: '中国 AI 走访与交流',
       paragraphs: [
-        '给想亲自看看中国 AI 的海外投资人和创始人。①实地了解：你想弄清楚什么，就按这个安排走访 AI 公司、开源社区、高校，我陪着一起聊。②在中国办活动：想见中国开发者和潜在用户，办一场产品 Workshop 或交流会，我帮你定目标、请人、组织现场。③引荐：双方都有交流需要才介绍，不卖联系人名单。',
-        '也和企业一起办活动，包括国内厂商。',
+        '海外投资人和创始人想来中国了解 AI 行业，我可以按你想了解的问题，安排 AI 公司、开源社区和高校的走访，并陪同交流。',
+        '如果想接触中国开发者和潜在用户，也可以一起办产品 Workshop 或交流会。我参与确定活动目标、邀请参与者和组织现场，也和国内企业合作办活动。',
+        '涉及引荐时，我会先确认双方都有交流意愿，不出售联系人名单。',
       ],
     },
     en: {
-      title: 'China AI field visits & events for global investors and founders',
+      title: 'China AI visits and events',
       paragraphs: [
-        "For investors and founders who want to see China's AI scene for themselves. Field visits planned around what you want to understand: companies, open-source communities, universities, and I join the conversations. Events in China: meet Chinese developers and potential users; I help set the goal, invite people and run the session. Introductions only when both sides have a reason to talk. I don't sell contact lists.",
-        'I also co-host events with companies, including Chinese vendors.',
+        'For overseas investors and founders visiting China, I can arrange visits to AI companies, open-source communities, and universities around the questions you want to explore, and join the conversations.',
+        'I also help organize product workshops and events to meet Chinese developers and potential users. I work on the purpose of the event, invitations, and the session itself, including events with Chinese companies.',
+        'Before making an introduction, I check that both sides want to talk. I do not sell contact lists.',
       ],
     },
   },
@@ -97,17 +98,6 @@ export const talkList = {
   ],
 } as const;
 
-export const jobsCopy = {
-  zh: {
-    label: '找工作 / 招人',
-    body: '找工作：来信写想做的方向、工作年限和所在城市。招人：写岗位、要求和预算范围。',
-  },
-  en: {
-    label: 'Jobs / Hiring',
-    body: 'Looking for a job: tell me the direction you want, your years of experience and your city. Hiring: tell me the role, its requirements and the budget range.',
-  },
-} as const;
+export const homepageServiceLine = '我主要做 AI 原生组织转型咨询，帮你梳理分工、流程和管理问题。也提供 AI 搜索（GEO）和产品市场策略（GTM）咨询。';
 
-export const homepageServiceLine = '给企业老板和管理团队讲 AI 能做什么、AI 时代的组织怎么协作；也带海外投资人和创始人来中国看 AI。';
-
-export const homepageOneLiner = 'Connecting global founders and builders with China’s AI ecosystem.';
+export const homepageOneLiner = 'I’m interested in how AI changes work and organizations. I started in engineering; now I build products, organize communities, and use agents in my own work.';

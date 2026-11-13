@@ -2,115 +2,68 @@ import 'server-only';
 
 import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
+import ContactActions from '@/components/ContactActions';
 import { consultingCopy } from '@/lib/consulting-copy';
+import { getConsultingInquiry } from '@/lib/contact';
 import { getFeaturedWork } from '@/lib/portfolio';
 import { getStudioContent } from '@/lib/studio-content';
+import { getSiteContent } from '@/lib/siteContent';
 import './studio-purpose.css';
 
 export default function StudioPurpose({ locale }: { locale: string }) {
-  const cases = getFeaturedWork(locale).slice(0, 3);
-  const { build, notes } = getStudioContent(locale);
-  const copy = locale === 'zh'
-    ? {
-        title: '项目与经历',
-        read: '了解这件事',
-        all: '查看全部项目',
-        products: '正在做的产品',
-        allProducts: '了解产品与项目',
-        writing: '精选文章',
-        allWriting: '阅读全部文章',
-      }
-    : {
-        title: 'Selected work',
-        read: 'Read the story',
-        all: 'All projects',
-        products: 'Products I’m building',
-        allProducts: 'Explore products and projects',
-        writing: 'Selected writing',
-        allWriting: 'Read all articles',
-      };
-  const invitation = locale === 'zh' ? consultingCopy.zh.home : consultingCopy.en.home;
+  const zh = locale === 'zh';
+  const consulting = zh ? consultingCopy.zh : consultingCopy.en;
+  const inquiry = getConsultingInquiry(locale);
+  const { notes } = getStudioContent(locale);
+  const work = getFeaturedWork(locale);
+  const cases = ['agent-speaking', 'superai-china'].flatMap(id => work.filter(item => item.id === id));
+  const podcast = getSiteContent(locale).podcast;
 
-  return (
-    <div className="studio-purpose">
-      <div className="studio-purpose-wrap">
-        <section className="studio-purpose-evidence" aria-labelledby="studio-purpose-title">
-          <div className="studio-purpose-heading">
-            <h2 id="studio-purpose-title">{copy.title}</h2>
-            <Link className="studio-purpose-link" href="/projects">{copy.all} <span aria-hidden="true">↗</span></Link>
-          </div>
-          <div className="studio-purpose-cases">
-            {cases.map((work, index) => (
-              <article key={work.id} className={`studio-purpose-case${index === 0 ? ' studio-purpose-case-featured' : ''}`}>
-                <Link className="studio-purpose-photo" href={`/work/${work.id}`} aria-label={`${copy.read} · ${work.title}`}>
-                  {work.image ? <Image src={work.image} alt={work.imageAlt ?? ''} fill sizes={index === 0 ? '(max-width: 800px) 90vw, 700px' : '(max-width: 800px) 90vw, 380px'} loading="lazy" className={work.imageClassName ?? ''} /> : null}
-                </Link>
-                <div className="studio-purpose-case-copy">
-                  <p className="studio-purpose-role">{work.role}</p>
-                  <h3><Link href={`/work/${work.id}`}>{work.title}</Link></h3>
-                  <p className="studio-purpose-summary">{work.heroSummary ?? work.summary}</p>
-                  {index === 0 ? <p className="studio-purpose-result">{work.result}</p> : null}
-                  <Link className="studio-purpose-link" href={`/work/${work.id}`}>{copy.read} <span aria-hidden="true">↗</span></Link>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-      </div>
-
-      <section className="studio-purpose-products" aria-labelledby="studio-products-title">
-        <div className="studio-purpose-wrap">
-          <div className="studio-purpose-heading">
-            <h2 id="studio-products-title">{copy.products}</h2>
-            <Link className="studio-purpose-link" href="/projects">{copy.allProducts} <span aria-hidden="true">↗</span></Link>
-          </div>
-          <div className="studio-purpose-product-grid">
-            {build.map(item => <a className="studio-purpose-product" key={item.id} href={item.href} target="_blank" rel="noopener noreferrer">
-              <div className="studio-purpose-product-image">
-                <div className="studio-purpose-product-screen">
-                  <Image src={item.image} alt="" fill sizes="(max-width: 800px) 90vw, 380px" />
-                </div>
-              </div>
-              <div className="studio-purpose-product-copy">
-                <h3>{item.title} <span aria-hidden="true">↗</span></h3>
-                <p>{item.description}</p>
-              </div>
-            </a>)}
-          </div>
+  return <div className="studio-purpose">
+    <div className="studio-purpose-wrap">
+      <section className="studio-purpose-consulting" aria-labelledby="home-consulting-title">
+        <header className="studio-purpose-heading">
+          <h2 id="home-consulting-title">{zh ? '你正在考虑哪一类问题？' : 'What are you working through?'}</h2>
+        </header>
+        <div className="studio-purpose-directions">
+          {consulting.directions.map((item, index) => <Link className="studio-purpose-direction" href={`/consulting#${item.id}`} key={item.id}>
+            <p className="studio-purpose-eyebrow">{index === 0 ? consulting.page.focusLabel : item.tag}</p>
+            <h3>{item.title}</h3><p>{item.question}</p>
+            <span className="studio-direction-action">{zh ? '看看怎么咨询' : 'See how I can help'} <span aria-hidden="true">→</span></span>
+          </Link>)}
         </div>
       </section>
 
-      <div className="studio-purpose-wrap">
-        <section className="studio-purpose-writing" aria-labelledby="studio-writing-title">
-          <div className="studio-purpose-heading">
-            <h2 id="studio-writing-title">{copy.writing}</h2>
-            <Link className="studio-purpose-link" href="/blog">{copy.allWriting} <span aria-hidden="true">↗</span></Link>
-          </div>
-          <div className="studio-purpose-note-list">
-            {notes.map(item => <Link className="studio-purpose-note" key={item.id} href={item.href}>
-              <div className="studio-purpose-note-image">
-                <Image src={item.image} alt="" fill sizes="(max-width: 600px) 110px, 240px" />
-              </div>
-              <div className="studio-purpose-note-copy">
-                <p className="studio-purpose-note-meta">{item.meta}</p>
-                <h3>{item.title}</h3>
-              </div>
-              <p className="studio-purpose-note-description">{item.description}</p>
-              <span className="studio-purpose-note-arrow" aria-hidden="true">↗</span>
-            </Link>)}
-          </div>
-        </section>
+      <section className="studio-purpose-evidence" aria-labelledby="home-practice-title">
+        <header className="studio-purpose-heading">
+          <h2 id="home-practice-title">{zh ? '先看看我做过什么' : 'Start with my work'}</h2>
+          <Link className="studio-purpose-link" href="/projects">{zh ? '全部案例与产品' : 'All work & products'} <span aria-hidden="true">→</span></Link>
+        </header>
+        <div className="studio-purpose-cases">{cases.map(item => <article className="studio-purpose-case" key={item.id}>
+          <Link className="studio-purpose-case-link" href={`/work/${item.id}`}>
+            <div className="studio-purpose-photo">{item.image ? <Image src={item.image} alt="" fill sizes="(max-width: 600px) 100px, 200px" className={item.imageClassName ?? ''} /> : null}</div>
+            <div><p className="studio-purpose-eyebrow">{item.role}</p><h3>{item.title}</h3><p>{item.heroSummary ?? item.summary}</p><span className="studio-direction-action">{zh ? '阅读经历' : 'Read the story'} <span aria-hidden="true">→</span></span></div>
+          </Link>
+        </article>)}</div>
+      </section>
 
-        <section className="studio-purpose-invitation" aria-labelledby="studio-purpose-invitation-title">
-          <div className="studio-purpose-invitation-copy">
-            <p className="studio-purpose-invitation-label">{invitation.label}</p>
-            <h2 id="studio-purpose-invitation-title">{invitation.heading}</h2>
-            <p>{invitation.body}</p>
-            <Link className="studio-purpose-link" href="/consulting">{invitation.link} <span aria-hidden="true">↗</span></Link>
-          </div>
-        </section>
-      </div>
+      <section className="studio-purpose-writing" aria-labelledby="home-writing-title">
+        <div className="studio-purpose-heading">
+          <h2 id="home-writing-title">{zh ? '文章与播客' : 'Writing & podcast'}</h2>
+          <Link className="studio-purpose-link" href="/blog">{zh ? '全部文章' : 'All writing'} <span aria-hidden="true">→</span></Link>
+        </div>
+        <div>
+          <div className="studio-purpose-note-list">{notes.map(item => <Link className="studio-purpose-note" key={item.id} href={item.href}>
+            <div className="studio-purpose-note-image"><Image src={item.image} alt="" fill sizes="(max-width: 600px) 85px, 140px" /></div>
+            <div><p className="studio-purpose-note-meta">{item.meta}</p><h3>{item.title}</h3></div>
+          </Link>)}</div>
+          <Link className="studio-purpose-podcast" href="/podcast"><p className="studio-purpose-eyebrow">{zh ? '播客' : 'Podcast'}</p><h3>{podcast.hero.title} <span aria-hidden="true">→</span></h3><p>{podcast.hero.subtitle}</p></Link>
+        </div>
+      </section>
+      <section className="studio-purpose-closing" aria-labelledby="home-contact-title">
+        <div><h2 id="home-contact-title">{zh ? '说说你遇到的问题' : 'Tell me what you’re working on'}</h2><p>{zh ? '简单介绍你的团队和想解决的事。我们先确认是否适合合作，再商定咨询内容、形式和费用。' : 'Tell me about your team and the problem. We can see whether I can help, then agree on the scope, format, and fee.'}</p></div>
+        <ContactActions locale={locale} context="home-consulting" className="home-contact-actions" emailSubject={inquiry.emailSubject} emailBody={inquiry.emailBody} />
+      </section>
     </div>
-  );
+  </div>;
 }

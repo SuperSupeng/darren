@@ -17,6 +17,21 @@ before(() => {
 });
 after(() => dom.window.close());
 
+test('consulting emails preserve the chosen topic and editable prompts without sending anything', () => {
+  const { getConsultingInquiry, createEmailHref } = createRequire(import.meta.url)('../src/lib/contact.ts');
+  for (const [locale, topic] of [['zh', 'AI 原生组织转型'], ['en', 'AI search & answers']]) {
+    const inquiry = getConsultingInquiry(locale, topic);
+    const url = new URL(inquiry.href);
+    assert.equal(url.protocol, 'mailto:');
+    assert.equal(url.pathname, 'supeng842499467@gmail.com');
+    assert.ok(url.searchParams.get('subject').includes(topic));
+    assert.ok(url.searchParams.get('body').includes(topic));
+    assert.ok(url.searchParams.get('body').includes('\n\n'));
+    assert.equal(url.searchParams.size, 2);
+  }
+  assert.equal(createEmailHref(), 'mailto:supeng842499467@gmail.com');
+});
+
 test('contact remains usable when both clipboard methods fail', async (t) => {
   for (const locale of ['zh', 'en']) {
     for (const variant of ['light', 'dark', 'quiet']) {

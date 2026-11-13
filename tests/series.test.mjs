@@ -36,37 +36,19 @@ test('series names use the decided wording and keep the three slugs', () => {
   assert.equal(seriesCatalog.practice.name.en, 'Practice & Life');
 });
 
-test('series intros stay limited to the approved strings', () => {
-  assert.deepEqual(seriesCatalog['people-and-orgs'].intro.zh, [
-    { text: '长期研究 AI 时代的人与组织。' },
-    { text: '（导语待 Darren 写）', placeholder: true },
-  ]);
-  assert.deepEqual(seriesCatalog['people-and-orgs'].intro.en, [
-    { text: 'Exploring AI, people & organizations.' },
-    { text: '(Intro to be written by Darren)', placeholder: true },
-  ]);
-  assert.deepEqual(seriesCatalog['china-ai-on-the-ground'].intro.zh, [
-    { text: '（导语待 Darren 写）', placeholder: true },
-  ]);
-  assert.deepEqual(seriesCatalog['china-ai-on-the-ground'].intro.en, [
-    { text: 'A ground-level guide to China’s AI ecosystem for global founders and builders.' },
-  ]);
-  assert.deepEqual(seriesCatalog.practice.intro.zh, [
-    { text: '（导语待 Darren 写）', placeholder: true },
-  ]);
-  assert.deepEqual(seriesCatalog.practice.intro.en, [
-    { text: '(Intro to be written by Darren)', placeholder: true },
-  ]);
+test('published series introductions are complete and match their metadata', () => {
+  for (const slug of seriesSlugs) {
+    for (const locale of locales) {
+      const intro = getSeriesCopy(slug, locale).intro;
+      assert.ok(intro.length > 0);
+      assert.ok(intro.every(part => !part.placeholder && part.text.trim().length > 20));
+      assert.ok(!/待.*写|to be written/.test(intro.map(part => part.text).join(' ')));
+      assert.equal(seriesMetaDescription(slug, locale), intro.map(part => part.text).join(' '));
+    }
+  }
 });
 
-test('a placeholder is not used as the meta description', () => {
-  assert.equal(seriesMetaDescription('people-and-orgs', 'zh'), '长期研究 AI 时代的人与组织。');
-  assert.equal(seriesMetaDescription('people-and-orgs', 'en'), 'Exploring AI, people & organizations.');
-  assert.equal(seriesMetaDescription('china-ai-on-the-ground', 'en'), 'A ground-level guide to China’s AI ecosystem for global founders and builders.');
-  assert.equal(seriesMetaDescription('china-ai-on-the-ground', 'zh'), 'China AI 现场');
-  assert.equal(seriesMetaDescription('practice', 'zh'), '实践与生活');
-  assert.equal(seriesMetaDescription('practice', 'en'), 'Practice & Life');
-
+test('series metadata uses the correct localized URLs', () => {
   for (const slug of seriesSlugs) {
     for (const locale of locales) {
       const metadata = createPageMetadata({

@@ -33,13 +33,13 @@ export default async function PodcastPage({ params }: { params: Promise<{ locale
       <main id="main-content" tabIndex={-1} className="collection-page collection-notes collection-podcast">
         <div className="collection-container">
           <CollectionHero
-            locale={locale}
             zone="notes"
             title={locale === 'zh' ? '播客' : 'Podcast'}
             lead={site.podcast.hero.title}
             description={site.podcast.hero.subtitle}
-            contentHref="#podcast-listen-title"
-          />
+          >
+            <a className="collection-text-link" href={site.podcast.listenUrl} target="_blank" rel="noopener noreferrer">{site.podcast.listenCta} <span aria-hidden="true">↗</span></a>
+          </CollectionHero>
           <section className="collection-section" aria-labelledby="podcast-listen-title">
             <h2 id="podcast-listen-title">{site.podcast.listen}</h2>
             <p className="collection-description">{site.podcast.summary}</p>
@@ -48,9 +48,9 @@ export default async function PodcastPage({ params }: { params: Promise<{ locale
             </a>
           </section>
           <CollectionNext
-            href="/about"
-            title={locale === 'zh' ? '关于我' : 'About'}
-            description={locale === 'zh' ? '一段更完整的个人介绍。' : 'A short page with more of the background.'}
+            href="/blog"
+            title={locale === 'zh' ? '继续阅读文章' : 'Continue with my writing'}
+            description={locale === 'zh' ? '关于 AI、产品和社区的文章，以及工作之外的生活记录。' : 'Writing about AI, products, and communities, along with life outside work.'}
           />
         </div>
       </main>

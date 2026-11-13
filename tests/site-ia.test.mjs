@@ -17,36 +17,24 @@ const {
 } = require('../src/lib/site-config.ts');
 const { getAllPosts, getPostsBySection } = require('../src/lib/blog.ts');
 
-test('top navigation is the signed-off four items in both languages', () => {
-  assert.deepEqual(navigationLinks.map((link) => link.href), [
-    '/',
-    '/blog',
-    '/podcast',
-    '/projects',
-  ]);
-  assert.deepEqual(navigationLinks.map((link) => link.en), [
-    'Home',
-    'Writing',
-    'Podcast',
-    'Projects',
-  ]);
-  assert.deepEqual(navigationLinks.map((link) => link.zh), [
-    '首页',
-    '文章',
-    '播客',
-    '项目',
-  ]);
-  assert.ok(!navigationLinks.some((link) => link.href === '/elsewhere' || link.href === '/field-notes'));
-  assert.ok(!navigationLinks.some((link) => link.href === collaborateHref || link.href === aboutLink.href));
-  assert.ok(footerLinks.some((link) => link.href === aboutLink.href));
-  assert.ok(!footerLinks.some((link) => link.href === collaborateHref));
-  assert.ok(!footerLinks.some((link) => link.href === '/elsewhere' || link.href === '/field-notes'));
+test('navigation gives consulting, writing, practice, and about clear destinations', () => {
+  assert.deepEqual(navigationLinks.map(link => link.href), ['/', '/consulting', '/projects', '/blog', '/about']);
+  assert.deepEqual(navigationLinks.map(link => link.zh), ['首页', '咨询', '案例与产品', '文章', '关于']);
+  assert.deepEqual(navigationLinks.map(link => link.en), ['Home', 'Consulting', 'Work', 'Writing', 'About']);
+  assert.ok(navigationLinks.some(link => link.href === collaborateHref));
+  assert.ok(footerLinks.some(link => link.href === aboutLink.href));
+  assert.ok(footerLinks.some(link => link.href === '/podcast'));
+  assert.equal(new Set(footerLinks.map(link => link.href)).size, footerLinks.length);
 });
 
-test('studio hotspots map into the remapped hub routes', () => {
-  assert.equal(studioZoneHrefs.work, '/projects');
-  assert.equal(studioZoneHrefs.build, '/projects');
+test('room links reach distinct sections and preserve lighting before the fragment', () => {
+  const { getStudioDestination } = require('../src/lib/studio-location.ts');
+  assert.equal(studioZoneHrefs.work, '/projects#work-archive');
+  assert.equal(studioZoneHrefs.build, '/projects#product-workbench');
   assert.equal(studioZoneHrefs.notes, '/blog');
+  assert.equal(getStudioDestination('work', 'evening'), '/projects?light=evening#work-archive');
+  assert.equal(getStudioDestination('build', 'day'), '/projects#product-workbench');
+  assert.equal(getStudioDestination('notes', 'evening'), '/blog?light=evening');
 });
 
 test('Writing lists every published article, including former field notes', () => {

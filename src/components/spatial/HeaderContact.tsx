@@ -3,7 +3,6 @@
 import { useEffect, useRef } from 'react';
 import { Link, usePathname } from '@/i18n/navigation';
 import ContactActions from '@/components/ContactActions';
-import JobsNote from '@/components/JobsNote';
 import { consultingCopy } from '@/lib/consulting-copy';
 import './header-contact.css';
 
@@ -49,10 +48,9 @@ export default function HeaderContact({ locale, menuOpen, onOpen }: { locale: st
     </summary>
     <div className="spatial-contact-panel">
       <h2>{zh ? '联系 Darren' : 'Contact Darren'}</h2>
-      <p>{zh ? '欢迎介绍你的团队和想做的事。点击邮箱写信，或复制地址。' : 'Tell me about your team and what you have in mind. Click the email address to write, or copy it.'}</p>
-      <p><Link href="/consulting">{pointer.link}</Link>{pointer.after}</p>
+      <p>{zh ? '咨询、分享邀请，或是交流彼此的经历，都可以给我写信。' : 'Email me about consulting, a speaking invitation, or an experience you would like to share.'}</p>
       <ContactActions locale={locale} context="header-contact" variant="quiet" className="spatial-contact-options" />
-      <JobsNote locale={locale} />
+      <p><Link href="/consulting">{pointer.link} →</Link></p>
     </div>
   </details>;
 }

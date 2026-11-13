@@ -1,23 +1,24 @@
 {
   "meta": {
-    "title": "Darren Su | Connecting global founders and builders with China’s AI ecosystem",
-    "description": "Connecting global founders and builders with China’s AI ecosystem."
+    "title": "Darren Su | AI, people & organizations",
+    "description": "Darren Su offers consulting on AI-native organizations, AI search visibility (GEO), and go-to-market strategy (GTM). Explore his products, writing, podcast, and life outside work."
   },
   "nav": {
     "home": "Home",
     "writing": "Writing",
     "podcast": "Podcast",
-    "projects": "Projects",
+    "projects": "Work",
     "about": "About",
     "contact": "Contact",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
-    "primary": "Primary navigation"
+    "primary": "Primary navigation",
+    "consulting": "Consulting"
   },
   "servicesPage": {
     "meta": {
-      "title": "Work with me | China AI Field Visits & Events, AI Talks & Advisory",
-      "description": "China AI field visits & events for global investors and founders. Talks, in-house sessions and hands-on workshops on where AI is now, what it can do, and how teams work once people and agents work together; agent building too."
+      "title": "Talks, workshops & visits",
+      "description": "AI talks and workshops drawn from my work with products, agents, and communities, plus visits to AI companies and communities in China."
     }
   },
   "footer": {
@@ -47,25 +48,25 @@
   "podcast": {
     "meta": {
       "title": "Podcast Re:Organize / 《重新组织》",
-      "description": "The entrance for Darren Su’s podcast Re:Organize / 《重新组织》: introduction and listening links."
+      "description": "Re:Organize is Darren Su’s podcast, with conversations about AI, how founders and business owners work, and how they run their teams."
     }
   },
   "projects": {
     "meta": {
-      "title": "Projects",
-      "description": "Products and projects by Darren Su, including GlobalTechEvents, Datawhale AI+X Events, 观木, an AI-native work system with 31 specialized agents and 44 recurring automations, and selected case studies."
+      "title": "Work & products",
+      "description": "Products and projects by Darren Su: GlobalTechEvents, Datawhale AI+X Events, 观木, notes on working with agents, and community events."
     }
   },
   "build": {
     "meta": {
       "title": "Products I build",
-      "description": "Products and experiments built by Darren Su, including GlobalTechEvents, Datawhale AI+X Events, and a multi-agent digital organization."
+      "description": "Products and experiments by Darren Su: GlobalTechEvents, Datawhale AI+X Events, 观木, and a multi-agent work system."
     }
   },
   "about": {
     "meta": {
       "title": "About me",
-      "description": "Co-founder, AGI Villa & MatchPoint · Head of City Ecosystem, Datawhale · n8n Ambassador. Connecting global founders and builders with China’s AI ecosystem."
+      "description": "Darren Su is an AI entrepreneur and independent consultant. Read about his background in engineering, communities, and products, along with volunteer teaching, meditation, and life outside work."
     }
   }
 }

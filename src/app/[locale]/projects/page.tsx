@@ -1,186 +1,83 @@
 import Image from 'next/image';
 import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
-import { getFeaturedWork, getPortfolio } from '@/lib/portfolio';
+import { getPortfolio } from '@/lib/portfolio';
 import { getExperienceArchive, getWorkCaseDate } from '@/lib/experience-archive';
 import JsonLd from '@/components/JsonLd';
 import { CollectionHero, CollectionHeading, CollectionNext } from '@/components/spatial/Collections';
 import { createPageMetadata, getProjectsPageKeywords, projectsStructuredData } from '@/lib/seo';
 import { getSiteContent } from '@/lib/siteContent';
 import '@/components/spatial/experience-archive.css';
+import '@/components/spatial/work-directory.css';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'projects' });
-
-  return createPageMetadata({
-    locale,
-    path: '/projects',
-    title: t('meta.title'),
-    description: t('meta.description'),
-    keywords: getProjectsPageKeywords(locale),
-  });
+  return createPageMetadata({ locale, path: '/projects', title: t('meta.title'), description: t('meta.description'), keywords: getProjectsPageKeywords(locale) });
 }
 
 export default async function ProjectsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  const zh = locale === 'zh';
   const site = getSiteContent(locale);
-  const labels = site.labels.productLab;
   const { work } = getPortfolio(locale);
-  const featured = getFeaturedWork(locale);
+  const featuredIds = ['agent-speaking', 'superai-china', 'rumata-workshop'];
+  const featured = featuredIds.flatMap(id => work.filter(item => item.id === id));
+  const otherWork = work.filter(item => !featuredIds.includes(item.id));
   const experienceSections = getExperienceArchive(locale);
   const system = site.products.digitalOrganization;
+  const labels = site.labels.productLab;
   const copy = site.projects;
-  const details = locale === 'zh' ? '问题、反馈与下一步' : 'Problem, feedback & next step';
 
-  return (
-    <>
-      <JsonLd data={projectsStructuredData(locale)} />
-      <main id="main-content" tabIndex={-1} className="collection-page collection-work collection-build">
-        <div className="collection-container">
-          <CollectionHero
-            locale={locale}
-            zone="work"
-            title={locale === 'zh' ? '项目' : 'Projects'}
-            lead={copy.hero.title}
-            description={copy.hero.subtitle}
-          >
-            <a className="collection-text-link" href="#product-workbench">
-              {copy.productsTitle} <span aria-hidden="true">↓</span>
-            </a>
-          </CollectionHero>
+  return <>
+    <JsonLd data={projectsStructuredData(locale)} />
+    <main id="main-content" tabIndex={-1} className="collection-page work-directory">
+      <div className="collection-container">
+        <CollectionHero zone="work" title={zh ? '案例与产品' : 'Work & products'} lead={zh ? '从做过的项目，了解我的工作。' : 'Get to know my work through these projects.'}>
+          <nav className="collection-hero-actions" aria-label={zh ? '本页内容' : 'On this page'}>
+            <a className="collection-text-link" href="#work-archive">{zh ? '项目案例' : 'Case studies'} ↓</a>
+            <a className="collection-text-link" href="#product-workbench">{copy.productsTitle} ↓</a>
+            <a className="collection-text-link" href="#experience-archive">{zh ? '其他经历' : 'Other experience'} ↓</a>
+          </nav>
+        </CollectionHero>
+        <section className="work-directory-section" id="work-archive" aria-labelledby="work-selected-title">
+          <CollectionHeading id="work-selected-title" title={zh ? '代表案例' : 'Selected work'} description={zh ? '包含个人实验和参与的项目，每篇都写明我的角色与经历。' : 'Personal experiments and projects I have taken part in. Each story explains my role.'} />
+          <div className="work-directory-cases">
+            {featured.map(item => <article key={item.id}>
+              <Link className="work-directory-case" href={item.href ?? `/work/${item.id}`}>
+                <div className="work-directory-photo">{item.image ? <Image src={item.image} alt="" fill sizes="(max-width:760px) 100px, 400px" className={item.imageClassName ?? ''} /> : null}</div>
+                <div><p className="work-directory-meta">{item.role} · {item.year}</p><h3>{item.title}</h3><p>{item.heroSummary ?? item.summary}</p><span className="work-directory-action">{zh ? '阅读经历' : 'Read the story'} →</span></div>
+              </Link>
+            </article>)}
+          </div>
+          <h3 className="work-directory-subtitle">{zh ? '更多案例' : 'More projects'}</h3>
+          <ul className="work-directory-index">{otherWork.map(item => <li key={item.id}><Link href={item.href ?? `/work/${item.id}`}><div><h3>{item.title}</h3><p>{item.role} · {getWorkCaseDate(item.id, locale) ?? item.year}</p></div><span aria-hidden="true">→</span></Link></li>)}</ul>
+          <div className="work-directory-inquiry"><p>{zh ? '想讨论你团队里的 AI、组织或市场问题？' : 'Have a question about AI, your organization, or entering a market?'}</p><Link href="/consulting">{zh ? '了解咨询内容' : 'Explore consulting'} →</Link></div>
+        </section>
 
-          <section className="collection-section" id="product-workbench">
-            <CollectionHeading title={copy.productsTitle} description={labels.selectedStatement} />
-            <nav className="collection-category-nav" aria-label={copy.productsTitle}>
-              {site.products.items.map((project) => (
-                <a key={project.id} href={`#product-${project.id}`}>{project.name}</a>
-              ))}
-            </nav>
-            <div className="collection-products">
-              {site.products.items.map((project, index) => {
-                const inactive = project.status === 'stopped' || project.status === '已停止';
-                const media = <Image src={project.image} alt={project.name} fill sizes={index === 0 ? '(min-width: 1000px) 55vw, 100vw' : '(min-width: 800px) 45vw, 100vw'} />;
-                return (
-                  <article key={project.id} id={`product-${project.id}`} className={`collection-product ${index === 0 ? 'collection-product-featured' : ''} ${inactive ? 'collection-product-ended' : ''}`}>
-                    <div className="collection-product-display">
-                      <div className="collection-screen-bar" aria-hidden="true"><span /><span /><span /></div>
-                      {inactive ? <div className="collection-product-image">{media}</div> : (
-                        <a className="collection-product-image" href={project.url} target="_blank" rel="noopener noreferrer" aria-label={`${labels.visitProject} · ${project.name}`}>{media}</a>
-                      )}
-                      <div className="collection-product-strip">
-                        <span className={`collection-status ${inactive ? 'collection-status-ended' : ''}`}><i aria-hidden="true" />{project.status}</span>
-                      </div>
-                    </div>
-                    <div className="collection-product-body">
-                      <h2>{project.name}</h2>
-                      <p className="collection-description">{project.description}</p>
-                      {inactive ? null : (
-                        <a className="collection-text-link" href={project.url} target="_blank" rel="noopener noreferrer">{labels.visitProject} <span aria-hidden="true">↗</span></a>
-                      )}
-                      <details className="collection-product-details" open={index === 0}>
-                        <summary>{details}<span aria-hidden="true">+</span></summary>
-                        <dl>
-                          <div><dt>{labels.problem}</dt><dd>{project.problem}</dd></div>
-                          <div><dt>{labels.signal}</dt><dd>{project.signal}</dd></div>
-                          <div><dt>{labels.nextStep}</dt><dd>{project.nextStep}</dd></div>
-                        </dl>
-                      </details>
-                    </div>
-                  </article>
-                );
-              })}
-            </div>
-          </section>
+        <section className="work-directory-section" id="product-workbench" aria-labelledby="work-products-title">
+          <CollectionHeading id="work-products-title" title={copy.productsTitle} description={labels.selectedStatement} />
+          <div className="work-directory-products">{site.products.items.map(project => {
+            const inactive = project.status === 'stopped' || project.status === '已停止';
+            return <article id={`product-${project.id}`} key={project.id} className="work-directory-product">
+              <div className="work-directory-product-image"><Image src={project.image} alt={project.name} fill sizes="(max-width:760px) 100px, 350px" /></div>
+              <div><p className="work-directory-meta">{project.status}</p><h3>{project.name}</h3><p>{project.description}</p>{!inactive ? <a className="work-directory-action" href={project.url} target="_blank" rel="noopener noreferrer">{labels.visitProject} <span aria-hidden="true">↗</span></a> : null}</div>
+              <details><summary>{zh ? '为什么做，现在怎样了' : 'Why I built it and how it is going'}</summary><dl><div><dt>{labels.problem}</dt><dd>{project.problem}</dd></div><div><dt>{labels.signal}</dt><dd>{project.signal}</dd></div><div><dt>{labels.nextStep}</dt><dd>{project.nextStep}</dd></div></dl></details>
+            </article>;
+          })}</div>
+          <aside className="work-directory-system"><h3>{system.title}</h3><p>{system.description}</p><Link className="work-directory-action" href={system.href}>{system.linkLabel} →</Link></aside>
+        </section>
 
-          <section className="collection-system">
-            <div className="collection-system-image"><Image src={system.image} alt={system.imageAlt} fill sizes="(min-width: 900px) 50vw, 100vw" /></div>
-            <div className="collection-system-body">
-              <h2>{system.title}</h2>
-              <p className="collection-description">{system.description}</p>
-              <div className="collection-system-metrics"><strong>{system.primaryMetric}</strong><strong>{system.secondaryMetric}</strong></div>
-              <Link href={system.href} className="collection-text-link">{system.linkLabel} <span aria-hidden="true">↗</span></Link>
-            </div>
-          </section>
-
-          <section className="collection-section" aria-labelledby="work-selected-title">
-            <CollectionHeading id="work-selected-title" title={copy.casesTitle} />
-            <div className="collection-work-featured">
-              {featured.map((item, index) => (
-                <article key={item.id} className={`collection-work-card ${index === 0 ? 'collection-work-card-featured' : ''}`}>
-                  <Link href={item.href ?? '/projects'} className="collection-photo" aria-label={`${copy.read} · ${item.title}`}>
-                    {item.image ? (
-                      <Image
-                        src={item.image}
-                        alt={item.imageAlt ?? ''}
-                        fill
-                        sizes={index === 0 ? '(min-width: 1000px) 60vw, 100vw' : '(min-width: 800px) 33vw, 100vw'}
-                        className={item.imageClassName ?? ''}
-                      />
-                    ) : null}
-                  </Link>
-                  <div className="collection-work-card-body">
-                    <p className="collection-meta">{item.location} · {item.year}</p>
-                    <h3><Link href={item.href ?? '/projects'}>{item.title}</Link></h3>
-                    <p className="collection-description">{item.summary}</p>
-                    <dl className="collection-work-facts">
-                      <div><dt>{copy.role}</dt><dd>{item.role}</dd></div>
-                      <div><dt>{copy.result}</dt><dd>{item.result}</dd></div>
-                    </dl>
-                    <Link href={item.href ?? '/projects'} className="collection-text-link">{copy.read} <span aria-hidden="true">↗</span></Link>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="collection-section" id="work-archive" aria-labelledby="work-archive-title">
-            <CollectionHeading id="work-archive-title" title={copy.archiveTitle} />
-            <ul className="work-case-index">
-              {work.map((item) => (
-                <li key={item.id}>
-                  <Link href={item.href ?? '/projects'} className="work-case-index-link">
-                    <div>
-                      <h3>{item.title}</h3>
-                      <p className="work-case-index-meta">
-                        <span>{item.role}</span>
-                        <span>{getWorkCaseDate(item.id, locale) ?? item.year}</span>
-                      </p>
-                    </div>
-                    <span className="work-case-index-arrow" aria-hidden="true">↗</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </section>
-
-          <section className="collection-section work-experience-archive" id="experience-archive" aria-labelledby="experience-archive-title">
-            <CollectionHeading id="experience-archive-title" title={copy.experiencesTitle} />
-            {experienceSections.map((section) => (
-              <section key={section.id} className="work-experience-group" aria-labelledby={section.id}>
-                <h3 id={section.id}>{section.title}</h3>
-                <ul className="work-experience-list">
-                  {section.entries.map((entry) => (
-                    <li key={entry.id} id={entry.id}>
-                      <div className="work-experience-entry-heading">
-                        <h4>{entry.title}</h4>
-                        {entry.date ? <p className="work-experience-date">{entry.date}</p> : null}
-                      </div>
-                      {entry.role ? <p className="work-experience-role">{entry.role}</p> : null}
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            ))}
-          </section>
-
-          <CollectionNext
-            href="/blog"
-            title={locale === 'zh' ? '阅读文章' : 'Read my writing'}
-            description={locale === 'zh' ? '关于产品开发、Agent 实践和工作经历的长文。' : 'Essays on product development, agent practice, and work.'}
-          />
-        </div>
-      </main>
-    </>
-  );
+        <section className="work-directory-section" id="experience-archive">
+          {/* Browsers can open this before hydration to reveal an incoming fragment. */}
+          <details className="work-directory-experience" suppressHydrationWarning><summary>{copy.experiencesTitle} <span>{zh ? '查看经历' : 'View experience'} ↓</span></summary>
+            {experienceSections.map(section => <section key={section.id} className="work-experience-group" aria-labelledby={section.id}>
+              <h3 id={section.id}>{section.title}</h3><ul className="work-experience-list">{section.entries.map(entry => <li key={entry.id} id={entry.id}><div className="work-experience-entry-heading"><h4>{entry.title}</h4>{entry.date ? <p className="work-experience-date">{entry.date}</p> : null}</div>{entry.role ? <p className="work-experience-role">{entry.role}</p> : null}</li>)}</ul>
+            </section>)}
+          </details>
+        </section>
+        <CollectionNext href="/blog" title={zh ? '阅读文章' : 'Read my writing'} description={zh ? '做项目时的思考，还有工作之外的生活记录。' : 'Thoughts from these projects, along with life outside work.'} />
+      </div>
+    </main>
+  </>;
 }

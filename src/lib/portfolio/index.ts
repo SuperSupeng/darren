@@ -1,3 +1,4 @@
+import { consultingCopy, consultingPracticeId } from '@/lib/consulting-copy';
 import { englishPortfolio } from './en';
 import { portfolioImageDimensions } from './images';
 import type { CollaborationPath, PortfolioContent, PortfolioWork } from './types';
@@ -64,4 +65,26 @@ export function getFeaturedWork(locale: string): PortfolioWork[] {
   return featuredWorkIds
     .map((id) => work.find((item) => item.id === id))
     .filter((item): item is PortfolioWork => Boolean(item));
+}
+
+export function getWorkInquiry(locale: string, workId: string) {
+  const language = locale === 'zh' ? 'zh' : 'en';
+  if (workId === consultingPracticeId) {
+    const copy = consultingCopy[language];
+    return {
+      href: '/consulting#ai-organization',
+      title: copy.directions[0].question,
+      label: language === 'zh' ? '了解 AI 原生组织咨询' : 'Explore AI-native organization consulting',
+      description: copy.page.contact,
+    };
+  }
+  const collaboration = getWorkCollaboration(locale, workId);
+  return collaboration ? {
+    href: `/services#${collaboration.id}`,
+    title: collaboration.invitation,
+    label: collaboration.linkLabel,
+    description: language === 'zh'
+      ? '想组织类似的活动或走访，可以来信介绍你的团队、想讨论的话题和预计时间。'
+      : 'To organize a similar event or visit, email me about your team, what you want to discuss, and when.',
+  } : null;
 }

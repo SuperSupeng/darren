@@ -12,13 +12,11 @@ const { getAboutCopy, getAboutInlineLinks } = require('../src/lib/about.ts');
 const expected = {
   en: [
     ['AGI Villa', '/en/blog/why-i-started-agi-villa', 'community'],
-    ['MatchPoint', '/en/projects', 'making'],
     ['GlobalTechEvents', 'https://www.globaltechevents.xyz/authors/darren-su', 'making'],
     ['31 agents', '/en/blog/managing-31-ai-employees', 'making'],
   ],
   zh: [
     ['AGI Villa', '/zh/blog/why-i-started-agi-villa', 'community'],
-    ['MatchPoint', '/zh/projects', 'making'],
     ['GlobalTechEvents', 'https://www.globaltechevents.xyz/authors/darren-su', 'making'],
     ['31 个 Agent', '/zh/blog/managing-31-ai-employees', 'making'],
   ],

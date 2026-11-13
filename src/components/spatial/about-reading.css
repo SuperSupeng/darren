@@ -250,3 +250,14 @@
   .about-reading .about-reading-stage .room-portal-view { height: 340px; }
   .about-reading .about-reading-portrait { width: 112px; border-width: 5px; bottom: 88px; left: 9%; }
 }
+
+/* A personal introduction uses a portrait; the optional studio lives on Home. */
+.about-reading .about-reading-hero { grid-template-columns: minmax(0,1fr) 240px; gap: 64px; padding-block: 32px; margin-bottom: 16px; }
+.about-reading .about-reading-stage { margin: 0; align-self: start; }
+.about-reading .about-reading-portrait { position: relative; inset: auto; width: 100%; margin: 0; transform: none; }
+@media(max-width:760px) {
+ .about-reading .about-reading-hero { grid-template-columns: 1fr; gap: 24px; padding-top: 12px; }
+ .about-reading .about-reading-stage { order: -1; }
+ .about-reading .about-reading-portrait { width: 96px; border-width: 3px; }
+ .about-reading .about-reading-intro p { font-size: 16px; margin-top: 20px; }
+}

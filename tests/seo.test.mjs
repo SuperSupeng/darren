@@ -153,7 +153,7 @@ test('homepage structured data identifies Darren as a person and the provider of
     assert.deepEqual(service.provider, { '@id': person['@id'] });
     assert.deepEqual(website.publisher, { '@id': person['@id'] });
     assert.equal(page.url, `${siteUrl}/${locale}`);
-    assert.equal(service.url, `${siteUrl}/${locale}/services`);
+    assert.equal(service.url, `${siteUrl}/${locale}/consulting`);
   }
 });
 
@@ -162,7 +162,7 @@ test('llms.txt uses the current IA, canonical identity, and confirmed public pro
   assert.match(body, /^# Darren Su \/ 苏鹏/m);
   assert.match(body, /Public name: Darren \/ Darren Su/);
   assert.match(body, /Chinese name: 苏鹏/);
-  assert.match(body, /Co-founder, AGI Villa & MatchPoint/);
+  assert.match(body, /Co-founder, AGI Villa/);
   assert.match(body, /Head of City Ecosystem, Datawhale/);
   assert.match(body, /Datawhale 城市生态负责人/);
   assert.match(body, /Re:Organize · Host/);
@@ -495,8 +495,8 @@ test('project index metadata mentions the AI-native work system without a new pu
   assert.ok(getProjectsPageKeywords('zh').includes('WAIC 官方夜场'));
   const zh = JSON.parse(fs.readFileSync(new URL('../messages/zh.json', import.meta.url), 'utf8'));
   const en = JSON.parse(fs.readFileSync(new URL('../messages/en.json', import.meta.url), 'utf8'));
-  assert.equal(zh.projects.meta.description, 'Darren Su / 苏鹏的产品与项目：GlobalTechEvents、Datawhale AI+X Events、观木，日常使用的 AI 原生工作系统（31 个专业 Agent、44 个自动任务），以及代表案例。');
-  assert.equal(en.projects.meta.description, 'Products and projects by Darren Su, including GlobalTechEvents, Datawhale AI+X Events, 观木, an AI-native work system with 31 specialized agents and 44 recurring automations, and selected case studies.');
+  assert.equal(zh.projects.meta.description, 'Darren Su / 苏鹏做的产品和参与的项目：GlobalTechEvents、Datawhale AI+X Events、观木，以及多 Agent 使用记录和社区活动案例。');
+  assert.equal(en.projects.meta.description, 'Products and projects by Darren Su: GlobalTechEvents, Datawhale AI+X Events, 观木, notes on working with agents, and community events.');
   assert.ok(getProjectsPageKeywords('zh').includes('观木'));
   assert.ok(getProjectsPageKeywords('en').includes('观木'));
   assert.ok(!zh.projects.meta.description.includes('MatchPoint'));

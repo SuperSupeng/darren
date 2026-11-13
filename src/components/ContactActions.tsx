@@ -3,6 +3,7 @@
 import { track } from '@vercel/analytics';
 import { useEffect, useRef, useState } from 'react';
 import { contactEmail as email } from '@/lib/site-config';
+import { createEmailHref } from '@/lib/contact';
 
 type ContactActionsProps = {
   locale: string;
@@ -27,10 +28,6 @@ export default function ContactActions({
   const copy = locale === 'zh'
     ? { email: '给我写邮件', copy: '复制邮箱', copied: '邮箱已复制', failed: '请复制下方邮箱地址', address: '邮箱地址，可手动复制' }
     : { email: 'Email me', copy: 'Copy email', copied: 'Email copied', failed: 'Please copy the address below', address: 'Email address for manual copying' };
-  const emailQuery = [
-    emailSubject ? `subject=${encodeURIComponent(emailSubject)}` : '',
-    emailBody ? `body=${encodeURIComponent(emailBody)}` : '',
-  ].filter(Boolean).join('&');
 
   const copyEmail = async () => {
     let didCopy = false;
@@ -88,7 +85,7 @@ export default function ContactActions({
   return (
     <div className={`contact-actions ${className}`.trim()}>
       <a
-        href={`mailto:${email}${emailQuery ? `?${emailQuery}` : ''}`}
+        href={createEmailHref(emailSubject, emailBody)}
         className={emailClass}
         onClick={() => track('Contact Email Opened', { location: context, locale })}
       >
@@ -112,6 +109,7 @@ export default function ContactActions({
       <span className="sr-only" role="status" aria-live="polite">
         {copyStatus === 'copied' ? copy.copied : copyStatus === 'failed' ? copy.failed : ''}
       </span>
+      <noscript><style>{'.contact-actions > button{display:none!important}'}</style></noscript>
     </div>
   );
 }

@@ -26,8 +26,8 @@
 @media (max-width: 600px) {
   .spatial-site .spatial-header-row { gap: 8px; }
   .spatial-site .spatial-header-actions { gap: 6px; }
-  .spatial-site .spatial-contact-trigger { width: 36px; padding: 0; }
-  .spatial-site .spatial-contact-trigger > span { display: none; }
+  .spatial-site .spatial-contact-trigger { width: auto; padding: 0 12px; font-size: 14px; }
+  .spatial-site .spatial-contact-trigger > svg { display: none; }
   .spatial-site .spatial-contact-panel { right: 12px; padding: 22px; }
 }
 @media (max-width: 370px) {

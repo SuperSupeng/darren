@@ -4,7 +4,7 @@ import { Component, useCallback, useEffect, useRef, useState, useSyncExternalSto
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { Link, useRouter } from '@/i18n/navigation';
-import { studioZoneHrefs } from '@/lib/site-config';
+import { getStudioDestination } from '@/lib/studio-location';
 import type { StudioFocusZone, StudioLighting } from '@/components/studio/types';
 import { useStudioSettings } from './StudioSettings';
 
@@ -52,7 +52,7 @@ function LiveRoom({ zone, lighting, locale, compact, contentHref }: { zone: Stud
   ];
   return <div ref={root} className="room-portal-render" data-portal-status={failed ? 'static' : ready ? 'ready' : 'loading'} data-view-angle={angle.toFixed(3)}>
     {(!ready || failed) && <Poster lighting={lighting} />}
-    {!failed && <PortalBoundary onFailure={onFailure}><StudioScene presentation="portal" viewAngle={angle} onViewAngleChange={setAngle} zone={zone} lighting={lighting} reducedMotion={motion} onReady={onReady} onFailure={onFailure} highlightedZone={highlighted} onHover={setHighlighted} hotspotRoot={root} onSelect={next => { if (next === zone && contentHref) window.location.hash = contentHref; else if (next !== 'overview') router.push(`${studioZoneHrefs[next]}${lighting === 'evening' ? '?light=evening' : ''}`); }} /></PortalBoundary>}
+    {!failed && <PortalBoundary onFailure={onFailure}><StudioScene presentation="portal" viewAngle={angle} onViewAngleChange={setAngle} zone={zone} lighting={lighting} reducedMotion={motion} onReady={onReady} onFailure={onFailure} highlightedZone={highlighted} onHover={setHighlighted} hotspotRoot={root} onSelect={next => { if (next === zone && contentHref) window.location.hash = contentHref; else if (next !== 'overview') router.push(getStudioDestination(next, lighting)); }} /></PortalBoundary>}
     {ready && !failed && <div className="room-portal-tools">
       {!compact && <p>{zh ? '拖动查看' : 'Drag to explore'}<span aria-hidden="true">↔</span></p>}
       <div role="group" aria-label={zh ? '房间视角' : 'Room viewpoint'}>{views.map(view => <button key={view.angle} type="button" aria-label={zh ? `${view.label}视角` : `${view.label} view`} aria-pressed={Math.abs(angle - view.angle) < 0.04} onClick={() => setAngle(view.angle)}><span aria-hidden="true">{view.icon}</span>{!compact && <span>{view.label}</span>}</button>)}</div>

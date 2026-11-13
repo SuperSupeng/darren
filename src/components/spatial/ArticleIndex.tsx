@@ -19,22 +19,18 @@ export function ArticleIndex({
   }
 
   return (
-    <div className="collection-notes-list">
-      {posts.map((post) => (
-        <article key={post.slug} className="collection-note-entry">
-          <div className="collection-note-date">
-            <ArticleDate post={post} locale={locale} />
+    <div className="article-directory">
+      {posts.map(post => <article key={post.slug}>
+        <Link className="article-directory-link" href={`/blog/${post.slug}`}>
+          <div className="article-directory-copy">
+            <p className="article-directory-meta"><ArticleDate post={post} locale={locale} /><span>{post.readingTime} {locale === 'zh' ? '分钟阅读' : 'min read'}</span></p>
+            <h3>{post.title}</h3>
+            <p className="article-directory-description">{post.description}</p>
+            <span className="article-directory-read">{readLabel} <span aria-hidden="true">→</span></span>
           </div>
-          <div className="collection-note-body">
-            <h3><Link href={`/blog/${post.slug}`}>{post.title}</Link></h3>
-            <p className="collection-description">{post.description}</p>
-            <Link href={`/blog/${post.slug}`} className="collection-text-link">{readLabel} <span aria-hidden="true">↗</span></Link>
-          </div>
-          <Link href={`/blog/${post.slug}`} className="collection-note-image" aria-label={`${readLabel} · ${post.title}`}>
-            <Image src={post.image.url} alt="" fill sizes="(max-width: 600px) 100vw, 200px" />
-          </Link>
-        </article>
-      ))}
+          <div className="article-directory-image"><Image src={post.image.url} alt="" fill sizes="(max-width: 600px) 80px, 150px" /></div>
+        </Link>
+      </article>)}
     </div>
   );
 }

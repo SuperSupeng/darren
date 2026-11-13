@@ -2,8 +2,6 @@ import { Link } from '@/i18n/navigation';
 import { getPortfolio, getWorkById } from '@/lib/portfolio';
 import { getExperienceArchive } from '@/lib/experience-archive';
 import ContactActions from '@/components/ContactActions';
-import JobsNote from '@/components/JobsNote';
-import RoomPortal from '@/components/spatial/RoomPortal';
 import {
   pricingLine,
   serviceIds,
@@ -35,20 +33,20 @@ export default function ServicesClient({ locale }: { locale: string }) {
   ];
   const copy = language === 'zh'
     ? {
-        title: '聊聊合作',
+        title: '讲座与交流',
         directions: '合作方式',
         otherDirections: '其他合作方式',
         studio: '看看工作室',
-        cta: '还没确定形式，也可以先聊需求',
-        ctaBody: '来信可以介绍你的团队或产品、希望达成的目标，以及预计时间。',
+        cta: '想邀请一场分享，或安排一次交流？',
+        ctaBody: '来信介绍一下参与者、想讨论的话题和预计时间。形式还没定，也可以一起商量。',
       }
     : {
-        title: 'Work together',
+        title: 'Talks & exchanges',
         directions: 'Ways to collaborate',
         otherDirections: 'Other ways to collaborate',
         studio: 'Look around the studio',
-        cta: 'Start with the need, even without a format in mind',
-        ctaBody: 'Tell me about your team or product, what you hope to achieve, and the approximate timing.',
+        cta: 'Planning a talk, workshop, or visit?',
+        ctaBody: 'Tell me who would take part, what you want to discuss, and when. We can work out the format together.',
       };
 
   return (
@@ -56,10 +54,8 @@ export default function ServicesClient({ locale }: { locale: string }) {
       <div className="collaboration-reading-wrap">
         <header className="collaboration-reading-intro">
           <h1>{copy.title}</h1>
-          <details className="collaboration-reading-scene">
-            <summary>{copy.studio}</summary>
-            <RoomPortal zone="work" locale={locale} compact />
-          </details>
+          <p>{language === 'zh' ? '我会结合做产品、用 Agent 和组织社区的经历，做分享、带工作坊，也陪海外团队走访中国 AI 公司和社区。企业管理和市场策略方面的问题，可以通过咨询来讨论。' : 'I draw on my work with products, agents, and communities for talks and workshops. I also accompany overseas teams visiting AI companies and communities in China. For questions about management or market strategy, I offer consulting.'}</p>
+          <Link className="collaboration-reading-link" href="/consulting">{language === 'zh' ? '了解咨询方向 ↗' : 'Explore consulting ↗'}</Link>
         </header>
         <nav id="collaboration-options" className="collaboration-reading-index" aria-label={copy.directions}>
           {collaborations.map((path) => <a href={`#${path.id}`} key={path.id}>{path.title}<span aria-hidden="true">↓</span></a>)}
@@ -97,7 +93,7 @@ export default function ServicesClient({ locale }: { locale: string }) {
             <p>{copy.ctaBody}</p>
             <p>{pricingLine[language]}</p>
             <ContactActions locale={locale} context="services-cta" className="collaboration-reading-contact" />
-            <JobsNote locale={locale} />
+
           </div>
         </section>
       </div>

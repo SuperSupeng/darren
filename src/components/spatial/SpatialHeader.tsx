@@ -22,14 +22,16 @@ export default function SpatialHeader({ blogLocalesBySlug }: { blogLocalesBySlug
   const pathname = usePathname();
   const { lighting, setLighting } = useStudioSettings();
   const [open, setOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const slug = pathname.match(/^\/blog\/([^/]+)$/)?.[1];
   const availableLocales = slug ? blogLocalesBySlug[slug] as Locale[] | undefined : undefined;
   const current = (href: string) => {
     if (href === '/') return pathname === '/' || pathname === '/studio';
     if (href === '/blog') {
-      return pathname === '/blog' || pathname.startsWith('/blog/');
+      return pathname === '/blog' || pathname.startsWith('/blog/') || pathname === '/podcast';
     }
+    if (href === '/consulting') return pathname === '/consulting' || pathname === '/services';
     if (href === '/projects') {
       return pathname === '/projects' || pathname === '/work' || pathname === '/build' || pathname.startsWith('/work/');
     }
@@ -47,10 +49,14 @@ export default function SpatialHeader({ blogLocalesBySlug }: { blogLocalesBySlug
       if (event.key === 'Escape') { setOpen(false); buttonRef.current?.focus(); }
     };
     window.addEventListener('keydown', escape);
-    return () => window.removeEventListener('keydown', escape);
+    const outside = (event: PointerEvent) => {
+      if (event.target instanceof Node && !headerRef.current?.contains(event.target)) setOpen(false);
+    };
+    document.addEventListener('pointerdown', outside);
+    return () => { window.removeEventListener('keydown', escape); document.removeEventListener('pointerdown', outside); };
   }, [open]);
 
-  return <header className="spatial-header">
+  return <header ref={headerRef} className="spatial-header">
     <div className="spatial-header-row">
       <Link className="spatial-brand" href={hrefFor('/')} aria-label={zh ? 'Darren Su 首页' : 'Darren Su home'} onClick={() => setOpen(false)}>
         <span className="spatial-brand-mark" aria-hidden="true"><Logo size={36} /></span>
@@ -61,20 +67,19 @@ export default function SpatialHeader({ blogLocalesBySlug }: { blogLocalesBySlug
       </nav>
       <div className="spatial-header-actions">
         <HeaderContact locale={locale} menuOpen={open} onOpen={() => setOpen(false)} />
-        <div className="spatial-light-switch" role="group" aria-label={zh ? '工作室光线' : 'Studio lighting'}>
-          {(['day', 'evening'] as const).map(value => <button key={value} type="button" aria-pressed={lighting === value} onClick={() => setLighting(value)}>
-            <LightIcon evening={value === 'evening'} /><span>{value === 'day' ? zh ? '日光' : 'Day' : zh ? '暮色' : 'Dusk'}</span>
-          </button>)}
-        </div>
-        <button className="spatial-mobile-light" type="button" aria-label={zh ? `切换为${lighting === 'day' ? '暮色' : '日光'}` : `Switch to ${lighting === 'day' ? 'dusk' : 'daylight'}`} onClick={() => setLighting(lighting === 'day' ? 'evening' : 'day')}><LightIcon evening={lighting === 'evening'} /></button>
-        <div className="spatial-language"><LanguageSwitcher availableLocales={availableLocales} onSelect={() => setOpen(false)} /></div>
+        <div className="spatial-language spatial-desktop-language"><LanguageSwitcher availableLocales={availableLocales} onSelect={() => setOpen(false)} /></div>
         <button ref={buttonRef} type="button" className="spatial-menu-toggle" aria-expanded={open} aria-controls="spatial-mobile-nav" aria-label={zh ? open ? '关闭导航' : '打开导航' : open ? 'Close navigation' : 'Open navigation'} onClick={() => setOpen(!open)}>
           <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden="true">{open ? <path d="m5 5 12 12M17 5 5 17" /> : <path d="M3 7h16M3 15h16" />}</svg>
+          <span>{zh ? open ? '关闭' : '菜单' : open ? 'Close' : 'Menu'}</span>
         </button>
       </div>
     </div>
     <nav id="spatial-mobile-nav" className="spatial-mobile-nav" aria-label={zh ? '页面导航' : 'Page navigation'} hidden={!open}>
       {roomLinks.map(link => <Link key={link.href} href={hrefFor(link.href)} aria-current={current(link.href) ? 'page' : undefined} onClick={() => setOpen(false)}>{zh ? link.zh : link.en}<span aria-hidden="true">↗</span></Link>)}
+      <div className="spatial-menu-settings">
+        <div className="spatial-language"><LanguageSwitcher availableLocales={availableLocales} onSelect={() => setOpen(false)} /></div>
+        <button className="spatial-menu-light" type="button" onClick={() => setLighting(lighting === 'day' ? 'evening' : 'day')}><LightIcon evening={lighting === 'evening'} />{zh ? lighting === 'day' ? '切换暮色' : '切换日光' : lighting === 'day' ? 'Use dusk theme' : 'Use daylight theme'}</button>
+      </div>
     </nav>
     <noscript>
       <style>{'.spatial-header-actions > :not(.spatial-header-contact),.spatial-desktop-nav,.spatial-footer button,.spatial-contact-options > button{display:none!important}'}</style>

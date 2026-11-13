@@ -99,6 +99,7 @@ test('cleanup cancels active and delayed effects without leaving altered styles 
   f.observers[0].report(...[stage, ...cards].map(target => ({ target, isIntersecting: true })));
   assert.equal(stage.dataset.motionVisible, 'true');
   assert.equal(f.animations.length, 2);
+  assert.ok(f.animations.every(animation => animation.keyframes.every(frame => !('translate' in frame) && !('transform' in frame))), 'Entering content must not move a link while a visitor is trying to click it');
   assert.ok(f.animations[1].options.delay > 0, 'The staggered effect must also be canceled');
   assert.ok(f.animations.every(animation => animation.options.fill === 'backwards'), 'A delayed reveal must apply its initial frame without retaining its final frame');
 

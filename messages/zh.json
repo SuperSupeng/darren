@@ -1,23 +1,24 @@
 {
   "meta": {
-    "title": "Darren Su / 苏鹏 | AI 创业者，长期研究 AI 时代的人与组织",
-    "description": "Darren，AI 创业者、野生人类学爱好者、禅修实践者。长期研究 AI 时代的人与组织。经常和 Founder、企业主聊天，有一档播客《重新组织》。关注全球 AI 与海外市场。给企业老板和管理团队讲 AI 能做什么、AI 时代的组织怎么协作；也带海外投资人和创始人来中国看 AI。"
+    "title": "Darren Su / 苏鹏 | AI、人与组织",
+    "description": "我是 Darren Su / 苏鹏，提供 AI 原生组织转型、AI 搜索（GEO）和产品市场策略（GTM）咨询。这里也有我的产品、文章、播客和生活记录。"
   },
   "nav": {
     "home": "首页",
     "writing": "文章",
     "podcast": "播客",
-    "projects": "项目",
+    "projects": "案例与产品",
     "about": "关于",
     "contact": "联系我",
     "openMenu": "打开菜单",
     "closeMenu": "关闭菜单",
-    "primary": "主要导航"
+    "primary": "主要导航",
+    "consulting": "咨询"
   },
   "servicesPage": {
     "meta": {
-      "title": "合作 | AI 转型讲座与咨询、China AI 实地走访与活动",
-      "description": "给企业老板和管理团队讲 AI 能做什么、AI 时代的组织怎么协作；也带海外投资人和创始人来中国看 AI。"
+      "title": "讲座、工作坊与走访交流",
+      "description": "结合产品、Agent 和社区工作的经历，做 AI 讲座与工作坊，也陪海外团队走访中国 AI 公司和社区。"
     }
   },
   "footer": {
@@ -47,25 +48,25 @@
   "podcast": {
     "meta": {
       "title": "播客《重新组织》 / Re:Organize",
-      "description": "Darren Su 播客《重新组织》 / Re:Organize 的入口：节目介绍与收听链接。"
+      "description": "《重新组织》是 Darren Su / 苏鹏的播客，和创业者、企业主聊 AI，也聊他们怎么做事、带团队。"
     }
   },
   "projects": {
     "meta": {
-      "title": "项目",
-      "description": "Darren Su / 苏鹏的产品与项目：GlobalTechEvents、Datawhale AI+X Events、观木，日常使用的 AI 原生工作系统（31 个专业 Agent、44 个自动任务），以及代表案例。"
+      "title": "案例与产品",
+      "description": "Darren Su / 苏鹏做的产品和参与的项目：GlobalTechEvents、Datawhale AI+X Events、观木，以及多 Agent 使用记录和社区活动案例。"
     }
   },
   "build": {
     "meta": {
       "title": "我做的产品",
-      "description": "Darren Su / 苏鹏正在创造的产品与实验：GlobalTechEvents、Datawhale AI+X Events 与多 Agent 数字组织。"
+      "description": "Darren Su / 苏鹏做的产品和实验：GlobalTechEvents、Datawhale AI+X Events、观木和多 Agent 工作系统。"
     }
   },
   "about": {
     "meta": {
       "title": "关于我",
-      "description": "Darren，AI 创业者、野生人类学爱好者、禅修实践者。长期研究 AI 时代的人与组织。经常和 Founder、企业主聊天，有一档播客《重新组织》。关注全球 AI 与海外市场。"
+      "description": "Darren Su / 苏鹏，AI 创业者与个人咨询顾问。这里介绍我的工程、社区和产品经历，也写公益课程、禅修与生活。"
     }
   }
 }

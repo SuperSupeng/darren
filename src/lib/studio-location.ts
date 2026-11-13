@@ -1,3 +1,4 @@
+import { studioZoneHrefs } from '@/lib/site-config';
 import type { StudioLighting, StudioZone } from '@/components/studio/types';
 
 export type StudioLocation = {
@@ -35,4 +36,9 @@ export function getStudioHref(state: StudioLocation): string {
   const hash = state.zone === 'overview' ? '' : `#${state.zone}`;
 
   return `/studio${query}${hash}`;
+}
+
+export function getStudioDestination(zone: Exclude<StudioZone, 'overview'>, lighting: StudioLighting) {
+  const [path, hash] = studioZoneHrefs[zone].split('#');
+  return `${path}${lighting === 'evening' ? '?light=evening' : ''}${hash ? `#${hash}` : ''}`;
 }

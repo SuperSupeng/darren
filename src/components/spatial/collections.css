@@ -287,3 +287,34 @@
 @media (prefers-reduced-motion: reduce) {
   .collection-page, .collection-page *, .collection-page *::before, .collection-page *::after { transition: none !important; animation: none !important; }
 }
+
+/* Reading and practice start with content; the room belongs to the homepage. */
+.collection-hero.collection-hero-text { display: block; padding-block: clamp(32px,5vw,64px); }
+.collection-hero-text .collection-hero-copy { max-width: 860px; padding: 0; }
+.collection-podcast-invitation { display: block; padding: 26px 30px; margin-bottom: 42px; border-left: 2px solid var(--space-accent); background: var(--space-surface); }
+.collection-podcast-invitation h2 { font-size: 25px; font-weight: 400; margin: 0 0 12px; }
+.collection-podcast-invitation p { margin: 0; }
+
+/* Article lists are for scanning; each row has one link and a small thumbnail. */
+.article-directory-link { display: grid; grid-template-columns: minmax(0,1fr) 150px; align-items: start; gap: 32px; padding-block: 26px; border-top: 1px solid var(--space-line); }
+.article-directory .article-directory-meta { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 16px; font-size: 13px; line-height: 1.6; color: var(--space-muted); }
+.article-directory h3 { font: 400 clamp(22px,2.3vw,30px)/1.5 var(--font-noto-serif); margin-top: 10px; }
+.article-directory-link:hover h3 { color: var(--space-accent); }
+.article-directory .article-directory-description { font-size: 16px; line-height: 1.8; color: var(--space-muted); margin-top: 10px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.article-directory-read { display: inline-flex; align-items: center; gap: 12px; font-size: 14px; margin-top: 12px; }
+.article-directory-image { position: relative; aspect-ratio: 4/3; background: var(--space-surface); }
+.article-directory-image img { object-fit: cover; }
+.collection-notes .collection-hero-text { padding-block: 30px; }
+.collection-notes .collection-hero-text .collection-hero-copy { padding-block: 0; }
+.collection-notes .collection-hero-text h1 { font-size: clamp(36px,4.5vw,58px); }
+.collection-notes .collection-hero-text .collection-hero-lead { margin-top: 18px; }
+.collection-series-row { gap: 8px 12px; }
+.collection-series-row a { display: inline-flex; align-items: center; min-height: 44px; border: 1px solid var(--space-line); padding: 7px 12px; font-size: 14px; }
+.collection-series-row a:hover { background: var(--space-surface); }
+@media(max-width:600px) {
+ .article-directory-link { grid-template-columns: minmax(0,1fr) 80px; gap: 16px; padding-block: 22px; }
+ .article-directory-image { aspect-ratio: 1; }
+ .article-directory h3 { font-size: 22px; }
+ .article-directory .article-directory-description { font-size: 14px; }
+ .article-directory .article-directory-meta { font-size: 12px; }
+}

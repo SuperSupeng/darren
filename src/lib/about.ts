@@ -1,27 +1,26 @@
 const aboutCopy = {
   zh: {
     title: '我是 Darren，也是苏鹏。',
-    intro: 'Darren，AI 创业者、野生人类学爱好者、禅修实践者。长期研究 AI 时代的人与组织。经常和 Founder、企业主聊天，有一档播客《重新组织》。关注全球 AI 与海外市场。从工程研发出发，我在 Datawhale 从学习者慢慢变成组织者，也和伙伴发起社区、做自己的产品，探索 Agent 和自动化。工作之外，我参与过青少年 AI 公益课程，也参加禅修，把做事和生活里的经历写下来。',
-    description: 'Darren，AI 创业者、野生人类学爱好者、禅修实践者。长期研究 AI 时代的人与组织。经常和 Founder、企业主聊天，有一档播客《重新组织》。关注全球 AI 与海外市场。',
+    intro: '我是 Darren，AI 创业者，也做个人咨询。做过工程研发，在 Datawhale 参与社区工作，和 Monica 发起了 AGI Villa。我关心 AI 进入工作后，人怎样分工、做决定、相互协作。工作之外，我喜欢观察人怎样生活，参与公益课程，也实践禅修。',
+    description: 'Darren Su / 苏鹏，AI 创业者与个人咨询顾问。这里介绍我的工程、社区和产品经历，也写公益课程、禅修与生活。',
     engineeringTitle: '从工程开始',
     engineering: [
       '2021 年，我在 PingCAP 做 TiCDC 研发实习，后来参与过 AI 基础设施、向量数据库和 AI 产品相关的工作。',
       '曾任爱可生 AI 创新事业部负责人。',
-      '现在我也组织产品 Workshop，让开发者直接试用产品，把使用中遇到的问题带回给创始人。写代码、观察使用过程、和人聊清楚需求，是我接触技术的几种方式。',
+      '现在我也组织产品 Workshop，让开发者直接试用产品，把使用中遇到的问题带回给创始人。我会写代码，也会观察别人怎么使用产品，和他们聊需求。',
     ],
     communityTitle: '在社区里，从学习者到组织者',
     community: [
       '2019 年，我因为学习 AI 接触 Datawhale。后来做过助教、组织活动，也逐渐参与城市生态和社区治理。现在，作为 Datawhale 城市生态负责人，我和各地伙伴一起支持 AI 学习与实践活动，让学习者、开发者、高校和开源贡献者有机会见面，一起做事。',
-      '我和 Monica 共同发起了 AGI Villa，和来自世界各地的 AI 创造者、产品团队与创业者交流。我希望把中国与全球的 AI 和开源社区连接起来，让大家有机会一起做事。做这些事时，我会留意人为什么愿意来、怎样参与，以及活动结束后是否还会继续交流。',
-      '我也是 n8n Ambassador，使用 n8n 搭建营销自动化工作流，也参与中文学习资料的建设。我希望让开发者和业务伙伴围绕真实需求，一起做出有用的自动化。',
+      '我和 Monica 共同发起了 AGI Villa。在这里，我们和来自世界各地的 AI 开发者、产品团队与创业者交流，希望中国和海外的 AI、开源社区能有更多合作。我会留意大家为什么来、怎样参与，以及活动结束后是否还会继续联系。',
+      '我也是 n8n Ambassador，用 n8n 搭建营销自动化工作流，也参与中文学习资料的建设。我希望开发者和业务伙伴能一起做，把工作中遇到的问题解决掉。',
     ],
-    communityReflection: '相识之后发生了什么，是我在社区工作里反复碰到的问题。',
+    communityReflection: '认识之后，能不能一起做点事？这是我一直关心的。',
     communityLink: '看看我的社区经历',
     makingTitle: '把遇到的问题做成产品',
     making: [
-      '在社区里，一些创始人会来问招聘的事。我也看到，简历和职位描述很难讲清楚一个人怎样面对陌生问题，或者一份工作的真实日常。后来，我联合创办 MatchPoint，尝试把职业探索和岗位理解做得更具体。想找工作或想招人，都可以找我聊聊。',
       'GlobalTechEvents 把散落在不同平台和城市的科技活动整理到一起，让人更容易找到值得关注的活动与社区。我也把它的日常运营交给了多 Agent 系统。',
-      '2026 年，我写下了当时运行 31 个 Agent 的经历。文章里有它们怎样分工，也有任务失败和停用的过程。使用 AI 没有让我免于判断，反而让我更清楚地看见自己的注意力和理解能力也是限制。',
+      '2026 年，我写下了当时运行 31 个 Agent 的经历。文章里有它们怎样分工，也有任务失败和停用的过程。任务多了以后，需要我判断和确认的事也多了，我自己的注意力和理解能力成了限制。',
     ],
     productsLink: '看看我的产品',
     agentLink: '读这篇 Agent 实践记录',
@@ -38,32 +37,31 @@ const aboutCopy = {
     lifeLink: '读宗通寺禅修手记',
     visitLink: '也可以看看我与 SuperAI 团队走访的记录',
     contactTitle: '保持联系',
-    contactBody: '如果你也在做产品、参与社区，或者想聊 AI 实践和禅修，欢迎给我写信。有具体的项目想一起做，也可以说说你的团队和正在想的问题。',
-    servicesLink: '了解合作方式',
+    contactBody: '做产品、参与社区，或是想交流 AI 和禅修的经历，都欢迎来信。想找我咨询，也可以先介绍你的团队和遇到的问题。',
+    servicesLink: '了解咨询方向',
   },
   en: {
     title: 'I’m Darren Su. My Chinese name is 苏鹏.',
-    intro: 'Co-founder, AGI Villa & MatchPoint · Head of City Ecosystem, Datawhale · n8n Ambassador. Connecting global founders and builders with China’s AI ecosystem. I began in engineering, grew from a learner into an organizer at Datawhale, and now start communities with others, build products, and explore agents and automation. Beyond work, I have helped run volunteer AI classes for young people and practice meditation. I write about what I encounter in work and life.',
-    description: 'Co-founder, AGI Villa & MatchPoint · Head of City Ecosystem, Datawhale · n8n Ambassador. Connecting global founders and builders with China’s AI ecosystem.',
+    intro: 'I’m an AI entrepreneur and independent consultant. I started in engineering, work with the Datawhale community, and co-founded AGI Villa with Monica. I’m interested in how people share work and make decisions as they start using AI. Outside work, I enjoy observing how people live, take part in volunteer teaching, and practice meditation.',
+    description: 'Darren Su is an AI entrepreneur and independent consultant. Read about his background in engineering, communities, and products, along with volunteer teaching, meditation, and life outside work.',
     engineeringTitle: 'Beginning in engineering',
     engineering: [
       'In 2021, I interned on TiCDC development at PingCAP. Later, I worked on AI infrastructure, vector databases, and AI products. ',
       'Former head of the AI Innovation Division at 爱可生.',
-      'Today I also organize product workshops where developers try a product and discuss their feedback with its founders. Writing code, observing how people use it, and talking through their needs are different ways I engage with technology.',
+      'I also organize product workshops where developers try a product and share their feedback with its founders. Alongside writing code, I watch how people use products and talk with them about what they need.',
     ],
     communityTitle: 'From learning together to organizing together',
     community: [
       'I joined Datawhale in 2019 to learn AI. I later became a teaching assistant and event organizer, and became involved in city programs and community governance. Today, as Head of City Ecosystem, Datawhale, I work with local partners on AI learning and practical activities, bringing together learners, developers, universities, and open-source contributors.',
-      'Monica and I also started AGI Villa, where we meet AI builders, product teams, and founders from around the world. I want to connect AI and open-source communities in China with their peers worldwide, giving people a chance to work together. In this work, I pay attention to why people show up, how they take part, and whether they keep talking afterward.',
-      'I am also an n8n Ambassador. I use n8n for marketing automation and support the development of Chinese-language learning resources. I want to bring developers and business users together to build useful automations around real needs.',
+      'Monica and I started AGI Villa, where we meet AI developers, product teams, and founders from around the world. We hope to encourage more collaboration between AI and open-source communities in China and overseas. I pay attention to why people come, how they take part, and whether they stay in touch afterward.',
+      'I am also an n8n Ambassador. I use n8n for marketing automation and contribute to Chinese-language learning resources. I want developers and business users to work together on problems they encounter in their jobs.',
     ],
-    communityReflection: 'What happens after an introduction is a question I keep returning to.',
+    communityReflection: 'Once people have met, will they do something together? That is what interests me.',
     communityLink: 'Explore my community work',
     makingTitle: 'Making products from problems I encounter',
     making: [
-      'Founders in the community would ask me about hiring. I also saw how little a résumé or job description reveals about how someone approaches an unfamiliar problem, or what a job is actually like. I co-founded MatchPoint to make career exploration and understanding a role more concrete. Looking for a job or hiring? Happy to chat.',
       'GlobalTechEvents brings together technology events scattered across different platforms and cities, making it easier to find events and communities worth following. I have also handed its daily operations to a multi-agent system.',
-      'In 2026, I wrote about the 31 agents I was running at the time. The article covers how they divided the work, but also failed tasks and automations I stopped. Using AI has not removed the need for my judgment. It has made the limits of my own attention and understanding more visible.',
+      'In 2026, I wrote about the 31 agents I was running at the time. The article covers how they divided the work, failed tasks, and automations I stopped. As the number of tasks grew, so did the decisions and approvals that needed me. My own attention and understanding became a limit.',
     ],
     productsLink: 'Explore my products',
     agentLink: 'Read about my agent experiments',
@@ -80,13 +78,12 @@ const aboutCopy = {
     lifeLink: 'Read my meditation retreat notes',
     visitLink: 'Read my notes from accompanying the SuperAI team in China',
     contactTitle: 'Keep in touch',
-    contactBody: 'If you’re building a product, taking part in a community, or want to exchange experiences with AI or meditation, you’re welcome to write. If you have a project in mind, tell me about your team and the question you’re working through.',
-    servicesLink: 'See ways to work together',
+    contactBody: 'Write if you’re building a product, involved in a community, or want to exchange experiences with AI or meditation. For consulting, tell me a little about your team and the problem you are facing.',
+    servicesLink: 'Explore consulting',
   },
 };
 
 const agiVillaLink = { phrase: 'AGI Villa', href: '/blog/why-i-started-agi-villa' } as const;
-const matchPointLink = { phrase: 'MatchPoint', href: '/projects' } as const;
 const globalTechEventsLink = {
   phrase: 'GlobalTechEvents',
   href: 'https://www.globaltechevents.xyz/authors/darren-su',
@@ -100,11 +97,11 @@ const agentsLink = {
 const aboutInlineLinks = {
   zh: {
     community: [agiVillaLink],
-    making: [matchPointLink, globalTechEventsLink, agentsLink.zh],
+    making: [globalTechEventsLink, agentsLink.zh],
   },
   en: {
     community: [agiVillaLink],
-    making: [matchPointLink, globalTechEventsLink, agentsLink.en],
+    making: [globalTechEventsLink, agentsLink.en],
   },
 } as const;
 

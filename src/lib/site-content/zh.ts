@@ -5,7 +5,7 @@ import type { LocalizedContent } from './types';
 export const chineseContent: LocalizedContent = {
   ...englishContent,
   home: {
-    intro: "Darren，AI 创业者、野生人类学爱好者、禅修实践者。长期研究 AI 时代的人与组织。经常和 Founder、企业主聊天，有一档播客《重新组织》。关注全球 AI 与海外市场。",
+    intro: "我关注 AI 时代的人与组织。做过工程研发，现在做产品、参与社区，也把 Agent 用在自己的日常工作里。",
     detail: homepageServiceLine,
   },
   labels: {
@@ -17,14 +17,14 @@ export const chineseContent: LocalizedContent = {
       sideQuote: "讨论时容易觉得一个想法可行。交给用户试用后，才知道有哪些问题。",
       selectedEyebrow: "目前的产品",
       selectedStatement:
-        "这些产品的起点都很具体：有的是我自己查找科技活动、组织城市项目时遇到的麻烦，有的是一座古建筑的木构不容易看清。",
+        "活动索引、社区日历，还有一个古建筑交互原型。它们分别来自我找活动、组织社区项目和看古建筑时遇到的问题。",
       projectLabel: "项目",
       visitProject: "访问项目",
       explainerEyebrow: "上线之后",
       explainerTitle: "产品上线后，我会继续看用户怎么用。",
-      problem: "问题",
-      signal: "反馈",
-      nextStep: "下一步",
+      problem: "为什么做",
+      signal: "现在怎么用",
+      nextStep: "接下来想做",
       explainerItems: [
         {
           title: "先让用户看到它",
@@ -50,7 +50,7 @@ export const chineseContent: LocalizedContent = {
       sidebarQuote: "这些文章大多从一次活动、一个产品问题，或者一段亲身经历开始。",
       latestEyebrow: "最新",
       recentTitle: "最近的文章",
-      recentDescription: "AI 技术与实践、创业与社区，也有公益行动和生活中的思考。",
+      recentDescription: "关于 AI、创业和社区的文章，也有公益课程、禅修和旅行的记录。",
       empty: "文章正在整理中。",
       minRead: "分钟阅读",
       rss: "RSS",
@@ -78,9 +78,9 @@ export const chineseContent: LocalizedContent = {
   writing: {
     hero: {
       eyebrow: "文章",
-      title: "我把做项目、做产品和使用 AI 的经验写在这里。",
+      title: "做过的事，和还没想明白的问题。",
       subtitle:
-        "AI 技术与实践、创业与社区，也有公益行动和生活中的思考。",
+        "写 Agent 怎么分工，产品怎么找用户，也写社区、公益课程、禅修和旅行。",
     },
   },
   podcast: {
@@ -88,19 +88,19 @@ export const chineseContent: LocalizedContent = {
       eyebrow: "播客",
       title: "《重新组织》",
       subtitle:
-        "节目入口：一段简短介绍，以及在小宇宙收听《重新组织》的链接。这里是集合页，不是日更更新墙。",
+        "和创业者、企业主聊 AI，也聊他们怎么做事、带团队。",
     },
-    listen: "收听",
+    listen: "关于这档节目",
     listenUrl: "https://www.xiaoyuzhoufm.com/podcast/6aacb9b82527cf1af35662c9",
     listenCta: "在小宇宙收听",
     summary:
-      "这一页只收节目入口，并给出在小宇宙收听的链接。不按日更维护，也不列出其他平台和单集，也不把外链目录混进文章。",
+      "我平时经常和创业者、企业主聊天。《重新组织》把这些话题带进播客：AI 改变了哪些工作，做决定时遇到过什么困难，人又是怎样从经历中学到东西的。",
   },
   projects: {
     hero: {
       eyebrow: "项目",
-      title: "GlobalTechEvents 和 AI+X Events，都来自我在工作里反复遇到的问题。",
-      subtitle: "这里收纳我做的产品，以及我发起、负责或参与的项目。",
+      title: "我做的产品，参与的项目。",
+      subtitle: "这里有产品介绍、多 Agent 使用记录，以及我在技术社区组织和参与的活动。案例里写明了我的角色和项目结果。",
     },
     productsTitle: "产品",
     casesTitle: "代表项目",
@@ -113,15 +113,15 @@ export const chineseContent: LocalizedContent = {
   products: {
     hero: {
       eyebrow: "产品",
-      title: "GlobalTechEvents 和 AI+X Events，都来自我在工作里反复遇到的问题。",
+      title: "我做的产品和实验",
       subtitle:
         "GlobalTechEvents 整理全球科技活动，AI+X Events 服务 Datawhale 的城市活动。我也长期运行一套多 Agent 工作系统。",
     },
     digitalOrganization: {
       eyebrow: "AI 原生工作系统",
-      title: "我也在日常工作中使用多 Agent 系统。",
+      title: "让 Agent 参与我的日常工作",
       description:
-        "我在 2026 年的实践文章里，记录了当时的 31 个专业 Agent 和 44 个自动任务，分别处理研究、产品、内容、运营和个人知识管理。我仍在日常工作中使用这套系统，并根据遇到的问题继续调整。",
+        "2026 年，我写过一篇管理 31 个 Agent、运行 44 个自动任务的记录。它们负责研究、产品、内容、运营和个人知识管理。文章里有分工方式，也有任务失败、流程停用的经历。我现在仍在使用和调整这套系统。",
       primaryMetric: "31 个专业 Agent",
       secondaryMetric: "44 个自动任务",
       image: "/blog/ai-employees/digital-organization.png",
@@ -134,7 +134,7 @@ export const chineseContent: LocalizedContent = {
         ...englishContent.products.items[0],
         tagline: "全球科技活动索引",
         description:
-          "把分散在不同城市和平台上的科技活动整理到一起，方便我和其他用户了解接下来有哪些会议与社区活动。",
+          "收集各地的科技会议和社区活动。我自己用它做海外研究、安排出行，也开放给其他人使用。",
         status: "运行中",
         problem:
           "这些信息散落在不同网站、城市和社区里。每次做海外研究或安排出行，都要重新寻找和核对。",
@@ -148,7 +148,7 @@ export const chineseContent: LocalizedContent = {
         ...englishContent.products.items[1],
         tagline: "AI+X 社区活动日历",
         description:
-          "集中收录 Meetup、Workshop、Hackathon，以及高校、城市和产业相关的 AI 活动，用户也可以自己提交和订阅。",
+          "收录各地的 AI Meetup、Workshop、Hackathon，以及高校和行业活动。可以查找活动，也可以提交和订阅。",
         status: "运行中",
         problem:
           "AI 活动信息散落在不同社区和平台，学习者很难持续找到本地可以参加的活动，组织者也缺少一个稳定的发布入口。",
@@ -162,7 +162,7 @@ export const chineseContent: LocalizedContent = {
         ...englishContent.products.items[2],
         tagline: "拆懂一座古建筑",
         description:
-          "从山西大云院弥陀殿出发，旋转、拆解、认识古建筑中的木构件。交互教学示意原型。",
+          "一个古建筑交互教学原型。以山西大云院弥陀殿为例，可以旋转建筑、拆开木构件，看看它们怎样相接。",
         status: "运行中",
         problem:
           "屋檐下的木构件不容易从一张照片或一张平面图里看清。它们多在视线上方，怎么相接也容易淹没在整座殿里。",
@@ -177,7 +177,7 @@ export const chineseContent: LocalizedContent = {
   about: {
     hero: {
       title: "Darren Su / 苏鹏",
-      tags: ["AGI Villa & MatchPoint 联合创始人", "Datawhale 城市生态负责人", "n8n Ambassador", "《重新组织》主持人"],
+      tags: ["AGI Villa 联合创始人", "Datawhale 城市生态负责人", "n8n Ambassador", "《重新组织》主持人"],
     },
     kernel: [
       {
@@ -223,7 +223,7 @@ export const chineseContent: LocalizedContent = {
   seo: {
     ogImageAlt: "Darren Su / 苏鹏",
     home: {
-      jobTitle: "AGI Villa & MatchPoint 联合创始人 · Datawhale 城市生态负责人 · n8n Ambassador",
+      jobTitle: "AGI Villa 联合创始人 · Datawhale 城市生态负责人 · n8n Ambassador",
       knowsAbout: [
         "AI 产品",
         "Agent 与自动化",
@@ -235,14 +235,15 @@ export const chineseContent: LocalizedContent = {
         "社区驱动增长",
         "数字组织设计",
       ],
-      professionalServiceName: "讲座和内训 / AI 转型咨询",
+      professionalServiceName: "Darren Su 个人咨询",
       serviceTypes: [
-        "讲座和内训 / AI 转型咨询",
-        "带海外投资人和创始人了解、走访中国 AI，一起办活动",
+        "AI 原生组织转型",
+        "AI 搜索可见性（GEO）",
+        "产品进入市场（GTM）",
       ],
     },
     services: {
-      listName: "Darren Su 合作方式",
+      listName: "Darren Su 讲座与交流",
     },
   },
 };

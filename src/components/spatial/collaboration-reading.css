@@ -351,3 +351,6 @@
   .collaboration-reading .collaboration-reading-help li { font-size: 17px; }
   .collaboration-reading .collaboration-reading-inquiry { margin-top: 48px; padding: 32px 26px; }
 }
+
+.collaboration-reading-intro > p { max-width: 42em; margin-top: 24px; color: var(--space-muted); font-size: 17px; line-height: 1.9; }
+.collaboration-reading-intro > a { display: inline-flex; align-items: center; min-height: 44px; margin-top: 18px; text-decoration: underline; text-underline-offset: 6px; }

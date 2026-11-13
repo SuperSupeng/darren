@@ -24,7 +24,7 @@ const pageKeywords: Record<Locale, Record<KeywordGroup, string[]>> = {
   en: {
     home: [
       'Darren Su',
-      'Co-founder, AGI Villa & MatchPoint',
+      'Co-founder, AGI Villa',
       'Head of City Ecosystem, Datawhale',
       'n8n Ambassador',
       'Re:Organize',
@@ -34,12 +34,11 @@ const pageKeywords: Record<Locale, Record<KeywordGroup, string[]>> = {
       'multi-agent organization',
       'AGI Villa',
       'Datawhale',
-      'MatchPoint',
       'GlobalTechEvents',
     ],
     services: [
       'China AI field visits & events for global investors and founders',
-      'Talks, in-house sessions and hands-on workshops on where AI is now, what it can do, and how teams work once people and agents work together; agent building too.',
+      'AI talks and workshops',
     ],
     work: [
       'AI developer ecosystem case studies',
@@ -61,8 +60,7 @@ const pageKeywords: Record<Locale, Record<KeywordGroup, string[]>> = {
       '苏鹏',
       'AGI Villa',
       'Datawhale',
-      'MatchPoint',
-      'Co-founder, AGI Villa & MatchPoint',
+      'Co-founder, AGI Villa',
       'GlobalTechEvents',
       'Head of City Ecosystem, Datawhale',
       'n8n Ambassador',
@@ -76,7 +74,7 @@ const pageKeywords: Record<Locale, Record<KeywordGroup, string[]>> = {
     home: [
       '苏鹏',
       'Darren Su',
-      'AGI Villa & MatchPoint 联合创始人',
+      'AGI Villa 联合创始人',
       'Datawhale 城市生态负责人',
       'n8n Ambassador',
       '《重新组织》',
@@ -85,11 +83,10 @@ const pageKeywords: Record<Locale, Record<KeywordGroup, string[]>> = {
       '多 Agent 数字组织',
       'AGI Villa',
       'Datawhale',
-      'MatchPoint',
       'GlobalTechEvents',
     ],
     services: [
-      '讲座和内训 / AI 转型咨询',
+      'AI 讲座与工作坊',
       '带海外投资人和创始人了解、走访中国 AI，一起办活动',
     ],
     work: [
@@ -113,8 +110,7 @@ const pageKeywords: Record<Locale, Record<KeywordGroup, string[]>> = {
       '苏鹏',
       'AGI Villa',
       'Datawhale',
-      'MatchPoint',
-      'AGI Villa & MatchPoint 联合创始人',
+      'AGI Villa 联合创始人',
       'GlobalTechEvents',
       'Datawhale 城市生态负责人',
       'n8n Ambassador',
@@ -377,7 +373,7 @@ export function homeStructuredData(locale: string) {
         '@type': 'Service',
         '@id': `${siteUrl}/#service`,
         name: site.seo.home.professionalServiceName,
-        url: absoluteLocalizedUrl(locale, '/services'),
+        url: absoluteLocalizedUrl(locale, '/consulting'),
         areaServed,
         serviceType: site.seo.home.serviceTypes,
         provider: { '@id': `${siteUrl}/#person` },
@@ -446,7 +442,7 @@ export function servicesStructuredData(locale: string) {
 
 export function workStructuredData(locale: string) {
   const { work } = getPortfolio(locale);
-  const name = locale === 'zh' ? 'Darren Su 的项目' : 'Darren Su Projects';
+  const name = locale === 'zh' ? 'Darren Su 的实践' : 'Darren Su Practice';
 
   return {
     '@context': 'https://schema.org',
@@ -475,7 +471,7 @@ export function workStructuredData(locale: string) {
 
 export function workCaseStructuredData(work: PortfolioWork, locale: string) {
   const url = absoluteLocalizedUrl(locale, `/work/${work.id}`);
-  const workIndexName = locale === 'zh' ? '项目' : 'Projects';
+  const workIndexName = locale === 'zh' ? '实践' : 'Practice';
 
   return {
     '@context': 'https://schema.org',
@@ -731,7 +727,7 @@ export function blogStructuredData(posts: BlogPost[], locale: string) {
 export function projectsStructuredData(locale: string) {
   const site = getSiteContent(locale);
   const { work } = getPortfolio(locale);
-  const name = locale === 'zh' ? '项目' : 'Projects';
+  const name = locale === 'zh' ? '实践' : 'Practice';
   const digitalOrganization = site.products.digitalOrganization;
 
   return {

@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import JobsNote from '@/components/JobsNote';
 import AboutParagraph from '@/components/AboutParagraph';
 import { getAboutCopy, getAboutInlineLinks } from '@/lib/about';
 import { getAboutRoles } from '@/lib/site-config';
@@ -7,7 +6,6 @@ import ProfileRoles from '@/components/ProfileRoles';
 import { getTranslations } from 'next-intl/server';
 import ContactActions from '@/components/ContactActions';
 import JsonLd from '@/components/JsonLd';
-import RoomPortal from '@/components/spatial/RoomPortal';
 import { Link } from '@/i18n/navigation';
 import '@/components/spatial/interiors.css';
 import '@/components/spatial/about-reading.css';
@@ -40,7 +38,6 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             <ProfileRoles roles={getAboutRoles(locale)} />
           </div>
           <div className="about-reading-stage">
-            <RoomPortal zone="notes" locale={locale} />
             <figure className="about-reading-portrait">
               <Image src="/photo.jpg" alt="Darren Su / 苏鹏" fill sizes="(max-width: 600px) 112px, 148px" loading="eager" className="object-cover" />
             </figure>
@@ -91,10 +88,10 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             <div className="about-reading-prose">
               <p>{copy.contactBody}</p>
               <ContactActions locale={locale} context="about-reading" className="about-reading-contact-actions" />
-              <JobsNote locale={locale} />
+
               <noscript><style>{'.about-reading-contact-actions > button{display:none!important}'}</style></noscript>
               <div className="about-reading-links">
-                <Link href="/services" className="about-reading-link">{copy.servicesLink}<span aria-hidden="true">↗</span></Link>
+                <Link href="/consulting" className="about-reading-link">{copy.servicesLink}<span aria-hidden="true">↗</span></Link>
                 <Link href="/blog/superai-china-ecosystem-visit" className="about-reading-link">{copy.visitLink}<span aria-hidden="true">↗</span></Link>
               </div>
             </div>

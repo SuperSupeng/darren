@@ -1,7 +1,7 @@
 export const englishContent = {
   home: {
-    intro: "Connecting global founders and builders with China’s AI ecosystem.",
-    detail: "",
+    intro: "I’m interested in how AI changes work and organizations. I started in engineering; now I build products, organize communities, and use agents in my own work.",
+    detail: "My consulting focuses on how teams divide and manage work with AI. I also advise on AI search visibility (GEO) and go-to-market strategy (GTM).",
   },
   labels: {
     productLab: {
@@ -11,14 +11,14 @@ export const englishContent = {
         "An idea may sound promising in conversation. Letting people try it shows where the problems are.",
       selectedEyebrow: "Current Products",
       selectedStatement:
-        "Each product began with a specific problem: the friction I encountered while finding technology events and organizing city programs, or the difficulty of seeing how an ancient timber hall fits together.",
+        "An event directory, a community calendar, and an interactive architecture prototype. Each grew out of a problem I ran into while finding events, organizing community projects, or studying an old building.",
       projectLabel: "Project",
       visitProject: "Visit project",
       explainerEyebrow: "After launch",
       explainerTitle: "After launch, I keep watching how people use the product.",
-      problem: "Problem",
-      signal: "Feedback",
-      nextStep: "Next step",
+      problem: "Why I built it",
+      signal: "How it is used",
+      nextStep: "What I plan to do next",
       explainerItems: [
         {
           title: "Let people see it",
@@ -45,7 +45,7 @@ export const englishContent = {
       latestEyebrow: "Latest",
       recentTitle: "Recent articles",
       recentDescription:
-        "Essays and conversations on AI, products, and communities, alongside records of teaching, starting a venture, and everyday life.",
+        "Writing on AI, starting a business, and communities, along with notes from volunteer teaching, meditation, and travel.",
       empty: "Notes are being organized.",
       minRead: "min read",
       rss: "RSS",
@@ -73,9 +73,9 @@ export const englishContent = {
   writing: {
     hero: {
       eyebrow: "Writing",
-      title: "I write about projects, products, and how I use AI.",
+      title: "Things I’ve done. Questions I’m still working on.",
       subtitle:
-        "Essays and conversations on AI, products, and communities, alongside records of teaching, starting a venture, and everyday life.",
+        "How agents share work, how products find users, and what I learn from communities, volunteer teaching, meditation, and travel.",
     },
   },
   podcast: {
@@ -83,20 +83,20 @@ export const englishContent = {
       eyebrow: "Podcast",
       title: "《重新组织》",
       subtitle:
-        "The show entrance: a short introduction and listening links. This is a hub, not a daily feed.",
+        "Conversations with founders and business owners about AI, how they work, and how they run their teams.",
     },
-    listen: "Listen",
+    listen: "About the podcast",
     listenUrl: "https://www.xiaoyuzhoufm.com/podcast/6aacb9b82527cf1af35662c9",
     listenCta: "Listen on Xiaoyuzhou",
     summary:
-      "This page is only the show entrance. It is not a daily feed, and it is not mixed into Writing.",
+      "I often talk with founders and business owners. Re:Organize brings those topics into a podcast: which parts of work AI is changing, what makes decisions difficult, and how people learn from experience.",
   },
   projects: {
     hero: {
       eyebrow: "Projects",
-      title: "GlobalTechEvents and AI+X Events all began with problems I kept encountering at work.",
+      title: "Products I build. Projects I take part in.",
       subtitle:
-        "This page gathers products I build with projects I have initiated, led, or contributed to.",
+        "Products, notes on working with agents, and events I have organized or joined in technology communities. Each case study explains my role and the results.",
     },
     productsTitle: "Products",
     casesTitle: "Selected work",
@@ -109,15 +109,15 @@ export const englishContent = {
   products: {
     hero: {
       eyebrow: "Products",
-      title: "GlobalTechEvents and AI+X Events all began with problems I kept encountering at work.",
+      title: "My products and experiments",
       subtitle:
         "GlobalTechEvents collects technology events worldwide, and AI+X Events supports Datawhale city activities. I also run a multi-agent work system over the long term.",
     },
     digitalOrganization: {
       eyebrow: "AI-native work system",
-      title: "I also use a multi-agent system in my day-to-day work.",
+      title: "Working with agents every day",
       description:
-        "In my 2026 essay, I documented 31 specialized agents and 44 recurring automations across research, products, content, operations, and personal knowledge. I continue to use and refine the system in my daily work.",
+        "In 2026, I wrote about managing 31 agents and 44 recurring automations for research, products, content, operations, and personal knowledge. The essay covers how I assigned work, tasks that failed, and workflows I stopped. I still use and adjust the system.",
       primaryMetric: "31 specialized agents",
       secondaryMetric: "44 recurring automations",
       image: "/blog/ai-employees/digital-organization.png",
@@ -131,7 +131,7 @@ export const englishContent = {
         name: "GlobalTechEvents",
         tagline: "A global technology event index",
         description:
-          "An index that brings together technology conferences and community events scattered across cities and platforms.",
+          "A directory of technology conferences and community events around the world. I use it for international research and travel planning, and make it available to others.",
         image: "/projects/globaltechevents.webp",
         url: "https://www.globaltechevents.xyz",
         status: "live",
@@ -148,7 +148,7 @@ export const englishContent = {
         name: "Datawhale AI+X Events",
         tagline: "A community calendar for practical AI",
         description:
-          "A shared calendar for AI meetups, workshops, hackathons, and university, city, and industry events. People can discover events, submit their own, and subscribe to updates in one place.",
+          "A calendar of AI meetups, workshops, hackathons, and university and industry events. Browse events, submit your own, or subscribe to updates.",
         image: "/projects/aix-events.svg",
         url: "https://aixevents.datawhale.cn/",
         status: "live",
@@ -165,7 +165,7 @@ export const englishContent = {
         name: "观木",
         tagline: "An interactive look at one ancient timber hall",
         description:
-          "An interactive prototype for Chinese ancient architecture. It starts from the Amitabha Hall of Dayun Temple in Pingshun, Shanxi: turn the hall, take the timber apart, and learn the parts.",
+          "An educational prototype about traditional Chinese architecture. Rotate a model of the Amitabha Hall at Dayun Temple in Shanxi and take apart its timber components to see how they fit together.",
         image: "/projects/guanmu.webp",
         url: "https://guanmu.darren-su.com/",
         status: "live",
@@ -183,7 +183,7 @@ export const englishContent = {
     hero: {
       title: "Darren Su / 苏鹏",
       tags: [
-        "Co-founder, AGI Villa & MatchPoint",
+        "Co-founder, AGI Villa",
         "Head of City Ecosystem, Datawhale",
         "n8n Ambassador",
         "Host of Re:Organize",
@@ -233,7 +233,7 @@ export const englishContent = {
   seo: {
     ogImageAlt: "Darren Su",
     home: {
-      jobTitle: "Co-founder, AGI Villa & MatchPoint · Head of City Ecosystem, Datawhale · n8n Ambassador",
+      jobTitle: "Co-founder, AGI Villa · Head of City Ecosystem, Datawhale · n8n Ambassador",
       knowsAbout: [
         "AI products",
         "agents and automation",
@@ -245,15 +245,15 @@ export const englishContent = {
         "community-led growth",
         "Digital Organization Design",
       ],
-      professionalServiceName:
-        "China AI field visits & events for global investors and founders",
+      professionalServiceName: "Independent consulting with Darren Su",
       serviceTypes: [
-        "China AI field visits & events for global investors and founders",
-        "Talks, in-house sessions and hands-on workshops on where AI is now, what it can do, and how teams work once people and agents work together; agent building too.",
+        "AI-native organization transformation",
+        "AI search visibility (GEO)",
+        "Go-to-market strategy (GTM)",
       ],
     },
     services: {
-      listName: "Darren Su Collaboration",
+      listName: "Darren Su Talks & Exchanges",
     },
   },
 };

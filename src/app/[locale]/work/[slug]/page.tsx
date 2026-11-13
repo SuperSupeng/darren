@@ -5,7 +5,7 @@ import JsonLd from '@/components/JsonLd';
 import '@/components/spatial/interiors.css';
 import { Link } from '@/i18n/navigation';
 import { locales } from '@/i18n/config';
-import { getAllWorkIds, getPortfolio, getWorkById, getWorkCollaboration } from '@/lib/portfolio';
+import { getAllWorkIds, getPortfolio, getWorkById, getWorkInquiry } from '@/lib/portfolio';
 import { createPageMetadata, getWorkPageMetadata, workCaseStructuredData } from '@/lib/seo';
 
 export const dynamicParams = false;
@@ -57,10 +57,10 @@ export default async function WorkCasePage({
   const works = getPortfolio(locale).work;
   const currentIndex = works.findIndex((item) => item.id === work.id);
   const nextWork = works[(currentIndex + 1) % works.length];
-  const collaboration = getWorkCollaboration(locale, work.id);
+  const inquiry = getWorkInquiry(locale, work.id);
   const copy = locale === 'zh'
     ? {
-        back: '返回项目',
+        back: '返回案例与产品',
         role: '我的角色',
         result: '规模与结果',
         context: '项目背景',
@@ -76,7 +76,7 @@ export default async function WorkCasePage({
         collaborationBody: '合作页面介绍了适合的项目和具体做法。也可以直接来信，说说你的团队、目标和预计时间。',
       }
     : {
-        back: 'Back to projects',
+        back: 'Back to work',
         role: 'My role',
         result: 'Scale and outcome',
         context: 'Project background',
@@ -163,10 +163,10 @@ export default async function WorkCasePage({
           </div>
 
           <section className="interior-invitation">
-            <div><h2>{collaboration?.invitation ?? copy.contactTitle}</h2>
-              {collaboration ? <Link href={`/services#${collaboration.id}`} className="interior-text-link">{collaboration.linkLabel} →</Link> : null}
+            <div><h2>{inquiry?.title ?? copy.contactTitle}</h2>
+              {inquiry ? <Link href={inquiry.href} className="interior-text-link">{inquiry.label} →</Link> : null}
             </div>
-            <div><p>{collaboration ? copy.collaborationBody : copy.contactBody}</p><ContactActions locale={locale} context={`work-case-${work.id}`} className="interior-contact" /></div>
+            <div><p>{inquiry?.description ?? copy.contactBody}</p><ContactActions locale={locale} context={`work-case-${work.id}`} className="interior-contact" /></div>
           </section>
           <Link href={nextWork.href ?? '/projects'} className="case-next">
             <span className="interior-kicker">{copy.next}</span>

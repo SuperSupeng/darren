@@ -1,30 +1,23 @@
 import type { ReactNode } from 'react';
 import { Link } from '@/i18n/navigation';
-import RoomPortal from '@/components/spatial/RoomPortal';
 import './collections.css';
 
 type CollectionZone = 'work' | 'build' | 'notes';
 
-export function CollectionHero({ locale, zone, title, lead, description, contentHref, children }: {
-  locale: string;
+export function CollectionHero({ zone, title, lead, description, children }: {
   zone: CollectionZone;
   title: string;
   lead: string;
   description?: string;
-  contentHref?: string;
   children?: ReactNode;
 }) {
-  const href = contentHref ?? (zone === 'work' ? '#work-archive' : zone === 'build' ? '#product-workbench' : '#notes-index');
   return (
-    <header className={`collection-hero collection-hero-${zone}`}>
+    <header className={`collection-hero collection-hero-text collection-hero-${zone}`}>
       <div className="collection-hero-copy">
         <h1>{title}</h1>
         <p className="collection-hero-lead">{lead}</p>
         {description ? <p className="collection-description">{description}</p> : null}
         {children}
-      </div>
-      <div className="collection-room">
-        <RoomPortal zone={zone} locale={locale} contentHref={href} />
       </div>
     </header>
   );

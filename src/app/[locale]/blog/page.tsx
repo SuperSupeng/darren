@@ -5,7 +5,7 @@ import { getSiteContent } from '@/lib/siteContent';
 import { rssPath } from '@/lib/site-config';
 import JsonLd from '@/components/JsonLd';
 import { Link } from '@/i18n/navigation';
-import { ArticleIndex, FeaturedArticle } from '@/components/spatial/ArticleIndex';
+import { ArticleIndex } from '@/components/spatial/ArticleIndex';
 import { CollectionHero, CollectionHeading } from '@/components/spatial/Collections';
 import { blogStructuredData, createPageMetadata, getPageKeywords } from '@/lib/seo';
 
@@ -26,9 +26,6 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const site = getSiteContent(locale);
   const posts = getAllPosts(locale);
-  const featured = posts.find((post) => post.date)
-    ?? posts.find((post) => post.slug === 'managing-31-ai-employees')
-    ?? posts[0];
   const labels = site.labels.fieldNotes;
   const copy = locale === 'zh'
     ? { title: '文章', read: '阅读全文', index: '全部文章', featured: '精选文章' }
@@ -40,14 +37,12 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
       <main id="main-content" tabIndex={-1} className="collection-page collection-notes">
         <div className="collection-container">
           <CollectionHero
-            locale={locale}
             zone="notes"
             title={copy.title}
             lead={site.writing.hero.title}
-            description={site.writing.hero.subtitle}
           >
             <div className="collection-hero-actions">
-              <a className="collection-text-link" href="#notes-index">{copy.index} <span aria-hidden="true">↓</span></a>
+              <Link className="collection-text-link" href="/podcast">{locale === 'zh' ? '播客《重新组织》' : 'Podcast · Re:Organize'} <span aria-hidden="true">→</span></Link>
               <a className="collection-text-link" href={rssPath}>{labels.rssLabel} <span aria-hidden="true">↗</span></a>
             </div>
             <p className="collection-series-row">
@@ -57,16 +52,8 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
             </p>
           </CollectionHero>
 
-          <div className="collection-note-strip">
-            <p>{labels.sidebarQuote}</p>
-          </div>
-
-          {featured ? (
-            <FeaturedArticle post={featured} locale={locale} eyebrow={copy.featured} readLabel={copy.read} />
-          ) : null}
-
           <section className="collection-section collection-journal-index" id="notes-index">
-            <CollectionHeading title={copy.index} description={labels.recentDescription} />
+            <CollectionHeading title={copy.index} />
             <ArticleIndex posts={posts} locale={locale} empty={labels.empty} readLabel={copy.read} />
           </section>
         </div>
